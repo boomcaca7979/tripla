@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { LanguageProvider } from "@/lib/i18n";
 import PageWrapper from "@/components/layout/PageWrapper";
 import "./globals.css";
 
@@ -23,11 +24,53 @@ const geistMono = localFont({
   ],
 });
 
+const SITE_URL = "https://travel-planner-two-livid.vercel.app";
+
 export const metadata: Metadata = {
-  title: "tripla",
-  description: "AI-powered travel planner",
+  title: {
+    default: "tripla - AI-Powered Travel Planner",
+    template: "%s | tripla",
+  },
+  description:
+    "Plan smarter. Travel better. AI-powered trip planning with real-time flights, weather, and personalized itineraries.",
+  keywords: [
+    "travel planner",
+    "AI itinerary",
+    "trip planning",
+    "flights",
+    "weather",
+    "travel guide",
+  ],
   icons: {
     icon: "/logo-icon.svg",
+  },
+  metadataBase: new URL(SITE_URL),
+  openGraph: {
+    title: "tripla - AI-Powered Travel Planner",
+    description:
+      "Plan smarter. Travel better. AI-powered trip planning with real-time flights, weather, and personalized itineraries.",
+    url: SITE_URL,
+    siteName: "tripla",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "tripla - AI-Powered Travel Planner",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "tripla - AI-Powered Travel Planner",
+    description:
+      "Plan smarter. Travel better. AI-powered trip planning with real-time flights, weather, and personalized itineraries.",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -42,7 +85,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        <PageWrapper>{children}</PageWrapper>
+        <LanguageProvider>
+          <PageWrapper>{children}</PageWrapper>
+        </LanguageProvider>
       </body>
     </html>
   );

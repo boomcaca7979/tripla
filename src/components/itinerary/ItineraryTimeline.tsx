@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect, useMemo } from "react";
 import DayCard from "./DayCard";
 import ItineraryBuilder from "./ItineraryBuilder";
 import PDFDownloadButton from "@/components/pdf/PDFDownloadButton";
+import ShareButton from "@/components/ShareButton";
 import type { Itinerary } from "@/types/itinerary";
 import type { FlightLeg } from "@/types/flight";
 
@@ -215,6 +216,7 @@ export default function ItineraryTimeline({
           <div className="flex shrink-0 items-center gap-2">
             <ItineraryBuilder itinerary={itinerary} />
             <PDFDownloadButton itinerary={itinerary} flights={flights} />
+            <ShareButton itinerary={itinerary} flights={flights} />
           </div>
         </div>
         <p className="text-sm text-gray-500">

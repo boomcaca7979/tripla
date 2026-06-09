@@ -7,21 +7,23 @@ import { usePathname } from "next/navigation";
 import { useTravelStore } from "@/store/travel";
 import { useHydration } from "@/hooks/useHydration";
 import { getStoredUser, signOut } from "@/lib/auth";
+import { useTranslation } from "@/lib/i18n";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 // ── Navigation items ─────────────────────────────────────────────────
 
 interface NavItem {
-  label: string;
+  labelKey: string;
   href: string;
   comingSoon?: boolean;
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "Destinations", href: "/destinations" },
-  { label: "Guides", href: "/guides" },
-  { label: "Trips", href: "/trips" },
-  { label: "Pricing", href: "/pricing" },
+  { labelKey: "nav.home", href: "/" },
+  { labelKey: "nav.destinations", href: "/destinations" },
+  { labelKey: "nav.guides", href: "/guides" },
+  { labelKey: "nav.trips", href: "/trips" },
+  { labelKey: "nav.pricing", href: "/pricing" },
 ];
 
 // ── Component ────────────────────────────────────────────────────────
@@ -29,6 +31,7 @@ const NAV_ITEMS: NavItem[] = [
 export default function Header() {
   const pathname = usePathname();
   const hydrated = useHydration();
+  const { t } = useTranslation();
 
   const temperatureUnit = useTravelStore((s) => s.temperatureUnit);
   const toggleTemperatureUnit = useTravelStore((s) => s.toggleTemperatureUnit);
@@ -50,9 +53,9 @@ export default function Header() {
   const handleComingSoon = useCallback((e: React.MouseEvent, item: NavItem) => {
     if (item.comingSoon) {
       e.preventDefault();
-      alert("Coming soon");
+      alert(t("nav.comingSoon"));
     }
-  }, []);
+  }, [t]);
 
   const isActive = useCallback(
     (item: NavItem) => {
@@ -84,7 +87,7 @@ export default function Header() {
             const active = isActive(item);
             return (
               <Link
-                key={item.label}
+                key={item.labelKey}
                 href={item.href}
                 onClick={(e) => handleComingSoon(e, item)}
                 className={[
@@ -96,7 +99,7 @@ export default function Header() {
                   .filter(Boolean)
                   .join(" ")}
               >
-                {item.label}
+                {t(item.labelKey)}
               </Link>
             );
           })}
@@ -116,19 +119,8 @@ export default function Header() {
             </svg>
           </Link>
 
-          {/* Language switch (placeholder) */}
-          <button
-            type="button"
-            onClick={() => alert("Coming soon")}
-            className="rounded-lg p-2 text-gray-700 transition-colors hover:bg-gray-100"
-            aria-label="Switch language"
-          >
-            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <path d="M2 12h20" />
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-            </svg>
-          </button>
+          {/* Language switch */}
+          <LanguageSwitcher />
 
           {/* Temperature & Currency */}
           {hydrated && (
@@ -165,7 +157,7 @@ export default function Header() {
                 onClick={handleLogout}
                 className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100"
               >
-                Logout
+                {t("nav.logout")}
               </button>
             </div>
           ) : (
@@ -174,13 +166,13 @@ export default function Header() {
                 href="/login"
                 className="hidden rounded-lg px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 sm:inline-flex"
               >
-                Log in
+                {t("nav.login")}
               </Link>
               <Link
                 href="/signup"
                 className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
-                Sign up
+                {t("nav.signup")}
               </Link>
             </>
           )}
@@ -216,7 +208,7 @@ export default function Header() {
               const active = isActive(item);
               return (
                 <Link
-                  key={item.label}
+                  key={item.labelKey}
                   href={item.href}
                   onClick={(e) => {
                     handleComingSoon(e, item);
@@ -231,7 +223,7 @@ export default function Header() {
                     .filter(Boolean)
                     .join(" ")}
                 >
-                  {item.label}
+                  {t(item.labelKey)}
                 </Link>
               );
             })}
@@ -245,7 +237,7 @@ export default function Header() {
                   onClick={() => { handleLogout(); setMobileOpen(false); }}
                   className="flex-1 rounded-lg border border-gray-300 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100"
                 >
-                  Logout
+                  {t("nav.logout")}
                 </button>
               </>
             ) : (
@@ -255,14 +247,14 @@ export default function Header() {
                   onClick={() => setMobileOpen(false)}
                   className="flex-1 rounded-lg border border-gray-300 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100"
                 >
-                  Log in
+                  {t("nav.login")}
                 </Link>
                 <Link
                   href="/signup"
                   onClick={() => setMobileOpen(false)}
                   className="flex-1 rounded-lg bg-blue-600 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-blue-700"
                 >
-                  Sign up
+                  {t("nav.signup")}
                 </Link>
               </>
             )}

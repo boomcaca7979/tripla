@@ -8,6 +8,7 @@ import type {
   TravelInterest,
 } from "@/types/itinerary";
 import { useTravelStore } from "@/store/travel";
+import { useTranslation } from "@/lib/i18n";
 
 // ── Mock Itinerary Data ──────────────────────────────────────────────
 
@@ -220,6 +221,7 @@ function ItineraryModal({
   onClose: () => void;
   onUseTemplate: (itinerary: ItineraryPreview) => void;
 }) {
+  const { t } = useTranslation();
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -260,7 +262,7 @@ function ItineraryModal({
           <div className="text-4xl mb-2">{itinerary.emoji}</div>
           <h2 className="text-xl font-bold text-white">{itinerary.title}</h2>
           <p className="mt-1 text-sm text-white/80">
-            {itinerary.days} days · {itinerary.country} · ~${itinerary.estimatedCost} {itinerary.currency}
+            {itinerary.days} {t("itineraryPreview.days")} · {itinerary.country} · ~${itinerary.estimatedCost} {itinerary.currency}
           </p>
         </div>
 
@@ -270,7 +272,7 @@ function ItineraryModal({
             <div key={day.dayNumber}>
               <div className="flex items-center gap-2 mb-3">
                 <span className="inline-flex items-center justify-center rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
-                  Day {day.dayNumber}
+                  {t("itineraryPreview.day")} {day.dayNumber}
                 </span>
                 <span className="text-sm font-medium text-gray-600">{day.theme}</span>
               </div>
@@ -280,7 +282,7 @@ function ItineraryModal({
                     <span className="text-base leading-6">{act.emoji}</span>
                     <div>
                       <p className="text-sm font-medium text-gray-800">{act.name}</p>
-                      <p className="text-xs text-gray-400 capitalize">{act.timeOfDay}</p>
+                      <p className="text-xs text-gray-400">{t(`itineraryPreview.${act.timeOfDay}`)}</p>
                     </div>
                   </div>
                 ))}
@@ -295,10 +297,10 @@ function ItineraryModal({
             onClick={() => onUseTemplate(itinerary)}
             className="w-full rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
-            Plan with this template
+            {t("itineraryPreview.planWithTemplate")}
           </button>
           <p className="mt-2 text-center text-xs text-gray-400">
-            Auto-fills destination and preferences — just pick your dates
+            {t("itineraryPreview.templateHint")}
           </p>
         </div>
       </div>
@@ -315,6 +317,7 @@ function ItineraryCard({
   itinerary: ItineraryPreview;
   onClick: () => void;
 }) {
+  const { t } = useTranslation();
   return (
     <div
       onClick={onClick}
@@ -337,14 +340,14 @@ function ItineraryCard({
               {itinerary.country}
             </span>
             <span className="rounded-full bg-white/20 px-2.5 py-0.5 text-xs font-semibold text-white backdrop-blur-sm">
-              {itinerary.days} days
+              {itinerary.days} {t("itineraryPreview.days")}
             </span>
           </div>
           <h3 className="text-2xl font-bold text-white">{itinerary.city}</h3>
           <p className="mt-1 text-sm text-white/80">{itinerary.title}</p>
           <div className="mt-3 flex items-center gap-3">
             <span className="text-lg font-bold text-white">${itinerary.estimatedCost}</span>
-            <span className="text-xs text-white/60">est.</span>
+            <span className="text-xs text-white/60">{t("itineraryPreview.est")}</span>
           </div>
         </div>
 
@@ -358,6 +361,7 @@ function ItineraryCard({
 // ── Main Component ───────────────────────────────────────────────────
 
 export default function ItineraryPreviewSection() {
+  const { t } = useTranslation();
   const [selectedItinerary, setSelectedItinerary] =
     useState<ItineraryPreview | null>(null);
   const setSearchParams = useTravelStore((s) => s.setSearchParams);
@@ -395,15 +399,15 @@ export default function ItineraryPreviewSection() {
     <section className="bg-gray-50 py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-center text-2xl font-bold text-gray-900 sm:text-3xl">
-          Popular Destinations
+          {t("itineraryPreview.title")}
         </h2>
         <p className="mx-auto mt-3 max-w-lg text-center text-gray-500">
-          Preview real itineraries — see what tripla can create for you
+          {t("itineraryPreview.subtitle")}
         </p>
 
         {templateApplied && (
           <div className="mx-auto mt-4 max-w-md rounded-lg bg-green-50 px-4 py-2 text-center text-sm text-green-700">
-            Template applied! Select your dates and click Plan My Trip
+            {t("itineraryPreview.templateApplied")}
           </div>
         )}
 

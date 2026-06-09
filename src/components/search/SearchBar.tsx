@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import AirportAutocomplete from "./AirportAutocomplete";
 import DateRangePicker from "./DateRangePicker";
 import { useTravelStore } from "@/store/travel";
+import { useTranslation } from "@/lib/i18n";
 import type { Airport } from "@/types/flight";
 import type {
   TravelPlanInput,
@@ -15,29 +16,29 @@ import type {
 
 // ── Constants ─────────────────────────────────────────────────────────
 
-const TRAVEL_STYLES: { value: TravelStyle; label: string }[] = [
-  { value: "relaxed", label: "Relaxed" },
-  { value: "active", label: "Active" },
-  { value: "cultural", label: "Cultural" },
-  { value: "foodie", label: "Foodie" },
-  { value: "adventure", label: "Adventure" },
+const TRAVEL_STYLES: { value: TravelStyle; labelKey: string }[] = [
+  { value: "relaxed", labelKey: "search.relaxed" },
+  { value: "active", labelKey: "search.active" },
+  { value: "cultural", labelKey: "search.cultural" },
+  { value: "foodie", labelKey: "search.foodie" },
+  { value: "adventure", labelKey: "search.adventure" },
 ];
 
-const BUDGET_LEVELS: { value: BudgetLevel; label: string }[] = [
-  { value: "budget", label: "Budget" },
-  { value: "mid-range", label: "Mid-Range" },
-  { value: "luxury", label: "Luxury" },
+const BUDGET_LEVELS: { value: BudgetLevel; labelKey: string }[] = [
+  { value: "budget", labelKey: "search.budgetLevel" },
+  { value: "mid-range", labelKey: "search.midRange" },
+  { value: "luxury", labelKey: "search.luxury" },
 ];
 
-const ALL_INTERESTS: { value: TravelInterest; label: string }[] = [
-  { value: "museums", label: "Museums & Galleries" },
-  { value: "nature", label: "Nature & Outdoors" },
-  { value: "food", label: "Food & Drink" },
-  { value: "shopping", label: "Shopping" },
-  { value: "nightlife", label: "Nightlife" },
-  { value: "history", label: "History & Landmarks" },
-  { value: "sports", label: "Sports" },
-  { value: "beaches", label: "Beaches & Coast" },
+const ALL_INTERESTS: { value: TravelInterest; labelKey: string }[] = [
+  { value: "museums", labelKey: "search.museums" },
+  { value: "nature", labelKey: "search.nature" },
+  { value: "food", labelKey: "search.food" },
+  { value: "shopping", labelKey: "search.shopping" },
+  { value: "nightlife", labelKey: "search.nightlife" },
+  { value: "history", labelKey: "search.history" },
+  { value: "sports", labelKey: "search.sports" },
+  { value: "beaches", labelKey: "search.beaches" },
 ];
 
 const LABEL_CLASS =
@@ -59,6 +60,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
   const router = useRouter();
   const setSearchParams = useTravelStore((s) => s.setSearchParams);
   const searchParams = useTravelStore((s) => s.searchParams);
+  const { t } = useTranslation();
 
   // ── State ────────────────────────────────────────────────────────────
   const [origin, setOrigin] = useState<Airport | null>(null);
@@ -104,11 +106,11 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
   const handleSubmit = useCallback(() => {
     // ── Validate ─────────────────────────────────────────────────────
     if (!origin || !destination) {
-      setError("Please select both origin and destination airports.");
+      setError(t("search.errorOriginDest"));
       return;
     }
     if (!departureDate || !returnDate) {
-      setError("Please select both departure and return dates.");
+      setError(t("search.errorDates"));
       return;
     }
 
@@ -166,8 +168,8 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
         <div className="flex-1">
           <AirportAutocomplete
-            label="From"
-            placeholder="City or airport…"
+            label={t("search.from")}
+            placeholder={t("search.fromPlaceholder")}
             value={origin}
             onChange={setOrigin}
             labelClassName={LABEL_CLASS}
@@ -200,8 +202,8 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
 
         <div className="flex-1">
           <AirportAutocomplete
-            label="To"
-            placeholder="City or airport…"
+            label={t("search.to")}
+            placeholder={t("search.toPlaceholder")}
             value={destination}
             onChange={setDestination}
             labelClassName={LABEL_CLASS}
@@ -228,7 +230,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
             htmlFor="search-group-size"
             className={LABEL_CLASS}
           >
-            Travelers
+            {t("search.travelers")}
           </label>
           <input
             id="search-group-size"
@@ -253,7 +255,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
             htmlFor="search-travel-style"
             className={LABEL_CLASS}
           >
-            Travel Style
+            {t("search.travelStyle")}
           </label>
           <select
             id="search-travel-style"
@@ -263,7 +265,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
           >
             {TRAVEL_STYLES.map((s) => (
               <option key={s.value} value={s.value}>
-                {s.label}
+                {t(s.labelKey)}
               </option>
             ))}
           </select>
@@ -274,7 +276,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
             htmlFor="search-budget-level"
             className={LABEL_CLASS}
           >
-            Budget
+            {t("search.budget")}
           </label>
           <select
             id="search-budget-level"
@@ -284,7 +286,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
           >
             {BUDGET_LEVELS.map((b) => (
               <option key={b.value} value={b.value}>
-                {b.label}
+                {t(b.labelKey)}
               </option>
             ))}
           </select>
@@ -293,7 +295,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
 
       {/* ── Row 4: Interests as pills ─────────────────────────────── */}
       <div className="mt-5">
-        <label className={LABEL_CLASS}>Interests</label>
+        <label className={LABEL_CLASS}>{t("search.interests")}</label>
         <div className="flex flex-wrap gap-2">
           {ALL_INTERESTS.map((interest) => {
             const checked = interests.includes(interest.value);
@@ -314,7 +316,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
                     <path d="M20 6L9 17l-5-5" />
                   </svg>
                 )}
-                {interest.label}
+                {t(interest.labelKey)}
               </button>
             );
           })}
@@ -335,7 +337,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
           onClick={handleSubmit}
           className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-10 py-3.5 text-base font-semibold text-white shadow-lg shadow-blue-600/25 transition-all hover:from-blue-700 hover:to-blue-800 hover:shadow-xl hover:shadow-blue-700/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
-          Plan My Trip
+          {t("search.planMyTrip")}
           <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 12h14" />
             <path d="M12 5l7 7-7 7" />
