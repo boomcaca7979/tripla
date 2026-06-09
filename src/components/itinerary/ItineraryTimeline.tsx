@@ -3,7 +3,9 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
 import DayCard from "./DayCard";
 import ItineraryBuilder from "./ItineraryBuilder";
+import PDFDownloadButton from "@/components/pdf/PDFDownloadButton";
 import type { Itinerary } from "@/types/itinerary";
+import type { FlightLeg } from "@/types/flight";
 
 // ── Types ────────────────────────────────────────────────────────────
 
@@ -97,6 +99,7 @@ interface ItineraryTimelineProps {
   itinerary: Itinerary | null;
   loading: boolean;
   progress: GenerationStep[];
+  flights?: FlightLeg[];
 }
 
 // ── Component ────────────────────────────────────────────────────────
@@ -105,6 +108,7 @@ export default function ItineraryTimeline({
   itinerary,
   loading,
   progress,
+  flights,
 }: ItineraryTimelineProps) {
   const [activeTab, setActiveTab] = useState<"itinerary" | "packing">(
     "itinerary",
@@ -209,6 +213,7 @@ export default function ItineraryTimeline({
             {itinerary.input.destination.country}
           </h2>
           <ItineraryBuilder itinerary={itinerary} />
+          <PDFDownloadButton itinerary={itinerary} flights={flights} />
         </div>
         <p className="text-sm text-gray-500">
           {formatDateRange(

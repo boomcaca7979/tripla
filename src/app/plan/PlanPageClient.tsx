@@ -213,6 +213,7 @@ export default function PlanPageClient() {
               itinerary={itinerary.itinerary}
               loading={itinerary.loading}
               progress={itinerary.progress}
+              flights={flightSearch.flights}
             />
           </ErrorBoundary>
         </div>
