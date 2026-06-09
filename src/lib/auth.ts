@@ -1,8 +1,9 @@
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-const TOKEN_KEY = "sb_access_token";
-const USER_KEY = "sb_user";
+const TOKEN_KEY = "sb-access-token";
+const REFRESH_TOKEN_KEY = "sb-refresh-token";
+const USER_KEY = "sb-user";
 
 interface AuthResponse {
   access_token: string;
@@ -59,7 +60,7 @@ export async function signIn(
   );
   const data = await res.json();
   if (!res.ok) throw new Error(data.msg || data.error_description || data.error || "Sign in failed");
-  saveSession(data);
+  if (data.access_token) saveSession(data);
   return data;
 }
 
@@ -74,6 +75,7 @@ export async function signOut(): Promise<void> {
     }).catch(() => {});
   }
   localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(REFRESH_TOKEN_KEY);
   localStorage.removeItem(USER_KEY);
 }
 
@@ -87,6 +89,7 @@ export async function getUser(): Promise<AuthResponse["user"] | null> {
   });
   if (!res.ok) {
     localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(REFRESH_TOKEN_KEY);
     localStorage.removeItem(USER_KEY);
     return null;
   }
@@ -129,6 +132,7 @@ export async function updatePassword(
 
 export function saveSession(auth: AuthResponse): void {
   localStorage.setItem(TOKEN_KEY, auth.access_token);
+  localStorage.setItem(REFRESH_TOKEN_KEY, auth.refresh_token);
   localStorage.setItem(USER_KEY, JSON.stringify(auth.user));
 }
 
