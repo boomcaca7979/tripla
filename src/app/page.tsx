@@ -1,65 +1,64 @@
-import Image from "next/image";
+import SearchBar from "@/components/search/SearchBar";
+import ItineraryPreviewSection from "@/components/home/ItineraryPreviewSection";
+import AIShowcaseSection from "@/components/home/AIShowcaseSection";
+
+// ── Component ────────────────────────────────────────────────────────
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      {/* ════════════ Hero ════════════ */}
+      <section className="relative flex min-h-[100vh] items-center justify-center overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-900 pt-16">
+        {/* Floating glowing orbs */}
+        <div
+          className="pointer-events-none absolute -left-20 top-1/4 h-80 w-80 rounded-full bg-cyan-300/20 blur-3xl animate-float-slow"
+          aria-hidden="true"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+        <div
+          className="pointer-events-none absolute right-10 top-10 h-64 w-64 rounded-full bg-sky-300/15 blur-3xl animate-float-medium"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute bottom-20 left-1/3 h-96 w-96 rounded-full bg-blue-300/15 blur-3xl animate-float-fast"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute -bottom-10 -right-10 h-72 w-72 rounded-full bg-cyan-200/10 blur-3xl animate-float-medium"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute left-1/4 top-1/2 h-56 w-56 rounded-full bg-sky-400/15 blur-3xl animate-float-slow"
+          aria-hidden="true"
+        />
+
+        <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center px-4 text-center">
+          {/* Title area */}
+          <h1 className="text-5xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
+            Plan smarter.
+            <br />
+            Travel better.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-4 text-2xl font-light italic tracking-wide text-white/90 sm:text-3xl">
+            Don&apos;t think. Just tripla.
           </p>
+          <p className="mt-4 max-w-xl text-sm text-white/60 sm:text-base">
+            AI-powered trip planning that combines real-time flight data,
+            intelligent weather scoring, and personalised itineraries — all in
+            one place.
+          </p>
+
+          {/* SearchBar island */}
+          <div id="hero-search" className="mt-10 w-full max-w-3xl">
+            <SearchBar />
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+
+      {/* ════════════ AI Showcase ════════════ */}
+      <AIShowcaseSection />
+
+      {/* ════════════ Itinerary Preview ════════════ */}
+      <ItineraryPreviewSection />
+    </>
   );
 }
