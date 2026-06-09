@@ -7,6 +7,7 @@ import PasswordField from "./PasswordField";
 import PasswordStrength from "./PasswordStrength";
 import GoogleIcon from "./GoogleIcon";
 import { SignupSchema, type SignupInput } from "@/lib/validators/auth";
+import { signUp } from "@/lib/auth";
 
 // ── Field error map ───────────────────────────────────────────────────
 
@@ -21,8 +22,10 @@ export default function SignupForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
+  const [authError, setAuthError] = useState("");
+  const [signupSuccess, setSignupSuccess] = useState(false);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const result = SignupSchema.safeParse({
       name,
@@ -40,10 +43,16 @@ export default function SignupForm() {
       return;
     }
     setErrors({});
+    setAuthError("");
     setSubmitting(true);
-    // eslint-disable-next-line no-console
-    console.log("signup", result.data);
-    setTimeout(() => setSubmitting(false), 600);
+    try {
+      await signUp(email, password, name);
+      setSignupSuccess(true);
+    } catch (err) {
+      setAuthError(err instanceof Error ? err.message : "Sign up failed");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleGoogle = () => {
@@ -63,6 +72,18 @@ export default function SignupForm() {
         </p>
       </header>
 
+      {signupSuccess ? (
+        <div className="flex flex-col gap-4">
+          <p className="text-sm text-green-600">
+            Account created! Please check your email to confirm, then{" "}
+            <Link href="/login" className="font-semibold text-blue-600 hover:text-blue-700">
+              log in
+            </Link>
+            .
+          </p>
+        </div>
+      ) : (
+      <>
       {/* ── Form ──────────────────────────────────────────── */}
       <form
         onSubmit={handleSubmit}
@@ -112,6 +133,10 @@ export default function SignupForm() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           error={errors.confirmPassword}
         />
+
+        {authError && (
+          <p className="text-sm text-red-600">{authError}</p>
+        )}
 
         {/* ── Submit button ──────────────────────────────── */}
         <button
@@ -188,6 +213,8 @@ export default function SignupForm() {
           Log In
         </Link>
       </p>
+      </>
+      )}
     </div>
   );
 }

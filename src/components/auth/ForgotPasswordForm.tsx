@@ -3,15 +3,22 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import AuthField from "./AuthField";
+import { resetPassword } from "@/lib/auth";
 
 export default function ForgotPasswordForm() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [authError, setAuthError] = useState("");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Placeholder — email send logic will be wired up later
-    setSubmitted(true);
+    setAuthError("");
+    try {
+      await resetPassword(email);
+      setSubmitted(true);
+    } catch (err) {
+      setAuthError(err instanceof Error ? err.message : "Reset password failed");
+    }
   };
 
   if (submitted) {
@@ -62,6 +69,10 @@ export default function ForgotPasswordForm() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+
+        {authError && (
+          <p className="text-sm text-red-600">{authError}</p>
+        )}
 
         <button
           type="submit"

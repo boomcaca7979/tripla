@@ -2,10 +2,12 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import AuthField from "./AuthField";
 import PasswordField from "./PasswordField";
 import GoogleIcon from "./GoogleIcon";
 import { LoginSchema, type LoginInput } from "@/lib/validators/auth";
+import { signIn } from "@/lib/auth";
 
 // ── Field error map ───────────────────────────────────────────────────
 
@@ -14,13 +16,15 @@ type FieldErrors = Partial<Record<keyof LoginInput, string>>;
 // ── Component ─────────────────────────────────────────────────────────
 
 export default function LoginForm() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
+  const [authError, setAuthError] = useState("");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const result = LoginSchema.safeParse({ email, password, remember });
     if (!result.success) {
@@ -33,11 +37,16 @@ export default function LoginForm() {
       return;
     }
     setErrors({});
+    setAuthError("");
     setSubmitting(true);
-    // Placeholder — Firebase Auth will be wired up here next.
-    // eslint-disable-next-line no-console
-    console.log("login", result.data);
-    setTimeout(() => setSubmitting(false), 600);
+    try {
+      await signIn(email, password);
+      router.push("/");
+    } catch (err) {
+      setAuthError(err instanceof Error ? err.message : "Sign in failed");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleGoogle = () => {
@@ -83,6 +92,10 @@ export default function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
           error={errors.password}
         />
+
+        {authError && (
+          <p className="text-sm text-red-600">{authError}</p>
+        )}
 
         {/* ── Remember + forgot ──────────────────────────── */}
         <div className="flex items-center justify-between text-sm">

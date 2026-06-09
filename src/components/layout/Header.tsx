@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTravelStore } from "@/store/travel";
 import { useHydration } from "@/hooks/useHydration";
+import { getStoredUser, signOut } from "@/lib/auth";
 
 // ── Navigation items ─────────────────────────────────────────────────
 
@@ -35,6 +36,16 @@ export default function Header() {
   const setPreferredCurrency = useTravelStore((s) => s.setPreferredCurrency);
 
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<{ email: string } | null>(null);
+
+  useEffect(() => {
+    setCurrentUser(getStoredUser());
+  }, []);
+
+  const handleLogout = async () => {
+    await signOut();
+    window.location.reload();
+  };
 
   const handleComingSoon = useCallback((e: React.MouseEvent, item: NavItem) => {
     if (item.comingSoon) {
@@ -145,21 +156,34 @@ export default function Header() {
             </>
           )}
 
-          {/* Login */}
-          <Link
-            href="/login"
-            className="hidden rounded-lg px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 sm:inline-flex"
-          >
-            Log in
-          </Link>
-
-          {/* Register */}
-          <Link
-            href="/signup"
-            className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            Sign up
-          </Link>
+          {/* Auth */}
+          {hydrated && currentUser ? (
+            <div className="hidden items-center gap-2 sm:inline-flex">
+              <span className="text-sm text-gray-600">{currentUser.email}</span>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="hidden rounded-lg px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 sm:inline-flex"
+              >
+                Log in
+              </Link>
+              <Link
+                href="/signup"
+                className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              >
+                Sign up
+              </Link>
+            </>
+          )}
 
           {/* Mobile menu toggle */}
           <button
@@ -213,20 +237,35 @@ export default function Header() {
             })}
           </nav>
           <div className="mt-3 flex gap-2 border-t border-gray-100 pt-3">
-            <Link
-              href="/login"
-              onClick={() => setMobileOpen(false)}
-              className="flex-1 rounded-lg border border-gray-300 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100"
-            >
-              Log in
-            </Link>
-            <Link
-              href="/signup"
-              onClick={() => setMobileOpen(false)}
-              className="flex-1 rounded-lg bg-blue-600 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-blue-700"
-            >
-              Sign up
-            </Link>
+            {currentUser ? (
+              <>
+                <span className="flex-1 py-2 text-center text-sm text-gray-600">{currentUser.email}</span>
+                <button
+                  type="button"
+                  onClick={() => { handleLogout(); setMobileOpen(false); }}
+                  className="flex-1 rounded-lg border border-gray-300 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex-1 rounded-lg border border-gray-300 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100"
+                >
+                  Log in
+                </Link>
+                <Link
+                  href="/signup"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex-1 rounded-lg bg-blue-600 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                >
+                  Sign up
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}
