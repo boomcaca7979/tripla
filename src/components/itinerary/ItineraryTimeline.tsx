@@ -207,13 +207,15 @@ export default function ItineraryTimeline({
       )}
 
       <div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-3">
           <h2 className="text-lg font-bold text-gray-900">
             {itinerary.input.destination.city},{" "}
             {itinerary.input.destination.country}
           </h2>
-          <ItineraryBuilder itinerary={itinerary} />
-          <PDFDownloadButton itinerary={itinerary} flights={flights} />
+          <div className="flex shrink-0 items-center gap-2">
+            <ItineraryBuilder itinerary={itinerary} />
+            <PDFDownloadButton itinerary={itinerary} flights={flights} />
+          </div>
         </div>
         <p className="text-sm text-gray-500">
           {formatDateRange(
