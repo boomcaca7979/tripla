@@ -2,7 +2,6 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import AuthField from "./AuthField";
 import PasswordField from "./PasswordField";
 import GoogleIcon from "./GoogleIcon";
@@ -16,7 +15,6 @@ type FieldErrors = Partial<Record<keyof LoginInput, string>>;
 // ── Component ─────────────────────────────────────────────────────────
 
 export default function LoginForm() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
@@ -41,7 +39,7 @@ export default function LoginForm() {
     setSubmitting(true);
     try {
       await signIn(email, password);
-      router.push("/");
+      window.location.href = "/";
     } catch (err) {
       setAuthError(err instanceof Error ? err.message : "Sign in failed");
     } finally {
