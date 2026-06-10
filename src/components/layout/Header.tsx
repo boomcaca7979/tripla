@@ -156,7 +156,7 @@ export default function Header() {
           )}
 
           {/* Auth — desktop only (mobile gets the buttons in the sheet) */}
-          {hydrated && currentUser ? (
+          {currentUser ? (
             <div className="hidden items-center gap-2 lg:inline-flex">
               <span className="text-sm text-gray-600">{currentUser.email}</span>
               <button
