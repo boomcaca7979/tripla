@@ -64,7 +64,7 @@ const TRIPS: Trip[] = [
   {
     id: "tokyo-3d-foodie",
     title: "Tokyo 3-Day Foodie Adventure",
-    coverImage: "/images/tokyo.jpg",
+    coverImage: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80",
     gradient: "from-rose-500 to-pink-700",
     author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
     days: 3,
@@ -130,7 +130,7 @@ const TRIPS: Trip[] = [
   {
     id: "paris-weekend",
     title: "Paris Romantic Weekend",
-    coverImage: "/images/paris.jpg",
+    coverImage: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80",
     gradient: "from-indigo-500 to-pink-600",
     author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
     days: 2,
@@ -186,7 +186,7 @@ const TRIPS: Trip[] = [
   {
     id: "nyc-explorer",
     title: "New York City Explorer",
-    coverImage: "/images/newyork.jpg",
+    coverImage: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800&q=80",
     gradient: "from-amber-500 to-red-600",
     author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
     days: 3,
@@ -528,6 +528,7 @@ function TripCard({
             src={trip.coverImage}
             alt={trip.title}
             fill
+            unoptimized
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             className="object-cover transition-transform duration-500 group-hover:scale-110"
           />
@@ -667,6 +668,7 @@ function TripModal({
               src={trip.coverImage}
               alt={trip.title}
               fill
+              unoptimized
               sizes="(min-width: 768px) 600px, 100vw"
               className="object-cover"
             />
