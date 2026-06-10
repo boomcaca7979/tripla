@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import type { ItineraryDay, Activity } from "@/types/itinerary";
+import { buildHotelSearchUrl } from "@/lib/affiliate";
 
 // ── WMO helper ───────────────────────────────────────────────────────
 
@@ -81,6 +82,10 @@ interface DayCardProps {
   exchangeRate: number | null;
   expanded?: boolean;
   onToggle?: () => void;
+  /** Destination city name for hotel affiliate link. */
+  destinationCity?: string;
+  /** Check-out date (YYYY-MM-DD) for hotel affiliate link. */
+  nextDate?: string;
 }
 
 // ── Component ────────────────────────────────────────────────────────
@@ -91,6 +96,8 @@ export default function DayCard({
   exchangeRate,
   expanded = false,
   onToggle,
+  destinationCity,
+  nextDate,
 }: DayCardProps) {
   const weather = day.weather
     ? getWeatherInfo(day.weather.weatherCode)
@@ -136,6 +143,21 @@ export default function DayCard({
           <span className="text-xs font-medium text-gray-600">
             {day.estimatedDailyCost} {currency}
           </span>
+          {destinationCity && (
+            <a
+              href={buildHotelSearchUrl({
+                city: destinationCity,
+                checkIn: day.date,
+                checkOut: nextDate ?? day.date,
+              })}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center gap-1 rounded border border-emerald-200 bg-emerald-50 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 transition-colors hover:bg-emerald-100"
+            >
+              Book Hotel
+            </a>
+          )}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className={`h-4 w-4 text-gray-400 transition-transform ${

@@ -5,6 +5,10 @@ import DayCard from "./DayCard";
 import ItineraryBuilder from "./ItineraryBuilder";
 import PDFDownloadButton from "@/components/pdf/PDFDownloadButton";
 import ShareButton from "@/components/ShareButton";
+import {
+  buildFlightSearchUrl,
+  buildHotelSearchUrl,
+} from "@/lib/affiliate";
 import type { Itinerary } from "@/types/itinerary";
 import type { FlightLeg } from "@/types/flight";
 
@@ -217,6 +221,31 @@ export default function ItineraryTimeline({
             <ItineraryBuilder itinerary={itinerary} />
             <PDFDownloadButton itinerary={itinerary} flights={flights} />
             <ShareButton itinerary={itinerary} flights={flights} />
+            <a
+              href={buildFlightSearchUrl({
+                originIata: itinerary.input.origin.iata,
+                destinationIata: itinerary.input.destination.iata,
+                departDate: itinerary.input.departureDate,
+                returnDate: itinerary.input.returnDate,
+              })}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-700 transition-colors hover:bg-blue-100"
+            >
+              Find Flights
+            </a>
+            <a
+              href={buildHotelSearchUrl({
+                city: itinerary.input.destination.city,
+                checkIn: itinerary.input.departureDate,
+                checkOut: itinerary.input.returnDate,
+              })}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-700 transition-colors hover:bg-blue-100"
+            >
+              Book Hotels
+            </a>
           </div>
         </div>
         <p className="text-sm text-gray-500">
@@ -283,7 +312,7 @@ export default function ItineraryTimeline({
       {/* ── Itinerary tab ───────────────────────────────────────── */}
       {activeTab === "itinerary" && (
         <div className="space-y-2">
-          {itinerary.days.map((day) => (
+          {itinerary.days.map((day, i) => (
             <DayCard
               key={day.date}
               day={day}
@@ -291,6 +320,8 @@ export default function ItineraryTimeline({
               exchangeRate={null}
               expanded={expandedDay === day.dayNumber}
               onToggle={() => toggleExpanded(day.dayNumber)}
+              destinationCity={itinerary.input.destination.city}
+              nextDate={itinerary.days[i + 1]?.date ?? itinerary.input.returnDate}
             />
           ))}
         </div>

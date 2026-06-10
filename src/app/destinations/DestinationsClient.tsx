@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import WeatherScore from "@/components/weather/WeatherScore";
 import { useTravelStore } from "@/store/travel";
+import { buildHotelSearchUrl } from "@/lib/affiliate";
 import type { Airport } from "@/types/flight";
 import type { WeatherScore as WeatherScoreType } from "@/types/weather";
 import type { TravelStyle, TravelInterest } from "@/types/itinerary";
@@ -736,6 +737,22 @@ function DestinationCard({
             </svg>
             {destination.currency}
           </span>
+        </div>
+
+        {/* Book Hotel affiliate link */}
+        <div className="mt-auto pt-4">
+          <a
+            href={buildHotelSearchUrl({
+              city: destination.city,
+              checkIn: new Date().toISOString().slice(0, 10),
+              checkOut: new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10),
+            })}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-700 transition-colors hover:bg-blue-100"
+          >
+            Book Hotel
+          </a>
         </div>
       </div>
     </div>
