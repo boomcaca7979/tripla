@@ -83,7 +83,7 @@ export default function CurrencyConverter({
               value={baseAmount}
               onFocus={() => setFocused("base")}
               onChange={(e) => handleBaseChange(e.target.value)}
-              className="w-full min-w-0 rounded-lg border-0 bg-transparent py-2 pr-3 pl-1.5 text-sm outline-none ring-0 focus:outline-none focus:ring-0"
+              className="w-full min-w-0 rounded-lg border-0 bg-transparent py-2 pr-3 pl-1.5 text-sm text-gray-900 outline-none ring-0 focus:outline-none focus:ring-0"
               aria-label={`Amount in ${baseCurrencyInfo.code}`}
             />
           </div>
@@ -113,7 +113,7 @@ export default function CurrencyConverter({
               value={targetAmount}
               onFocus={() => setFocused("target")}
               onChange={(e) => handleTargetChange(e.target.value)}
-              className="w-full min-w-0 rounded-lg border-0 bg-transparent py-2 pr-3 pl-1.5 text-sm outline-none ring-0 focus:outline-none focus:ring-0"
+              className="w-full min-w-0 rounded-lg border-0 bg-transparent py-2 pr-3 pl-1.5 text-sm text-gray-900 outline-none ring-0 focus:outline-none focus:ring-0"
               aria-label={`Amount in ${targetCurrencyInfo.code}`}
             />
           </div>
