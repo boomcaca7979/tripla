@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/plan", "/api/"],
       },
     ],
-    sitemap: "https://travel-planner-two-livid.vercel.app/sitemap.xml",
+    sitemap: "https://www.utripla.xyz/sitemap.xml",
   };
 }

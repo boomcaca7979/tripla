@@ -10,7 +10,7 @@ export interface SharedData {
 
 // ── Constants ────────────────────────────────────────────────────────
 
-const SITE_URL = "https://travel-planner-two-livid.vercel.app";
+const SITE_URL = "https://www.utripla.xyz";
 
 // ── Encoding / Decoding ──────────────────────────────────────────────
 

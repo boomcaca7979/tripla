@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://travel-planner-two-livid.vercel.app";
+const SITE_URL = "https://www.utripla.xyz";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

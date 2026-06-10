@@ -24,7 +24,7 @@ const geistMono = localFont({
   ],
 });
 
-const SITE_URL = "https://travel-planner-two-livid.vercel.app";
+const SITE_URL = "https://www.utripla.xyz";
 
 export const metadata: Metadata = {
   title: {
