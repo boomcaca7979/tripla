@@ -503,7 +503,7 @@ const TRIPS: Trip[] = [
       longitude: 116.6031,
     },
     travelStyle: "cultural",
-    interests: ["history", "culture", "food"],
+    interests: ["history", "museums", "food"],
   },
   {
     id: "shanghai-urban-experience",
@@ -627,7 +627,7 @@ const TRIPS: Trip[] = [
       longitude: 113.2988,
     },
     travelStyle: "foodie",
-    interests: ["food", "culture"],
+    interests: ["food", "museums"],
   },
   {
     id: "chengdu-slow-life",
@@ -693,7 +693,7 @@ const TRIPS: Trip[] = [
       longitude: 103.9471,
     },
     travelStyle: "relaxed",
-    interests: ["food", "nature", "culture"],
+    interests: ["food", "nature", "museums"],
   },
   {
     id: "xian-historical-journey",
@@ -759,7 +759,7 @@ const TRIPS: Trip[] = [
       longitude: 108.7519,
     },
     travelStyle: "cultural",
-    interests: ["history", "culture", "food"],
+    interests: ["history", "museums", "food"],
   },
   {
     id: "hangzhou-west-lake-poetry",
@@ -816,7 +816,7 @@ const TRIPS: Trip[] = [
       longitude: 120.4293,
     },
     travelStyle: "relaxed",
-    interests: ["nature", "culture", "food"],
+    interests: ["nature", "museums", "food"],
   },
   {
     id: "chongqing-mountain-adventure",
@@ -883,7 +883,7 @@ const TRIPS: Trip[] = [
       longitude: 106.6417,
     },
     travelStyle: "active",
-    interests: ["food", "adventure", "nightlife"],
+    interests: ["food", "sports", "nightlife"],
   },
   {
     id: "hongkong-shopping-foodie",
@@ -998,7 +998,7 @@ const TRIPS: Trip[] = [
       longitude: 113.5914,
     },
     travelStyle: "cultural",
-    interests: ["culture", "food", "nightlife"],
+    interests: ["museums", "food", "nightlife"],
   },
 ];
 
