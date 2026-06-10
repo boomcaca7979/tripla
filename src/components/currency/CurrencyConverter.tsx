@@ -127,11 +127,7 @@ export default function CurrencyConverter({
         </span>
         <span className="mx-1.5">·</span>
         <span>Updated {formatUpdated(rate.lastUpdated)}</span>
-        {rate.mock && (
-          <span className="ml-1 inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-medium text-amber-700">
-            Demo rate
-          </span>
-        )}
+        {/* Demo rate badge hidden — will re-enable when real API is connected */}
       </div>
     </div>
   );

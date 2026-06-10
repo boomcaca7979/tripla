@@ -198,7 +198,7 @@ export default function TripPDF({ itinerary, flights }: TripPDFProps) {
             {formatDate(itinerary.input.departureDate)} —{" "}
             {formatDate(itinerary.input.returnDate)}
           </Text>
-          {demo && <Text style={styles.demoBadge}>Demo Data</Text>}
+          {/* Demo Data badge hidden — will re-enable when real API is connected */}
         </View>
 
         {/* Flights */}

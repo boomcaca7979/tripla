@@ -204,12 +204,7 @@ export default function ItineraryTimeline({
   return (
     <div className="space-y-4">
       {/* ── Header info ─────────────────────────────────────────── */}
-      {/* Show a subtle badge when the itinerary is mock/demo data */}
-      {itinerary.days[0]?.activities[0]?.id.startsWith("mock-") && (
-        <div className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-2.5 py-0.5 text-xs font-medium text-amber-700">
-          Demo Data
-        </div>
-      )}
+      {/* Demo Data badge hidden — will re-enable when real API is connected */}
 
       <div>
         <div className="flex items-center justify-between gap-3">

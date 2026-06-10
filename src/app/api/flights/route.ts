@@ -41,7 +41,7 @@ function buildMockFlights(depIata: string, arrIata: string, date: string): Fligh
   return [
     {
       flightNumber: `${depIata}${arrIata}1`,
-      airline: { name: "Demo Airways", iata: "DA", icao: "DMO" },
+      airline: { name: "Partner Airways", iata: "PA", icao: "PRT" },
       departure: {
         airport: dep,
         scheduledTime: `${date}T08:00:00Z`,
