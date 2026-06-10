@@ -28,6 +28,19 @@ const CURRENCY_TO_COUNTRY: Record<string, string> = {
   AUD: "AU",
   AED: "AE",
   MYR: "MY",
+  CAD: "CA",
+  CHF: "CH",
+  SEK: "SE",
+  NOK: "NO",
+  DKK: "DK",
+  NZD: "NZ",
+  INR: "IN",
+  BRL: "BR",
+  MXN: "MX",
+  TRY: "TR",
+  VND: "VN",
+  PHP: "PH",
+  IDR: "ID",
 };
 
 function findCurrencyInfo(currencyCode: string): CurrencyInfo | null {
@@ -40,12 +53,14 @@ function findCurrencyInfo(currencyCode: string): CurrencyInfo | null {
 
 interface CurrencyWidgetProps {
   destinationCountryCode: string;
+  originCountryCode?: string;
 }
 
 // ── Component ────────────────────────────────────────────────────────
 
 export default function CurrencyWidget({
   destinationCountryCode,
+  originCountryCode,
 }: CurrencyWidgetProps) {
   const preferredCurrency = useTravelStore((s) => s.preferredCurrency);
   const { rate, loading, error, fetchRate } = useCurrency();
@@ -55,10 +70,14 @@ export default function CurrencyWidget({
     [destinationCountryCode],
   );
 
-  const baseInfo = useMemo(
-    () => findCurrencyInfo(preferredCurrency),
-    [preferredCurrency],
-  );
+  const baseInfo = useMemo(() => {
+    // Prefer origin country currency over store's preferredCurrency
+    if (originCountryCode) {
+      const originInfo = getCurrencyByCountryCode(originCountryCode);
+      if (originInfo) return originInfo;
+    }
+    return findCurrencyInfo(preferredCurrency);
+  }, [originCountryCode, preferredCurrency]);
 
   // ── Fetch rate when both currencies are known ────────────────────
   useEffect(() => {

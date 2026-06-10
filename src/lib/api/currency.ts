@@ -65,6 +65,22 @@ const COUNTRY_CURRENCY_MAP: Record<string, CurrencyInfo> = {
     symbol: "€",
     country: "Netherlands",
   },
+  CA: { code: "CAD", name: "Canadian Dollar", symbol: "C$", country: "Canada" },
+  IT: { code: "EUR", name: "Euro", symbol: "€", country: "Italy" },
+  ES: { code: "EUR", name: "Euro", symbol: "€", country: "Spain" },
+  CH: { code: "CHF", name: "Swiss Franc", symbol: "CHF", country: "Switzerland" },
+  SE: { code: "SEK", name: "Swedish Krona", symbol: "kr", country: "Sweden" },
+  NO: { code: "NOK", name: "Norwegian Krone", symbol: "kr", country: "Norway" },
+  DK: { code: "DKK", name: "Danish Krone", symbol: "kr", country: "Denmark" },
+  IE: { code: "EUR", name: "Euro", symbol: "€", country: "Ireland" },
+  NZ: { code: "NZD", name: "New Zealand Dollar", symbol: "NZ$", country: "New Zealand" },
+  IN: { code: "INR", name: "Indian Rupee", symbol: "₹", country: "India" },
+  BR: { code: "BRL", name: "Brazilian Real", symbol: "R$", country: "Brazil" },
+  MX: { code: "MXN", name: "Mexican Peso", symbol: "MX$", country: "Mexico" },
+  TR: { code: "TRY", name: "Turkish Lira", symbol: "₺", country: "Turkey" },
+  VN: { code: "VND", name: "Vietnamese Dong", symbol: "₫", country: "Vietnam" },
+  PH: { code: "PHP", name: "Philippine Peso", symbol: "₱", country: "Philippines" },
+  ID: { code: "IDR", name: "Indonesian Rupiah", symbol: "Rp", country: "Indonesia" },
 };
 
 // ─── Helpers ────────────────────────────────────────────────────────────────

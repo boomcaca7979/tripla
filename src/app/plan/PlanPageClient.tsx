@@ -110,6 +110,11 @@ export default function PlanPageClient() {
     [destination],
   );
 
+  const originCountryCode = useMemo(
+    () => (origin && origin.country ? countryNameToCode(origin.country) : ""),
+    [origin],
+  );
+
   // ── Build TravelPlanInput ────────────────────────────────────────
   const travelPlanInput = useMemo<TravelPlanInput | null>(() => {
     if (!origin || !destination || !departureDate || !returnDate) return null;
@@ -234,6 +239,7 @@ export default function PlanPageClient() {
           <ErrorBoundary>
             <CurrencyWidget
               destinationCountryCode={destinationCountryCode}
+              originCountryCode={originCountryCode}
             />
           </ErrorBoundary>
         </aside>
