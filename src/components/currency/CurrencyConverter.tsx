@@ -13,9 +13,6 @@ interface CurrencyConverterProps {
 
 // ── Helpers ──────────────────────────────────────────────────────────
 
-const INPUT_CLASS =
-  "w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm transition-colors hover:border-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500";
-
 /** Format ISO datetime to a user-friendly string. */
 function formatUpdated(iso: string): string {
   try {
@@ -74,8 +71,8 @@ export default function CurrencyConverter({
           >
             {baseCurrencyInfo.code} — {baseCurrencyInfo.name}
           </label>
-          <div className="relative">
-            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">
+          <div className="flex items-center rounded-lg border border-gray-300 bg-white transition-colors hover:border-gray-400 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500">
+            <span className="shrink-0 pl-3 text-sm text-gray-400">
               {baseCurrencyInfo.symbol}
             </span>
             <input
@@ -86,7 +83,7 @@ export default function CurrencyConverter({
               value={baseAmount}
               onFocus={() => setFocused("base")}
               onChange={(e) => handleBaseChange(e.target.value)}
-              className={`${INPUT_CLASS} pl-8`}
+              className="w-full min-w-0 rounded-lg border-0 bg-transparent py-2 pr-3 pl-1.5 text-sm outline-none ring-0 focus:outline-none focus:ring-0"
               aria-label={`Amount in ${baseCurrencyInfo.code}`}
             />
           </div>
@@ -104,8 +101,8 @@ export default function CurrencyConverter({
           >
             {targetCurrencyInfo.code} — {targetCurrencyInfo.name}
           </label>
-          <div className="relative">
-            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">
+          <div className="flex items-center rounded-lg border border-gray-300 bg-white transition-colors hover:border-gray-400 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500">
+            <span className="shrink-0 pl-3 text-sm text-gray-400">
               {targetCurrencyInfo.symbol}
             </span>
             <input
@@ -116,7 +113,7 @@ export default function CurrencyConverter({
               value={targetAmount}
               onFocus={() => setFocused("target")}
               onChange={(e) => handleTargetChange(e.target.value)}
-              className={`${INPUT_CLASS} pl-8`}
+              className="w-full min-w-0 rounded-lg border-0 bg-transparent py-2 pr-3 pl-1.5 text-sm outline-none ring-0 focus:outline-none focus:ring-0"
               aria-label={`Amount in ${targetCurrencyInfo.code}`}
             />
           </div>
