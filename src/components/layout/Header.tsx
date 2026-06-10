@@ -43,6 +43,13 @@ export default function Header() {
 
   useEffect(() => {
     setCurrentUser(getStoredUser());
+
+    // 监听 localStorage 变化，实现跨标签页状态同步
+    const handleStorage = () => {
+      setCurrentUser(getStoredUser());
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
   const handleLogout = async () => {
