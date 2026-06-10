@@ -78,7 +78,8 @@ export function useWeather() {
           return;
         }
 
-        const { latitude, longitude, timezone } = geoRes.data[0];
+        const { latitude, longitude, timezone, name, country } = geoRes.data[0];
+        const locationLabel = country ? `${name}, ${country}` : name;
 
         // Validate coordinates — fall back to mock if they're invalid (0,0, NaN, etc.)
         if (!isFinite(latitude) || !isFinite(longitude) || Math.abs(latitude) < 0.01 || Math.abs(longitude) < 0.01) {
@@ -112,7 +113,7 @@ export function useWeather() {
           return;
         }
 
-        const forecastData = weatherRes.data;
+        const forecastData = { ...weatherRes.data, location: locationLabel };
         setForecast(forecastData);
 
         // Cache the forecast

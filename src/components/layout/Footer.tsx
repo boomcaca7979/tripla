@@ -47,12 +47,12 @@ export default function Footer() {
           </a>
           ,{" "}
           <a
-            href="https://anthropic.com"
+            href="https://groq.com"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-gray-500 underline-offset-2 hover:underline"
           >
-            Anthropic
+            Groq (Llama 3.3)
           </a>
         </p>
       </div>

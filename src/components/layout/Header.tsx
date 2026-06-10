@@ -122,13 +122,13 @@ export default function Header() {
           {/* Language switch */}
           <LanguageSwitcher />
 
-          {/* Temperature & Currency */}
+          {/* Temperature & Currency — desktop only */}
           {hydrated && (
             <>
               <button
                 type="button"
                 onClick={toggleTemperatureUnit}
-                className="rounded-lg border border-gray-300 px-2 py-1 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="hidden rounded-lg border border-gray-300 px-2 py-1 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:inline-flex"
                 aria-label={`Switch to ${temperatureUnit === "C" ? "Fahrenheit" : "Celsius"}`}
               >
                 °{temperatureUnit}
@@ -136,7 +136,7 @@ export default function Header() {
               <select
                 value={preferredCurrency}
                 onChange={(e) => setPreferredCurrency(e.target.value)}
-                className="rounded-lg border border-gray-300 px-2 py-1 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="hidden rounded-lg border border-gray-300 px-2 py-1 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:inline-flex"
                 aria-label="Preferred currency"
               >
                 <option value="USD">USD $</option>
@@ -148,9 +148,9 @@ export default function Header() {
             </>
           )}
 
-          {/* Auth */}
+          {/* Auth — desktop only (mobile gets the buttons in the sheet) */}
           {hydrated && currentUser ? (
-            <div className="hidden items-center gap-2 sm:inline-flex">
+            <div className="hidden items-center gap-2 lg:inline-flex">
               <span className="text-sm text-gray-600">{currentUser.email}</span>
               <button
                 type="button"
@@ -164,13 +164,13 @@ export default function Header() {
             <>
               <Link
                 href="/login"
-                className="hidden rounded-lg px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 sm:inline-flex"
+                className="hidden rounded-lg px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 lg:inline-flex"
               >
                 {t("nav.login")}
               </Link>
               <Link
                 href="/signup"
-                className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="hidden rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 lg:inline-flex"
               >
                 {t("nav.signup")}
               </Link>
@@ -228,10 +228,37 @@ export default function Header() {
               );
             })}
           </nav>
+
+          {/* Temperature & Currency inside the mobile sheet */}
+          {hydrated && (
+            <div className="mt-3 flex items-center gap-2 border-t border-gray-100 pt-3">
+              <button
+                type="button"
+                onClick={toggleTemperatureUnit}
+                className="flex-1 rounded-lg border border-gray-300 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100"
+                aria-label={`Switch to ${temperatureUnit === "C" ? "Fahrenheit" : "Celsius"}`}
+              >
+                °{temperatureUnit}
+              </button>
+              <select
+                value={preferredCurrency}
+                onChange={(e) => setPreferredCurrency(e.target.value)}
+                className="flex-1 rounded-lg border border-gray-300 px-2 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Preferred currency"
+              >
+                <option value="USD">USD $</option>
+                <option value="EUR">EUR €</option>
+                <option value="JPY">JPY ¥</option>
+                <option value="GBP">GBP £</option>
+                <option value="CNY">CNY ¥</option>
+              </select>
+            </div>
+          )}
+
           <div className="mt-3 flex gap-2 border-t border-gray-100 pt-3">
             {currentUser ? (
               <>
-                <span className="flex-1 py-2 text-center text-sm text-gray-600">{currentUser.email}</span>
+                <span className="flex-1 self-center truncate py-2 text-center text-sm text-gray-600">{currentUser.email}</span>
                 <button
                   type="button"
                   onClick={() => { handleLogout(); setMobileOpen(false); }}

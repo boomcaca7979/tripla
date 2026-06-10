@@ -4,6 +4,47 @@ import type { Itinerary, TravelPlanInput } from "@/types/itinerary";
 import type { WeatherDay } from "@/types/weather";
 import type { AppError } from "@/types/common";
 
+// ── City → preferred target currency ────────────────────────────────
+// Used to pick the right rate when normalising the itinerary budget.
+// Falls back to USD when the destination is unknown.
+
+const CITY_CURRENCY: Record<string, string> = {
+  tokyo: "JPY",
+  osaka: "JPY",
+  kyoto: "JPY",
+  bangkok: "THB",
+  phuket: "THB",
+  chiangmai: "THB",
+  paris: "EUR",
+  rome: "EUR",
+  barcelona: "EUR",
+  madrid: "EUR",
+  amsterdam: "EUR",
+  berlin: "EUR",
+  frankfurt: "EUR",
+  london: "GBP",
+  edinburgh: "GBP",
+  "new york": "USD",
+  "los angeles": "USD",
+  "san francisco": "USD",
+  chicago: "USD",
+  singapore: "SGD",
+  dubai: "AED",
+  sydney: "AUD",
+  melbourne: "AUD",
+  istanbul: "TRY",
+  taipei: "TWD",
+  hongkong: "HKD",
+  seoul: "KRW",
+  beijing: "CNY",
+  shanghai: "CNY",
+};
+
+function currencyForCity(city: string): string {
+  if (!city) return "USD";
+  return CITY_CURRENCY[city.toLowerCase().trim()] ?? "USD";
+}
+
 // ── Types ────────────────────────────────────────────────────────────
 
 export interface GenerationStep {
@@ -78,8 +119,9 @@ export function useItinerary() {
       advanceStep(3, "running");
 
       // Call itinerary generation API
+      const targetCurrency = currencyForCity(input.destination.city);
       const rateRes = await fetch(
-        `/api/currency?from=${encodeURIComponent("USD")}&to=${encodeURIComponent("JPY")}`,
+        `/api/currency?from=${encodeURIComponent("USD")}&to=${encodeURIComponent(targetCurrency)}`,
       );
       const rateData = await rateRes.json().catch(() => null);
 

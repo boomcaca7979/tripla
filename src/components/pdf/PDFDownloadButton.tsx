@@ -29,10 +29,7 @@ export default function PDFDownloadButton({
   const fileName = `tripla-itinerary-${itinerary.input.destination.city}-${itinerary.input.departureDate}.pdf`;
 
   const handleExport = useCallback(async () => {
-    if (!loggedIn) {
-      alert("Log in to export PDF");
-      return;
-    }
+    if (!loggedIn) return;
 
     setLoading(true);
     try {
@@ -59,14 +56,16 @@ export default function PDFDownloadButton({
     <button
       type="button"
       onClick={handleExport}
-      disabled={loading}
+      disabled={loading || !loggedIn}
+      title={loggedIn ? undefined : "Log in to export PDF"}
+      aria-disabled={!loggedIn}
       className={[
         "inline-flex items-center rounded-lg px-3 py-1.5 text-sm font-medium transition-colors",
         "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
         loggedIn
           ? "bg-blue-600 text-white hover:bg-blue-700"
           : "cursor-not-allowed bg-gray-300 text-gray-500",
-        loading ? "opacity-50" : "",
+        !loggedIn || loading ? "opacity-50" : "",
       ].join(" ")}
     >
       {loading ? "Preparing PDF…" : "Export PDF"}
