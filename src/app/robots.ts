@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/plan", "/api/"],
       },
     ],
-    sitemap: "https://www.utripla.xyz/sitemap.xml",
+    sitemap: "https://www.utripla.xyz/sitemap-main.xml",
   };
 }

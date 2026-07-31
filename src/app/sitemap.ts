@@ -5,7 +5,7 @@ import { TRAVEL_STYLES } from "@/data/travel-styles";
 
 const SITE_URL = "https://www.utripla.xyz";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export function generateSitemapEntries(): MetadataRoute.Sitemap {
   // Phase 7.4/9 Step 7: 6 个 Hub 页面 priority 0.8
   const hubRoutes = [
     { path: "/trips", priority: 0.8, changeFrequency: "weekly" as const },
@@ -89,4 +89,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...bestTimeEntries,
     ...travelBudgetEntries,
   ];
+}
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return generateSitemapEntries();
 }
