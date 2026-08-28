@@ -12,6 +12,7 @@ export function useHydration(): boolean {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- SSR 安全的 mounted 标志（React 官方 hydration 模式）
     setMounted(true);
   }, []);
 

@@ -84,6 +84,8 @@ const CITY_TO_IATA: Record<string, { iata: string; icao: string }> = {
   "são paulo": { iata: "GRU", icao: "SBGR" },
   "sao paulo": { iata: "GRU", icao: "SBGR" },
   "mexico city": { iata: "MEX", icao: "MMMX" },
+  "las vegas": { iata: "LAS", icao: "KLAS" },
+  austin: { iata: "AUS", icao: "KAUS" },
   // Middle East / India / Oceania
   dubai: { iata: "DXB", icao: "OMDB" },
   delhi: { iata: "DEL", icao: "VIDP" },
@@ -91,6 +93,11 @@ const CITY_TO_IATA: Record<string, { iata: string; icao: string }> = {
   sydney: { iata: "SYD", icao: "YSSY" },
   auckland: { iata: "AKL", icao: "NZAA" },
   istanbul: { iata: "IST", icao: "LTFM" },
+  // New SEO destinations
+  kyoto: { iata: "KIX", icao: "RJBB" },
+  vienna: { iata: "VIE", icao: "LOWW" },
+  rovaniemi: { iata: "RVN", icao: "EFKT" },
+  antalya: { iata: "AYT", icao: "LTAI" },
 };
 
 function lookupIata(cityName: string): { iata: string; icao: string } {
@@ -139,6 +146,7 @@ export default function AirportAutocomplete({
   // ── Sync display when parent changes value externally ───────────────
   useEffect(() => {
     if (value) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- 父组件外部变更 value 时同步显示（prop → state 同步）
       setQuery(`${value.city} (${value.iata || "—"})`);
     }
   }, [value]);

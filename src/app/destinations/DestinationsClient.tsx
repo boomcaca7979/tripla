@@ -38,6 +38,15 @@ const INTEREST_LABELS: Record<TravelInterest, string> = {
 
 const PAGE_SIZE = 9;
 
+/** Hotel affiliate 链接的默认日期（今天起 7 晚）。模块级 helper，避免渲染期直接调用 new Date()。 */
+function defaultHotelDates() {
+  const checkIn = new Date().toISOString().slice(0, 10);
+  const checkOut = new Date(Date.now() + 7 * 86400000)
+    .toISOString()
+    .slice(0, 10);
+  return { checkIn, checkOut };
+}
+
 // ── Component ──────────────────────────────────────────────────────────
 
 export default function DestinationsClient() {
@@ -379,8 +388,7 @@ function DestinationCard({
           <a
             href={buildHotelSearchUrl({
               city: destination.city,
-              checkIn: new Date().toISOString().slice(0, 10),
-              checkOut: new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10),
+              ...defaultHotelDates(),
             })}
             target="_blank"
             rel="noopener noreferrer sponsored"

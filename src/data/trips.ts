@@ -106,7 +106,8 @@ const RAW_TRIPS: RawTrip[] = [
     gradient: "from-rose-500 to-pink-700",
     author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
     days: 3,
-    estimatedCost: 800,
+    // Fix: 与 destinations.ts 的 budgetPerDay(USD 120/日) 对齐，避免与 /travel-budget/tokyo 页面数据矛盾。
+    estimatedCost: 360,
     currency: "USD",
     tags: ["Foodie", "Shopping", "Culture"],
     excerpt:
@@ -172,7 +173,8 @@ const RAW_TRIPS: RawTrip[] = [
     gradient: "from-indigo-500 to-pink-600",
     author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
     days: 2,
-    estimatedCost: 600,
+    // Fix: 与 destinations.ts 的 budgetPerDay(USD 150/日) 对齐。
+    estimatedCost: 300,
     currency: "USD",
     tags: ["Culture", "Foodie", "Couples"],
     excerpt:
@@ -228,7 +230,8 @@ const RAW_TRIPS: RawTrip[] = [
     gradient: "from-amber-500 to-red-600",
     author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
     days: 3,
-    estimatedCost: 900,
+    // Fix: 与 destinations.ts 的 budgetPerDay(USD 200/日) 对齐。
+    estimatedCost: 600,
     currency: "USD",
     tags: ["Active", "Culture", "Foodie"],
     excerpt:
@@ -294,7 +297,8 @@ const RAW_TRIPS: RawTrip[] = [
     gradient: "from-orange-500 to-yellow-600",
     author: { kind: "user", name: "Lalita S.", avatarColor: "from-orange-500 to-yellow-500", initials: "LS" },
     days: 3,
-    estimatedCost: 450,
+    // Fix: 与 destinations.ts 的 budgetPerDay(USD 50/日) 对齐。
+    estimatedCost: 150,
     currency: "USD",
     tags: ["Foodie", "Nightlife", "Budget"],
     excerpt:
@@ -359,7 +363,8 @@ const RAW_TRIPS: RawTrip[] = [
     gradient: "from-slate-700 to-blue-900",
     author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
     days: 2,
-    estimatedCost: 550,
+    // Fix: 与 destinations.ts 的 budgetPerDay(USD 180/日) 对齐。
+    estimatedCost: 360,
     currency: "USD",
     tags: ["History", "Museums", "Slow Travel"],
     excerpt:
@@ -416,7 +421,8 @@ const RAW_TRIPS: RawTrip[] = [
     gradient: "from-sky-500 to-cyan-700",
     author: { kind: "user", name: "Olivia P.", avatarColor: "from-sky-500 to-cyan-500", initials: "OP" },
     days: 3,
-    estimatedCost: 700,
+    // Fix: 与 destinations.ts 的 budgetPerDay(USD 160/日) 对齐。
+    estimatedCost: 480,
     currency: "USD",
     tags: ["Adventure", "Nature", "Beaches"],
     excerpt:
@@ -931,7 +937,8 @@ const RAW_TRIPS: RawTrip[] = [
     author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
     days: 2,
     estimatedCost: 3500,
-    currency: "CNY",
+    // Fix: 香港法定货币为港元（HKD），原 CNY 标注错误。
+    currency: "HKD",
     tags: ["Shopping", "Foodie", "Urban"],
     excerpt:
       "Victoria Harbour panoramas, Victoria Peak sunsets, and dim sum feasts — Hong Kong in 48 electrifying hours.",
@@ -989,7 +996,8 @@ const RAW_TRIPS: RawTrip[] = [
     author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
     days: 2,
     estimatedCost: 2500,
-    currency: "CNY",
+    // Fix: 澳门法定货币为澳门元（MOP），原 CNY 标注错误。
+    currency: "MOP",
     tags: ["Culture", "Foodie", "Couples"],
     excerpt:
       "Portuguese heritage meets casino glamour — Ruins of St. Paul's, Venetian canals, and egg tart bliss in Macau.",
@@ -2098,6 +2106,570 @@ const RAW_TRIPS: RawTrip[] = [
     },
     travelStyle: "adventure",
     interests: ["nature", "sports", "food"],
+  },
+  {
+    // Event template: 2026 Singapore Grand Prix (Oct 9-11, Sprint weekend, Marina Bay).
+    id: "singapore-gp-2026",
+    title: "Singapore Grand Prix 2026 Race Weekend",
+    coverImage: null,
+    gradient: "from-red-600 to-rose-800",
+    author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
+    days: 3,
+    estimatedCost: 540,
+    currency: "SGD",
+    tags: ["Sports", "Nightlife", "Events"],
+    excerpt:
+      "Formula 1's original night race under the Marina Bay floodlights — practice Friday, Sprint Saturday, Grand Prix Sunday, with hawker dinners between sessions.",
+    weatherTip:
+      "The 2026 Singapore Grand Prix runs October 9-11. Tropical heat and evening thunderstorms are possible — the grandstands are covered, but plan for humidity.",
+    fullDays: [
+      {
+        day: 1,
+        theme: "Arrival & Friday practice",
+        activities: [
+          { time: "14:00", name: "Check in near City Hall or Marina Bay", emoji: "🏨" },
+          { time: "17:00", name: "Maxwell Food Centre hawker dinner", emoji: "🍚" },
+          { time: "20:00", name: "Marina Bay Circuit · Friday practice", emoji: "🏎️" },
+          { time: "22:30", name: "Riverside walk along Boat Quay", emoji: "🌃" },
+        ],
+      },
+      {
+        day: 2,
+        theme: "Sprint Saturday",
+        activities: [
+          { time: "09:00", name: "Gardens by the Bay & Cloud Forest", emoji: "🌳" },
+          { time: "13:00", name: "Lau Pa Sat lunch satay street", emoji: "🍢" },
+          { time: "16:00", name: "Marina Bay Circuit · Sprint & Qualifying", emoji: "🏁" },
+          { time: "21:00", name: "Post-session concerts in Zone 4", emoji: "🎵" },
+        ],
+      },
+      {
+        day: 3,
+        theme: "Race Sunday",
+        activities: [
+          { time: "10:00", name: "Chinatown & Sri Mariamman Temple stroll", emoji: "🏮" },
+          { time: "14:00", name: "Early dinner before track gates", emoji: "🍜" },
+          { time: "18:00", name: "Singapore Grand Prix under the lights", emoji: "🏎️" },
+          { time: "23:00", name: "Marina Bay Sands SkyPark nightcap", emoji: "🍸" },
+        ],
+      },
+    ],
+    restaurants: [
+      { name: "Maxwell Food Centre", cuisine: "Hawker centre · $", emoji: "🍚" },
+      { name: "Lau Pa Sat", cuisine: "Satay street · $", emoji: "🍢" },
+      { name: "Satay by the Bay", cuisine: "Waterfront BBQ · $", emoji: "🍗" },
+    ],
+    city: "Singapore",
+    country: "Singapore",
+    airport: {
+      iata: "SIN",
+      icao: "WSSS",
+      name: "Singapore Changi Airport",
+      city: "Singapore",
+      country: "Singapore",
+      timezone: "Asia/Singapore",
+      latitude: 1.3644,
+      longitude: 103.9915,
+    },
+    travelStyle: "active",
+    interests: ["sports", "nightlife", "food"],
+  },
+  {
+    // Event template: Oktoberfest Munich 2026 (Sept 19 - Oct 4, Theresienwiese).
+    id: "oktoberfest-munich-2026",
+    title: "Oktoberfest Munich 2026 Long Weekend",
+    coverImage: null,
+    gradient: "from-amber-500 to-orange-700",
+    author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
+    days: 3,
+    estimatedCost: 450,
+    currency: "USD",
+    tags: ["Events", "Foodie", "Culture"],
+    excerpt:
+      "Three days at the Wiesn and beyond — the Saturday tapping ceremony at noon, beer-garden lunches in the Englischer Garten, and Munich's palaces between steins.",
+    weatherTip:
+      "Oktoberfest 2026 runs September 19 to October 4. Mid-week visits are quieter; weekends fill the tents by mid-morning.",
+    fullDays: [
+      {
+        day: 1,
+        theme: "Old town & warm-up",
+        activities: [
+          { time: "13:00", name: "Marienplatz & the Rathaus-Glockenspiel", emoji: "🏙️" },
+          { time: "15:00", name: "Viktualienmarkt beer-garden lunch", emoji: "🍺" },
+          { time: "17:00", name: "English Garden & Eisbach surf wave", emoji: "🏄" },
+          { time: "19:00", name: "Dinner in a traditional gasthaus", emoji: "🍖" },
+        ],
+      },
+      {
+        day: 2,
+        theme: "Opening Saturday at the Wiesn",
+        activities: [
+          { time: "09:00", name: "Landlords' parade to the Theresienwiese", emoji: "🐴" },
+          { time: "12:00", name: "'O'zapft is!' — the tapping ceremony", emoji: "🍻" },
+          { time: "14:00", name: "Big-tent lunch & liter stein", emoji: "🥨" },
+          { time: "18:00", name: "Ferris wheel over the festival lights", emoji: "🎡" },
+        ],
+      },
+      {
+        day: 3,
+        theme: "Oide Wiesn & palaces",
+        activities: [
+          { time: "10:00", name: "Oide Wiesn historical festival section", emoji: "🎠" },
+          { time: "13:00", name: "Nymphenburg Palace gardens", emoji: "🏰" },
+          { time: "16:00", name: "Deutsches Museum highlights", emoji: "⚙️" },
+          { time: "19:00", name: "Hofbräuhaus farewell dinner", emoji: "🎺" },
+        ],
+      },
+    ],
+    restaurants: [
+      { name: "Hofbräuhaus am Platzl", cuisine: "Bavarian · $$", emoji: "🍺" },
+      { name: "Augustiner Keller", cuisine: "Beer garden · $$", emoji: "🥨" },
+      { name: "Viktualienmarkt stalls", cuisine: "Street food · $", emoji: "🥒" },
+    ],
+    city: "Munich",
+    country: "Germany",
+    airport: {
+      iata: "MUC",
+      icao: "EDDM",
+      name: "Munich Airport",
+      city: "Munich",
+      country: "Germany",
+      timezone: "Europe/Berlin",
+      latitude: 48.3538,
+      longitude: 11.7861,
+    },
+    travelStyle: "foodie",
+    interests: ["food", "nightlife", "history"],
+  },
+  {
+    // Event template: 2026 United States GP at COTA, Austin (Oct 23-25).
+    id: "austin-f1-2026",
+    title: "Austin F1 Grand Prix 2026 at COTA",
+    coverImage: null,
+    gradient: "from-red-600 to-blue-800",
+    author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
+    days: 3,
+    estimatedCost: 450,
+    currency: "USD",
+    tags: ["Sports", "Foodie", "Music"],
+    excerpt:
+      "The United States Grand Prix at Circuit of the Americas — general-admission hillside viewing, brisket before qualifying, and live music on Sixth Street after the flag.",
+    weatherTip:
+      "The 2026 United States Grand Prix runs October 23-25. Austin in late October is warm and mostly dry — bring sun protection for the COTA expanses.",
+    fullDays: [
+      {
+        day: 1,
+        theme: "Downtown Austin warm-up",
+        activities: [
+          { time: "12:00", name: "Congress Avenue & State Capitol walk", emoji: "🏛️" },
+          { time: "14:00", name: "Breakfast taco & BBQ crawl", emoji: "🥩" },
+          { time: "16:30", name: "Congress Bridge bat flight at dusk", emoji: "🦇" },
+          { time: "20:00", name: "Live music on Sixth Street", emoji: "🎸" },
+        ],
+      },
+      {
+        day: 2,
+        theme: "Qualifying Saturday at COTA",
+        activities: [
+          { time: "09:00", name: "Drive out to Circuit of the Americas", emoji: "🚗" },
+          { time: "11:00", name: "Fan zones & F1 Miami-style paddock vibes", emoji: "🎪" },
+          { time: "15:00", name: "Qualifying session at Turn 1 climb", emoji: "🏁" },
+          { time: "20:00", name: "Rainey Street food trucks", emoji: "🌮" },
+        ],
+      },
+      {
+        day: 3,
+        theme: "Race Sunday",
+        activities: [
+          { time: "10:00", name: "Lady Bird Lake morning walk", emoji: "🌅" },
+          { time: "12:00", name: "Grand Prix — main straight grandstand", emoji: "🏎️" },
+          { time: "17:00", name: "Post-race celebrations downtown", emoji: "🥃" },
+          { time: "19:00", name: "Farewell Texas BBQ dinner", emoji: "🔥" },
+        ],
+      },
+    ],
+    restaurants: [
+      { name: "Franklin Barbecue", cuisine: "Texas BBQ · $", emoji: "🥩" },
+      { name: "Veracruz All Natural", cuisine: "Tacos · $", emoji: "🌮" },
+      { name: "Cooper's Old Time Pit Bar-B-Que", cuisine: "Hill country BBQ · $$", emoji: "🍖" },
+    ],
+    city: "Austin",
+    country: "United States",
+    airport: {
+      iata: "AUS",
+      icao: "KAUS",
+      name: "Austin-Bergstrom International Airport",
+      city: "Austin",
+      country: "United States",
+      timezone: "America/Chicago",
+      latitude: 30.1975,
+      longitude: -97.6664,
+    },
+    travelStyle: "active",
+    interests: ["sports", "food", "nightlife"],
+  },
+  {
+    // Event template: 2026 Mexico City GP (Oct 30 - Nov 1, Autódromo Hermanos Rodríguez).
+    id: "mexico-city-f1-2026",
+    title: "Mexico City F1 Grand Prix 2026 Weekend",
+    coverImage: null,
+    gradient: "from-green-600 to-red-700",
+    author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
+    days: 3,
+    estimatedCost: 8000,
+    currency: "MXN",
+    tags: ["Sports", "Culture", "Foodie"],
+    excerpt:
+      "The Mexican Grand Prix through the Foro Sol stadium section — packed grandstands, mariachi trackside, plus taquerías, murals and pyramids around the race weekend.",
+    weatherTip:
+      "The 2026 Mexico City Grand Prix runs October 30 to November 1. Late October is the end of the rainy season — mild days, possible afternoon showers.",
+    fullDays: [
+      {
+        day: 1,
+        theme: "Centro histórico warm-up",
+        activities: [
+          { time: "10:00", name: "Zócalo & Metropolitan Cathedral", emoji: "⛪" },
+          { time: "12:00", name: "Templo Mayor ruins & museum", emoji: "🏛️" },
+          { time: "15:00", name: "Mural tour in the Centro", emoji: "🎨" },
+          { time: "19:00", name: "Taquería dinner in Roma Norte", emoji: "🌮" },
+        ],
+      },
+      {
+        day: 2,
+        theme: "Qualifying at Foro Sol",
+        activities: [
+          { time: "09:00", name: "Churros & chocolate at El Moro", emoji: "🍩" },
+          { time: "12:00", name: "Autódromo Hermanos Rodríguez · Qualifying", emoji: "🏁" },
+          { time: "17:00", name: "Frida Kahlo's Casa Azul, Coyoacán", emoji: "💙" },
+          { time: "20:00", name: "Coyoacán market dinner", emoji: "🫓" },
+        ],
+      },
+      {
+        day: 3,
+        theme: "Race Sunday",
+        activities: [
+          { time: "11:30", name: "Grand Prix — stadium section roar", emoji: "🏎️" },
+          { time: "16:00", name: "Chapultepec Park wind-down", emoji: "🌳" },
+          { time: "18:00", name: "Roma Norte mezcalería toast", emoji: "🥃" },
+        ],
+      },
+    ],
+    restaurants: [
+      { name: "El Moro", cuisine: "Churros & chocolate · $", emoji: "🍩" },
+      { name: "Taquería El Greco", cuisine: "Tacos al pastor · $", emoji: "🌮" },
+      { name: "Mercado de Coyoacán", cuisine: "Market food · $", emoji: "🫓" },
+    ],
+    city: "Mexico City",
+    country: "Mexico",
+    airport: {
+      iata: "MEX",
+      icao: "MMMX",
+      name: "Mexico City International Airport",
+      city: "Mexico City",
+      country: "Mexico",
+      timezone: "America/Mexico_City",
+      latitude: 19.4363,
+      longitude: -99.0721,
+    },
+    travelStyle: "active",
+    interests: ["sports", "food", "history"],
+  },
+  {
+    // Event template: 2026 Las Vegas GP (Nov 19-21, Strip circuit).
+    id: "las-vegas-f1-2026",
+    title: "Las Vegas F1 Grand Prix 2026 Strip Weekend",
+    coverImage: null,
+    gradient: "from-purple-600 to-fuchsia-800",
+    author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
+    days: 3,
+    estimatedCost: 540,
+    currency: "USD",
+    tags: ["Sports", "Nightlife", "Luxury"],
+    excerpt:
+      "Formula 1 screaming down the Las Vegas Strip at night — Sphere-side viewing, celebrity-chef dinners, and a Red Rock Canyon reset before the race.",
+    weatherTip:
+      "The 2026 Las Vegas Grand Prix runs November 19-21. Desert nights get cold — pack layers for the evening track sessions.",
+    fullDays: [
+      {
+        day: 1,
+        theme: "Strip arrival",
+        activities: [
+          { time: "15:00", name: "Check in on or near the Strip", emoji: "🏨" },
+          { time: "17:00", name: "Bellagio fountains & conservatory", emoji: "⛲" },
+          { time: "19:00", name: "Resort-row dinner", emoji: "🍽️" },
+          { time: "21:00", name: "Sphere exterior light show", emoji: "🌀" },
+        ],
+      },
+      {
+        day: 2,
+        theme: "Qualifying night",
+        activities: [
+          { time: "10:00", name: "Red Rock Canyon scenic drive", emoji: "🏜️" },
+          { time: "15:00", name: "F1 fan zone & driver appearances", emoji: "🎪" },
+          { time: "22:00", name: "Qualifying under the Vegas lights", emoji: "🏁" },
+          { time: "01:00", name: "Late-night lounge, no clock needed", emoji: "🍸" },
+        ],
+      },
+      {
+        day: 3,
+        theme: "Race Saturday",
+        activities: [
+          { time: "11:00", name: "Brunch buffet marathon", emoji: "🥞" },
+          { time: "16:00", name: "Track walk & grandstand entry", emoji: "🚶" },
+          { time: "22:00", name: "Las Vegas Grand Prix on the Strip", emoji: "🏎️" },
+          { time: "01:00", name: "Fremont Street nightcap", emoji: "🎰" },
+        ],
+      },
+    ],
+    restaurants: [
+      { name: "Bouchon Bistro", cuisine: "French · $$$", emoji: "🥐" },
+      { name: "Tacos El Gordo", cuisine: "Tijuana-style tacos · $", emoji: "🌮" },
+      { name: "Best Friend", cuisine: "Korean BBQ · $$", emoji: "🥩" },
+    ],
+    city: "Las Vegas",
+    country: "United States",
+    airport: {
+      iata: "LAS",
+      icao: "KLAS",
+      name: "Harry Reid International Airport",
+      city: "Las Vegas",
+      country: "United States",
+      timezone: "America/Los_Angeles",
+      latitude: 36.084,
+      longitude: -115.1538,
+    },
+    travelStyle: "active",
+    interests: ["sports", "nightlife", "food"],
+  },
+  {
+    // Seasonal template: Kyoto autumn foliage (mid-Nov to early Dec peak).
+    id: "kyoto-autumn-2026",
+    title: "Kyoto Autumn Foliage 4-Day Escape",
+    coverImage: null,
+    gradient: "from-red-500 to-amber-700",
+    author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
+    days: 4,
+    estimatedCost: 560,
+    currency: "USD",
+    tags: ["Nature", "Culture", "Slow Travel"],
+    excerpt:
+      "Momiji season in the old capital — vermilion maples at Tōfuku-ji, an Arashiyama river morning, and lantern-lit temple illuminations after dark.",
+    weatherTip:
+      "Kyoto's autumn foliage typically peaks from mid-November to early December — book accommodation early, it's the busiest scenic window after cherry blossom season.",
+    fullDays: [
+      {
+        day: 1,
+        theme: "Higashiyama classics",
+        activities: [
+          { time: "10:00", name: "Kiyomizu-dera & Sannenzaka lanes", emoji: "⛩️" },
+          { time: "13:00", name: "Lunch in a machiya café", emoji: "🍱" },
+          { time: "15:00", name: "Kodai-ji maple garden", emoji: "🍁" },
+          { time: "18:00", name: "Gion lantern walk at dusk", emoji: "🏮" },
+        ],
+      },
+      {
+        day: 2,
+        theme: "Arashiyama morning",
+        activities: [
+          { time: "07:30", name: "Bamboo grove before the crowds", emoji: "🎋" },
+          { time: "10:00", name: "Tenryū-ji temple & garden", emoji: "🏯" },
+          { time: "13:00", name: "Hozugawa river boat ride", emoji: "🚣" },
+          { time: "16:00", name: "Monkey Park Iwatayama sunset", emoji: "🐒" },
+        ],
+      },
+      {
+        day: 3,
+        theme: "Golden & vermilion",
+        activities: [
+          { time: "09:00", name: "Fushimi Inari torii hike", emoji: "🦊" },
+          { time: "13:00", name: "Uji matcha stop", emoji: "🍵" },
+          { time: "15:30", name: "Kinkaku-ji golden pavilion", emoji: "✨" },
+          { time: "18:30", name: "Evening illumination at Tōfuku-ji", emoji: "🍁" },
+        ],
+      },
+      {
+        day: 4,
+        theme: "Nishiki & Nara option",
+        activities: [
+          { time: "09:00", name: "Nishiki Market food walk", emoji: "🍢" },
+          { time: "11:00", name: "Nijō Castle interiors", emoji: "🏰" },
+          { time: "14:00", name: "Day trip to Nara's deer park", emoji: "🦌" },
+          { time: "19:00", name: "Pontocho farewell dinner", emoji: "🍶" },
+        ],
+      },
+    ],
+    restaurants: [
+      { name: "Nishiki Market stalls", cuisine: "Street food · $", emoji: "🍢" },
+      { name: "Menami", cuisine: "Obanzai home-style · $$", emoji: "🥢" },
+      { name: "Katsukura", cuisine: "Tonkatsu · $$", emoji: "🐖" },
+    ],
+    city: "Kyoto",
+    country: "Japan",
+    airport: {
+      iata: "KIX",
+      icao: "RJBB",
+      name: "Kansai International Airport",
+      city: "Osaka",
+      country: "Japan",
+      timezone: "Asia/Tokyo",
+      latitude: 34.4273,
+      longitude: 135.2444,
+    },
+    travelStyle: "cultural",
+    interests: ["nature", "history", "food"],
+  },
+  {
+    // Seasonal template: Vienna Christmas markets 2026 (Christkindlmarkt Nov 13 - Dec 26).
+    id: "vienna-christmas-markets-2026",
+    title: "Vienna Christmas Markets 2026 Weekend",
+    coverImage: null,
+    gradient: "from-amber-500 to-red-600",
+    author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
+    days: 3,
+    estimatedCost: 420,
+    currency: "USD",
+    tags: ["Culture", "Foodie", "Winter"],
+    excerpt:
+      "Glühwein under the Rathaus tree — the Christkindlmarkt at Rathausplatz, Schönbrunn's baroque stalls, Klimt at the Belvedere, and waltzes at the Staatsoper.",
+    weatherTip:
+      "The Wiener Christkindlmarkt at Rathausplatz runs November 13 to December 26, 2026 (daily 10am-10pm). Weekday evenings are less crowded.",
+    fullDays: [
+      {
+        day: 1,
+        theme: "Old town advent",
+        activities: [
+          { time: "14:00", name: "St. Stephen's Cathedral & Graben lights", emoji: "⛪" },
+          { time: "16:00", name: "Christkindlmarkt at Rathausplatz", emoji: "🎄" },
+          { time: "18:00", name: "Ice skating at the Rathaus rink", emoji: "⛸️" },
+          { time: "20:00", name: "Coffee-house dinner & Sachertorte", emoji: "☕" },
+        ],
+      },
+      {
+        day: 2,
+        theme: "Imperial Vienna",
+        activities: [
+          { time: "09:30", name: "Schönbrunn Palace tour & market", emoji: "🏰" },
+          { time: "14:00", name: "Belvedere — Klimt's 'The Kiss'", emoji: "🖼️" },
+          { time: "16:30", name: "Naschmarkt punch stalls", emoji: "🍹" },
+          { time: "19:00", name: "Classical concert or Staatsoper", emoji: "🎻" },
+        ],
+      },
+      {
+        day: 3,
+        theme: "Museums & small markets",
+        activities: [
+          { time: "10:00", name: "Spittelberg artisan market lanes", emoji: "🛍️" },
+          { time: "13:00", name: "Kunsthistorisches Museum", emoji: "🏛️" },
+          { time: "16:00", name: "Karlsplatz market & church", emoji: "✨" },
+          { time: "19:00", name: "Farewell Glühwein at Rathausplatz", emoji: "🍻" },
+        ],
+      },
+    ],
+    restaurants: [
+      { name: "Café Sacher", cuisine: "Viennese classic · $$$", emoji: "🍰" },
+      { name: "Figlmüller", cuisine: "Wiener Schnitzel · $$", emoji: "🍖" },
+      { name: "Naschmarkt stalls", cuisine: "Market food · $", emoji: "🥨" },
+    ],
+    city: "Vienna",
+    country: "Austria",
+    airport: {
+      iata: "VIE",
+      icao: "LOWW",
+      name: "Vienna International Airport",
+      city: "Vienna",
+      country: "Austria",
+      timezone: "Europe/Vienna",
+      latitude: 48.1103,
+      longitude: 16.5697,
+    },
+    travelStyle: "cultural",
+    interests: ["museums", "history", "food"],
+  },
+  {
+    // Seasonal template: New England fall foliage loop from Boston.
+    id: "new-england-fall-foliage-2026",
+    title: "New England Fall Foliage 5-Day Loop",
+    coverImage: null,
+    gradient: "from-orange-500 to-red-700",
+    author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
+    days: 5,
+    estimatedCost: 850,
+    currency: "USD",
+    tags: ["Nature", "Road Trip", "Slow Travel"],
+    excerpt:
+      "Boston to the White Mountains and back — covered bridges, Kancamagus Highway colour, Vermont village greens, and cider donuts at every farm stand.",
+    weatherTip:
+      "Foliage season moves north to south: northern New England typically peaks late September to mid-October, southern areas mid-October. Watch regional foliage reports before locking dates.",
+    fullDays: [
+      {
+        day: 1,
+        theme: "Boston arrival",
+        activities: [
+          { time: "13:00", name: "Freedom Walk through downtown", emoji: "🗽" },
+          { time: "16:00", name: "Boston Public Garden autumn strolls", emoji: "🍂" },
+          { time: "19:00", name: "North End Italian dinner", emoji: "🍝" },
+        ],
+      },
+      {
+        day: 2,
+        theme: "White Mountains, New Hampshire",
+        activities: [
+          { time: "09:00", name: "Drive north to North Conway", emoji: "🚗" },
+          { time: "11:00", name: "Kancamagus Highway scenic stops", emoji: "🍁" },
+          { time: "14:00", name: "Covered bridge loop", emoji: "🌉" },
+          { time: "17:00", name: "Sunset from Cathedral Ledge", emoji: "🌄" },
+        ],
+      },
+      {
+        day: 3,
+        theme: "Vermont villages",
+        activities: [
+          { time: "09:00", name: "Stowe village & church steeple", emoji: "⛪" },
+          { time: "11:00", name: "Smugglers' Notch drive", emoji: "⛰️" },
+          { time: "14:00", name: "Ben & Jerry's factory tour", emoji: "🍦" },
+          { time: "17:00", name: "Cider donuts at a farm stand", emoji: "🍩" },
+        ],
+      },
+      {
+        day: 4,
+        theme: "Green Mountains south",
+        activities: [
+          { time: "09:00", name: "Woodstock village green", emoji: "🏡" },
+          { time: "11:30", name: "Quechee Gorge walk", emoji: "🏞️" },
+          { time: "14:00", name: "Maple syrup farm visit", emoji: "🍁" },
+          { time: "18:00", name: "Fireside inn dinner", emoji: "🔥" },
+        ],
+      },
+      {
+        day: 5,
+        theme: "Back to Boston",
+        activities: [
+          { time: "09:00", name: "Morning foliage hike", emoji: "🥾" },
+          { time: "12:00", name: "Scenic drive back via Wachusett", emoji: "🚙" },
+          { time: "16:00", name: "Cambridge & Harvard Yard walk", emoji: "🎓" },
+          { time: "19:00", name: "Seafood farewell dinner", emoji: "🦞" },
+        ],
+      },
+    ],
+    restaurants: [
+      { name: "Polly's Pancake Parlor", cuisine: "New Hampshire · $", emoji: "🥞" },
+      { name: "Simon Pearce", cuisine: "Vermont farm-to-table · $$$", emoji: "🍷" },
+      { name: "Union Oyster House", cuisine: "Boston chowder · $$", emoji: "🦪" },
+    ],
+    city: "Boston",
+    country: "United States",
+    airport: {
+      iata: "BOS",
+      icao: "KBOS",
+      name: "Boston Logan International Airport",
+      city: "Boston",
+      country: "United States",
+      timezone: "America/New_York",
+      latitude: 42.3656,
+      longitude: -71.0096,
+    },
+    travelStyle: "relaxed",
+    interests: ["nature", "food", "history"],
   },
 ];
 

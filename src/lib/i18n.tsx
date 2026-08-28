@@ -305,6 +305,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored === "zh" || stored === "en") {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- 从 localStorage 恢复语言（SSR 安全模式，官方推荐）
         setLocaleState(stored);
       }
     } catch {

@@ -9,6 +9,7 @@ import {
   type Destination,
 } from "@/data/destinations";
 import { TRIPS } from "@/data/trips";
+import { getGuidesForCity } from "@/data/guides";
 import WeatherScore from "@/components/weather/WeatherScore";
 import { buildHotelSearchUrl } from "@/lib/affiliate";
 
@@ -185,6 +186,15 @@ function buildFaqJsonLd(dest: Destination) {
   };
 }
 
+/** Hotel affiliate 链接的默认日期（今天起 7 晚）。模块级 helper，避免渲染期直接调用 new Date()。 */
+function defaultHotelDates() {
+  const checkIn = new Date().toISOString().slice(0, 10);
+  const checkOut = new Date(Date.now() + 7 * 86400000)
+    .toISOString()
+    .slice(0, 10);
+  return { checkIn, checkOut };
+}
+
 // ── Page ──────────────────────────────────────────────────────────────
 
 export default async function DestinationDetailPage({
@@ -202,6 +212,9 @@ export default async function DestinationDetailPage({
   const popularTrips = TRIPS.filter(
     (t) => t.city.toLowerCase() === dest.city.toLowerCase(),
   ).slice(0, 5);
+
+  // Destination → Guide 内链（同 city 的 guide，最多 4）。
+  const cityGuides = getGuidesForCity(dest.city).slice(0, 4);
 
   const totalBudget = dest.budgetPerDay * dest.recommendedDays;
 
@@ -422,6 +435,40 @@ export default async function DestinationDetailPage({
           </ul>
         </section>
 
+        {/* City guides (Destination → Guide 内链) */}
+        {cityGuides.length > 0 && (
+          <section className="mb-10">
+            <h2 className="mb-4 text-2xl font-bold text-gray-900">
+              {dest.city} travel guides
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {cityGuides.map((g) => (
+                <Link
+                  key={g.slug}
+                  href={`/guides/${g.slug}`}
+                  className="group block rounded-2xl border border-gray-100 overflow-hidden transition hover:shadow-md"
+                >
+                  <div
+                    className={`h-24 bg-gradient-to-br ${g.gradient} flex items-end p-4`}
+                  >
+                    <span className="text-sm font-semibold text-white/90">
+                      {g.readTime} · Updated {g.updatedAt}
+                    </span>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-semibold text-gray-900 group-hover:text-blue-700">
+                      {g.title}
+                    </h3>
+                    <p className="mt-1 line-clamp-2 text-sm text-gray-600">
+                      {g.excerpt}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Popular trip templates (Phase 3 Step 3: 最多 5 个) */}
         {popularTrips.length > 0 && (
           <section className="mb-10">
@@ -474,8 +521,7 @@ export default async function DestinationDetailPage({
           <a
             href={buildHotelSearchUrl({
               city: dest.city,
-              checkIn: new Date().toISOString().slice(0, 10),
-              checkOut: new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10),
+              ...defaultHotelDates(),
             })}
             target="_blank"
             rel="noopener noreferrer sponsored"

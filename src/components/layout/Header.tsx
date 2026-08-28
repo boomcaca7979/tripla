@@ -42,6 +42,7 @@ export default function Header() {
   const [currentUser, setCurrentUser] = useState<{ email: string } | null>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 从 localStorage 恢复登录态（SSR 安全模式）
     setCurrentUser(getStoredUser());
 
     // 监听 localStorage 变化，实现跨标签页状态同步

@@ -6,6 +6,7 @@ import AirportAutocomplete from "./AirportAutocomplete";
 import DateRangePicker from "./DateRangePicker";
 import { useTravelStore } from "@/store/travel";
 import { useTranslation } from "@/lib/i18n";
+import { DESTINATIONS } from "@/data/destinations";
 import type { Airport } from "@/types/flight";
 import type {
   TravelPlanInput,
@@ -76,12 +77,52 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
   // ── Sync from store (template auto-fill) ────────────────────────────
   useEffect(() => {
     if (!searchParams) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 模板/行程卡片通过 store 注入搜索参数（外部 store → 本地 state 同步）
     if (searchParams.destination) setDestination(searchParams.destination);
     if (searchParams.travelStyle) setTravelStyle(searchParams.travelStyle);
     if (searchParams.budgetLevel) setBudgetLevel(searchParams.budgetLevel);
     if (searchParams.interests && searchParams.interests.length > 0)
       setInterests(searchParams.interests);
   }, [searchParams]);
+
+  // ── Deep-link prefill from URL query params ─────────────────────────
+  // 支持 /?to=City&travelStyle=cultural&interests=food,history
+  //        &departureDate=YYYY-MM-DD&returnDate=YYYY-MM-DD#hero-search
+  // 用 window.location 而非 useSearchParams，避免静态渲染需要 Suspense 边界。
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const to = params.get("to");
+    const style = params.get("travelStyle");
+    const interestsParam = params.get("interests");
+    const dep = params.get("departureDate");
+    const ret = params.get("returnDate");
+    if (!to && !style && !interestsParam && !dep && !ret) return;
+
+    if (to) {
+      const dest = DESTINATIONS.find(
+        (d) => d.city.toLowerCase() === to.toLowerCase(),
+      );
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- 从 URL 深链接预填规划器（外部系统 → state，SSR 安全）
+      if (dest) setDestination(dest.airport);
+    }
+    if (style && TRAVEL_STYLES.some((s) => s.value === style)) {
+      setTravelStyle(style as TravelStyle);
+    }
+    if (interestsParam) {
+      const list = interestsParam
+        .split(",")
+        .map((i) => i.trim())
+        .filter((i): i is TravelInterest =>
+          ALL_INTERESTS.some((a) => a.value === i),
+        );
+      if (list.length > 0) setInterests(list);
+    }
+    if (dep) setDepartureDate(dep);
+    if (ret) setReturnDate(ret);
+    // 仅在首次挂载时读取一次 URL。
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // ── Handlers ─────────────────────────────────────────────────────────
 

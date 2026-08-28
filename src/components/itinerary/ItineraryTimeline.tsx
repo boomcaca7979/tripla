@@ -168,6 +168,7 @@ export default function ItineraryTimeline({
   // Expand first day by default only on fresh data
   useEffect(() => {
     if (itinerary && itinerary.days.length > 0 && expandedDay === null) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- 新行程生成后展开第一天（派生默认值）
       setExpandedDay(itinerary.days[0].dayNumber);
     }
   }, [itinerary?.id]); // eslint-disable-line react-hooks/exhaustive-deps

@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { TRIPS } from "@/data/trips";
 import { DESTINATIONS, type Region } from "@/data/destinations";
 import { TRAVEL_STYLES } from "@/data/travel-styles";
+import { GUIDES } from "@/data/guides";
 
 const SITE_URL = "https://www.utripla.xyz";
 
@@ -79,6 +80,14 @@ export function generateSitemapEntries(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  // Guide 详情页（SEO 内容页）priority 0.7，随 updatedAt 声明 lastModified。
+  const guideEntries: MetadataRoute.Sitemap = GUIDES.map((g) => ({
+    url: `${SITE_URL}/guides/${g.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.7,
+    lastModified: new Date(g.updatedAt),
+  }));
+
   return [
     ...staticEntries,
     ...hubEntries,
@@ -88,6 +97,7 @@ export function generateSitemapEntries(): MetadataRoute.Sitemap {
     ...destinationEntries,
     ...bestTimeEntries,
     ...travelBudgetEntries,
+    ...guideEntries,
   ];
 }
 

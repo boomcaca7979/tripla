@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTripBySlug, getTripSlugs, TRIPS, type Trip } from "@/data/trips";
 import { DESTINATIONS } from "@/data/destinations";
+import { getGuidesForCity } from "@/data/guides";
 
 // ── Static params ─────────────────────────────────────────────────────
 
@@ -212,6 +213,9 @@ export default async function TripDetailPage({
     ...sameRegionDests,
     ...otherDests,
   ].slice(0, 3);
+
+  // Trip → Guide 内链（同 city 的 guide，最多 3）。
+  const cityGuides = getGuidesForCity(trip.city).slice(0, 3);
 
   return (
     <article className="min-h-screen bg-white pt-24">
@@ -427,6 +431,40 @@ export default async function TripDetailPage({
             Customize this trip →
           </Link>
         </section>
+
+        {/* City guides (Trip → Guide 内链) */}
+        {cityGuides.length > 0 && (
+          <section className="mb-10">
+            <h2 className="mb-4 text-2xl font-bold text-gray-900">
+              {trip.city} travel guides
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {cityGuides.map((g) => (
+                <Link
+                  key={g.slug}
+                  href={`/guides/${g.slug}`}
+                  className="group block rounded-2xl border border-gray-100 overflow-hidden transition hover:shadow-md"
+                >
+                  <div
+                    className={`h-24 bg-gradient-to-br ${g.gradient} flex items-end p-4`}
+                  >
+                    <span className="text-sm font-semibold text-white/90">
+                      {g.readTime}
+                    </span>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-semibold text-gray-900 group-hover:text-blue-700">
+                      {g.seoTitle}
+                    </h3>
+                    <p className="mt-1 line-clamp-2 text-sm text-gray-600">
+                      {g.excerpt}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Related trips (Phase 3 Step 2: 同 city 优先，最多 3) */}
         {relatedTrips.length > 0 && (
