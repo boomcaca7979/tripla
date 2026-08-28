@@ -3,6 +3,7 @@ import { TRIPS } from "@/data/trips";
 import { DESTINATIONS, type Region } from "@/data/destinations";
 import { TRAVEL_STYLES } from "@/data/travel-styles";
 import { GUIDES } from "@/data/guides";
+import { AI_PAGES } from "@/data/ai-pages";
 
 const SITE_URL = "https://www.utripla.xyz";
 
@@ -88,6 +89,14 @@ export function generateSitemapEntries(): MetadataRoute.Sitemap {
     lastModified: new Date(g.updatedAt),
   }));
 
+  // Phase 2: AI Travel SEO 落地页 priority 0.8，随 updatedAt 声明 lastModified。
+  const aiPageEntries: MetadataRoute.Sitemap = AI_PAGES.map((p) => ({
+    url: `${SITE_URL}/${p.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+    lastModified: new Date(p.updatedAt),
+  }));
+
   return [
     ...staticEntries,
     ...hubEntries,
@@ -98,6 +107,7 @@ export function generateSitemapEntries(): MetadataRoute.Sitemap {
     ...bestTimeEntries,
     ...travelBudgetEntries,
     ...guideEntries,
+    ...aiPageEntries,
   ];
 }
 

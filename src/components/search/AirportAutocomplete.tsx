@@ -74,6 +74,9 @@ const CITY_TO_IATA: Record<string, { iata: string; icao: string }> = {
   oslo: { iata: "OSL", icao: "ENGM" },
   copenhagen: { iata: "CPH", icao: "EKCH" },
   dublin: { iata: "DUB", icao: "EIDW" },
+  milan: { iata: "MXP", icao: "LIMC" },
+  prague: { iata: "PRG", icao: "LKPR" },
+  cologne: { iata: "CGN", icao: "EDDK" },
   // Americas
   "new york": { iata: "JFK", icao: "KJFK" },
   "los angeles": { iata: "LAX", icao: "KLAX" },
@@ -88,11 +91,13 @@ const CITY_TO_IATA: Record<string, { iata: string; icao: string }> = {
   austin: { iata: "AUS", icao: "KAUS" },
   // Middle East / India / Oceania
   dubai: { iata: "DXB", icao: "OMDB" },
+  "abu dhabi": { iata: "AUH", icao: "OMAA" },
   delhi: { iata: "DEL", icao: "VIDP" },
   mumbai: { iata: "BOM", icao: "VABB" },
   sydney: { iata: "SYD", icao: "YSSY" },
   auckland: { iata: "AKL", icao: "NZAA" },
   istanbul: { iata: "IST", icao: "LTFM" },
+  baku: { iata: "GYD", icao: "UBBB" },
   // New SEO destinations
   kyoto: { iata: "KIX", icao: "RJBB" },
   vienna: { iata: "VIE", icao: "LOWW" },

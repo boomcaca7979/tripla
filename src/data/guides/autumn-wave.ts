@@ -248,7 +248,7 @@ export const AUTUMN_WAVE_GUIDES: Guide[] = [
           "Kyoto, Japan — peak momiji, typically from mid-November into early December. The city's most beautiful and most crowded month; our Kyoto autumn guide covers the dawn strategy that makes it work.",
           "Vienna, Austria — the Christmas market season opens at Rathausplatz on November 13. Museums, coffeehouses, and punch by the mugful; our full Vienna markets guide has the circuit.",
           "Las Vegas, USA — Formula 1 under the lights, November 19–21. A night race around the Strip, with everything that implies for closures, demand, and prices.",
-          "Mexico City, Mexico — Day of the Dead (November 1–2) closes out the race weekend of October 30–November 1: ofrendas, marigolds, and the year's most atmospheric week in CDMX.",
+          "Mexico City, Mexico — Day of the Dead (November 1–2) closes out the race weekend of October 30–November 1: ofrendas, marigolds, and the year's most atmospheric week in CDMX. Give it two or three days on the way to or from the race — our complete Mexico City guide has the neighborhood-by-neighborhood plan and the four-day shape.",
           "Rovaniemi, Finland — the aurora season is fully underway and the days shrink toward kaamos, the polar-night weeks around the winter solstice when the sun barely rises. Snow cover typically builds through the month — check conditions and the official local tourism site before booking activities.",
           "Munich, Germany — the Christmas markets begin in late November, and the city is calmer and more affordable-feeling than the festival weeks of October. Pairs naturally with Nuremberg by train.",
           "Istanbul, Turkey — shoulder season done right: shorter lines at Hagia Sophia and Topkapı, ferry rides in crisp air, and the covers going on the terrace tables.",
@@ -282,28 +282,28 @@ export const AUTUMN_WAVE_GUIDES: Guide[] = [
       },
     ],
     itinerary: {
-      heading: "Sample Itinerary: Four Days in Mexico City, Early November",
-      intro: "The first days of November are the most atmospheric week of CDMX's year — Day of the Dead ofrendas everywhere, race-weekend energy, and the start of cool, dry weather. This is the shape we'd book; see our full Mexico City guide for the deep dive.",
+      heading: "Sample Itinerary: November in Rovaniemi",
+      intro: "Four days on the Arctic Circle as the darkness settles toward kaamos — aurora evenings from the first night, husky and reindeer trails at pre-Christmas availability, and Lapland before the December rush arrives. This is the shape we'd book for November; our Lapland Christmas guide covers the December version of the same town.",
       days: [
         {
           day: 1,
-          theme: "Roma and Condesa on foot",
-          description: "Base yourself in Roma or Condesa and spend the first day walking — the tree-lined boulevards, Parque México, coffee in Colonia Roma, and an early dinner. Take it easy: the city sits at 2,240 meters, and altitude plus jet lag is a bad first-day combination. Look for the first ofrendas in hotel lobbies and restaurant entrances.",
+          theme: "Arrive, cross the Arctic Circle at Santa Claus Village",
+          description: "Fly in via Helsinki — or step off the overnight train already rested, the northern way. The November day is short and shrinking, so go straight to the guaranteed centerpiece: Santa Claus Village on the Arctic Circle line, a short ride from town — Santa's meeting room, the official post office, and the line on the ground you cross to stand in two hemispheres, all at a fraction of the Christmas-week crush. Back in town for dinner, then first aurora watch if the sky is clear: November's darkness is the asset, and multiple nights are the strategy.",
         },
         {
           day: 2,
-          theme: "Chapultepec and the Anthropology Museum",
-          description: "Give the Museo Nacional de Antropología a half day minimum — it is the single best museum in the Americas, and its Mesoamerican halls reframe everything else you'll see in Mexico. Walk Chapultepec Park after, then dinner back in Condesa. Verify opening days on the official museum site before you go.",
+          theme: "Husky or reindeer trails, then the aurora window",
+          description: "The signature Lapland day: a husky team for speed, noise, and joy, or a reindeer sled for silence and herding-culture stories — book either well ahead, because capacity is limited even in the calm weeks. Snow cover typically builds through November, so verify what's running on the official local tourism channels before you lock the day. Evening: the dedicated aurora attempt — a tour that drives away from town light, or a self-drive plan built around that day's cloud forecast.",
         },
         {
           day: 3,
-          theme: "Coyoacán and the Casa Azul",
-          description: "Morning in Coyoacán: the Frida Kahlo Museum (Casa Azul) uses timed entry, so book through the official channel well ahead. Wander the colonial centro, then take a trajinera boat through the canals at Xochimilco in the late afternoon if your energy holds. This is the Day of the Dead heartland — check the city's official program for parades and cemetery events.",
+          theme: "The Arctic Circle activity day",
+          description: "The full winter program at November pace: a snowmobile run into the forest, the Ounasvaara fell's trails above town, or the Arktikum museum's glass-roofed Arctic exhibits for the darkest hours — mix one outdoor block with one indoor one and the short daylight stops mattering. Keep the evening flexible for a third aurora window; by now you know the forecasts and the drill. This is also the day to shop for the craft the region is actually known for, from the makers themselves.",
         },
         {
           day: 4,
-          theme: "Centro Histórico and street food",
-          description: "The Zócalo, the Templo Mayor ruins beside the cathedral, and the murals inside the Palacio Nacional — verify access requirements on the official site. Lunch should be street food or a market comedor; late afternoon, if your dates include November 1, find a vigil or public ofrenda. If you're here for the Grand Prix (October 30–November 1), everything above needs booking much further ahead.",
+          theme: "Santa Park or the town center, then south",
+          description: "Two closing moves before the flight: Santa Park, the cavern attraction north of town, if the family wants one more turn of the Christmas machine — or a slow morning of the real Rovaniemi, the Alvar Aalto-designed center and the riverbank under what light there is. Either way, depart with the layers you didn't own four days ago. If the aurora never showed, this is the day you start planning the return trip with more nights.",
         },
       ],
     },
@@ -347,7 +347,7 @@ export const AUTUMN_WAVE_GUIDES: Guide[] = [
       {
         question: "Where should I travel in November 2026?",
         answer:
-          "Start with the anchors: Kyoto for peak foliage (typically mid-November to early December), Vienna for the Christmas markets opening November 13, Las Vegas for Formula 1 on November 19–21, or Mexico City for Day of the Dead at the start of the month. Add Bangkok or Istanbul for shoulder-season calm, or Rovaniemi for northern lights and polar-night darkness.",
+          "Start with the anchors: Kyoto for peak foliage (typically mid-November to early December), Vienna for the Christmas markets opening November 13, Las Vegas for Formula 1 on November 19–21, or Mexico City for Day of the Dead at the start of the month — two or three days there covers the ofrendas and the atmosphere, and our complete Mexico City guide has the full four-day plan. Add Bangkok or Istanbul for shoulder-season calm, or Rovaniemi for northern lights and polar-night darkness.",
       },
       {
         question: "When do Vienna's Christmas markets open in 2026?",
@@ -385,6 +385,7 @@ export const AUTUMN_WAVE_GUIDES: Guide[] = [
       "christmas-markets-europe-2026",
       "kyoto-autumn-travel-2026",
       "las-vegas-f1-2026-travel-guide",
+      "mexico-city-travel-guide-2026",
     ],
     planner: {
       destination: "Vienna",

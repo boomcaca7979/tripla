@@ -2,6 +2,15 @@ import type { TravelStyle, TravelInterest } from "@/types/itinerary";
 import { REFRESHED_GUIDES } from "./guides/refreshed";
 import { SEPTEMBER_WAVE_GUIDES } from "./guides/september-wave";
 import { AUTUMN_WAVE_GUIDES } from "./guides/autumn-wave";
+import { WINTER_SEASONAL_GUIDES } from "./guides/winter-seasonal";
+import { F1_WAVE_GUIDES } from "./guides/f1-wave";
+import { FESTIVAL_WAVE_GUIDES } from "./guides/festival-wave";
+import { QUESTIONS_CORE_GUIDES } from "./guides/questions-core";
+import { QUESTIONS_EXTENDED_GUIDES } from "./guides/questions-extended";
+import { NEW_CITIES_GUIDES } from "./guides/new-cities";
+import { QUESTIONS_2027_GUIDES } from "./guides/questions-2027";
+import { WHERE_2027_GUIDES } from "./guides/where-2027";
+import { EVENTS_2027_GUIDES } from "./guides/events-2027";
 
 // ── Types ──────────────────────────────────────────────────────────────
 
@@ -101,6 +110,15 @@ export const GUIDES: Guide[] = [
   ...SEPTEMBER_WAVE_GUIDES,
   ...AUTUMN_WAVE_GUIDES,
   ...REFRESHED_GUIDES,
+  ...WINTER_SEASONAL_GUIDES,
+  ...F1_WAVE_GUIDES,
+  ...FESTIVAL_WAVE_GUIDES,
+  ...QUESTIONS_CORE_GUIDES,
+  ...QUESTIONS_EXTENDED_GUIDES,
+  ...NEW_CITIES_GUIDES,
+  ...QUESTIONS_2027_GUIDES,
+  ...WHERE_2027_GUIDES,
+  ...EVENTS_2027_GUIDES,
 ];
 
 /** 返回所有 guide 的 slug。 */

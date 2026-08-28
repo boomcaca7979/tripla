@@ -852,7 +852,7 @@ export const SEPTEMBER_WAVE_GUIDES: Guide[] = [
     title: "Singapore Grand Prix 2026 Travel Guide: Race Weekend Done Right",
     seoTitle: "Singapore Grand Prix 2026: Race Weekend Guide",
     metaDescription:
-      "The Singapore Grand Prix 2026 (October 9–11) is F1's only night race. Plan circuit zones, road closures, hawker food strategy, and what to pack for humidity.",
+      "The Singapore Grand Prix 2026 (October 9–11) is F1's original night race under the Marina Bay floodlights. Plan circuit zones, road closures, hawker food strategy, and packing for humidity.",
     excerpt:
       "Formula 1's original night race returns to Marina Bay October 9–11, 2026. The weekend playbook: which circuit zones to pick, how to move when the streets close, eating properly at hawker centers instead of concession stands, and packing for equatorial humidity.",
     coverImage: null,
@@ -880,7 +880,7 @@ export const SEPTEMBER_WAVE_GUIDES: Guide[] = [
         paragraphs: [
           "Race weekend runs Friday, October 9 to Sunday, October 11, 2026, with practice and qualifying sessions spread across Friday evening and Saturday, and the grand prix itself on Sunday night under the lights. Check the official Formula 1 site for the confirmed 2026 session times — they shift year to year, and they matter, because they set your dinner clock all weekend.",
           "The rhythm of a Singapore weekend is inverted, and leaning into it is the whole trick. Days are for the city — the hawker lunches, the Gardens, the air-conditioned museums — while evenings belong to the circuit. The afternoons still get hot enough that standing at a support-race session is real work, so treat the daylight hours as recovery and arrive at the track ready for the part you came for.",
-          "One racing note for 2026: this is the first season of Formula 1's new engine formula — a genuinely fresh competitive era, and as good an argument as any for finally doing the night race in person.",
+          "A technical aside that shapes the racing itself: the power units are new to everyone in 2026, and Marina Bay is among the sternest examinations fresh machinery can face. Race distance in equatorial humidity, at night, with concrete walls never far away, asks harder questions of cooling and reliability than any temperate circuit does — which is why the cars that come through Singapore intact are the ones whose new engines the paddock quietly trusts for everything that follows.",
         ],
       },
       {
@@ -1092,7 +1092,7 @@ export const SEPTEMBER_WAVE_GUIDES: Guide[] = [
         paragraphs: [
           "Race weekend runs Friday, October 23 to Sunday, October 25, 2026. Check the official Formula 1 site for the confirmed session schedule — and for the support series and the weekend's headline concerts, which COTA has historically staged at its own amphitheater after track activity ends; the lineup is announced on the official event channels in the months before.",
           "The circuit itself is a purpose-built road course in the flat farmland southeast of the city, close to Austin's airport — which matters for planning, because 'near the airport' cuts both ways: quick to reach from the airport-side hotels, a real drive from downtown. The layout rewards walking it on Friday: the climb into Turn 1's amphitheater, the flowing esses through Turns 3 to 6, and the long back straight into the heavy braking zone at the far end are the three places everyone remembers.",
-          "One racing note: 2026 is the first season of Formula 1's new power-unit rules — a genuinely new competitive era, and a good year to see it live for the first time.",
+          "The technical subplot for the informed: the 2026 engine reset scrambles the competitive order, and COTA's layout is built to expose whatever that reset produces. The long run to the heavy braking zone at the far end of the lap punishes any power deficit, the climbing esses through Turns 3 to 6 punish a car that doesn't trust its tires, and the stadium bowl at Turn 1 punishes whoever gets the first lap wrong — a wide-ranging examination that suits an unsettled grid better than any narrow street layout could.",
         ],
       },
       {
@@ -1506,7 +1506,7 @@ export const SEPTEMBER_WAVE_GUIDES: Guide[] = [
         paragraphs: [
           "Race weekend runs Thursday, November 19 through Saturday, November 21, 2026 — a Thursday-to-Saturday format unusual on the calendar, with the grand prix on Saturday night. Check the official Formula 1 site for the confirmed 2026 session times; they run late into the evening, and they will set your dinner clock for all three nights.",
           "The circuit is a temporary street layout that uses Las Vegas Boulevard and the surrounding streets, with one of the longest straights in Formula 1 and a pit complex at the Grand Prix Plaza — the permanent facility the sport built beside the Strip. The lap sweeps past the Sphere and the resort skyline, which is the entire aesthetic argument for this race: no other venue in motorsport runs its cars through real estate this recognizable, at night, at speed.",
-          "One racing note: 2026 is the first season of Formula 1's new power-unit formula — a genuinely new competitive era, arriving in the sport's newest venue. If you've been waiting for a reason to do this race, the calendar just handed you one.",
+          "The technical footnote belongs at this race more than most: the engine regulations reset in 2026 around greater electrical power and efficiency, and the desert night is the newest formula's most unusual laboratory. Mid-November air over the Mojave is the coldest the calendar ever serves — denser air, easier cooling, kinder to batteries — so the long flat-out blast down the Strip straight will show the new power units working in conditions no other venue replicates. The sport's newest cars, its newest circuit and a cold desert night: no other race on the calendar offers that combination.",
         ],
         bullets: [
           "Dates: Thursday, November 19 – Saturday, November 21, 2026, with the race Saturday night.",
