@@ -1,5 +1,10 @@
 import type { Airport } from "@/types/flight";
 import type { TravelStyle, TravelInterest } from "@/types/itinerary";
+import { EXTENDED_TRIPS_A, type RawTripInput } from "./trips-extended-a";
+import { EXTENDED_TRIPS_B } from "./trips-extended-b";
+import { EXTENDED_TRIPS_C } from "./trips-extended-c";
+import { EXTENDED_TRIPS_D } from "./trips-extended-d";
+import { EXTENDED_TRIPS_E } from "./trips-extended-e";
 
 // ── Types ──────────────────────────────────────────────────────────────
 
@@ -3566,6 +3571,9 @@ const RAW_TRIPS: RawTrip[] = [
  *
  * 保留 id/excerpt/estimatedCost/weatherTip/fullDays 以兼容现有列表页/Modal。
  */
+/** 扩容批次共用的字面量输入类型（与 RawTrip 结构一致，结构化兼容）。 */
+export type { RawTripInput };
+
 function normalizeTrip(raw: RawTrip): Trip {
   return {
     ...raw,
@@ -3578,7 +3586,14 @@ function normalizeTrip(raw: RawTrip): Trip {
   };
 }
 
-export const TRIPS: Trip[] = RAW_TRIPS.map(normalizeTrip);
+export const TRIPS: Trip[] = [
+  ...RAW_TRIPS,
+  ...EXTENDED_TRIPS_A,
+  ...EXTENDED_TRIPS_B,
+  ...EXTENDED_TRIPS_C,
+  ...EXTENDED_TRIPS_D,
+  ...EXTENDED_TRIPS_E,
+].map(normalizeTrip);
 
 /** 返回所有 trip 的 slug。 */
 export function getTripSlugs(): string[] {

@@ -11,6 +11,16 @@ import { NEW_CITIES_GUIDES } from "./guides/new-cities";
 import { QUESTIONS_2027_GUIDES } from "./guides/questions-2027";
 import { WHERE_2027_GUIDES } from "./guides/where-2027";
 import { EVENTS_2027_GUIDES } from "./guides/events-2027";
+import { ITINERARIES_1_GUIDES } from "./guides/itineraries-1";
+import { ITINERARIES_2_GUIDES } from "./guides/itineraries-2";
+import { BUDGET_GUIDES } from "./guides/budgets";
+import { SEASONS_FOOD_GUIDES } from "./guides/seasons-food";
+import { COMPARISON_GUIDES } from "./guides/comparisons";
+import { ITINERARIES_3_GUIDES } from "./guides/itineraries-3";
+import { ITINERARIES_4_GUIDES } from "./guides/itineraries-4";
+import { COUNTRY_GUIDES } from "./guides/countries";
+import { TRAVELER_TOPIC_GUIDES } from "./guides/traveler-topic-guides";
+import { EXTRA_GUIDES } from "./guides/extra-guides";
 
 // ── Types ──────────────────────────────────────────────────────────────
 
@@ -119,6 +129,16 @@ export const GUIDES: Guide[] = [
   ...QUESTIONS_2027_GUIDES,
   ...WHERE_2027_GUIDES,
   ...EVENTS_2027_GUIDES,
+  ...ITINERARIES_1_GUIDES,
+  ...ITINERARIES_2_GUIDES,
+  ...BUDGET_GUIDES,
+  ...SEASONS_FOOD_GUIDES,
+  ...COMPARISON_GUIDES,
+  ...ITINERARIES_3_GUIDES,
+  ...ITINERARIES_4_GUIDES,
+  ...COUNTRY_GUIDES,
+  ...TRAVELER_TOPIC_GUIDES,
+  ...EXTRA_GUIDES,
 ];
 
 /** 返回所有 guide 的 slug。 */

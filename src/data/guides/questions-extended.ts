@@ -1376,11 +1376,7 @@ export const QUESTIONS_EXTENDED_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["vienna", "prague", "munich"],
     relatedTripSlugs: ["vienna-christmas-markets-2026"],
-    relatedGuideSlugs: [
-      "how-many-days-in-vienna",
-      "vienna-christmas-markets-2026",
-      "best-area-to-stay-in-vienna",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-vienna", "vienna-christmas-markets-2026", "best-area-to-stay-in-vienna"],
     planner: {
       destination: "Vienna",
       travelStyle: "cultural",
@@ -1560,11 +1556,7 @@ export const QUESTIONS_EXTENDED_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["mexico-city"],
     relatedTripSlugs: ["mexico-city-3-day", "mexico-city-ancient-culture"],
-    relatedGuideSlugs: [
-      "how-many-days-in-mexico-city",
-      "is-mexico-city-expensive",
-      "mexico-city-travel-guide-2026",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-mexico-city", "is-mexico-city-expensive", "mexico-city-travel-guide-2026"],
     planner: {
       destination: "Mexico City",
       travelStyle: "cultural",
@@ -1738,11 +1730,7 @@ export const QUESTIONS_EXTENDED_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["kyoto", "tokyo"],
     relatedTripSlugs: ["kyoto-autumn-2026"],
-    relatedGuideSlugs: [
-      "how-many-days-in-kyoto",
-      "is-kyoto-expensive",
-      "kyoto-autumn-travel-2026",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-kyoto", "is-kyoto-expensive", "kyoto-autumn-travel-2026"],
     planner: {
       destination: "Kyoto",
       travelStyle: "cultural",
@@ -1916,11 +1904,7 @@ export const QUESTIONS_EXTENDED_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["vienna"],
     relatedTripSlugs: ["vienna-christmas-markets-2026"],
-    relatedGuideSlugs: [
-      "how-many-days-in-vienna",
-      "vienna-christmas-markets-2026",
-      "best-christmas-markets-germany-2026",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-vienna", "vienna-christmas-markets-2026", "best-christmas-markets-germany-2026"],
     planner: {
       destination: "Vienna",
       travelStyle: "cultural",
@@ -2107,11 +2091,7 @@ export const QUESTIONS_EXTENDED_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["tokyo", "kyoto"],
     relatedTripSlugs: ["tokyo-3d-foodie"],
-    relatedGuideSlugs: [
-      "how-many-days-in-tokyo",
-      "is-tokyo-expensive",
-      "tokyo-foodie-guide-2026",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-tokyo", "is-tokyo-expensive", "tokyo-food-guide"],
     planner: {
       destination: "Tokyo",
       travelStyle: "foodie",

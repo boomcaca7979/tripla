@@ -206,16 +206,8 @@ export const SEPTEMBER_WAVE_GUIDES: Guide[] = [
       },
     ],
     relatedDestinationSlugs: ["kyoto", "munich", "rome", "singapore"],
-    relatedTripSlugs: [
-      "oktoberfest-munich-2026",
-      "kyoto-autumn-2026",
-      "new-england-fall-foliage-2026",
-    ],
-    relatedGuideSlugs: [
-      "labor-day-weekend-getaways-2026",
-      "best-fall-foliage-trips-2026",
-      "oktoberfest-munich-2026",
-    ],
+    relatedTripSlugs: ["oktoberfest-munich-2026", "kyoto-autumn-2026", "new-england-fall-foliage-2026"],
+    relatedGuideSlugs: ["labor-day-weekend-getaways-2026", "best-fall-foliage-trips-2026", "oktoberfest-munich-2026"],
     planner: {
       destination: "Kyoto",
       travelStyle: "cultural",
@@ -400,10 +392,7 @@ export const SEPTEMBER_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["newyork", "austin", "las-vegas", "mexico-city"],
     relatedTripSlugs: ["nyc-explorer", "mexico-city-ancient-culture"],
-    relatedGuideSlugs: [
-      "where-to-travel-september-2026",
-      "best-fall-foliage-trips-2026",
-    ],
+    relatedGuideSlugs: ["where-to-travel-september-2026", "best-fall-foliage-trips-2026"],
     planner: {
       destination: "Austin",
       travelStyle: "foodie",
@@ -610,11 +599,7 @@ export const SEPTEMBER_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["kyoto", "munich"],
     relatedTripSlugs: ["new-england-fall-foliage-2026", "kyoto-autumn-2026"],
-    relatedGuideSlugs: [
-      "where-to-travel-october-2026",
-      "kyoto-autumn-travel-2026",
-      "where-to-travel-september-2026",
-    ],
+    relatedGuideSlugs: ["where-to-travel-october-2026", "kyoto-autumn-travel-2026", "where-to-travel-september-2026"],
     planner: {
       destination: "New York",
       travelStyle: "relaxed",
@@ -832,10 +817,7 @@ export const SEPTEMBER_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["munich", "vienna"],
     relatedTripSlugs: ["oktoberfest-munich-2026"],
-    relatedGuideSlugs: [
-      "where-to-travel-october-2026",
-      "vienna-christmas-markets-2026",
-    ],
+    relatedGuideSlugs: ["where-to-travel-october-2026", "vienna-christmas-markets-2026"],
     planner: {
       destination: "Munich",
       travelStyle: "foodie",
@@ -1258,10 +1240,7 @@ export const SEPTEMBER_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["austin", "mexico-city", "las-vegas"],
     relatedTripSlugs: ["austin-f1-2026"],
-    relatedGuideSlugs: [
-      "mexico-city-f1-2026-travel-guide",
-      "las-vegas-f1-2026-travel-guide",
-    ],
+    relatedGuideSlugs: ["mexico-city-f1-2026-travel-guide", "las-vegas-f1-2026-travel-guide"],
     planner: {
       destination: "Austin",
       travelStyle: "active",
@@ -1681,10 +1660,7 @@ export const SEPTEMBER_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["las-vegas", "austin", "mexico-city"],
     relatedTripSlugs: ["las-vegas-f1-2026"],
-    relatedGuideSlugs: [
-      "where-to-travel-november-2026",
-      "austin-f1-2026-travel-guide",
-    ],
+    relatedGuideSlugs: ["where-to-travel-november-2026", "austin-f1-2026-travel-guide"],
     planner: {
       destination: "Las Vegas",
       travelStyle: "active",

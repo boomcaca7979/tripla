@@ -241,12 +241,7 @@ export const EVENTS_2027_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["tokyo", "kyoto", "osaka"],
     relatedTripSlugs: ["solo-japan-7-day", "tokyo-3d-foodie", "osaka-food-capital"],
-    relatedGuideSlugs: [
-      "how-many-days-in-tokyo",
-      "best-area-to-stay-in-kyoto",
-      "is-kyoto-expensive",
-      "where-to-travel-march-2027",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-tokyo", "best-area-to-stay-in-kyoto", "is-kyoto-expensive", "where-to-travel-march-2027"],
     planner: {
       destination: "Tokyo",
       travelStyle: "cultural",
@@ -468,12 +463,7 @@ export const EVENTS_2027_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["tokyo", "kyoto", "osaka"],
     relatedTripSlugs: ["solo-japan-7-day", "osaka-food-capital"],
-    relatedGuideSlugs: [
-      "how-many-days-in-tokyo",
-      "is-tokyo-expensive",
-      "how-many-days-in-osaka",
-      "best-area-to-stay-in-osaka",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-tokyo", "is-tokyo-expensive", "how-many-days-in-osaka", "best-area-to-stay-in-osaka"],
     planner: {
       destination: "Tokyo",
       travelStyle: "cultural",
@@ -670,12 +660,7 @@ export const EVENTS_2027_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["abu-dhabi", "singapore", "las-vegas"],
     relatedTripSlugs: ["abu-dhabi-f1-2026", "las-vegas-f1-2026", "singapore-gp-2026"],
-    relatedGuideSlugs: [
-      "f1-abu-dhabi-2026-travel-guide",
-      "f1-monza-2026-travel-guide",
-      "singapore-grand-prix-2026-travel-guide",
-      "las-vegas-f1-2026-travel-guide",
-    ],
+    relatedGuideSlugs: ["f1-abu-dhabi-2026-travel-guide", "f1-monza-2026-travel-guide", "singapore-grand-prix-2026-travel-guide", "las-vegas-f1-2026-travel-guide"],
     planner: {
       destination: "Abu Dhabi",
       travelStyle: "active",

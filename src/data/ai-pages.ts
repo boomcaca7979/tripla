@@ -1,4 +1,6 @@
 import type { TravelStyle, TravelInterest } from "@/types/itinerary";
+import { AI_PAGES_EXTENDED } from "./ai-pages-extended";
+import { AI_PAGES_EXTENDED_2 } from "./ai-pages-extended-2";
 
 // ── Types ──────────────────────────────────────────────────────────────
 
@@ -1039,4 +1041,6 @@ export const AI_PAGES: AiPage[] = [
     updatedAt: "2026-08-28",
     readTime: "8 min read",
   },
+  ...AI_PAGES_EXTENDED,
+  ...AI_PAGES_EXTENDED_2,
 ];

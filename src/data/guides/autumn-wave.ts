@@ -194,11 +194,7 @@ export const AUTUMN_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["kyoto", "munich", "austin", "mexico-city"],
     relatedTripSlugs: ["new-england-fall-foliage-2026", "kyoto-autumn-2026"],
-    relatedGuideSlugs: [
-      "where-to-travel-november-2026",
-      "best-fall-foliage-trips-2026",
-      "oktoberfest-munich-2026",
-    ],
+    relatedGuideSlugs: ["where-to-travel-november-2026", "best-fall-foliage-trips-2026", "oktoberfest-munich-2026"],
     planner: {
       destination: "Kyoto",
       label: "Plan your October 2026 trip",
@@ -376,17 +372,8 @@ export const AUTUMN_WAVE_GUIDES: Guide[] = [
       },
     ],
     relatedDestinationSlugs: ["vienna", "kyoto", "las-vegas", "rovaniemi"],
-    relatedTripSlugs: [
-      "vienna-christmas-markets-2026",
-      "kyoto-autumn-2026",
-      "las-vegas-f1-2026",
-    ],
-    relatedGuideSlugs: [
-      "christmas-markets-europe-2026",
-      "kyoto-autumn-travel-2026",
-      "las-vegas-f1-2026-travel-guide",
-      "mexico-city-travel-guide-2026",
-    ],
+    relatedTripSlugs: ["vienna-christmas-markets-2026", "kyoto-autumn-2026", "las-vegas-f1-2026"],
+    relatedGuideSlugs: ["christmas-markets-europe-2026", "kyoto-autumn-travel-2026", "las-vegas-f1-2026-travel-guide", "mexico-city-travel-guide-2026"],
     planner: {
       destination: "Vienna",
       label: "Plan your November 2026 trip",
@@ -577,10 +564,7 @@ export const AUTUMN_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["vienna", "munich", "rovaniemi"],
     relatedTripSlugs: ["vienna-christmas-markets-2026"],
-    relatedGuideSlugs: [
-      "vienna-christmas-markets-2026",
-      "where-to-travel-november-2026",
-    ],
+    relatedGuideSlugs: ["vienna-christmas-markets-2026", "where-to-travel-november-2026"],
     planner: {
       destination: "Vienna",
       departureDate: "2026-11-27",
@@ -751,10 +735,7 @@ export const AUTUMN_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["vienna", "munich", "rovaniemi"],
     relatedTripSlugs: ["vienna-christmas-markets-2026"],
-    relatedGuideSlugs: [
-      "christmas-markets-europe-2026",
-      "where-to-travel-november-2026",
-    ],
+    relatedGuideSlugs: ["christmas-markets-europe-2026", "where-to-travel-november-2026"],
     planner: {
       destination: "Vienna",
       departureDate: "2026-11-27",
@@ -937,10 +918,7 @@ export const AUTUMN_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["rome"],
     relatedTripSlugs: ["rome-eternal-city"],
-    relatedGuideSlugs: [
-      "where-to-travel-october-2026",
-      "best-solo-travel-destinations-2026",
-    ],
+    relatedGuideSlugs: ["where-to-travel-october-2026", "best-solo-travel-destinations-2026"],
     planner: {
       destination: "Rome",
       travelStyle: "relaxed",
@@ -1121,10 +1099,7 @@ export const AUTUMN_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["tokyo", "singapore", "vienna", "seoul"],
     relatedTripSlugs: ["tokyo-3d-foodie", "singapore-garden-city"],
-    relatedGuideSlugs: [
-      "where-to-travel-october-2026",
-      "slow-travel-italy-2026",
-    ],
+    relatedGuideSlugs: ["where-to-travel-october-2026", "slow-travel-italy-2026"],
     planner: {
       destination: "Tokyo",
       label: "Plan my solo trip",
@@ -1305,10 +1280,7 @@ export const AUTUMN_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["mexico-city"],
     relatedTripSlugs: ["mexico-city-ancient-culture", "mexico-city-f1-2026"],
-    relatedGuideSlugs: [
-      "mexico-city-f1-2026-travel-guide",
-      "where-to-travel-november-2026",
-    ],
+    relatedGuideSlugs: ["mexico-city-f1-2026-travel-guide", "where-to-travel-november-2026"],
     planner: {
       destination: "Mexico City",
       label: "Plan my Mexico City trip",
@@ -1501,10 +1473,7 @@ export const AUTUMN_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["kyoto", "tokyo"],
     relatedTripSlugs: ["kyoto-autumn-2026", "tokyo-3d-foodie"],
-    relatedGuideSlugs: [
-      "where-to-travel-november-2026",
-      "best-fall-foliage-trips-2026",
-    ],
+    relatedGuideSlugs: ["where-to-travel-november-2026", "best-fall-foliage-trips-2026"],
     planner: {
       destination: "Kyoto",
       departureDate: "2026-11-16",

@@ -185,12 +185,7 @@ export const NEW_CITIES_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["seoul", "tokyo", "osaka"],
     relatedTripSlugs: ["seoul-k-culture"],
-    relatedGuideSlugs: [
-      "how-many-days-in-tokyo",
-      "how-many-days-in-osaka",
-      "where-to-travel-october-2026",
-      "best-solo-travel-destinations-2026",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-tokyo", "how-many-days-in-osaka", "where-to-travel-october-2026", "best-solo-travel-destinations-2026"],
     planner: {
       destination: "Seoul",
       travelStyle: "active",
@@ -375,11 +370,7 @@ export const NEW_CITIES_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["bangkok", "singapore", "seoul"],
     relatedTripSlugs: ["bangkok-nightlife"],
-    relatedGuideSlugs: [
-      "bangkok-night-markets-guide-2026",
-      "how-many-days-in-singapore",
-      "where-to-travel-november-2026",
-    ],
+    relatedGuideSlugs: ["bangkok-night-markets-guide-2026", "how-many-days-in-singapore", "where-to-travel-november-2026"],
     planner: {
       destination: "Bangkok",
       travelStyle: "foodie",
@@ -570,12 +561,7 @@ export const NEW_CITIES_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["osaka", "kyoto", "tokyo"],
     relatedTripSlugs: ["osaka-food-capital", "kyoto-autumn-2026"],
-    relatedGuideSlugs: [
-      "how-many-days-in-kyoto",
-      "osaka-food-guide-2027",
-      "how-many-days-in-tokyo",
-      "japan-cherry-blossom-2027",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-kyoto", "osaka-food-guide-2027", "how-many-days-in-tokyo", "japan-cherry-blossom-2027"],
     planner: {
       destination: "Osaka",
       travelStyle: "foodie",
@@ -752,11 +738,7 @@ export const NEW_CITIES_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["osaka", "kyoto"],
     relatedTripSlugs: ["osaka-food-capital"],
-    relatedGuideSlugs: [
-      "how-many-days-in-osaka",
-      "tokyo-foodie-guide-2026",
-      "golden-week-japan-2027",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-osaka", "tokyo-food-guide", "golden-week-japan-2027"],
     planner: {
       destination: "Osaka",
       travelStyle: "foodie",
@@ -923,12 +905,7 @@ export const NEW_CITIES_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["hong-kong", "singapore", "seoul"],
     relatedTripSlugs: ["hongkong-shopping-foodie", "macau-portuguese-charm"],
-    relatedGuideSlugs: [
-      "how-many-days-in-hong-kong",
-      "how-many-days-in-singapore",
-      "new-york-weekend-guide-2026",
-      "where-to-travel-october-2026",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-hong-kong", "how-many-days-in-singapore", "new-york-weekend-guide-2026", "where-to-travel-october-2026"],
     planner: {
       destination: "Hong Kong",
       travelStyle: "foodie",
@@ -1113,12 +1090,7 @@ export const NEW_CITIES_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["hong-kong", "singapore", "seoul"],
     relatedTripSlugs: ["hongkong-shopping-foodie", "macau-portuguese-charm"],
-    relatedGuideSlugs: [
-      "hong-kong-48-hours",
-      "how-many-days-in-singapore",
-      "where-to-travel-october-2026",
-      "sydney-outdoors-guide-2026",
-    ],
+    relatedGuideSlugs: ["hong-kong-48-hours", "how-many-days-in-singapore", "where-to-travel-october-2026", "sydney-outdoors-guide-2026"],
     planner: {
       destination: "Hong Kong",
       travelStyle: "foodie",
@@ -1319,11 +1291,7 @@ export const NEW_CITIES_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["bali", "singapore", "bangkok"],
     relatedTripSlugs: ["bali-island-escape"],
-    relatedGuideSlugs: [
-      "how-many-days-in-singapore",
-      "where-to-travel-november-2026",
-      "best-solo-travel-destinations-2026",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-singapore", "where-to-travel-november-2026", "best-solo-travel-destinations-2026"],
     planner: {
       destination: "Bali",
       travelStyle: "relaxed",

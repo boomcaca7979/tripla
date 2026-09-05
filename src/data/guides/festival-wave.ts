@@ -196,11 +196,7 @@ export const FESTIVAL_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["prague", "vienna", "cologne"],
     relatedTripSlugs: ["vienna-christmas-markets-2026"],
-    relatedGuideSlugs: [
-      "vienna-christmas-markets-2026",
-      "christmas-markets-europe-2026",
-      "cologne-christmas-markets-2026",
-    ],
+    relatedGuideSlugs: ["vienna-christmas-markets-2026", "christmas-markets-europe-2026", "cologne-christmas-markets-2026"],
     planner: {
       destination: "Prague",
       departureDate: "2026-11-27",
@@ -400,11 +396,7 @@ export const FESTIVAL_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["cologne", "munich", "prague"],
     relatedTripSlugs: ["cologne-christmas-market-weekend", "vienna-christmas-markets-2026"],
-    relatedGuideSlugs: [
-      "best-christmas-markets-germany-2026",
-      "prague-christmas-markets-2026",
-      "christmas-markets-europe-2026",
-    ],
+    relatedGuideSlugs: ["best-christmas-markets-germany-2026", "prague-christmas-markets-2026", "christmas-markets-europe-2026"],
     planner: {
       destination: "Cologne",
       departureDate: "2026-11-26",
@@ -611,11 +603,7 @@ export const FESTIVAL_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["cologne", "munich", "vienna"],
     relatedTripSlugs: ["vienna-christmas-markets-2026"],
-    relatedGuideSlugs: [
-      "cologne-christmas-markets-2026",
-      "prague-christmas-markets-2026",
-      "christmas-markets-europe-2026",
-    ],
+    relatedGuideSlugs: ["cologne-christmas-markets-2026", "prague-christmas-markets-2026", "christmas-markets-europe-2026"],
     planner: {
       destination: "Munich",
       departureDate: "2026-11-27",
@@ -809,11 +797,7 @@ export const FESTIVAL_WAVE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["rovaniemi", "munich", "vienna"],
     relatedTripSlugs: ["lapland-christmas-2026"],
-    relatedGuideSlugs: [
-      "best-christmas-destinations-2026",
-      "best-winter-destinations-2026",
-      "vienna-christmas-markets-2026",
-    ],
+    relatedGuideSlugs: ["best-christmas-destinations-2026", "best-winter-destinations-2026", "vienna-christmas-markets-2026"],
     planner: {
       destination: "Rovaniemi",
       departureDate: "2026-12-22",

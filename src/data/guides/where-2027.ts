@@ -198,12 +198,7 @@ export const WHERE_2027_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["rovaniemi", "tokyo", "dubai"],
     relatedTripSlugs: ["lapland-christmas-2026", "dubai-luxury", "solo-japan-7-day"],
-    relatedGuideSlugs: [
-      "where-to-travel-december-2026",
-      "best-winter-destinations-2026",
-      "christmas-in-lapland-2026",
-      "is-tokyo-expensive",
-    ],
+    relatedGuideSlugs: ["where-to-travel-december-2026", "best-winter-destinations-2026", "christmas-in-lapland-2026", "is-tokyo-expensive"],
     planner: {
       destination: "Rovaniemi",
       label: "Plan your January 2027 trip",
@@ -397,12 +392,7 @@ export const WHERE_2027_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["paris", "munich", "bangkok"],
     relatedTripSlugs: ["paris-weekend", "dubai-luxury"],
-    relatedGuideSlugs: [
-      "where-to-travel-january-2027",
-      "where-to-travel-march-2027",
-      "japan-cherry-blossom-2027",
-      "how-many-days-in-kyoto",
-    ],
+    relatedGuideSlugs: ["where-to-travel-january-2027", "where-to-travel-march-2027", "japan-cherry-blossom-2027", "how-many-days-in-kyoto"],
     planner: {
       destination: "Munich",
       label: "Plan your February 2027 trip",
@@ -592,11 +582,7 @@ export const WHERE_2027_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["istanbul", "tokyo", "rome"],
     relatedTripSlugs: ["istanbul-highlights-3d", "rome-eternal-city"],
-    relatedGuideSlugs: [
-      "japan-cherry-blossom-2027",
-      "where-to-travel-february-2027",
-      "is-kyoto-expensive",
-    ],
+    relatedGuideSlugs: ["japan-cherry-blossom-2027", "where-to-travel-february-2027", "is-kyoto-expensive"],
     planner: {
       destination: "Istanbul",
       label: "Plan your March 2027 trip",

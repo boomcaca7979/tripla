@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import HomeClient from "./HomeClient";
+import ContentHubSections from "@/components/home/ContentHubSections";
 
 export const metadata: Metadata = {
   title: "tripla - Plan Your Next Adventure with AI",
@@ -8,5 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <HomeClient />;
+  return (
+    <>
+      <HomeClient />
+      <ContentHubSections />
+    </>
+  );
 }

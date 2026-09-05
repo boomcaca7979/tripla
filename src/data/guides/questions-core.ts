@@ -179,11 +179,7 @@ export const QUESTIONS_CORE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["tokyo", "kyoto", "seoul"],
     relatedTripSlugs: ["tokyo-3d-foodie", "solo-japan-7-day"],
-    relatedGuideSlugs: [
-      "tokyo-foodie-guide-2026",
-      "is-tokyo-expensive",
-      "best-area-to-stay-in-tokyo",
-    ],
+    relatedGuideSlugs: ["tokyo-food-guide", "is-tokyo-expensive", "best-area-to-stay-in-tokyo"],
     planner: {
       destination: "Tokyo",
       travelStyle: "foodie",
@@ -520,11 +516,7 @@ export const QUESTIONS_CORE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["singapore", "bangkok", "dubai"],
     relatedTripSlugs: ["singapore-garden-city", "singapore-gp-2026"],
-    relatedGuideSlugs: [
-      "singapore-grand-prix-2026-travel-guide",
-      "is-singapore-expensive",
-      "best-area-to-stay-in-singapore",
-    ],
+    relatedGuideSlugs: ["singapore-grand-prix-2026-travel-guide", "is-singapore-expensive", "best-area-to-stay-in-singapore"],
     planner: {
       destination: "Singapore",
       travelStyle: "foodie",
@@ -1030,11 +1022,7 @@ export const QUESTIONS_CORE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["singapore", "bangkok", "dubai"],
     relatedTripSlugs: ["singapore-garden-city"],
-    relatedGuideSlugs: [
-      "how-many-days-in-singapore",
-      "best-area-to-stay-in-singapore",
-      "singapore-grand-prix-2026-travel-guide",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-singapore", "best-area-to-stay-in-singapore", "singapore-grand-prix-2026-travel-guide"],
     planner: {
       destination: "Singapore",
       travelStyle: "relaxed",
@@ -1207,11 +1195,7 @@ export const QUESTIONS_CORE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["mexico-city", "austin", "madrid"],
     relatedTripSlugs: ["mexico-city-3-day", "mexico-city-ancient-culture"],
-    relatedGuideSlugs: [
-      "how-many-days-in-mexico-city",
-      "mexico-city-travel-guide-2026",
-      "mexico-city-f1-2026-travel-guide",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-mexico-city", "mexico-city-travel-guide-2026", "mexico-city-f1-2026-travel-guide"],
     planner: {
       destination: "Mexico City",
       travelStyle: "foodie",
@@ -1376,11 +1360,7 @@ export const QUESTIONS_CORE_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["tokyo", "kyoto", "seoul"],
     relatedTripSlugs: ["tokyo-3d-foodie"],
-    relatedGuideSlugs: [
-      "how-many-days-in-tokyo",
-      "tokyo-foodie-guide-2026",
-      "best-area-to-stay-in-tokyo",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-tokyo", "tokyo-food-guide", "best-area-to-stay-in-tokyo"],
     planner: {
       destination: "Tokyo",
       travelStyle: "foodie",

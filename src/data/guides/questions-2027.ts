@@ -183,12 +183,7 @@ export const QUESTIONS_2027_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["munich", "vienna", "prague"],
     relatedTripSlugs: ["oktoberfest-munich-2026"],
-    relatedGuideSlugs: [
-      "how-many-days-in-munich",
-      "best-area-to-stay-in-munich",
-      "oktoberfest-munich-2026",
-      "best-christmas-markets-germany-2026",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-munich", "best-area-to-stay-in-munich", "oktoberfest-munich-2026", "best-christmas-markets-germany-2026"],
     planner: {
       destination: "Munich",
       travelStyle: "cultural",
@@ -383,11 +378,7 @@ export const QUESTIONS_2027_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["amsterdam", "paris", "london"],
     relatedTripSlugs: ["amsterdam-canal-romance"],
-    relatedGuideSlugs: [
-      "how-many-days-in-paris",
-      "is-vienna-expensive",
-      "where-to-travel-january-2027",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-paris", "is-vienna-expensive", "where-to-travel-january-2027"],
     planner: {
       destination: "Amsterdam",
       travelStyle: "cultural",
@@ -584,11 +575,7 @@ export const QUESTIONS_2027_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["bali", "bangkok", "singapore"],
     relatedTripSlugs: ["bali-island-escape"],
-    relatedGuideSlugs: [
-      "bali-first-timers-guide",
-      "is-singapore-expensive",
-      "how-many-days-in-bangkok",
-    ],
+    relatedGuideSlugs: ["bali-first-timers-guide", "is-singapore-expensive", "how-many-days-in-bangkok"],
     planner: {
       destination: "Bali",
       travelStyle: "relaxed",
@@ -775,11 +762,7 @@ export const QUESTIONS_2027_GUIDES: Guide[] = [
     ],
     relatedDestinationSlugs: ["osaka", "kyoto", "tokyo"],
     relatedTripSlugs: ["osaka-food-capital"],
-    relatedGuideSlugs: [
-      "how-many-days-in-osaka",
-      "osaka-food-guide-2027",
-      "how-many-days-in-kyoto",
-    ],
+    relatedGuideSlugs: ["how-many-days-in-osaka", "osaka-food-guide-2027", "how-many-days-in-kyoto"],
     planner: {
       destination: "Osaka",
       travelStyle: "foodie",

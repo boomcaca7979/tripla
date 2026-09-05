@@ -210,16 +210,8 @@ export const WINTER_SEASONAL_GUIDES: Guide[] = [
       },
     ],
     relatedDestinationSlugs: ["vienna", "prague", "rovaniemi", "abu-dhabi", "kyoto", "sydney"],
-    relatedTripSlugs: [
-      "vienna-christmas-markets-2026",
-      "abu-dhabi-f1-2026",
-      "lapland-christmas-2026",
-    ],
-    relatedGuideSlugs: [
-      "where-to-travel-november-2026",
-      "christmas-markets-europe-2026",
-      "best-winter-destinations-2026",
-    ],
+    relatedTripSlugs: ["vienna-christmas-markets-2026", "abu-dhabi-f1-2026", "lapland-christmas-2026"],
+    relatedGuideSlugs: ["where-to-travel-november-2026", "christmas-markets-europe-2026", "best-winter-destinations-2026"],
     planner: {
       destination: "Vienna",
       travelStyle: "cultural",
@@ -1008,12 +1000,7 @@ export const WINTER_SEASONAL_GUIDES: Guide[] = [
       },
     ],
     relatedDestinationSlugs: ["rovaniemi", "vienna", "istanbul"],
-    relatedTripSlugs: [
-      "lapland-christmas-2026",
-      "vienna-christmas-markets-2026",
-      "istanbul-highlights-3d",
-      "antalya-turquoise-coast",
-    ],
+    relatedTripSlugs: ["lapland-christmas-2026", "vienna-christmas-markets-2026", "istanbul-highlights-3d", "antalya-turquoise-coast"],
     relatedGuideSlugs: ["where-to-travel-december-2026", "christmas-markets-europe-2026"],
     planner: {
       destination: "Rovaniemi",
