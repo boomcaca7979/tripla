@@ -1,0 +1,1297 @@
+import type { Airport } from "@/types/flight";
+import type { RawTripInput } from "./trips-extended-a";
+
+// Extended trips, batch G — 46 multi-city and national routes. Day-by-day
+// compact itineraries; budget follows destinations budgetPerDay × days.
+
+const AI = { kind: "ai" as const, name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" };
+
+const mkApt = (iata: string, icao: string, name: string, city: string, country: string, tz: string, lat: number, lon: number): Airport => ({
+  iata, icao, name, city, country, timezone: tz, latitude: lat, longitude: lon,
+});
+
+const NRT = mkApt("NRT", "RJAA", "Narita International Airport", "Tokyo", "Japan", "Asia/Tokyo", 35.7647, 140.3864);
+const ICN = mkApt("ICN", "RKSI", "Incheon International Airport", "Seoul", "South Korea", "Asia/Seoul", 37.4602, 126.4407);
+const BKK = mkApt("BKK", "VTBS", "Suvarnabhumi Airport", "Bangkok", "Thailand", "Asia/Bangkok", 13.69, 100.7501);
+const CNX = mkApt("CNX", "VTCC", "Chiang Mai International Airport", "Chiang Mai", "Thailand", "Asia/Bangkok", 18.7669, 98.9626);
+const HKT = mkApt("HKT", "VTSP", "Phuket International Airport", "Phuket", "Thailand", "Asia/Bangkok", 8.1132, 98.3169);
+const SIN = mkApt("SIN", "WSSS", "Singapore Changi Airport", "Singapore", "Singapore", "Asia/Singapore", 1.3644, 103.9915);
+const KUL = mkApt("KUL", "WMKK", "Kuala Lumpur International Airport", "Kuala Lumpur", "Malaysia", "Asia/Kuala_Lumpur", 2.7456, 101.7099);
+const HAN = mkApt("HAN", "VVNB", "Noi Bai International Airport", "Hanoi", "Vietnam", "Asia/Ho_Chi_Minh", 21.2212, 105.8072);
+const SGN = mkApt("SGN", "VVTS", "Tan Son Nhat International Airport", "Ho Chi Minh City", "Vietnam", "Asia/Ho_Chi_Minh", 10.8188, 106.8069);
+const DPS = mkApt("DPS", "WADD", "I Gusti Ngurah Rai International Airport", "Bali (Denpasar)", "Indonesia", "Asia/Makassar", -8.7482, 115.1675);
+const JFK = mkApt("JFK", "KJFK", "John F. Kennedy International Airport", "New York", "USA", "America/New_York", 40.6413, -73.7781);
+const LAX = mkApt("LAX", "KLAX", "Los Angeles International Airport", "Los Angeles", "USA", "America/Los_Angeles", 33.9416, -118.4085);
+const SFO = mkApt("SFO", "KSFO", "San Francisco International Airport", "San Francisco", "USA", "America/Los_Angeles", 37.6213, -122.379);
+const LAS = mkApt("LAS", "KLAS", "Harry Reid International Airport", "Las Vegas", "USA", "America/Los_Angeles", 36.084, -115.1537);
+const MCO = mkApt("MCO", "KMCO", "Orlando International Airport", "Orlando", "USA", "America/New_York", 28.4312, -81.3081);
+const IAD = mkApt("IAD", "KIAD", "Washington Dulles International Airport", "Washington", "USA", "America/New_York", 38.9531, -77.4565);
+const YYZ = mkApt("YYZ", "CYYZ", "Toronto Pearson International Airport", "Toronto", "Canada", "America/Toronto", 43.6777, -79.6248);
+const YVR = mkApt("YVR", "CYVR", "Vancouver International Airport", "Vancouver", "Canada", "America/Vancouver", 49.1967, -123.1815);
+const SYD = mkApt("SYD", "YSSY", "Sydney Kingsford Smith Airport", "Sydney", "Australia", "Australia/Sydney", -33.9399, 151.1753);
+const MEL = mkApt("MEL", "YMML", "Melbourne Airport", "Melbourne", "Australia", "Australia/Melbourne", -37.669, 144.841);
+const OOL = mkApt("OOL", "YBCG", "Gold Coast Airport", "Gold Coast", "Australia", "Australia/Brisbane", -28.1644, 153.5052);
+const ZQN = mkApt("ZQN", "NZQN", "Queenstown Airport", "Queenstown", "New Zealand", "Pacific/Auckland", -45.0211, 168.7392);
+const CDG = mkApt("CDG", "LFPG", "Charles de Gaulle Airport", "Paris", "France", "Europe/Paris", 49.0097, 2.5479);
+const LYS = mkApt("LYS", "LFLL", "Lyon-Saint Exupéry Airport", "Lyon", "France", "Europe/Paris", 45.7256, 5.0811);
+const NCE = mkApt("NCE", "LFMN", "Nice Côte d'Azur Airport", "Nice", "France", "Europe/Paris", 43.6584, 7.2159);
+const BCN = mkApt("BCN", "LEBL", "Barcelona–El Prat Airport", "Barcelona", "Spain", "Europe/Madrid", 41.2974, 2.0833);
+const MAD = mkApt("MAD", "LEMD", "Adolfo Suárez Madrid–Barajas Airport", "Madrid", "Spain", "Europe/Madrid", 40.4936, -3.5668);
+const AMS = mkApt("AMS", "EHAM", "Amsterdam Airport Schiphol", "Amsterdam", "Netherlands", "Europe/Amsterdam", 52.3105, 4.7683);
+const BRU = mkApt("BRU", "EBBR", "Brussels Airport", "Brussels", "Belgium", "Europe/Brussels", 50.9014, 4.4844);
+const PRG = mkApt("PRG", "LKPR", "Václav Havel Airport Prague", "Prague", "Czech Republic", "Europe/Prague", 50.1008, 14.26);
+const VIE = mkApt("VIE", "LOWW", "Vienna International Airport", "Vienna", "Austria", "Europe/Vienna", 48.1103, 16.5697);
+const BUD = mkApt("BUD", "LHBP", "Budapest Ferenc Liszt International Airport", "Budapest", "Hungary", "Europe/Budapest", 47.4369, 19.2556);
+const BER = mkApt("BER", "EDDB", "Berlin Brandenburg Airport", "Berlin", "Germany", "Europe/Berlin", 52.3667, 13.5033);
+const FCO = mkApt("FCO", "LIRF", "Leonardo da Vinci–Fiumicino Airport", "Rome", "Italy", "Europe/Rome", 41.8003, 12.2389);
+const FLR = mkApt("FLR", "LIRQ", "Florence Peretola Airport", "Florence", "Italy", "Europe/Rome", 43.81, 11.2051);
+const VCE = mkApt("VCE", "LIPZ", "Venice Marco Polo Airport", "Venice", "Italy", "Europe/Rome", 45.5053, 12.3519);
+const ATH = mkApt("ATH", "LGAV", "Athens Eleftherios Venizelos Airport", "Athens", "Greece", "Europe/Athens", 37.9364, 23.9445);
+const ZRH = mkApt("ZRH", "LSZH", "Zurich Airport", "Zurich", "Switzerland", "Europe/Zurich", 47.4647, 8.5492);
+const LIS = mkApt("LIS", "LPPT", "Humberto Delgado Airport", "Lisbon", "Portugal", "Europe/Lisbon", 38.7742, -9.1342);
+const DEN = mkApt("DEN", "KDEN", "Denver International Airport", "Denver", "USA", "America/Denver", 39.8561, -104.6737);
+const TLL = mkApt("TLL", "EETN", "Lennart Meri Tallinn Airport", "Tallinn", "Estonia", "Europe/Tallinn", 59.4133, 24.8328);
+const SPU = mkApt("SPU", "LDSP", "Split Airport", "Split", "Croatia", "Europe/Zagreb", 43.5389, 16.298);
+const WAW = mkApt("WAW", "EPWA", "Warsaw Chopin Airport", "Warsaw", "Poland", "Europe/Warsaw", 52.1657, 20.9671);
+const KRK = mkApt("KRK", "EPKK", "John Paul II International Airport Kraków-Balice", "Krakow", "Poland", "Europe/Warsaw", 50.0777, 19.7848);
+const DBV = mkApt("DBV", "LDDU", "Dubrovnik Airport", "Dubrovnik", "Croatia", "Europe/Zagreb", 42.5614, 18.2682);
+const DEL = mkApt("DEL", "VIDP", "Indira Gandhi International Airport", "Delhi", "India", "Asia/Kolkata", 28.5562, 77.1);
+const CMB = mkApt("CMB", "VCBI", "Bandaranaike International Airport", "Colombo", "Sri Lanka", "Asia/Colombo", 7.1808, 79.8841);
+const KTM = mkApt("KTM", "VNKT", "Tribhuvan International Airport", "Kathmandu", "Nepal", "Asia/Kathmandu", 27.6966, 85.3591);
+const MIA = mkApt("MIA", "KMIA", "Miami International Airport", "Miami", "USA", "America/New_York", 25.7959, -80.287);
+
+export const EXTENDED_TRIPS_G: RawTripInput[] = [
+  {
+    id: "tokyo-osaka-5d", title: "Tokyo & Osaka 5-Day Trip",
+    coverImage: null, gradient: "from-red-500 to-blue-600", author: AI,
+    days: 5, estimatedCost: 580, currency: "USD",
+    tags: ["Multi-City", "Rail", "Foodie"],
+    excerpt: "Tokyo's core plus Osaka's kuidaore finale — the two-city Japan trip for food-and-neon travelers who skip the middle.",
+    weatherTip: "March–May and October–November suit both cities. Book the Osaka hotel near Namba for the food radius.",
+    fullDays: [
+      { day: 1, theme: "Tokyo — Old East", activities: [
+        { time: "08:30", name: "Senso-ji & Asakusa", emoji: "🏯" },
+        { time: "18:00", name: "Omoide Yokocho dinner", emoji: "🏮" } ] },
+      { day: 2, theme: "Tokyo — Modern West", activities: [
+        { time: "09:00", name: "Meiji, Harajuku, Shibuya", emoji: "⛩️" },
+        { time: "19:00", name: "Shinjuku neon night", emoji: "🌃" } ] },
+      { day: 3, theme: "Tokyo — Center", activities: [
+        { time: "08:30", name: "Tsukiji breakfast & Ginza", emoji: "🍣" },
+        { time: "17:30", name: "Last Tokyo night: Akihabara or teamLab", emoji: "🎮" } ] },
+      { day: 4, theme: "Shinkansen to Osaka", activities: [
+        { time: "09:00", name: "Bullet train west (2h30)", emoji: "🚄" },
+        { time: "13:00", name: "Osaka Castle & Kuromon Market", emoji: "🐙" },
+        { time: "19:00", name: "Dotonbori's neon & kushikatsu", emoji: "🍢" } ] },
+      { day: 5, theme: "Osaka — Kuidaore", activities: [
+        { time: "09:30", name: "Osaka Museum of Housing", emoji: "🏘️" },
+        { time: "13:00", name: "Umeda Sky & Shinsekai", emoji: "🌆" },
+        { time: "17:00", name: "KIX departure", emoji: "✈️" } ] },
+    ],
+    restaurants: [
+      { name: "Omoide Yokocho", cuisine: "Yakitori · $", emoji: "🏮" },
+      { name: "Wanaka Dotonbori", cuisine: "Takoyaki · $", emoji: "🐙" },
+      { name: "Daruma Kushikatsu", cuisine: "No double-dipping · $$", emoji: "🍢" },
+    ],
+    city: "Tokyo", country: "Japan", airport: NRT, travelStyle: "foodie",
+    interests: ["food", "nightlife", "history"],
+    highlights: ["Two food capitals in one week", "The shinkansen hop", "Dotonbori's neon finale"],
+  },
+  {
+    id: "rome-florence-4d", title: "Rome & Florence 4-Day Trip",
+    coverImage: null, gradient: "from-amber-500 to-emerald-600", author: AI,
+    days: 4, estimatedCost: 520, currency: "EUR",
+    tags: ["Multi-City", "Culture", "Art"],
+    excerpt: "Two Renaissance-era capitals by fast train: Rome's ancient core and Florence's galleries, two nights each.",
+    weatherTip: "April–May and late September–October are ideal. Book the Uffizi and Vatican slots ahead.",
+    fullDays: [
+      { day: 1, theme: "Rome — Ancient", activities: [
+        { time: "08:30", name: "Colosseum & Forum", emoji: "🏛️" },
+        { time: "19:00", name: "Trastevere dinner", emoji: "🍝" } ] },
+      { day: 2, theme: "Rome — Vatican & Fountains", activities: [
+        { time: "08:00", name: "Vatican early", emoji: "🎨" },
+        { time: "17:00", name: "Trevi & Pantheon at dusk", emoji: "⛲" } ] },
+      { day: 3, theme: "Train to Florence", activities: [
+        { time: "10:00", name: "Frecciarossa north (1h30)", emoji: "🚄" },
+        { time: "13:00", name: "The Duomo & the Accademia's David", emoji: "🗿" },
+        { time: "18:30", name: "Piazzale Michelangelo sunset", emoji: "🌄" } ] },
+      { day: 4, theme: "Uffizi & Departure", activities: [
+        { time: "08:30", name: "The Uffizi at opening", emoji: "🖼️" },
+        { time: "14:00", name: "Oltrarno lunch & departure", emoji: "✈️" } ] },
+    ],
+    restaurants: [
+      { name: "Da Enzo al 29", cuisine: "Rome · $$", emoji: "🍝" },
+      { name: "Trattoria Mario", cuisine: "Florence lunch · $$", emoji: "🥩" },
+      { name: "All'Antico Vinaio", cuisine: "Schiacciata · $", emoji: "🥪" },
+    ],
+    city: "Rome", country: "Italy", airport: FCO, travelStyle: "cultural",
+    interests: ["history", "museums", "food"],
+    highlights: ["Ancient Rome to Renaissance Florence in one rail hop", "Both big bookings made ahead", "Two two-night bases"],
+  },
+  {
+    id: "florence-venice-4d", title: "Florence & Venice 4-Day Trip",
+    coverImage: null, gradient: "from-blue-500 to-amber-500", author: AI,
+    days: 4, estimatedCost: 560, currency: "EUR",
+    tags: ["Multi-City", "Romance", "Art"],
+    excerpt: "Two nights each in the Renaissance workshop and the lagoon republic — connected by a two-hour train.",
+    weatherTip: "April–May and September–October pair gallery weather with canal light.",
+    fullDays: [
+      { day: 1, theme: "Florence — Renaissance", activities: [
+        { time: "08:15", name: "The dome's 463 steps (booked)", emoji: "⛪" },
+        { time: "13:00", name: "The Accademia's David", emoji: "🗿" },
+        { time: "18:30", name: "Piazzale Michelangelo sunset", emoji: "🌄" } ] },
+      { day: 2, theme: "Florence — Uffizi & Oltrarno", activities: [
+        { time: "08:30", name: "The Uffizi at opening", emoji: "🖼️" },
+        { time: "15:00", name: "Oltrarno's artisans", emoji: "🛠️" } ] },
+      { day: 3, theme: "Train to Venice", activities: [
+        { time: "10:00", name: "Rail to Santa Lucia (2h10)", emoji: "🚄" },
+        { time: "14:00", name: "Grand Canal vaporetto & St Mark's at dusk", emoji: "🛶" },
+        { time: "19:30", name: "Cicchetti crawl", emoji: "🍤" } ] },
+      { day: 4, theme: "Venice — Islands & Departure", activities: [
+        { time: "09:00", name: "Murano & Burano", emoji: "🧶" },
+        { time: "15:00", name: "VCE departure", emoji: "✈️" } ] },
+    ],
+    restaurants: [
+      { name: "Trattoria Mario", cuisine: "Florence · $$", emoji: "🍝" },
+      { name: "All'Arco", cuisine: "Venice cicchetti · $", emoji: "🍤" },
+      { name: "Trattoria alla Madonna", cuisine: "Venetian classic · $$", emoji: "🦑" },
+    ],
+    city: "Florence", country: "Italy", airport: FLR, travelStyle: "cultural",
+    interests: ["museums", "food", "history"],
+    highlights: ["David, the Uffizi and the lagoon", "Two-hour rail between two worlds", "Murano's furnaces"],
+  },
+  {
+    id: "paris-lyon-5d", title: "Paris & Lyon 5-Day Trip",
+    coverImage: null, gradient: "from-rose-500 to-amber-600", author: AI,
+    days: 5, estimatedCost: 750, currency: "EUR",
+    tags: ["Foodie", "Multi-City", "Culture"],
+    excerpt: "The capital and the kitchen: three Paris days, the TGV south, and two Lyon days of bouchons and traboules.",
+    weatherTip: "April–June and September–October suit both cities' terraces.",
+    fullDays: [
+      { day: 1, theme: "Paris — Islands & Louvre", activities: [
+        { time: "09:00", name: "Louvre first entry", emoji: "🖼️" },
+        { time: "19:00", name: "Saint-Germain bistro", emoji: "🍷" } ] },
+      { day: 2, theme: "Paris — Montmartre & Marais", activities: [
+        { time: "09:00", name: "Sacré-Cœur & the Marais", emoji: "🎨" },
+        { time: "20:00", name: "Marais dinner", emoji: "🥖" } ] },
+      { day: 3, theme: "Paris — Versailles", activities: [
+        { time: "08:30", name: "Versailles' first slot, the gardens", emoji: "👑" } ] },
+      { day: 4, theme: "TGV to Lyon", activities: [
+        { time: "10:00", name: "2h TGV south", emoji: "🚄" },
+        { time: "13:00", name: "Vieux Lyon's traboules & bouchon lunch", emoji: "🍲" },
+        { time: "17:00", name: "Fourvière's basilica", emoji: "⛪" } ] },
+      { day: 5, theme: "Lyon — Bocuse & Farewell", activities: [
+        { time: "09:30", name: "Les Halles Paul Bocuse", emoji: "🧺" },
+        { time: "14:00", name: "The Croix-Rousse murals; LYS or onward", emoji: "✈️" } ] },
+    ],
+    restaurants: [
+      { name: "Le Comptoir du Relais", cuisine: "Paris bistro · $$", emoji: "🥖" },
+      { name: "Café des Fédérations", cuisine: "Lyon bouchon · $$", emoji: "🍲" },
+      { name: "Les Halles Paul Bocuse", cuisine: "The counters · $$", emoji: "🧺" },
+    ],
+    city: "Paris", country: "France", airport: CDG, travelStyle: "foodie",
+    interests: ["food", "museums", "history"],
+    highlights: ["The capital and the kitchen in one trip", "Versailles before the coaches", "Two real bouchon dinners"],
+  },
+  {
+    id: "paris-nice-6d", title: "Paris & Nice 6-Day Trip",
+    coverImage: null, gradient: "from-blue-600 to-rose-400", author: AI,
+    days: 6, estimatedCost: 900, currency: "EUR",
+    tags: ["Multi-City", "Beaches", "Culture"],
+    excerpt: "The capital and the Riviera: three Paris days, the TGV or flight south, and three Nice days with Monaco and Èze.",
+    weatherTip: "May–June and September–October pair Paris terraces with Riviera swims.",
+    fullDays: [
+      { day: 1, theme: "Paris — Islands & Louvre", activities: [{ time: "09:00", name: "Louvre & Sainte-Chapelle", emoji: "🖼️" }] },
+      { day: 2, theme: "Paris — Montmartre & Marais", activities: [{ time: "09:00", name: "Sacré-Cœur & the Marais", emoji: "🎨" }] },
+      { day: 3, theme: "Paris — Versailles or the Axis", activities: [{ time: "08:30", name: "Versailles' first slot", emoji: "👑" }] },
+      { day: 4, theme: "TGV to Nice", activities: [
+        { time: "10:00", name: "5h30 TGV along the Rhône (or 1h30 flight)", emoji: "🚄" },
+        { time: "16:00", name: "The Promenade at golden hour", emoji: "🌅" } ] },
+      { day: 5, theme: "Nice — Vieux Nice & Monaco", activities: [
+        { time: "09:30", name: "Cours Saleya & socca", emoji: "🥞" },
+        { time: "14:00", name: "Monaco & Èze by corniche", emoji: "🌵" } ] },
+      { day: 6, theme: "Departure", activities: [{ time: "11:00", name: "Castle Hill view & NCE", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Le Comptoir du Relais", cuisine: "Paris · $$", emoji: "🥖" },
+      { name: "Chez Pipo", cuisine: "Nice socca · $", emoji: "🥞" },
+      { name: "Le Bistrot d'Antoine", cuisine: "Niçois · $$", emoji: "🍽️" },
+    ],
+    city: "Paris", country: "France", airport: CDG, travelStyle: "relaxed",
+    interests: ["food", "museums", "beaches"],
+    highlights: ["Capital culture then Riviera swims", "Monaco and Èze day", "The TGV's Rhône scenery"],
+  },
+  {
+    id: "paris-barcelona-7d", title: "Paris & Barcelona 7-Day Trip",
+    coverImage: null, gradient: "from-indigo-600 to-red-500", author: AI,
+    days: 7, estimatedCost: 1000, currency: "EUR",
+    tags: ["Multi-City", "Culture", "Foodie"],
+    excerpt: "The two great southern-European culture cities by rail: four Paris days and three Barcelona days of Gaudí and tapas.",
+    weatherTip: "April–June and September–October are ideal for both cities' terraces.",
+    fullDays: [
+      { day: 1, theme: "Paris — Islands & Louvre", activities: [{ time: "09:00", name: "Louvre & Sainte-Chapelle", emoji: "🖼️" }] },
+      { day: 2, theme: "Paris — Montmartre & Marais", activities: [{ time: "09:00", name: "Sacré-Cœur & the Marais", emoji: "🎨" }] },
+      { day: 3, theme: "Paris — Grand Axis", activities: [{ time: "17:30", name: "The tower at golden hour", emoji: "🗼" }] },
+      { day: 4, theme: "Paris — Versailles", activities: [{ time: "08:30", name: "Versailles' gardens", emoji: "👑" }] },
+      { day: 5, theme: "TGV to Barcelona", activities: [
+        { time: "10:00", name: "6h30 TGV (or 1h50 flight)", emoji: "🚄" },
+        { time: "17:00", name: "Gothic Quarter & tapas", emoji: "🍢" } ] },
+      { day: 6, theme: "Barcelona — Gaudí", activities: [
+        { time: "09:00", name: "Sagrada Família (booked)", emoji: "⛪" },
+        { time: "15:00", name: "Park Güell & Gràcia", emoji: "🦎" } ] },
+      { day: 7, theme: "Barcelona — Beach & Departure", activities: [
+        { time: "09:30", name: "La Boqueria & the Barceloneta boardwalk", emoji: "🏖️" },
+        { time: "15:00", name: "BCN departure", emoji: "✈️" } ] },
+    ],
+    restaurants: [
+      { name: "Le Comptoir du Relais", cuisine: "Paris · $$", emoji: "🥖" },
+      { name: "Cal Pep", cuisine: "Barcelona seafood · $$", emoji: "🍤" },
+      { name: "Quimet & Quimet", cuisine: "Montaditos · $", emoji: "🥫" },
+    ],
+    city: "Paris", country: "France", airport: CDG, travelStyle: "cultural",
+    interests: ["museums", "food", "history"],
+    highlights: ["Gaudí and the Louvre in one week", "The TGV's descent into Catalonia", "Tapas vs bistros — eat both"],
+  },
+  {
+    id: "madrid-barcelona-6d", title: "Madrid & Barcelona 6-Day Trip",
+    coverImage: null, gradient: "from-red-500 to-yellow-500", author: AI,
+    days: 6, estimatedCost: 780, currency: "EUR",
+    tags: ["Multi-City", "Culture", "Foodie"],
+    excerpt: "Spain's two personalities by AVE: Madrid's art triangle and tapas nights, then Barcelona's Gaudí and the beach.",
+    weatherTip: "April–June and September–October are ideal; August is hot and Madrid half-empty.",
+    fullDays: [
+      { day: 1, theme: "Madrid — Prado & Retiro", activities: [{ time: "09:00", name: "The Prado & Retiro's rowboats", emoji: "🖼️" }] },
+      { day: 2, theme: "Madrid — Palace & Guernica", activities: [{ time: "09:30", name: "The Royal Palace & the Reina Sofía", emoji: "🎨" }] },
+      { day: 3, theme: "Madrid — Day Trip or Markets", activities: [{ time: "09:00", name: "Toledo by AVE or San Miguel grazing", emoji: "🏰" }] },
+      { day: 4, theme: "AVE to Barcelona", activities: [
+        { time: "10:00", name: "2h30 AVE east", emoji: "🚄" },
+        { time: "14:00", name: "Gothic Quarter & the cathedral", emoji: "⛪" } ] },
+      { day: 5, theme: "Barcelona — Gaudí", activities: [
+        { time: "09:00", name: "Sagrada Família (booked)", emoji: "⛪" },
+        { time: "14:00", name: "Park Güell & the Gràcia squares", emoji: "🦎" } ] },
+      { day: 6, theme: "Barcelona — Beach & Departure", activities: [
+        { time: "09:30", name: "La Boqueria & Barceloneta", emoji: "🏖️" },
+        { time: "14:00", name: "BCN departure", emoji: "✈️" } ] },
+    ],
+    restaurants: [
+      { name: "Taberna La Daniela", cuisine: "Madrid tapas · $$", emoji: "🍲" },
+      { name: "El Quim de la Boqueria", cuisine: "Market counter · $$", emoji: "🧺" },
+      { name: "Quimet & Quimet", cuisine: "Montaditos · $", emoji: "🥫" },
+    ],
+    city: "Madrid", country: "Spain", airport: MAD, travelStyle: "cultural",
+    interests: ["museums", "food", "history"],
+    highlights: ["Velázquez, Guernica and Gaudí", "The AVE between rivals", "Two tapas cultures compared"],
+  },
+  {
+    id: "amsterdam-brussels-paris-7d", title: "Amsterdam, Brussels & Paris 7-Day Trip",
+    coverImage: null, gradient: "from-orange-500 to-blue-600", author: AI,
+    days: 7, estimatedCost: 1050, currency: "EUR",
+    tags: ["Multi-City", "Rail", "Foodie"],
+    excerpt: "The southern loop of the corridor: Amsterdam's canals, Brussels' frites and lambic, and Paris's museums — all by rail.",
+    weatherTip: "May–June and September–October are the terrace seasons across all three.",
+    fullDays: [
+      { day: 1, theme: "Amsterdam — Museums", activities: [{ time: "09:00", name: "The Rijksmuseum & canal walk", emoji: "🖼️" }] },
+      { day: 2, theme: "Amsterdam — Jordaan & Anne Frank", activities: [{ time: "09:30", name: "Anne Frank House (booked) & the Jordaan", emoji: "🕯️" }] },
+      { day: 3, theme: "Train to Brussels", activities: [
+        { time: "10:00", name: "2h train south", emoji: "🚄" },
+        { time: "13:00", name: "Grand-Place & frites", emoji: "🍟" },
+        { time: "17:00", name: "Cantillon's lambic brewery", emoji: "🍺" } ] },
+      { day: 4, theme: "Brussels — Art Nouveau", activities: [
+        { time: "10:00", name: "The Horta Museum & the comic murals", emoji: "🏡" },
+        { time: "16:00", name: "Thalys to Paris (1h30)", emoji: "🚄" } ] },
+      { day: 5, theme: "Paris — Islands & Louvre", activities: [{ time: "09:00", name: "Louvre & Sainte-Chapelle", emoji: "🖼️" }] },
+      { day: 6, theme: "Paris — Montmartre & Marais", activities: [{ time: "09:00", name: "Sacré-Cœur & the Marais", emoji: "🎨" }] },
+      { day: 7, theme: "Paris — Departure", activities: [{ time: "10:00", name: "The grand axis & CDG", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Winkel 43", cuisine: "Amsterdam appeltaart · $$", emoji: "🥧" },
+      { name: "Chez Léon", cuisine: "Brussels moules · $$", emoji: "🦪" },
+      { name: "Le Comptoir du Relais", cuisine: "Paris bistro · $$", emoji: "🥖" },
+    ],
+    city: "Amsterdam", country: "Netherlands", airport: AMS, travelStyle: "cultural",
+    interests: ["food", "museums", "history"],
+    highlights: ["Three capitals, zero flights", "Lambic at its living brewery", "The frites standards compared"],
+  },
+  {
+    id: "prague-vienna-budapest-7d", title: "Prague, Vienna & Budapest 7-Day Trip",
+    coverImage: null, gradient: "from-rose-500 to-emerald-600", author: AI,
+    days: 7, estimatedCost: 780, currency: "EUR",
+    tags: ["Multi-City", "Culture", "History"],
+    excerpt: "Central Europe's imperial triangle by rail: Prague's spires, Vienna's palaces and Budapest's baths.",
+    weatherTip: "April–June and September–October are ideal; December's markets are the alternate circuit.",
+    fullDays: [
+      { day: 1, theme: "Prague — Castle", activities: [{ time: "08:00", name: "The castle & Charles Bridge", emoji: "🏰" }] },
+      { day: 2, theme: "Prague — Old Town", activities: [{ time: "09:30", name: "The astronomical hour & the Jewish Quarter", emoji: "⏰" }] },
+      { day: 3, theme: "Rail to Vienna", activities: [
+        { time: "10:00", name: "4h rail south", emoji: "🚄" },
+        { time: "15:00", name: "The Ring & the café hour", emoji: "☕" } ] },
+      { day: 4, theme: "Vienna — Schönbrunn", activities: [{ time: "09:00", name: "Schönbrunn & the Kunsthistorisches", emoji: "👑" }] },
+      { day: 5, theme: "Rail to Budapest", activities: [
+        { time: "10:00", name: "2h40 rail east", emoji: "🚄" },
+        { time: "15:00", name: "Buda Castle & the Chain Bridge", emoji: "🌉" } ] },
+      { day: 6, theme: "Budapest — Baths & the Quarter", activities: [
+        { time: "10:00", name: "Széchenyi's pools & the Jewish Quarter", emoji: "♨️" },
+        { time: "20:00", name: "Szimpla Kert's ruin-bar night", emoji: "🍹" } ] },
+      { day: 7, theme: "Departure", activities: [{ time: "10:00", name: "The Danube bend or BUD airport", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Lokál Dlouhááá", cuisine: "Prague Pilsner hall · $$", emoji: "🍺" },
+      { name: "Figlmüller", cuisine: "Vienna schnitzel · $$$", emoji: "🍗" },
+      { name: "Mazel Tov", cuisine: "Budapest courtyard · $$", emoji: "🌿" },
+    ],
+    city: "Prague", country: "Czech Republic", airport: PRG, travelStyle: "cultural",
+    interests: ["history", "food", "museums"],
+    highlights: ["Three imperial cities, one rail loop", "The baths as civic ritual", "The ruin-bar origin story"],
+  },
+  {
+    id: "vienna-prague-5d", title: "Vienna & Prague 5-Day Trip",
+    coverImage: null, gradient: "from-amber-500 to-rose-600", author: AI,
+    days: 5, estimatedCost: 550, currency: "EUR",
+    tags: ["Multi-City", "Culture", "Romance"],
+    excerpt: "Two imperial neighbors by rail: Vienna's palaces and concerts, then Prague's spires and Pilsner.",
+    weatherTip: "April–June and September–October suit both; December adds the twin Christmas markets.",
+    fullDays: [
+      { day: 1, theme: "Vienna — Ring & Café", activities: [{ time: "09:30", name: "The Hofburg & the café hour", emoji: "☕" }] },
+      { day: 2, theme: "Vienna — Schönbrunn", activities: [{ time: "09:00", name: "Schönbrunn & the concert night", emoji: "🎻" }] },
+      { day: 3, theme: "Vienna — Belvedere", activities: [{ time: "09:30", name: "Klimt's Kiss & the Prater", emoji: "💋" }] },
+      { day: 4, theme: "Rail to Prague", activities: [
+        { time: "10:00", name: "4h rail north", emoji: "🚄" },
+        { time: "15:00", name: "Charles Bridge & Lokál dinner", emoji: "🍺" } ] },
+      { day: 5, theme: "Prague — Castle & Departure", activities: [
+        { time: "08:00", name: "The castle at opening", emoji: "🏰" },
+        { time: "14:00", name: "PRG departure", emoji: "✈️" } ] },
+    ],
+    restaurants: [
+      { name: "Café Sperl", cuisine: "Viennese café · $$", emoji: "☕" },
+      { name: "Lokál Dlouhááá", cuisine: "Prague beer hall · $$", emoji: "🍺" },
+      { name: "Figlmüller", cuisine: "The schnitzel · $$$", emoji: "🍗" },
+    ],
+    city: "Vienna", country: "Austria", airport: VIE, travelStyle: "cultural",
+    interests: ["history", "nightlife", "food"],
+    highlights: ["A concert in the golden hall", "Klimt's Kiss", "Prague at dawn"],
+  },
+  {
+    id: "berlin-prague-5d", title: "Berlin & Prague 5-Day Trip",
+    coverImage: null, gradient: "from-slate-600 to-rose-600", author: AI,
+    days: 5, estimatedCost: 520, currency: "EUR",
+    tags: ["Multi-City", "History", "Nightlife"],
+    excerpt: "Two young-at-heart neighbors by rail: Berlin's Wall history and club nights, then Prague's fairytale spires and tank beer.",
+    weatherTip: "May–September suits both cities' outdoor seasons.",
+    fullDays: [
+      { day: 1, theme: "Berlin — The Wall", activities: [{ time: "09:30", name: "Bernauer Straße & the East Side Gallery", emoji: "🧱" }] },
+      { day: 2, theme: "Berlin — Museums & Kreuzberg", activities: [{ time: "09:00", name: "Museum Island & Markthalle Neun", emoji: "🏺" }] },
+      { day: 3, theme: "Rail to Prague", activities: [
+        { time: "10:00", name: "4h rail south", emoji: "🚄" },
+        { time: "15:00", name: "The Old Town square's astronomical hour", emoji: "⏰" } ] },
+      { day: 4, theme: "Prague — Castle", activities: [{ time: "08:00", name: "The castle & Charles Bridge", emoji: "🏰" }] },
+      { day: 5, theme: "Prague — Petřín & Departure", activities: [{ time: "09:30", name: "Petřín's view & PRG", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Markthalle Neun", cuisine: "Berlin food hall · $$", emoji: "🥙" },
+      { name: "Lokál Dlouhááá", cuisine: "Prague beer hall · $$", emoji: "🍺" },
+      { name: "Prater Garten", cuisine: "Berlin beer garden · $$", emoji: "🍻" },
+    ],
+    city: "Berlin", country: "Germany", airport: BER, travelStyle: "cultural",
+    interests: ["history", "nightlife", "food"],
+    highlights: ["The Wall's trace by mural", "Kreuzberg's canal bars", "Prague's dawn bridge"],
+  },
+  {
+    id: "bangkok-chiang-mai-7d", title: "Bangkok & Chiang Mai 7-Day Trip",
+    coverImage: null, gradient: "from-amber-500 to-emerald-600", author: AI,
+    days: 7, estimatedCost: 350, currency: "USD",
+    tags: ["Multi-City", "Culture", "Foodie"],
+    excerpt: "Thailand's two personalities by air: Bangkok's temples and markets, then Chiang Mai's moated old city and mountain cafés.",
+    weatherTip: "November–February is cool season for both; avoid the north's March burning haze.",
+    fullDays: [
+      { day: 1, theme: "Bangkok — temples", activities: [{ time: "08:30", name: "The Grand Palace trio", emoji: "🛕" }] },
+      { day: 2, theme: "Bangkok — markets", activities: [{ time: "09:30", name: "Chatuchak & Yaowarat", emoji: "🛍️" }] },
+      { day: 3, theme: "Bangkok — canals", activities: [{ time: "09:00", name: "The khlongs by longtail; fly north", emoji: "🛶" }] },
+      { day: 4, theme: "Chiang Mai — old city", activities: [{ time: "09:00", name: "Wat Phra Singh & Wat Chedi Luang", emoji: "🛕" }] },
+      { day: 5, theme: "Chiang Mai — elephants", activities: [{ time: "07:30", name: "The ethical sanctuary day", emoji: "🐘" }] },
+      { day: 6, theme: "Chiang Mai — Doi Suthep", activities: [{ time: "08:00", name: "The mountain temple & Nimman cafés", emoji: "⛰️" }] },
+      { day: 7, theme: "Cooking & Departure", activities: [{ time: "09:00", name: "The cooking school & CNX", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Thipsamai", cuisine: "Bangkok pad thai · $", emoji: "🍤" },
+      { name: "Khao Soi Mae Sai", cuisine: "The northern curry · $", emoji: "🍜" },
+      { name: "Tong Tem Toh", cuisine: "Lanna cuisine · $$", emoji: "🍲" },
+    ],
+    city: "Bangkok", country: "Thailand", airport: BKK, travelStyle: "cultural",
+    interests: ["food", "history", "nature"],
+    highlights: ["The temple trio then the mountain temples", "The ethical elephant day", "Two food cultures in one country"],
+  },
+  {
+    id: "bangkok-phuket-6d", title: "Bangkok & Phuket 6-Day Trip",
+    coverImage: null, gradient: "from-purple-600 to-cyan-500", author: AI,
+    days: 6, estimatedCost: 330, currency: "USD",
+    tags: ["Multi-City", "Beaches", "Culture"],
+    excerpt: "Three Bangkok days of temples and markets, then three Phuket days of island boats and beach sunsets.",
+    weatherTip: "November–April is the dry window for both acts.",
+    fullDays: [
+      { day: 1, theme: "Bangkok — temples", activities: [{ time: "08:30", name: "The Grand Palace & Wat Pho", emoji: "🛕" }] },
+      { day: 2, theme: "Bangkok — markets", activities: [{ time: "09:30", name: "Chatuchak & the night markets", emoji: "🛍️" }] },
+      { day: 3, theme: "Bangkok — canals", activities: [{ time: "09:00", name: "The khlongs; the evening flight south", emoji: "🛶" }] },
+      { day: 4, theme: "Phuket — beaches", activities: [{ time: "10:00", name: "Kata & Nai Harn's coves", emoji: "🏖️" }] },
+      { day: 5, theme: "Phuket — islands", activities: [{ time: "08:00", name: "Phang Nga's canoe lagoons & James Bond Island", emoji: "🛶" }] },
+      { day: 6, theme: "Phuket — farewell", activities: [{ time: "09:30", name: "Old Town's shophouses & HKT", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Thipsamai", cuisine: "Bangkok · $", emoji: "🍤" },
+      { name: "One Chun", cuisine: "Phuket Old Town · $$", emoji: "🦐" },
+      { name: "Kata beachfront grills", cuisine: "Seafood · $$", emoji: "🐟" },
+    ],
+    city: "Bangkok", country: "Thailand", airport: BKK, travelStyle: "relaxed",
+    interests: ["food", "beaches", "history"],
+    highlights: ["Temples then turquoise", "Phang Nga's canoe lagoons", "Old Phuket Town's shophouses"],
+  },
+  {
+    id: "bangkok-singapore-7d", title: "Bangkok & Singapore 7-Day Trip",
+    coverImage: null, gradient: "from-amber-500 to-emerald-600", author: AI,
+    days: 7, estimatedCost: 650, currency: "USD",
+    tags: ["Multi-City", "Foodie", "City Break"],
+    excerpt: "Southeast Asia's two food capitals: Bangkok's street blaze, then Singapore's hawker curriculum and the bay.",
+    weatherTip: "Both cities are year-round; the heat rhythm (early mornings, air-con middays) applies everywhere.",
+    fullDays: [
+      { day: 1, theme: "Bangkok — temples", activities: [{ time: "08:30", name: "The Grand Palace trio", emoji: "🛕" }] },
+      { day: 2, theme: "Bangkok — Yaowarat", activities: [{ time: "10:00", name: "Markets; Yaowarat's night blaze", emoji: "🔥" }] },
+      { day: 3, theme: "Bangkok — canals", activities: [{ time: "09:00", name: "The khlongs; the evening flight", emoji: "🛶" }] },
+      { day: 4, theme: "Singapore — the bay", activities: [
+        { time: "09:00", name: "Gardens by the Bay", emoji: "🌳" },
+        { time: "19:45", name: "Garden Rhapsody & Lau Pa Sat satay", emoji: "💡" } ] },
+      { day: 5, theme: "Singapore — hawkers", activities: [{ time: "11:30", name: "Maxwell, Chinatown, Kampong Glam", emoji: "🍗" }] },
+      { day: 6, theme: "Singapore — heritage", activities: [{ time: "09:30", name: "Little India, Katong, the Botanic Gardens", emoji: "🌺" }] },
+      { day: 7, theme: "Departure", activities: [{ time: "10:00", name: "Changi — plan for it", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Thipsamai", cuisine: "Bangkok · $", emoji: "🍤" },
+      { name: "Tian Tian Chicken Rice", cuisine: "Singapore · $", emoji: "🍗" },
+      { name: "Odette", cuisine: "Singapore splurge · $$$$", emoji: "🍽️" },
+    ],
+    city: "Bangkok", country: "Thailand", airport: BKK, travelStyle: "foodie",
+    interests: ["food", "history", "shopping"],
+    highlights: ["Two hawker cultures compared", "The bay's light shows", "Changi as the departure destination"],
+  },
+  {
+    id: "singapore-kuala-lumpur-5d", title: "Singapore & Kuala Lumpur 5-Day Trip",
+    coverImage: null, gradient: "from-emerald-500 to-teal-700", author: AI,
+    days: 5, estimatedCost: 420, currency: "USD",
+    tags: ["Multi-City", "Foodie", "City Break"],
+    excerpt: "Two capitals four hours apart: Singapore's bay and hawkers, then KL's towers, caves and Jalan Alor.",
+    weatherTip: "Both tropical year-round — plan around the afternoon storms, not the heat.",
+    fullDays: [
+      { day: 1, theme: "Singapore — the bay", activities: [{ time: "09:00", name: "Gardens & the Rhapsody show", emoji: "🌳" }] },
+      { day: 2, theme: "Singapore — hawkers", activities: [{ time: "11:30", name: "Maxwell, Chinatown, Old Airport Road", emoji: "🍗" }] },
+      { day: 3, theme: "Flight to Kuala Lumpur", activities: [
+        { time: "10:00", name: "1h flight (or 4h train)", emoji: "✈️" },
+        { time: "14:00", name: "Petronas Towers & KLCC park", emoji: "🌆" },
+        { time: "19:00", name: "Jalan Alor's hawker street", emoji: "🍢" } ] },
+      { day: 4, theme: "KL — caves & temples", activities: [{ time: "08:30", name: "Batu Caves' rainbow steps & Thean Hou", emoji: "🪜" }] },
+      { day: 5, theme: "KL — markets & Departure", activities: [{ time: "09:30", name: "Central Market & the canopy walk; KUL", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Tian Tian Chicken Rice", cuisine: "Singapore · $", emoji: "🍗" },
+      { name: "Jalan Alor stalls", cuisine: "KL hawker row · $", emoji: "🍢" },
+      { name: "Madras Lane", cuisine: "Petaling Street · $", emoji: "🍜" },
+    ],
+    city: "Singapore", country: "Singapore", airport: SIN, travelStyle: "foodie",
+    interests: ["food", "shopping", "history"],
+    highlights: ["The hawker rivalry, settled diplomatically", "The skybridge and the rainbow steps", "Two capitals, one cuisine family"],
+  },
+  {
+    id: "kuala-lumpur-penang-5d", title: "Kuala Lumpur & Penang 5-Day Trip",
+    coverImage: null, gradient: "from-amber-400 to-emerald-600", author: AI,
+    days: 5, estimatedCost: 320, currency: "USD",
+    tags: ["Multi-City", "Foodie", "Culture"],
+    excerpt: "KL's towers and caves, then Penang's street art and the hawker canon — Malaysia's two food capitals by flight or train.",
+    weatherTip: "December–February is the drier west-coast window for both.",
+    fullDays: [
+      { day: 1, theme: "KL — towers", activities: [{ time: "09:00", name: "Petronas Towers & Merdeka Square", emoji: "🌆" }] },
+      { day: 2, theme: "KL — caves", activities: [{ time: "08:30", name: "Batu Caves & Thean Hou Temple", emoji: "🪜" }] },
+      { day: 3, theme: "Flight or train to Penang", activities: [
+        { time: "10:00", name: "1h flight to PEN", emoji: "✈️" },
+        { time: "14:00", name: "George Town's street-art trail", emoji: "🎨" } ] },
+      { day: 4, theme: "Penang — food & hill", activities: [
+        { time: "09:00", name: "Penang Hill & Kek Lok Si", emoji: "🚡" },
+        { time: "18:30", name: "Gurney Drive's hawker dinner", emoji: "🍢" } ] },
+      { day: 5, theme: "Penang — jetties & Departure", activities: [{ time: "09:30", name: "The clan jetties & PEN", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Madras Lane", cuisine: "KL · $", emoji: "🍜" },
+      { name: "Gurney Drive hawkers", cuisine: "Penang · $", emoji: "🍢" },
+      { name: "Kebaya", cuisine: "Nyonya · $$$", emoji: "🌺" },
+    ],
+    city: "Kuala Lumpur", country: "Malaysia", airport: KUL, travelStyle: "foodie",
+    interests: ["food", "history", "museums"],
+    highlights: ["Two hawker dynasties", "George Town's street art", "The rainbow steps at dawn"],
+  },
+  {
+    id: "hanoi-ninh-binh-4d", title: "Hanoi & Ninh Binh 4-Day Trip",
+    coverImage: null, gradient: "from-red-500 to-emerald-500", author: AI,
+    days: 4, estimatedCost: 200, currency: "USD",
+    tags: ["Culture", "Nature", "Foodie"],
+    excerpt: "Hanoi's Old Quarter and egg coffee, then Ninh Binh's 'Ha Long on land' — karsts among rice paddies by rowboat.",
+    weatherTip: "October–December is Hanoi's clear window; Ninh Binh is best in the same months.",
+    fullDays: [
+      { day: 1, theme: "Hanoi — Old Quarter", activities: [{ time: "07:30", name: "Pho at dawn; the 36 streets", emoji: "🍜" }] },
+      { day: 2, theme: "Hanoi — history & coffee", activities: [{ time: "09:00", name: "The temples, museums and egg coffee", emoji: "☕" }] },
+      { day: 3, theme: "Ninh Binh — the karsts", activities: [
+        { time: "08:30", name: "Tam Coc or Trang An's rowboat karsts", emoji: "🛶" },
+        { time: "15:00", name: "Mua Cave's 500-step viewpoint", emoji: "🌄" } ] },
+      { day: 4, theme: "Hanoi — farewell", activities: [{ time: "09:00", name: "Train Street coffee & HAN", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Pho Bat Dan", cuisine: "The queue legend · $", emoji: "🍜" },
+      { name: "Cafe Giang", cuisine: "Egg coffee origin · $", emoji: "☕" },
+      { name: "Chua Thien Huong", cuisine: "Ninh Binh goat · $$", emoji: "🐐" },
+    ],
+    city: "Hanoi", country: "Vietnam", airport: HAN, travelStyle: "cultural",
+    interests: ["nature", "food", "history"],
+    highlights: ["'Ha Long on land' by rowboat", "Mua Cave's panorama", "The egg-coffee origin"],
+  },
+  {
+    id: "hcmc-da-nang-hanoi-8d", title: "Vietnam 8-Day Trip: Saigon to Hanoi",
+    coverImage: null, gradient: "from-red-500 to-yellow-500", author: AI,
+    days: 8, estimatedCost: 400, currency: "USD",
+    tags: ["Multi-City", "Foodie", "Culture"],
+    excerpt: "Eight days up the country: Saigon's engines and Cu Chi, Hoi An's lanterns, and Hanoi's Old Quarter finale.",
+    weatherTip: "February–April splits the north and south seasons best.",
+    fullDays: [
+      { day: 1, theme: "Saigon — arrival", activities: [{ time: "16:00", name: "The colonial core & rooftops", emoji: "🌆" }] },
+      { day: 2, theme: "Saigon — history", activities: [{ time: "08:00", name: "Cu Chi & the War Remnants Museum", emoji: "🕊️" }] },
+      { day: 3, theme: "Saigon — Mekong", activities: [{ time: "08:00", name: "The delta channels by boat", emoji: "🚣" }] },
+      { day: 4, theme: "Fly to Da Nang → Hoi An", activities: [{ time: "14:00", name: "The lantern town at dusk", emoji: "🏮" }] },
+      { day: 5, theme: "Hoi An — cooking", activities: [{ time: "09:00", name: "The herb-farm cooking class", emoji: "👩‍🍳" }] },
+      { day: 6, theme: "Fly to Hanoi", activities: [{ time: "16:00", name: "The Old Quarter's first pho", emoji: "🍜" }] },
+      { day: 7, theme: "Hanoi — Old Quarter", activities: [{ time: "07:30", name: "The 36 streets & egg coffee", emoji: "🥚" }] },
+      { day: 8, theme: "Departure", activities: [{ time: "10:00", name: "Train Street coffee & HAN", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Banh Mi Huynh Hoa", cuisine: "Saigon · $", emoji: "🥖" },
+      { name: "Madam Khanh", cuisine: "Hoi An · $", emoji: "🥟" },
+      { name: "Pho Bat Dan", cuisine: "Hanoi · $", emoji: "🍜" },
+    ],
+    city: "Ho Chi Minh City", country: "Vietnam", airport: SGN, travelStyle: "foodie",
+    interests: ["food", "history", "history"],
+    highlights: ["Three food cities in one country", "Hoi An's lantern evening", "The delta and the karsts"],
+  },
+  {
+    id: "bali-gili-7d", title: "Bali & Gili Islands 7-Day Trip",
+    coverImage: null, gradient: "from-emerald-500 to-cyan-600", author: AI,
+    days: 7, estimatedCost: 490, currency: "USD",
+    tags: ["Multi-City", "Beaches", "Romance"],
+    excerpt: "Bali's green interior and the car-free Gilis: four Ubud days, the fast boat east, and three Gili days of sand and snorkel.",
+    weatherTip: "May–September is the dry season for both islands.",
+    fullDays: [
+      { day: 1, theme: "Ubud — arrive", activities: [{ time: "16:00", name: "The ridge walk at golden hour", emoji: "🌄" }] },
+      { day: 2, theme: "Ubud — terraces & temples", activities: [{ time: "07:00", name: "Tegallalang & Tirta Empul", emoji: "🌾" }] },
+      { day: 3, theme: "Ubud — waterfalls", activities: [{ time: "09:00", name: "Tibumana & the Monkey Forest", emoji: "🐒" }] },
+      { day: 4, theme: "Fast boat to the Gilis", activities: [{ time: "09:00", name: "Cross to Gili Air; beach arrival", emoji: "⛵" }] },
+      { day: 5, theme: "Gili — snorkel", activities: [{ time: "09:00", name: "The turtle point & the swing bars", emoji: "🐢" }] },
+      { day: 6, theme: "Gili — island walk", activities: [{ time: "09:30", name: "The two-hour island circuit", emoji: "🏝️" }] },
+      { day: 7, theme: "Departure", activities: [{ time: "08:00", name: "Boat back & DPS flight", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Warung Babi Guling Ibu Oka", cuisine: "Ubud · $", emoji: "🐖" },
+      { name: "Gili Air beach grills", cuisine: "Catch of the day · $$", emoji: "🐟" },
+      { name: "Zest Ubud", cuisine: "Plant-forward · $$", emoji: "🥗" },
+    ],
+    city: "Bali", country: "Indonesia", airport: DPS, travelStyle: "relaxed",
+    interests: ["beaches", "nature", "food"],
+    highlights: ["Two islands, two rhythms", "The turtle snorkel point", "No cars on the Gilis"],
+  },
+  {
+    id: "tokyo-seoul-7d", title: "Tokyo & Seoul 7-Day Trip",
+    coverImage: null, gradient: "from-rose-500 to-fuchsia-600", author: AI,
+    days: 7, estimatedCost: 850, currency: "USD",
+    tags: ["Multi-City", "Foodie", "City Break"],
+    excerpt: "Two capitals two hours apart: four Tokyo days of districts and counters, then three Seoul days of palaces and BBQ.",
+    weatherTip: "April and October are the twin-blossom windows; both cities' springs are spectacular.",
+    fullDays: [
+      { day: 1, theme: "Tokyo — old east", activities: [{ time: "08:30", name: "Senso-ji & Ueno", emoji: "🏯" }] },
+      { day: 2, theme: "Tokyo — modern west", activities: [{ time: "09:00", name: "Meiji, Shibuya, Shinjuku", emoji: "⛩️" }] },
+      { day: 3, theme: "Tokyo — center", activities: [{ time: "08:30", name: "Tsukiji, Ginza, the towers", emoji: "🍣" }] },
+      { day: 4, theme: "Tokyo — neighborhoods", activities: [{ time: "10:00", name: "Shimokitazawa & Nakameguro", emoji: "☕" }] },
+      { day: 5, theme: "Fly to Seoul", activities: [
+        { time: "10:00", name: "2h15 flight to ICN", emoji: "✈️" },
+        { time: "15:00", name: "Gyeongbokgung & Bukchon", emoji: "🏯" },
+        { time: "19:00", name: "First Korean BBQ", emoji: "🥓" } ] },
+      { day: 6, theme: "Seoul — markets & Hongdae", activities: [{ time: "10:00", name: "Gwangjang Market & Hongdae's night", emoji: "🥞" }] },
+      { day: 7, theme: "Seoul — departure", activities: [{ time: "10:00", name: "The tower view & ICN", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Omoide Yokocho", cuisine: "Tokyo · $", emoji: "🏮" },
+      { name: "Maple Tree House", cuisine: "Seoul BBQ · $$", emoji: "🥓" },
+      { name: "Gwangjang Market", cuisine: "Bindaetteok · $", emoji: "🥞" },
+    ],
+    city: "Tokyo", country: "Japan", airport: NRT, travelStyle: "foodie",
+    interests: ["food", "history", "shopping"],
+    highlights: ["Two capitals, one short flight", "Counter dining vs BBQ democracy", "The blossom-race double header"],
+  },
+  {
+    id: "nyc-boston-6d", title: "New York & Boston 6-Day Trip",
+    coverImage: null, gradient: "from-blue-700 to-red-500", author: AI,
+    days: 6, estimatedCost: 1080, currency: "USD",
+    tags: ["Multi-City", "Culture", "History"],
+    excerpt: "Four New York days, then the Acela north to Boston's Freedom Trail and the North End's cannoli.",
+    weatherTip: "September–October pairs the cities at their best; winter is cold on both platforms.",
+    fullDays: [
+      { day: 1, theme: "NYC — Midtown & Downtown", activities: [{ time: "09:30", name: "The observation deck & Brooklyn Bridge", emoji: "🌉" }] },
+      { day: 2, theme: "NYC — Museums", activities: [{ time: "09:30", name: "The Met & Central Park", emoji: "🖼️" }] },
+      { day: 3, theme: "NYC — Neighborhoods", activities: [{ time: "10:00", name: "Katz's, the High Line, Chelsea", emoji: "🥪" }] },
+      { day: 4, theme: "NYC — Flex", activities: [{ time: "10:00", name: "MoMA or the Tenement Museum", emoji: "🏚️" }] },
+      { day: 5, theme: "Acela to Boston", activities: [
+        { time: "10:00", name: "4h rail north", emoji: "🚄" },
+        { time: "15:00", name: "The Freedom Trail's red line", emoji: "🔴" } ] },
+      { day: 6, theme: "Boston — Cambridge & Departure", activities: [{ time: "09:30", name: "Harvard Yard & the cannoli; BOS", emoji: "🥐" }] },
+    ],
+    restaurants: [
+      { name: "Katz's Delicatessen", cuisine: "NYC · $$", emoji: "🥪" },
+      { name: "Mike's Pastry", cuisine: "Boston cannoli · $", emoji: "🥐" },
+      { name: "Union Oyster House", cuisine: "Boston since 1826 · $$$", emoji: "🦪" },
+    ],
+    city: "New York", country: "USA", airport: JFK, travelStyle: "cultural",
+    interests: ["history", "food", "museums"],
+    highlights: ["The skyline to the Freedom Trail", "The Acela's Northeast corridor", "One cannoli verdict"],
+  },
+  {
+    id: "la-san-francisco-7d", title: "Los Angeles & San Francisco 7-Day Trip",
+    coverImage: null, gradient: "from-amber-400 to-blue-600", author: AI,
+    days: 7, estimatedCost: 1260, currency: "USD",
+    tags: ["Multi-City", "Road Trip", "Nature"],
+    excerpt: "California's two anchors and the Highway 1 drive between them: LA's sprawl, the Big Sur cliffs, and SF's bridges.",
+    weatherTip: "May–September is the dry coastal window; Big Sur's fog burns off by noon.",
+    fullDays: [
+      { day: 1, theme: "LA — Hollywood & beaches", activities: [{ time: "10:00", name: "The Hollywood sign viewpoint & Santa Monica pier", emoji: "🌴" }] },
+      { day: 2, theme: "LA — Getty & Griffith", activities: [{ time: "10:00", name: "The Getty Center & Griffith's observatory", emoji: "🔭" }] },
+      { day: 3, theme: "Highway 1 north", activities: [{ time: "09:00", name: "Malibu, Santa Barbara, Pismo", emoji: "🛣️" }] },
+      { day: 4, theme: "Big Sur", activities: [{ time: "09:00", name: "Bixby Bridge, McWay Falls, the cliffs", emoji: "🌉" }] },
+      { day: 5, theme: "Monterey to San Francisco", activities: [{ time: "09:00", name: "Cannery Row, then the city by the bay", emoji: "🦭" }] },
+      { day: 6, theme: "SF — the icons", activities: [{ time: "09:00", name: "The Golden Gate, Alcatraz (booked), the piers", emoji: "🌉" }] },
+      { day: 7, theme: "SF — departure", activities: [{ time: "10:00", name: "The cable cars & SFO", emoji: "🚋" }] },
+    ],
+    restaurants: [
+      { name: "In-N-Out Burger", cuisine: "The California institution · $", emoji: "🍔" },
+      { name: "Fisherman's Wharf chowder", cuisine: "SF sourdough bowl · $$", emoji: "🦐" },
+      { name: "Nobu Malibu tier", cuisine: "Coastal splurge · $$$$", emoji: "🍣" },
+    ],
+    city: "Los Angeles", country: "USA", airport: LAX, travelStyle: "adventure",
+    interests: ["nature", "food", "beaches"],
+    highlights: ["Big Sur's Bixby Bridge", "Alcatraz's booked island", "The coastal drive as the trip"],
+  },
+  {
+    id: "sf-las-vegas-6d", title: "San Francisco, Yosemite & Las Vegas 6-Day Trip",
+    coverImage: null, gradient: "from-green-600 to-amber-600", author: AI,
+    days: 6, estimatedCost: 1140, currency: "USD",
+    tags: ["Road Trip", "Nature", "Adventure"],
+    excerpt: "The bay to the canyon: San Francisco, Yosemite's granite, Death Valley's pass and the Las Vegas finale.",
+    weatherTip: "May–June and September–October open Yosemite's roads without the peak heat.",
+    fullDays: [
+      { day: 1, theme: "San Francisco", activities: [{ time: "09:00", name: "The Golden Gate, the piers, Alcatraz", emoji: "🌉" }] },
+      { day: 2, theme: "Yosemite Valley", activities: [{ time: "08:00", name: "El Capitan, the falls, Tunnel View", emoji: "🏔️" }] },
+      { day: 3, theme: "Yosemite to the Sierras", activities: [{ time: "09:00", name: "Glacier Point & the Mariposa grove", emoji: "🌲" }] },
+      { day: 4, theme: "Across the desert", activities: [{ time: "09:00", name: "Tioga Pass east & Mammoth Lakes", emoji: "🌋" }] },
+      { day: 5, theme: "Death Valley to Vegas", activities: [{ time: "09:00", name: "Zabriskie Point & the strip arrival", emoji: "🎰" }] },
+      { day: 6, theme: "Las Vegas & Departure", activities: [{ time: "10:00", name: "The Hoover Dam detour & LAS", emoji: "🛣️" }] },
+    ],
+    restaurants: [
+      { name: "Tartine Manufactory", cuisine: "SF baking · $$", emoji: "🍞" },
+      { name: "The Ahwahnee dining room", cuisine: "Yosemite grand dining · $$$$", emoji: "🏔️" },
+      { name: "Bacchanal Buffet", cuisine: "Las Vegas excess · $$$", emoji: "🎰" },
+    ],
+    city: "San Francisco", country: "USA", airport: SFO, travelStyle: "adventure",
+    interests: ["nature", "food", "sports"],
+    highlights: ["Tunnel View's granite wall", "Tioga Pass's high desert crossing", "The strip's absurdity as contrast"],
+  },
+  {
+    id: "vegas-la-5d", title: "Las Vegas & Los Angeles 5-Day Trip",
+    coverImage: null, gradient: "from-purple-600 to-amber-500", author: AI,
+    days: 5, estimatedCost: 950, currency: "USD",
+    tags: ["Multi-City", "Nightlife", "Nature"],
+    excerpt: "The desert-and-entertainment pairing: two Vegas nights, the canyon day trip, and two Los Angeles days of studios and beaches.",
+    weatherTip: "March–May and October–November keep both deserts bearable.",
+    fullDays: [
+      { day: 1, theme: "Las Vegas — the Strip", activities: [{ time: "15:00", name: "The fountains, the tower, the buffet", emoji: "🎰" }] },
+      { day: 2, theme: "Grand Canyon Day Trip", activities: [{ time: "07:00", name: "The South Rim's viewpoints", emoji: "🏜️" }] },
+      { day: 3, theme: "Drive to Los Angeles", activities: [{ time: "09:00", name: "Route 66 stops; Hollywood evening", emoji: "🛣️" }] },
+      { day: 4, theme: "LA — Studios & Beach", activities: [{ time: "09:30", name: "The studio tour & Santa Monica", emoji: "🌴" }] },
+      { day: 5, theme: "LA — Departure", activities: [{ time: "10:00", name: "The Getty & LAX", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Bacchanal Buffet", cuisine: "Vegas excess · $$$", emoji: "🎰" },
+      { name: "In-N-Out", cuisine: "The road-trip meal · $", emoji: "🍔" },
+      { name: "Grand Central Market", cuisine: "LA food hall · $$", emoji: "🌮" },
+    ],
+    city: "Las Vegas", country: "USA", airport: LAS, travelStyle: "adventure",
+    interests: ["nature", "nightlife", "food"],
+    highlights: ["The South Rim's rim walk", "Route 66's kitsch stops", "The Getty's hilltop view"],
+  },
+  {
+    id: "california-road-trip-10d", title: "California 10-Day Road Trip",
+    coverImage: null, gradient: "from-yellow-500 to-blue-700", author: AI,
+    days: 10, estimatedCost: 1800, currency: "USD",
+    tags: ["Road Trip", "Nature", "Beaches"],
+    excerpt: "Ten days of the full California loop: San Francisco, Yosemite, Highway 1's Big Sur, Los Angeles and San Diego.",
+    weatherTip: "May–June and September–October open Tioga Pass and calm the coast.",
+    fullDays: [
+      { day: 1, theme: "San Francisco", activities: [{ time: "09:00", name: "The bridge, the piers, Alcatraz", emoji: "🌉" }] },
+      { day: 2, theme: "San Francisco", activities: [{ time: "09:30", name: "The cable cars, the Mission's murals", emoji: "🚋" }] },
+      { day: 3, theme: "Yosemite", activities: [{ time: "08:00", name: "The Valley's granite", emoji: "🏔️" }] },
+      { day: 4, theme: "Yosemite", activities: [{ time: "09:00", name: "Glacier Point & the groves", emoji: "🌲" }] },
+      { day: 5, theme: "Highway 1 south", activities: [{ time: "09:00", name: "Monterey, Carmel, Big Sur", emoji: "🌉" }] },
+      { day: 6, theme: "Big Sur & the coast", activities: [{ time: "09:00", name: "McWay Falls to San Luis Obispo", emoji: "🦭" }] },
+      { day: 7, theme: "Santa Barbara to LA", activities: [{ time: "09:30", name: "The missions and Malibu into the city", emoji: "🌴" }] },
+      { day: 8, theme: "Los Angeles", activities: [{ time: "09:30", name: "The studios, Griffith, the observatory", emoji: "🔭" }] },
+      { day: 9, theme: "San Diego", activities: [{ time: "09:00", name: "La Jolla, the Zoo, Sunset Cliffs", emoji: "🦭" }] },
+      { day: 10, theme: "Departure", activities: [{ time: "10:00", name: "The burrito verdict; SAN or LAX", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Tartine Manufactory", cuisine: "SF · $$", emoji: "🍞" },
+      { name: "Grand Central Market", cuisine: "LA food hall · $$", emoji: "🌮" },
+      { name: "Oscar's Mexican Seafood", cuisine: "San Diego · $", emoji: "🌯" },
+    ],
+    city: "San Francisco", country: "USA", airport: SFO, travelStyle: "adventure",
+    interests: ["nature", "beaches", "food"],
+    highlights: ["Yosemite's granite", "Big Sur's bridges", "The full coast in ten days"],
+  },
+  {
+    id: "florida-family-7d", title: "Florida 7-Day Family Trip",
+    coverImage: null, gradient: "from-pink-500 to-cyan-500", author: AI,
+    days: 7, estimatedCost: 1400, currency: "USD",
+    tags: ["Family", "Theme Parks", "Beaches"],
+    excerpt: "Seven family days through the sunshine state: Orlando's parks, Kennedy's rockets, the Everglades' gators and Miami's beach.",
+    weatherTip: "February–May is warm, dry and pre-storm; rope-drop discipline applies at every park.",
+    fullDays: [
+      { day: 1, theme: "Magic Kingdom", activities: [{ time: "08:30", name: "Rope-drop & fireworks return", emoji: "🏰" }] },
+      { day: 2, theme: "Epcot or Animal Kingdom", activities: [{ time: "08:30", name: "The chosen park & the pool", emoji: "🌏" }] },
+      { day: 3, theme: "Universal & Harry Potter", activities: [{ time: "08:00", name: "Diagon Alley & the express pass", emoji: "🧙" }] },
+      { day: 4, theme: "Kennedy Space Center", activities: [{ time: "09:00", name: "The rockets, shuttle and launchpad", emoji: "🚀" }] },
+      { day: 5, theme: "Drive to the Everglades", activities: [{ time: "09:00", name: "The airboat gator ride; Miami evening", emoji: "🐊" }] },
+      { day: 6, theme: "Miami Beach", activities: [{ time: "09:30", name: "South Beach & Little Havana", emoji: "🏖️" }] },
+      { day: 7, theme: "Departure", activities: [{ time: "10:00", name: "The beach hour & MIA", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Chef Art Smith's Homecomin'", cuisine: "Disney Springs · $$", emoji: "🍗" },
+      { name: "Versailles", cuisine: "Little Havana · $$", emoji: "☕" },
+      { name: "Joe's Stone Crab", cuisine: "Seasonal legend · $$$", emoji: "🦀" },
+    ],
+    city: "Orlando", country: "USA", airport: MCO, travelStyle: "relaxed",
+    interests: ["beaches", "food", "nature"],
+    highlights: ["Three parks in three days", "Real rockets after castles", "Gators to art deco in one drive"],
+  },
+  {
+    id: "nyc-washington-dc-6d", title: "New York & Washington DC 6-Day Trip",
+    coverImage: null, gradient: "from-slate-500 to-blue-700", author: AI,
+    days: 6, estimatedCost: 1080, currency: "USD",
+    tags: ["Multi-City", "Museums", "History"],
+    excerpt: "Three New York days and three DC days by Acela — the skyline, then the Smithsonian's free seventeen.",
+    weatherTip: "April–June and September–October are ideal; the monuments are best by night.",
+    fullDays: [
+      { day: 1, theme: "NYC — Midtown & Downtown", activities: [{ time: "09:30", name: "The deck & Brooklyn Bridge", emoji: "🌉" }] },
+      { day: 2, theme: "NYC — Museums & Park", activities: [{ time: "09:30", name: "The Met & Central Park", emoji: "🖼️" }] },
+      { day: 3, theme: "NYC — Neighborhoods", activities: [{ time: "10:00", name: "Katz's, the High Line, Chelsea", emoji: "🥪" }] },
+      { day: 4, theme: "Acela to Washington", activities: [
+        { time: "10:00", name: "3h rail south", emoji: "🚄" },
+        { time: "19:00", name: "The monuments by night", emoji: "🌙" } ] },
+      { day: 5, theme: "DC — Museums", activities: [{ time: "09:30", name: "Air & Space or the NMAAHC (booked)", emoji: "🚀" }] },
+      { day: 6, theme: "DC — Archives & Departure", activities: [{ time: "09:30", name: "The founding documents & IAD", emoji: "📜" }] },
+    ],
+    restaurants: [
+      { name: "Katz's Delicatessen", cuisine: "NYC · $$", emoji: "🥪" },
+      { name: "Ben's Chili Bowl", cuisine: "DC half-smoke · $", emoji: "🌭" },
+      { name: "Old Ebbitt Grill", cuisine: "DC institution · $$", emoji: "🦪" },
+    ],
+    city: "New York", country: "USA", airport: JFK, travelStyle: "cultural",
+    interests: ["museums", "history", "food"],
+    highlights: ["The skyline then the monuments", "The founding documents", "Two cities, zero rental cars"],
+  },
+  {
+    id: "vancouver-banff-7d", title: "Vancouver & Banff 7-Day Trip",
+    coverImage: null, gradient: "from-emerald-600 to-cyan-500", author: AI,
+    days: 7, estimatedCost: 1400, currency: "CAD",
+    tags: ["Multi-City", "Nature", "Road Trip"],
+    excerpt: "The Pacific city and the turquoise Rockies: Vancouver's harbor and trails, then the drive east to Banff's lakes.",
+    weatherTip: "June–September opens every road and thaws the lakes turquoise.",
+    fullDays: [
+      { day: 1, theme: "Vancouver — Stanley Park", activities: [{ time: "09:30", name: "The seawall loop & Gastown", emoji: "🌳" }] },
+      { day: 2, theme: "Vancouver — Capilano & Whistler teaser", activities: [{ time: "09:00", name: "The suspension bridge & the Sea-to-Sky", emoji: "🌉" }] },
+      { day: 3, theme: "Fly to Calgary & Banff", activities: [{ time: "13:00", name: "The Bow Valley's first sunset", emoji: "🏔️" }] },
+      { day: 4, theme: "Banff — the lakes", activities: [{ time: "07:00", name: "Lake Louise at dawn & Moraine", emoji: "🏞️" }] },
+      { day: 5, theme: "Banff — the canyon", activities: [{ time: "09:00", name: "Johnston Canyon & the hot springs", emoji: "💦" }] },
+      { day: 6, theme: "The Icefields Parkway", activities: [{ time: "08:00", name: "The Athabasca Glacier & Jasper's direction", emoji: "🧊" }] },
+      { day: 7, theme: "Departure", activities: [{ time: "10:00", name: "The wildlife loop & YYC", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Miku", cuisine: "Vancouver aburi sushi · $$$", emoji: "🍣" },
+      { name: "The Grizzly House", cuisine: "Banff fondue · $$$", emoji: "🧀" },
+      { name: "Park Distillery", cuisine: "Alpine campfire · $$", emoji: "🔥" },
+    ],
+    city: "Vancouver", country: "Canada", airport: YVR, travelStyle: "adventure",
+    interests: ["nature", "food", "sports"],
+    highlights: ["The seawall and the Sea-to-Sky", "Moraine's ten peaks", "The glacier drive"],
+  },
+  {
+    id: "sydney-melbourne-7d", title: "Sydney & Melbourne 7-Day Trip",
+    coverImage: null, gradient: "from-sky-500 to-rose-400", author: AI,
+    days: 7, estimatedCost: 1120, currency: "AUD",
+    tags: ["Multi-City", "Foodie", "Culture"],
+    excerpt: "Australia's two personalities by air: Sydney's harbour and Bondi, then Melbourne's lanes, coffee and the Great Ocean Road.",
+    weatherTip: "October–April suits Sydney's beaches; Melbourne is four-seasons-in-a-day — pack layers.",
+    fullDays: [
+      { day: 1, theme: "Sydney — harbour", activities: [{ time: "09:00", name: "The Opera House & the Rocks", emoji: "🎭" }] },
+      { day: 2, theme: "Sydney — Bondi to Coogee", activities: [{ time: "08:30", name: "The coastal walk & Icebergs", emoji: "🏊" }] },
+      { day: 3, theme: "Blue Mountains", activities: [{ time: "08:00", name: "The Three Sisters & the cliff walks", emoji: "⛰️" }] },
+      { day: 4, theme: "Fly to Melbourne", activities: [
+        { time: "10:00", name: "1h30 flight", emoji: "✈️" },
+        { time: "13:30", name: "The lanes' coffee and street art", emoji: "☕" } ] },
+      { day: 5, theme: "Melbourne — markets & NGV", activities: [{ time: "09:00", name: "Queen Vic Market & the NGV", emoji: "🖼️" }] },
+      { day: 6, theme: "Great Ocean Road", activities: [{ time: "08:00", name: "The Apostles and the koala stops", emoji: "🗿" }] },
+      { day: 7, theme: "Departure", activities: [{ time: "10:00", name: "Fitzroy's farewell brunch & MEL", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Bourke Street Bakery", cuisine: "Sydney cult · $", emoji: "🥐" },
+      { name: "Patricia Coffee Brewers", cuisine: "Melbourne espresso · $$", emoji: "☕" },
+      { name: "Chin Chin", cuisine: "Melbourne Modern Asian · $$", emoji: "🍜" },
+    ],
+    city: "Sydney", country: "Australia", airport: SYD, travelStyle: "cultural",
+    interests: ["food", "nature", "history"],
+    highlights: ["The harbour then the lanes", "The Bondi-to-Coogee walk", "The Apostles' day trip"],
+  },
+  {
+    id: "sydney-gold-coast-5d", title: "Sydney & Gold Coast 5-Day Trip",
+    coverImage: null, gradient: "from-yellow-500 to-cyan-600", author: AI,
+    days: 5, estimatedCost: 800, currency: "AUD",
+    tags: ["Multi-City", "Beaches", "Family"],
+    excerpt: "Three Sydney days of harbour and coast, then two Gold Coast days of surf and theme parks — 1h20 apart by air.",
+    weatherTip: "October–April is beach season north; Sydney is swimmable December–March.",
+    fullDays: [
+      { day: 1, theme: "Sydney — harbour & Bondi", activities: [{ time: "09:00", name: "The Opera House & the coastal walk", emoji: "🎭" }] },
+      { day: 2, theme: "Sydney — Blue Mountains", activities: [{ time: "08:00", name: "The Three Sisters & Scenic World", emoji: "⛰️" }] },
+      { day: 3, theme: "Fly to the Gold Coast", activities: [
+        { time: "09:30", name: "1h20 flight", emoji: "✈️" },
+        { time: "12:30", name: "Burleigh Heads' surf & the headland", emoji: "🏄" } ] },
+      { day: 4, theme: "Gold Coast — parks or whales", activities: [{ time: "09:00", name: "Movie World or the whale boat (Jun–Oct)", emoji: "🎢" }] },
+      { day: 5, theme: "Departure", activities: [{ time: "09:30", name: "The beach morning & OOL", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Bourke Street Bakery", cuisine: "Sydney · $", emoji: "🥐" },
+      { name: "Rick Shores", cuisine: "Burleigh ocean dining · $$$", emoji: "🌊" },
+      { name: "Beachfront fish & chips", cuisine: "Every night · $", emoji: "🍟" },
+    ],
+    city: "Sydney", country: "Australia", airport: SYD, travelStyle: "relaxed",
+    interests: ["beaches", "nature", "food"],
+    highlights: ["The harbour then the surf strip", "The Three Sisters' cliffs", "Whale season offshore"],
+  },
+  {
+    id: "melbourne-great-ocean-road-4d", title: "Melbourne & Great Ocean Road 4-Day Trip",
+    coverImage: null, gradient: "from-emerald-500 to-amber-500", author: AI,
+    days: 4, estimatedCost: 640, currency: "AUD",
+    tags: ["Road Trip", "Nature", "Foodie"],
+    excerpt: "Melbourne's lanes and coffee, then the Great Ocean Road's cliffs, koalas and the Twelve Apostles.",
+    weatherTip: "March–May and September–November are calm and clear on the coast road.",
+    fullDays: [
+      { day: 1, theme: "Melbourne — lanes & coffee", activities: [{ time: "08:00", name: "Hosier Lane & the espresso crawl", emoji: "☕" }] },
+      { day: 2, theme: "Melbourne — market & NGV", activities: [{ time: "09:00", name: "Queen Vic Market & the NGV", emoji: "🖼️" }] },
+      { day: 3, theme: "Great Ocean Road", activities: [
+        { time: "08:00", name: "The coast drive: Kennett River's koalas to the Apostles", emoji: "🗿" },
+        { time: "19:00", name: "Overnight in Warrnambool or Apollo Bay", emoji: "🏨" } ] },
+      { day: 4, theme: "Return & Departure", activities: [{ time: "09:30", name: "The hinterland waterfall return & MEL", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Patricia Coffee Brewers", cuisine: "The espresso benchmark · $$", emoji: "☕" },
+      { name: "Apollo Bay fish co-op", cuisine: "Coastal catch · $$", emoji: "🐟" },
+      { name: "Brae (or the pub alternative)", cuisine: "Ocea-terroir · $$$$", emoji: "🌿" },
+    ],
+    city: "Melbourne", country: "Australia", airport: MEL, travelStyle: "adventure",
+    interests: ["nature", "food", "beaches"],
+    highlights: ["The lanes' espresso culture", "The Twelve Apostles", "Koalas in the wild at Kennett River"],
+  },
+  {
+    id: "greece-islands-7d", title: "Greece 7-Day Island Trip",
+    coverImage: null, gradient: "from-blue-500 to-amber-400", author: AI,
+    days: 7, estimatedCost: 910, currency: "EUR",
+    tags: ["Islands", "Beaches", "Culture"],
+    excerpt: "Athens' Acropolis and the Cycladic chain: two Athens days, then Naxos, Paros and Santorini by ferry.",
+    weatherTip: "May–June and September–early October are the ferry-friendly sweet spots.",
+    fullDays: [
+      { day: 1, theme: "Athens — Acropolis", activities: [{ time: "08:00", name: "The Parthenon at opening", emoji: "🏛️" }] },
+      { day: 2, theme: "Athens — museums", activities: [{ time: "09:30", name: "The Acropolis Museum & Plaka", emoji: "🏺" }] },
+      { day: 3, theme: "Ferry to Naxos", activities: [{ time: "10:00", name: "The Portara at sunset", emoji: "🌅" }] },
+      { day: 4, theme: "Naxos — villages", activities: [{ time: "09:30", name: "The mountain villages & beaches", emoji: "🏖️" }] },
+      { day: 5, theme: "Paros", activities: [{ time: "09:30", name: "Naoussa's harbor & Antiparos day", emoji: "⛵" }] },
+      { day: 6, theme: "Santorini", activities: [{ time: "09:30", name: "Akrotiri & the caldera walk", emoji: "🤍" }] },
+      { day: 7, theme: "Oia & Departure", activities: [{ time: "09:00", name: "The blue domes & JTR", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "To Kafeneio", cuisine: "Athens taverna · $$", emoji: "🍲" },
+      { name: "Naxos tavernas", cuisine: "Island plates · $$", emoji: "🥗" },
+      { name: "Metaxy Mas", cuisine: "Santorini local · $$", emoji: "🍷" },
+    ],
+    city: "Athens", country: "Greece", airport: ATH, travelStyle: "relaxed",
+    interests: ["beaches", "history", "food"],
+    highlights: ["The Parthenon before the heat", "Three islands in four days", "Santorini's caldera finale"],
+  },
+  {
+    id: "croatia-coast-7d", title: "Croatia 7-Day Coast Trip",
+    coverImage: null, gradient: "from-orange-500 to-blue-600", author: AI,
+    days: 7, estimatedCost: 770, currency: "EUR",
+    tags: ["Multi-City", "History", "Beaches"],
+    excerpt: "The Adriatic's walled gems: Split's Roman palace, Hvar's lavender island, and Dubrovnik's walls by ferry and coastal road.",
+    weatherTip: "May–June and September–October are warm with workable crowds.",
+    fullDays: [
+      { day: 1, theme: "Split — the Palace", activities: [{ time: "08:30", name: "Diocletian's Palace & the Riva", emoji: "🏛️" }] },
+      { day: 2, theme: "Split — islands", activities: [{ time: "08:30", name: "Brač's Zlatni Rat or Hvar", emoji: "⛴️" }] },
+      { day: 3, theme: "Coastal drive to Dubrovnik", activities: [{ time: "10:00", name: "Korčula and the Pelješac oysters", emoji: "🦪" }] },
+      { day: 4, theme: "Dubrovnik — walls", activities: [{ time: "08:00", name: "The wall circuit at opening", emoji: "🏰" }] },
+      { day: 5, theme: "Dubrovnik — islands", activities: [{ time: "09:30", name: "Lokrum's peacocks & the kayak loop", emoji: "🦚" }] },
+      { day: 6, theme: "Dubrovnik — Srđ & Elaphiti", activities: [{ time: "09:00", name: "The cable car & the island boats", emoji: "🚡" }] },
+      { day: 7, theme: "Departure", activities: [{ time: "09:30", name: "The last swim & DBV", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Proto", cuisine: "Dubrovnik seafood · $$$", emoji: "🦐" },
+      { name: "Konoba Marjan", cuisine: "Split grill · $$", emoji: "🐟" },
+      { name: "Stari Mlini", cuisine: "Kotor-adjacent · $$$", emoji: "🍋" },
+    ],
+    city: "Split", country: "Croatia", airport: SPU, travelStyle: "cultural",
+    interests: ["history", "beaches", "food"],
+    highlights: ["A Roman palace as your old town", "The wall circuit at opening", "The Pelješac oyster route"],
+  },
+  {
+    id: "portugal-algarve-6d", title: "Portugal 6-Day Trip: Lisbon & the Algarve",
+    coverImage: null, gradient: "from-yellow-500 to-cyan-500", author: AI,
+    days: 6, estimatedCost: 660, currency: "EUR",
+    tags: ["Multi-City", "Beaches", "Culture"],
+    excerpt: "Lisbon's hills and tarts, then the Algarve's grottoes and cliff walks — by train and coastal drive.",
+    weatherTip: "May–June and September–October are the swim-and-explore window.",
+    fullDays: [
+      { day: 1, theme: "Lisbon — Alfama & castle", activities: [{ time: "09:00", name: "The castle & Alfama's lanes", emoji: "🏰" }] },
+      { day: 2, theme: "Lisbon — Belém", activities: [{ time: "09:00", name: "The tarts, the monastery, the tower", emoji: "🥮" }] },
+      { day: 3, theme: "Train to the Algarve", activities: [
+        { time: "10:00", name: "3h rail south to Faro", emoji: "🚄" },
+        { time: "14:00", name: "Faro's old town & the Ria Formosa", emoji: "🦩" } ] },
+      { day: 4, theme: "Algarve — grottoes", activities: [{ time: "09:00", name: "Benagil's sea-cave boat & Marinha beach", emoji: "⛵" }] },
+      { day: 5, theme: "Algarve — Lagos", activities: [{ time: "09:30", name: "Ponta da Piedade & the old town", emoji: "🌅" }] },
+      { day: 6, theme: "Departure", activities: [{ time: "10:00", name: "The last nata & FAO", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Pastéis de Belém", cuisine: "The originals · $", emoji: "🥮" },
+      { name: "A Tasca do Kiko", cuisine: "Algarve seafood · $$", emoji: "🐟" },
+      { name: "O Camilo", cuisine: "Lagos cliffside · $$", emoji: "🌅" },
+    ],
+    city: "Lisbon", country: "Portugal", airport: LIS, travelStyle: "relaxed",
+    interests: ["beaches", "food", "history"],
+    highlights: ["The grottoes of Benagil", "The originals at Belém", "Ponta da Piedade's cliffs"],
+  },
+  {
+    id: "poland-krakow-warsaw-5d", title: "Poland 5-Day Trip: Krakow & Warsaw",
+    coverImage: null, gradient: "from-emerald-600 to-red-500", author: AI,
+    days: 5, estimatedCost: 400, currency: "EUR",
+    tags: ["Multi-City", "History", "Culture"],
+    excerpt: "Krakow's preserved royal city and the solemn memorial, then Warsaw's rebuilt old town and rising skyline.",
+    weatherTip: "May–September is festival season; December's twin Christmas markets glow.",
+    fullDays: [
+      { day: 1, theme: "Krakow — the square & Wawel", activities: [{ time: "09:00", name: "The Rynek & Wawel's hill", emoji: "🏰" }] },
+      { day: 2, theme: "Krakow — Kazimierz & the mine", activities: [{ time: "09:30", name: "Kazimierz & the Wieliczka Salt Mine", emoji: "🧂" }] },
+      { day: 3, theme: "Auschwitz memorial & rail to Warsaw", activities: [
+        { time: "08:00", name: "The memorial morning (booked)", emoji: "🕯️" },
+        { time: "16:00", name: "2h30 rail to Warsaw", emoji: "🚄" } ] },
+      { day: 4, theme: "Warsaw — risen", activities: [{ time: "09:30", name: "The rebuilt Old Town & the Rising Museum", emoji: "🕊️" }] },
+      { day: 5, theme: "Warsaw — POLIN & Departure", activities: [{ time: "09:30", name: "POLIN's vaults & WAW", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Pod Wawelem", cuisine: "Krakow · $$", emoji: "🍖" },
+      { name: "Zapiecek", cuisine: "Warsaw pierogi · $", emoji: "🥟" },
+      { name: "Hala Koszyki", cuisine: "Warsaw food hall · $$", emoji: "🧺" },
+    ],
+    city: "Krakow", country: "Poland", airport: KRK, travelStyle: "cultural",
+    interests: ["history", "food", "museums"],
+    highlights: ["The preserved square", "The salt mine's chapels", "Warsaw's phoenix old town"],
+  },
+  {
+    id: "baltic-capitals-7d", title: "The Baltics 7-Day Trip: Tallinn, Riga, Vilnius",
+    coverImage: null, gradient: "from-slate-500 to-emerald-600", author: AI,
+    days: 7, estimatedCost: 630, currency: "EUR",
+    tags: ["Multi-City", "History", "Culture"],
+    excerpt: "Three medieval capitals by bus and rail: Tallinn's ramparts, Riga's art nouveau and Vilnius's baroque — at Baltic prices.",
+    weatherTip: "June–August's long days suit the old towns; December's markets are the cozy alternative.",
+    fullDays: [
+      { day: 1, theme: "Tallinn — the walls", activities: [{ time: "09:00", name: "The ramparts & Toompea", emoji: "🏰" }] },
+      { day: 2, theme: "Tallinn — Kadriorg", activities: [{ time: "09:30", name: "Kadriorg & Telliskivi's creative city", emoji: "🎨" }] },
+      { day: 3, theme: "Bus to Riga", activities: [
+        { time: "10:00", name: "4h30 bus south", emoji: "🚌" },
+        { time: "15:00", name: "The Art Nouveau district & the old town", emoji: "🏛️" } ] },
+      { day: 4, theme: "Riga — market & Central", activities: [{ time: "09:30", name: "The Central Market's zeppelin hangars & the skyline", emoji: "🧺" }] },
+      { day: 5, theme: "Bus to Vilnius", activities: [
+        { time: "10:00", name: "4h bus east", emoji: "🚌" },
+        { time: "15:00", name: "The baroque old town & the Republic of Užupis", emoji: "🎨" } ] },
+      { day: 6, theme: "Vilnius — castles", activities: [{ time: "09:00", name: "Trakai's island castle day trip", emoji: "🏰" }] },
+      { day: 7, theme: "Departure", activities: [{ time: "10:00", name: "The last zeppelins & VNO", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Rataskaevu 16", cuisine: "Tallinn · $$", emoji: "🍽️" },
+      { name: "Riga Central Market", cuisine: "The hangar stalls · $", emoji: "🧺" },
+      { name: "Forto Dvaras", cuisine: "Vilnius Lithuanian · $$", emoji: "🥔" },
+    ],
+    city: "Tallinn", country: "Estonia", airport: TLL, travelStyle: "cultural",
+    interests: ["history", "food", "history"],
+    highlights: ["Three UNESCO old towns", "The zeppelin-hangar market", "The Republic of Užupis"],
+  },
+  {
+    id: "balkans-dubrovnik-split-7d", title: "The Balkans 7-Day Trip: Dubrovnik to Split",
+    coverImage: null, gradient: "from-orange-500 to-emerald-600", author: AI,
+    days: 7, estimatedCost: 700, currency: "EUR",
+    tags: ["Multi-City", "History", "Beaches"],
+    excerpt: "The Adriatic's walled arc: Dubrovnik's walls, Mostar's bridge, Kotor's bay and Split's palace — by bus and ferry.",
+    weatherTip: "May–June and September–October are warm with human crowds.",
+    fullDays: [
+      { day: 1, theme: "Dubrovnik — walls", activities: [{ time: "08:00", name: "The wall circuit at opening", emoji: "🏰" }] },
+      { day: 2, theme: "Dubrovnik — Lokrum", activities: [{ time: "09:30", name: "Lokrum's gardens & the kayak loop", emoji: "🦚" }] },
+      { day: 3, theme: "Bus to Mostar", activities: [
+        { time: "10:00", name: "3h bus to the Stari Most", emoji: "🌉" },
+        { time: "16:00", name: "The bridge divers & the bazaar", emoji: "🤿" } ] },
+      { day: 4, theme: "Kotor", activities: [{ time: "09:30", name: "The bay's walls & the serpentine viewpoint", emoji: "⛰️" }] },
+      { day: 5, theme: "Ferry or drive to Split", activities: [{ time: "10:00", name: "The coast route; Diocletian's dusk", emoji: "🏛️" }] },
+      { day: 6, theme: "Split — islands", activities: [{ time: "08:30", name: "Hvar or Brač's Zlatni Rat", emoji: "⛴️" }] },
+      { day: 7, theme: "Departure", activities: [{ time: "09:30", name: "The last swim & SPU", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Proto", cuisine: "Dubrovnik · $$$", emoji: "🦐" },
+      { name: "Tima-Irina", cuisine: "Mostar grill · $$", emoji: "🍢" },
+      { name: "Konoba Marjan", cuisine: "Split · $$", emoji: "🐟" },
+    ],
+    city: "Dubrovnik", country: "Croatia", airport: DBV, travelStyle: "cultural",
+    interests: ["history", "beaches", "food"],
+    highlights: ["The walls at opening", "Mostar's bridge divers", "Kotor's fjord-like bay"],
+  },
+  {
+    id: "india-golden-triangle-7d", title: "India 7-Day Trip: The Golden Triangle",
+    coverImage: null, gradient: "from-amber-500 to-rose-600", author: AI,
+    days: 7, estimatedCost: 450, currency: "USD",
+    tags: ["Culture", "History", "Classic"],
+    excerpt: "The classic triangle: Delhi's layers, Agra's Taj at sunrise and Jaipur's pink forts — by car and rail.",
+    weatherTip: "October–March is the pleasant season; April–June bakes.",
+    fullDays: [
+      { day: 1, theme: "Delhi — arrival & Old Delhi", activities: [{ time: "15:00", name: "Chandni Chowk's rickshaw maze", emoji: "🛺" }] },
+      { day: 2, theme: "Delhi — monuments", activities: [{ time: "09:00", name: "Humayun's Tomb, Qutub Minar, India Gate", emoji: "🕌" }] },
+      { day: 3, theme: "Drive to Agra", activities: [
+        { time: "09:00", name: "3h drive; Agra Fort's afternoon", emoji: "🏰" } ] },
+      { day: 4, theme: "The Taj at sunrise", activities: [
+        { time: "05:30", name: "The Taj Mahal at dawn", emoji: "🕌" },
+        { time: "12:00", name: "Drive to Jaipur via Fatehpur Sikri", emoji: "🚗" } ] },
+      { day: 5, theme: "Jaipur — Amber", activities: [{ time: "08:00", name: "Amber Fort & the mirror palace", emoji: "🏰" }] },
+      { day: 6, theme: "Jaipur — palaces & bazaars", activities: [{ time: "09:30", name: "The City Palace, Jantar Mantar, the bazaars", emoji: "🛍️" }] },
+      { day: 7, theme: "Departure", activities: [{ time: "10:00", name: "The last thali & JAI or DEL", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Karim's", cuisine: "Delhi since 1913 · $$", emoji: "🍢" },
+      { name: "Laxmi Misthan Bhandar", cuisine: "Jaipur thali · $$", emoji: "🍛" },
+      { name: "Pinch of Spice", cuisine: "Agra Mughlai · $$", emoji: "🍗" },
+    ],
+    city: "Jaipur", country: "India", airport: DEL, travelStyle: "cultural",
+    interests: ["history", "food", "shopping"],
+    highlights: ["The Taj at dawn", "Amber's mirror palace", "Three cities, one triangle"],
+  },
+  {
+    id: "sri-lanka-7d", title: "Sri Lanka 7-Day Trip",
+    coverImage: null, gradient: "from-teal-600 to-amber-500", author: AI,
+    days: 7, estimatedCost: 350, currency: "USD",
+    tags: ["Culture", "Nature", "Beaches"],
+    excerpt: "One week around the teardrop: the Cultural Triangle's rock fortresses, Kandy's temple, the tea train and the southern beaches.",
+    weatherTip: "December–March suits the west and south coasts and the Cultural Triangle.",
+    fullDays: [
+      { day: 1, theme: "Colombo & Negombo", activities: [{ time: "15:00", name: "Galle Face sunset & hoppers", emoji: "🪁" }] },
+      { day: 2, theme: "The Cultural Triangle", activities: [{ time: "08:00", name: "Sigiriya's Lion Rock climb", emoji: "🦁" }] },
+      { day: 3, theme: "Dambulla & Kandy", activities: [{ time: "09:00", name: "The cave temples & the Tooth Relic", emoji: "🛕" }] },
+      { day: 4, theme: "The Tea Train", activities: [{ time: "08:00", name: "Ella's train through the plantations", emoji: "🚂" }] },
+      { day: 5, theme: "Ella & the Nine Arch", activities: [{ time: "09:00", name: "Little Adam's Peak & the arch bridge", emoji: "🌉" }] },
+      { day: 6, theme: "To the South Coast", activities: [{ time: "10:00", name: "The safari or the whale coast; Mirissa", emoji: "🐋" }] },
+      { day: 7, theme: "Beaches & Departure", activities: [{ time: "09:30", name: "The final swim & CMB", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Ministry of Crab", cuisine: "Colombo · $$$", emoji: "🦀" },
+      { name: "Cafe Chill Ella", cuisine: "Hill country · $$", emoji: "🍛" },
+      { name: "Mirissa beach shacks", cuisine: "Seafood · $$", emoji: "🦐" },
+    ],
+    city: "Colombo", country: "Sri Lanka", airport: CMB, travelStyle: "cultural",
+    interests: ["history", "nature", "beaches"],
+    highlights: ["Sigiriya's Lion Rock", "The tea train to Ella", "The whale coast finish"],
+  },
+  {
+    id: "nepal-kathmandu-pokhara-7d", title: "Nepal 7-Day Trip: Kathmandu & Pokhara",
+    coverImage: null, gradient: "from-red-600 to-sky-500", author: AI,
+    days: 7, estimatedCost: 315, currency: "USD",
+    tags: ["Culture", "Adventure", "Nature"],
+    excerpt: "The valley's stupas and squares, the Pokhara lakeside under the Annapurnas, and a Himalaya sunrise before the trekking itch starts.",
+    weatherTip: "October–November and March–April are the clear-mountain windows.",
+    fullDays: [
+      { day: 1, theme: "Kathmandu — stupas", activities: [{ time: "08:00", name: "Boudhanath & Pashupatinath", emoji: "☸️" }] },
+      { day: 2, theme: "Kathmandu — squares", activities: [{ time: "09:00", name: "The Durbar Squares & Swayambhunath", emoji: "🏛️" }] },
+      { day: 3, theme: "Fly to Pokhara", activities: [{ time: "11:00", name: "Lakeside arrival & the Annapurna view", emoji: "🏔️" }] },
+      { day: 4, theme: "Sarangkot Sunrise", activities: [{ time: "05:00", name: "The Annapurna sunrise & paragliding", emoji: "🪂" }] },
+      { day: 5, theme: "The Peace Pagoda", activities: [{ time: "09:00", name: "The World Peace Pagoda hike & boating", emoji: "🛶" }] },
+      { day: 6, theme: "Return to Kathmandu", activities: [{ time: "11:00", name: "Bhaktapur's pottery square", emoji: "🏺" }] },
+      { day: 7, theme: "Departure", activities: [{ time: "10:00", name: "The last momo & KTM", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Boudha Sekhar Corner", cuisine: "Momo & thukpa · $", emoji: "🥟" },
+      { name: "OR2K", cuisine: "Pokhara lakeside · $$", emoji: "🥗" },
+      { name: "Krishnarpan", cuisine: "Newari feast · $$$", emoji: "🍲" },
+    ],
+    city: "Kathmandu", country: "Nepal", airport: KTM, travelStyle: "adventure",
+    interests: ["history", "nature", "food"],
+    highlights: ["The Annapurna sunrise", "The medieval valley squares", "The trekking itch it plants"],
+  },
+  {
+    id: "japan-alps-kanazawa-5d", title: "Japan 5-Day Trip: Tokyo & the Alps to Kanazawa",
+    coverImage: null, gradient: "from-teal-600 to-amber-500", author: AI,
+    days: 5, estimatedCost: 640, currency: "USD",
+    tags: ["Multi-City", "Culture", "Rail"],
+    excerpt: "Tokyo's core, then the alpine route north: Takayama's old town, Shirakawa-go's thatched roofs and Kanazawa's gardens.",
+    weatherTip: "April–June and October–November are ideal; winter turns Shirakawa-go into a snow-globe.",
+    fullDays: [
+      { day: 1, theme: "Tokyo — east & west", activities: [{ time: "08:30", name: "Senso-ji; Meiji and Shibuya", emoji: "🏯" }] },
+      { day: 2, theme: "Tokyo — center", activities: [{ time: "08:30", name: "Tsukiji, Ginza, the towers", emoji: "🍣" }] },
+      { day: 3, theme: "To Takayama", activities: [
+        { time: "09:00", name: "The limited express through the Alps", emoji: "🚞" },
+        { time: "14:00", name: "Takayama's old town & sake breweries", emoji: "🍶" } ] },
+      { day: 4, theme: "Shirakawa-go & Kanazawa", activities: [
+        { time: "08:30", name: "The thatched gassho village", emoji: "🏘️" },
+        { time: "16:00", name: "Kanazawa's Higashi Chaya at dusk", emoji: "🏮" } ] },
+      { day: 5, theme: "Kanazawa — Kenrokuen", activities: [{ time: "08:00", name: "Kenrokuen at opening & Komatsu", emoji: "🏞️" }] },
+    ],
+    restaurants: [
+      { name: "Omicho Market", cuisine: "Kanazawa seafood bowls · $$", emoji: "🦀" },
+      { name: "Takayama hida gyu", cuisine: "Alps beef · $$", emoji: "🥩" },
+      { name: "Gold-leaf cafés", cuisine: "Kanazawa · $", emoji: "🍨" },
+    ],
+    city: "Tokyo", country: "Japan", airport: NRT, travelStyle: "cultural",
+    interests: ["history", "nature", "food"],
+    highlights: ["The thatched gassho roofs", "Kenrokuen at opening", "The alpine limited express"],
+  },
+  {
+    id: "italy-food-8d", title: "Italy 8-Day Food Trip: Emilia-Romagna",
+    coverImage: null, gradient: "from-red-600 to-amber-500", author: AI,
+    days: 8, estimatedCost: 880, currency: "EUR",
+    tags: ["Foodie", "Cooking", "Multi-City"],
+    excerpt: "Eight days through the food valley: Bologna's ragù, Modena's balsamico, Parma's ham and the cooking schools between.",
+    weatherTip: "April–June and September–October suit the market mornings and the acetaia tours.",
+    fullDays: [
+      { day: 1, theme: "Bologna — the Quadrilatero", activities: [{ time: "10:00", name: "The market lanes & tagliatelle al ragù", emoji: "🍝" }] },
+      { day: 2, theme: "Bologna — pasta school", activities: [{ time: "09:30", name: "The fresh-pasta making class", emoji: "👩‍🍳" }] },
+      { day: 3, theme: "Modena — balsamico", activities: [{ time: "09:30", name: "The acetaia barrels & Osteria Francescana's town", emoji: "🍇" }] },
+      { day: 4, theme: "Parma — prosciutto & parmigiano", activities: [{ time: "08:30", name: "The ham cellars and the cheese dairies", emoji: "🥓" }] },
+      { day: 5, theme: "Bologna — towers & tortellini", activities: [{ time: "09:30", name: "The Two Towers & the broth lesson", emoji: "🗼" }] },
+      { day: 6, theme: "Ravenna — mosaics", activities: [{ time: "09:30", name: "The UNESCO Byzantine mosaics", emoji: "🎨" }] },
+      { day: 7, theme: "Ferrara & the salumeria", activities: [{ time: "09:30", name: "The Este castle & the final salumeria", emoji: "🏰" }] },
+      { day: 8, theme: "Departure", activities: [{ time: "10:00", name: "The last tortellini & BLQ", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Osteria dell'Orsa", cuisine: "Bologna · $", emoji: "🍝" },
+      { name: "Trattoria Billy", cuisine: "Modena · $$", emoji: "🥩" },
+      { name: "Sfoglia Rina", cuisine: "The pasta shop · $", emoji: "👩‍🍳" },
+    ],
+    city: "Bologna", country: "Italy", airport: {
+      iata: "BLQ", icao: "LIPQ", name: "Bologna Guglielmo Marconi Airport", city: "Bologna", country: "Italy",
+      timezone: "Europe/Rome", latitude: 44.5354, longitude: 11.2887,
+    }, travelStyle: "foodie",
+    interests: ["food", "history"],
+    highlights: ["The pasta school you'll repeat", "Modena's aged balsamico", "Parma's ham cellars"],
+  },
+  {
+    id: "andalusia-road-7d", title: "Andalusia 7-Day Road Trip",
+    coverImage: null, gradient: "from-orange-500 to-red-600", author: AI,
+    days: 7, estimatedCost: 630, currency: "EUR",
+    tags: ["Road Trip", "History", "Culture"],
+    excerpt: "The Moorish route by car: Córdoba's Mezquita, Seville's Alcázar, Ronda's gorge and Granada's Alhambra.",
+    weatherTip: "March–May and October–November avoid the 40°C furnace.",
+    fullDays: [
+      { day: 1, theme: "Malé to Córdoba", activities: [{ time: "14:00", name: "Pick up the car; the Mezquita at dusk", emoji: "🕌" }] },
+      { day: 2, theme: "Córdoba to Seville", activities: [{ time: "09:00", name: "The patios morning; Seville's Triana dinner", emoji: "🌺" }] },
+      { day: 3, theme: "Seville — Alcázar", activities: [{ time: "09:00", name: "The Mudéjar halls & the cathedral", emoji: "🕌" }] },
+      { day: 4, theme: "Seville — flamenco & Ronda", activities: [{ time: "10:00", name: "The gorge town drive; Ronda's Puente Nuevo", emoji: "🌉" }] },
+      { day: 5, theme: "Ronda to Granada", activities: [{ time: "10:00", name: "The olive roads; the Albaicín mirador", emoji: "🌄" }] },
+      { day: 6, theme: "Granada — Alhambra", activities: [{ time: "08:30", name: "The Nasrid Palaces' booked slot", emoji: "🕌" }] },
+      { day: 7, theme: "Departure", activities: [{ time: "10:00", name: "The final tapas & GRX or Málaga", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Taberna Salinas", cuisine: "Córdoba · $$", emoji: "🍲" },
+      { name: "Espacio Eol", cuisine: "Seville · $$", emoji: "🥘" },
+      { name: "Bodegas Castañeda", cuisine: "Granada free tapas · $", emoji: "🍷" },
+    ],
+    city: "Granada", country: "Spain", airport: {
+      iata: "GRX", icao: "LEGR", name: "Federico García Lorca Granada Airport", city: "Granada", country: "Spain",
+      timezone: "Europe/Madrid", latitude: 37.1888, longitude: -3.7772,
+    }, travelStyle: "cultural",
+    interests: ["history", "food"],
+    highlights: ["The Mezquita's column forest", "Ronda's gorge bridge", "The Alhambra's booked hour"],
+  },
+  {
+    id: "miami-keys-5d", title: "Miami & the Keys 5-Day Trip",
+    coverImage: null, gradient: "from-cyan-400 to-rose-500", author: AI,
+    days: 5, estimatedCost: 850, currency: "USD",
+    tags: ["Road Trip", "Beaches", "Foodie"],
+    excerpt: "Miami's art deco and Little Havana, then the Overseas Highway down to Key West's sunset celebration.",
+    weatherTip: "December–April is the dry, key-hopping season; June–November is hurricane-aware.",
+    fullDays: [
+      { day: 1, theme: "Miami — South Beach", activities: [{ time: "10:00", name: "The art-deco walk & the sand", emoji: "🏖️" }] },
+      { day: 2, theme: "Miami — Wynwood & Calle Ocho", activities: [{ time: "10:00", name: "The murals & the cafecito counters", emoji: "🎨" }] },
+      { day: 3, theme: "Drive to Key Largo & Islamorada", activities: [{ time: "09:30", name: "The Overseas Highway's bridges; a lobster roll", emoji: "🦞" }] },
+      { day: 4, theme: "Key West", activities: [{ time: "10:00", name: "Duval Street, Hemingway's cats, Mallory Square's sunset", emoji: "🌇" }] },
+      { day: 5, theme: "Return & Departure", activities: [{ time: "10:00", name: "The drive back & MIA", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Versailles", cuisine: "Little Havana · $$", emoji: "☕" },
+      { name: "Keys Fisheries", cuisine: "Islamorada · $$", emoji: "🦞" },
+      { name: "Blue Heaven", cuisine: "Key West institution · $$", emoji: "🐓" },
+    ],
+    city: "Miami", country: "USA", airport: MIA, travelStyle: "relaxed",
+    interests: ["beaches", "food", "nightlife"],
+    highlights: ["The Overseas Highway's bridges", "Mallory Square's sunset show", "The cafecito counters"],
+  },
+  {
+    id: "denver-rockies-5d", title: "Denver & the Rockies 5-Day Trip",
+    coverImage: null, gradient: "from-amber-500 to-emerald-700", author: AI,
+    days: 5, estimatedCost: 850, currency: "USD",
+    tags: ["Road Trip", "Nature", "Adventure"],
+    excerpt: "The Mile High City and the high country: Red Rocks, Rocky Mountain's elk meadows, Aspen's passes and the hot springs.",
+    weatherTip: "June–September opens Trail Ridge Road; winter is the ski season.",
+    fullDays: [
+      { day: 1, theme: "Denver — city & breweries", activities: [{ time: "10:00", name: "Union Station & the RiNo breweries", emoji: "🍺" }] },
+      { day: 2, theme: "Red Rocks & Golden", activities: [{ time: "09:30", name: "The amphitheatre & the Coors town", emoji: "🪨" }] },
+      { day: 3, theme: "Rocky Mountain National Park", activities: [{ time: "07:00", name: "Trail Ridge Road & the elk meadows", emoji: "🦌" }] },
+      { day: 4, theme: "Aspen & Independence Pass", activities: [{ time: "08:30", name: "The pass drive & the Maroon Bells", emoji: "🏔️" }] },
+      { day: 5, theme: "Hot Springs & Departure", activities: [{ time: "09:30", name: "The Idaho Springs soak & DEN", emoji: "♨️" }] },
+    ],
+    restaurants: [
+      { name: "The Buckhorn Exchange", cuisine: "Denver's oldest · $$$", emoji: "🦌" },
+      { name: "Snooze A.M. Eatery", cuisine: "Breakfast institution · $$", emoji: "🥞" },
+      { name: "White House Tavern", cuisine: "Aspen bistro · $$$", emoji: "🏔️" },
+    ],
+    city: "Denver", country: "USA", airport: DEN, travelStyle: "adventure",
+    interests: ["nature", "food", "sports"],
+    highlights: ["Trail Ridge Road's 12,000 feet", "The Maroon Bells' reflection", "Red Rocks at golden hour"],
+  },
+  {
+    id: "vietnam-north-5d", title: "North Vietnam 5-Day Trip: Hanoi, Ninh Binh & Ha Long",
+    coverImage: null, gradient: "from-red-500 to-teal-600", author: AI,
+    days: 5, estimatedCost: 250, currency: "USD",
+    tags: ["Multi-City", "Nature", "Culture"],
+    excerpt: "The north's three landscapes: Hanoi's Old Quarter, Ninh Binh's rice-field karsts and Ha Long Bay's sea towers.",
+    weatherTip: "October–December is the clear, cool window for all three.",
+    fullDays: [
+      { day: 1, theme: "Hanoi — the Old Quarter", activities: [{ time: "07:30", name: "Pho at dawn; the 36 streets & egg coffee", emoji: "🍜" }] },
+      { day: 2, theme: "Ninh Binh — the karsts", activities: [
+        { time: "08:30", name: "Tam Coc's rowboat rice-field karsts", emoji: "🛶" },
+        { time: "16:00", name: "Mua Cave's 500 steps", emoji: "🌄" } ] },
+      { day: 3, theme: "Ninh Binh — temples", activities: [{ time: "09:00", name: "Bai Dinh's pagoda & Hoa Lu's ancient capital", emoji: "🛕" }] },
+      { day: 4, theme: "Ha Long Bay", activities: [{ time: "08:00", name: "The day cruise through the sea towers", emoji: "🛥️" }] },
+      { day: 5, theme: "Departure", activities: [{ time: "09:00", name: "Train Street coffee & HAN", emoji: "✈️" }] },
+    ],
+    restaurants: [
+      { name: "Pho Bat Dan", cuisine: "Hanoi · $", emoji: "🍜" },
+      { name: "Cafe Giang", cuisine: "Egg coffee · $", emoji: "☕" },
+      { name: "Ninh Binh goat restaurants", cuisine: "The local specialty · $$", emoji: "🐐" },
+    ],
+    city: "Hanoi", country: "Vietnam", airport: HAN, travelStyle: "cultural",
+    interests: ["nature", "food", "history"],
+    highlights: ["Two karst landscapes by boat", "Mua Cave's 500 steps", "The egg-coffee origin"],
+  },
+];

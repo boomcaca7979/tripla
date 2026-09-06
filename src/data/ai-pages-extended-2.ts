@@ -495,7 +495,7 @@ export const AI_PAGES_EXTENDED_2: AiPage[] = [
       { question: "Is the crowd worth it?", answer: "At dawn and in the neighborhoods, yes — the 7am park is the trip. The planner schedules around the scrums." },
       { question: "What if I miss the peak?", answer: "The front moves north — the planner reroutes to the Tohoku or Hokkaido bloom within your window." },
     ],
-    guides: ["japan-travel-guide", "best-time-to-visit-japan", "japan-cherry-blossom-2027", "kyoto-3-day-itinerary", "tokyo-first-time-guide", "japan-travel-budget"],
+    guides: ["japan-travel-guide", "best-time-to-visit-japan", "japan-cherry-blossom-2027", "kyoto-2-day-itinerary", "tokyo-first-time-guide", "japan-travel-budget"],
     dests: ["tokyo", "kyoto", "fukuoka"], plannerCity: "Tokyo", readTime: "5 min read",
   }),
   aiPage({

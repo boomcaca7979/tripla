@@ -1,6 +1,7 @@
 import type { TravelStyle, TravelInterest } from "@/types/itinerary";
 import { AI_PAGES_EXTENDED } from "./ai-pages-extended";
 import { AI_PAGES_EXTENDED_2 } from "./ai-pages-extended-2";
+import { AI_PAGES_BATCH_3 } from "./ai-pages-batch3";
 
 // ── Types ──────────────────────────────────────────────────────────────
 
@@ -1043,4 +1044,5 @@ export const AI_PAGES: AiPage[] = [
   },
   ...AI_PAGES_EXTENDED,
   ...AI_PAGES_EXTENDED_2,
+  ...AI_PAGES_BATCH_3,
 ];

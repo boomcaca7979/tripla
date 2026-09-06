@@ -3,6 +3,7 @@ import type { WeatherScore } from "@/types/weather";
 import type { TravelStyle, TravelInterest } from "@/types/itinerary";
 import { EXTENDED_DESTINATIONS_A } from "./destinations-extended-a";
 import { EXTENDED_DESTINATIONS_B } from "./destinations-extended-b";
+import { EXTENDED_DESTINATIONS_C } from "./destinations-extended-d";
 
 // ── Types ──────────────────────────────────────────────────────────────
 
@@ -2793,6 +2794,7 @@ export const DESTINATIONS: Destination[] = [
   ...RAW_DESTINATIONS,
   ...EXTENDED_DESTINATIONS_A,
   ...EXTENDED_DESTINATIONS_B,
+  ...EXTENDED_DESTINATIONS_C,
 ].map(normalizeDestination);
 
 /** 返回所有 destination 的 slug。 */

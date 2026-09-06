@@ -5,6 +5,8 @@ import { EXTENDED_TRIPS_B } from "./trips-extended-b";
 import { EXTENDED_TRIPS_C } from "./trips-extended-c";
 import { EXTENDED_TRIPS_D } from "./trips-extended-d";
 import { EXTENDED_TRIPS_E } from "./trips-extended-e";
+import { EXTENDED_TRIPS_F } from "./trips-extended-f";
+import { EXTENDED_TRIPS_G } from "./trips-extended-g";
 
 // ── Types ──────────────────────────────────────────────────────────────
 
@@ -3593,6 +3595,8 @@ export const TRIPS: Trip[] = [
   ...EXTENDED_TRIPS_C,
   ...EXTENDED_TRIPS_D,
   ...EXTENDED_TRIPS_E,
+  ...EXTENDED_TRIPS_F,
+  ...EXTENDED_TRIPS_G,
 ].map(normalizeTrip);
 
 /** 返回所有 trip 的 slug。 */

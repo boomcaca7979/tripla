@@ -21,6 +21,9 @@ import { ITINERARIES_4_GUIDES } from "./guides/itineraries-4";
 import { COUNTRY_GUIDES } from "./guides/countries";
 import { TRAVELER_TOPIC_GUIDES } from "./guides/traveler-topic-guides";
 import { EXTRA_GUIDES } from "./guides/extra-guides";
+import { COUNTRY_GUIDES_2 } from "./guides/countries-2";
+import { GAP_FILL_GUIDES } from "./guides/gap-fill";
+import { FINAL_GUIDES } from "./guides/final-batch";
 
 // ── Types ──────────────────────────────────────────────────────────────
 
@@ -139,6 +142,9 @@ export const GUIDES: Guide[] = [
   ...COUNTRY_GUIDES,
   ...TRAVELER_TOPIC_GUIDES,
   ...EXTRA_GUIDES,
+  ...COUNTRY_GUIDES_2,
+  ...FINAL_GUIDES,
+  ...GAP_FILL_GUIDES,
 ];
 
 /** 返回所有 guide 的 slug。 */
