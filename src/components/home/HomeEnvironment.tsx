@@ -49,6 +49,17 @@ export function useHomeState(): HomeState {
   return ctx;
 }
 
+/**
+ * Deterministic first-paint values shared by the SSG server build and the
+ * client's first render. They MUST be identical on both sides so React
+ * hydration matches (no #418). The real wall-clock time / season / weather /
+ * moon phase are applied inside an effect AFTER hydration (see below).
+ */
+const INITIAL_SEASON: Season = "summer";
+const INITIAL_WEATHER: WeatherId = "clear";
+const INITIAL_HOUR = 12;
+const INITIAL_MOON: MoonPhaseId = "full";
+
 /** 内容区消费的环境 token（浅墨族：envDeep 恒为深色世界） */
 const CONTENT_TOKENS: Record<string, string> = {
   "--ut-ink": "#f5f2ea",
@@ -65,37 +76,46 @@ const CONTENT_TOKENS: Record<string, string> = {
 
 export default function HomeEnvironment({ children }: { children: ReactNode }) {
   const destination = HOME_DESTINATION;
-  // 季节/天气为确定性派生：SSR 与客户端同月同日 → 无 hydration 位移
-  const [season] = useState<Season>(() => seasonFromDate(new Date()));
-  const [weather, setWeather] = useState<WeatherId>(() =>
-    deriveWeatherFor(HOME_DESTINATION.id, new Date(), seasonFromDate(new Date())),
-  );
-  // SSR 以服务器时钟算东京当地小时（数字一致 → 首帧即正确）
-  const [liveHour, setLiveHour] = useState(() => destinationLocalHour(HOME_DESTINATION.timeZone, new Date()));
+  // 确定性首屏状态：SSG 构建时与客户端首次 render 必须使用完全相同的
+  // initial state，否则 React hydration 会在季节/天气/小时/月相上产生 #418。
+  // 真实时间数据在 hydration 完成后的 effect 中再写入（见下方 sync）。
+  const [season, setSeason] = useState<Season>(INITIAL_SEASON);
+  const [weather, setWeather] = useState<WeatherId>(INITIAL_WEATHER);
+  const [liveHour, setLiveHour] = useState<number>(INITIAL_HOUR);
   const [hourOverride, setHourOverride] = useState<number | null>(null);
   const [mood, setMood] = useState<MoodId>("all");
+  const [moonPhase, setMoonPhase] = useState<MoonPhaseId>(INITIAL_MOON);
   const [moonOverride, setMoonOverride] = useState<MoonPhaseId | null>(null);
   const [saveData, setSaveData] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
 
+  // hydration 后把真实本地时间/季节/天气/月相写入 state；
+  // 首次渲染保持确定性（与 SSG HTML 一致），effect 内更新不再触发 hydration 校验。
   useEffect(() => {
-    const tick = () => setLiveHour(destinationLocalHour(destination.timeZone, new Date()));
+    const sync = () => {
+      const now = new Date();
+      const s = seasonFromDate(now);
+      setSeason(s);
+      setWeather(deriveWeatherFor(HOME_DESTINATION.id, now, s));
+      setLiveHour(destinationLocalHour(destination.timeZone, now));
+      setMoonPhase(moonPhaseFor(now));
+    };
     // 异步初始化（避免 effect 内同步 setState 级联渲染）
     const t0 = setTimeout(() => {
-      tick();
+      sync();
       const conn = (navigator as Navigator & { connection?: { saveData?: boolean } })
         .connection;
       setSaveData(Boolean(conn?.saveData));
     }, 0);
-    const id = setInterval(tick, 30_000);
+    const id = setInterval(sync, 30_000);
     return () => { clearTimeout(t0); clearInterval(id); };
   }, [destination.timeZone]);
 
   const hour = hourOverride ?? liveHour;
-  const moonPhase: MoonPhaseId = moonOverride ?? moonPhaseFor(new Date());
+  const effectiveMoon: MoonPhaseId = moonOverride ?? moonPhase;
   const visual = useMemo(
-    () => deriveVisualState({ hour, season, mood, weather, moonPhase }),
-    [hour, season, mood, weather, moonPhase],
+    () => deriveVisualState({ hour, season, mood, weather, moonPhase: effectiveMoon }),
+    [hour, season, mood, weather, effectiveMoon],
   );
 
   // 状态渗透：把环境/内容 token 镜像到 :root，让包裹层外的
@@ -184,9 +204,9 @@ export default function HomeEnvironment({ children }: { children: ReactNode }) {
 
   const state: HomeState = {
     destination, mood, setMood, weather, setWeather,
-    moonPhase,
+    moonPhase: effectiveMoon,
     cycleMoonPhase: () => {
-      const i = MOON_PHASE_SEQUENCE.indexOf(moonPhase);
+      const i = MOON_PHASE_SEQUENCE.indexOf(effectiveMoon);
       setMoonOverride(MOON_PHASE_SEQUENCE[(i + 1) % MOON_PHASE_SEQUENCE.length]);
     },
     hour, hourOverride, setHourOverride, season, visual, lite: saveData,
