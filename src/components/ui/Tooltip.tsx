@@ -16,10 +16,10 @@ const positionStyles: Record<TooltipPosition, string> = {
 };
 
 const arrowStyles: Record<TooltipPosition, string> = {
-  top: "left-1/2 top-full -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-800",
-  bottom: "bottom-full left-1/2 -translate-x-1/2 border-b-4 border-l-4 border-r-4 border-b-gray-800 border-l-transparent border-r-transparent",
-  left: "left-full top-1/2 -translate-y-1/2 border-l-4 border-t-4 border-b-4 border-l-gray-800 border-t-transparent border-b-transparent",
-  right: "right-full top-1/2 -translate-y-1/2 border-r-4 border-t-4 border-b-4 border-r-gray-800 border-t-transparent border-b-transparent",
+  top: "left-1/2 top-full -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-ut-ink",
+  bottom: "bottom-full left-1/2 -translate-x-1/2 border-b-4 border-l-4 border-r-4 border-b-ut-ink border-l-transparent border-r-transparent",
+  left: "left-full top-1/2 -translate-y-1/2 border-l-4 border-t-4 border-b-4 border-l-ut-ink border-t-transparent border-b-transparent",
+  right: "right-full top-1/2 -translate-y-1/2 border-r-4 border-t-4 border-b-4 border-r-ut-ink border-t-transparent border-b-transparent",
 };
 
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
@@ -30,8 +30,10 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         <div
           role="tooltip"
           className={[
-            "pointer-events-none absolute z-50 whitespace-nowrap rounded-md bg-gray-800 px-2.5 py-1.5 text-xs text-white opacity-0 shadow-sm transition-opacity",
-            "group-hover:opacity-100",
+            "pointer-events-none absolute z-50 whitespace-nowrap rounded-ut-sm bg-ut-ink px-2.5 py-1.5 text-label text-ut-inverse",
+            "opacity-0 shadow-ut-1",
+            "transition-opacity duration-[var(--ut-dur-fast)] ease-ut-out",
+            "group-hover:opacity-100 group-focus-within:opacity-100",
             positionStyles[position],
           ].join(" ")}
         >

@@ -5,7 +5,6 @@ import { pdf } from "@react-pdf/renderer";
 import TripPDF from "./TripPDF";
 import type { Itinerary } from "@/types/itinerary";
 import type { FlightLeg } from "@/types/flight";
-import { getStoredUser } from "@/lib/auth";
 
 // ── Props ───────────────────────────────────────────────────────────
 
@@ -21,16 +20,10 @@ export default function PDFDownloadButton({
   flights,
 }: PDFDownloadButtonProps) {
   const [loading, setLoading] = useState(false);
-  const [loggedIn] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return !!getStoredUser();
-  });
 
   const fileName = `tripla-itinerary-${itinerary.input.destination.city}-${itinerary.input.departureDate}.pdf`;
 
   const handleExport = useCallback(async () => {
-    if (!loggedIn) return;
-
     setLoading(true);
     try {
       const blob = await pdf(
@@ -50,22 +43,19 @@ export default function PDFDownloadButton({
     } finally {
       setLoading(false);
     }
-  }, [itinerary, flights, fileName, loggedIn]);
+  }, [itinerary, flights, fileName]);
 
   return (
     <button
       type="button"
       onClick={handleExport}
-      disabled={loading || !loggedIn}
-      title={loggedIn ? undefined : "Log in to export PDF"}
-      aria-disabled={!loggedIn}
+      disabled={loading}
+      aria-disabled={loading}
       className={[
         "inline-flex items-center rounded-lg px-3 py-1.5 text-sm font-medium transition-colors",
         "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
-        loggedIn
-          ? "bg-blue-600 text-white hover:bg-blue-700"
-          : "cursor-not-allowed bg-gray-300 text-gray-500",
-        !loggedIn || loading ? "opacity-50" : "",
+        "bg-blue-600 text-white hover:bg-blue-700",
+        loading ? "opacity-50" : "",
       ].join(" ")}
     >
       {loading ? "Preparing PDF…" : "Export PDF"}

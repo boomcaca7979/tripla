@@ -26,7 +26,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-lg font-semibold text-gray-900">2. How We Use Your Information</h2>
             <p className="mt-2">
-              We use your information to provide and improve the Service, personalize your travel recommendations, communicate with you about your account, and ensure the security of our platform.
+              We use your information to provide and improve the Service, personalize your travel recommendations, and ensure the security of our platform. The Service does not require an account: all content is anonymously accessible, and preferences you choose (such as temperature unit or currency) are stored only on your own device.
             </p>
           </section>
 
@@ -61,7 +61,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-lg font-semibold text-gray-900">7. Data Retention</h2>
             <p className="mt-2">
-              We retain your personal information for as long as your account is active or as needed to provide the Service. You may request deletion of your account and associated data at any time.
+              We retain your personal information only for as long as needed to provide the Service. Data stored on your device (such as saved preferences or locally saved itineraries) never leaves your device and can be removed at any time by clearing your browser storage.
             </p>
           </section>
 

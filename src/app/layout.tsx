@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Instrument_Serif } from "next/font/google";
 import Script from "next/script";
 import { LanguageProvider } from "@/lib/i18n";
 import PageWrapper from "@/components/layout/PageWrapper";
@@ -25,31 +26,42 @@ const geistMono = localFont({
   ],
 });
 
+// Display 衬线（编辑感标题）：单字重 400，构建时自托管，浏览器不请求 Google
+const instrumentSerif = Instrument_Serif({
+  weight: "400",
+  style: "normal",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-instrument-serif",
+  fallback: ["Georgia", "Times New Roman", "serif"],
+});
+
 const SITE_URL = "https://www.utripla.xyz";
 
 export const metadata: Metadata = {
   title: {
-    default: "tripla - AI-Powered Travel Planner",
+    default: "tripla — Interactive Travel Discovery",
     template: "%s | tripla",
   },
   description:
-    "Plan smarter. Travel better. AI-powered trip planning with real-time flights, weather, and personalized itineraries.",
+    "Wander a living atlas of destinations, stolen routes and field notes. No account, no search box in your face — open it and see what pulls you in.",
   keywords: [
-    "travel planner",
-    "AI itinerary",
-    "trip planning",
+    "travel discovery",
+    "travel guides",
+    "destinations",
+    "trip routes",
     "flights",
     "weather",
-    "travel guide",
+    "field notes",
   ],
   icons: {
     icon: "/logo-icon.svg",
   },
   metadataBase: new URL(SITE_URL),
   openGraph: {
-    title: "tripla - AI-Powered Travel Planner",
+    title: "tripla — Interactive Travel Discovery",
     description:
-      "Plan smarter. Travel better. AI-powered trip planning with real-time flights, weather, and personalized itineraries.",
+      "Wander a living atlas of destinations, stolen routes and field notes — no account, no search box in your face.",
     url: SITE_URL,
     siteName: "tripla",
     type: "website",
@@ -58,15 +70,15 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "tripla - AI-Powered Travel Planner",
+        alt: "tripla — Interactive Travel Discovery",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "tripla - AI-Powered Travel Planner",
+    title: "tripla — Interactive Travel Discovery",
     description:
-      "Plan smarter. Travel better. AI-powered trip planning with real-time flights, weather, and personalized itineraries.",
+      "Wander a living atlas of destinations, stolen routes and field notes — no account, no search box in your face.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -86,8 +98,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
+      <head>
+        {/* JS 可用标记：Reveal 初始隐藏仅在 .js-ready 下生效（无 JS 内容默认可见） */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js-ready')" }} />
+      </head>
       <body className="min-h-full">
         <Script
           async

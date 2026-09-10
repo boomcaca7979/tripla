@@ -43,10 +43,10 @@ const ALL_INTERESTS: { value: TravelInterest; labelKey: string }[] = [
 ];
 
 const LABEL_CLASS =
-  "mb-1.5 block text-xs font-semibold uppercase tracking-wide text-gray-500";
+  "mb-1.5 block text-[11px] font-mono uppercase tracking-[0.14em] text-ut-muted";
 
 const INPUT_CLASS =
-  "w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 transition-colors hover:border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20";
+  "w-full rounded-ut-md border border-ut-border bg-ut-surface px-3 py-2.5 text-body-sm text-ut-text placeholder:text-ut-subtle transition-colors hover:border-ut-border-strong focus:border-ut-accent-line focus:outline-none focus:ring-2 focus:ring-[rgba(var(--ut-accent-rgb),0.25)]";
 
 // ── Props ─────────────────────────────────────────────────────────────
 
@@ -204,7 +204,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
 
   // ── Render ──────────────────────────────────────────────────────────
   return (
-    <div className="rounded-3xl bg-white p-6 shadow-2xl shadow-black/10 backdrop-blur-xl sm:p-8">
+    <div className="rounded-ut-lg border border-ut-border bg-ut-surface-elevated p-6 shadow-ut-2 backdrop-blur-xl sm:p-8">
       {/* ── Row 1: From + To ──────────────────────────────────────── */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
         <div className="flex-1">
@@ -222,7 +222,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
           type="button"
           aria-label="Swap origin and destination"
           onClick={swapAirports}
-          className="self-center rounded-full border border-gray-200 bg-gray-50 p-2.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 sm:mb-0.5"
+          className="self-center rounded-full border border-ut-border bg-ut-surface p-2.5 text-ut-muted transition-colors hover:border-ut-border-strong hover:text-ut-text focus:outline-none focus:ring-2 focus:ring-[rgba(var(--ut-accent-rgb),0.3)] sm:mb-0.5"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -262,7 +262,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
             onChange={handleDateChange}
             labelClassName={LABEL_CLASS}
             inputClassName={INPUT_CLASS}
-            arrowClassName="text-gray-400"
+            arrowClassName="text-ut-subtle"
           />
         </div>
 
@@ -348,8 +348,8 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
                 className={[
                   "inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm transition-all",
                   checked
-                    ? "border-blue-500 bg-blue-50 text-blue-700 shadow-sm"
-                    : "border-gray-200 bg-white text-gray-600 hover:border-gray-300 hover:bg-gray-50",
+                    ? "border-ut-accent-line bg-ut-accent-soft text-ut-accent"
+                    : "border-ut-border bg-ut-surface text-ut-text-2 hover:border-ut-border-strong hover:text-ut-text",
                 ].join(" ")}
               >
                 {checked && (
@@ -376,7 +376,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
         <button
           type="button"
           onClick={handleSubmit}
-          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-10 py-3.5 text-base font-semibold text-white shadow-lg shadow-blue-600/25 transition-all hover:from-blue-700 hover:to-blue-800 hover:shadow-xl hover:shadow-blue-700/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="inline-flex items-center gap-2 rounded-ut-sm bg-ut-accent px-10 py-3.5 text-base font-semibold text-ut-inverse shadow-ut-1 transition-all hover:bg-ut-accent-strong hover:shadow-ut-2 focus:outline-none focus:ring-2 focus:ring-[rgba(var(--ut-accent-rgb),0.55)] focus:ring-offset-2 focus:ring-offset-transparent"
         >
           {t("search.planMyTrip")}
           <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">

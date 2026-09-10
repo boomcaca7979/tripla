@@ -1,97 +1,778 @@
 @import "tailwindcss";
 
+/* ════════════════════════════════════════════════════════════════════
+   UTRIPLA 2.0 Design Tokens — single source of truth
+   Light-first. Components must consume these via Tailwind ut-* utilities
+   or var(--ut-*) directly. No hardcoded palette colors in primitives.
+   ════════════════════════════════════════════════════════════════════ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ── 1. Background / Surface ── */
+  --ut-bg: #faf9f6;                /* warm paper, page background */
+  --ut-surface: #ffffff;           /* cards, panels */
+  --ut-surface-hover: #f4f2ee;     /* hover surface */
+  --ut-surface-elevated: #ffffff;  /* elevated surface (pairs with shadow-2) */
+
+  /* ── 2. Text ── */
+  --ut-ink: #16181d;               /* strongest heading text */
+  --ut-text: #23272f;              /* body text */
+  --ut-text-2: #4b5261;            /* secondary text */
+  --ut-muted: #667085;             /* de-emphasized but still readable */
+  --ut-subtle: #98a1b2;            /* decorative micro labels only — never key info */
+  --ut-inverse: #ffffff;           /* text on accent / dark surfaces */
+
+  /* ── 3. Border ── */
+  --ut-border: rgba(22, 24, 29, 0.10);
+  --ut-border-strong: rgba(22, 24, 29, 0.20);
+
+  /* ── 4. Accent（SSR 默认值；后续 Phase 由目的地状态驱动重写） ── */
+  --ut-accent: #b45f4d;                    /* terracotta */
+  --ut-accent-rgb: 180, 95, 77;
+  --ut-accent-strong: #9a4a3a;             /* hover / pressed */
+  --ut-accent-soft: rgba(var(--ut-accent-rgb), 0.10);  /* tinted surface */
+  --ut-accent-line: rgba(var(--ut-accent-rgb), 0.40);  /* underline / active border */
+  --ut-on-accent: #ffffff;                 /* accent 上的前景（Home 由状态引擎动态覆盖） */
+
+  /* ── 5. Ambient（仅基础能力，不做 WebGL） ── */
+  --ut-hero-grad: linear-gradient(180deg, #1d2a44 0%, #3a4a6b 45%, #b45f4d 100%);
+  --ut-glow: rgba(var(--ut-accent-rgb), 0.18);
+  --ut-vignette: radial-gradient(ellipse 70% 55% at 50% 40%, rgba(0, 0, 0, 0.28) 0%, transparent 75%);
+
+  /* ── 6. Typography（字体变量由 next/font 注入） ── */
+  --ut-font-display: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+  --ut-font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --ut-font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --ut-text-display-xl: clamp(2.5rem, 4.5vw + 1.1rem, 3.75rem); /* 40→60px 流式 */
+  --ut-text-display-xl--lh: 1.08;
+  --ut-text-display-lg: clamp(2.125rem, 3.5vw + 0.9rem, 3rem);   /* 34→48px 流式 */
+  --ut-text-display-lg--lh: 1.12;
+  --ut-text-h1: 2.25rem;           /* 36px */
+  --ut-text-h1--lh: 1.15;
+  --ut-text-h2: 1.75rem;           /* 28px */
+  --ut-text-h2--lh: 1.2;
+  --ut-text-h3: 1.375rem;          /* 22px */
+  --ut-text-h3--lh: 1.3;
+  --ut-text-body-lg: 1.125rem;     /* 18px */
+  --ut-text-body-lg--lh: 1.6;
+  --ut-text-body: 1rem;            /* 16px */
+  --ut-text-body--lh: 1.6;
+  --ut-text-body-sm: 0.875rem;     /* 14px */
+  --ut-text-body-sm--lh: 1.5;
+  --ut-text-label: 0.75rem;        /* 12px */
+  --ut-text-label--lh: 1.4;
+  --ut-text-micro: 0.625rem;       /* 10px — eyebrow / micro labels */
+  --ut-text-micro--lh: 1.4;
+
+  /* ── 7. Radius ── */
+  --ut-radius-sm: 8px;
+  --ut-radius-md: 12px;
+  --ut-radius-lg: 16px;
+  --ut-radius-pill: 999px;
+
+  /* ── 8. Shadow（少量层级） ── */
+  --ut-shadow-1: 0 1px 2px rgba(22, 24, 29, 0.05), 0 4px 16px rgba(22, 24, 29, 0.06);
+  --ut-shadow-2: 0 2px 6px rgba(22, 24, 29, 0.07), 0 12px 32px rgba(22, 24, 29, 0.10);
+  --ut-shadow-focus: 0 0 0 2px var(--ut-bg), 0 0 0 4px rgba(var(--ut-accent-rgb), 0.55);
+
+  /* ── 9. Motion（反馈 ≤300ms；环境 ≥6s） ── */
+  --ut-dur-fast: 150ms;
+  --ut-dur-med: 300ms;
+  --ut-dur-slow: 600ms;
+  --ut-dur-ambient: 8s;
+  --ut-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ut-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ── Layout foundation ── */
+  --ut-container-max: 80rem;       /* 1280px */
+  --ut-page-px: 1rem;              /* mobile page padding; md+: 1.5rem */
+  --ut-touch-min: 44px;            /* minimum touch target */
+
+  /* Backward-compat aliases（旧引用逐步退役） */
+  --background: var(--ut-bg);
+  --foreground: var(--ut-text);
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   Tailwind 4 mapping — generates text-ut-* / bg-ut-* / border-ut-* /
+   rounded-ut-* / shadow-ut-* / font-display utilities.
+   ════════════════════════════════════════════════════════════════════ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ut-bg: var(--ut-bg);
+  --color-ut-surface: var(--ut-surface);
+  --color-ut-surface-hover: var(--ut-surface-hover);
+  --color-ut-surface-elevated: var(--ut-surface-elevated);
+  --color-ut-ink: var(--ut-ink);
+  --color-ut-text: var(--ut-text);
+  --color-ut-text-2: var(--ut-text-2);
+  --color-ut-muted: var(--ut-muted);
+  --color-ut-subtle: var(--ut-subtle);
+  --color-ut-inverse: var(--ut-inverse);
+  --color-ut-border: var(--ut-border);
+  --color-ut-border-strong: var(--ut-border-strong);
+  --color-ut-accent: var(--ut-accent);
+  --color-ut-accent-strong: var(--ut-accent-strong);
+  --color-ut-accent-soft: var(--ut-accent-soft);
+  --color-ut-accent-line: var(--ut-accent-line);
+  --color-ut-on-accent: var(--ut-on-accent);
+
+  --font-sans: var(--ut-font-sans);
+  --font-mono: var(--ut-font-mono);
+  --font-display: var(--ut-font-display);
+
+  --text-display-xl: var(--ut-text-display-xl);
+  --text-display-xl--line-height: var(--ut-text-display-xl--lh);
+  --text-display-lg: var(--ut-text-display-lg);
+  --text-display-lg--line-height: var(--ut-text-display-lg--lh);
+  --text-h1: var(--ut-text-h1);
+  --text-h1--line-height: var(--ut-text-h1--lh);
+  --text-h2: var(--ut-text-h2);
+  --text-h2--line-height: var(--ut-text-h2--lh);
+  --text-h3: var(--ut-text-h3);
+  --text-h3--line-height: var(--ut-text-h3--lh);
+  --text-body-lg: var(--ut-text-body-lg);
+  --text-body-lg--line-height: var(--ut-text-body-lg--lh);
+  --text-body: var(--ut-text-body);
+  --text-body--line-height: var(--ut-text-body--lh);
+  --text-body-sm: var(--ut-text-body-sm);
+  --text-body-sm--line-height: var(--ut-text-body-sm--lh);
+  --text-label: var(--ut-text-label);
+  --text-label--line-height: var(--ut-text-label--lh);
+  --text-micro: var(--ut-text-micro);
+  --text-micro--line-height: var(--ut-text-micro--lh);
+
+  --radius-ut-sm: var(--ut-radius-sm);
+  --radius-ut-md: var(--ut-radius-md);
+  --radius-ut-lg: var(--ut-radius-lg);
+  --radius-ut-pill: var(--ut-radius-pill);
+
+  --shadow-ut-1: var(--ut-shadow-1);
+  --shadow-ut-2: var(--ut-shadow-2);
+  --shadow-ut-focus: var(--ut-shadow-focus);
+
+  --ease-ut-out: var(--ut-ease-out);
+  --ease-ut-in-out: var(--ut-ease-in-out);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ════════════════════════════════════════════════════════════════════
+   Base
+   ════════════════════════════════════════════════════════════════════ */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--ut-bg);
+  color: var(--ut-text);
+  font-family: var(--ut-font-sans);
+  font-size: var(--ut-text-body);
+  line-height: var(--ut-text-body--lh);
 }
 
-/* ── Floating orbs animation ─────────────────────────────────────── */
+::selection {
+  background: var(--ut-accent-soft);
+  color: var(--ut-ink);
+}
+
+/* 统一键盘焦点（组件内可用 focus-visible:ring-ut-accent 覆盖） */
+:focus-visible {
+  outline: 2px solid rgba(var(--ut-accent-rgb), 0.7);
+  outline-offset: 2px;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   Living Home — Page-level Environment（整个 Home 共享的天空为状态层）
+   颜色由 --ut-sky-* 驱动；@property 注册使其可过渡（不支持则瞬时切换）。
+   hero 之内是天空，滚动后 veil 把环境压向 envDeep —— 不存在硬切。
+   ════════════════════════════════════════════════════════════════════ */
+
+@property --ut-sky-a {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #b8d4e4;
+}
+@property --ut-sky-b {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #e2ecec;
+}
+@property --ut-sky-c {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #faf6ea;
+}
+
+/* ── 页面级环境层（fixed，全 Home 共享） ── */
+
+.ut-page-sky {
+  position: fixed;
+  inset: -12px; /* 视差位移余量 */
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    var(--ut-sky-a) 0%,
+    var(--ut-sky-b) 52%,
+    var(--ut-sky-c) 100%
+  );
+  transform: translate3d(
+    calc(var(--ut-px, 0) * -2px),
+    calc(var(--ut-py, 0) * -2px),
+    0
+  );
+}
+
+/* 滚动环境连续性：hero 离开视口时天空沉入 envDeep（地平线以下的世界） */
+.ut-env-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: rgb(var(--ut-env-deep-rgb, 12, 14, 20));
+  opacity: calc(var(--ut-scroll, 0) * 0.94);
+}
+
+/* 页面级 accent 光晕：随状态呼吸，滚动后渐弱让位于内容 */
+.ut-page-haze {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 60% 45% at 72% 18%,
+      rgba(var(--ut-accent-rgb), calc(var(--ut-glow-alpha, 0.16) * 0.9)) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 45% 40% at 18% 70%,
+      rgba(var(--ut-accent-rgb), calc(var(--ut-glow-alpha, 0.16) * 0.5)) 0%,
+      transparent 65%
+    );
+  mix-blend-mode: soft-light;
+  opacity: calc(1 - var(--ut-scroll, 0) * 0.55);
+  animation: ut-ambient 14s var(--ut-ease-in-out) infinite;
+  translate: calc(var(--ut-px, 0) * 3px) calc(var(--ut-py, 0) * 3px);
+}
+
+/* Hero 墨色由对比度引擎计算并经 :root 注入（--ut-hero-* 家族）；
+   data-sky-ink 仅作为 ghost 按钮/辉光的兜底分档 */
+[data-sky-ink="light"] {
+  --ut-hero-ghost-ink: #f6f3ec;
+  --ut-hero-ghost-line: rgba(246, 243, 236, 0.42);
+}
+[data-sky-ink="dark"] {
+  --ut-hero-ghost-ink: var(--ut-ink);
+  --ut-hero-ghost-line: rgba(22, 24, 29, 0.35);
+}
+
+/* ── Hero 排版：display 级空间对象 ── */
+
+.ut-hero-h1 {
+  font-size: clamp(2.6rem, 6vw + 0.6rem, 6.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  max-width: 14ch;
+  text-wrap: balance;
+}
+
+.ut-hero-ambient {
+  font-size: clamp(1.1rem, 0.9vw + 0.75rem, 1.4rem);
+  line-height: 1.45;
+}
+
+.ut-hero-label {
+  font-family: var(--ut-font-mono);
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ut-hero-muted);
+}
+
+/* 乐器带位于乐器面板（envDeep 0.92 深底）之上，永远使用内容浅墨族 */
+.ut-inst-label {
+  font-family: var(--ut-font-mono);
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ut-text-2);
+}
+
+.ut-hero-ink-text { color: var(--ut-hero-ink); }
+.ut-hero-soft-text { color: var(--ut-hero-soft); }
+.ut-hero-muted-text { color: var(--ut-hero-muted); }
+
+/* ── Instrument zone：hero 底部的安静乐器带 ── */
+
+/* ── Instrument zone：hero 底部下沉带 + 独立乐器面板 ── */
+
+/* 外层只做环境的连续下沉（无可见台阶，任何天空亮度下都与融合带衔接） */
+.ut-instrument {
+  background: linear-gradient(
+    180deg,
+    rgba(var(--ut-env-deep-rgb), 0) 0%,
+    rgba(var(--ut-env-deep-rgb), 0.5) 100%
+  );
+}
+
+/* 乐器面板：Ephemera 式的独立表面，文字永不赌天空颜色
+   （envDeep 0.92 → 任何天空下 L ≤ 0.18，浅墨 token 恒可读） */
+.ut-inst-panel {
+  background: rgba(var(--ut-env-deep-rgb), 0.92);
+  border: 1px solid rgba(245, 242, 234, 0.12);
+  box-shadow: var(--ut-shadow-1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* hero 底部与内容世界的融合带（任何滚动位置都无硬切） */
+.ut-hero-blend {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 40vh;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--ut-env-deep-rgb), 0) 0%,
+    rgba(var(--ut-env-deep-rgb), 0.3) 50%,
+    rgba(var(--ut-env-deep-rgb), 0.62) 100%
+  );
+}
+
+/* ── Weather：quiet condition control（环境条件选择器，不是 filter bar） ── */
+
+.ut-wx-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 4px 2px;
+  color: var(--ut-text-2);
+  font-family: var(--ut-font-mono);
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  transition: color var(--ut-dur-fast) var(--ut-ease-out);
+}
+
+.ut-wx-btn:hover,
+.ut-wx-btn:focus-visible,
+.ut-wx-btn[aria-pressed="true"] {
+  color: var(--ut-ink);
+}
+
+.ut-wx-glyph {
+  font-size: 0.85rem;
+  line-height: 1;
+  color: var(--ut-text-2);
+  transition: color var(--ut-dur-fast) var(--ut-ease-out);
+}
+
+.ut-wx-btn[aria-pressed="true"] .ut-wx-glyph {
+  color: var(--ut-accent);
+}
+
+.ut-wx-underline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--ut-hero-accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--ut-dur-med) var(--ut-ease-out);
+}
+
+.ut-wx-btn[aria-pressed="true"] .ut-wx-underline {
+  transform: scaleX(1);
+}
+
+/* Live 徽标（随天空明暗取可读绿） */
+[data-sky-ink="dark"] .ut-live { color: #047857; }
+[data-sky-ink="light"] .ut-live { color: #6ee7b7; }
+
+/* Home 顶部（未滚动）的 Header：与天空同一墨色体系，chrome 控件随之适配 */
+.ut-header-on-env,
+.ut-header-on-env a,
+.ut-header-on-env button,
+.ut-header-on-env select {
+  color: var(--ut-hero-ink);
+}
+.ut-header-on-env button,
+.ut-header-on-env select {
+  border-color: var(--ut-hero-line);
+  background: transparent;
+}
+.ut-header-on-env select option {
+  color: #16181d;
+  background: #ffffff;
+}
+
+.ut-sky-vignette {
+  position: absolute;
+  inset: 0;
+  background: var(--ut-vignette);
+}
+
+/* ── Z0.5 环境细节（星 / 日 / 月 / 云，全部状态驱动） ── */
+
+.ut-stars-layer {
+  position: absolute;
+  inset: 0;
+  transition: opacity 1.5s var(--ut-ease-in-out);
+  /* 星光 = 状态α ×（1 − 滚动褪去） */
+  opacity: calc(var(--ut-stars-alpha, 0) * (1 - var(--ut-scroll, 0) * 0.6));
+  transform: translate3d(
+    calc(var(--ut-px, 0) * -2px),
+    calc(var(--ut-py, 0) * -2px),
+    0
+  );
+}
+
+.ut-stars {
+  width: 100%;
+  height: 60%;
+}
+
+@keyframes ut-star-twinkle {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.3; }
+}
+
+.ut-star-twinkle {
+  animation: ut-star-twinkle 6s var(--ut-ease-in-out) infinite;
+}
+
+.ut-body {
+  position: absolute;
+  border-radius: 9999px;
+  transition: left 1.2s var(--ut-ease-in-out), top 1.2s var(--ut-ease-in-out), opacity 1.5s var(--ut-ease-in-out);
+  transform: translate3d(
+    calc(var(--ut-px, 0) * -6px),
+    calc(var(--ut-py, 0) * -6px),
+    0
+  );
+}
+
+.ut-sun {
+  width: 72px;
+  height: 72px;
+  background: radial-gradient(circle, rgba(255, 236, 200, 0.95) 0%, rgba(255, 220, 160, 0.5) 45%, transparent 72%);
+  filter: blur(1px);
+  /* bloom：双层柔和光晕（无 pseudo，零额外层级） */
+  box-shadow:
+    0 0 34px 12px rgba(255, 214, 150, 0.4),
+    0 0 90px 44px rgba(255, 205, 140, 0.16);
+}
+
+.ut-moon {
+  width: 44px;
+  height: 44px;
+  background: radial-gradient(circle at 38% 38%, rgba(240, 240, 250, 0.95) 0%, rgba(220, 224, 240, 0.55) 50%, transparent 72%);
+  filter: blur(0.5px);
+  /* rim light：受光侧微亮、背光侧微暗（圆体的最小立体感） */
+  box-shadow:
+    inset -2px -2px 5px rgba(110, 120, 150, 0.28),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.3);
+}
+
+/* 月相明暗面：深色圆盘经 --ut-moon-shift（内联，按相位计算）横移，
+   形成新月→满月的 terminator；纯 CSS，无纹理无脚本 */
+.ut-moon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 42% 40%, rgba(26, 30, 46, 0.88) 0%, rgba(26, 30, 46, 0.78) 60%, rgba(26, 30, 46, 0.66) 100%);
+  translate: var(--ut-moon-shift, 0) 0;
+  transition: translate 1.2s var(--ut-ease-in-out);
+  pointer-events: none;
+}
+
+/* 月面质感：低透明度月海斑点（纯 CSS，无纹理资源） */
+.ut-moon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle at 30% 32%, rgba(168, 175, 198, 0.55) 0 9%, transparent 10%),
+    radial-gradient(circle at 62% 56%, rgba(168, 175, 198, 0.4) 0 7%, transparent 8%),
+    radial-gradient(circle at 44% 74%, rgba(168, 175, 198, 0.32) 0 6%, transparent 7%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+@keyframes ut-cloud-drift {
+  0%, 100% { transform: translateX(-2.5%); }
+  50% { transform: translateX(2.5%); }
+}
+
+.ut-cloud {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(28px);
+  background: rgba(255, 255, 255, 0.35);
+  animation: ut-cloud-drift 90s var(--ut-ease-in-out) infinite;
+  /* translate 与 transform（drift 动画）是独立属性，二者叠加 */
+  translate: calc(var(--ut-px, 0) * 4px) calc(var(--ut-py, 0) * 4px);
+}
+
+/* 云量随天气：默认少云；cloudy/rain/snow/storm 由 data 属性加浓、压灰 */
+.ut-cloud-a { top: 14%; left: 6%; width: 42%; height: 14%; opacity: 0.35; }
+.ut-cloud-b { top: 30%; right: -8%; width: 52%; height: 16%; opacity: 0.28; animation-delay: -30s; }
+
+[data-ut-weather="cloudy"] .ut-cloud { background: rgba(210, 216, 224, 0.55); opacity: 0.75; }
+[data-ut-weather="rain"] .ut-cloud { background: rgba(120, 132, 146, 0.6); opacity: 0.85; filter: blur(32px); }
+[data-ut-weather="snow"] .ut-cloud { background: rgba(232, 238, 246, 0.7); opacity: 0.8; }
+[data-ut-weather="storm"] .ut-cloud { background: rgba(52, 58, 74, 0.75); opacity: 0.95; filter: blur(36px); }
+
+/* Overcast depth：cloudy/noon 的天空不再是平灰 ——
+   顶部压灰（云盖）、近地平线微亮（散射），纯渐变无 motion */
+[data-ut-weather="cloudy"] .ut-page-sky::after,
+[data-ut-weather="rain"] .ut-page-sky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(84, 92, 106, 0.30) 0%,
+    rgba(130, 138, 150, 0.14) 55%,
+    rgba(235, 238, 242, 0.10) 100%
+  );
+}
+
+/* ── 降水暗示层（轻量 CSS，"暗示天气"而非模拟） ── */
+
+@keyframes ut-rain-fall {
+  from { background-position: 0 0; }
+  to { background-position: -14px 240px; }
+}
+
+@keyframes ut-snow-fall {
+  from { background-position: 0 -60px, 20px -30px; }
+  to { background-position: -20px 260px, -14px 300px; }
+}
+
+.ut-precip {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ut-precip-rain {
+  background: repeating-linear-gradient(
+    24deg,
+    transparent 0,
+    transparent 9px,
+    rgba(200, 216, 232, 0.16) 9px,
+    rgba(200, 216, 232, 0.16) 10px
+  );
+  animation: ut-rain-fall 2.2s linear infinite;
+  opacity: 0.5;
+}
+
+.ut-precip-snow {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.5) 1.2px, transparent 1.6px),
+    radial-gradient(circle at 70% 0%, rgba(255, 255, 255, 0.4) 1px, transparent 1.4px);
+  background-size: 90px 130px, 60px 90px;
+  animation: ut-snow-fall 9s linear infinite;
+  opacity: 0.6;
+}
+
+/* 夜间 sky-ink=light 时 ghost 按钮与 eyebrow 的适配（颜色随对比度引擎的 ink 分档） */
+[data-sky-ink="light"] .ut-hero-ghost {
+  border-color: var(--ut-hero-ghost-line, rgba(246, 243, 236, 0.42));
+  color: var(--ut-hero-ghost-ink, #f6f3ec);
+}
+[data-sky-ink="light"] .ut-hero-ghost:hover {
+  border-color: rgba(246, 243, 236, 0.75);
+  color: #ffffff;
+}
+[data-sky-ink="dark"] .ut-hero-ghost {
+  border-color: var(--ut-hero-ghost-line, rgba(22, 24, 29, 0.35));
+  color: var(--ut-hero-ghost-ink, var(--ut-ink));
+}
+[data-sky-ink="dark"] .ut-hero-ghost:hover {
+  border-color: rgba(22, 24, 29, 0.6);
+  color: #000000;
+}
+.ut-hero-eyebrow {
+  color: var(--ut-hero-muted);
+}
+.ut-hero-soft {
+  color: var(--ut-hero-soft);
+}
+
+/* TimeDock 轨道 = 一根浓缩的天空时间轴（24h 渐变即图例） */
+.ut-time-track {
+  background: linear-gradient(
+    to right,
+    #12142e 0%, #3a2c52 21%, #d9a87c 29%, #b8d4e4 42%,
+    #faf6ea 54%, #e8c8a0 71%, #a85a6a 79%, #191c3c 88%, #12142e 100%
+  );
+}
+
+/* ── 支撑文案逐词漂浮（±3px，7s，相位错开） ── */
+@keyframes ut-word-drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.ut-word-drift {
+  animation: ut-word-drift 7s var(--ut-ease-in-out) infinite;
+  animation-delay: calc(var(--wd-i, 0) * -0.7s);
+  will-change: transform;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   Reveal（滚动显现）
+   规则：仅当 <html> 带 .js-ready 时才应用初始隐藏 —— 无 JS / 爬虫
+   看到的内容默认完全可见（SEO 安全）。.ut-reveal-visible 由
+   IntersectionObserver 添加。
+   ════════════════════════════════════════════════════════════════════ */
+
+.js-ready .ut-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity var(--ut-dur-slow) var(--ut-ease-out),
+    transform var(--ut-dur-slow) var(--ut-ease-out);
+}
+
+.js-ready .ut-reveal.ut-reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   Skeleton shimmer（transform-based sheen，合成器友好）
+   ════════════════════════════════════════════════════════════════════ */
+
+@keyframes ut-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.ut-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--ut-surface-hover);
+}
+
+.ut-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  animation: ut-shimmer 1.6s infinite;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   Ambient animations（既有 hero orbs 保留；幅度 ≤40px 属既有视觉，
+   Phase 3 Home 重构时收敛到 ≤8px 规范）
+   ════════════════════════════════════════════════════════════════════ */
+
 @keyframes float-slow {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -40px) scale(1.05);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.95);
-  }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -40px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
 }
 
 @keyframes float-medium {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(-40px, 30px) scale(0.95);
-  }
-  66% {
-    transform: translate(20px, -30px) scale(1.05);
-  }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-40px, 30px) scale(0.95); }
+  66% { transform: translate(20px, -30px) scale(1.05); }
 }
 
 @keyframes float-fast {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(25px, 25px) scale(1.08); }
+  66% { transform: translate(-30px, -20px) scale(0.92); }
+}
+
+.animate-float-slow { animation: float-slow 12s var(--ut-ease-in-out) infinite; }
+.animate-float-medium { animation: float-medium 10s var(--ut-ease-in-out) infinite; }
+.animate-float-fast { animation: float-fast 8s var(--ut-ease-in-out) infinite; }
+
+/* StateChip 呼吸点 — ambient 级（6s 周期，仅 opacity） */
+@keyframes ut-chip-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.ut-chip-pulse {
+  animation: ut-chip-pulse 6s var(--ut-ease-in-out) infinite;
+}
+
+/* Home hero 光晕 — ambient 级（12s/15s 周期，仅 opacity + 轻微 scale） */
+@keyframes ut-ambient {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.ut-ambient-a { animation: ut-ambient 12s var(--ut-ease-in-out) infinite; }
+.ut-ambient-b { animation: ut-ambient 15s var(--ut-ease-in-out) infinite reverse; }
+
+/* ════════════════════════════════════════════════════════════════════
+   Reduced motion — 关闭 ambient / reveal / shimmer，保留状态变化
+   ════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-float-medium,
+  .animate-float-fast,
+  .ut-chip-pulse,
+  .ut-ambient-a,
+  .ut-ambient-b,
+  .ut-page-haze,
+  .ut-word-drift,
+  .ut-star-twinkle,
+  .ut-cloud,
+  .ut-precip-rain,
+  .ut-precip-snow,
+  .ut-skeleton::after {
+    animation: none;
   }
-  33% {
-    transform: translate(25px, 25px) scale(1.08);
+
+  .ut-skeleton::after {
+    display: none;
   }
-  66% {
-    transform: translate(-30px, -20px) scale(0.92);
+
+  .ut-word-drift {
+    transform: none;
+  }
+
+  .ut-precip-rain,
+  .ut-precip-snow {
+    opacity: 0.35;
+  }
+
+  .js-ready .ut-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
-.animate-float-slow {
-  animation: float-slow 12s ease-in-out infinite;
-}
-
-.animate-float-medium {
-  animation: float-medium 10s ease-in-out infinite;
-}
-
-.animate-float-fast {
-  animation: float-fast 8s ease-in-out infinite;
-}
-
-/* ── Eye blink animation ─────────────────────────────────────── */
-/* 150ms eyelid-close motion — toggle the .animate-eye-blink class on/off to fire. */
-@keyframes eye-blink {
-  0% {
-    transform: scaleY(1);
-  }
-  45% {
-    transform: scaleY(0.1);
-  }
-  55% {
-    transform: scaleY(0.1);
-  }
-  100% {
-    transform: scaleY(1);
-  }
-}
-
-.animate-eye-blink {
-  animation: eye-blink 150ms ease-in-out;
-  transform-origin: center center;
+/* 省流模式（navigator.connection.saveData）：停掉一切 ambient */
+[data-ut-lite="true"] .ut-page-haze,
+[data-ut-lite="true"] .ut-word-drift,
+[data-ut-lite="true"] .ut-chip-pulse,
+[data-ut-lite="true"] .ut-cloud,
+[data-ut-lite="true"] .ut-star-twinkle,
+[data-ut-lite="true"] .ut-precip-rain,
+[data-ut-lite="true"] .ut-precip-snow {
+  animation: none;
 }

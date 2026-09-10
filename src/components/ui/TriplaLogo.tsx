@@ -38,8 +38,8 @@ export default function TriplaLogo({
             y2="30"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#0ea5e9" />
-            <stop offset="1" stopColor="#6366f1" />
+            <stop stopColor="var(--ut-accent)" />
+            <stop offset="1" stopColor="var(--ut-accent-strong)" />
           </linearGradient>
         </defs>
 
@@ -60,17 +60,17 @@ export default function TriplaLogo({
         />
 
         {/* Paper airplane – upper wing (lighter) */}
-        <path d="M26 4L4 14L12 16L26 4Z" fill="#38bdf8" />
+        <path d="M26 4L4 14L12 16L26 4Z" fill="var(--ut-accent-soft, rgba(180,95,77,0.4))" />
 
         {/* Paper airplane – lower wing (gradient) */}
         <path d="M26 4L12 16L9 28L26 4Z" fill={`url(#${grad})`} />
 
-        {/* Orange accent dot */}
-        <circle cx="5" cy="30" r="1.5" fill="#f97316" />
+        {/* Accent dot */}
+        <circle cx="5" cy="30" r="1.5" fill="var(--ut-accent)" />
       </svg>
 
       {variant === "horizontal" && (
-        <span className="text-lg font-bold tracking-tight text-gray-900">
+        <span className="text-lg font-bold tracking-tight text-ut-ink">
           tripla
         </span>
       )}

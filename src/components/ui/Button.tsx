@@ -1,6 +1,6 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
+type ButtonVariant = "primary" | "secondary" | "ghost" | "outline" | "danger";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -10,17 +10,24 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
+// 视觉全部来自 --ut-* token（经 @theme 映射为 ut-* 工具类）
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500",
-  secondary: "bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-400",
-  ghost: "bg-transparent text-gray-700 hover:bg-gray-100 focus:ring-gray-400",
-  danger: "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500",
+  primary:
+    "bg-ut-accent text-ut-inverse hover:bg-ut-accent-strong focus-visible:ring-ut-accent",
+  secondary:
+    "bg-ut-surface-hover text-ut-text hover:bg-ut-border focus-visible:ring-ut-accent",
+  ghost:
+    "bg-transparent text-ut-text-2 hover:bg-ut-surface-hover focus-visible:ring-ut-accent",
+  outline:
+    "border border-ut-border-strong bg-transparent text-ut-text hover:border-ut-accent-line hover:text-ut-accent focus-visible:ring-ut-accent",
+  danger:
+    "bg-red-600 text-white hover:bg-red-700 focus-visible:ring-red-500",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "px-3 py-1.5 text-sm gap-1.5",
-  md: "px-4 py-2 text-sm gap-2",
-  lg: "px-6 py-3 text-base gap-2",
+  sm: "px-3 py-1.5 text-body-sm gap-1.5",
+  md: "px-4 py-2 text-body-sm gap-2",
+  lg: "px-6 py-3 text-body gap-2",
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -32,8 +39,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         disabled={isDisabled}
         className={[
-          "inline-flex items-center justify-center rounded-lg font-medium transition-colors",
-          "focus:outline-none focus:ring-2 focus:ring-offset-2",
+          "inline-flex items-center justify-center rounded-ut-sm font-medium",
+          "transition-[background-color,color,border-color,box-shadow]",
+          "duration-[var(--ut-dur-fast)] ease-ut-out",
+          "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
           "disabled:pointer-events-none disabled:opacity-50",
           variantStyles[variant],
           sizeStyles[size],

@@ -2,6 +2,50 @@
 
 import Link from "next/link";
 import { useTranslation } from "@/lib/i18n";
+import Eyebrow from "@/components/ui/Eyebrow";
+
+// ── Footer navigation groups ─────────────────────────────────────────
+// 仅链接现有路由（新 URL 在后续 Phase 落地后再加入）。全部为可爬取 <Link>。
+
+interface FooterLink {
+  labelKey: string;
+  href: string;
+}
+
+const GROUPS: { titleKey: string; links: FooterLink[] }[] = [
+  {
+    titleKey: "footer.discover",
+    links: [
+      { labelKey: "nav.destinations", href: "/destinations" },
+      { labelKey: "nav.regions", href: "/regions" },
+      { labelKey: "footer.travelStyles", href: "/travel-styles" },
+    ],
+  },
+  {
+    titleKey: "footer.travel",
+    links: [
+      { labelKey: "nav.routes", href: "/trips" },
+      { labelKey: "nav.guides", href: "/guides" },
+      { labelKey: "nav.bestTime", href: "/best-time-to-visit" },
+      { labelKey: "footer.budget", href: "/travel-budget" },
+    ],
+  },
+  {
+    titleKey: "footer.tools",
+    links: [
+      { labelKey: "footer.plan", href: "/plan" },
+      { labelKey: "footer.share", href: "/share" },
+    ],
+  },
+  {
+    titleKey: "footer.about",
+    links: [
+      { labelKey: "nav.home", href: "/" },
+      { labelKey: "footer.privacy", href: "/privacy" },
+      { labelKey: "footer.terms", href: "/terms" },
+    ],
+  },
+];
 
 // ── Component ────────────────────────────────────────────────────────
 
@@ -10,51 +54,85 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-gray-200 bg-white">
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 py-6 sm:flex-row sm:justify-between sm:gap-0">
-        {/* Copyright */}
-        <p className="text-xs text-gray-500">&copy; {year} tripla. {t("footer.rights")}</p>
+    <footer
+      className="relative z-10 border-t border-[rgba(var(--ut-accent-rgb,180,95,77),0.14)]"
+      style={{ background: "var(--ut-footer-bg, var(--ut-surface))" }}
+    >
+      <div className="mx-auto max-w-[var(--ut-container-max)] px-4 py-12 md:px-6">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:grid-cols-5">
+          {/* Brand column */}
+          <div className="col-span-2 sm:col-span-4 lg:col-span-1">
+            <Link
+              href="/"
+              className="inline-block font-display text-h3 text-ut-ink transition-opacity duration-[var(--ut-dur-fast)] hover:opacity-80 focus-visible:outline-2 focus-visible:outline-ut-accent"
+            >
+              tripla
+            </Link>
+            <p className="mt-3 max-w-[26ch] text-body-sm text-ut-muted">
+              {t("footer.tagline")}
+            </p>
+          </div>
 
-        {/* Navigation */}
-        <nav className="flex items-center gap-6 text-xs" aria-label="Footer navigation">
-          <Link href="/" className="font-medium text-gray-700 underline-offset-2 hover:underline">
-            {t("footer.home")}
-          </Link>
-          <Link href="/pricing" className="font-medium text-gray-700 underline-offset-2 hover:underline">
-            {t("footer.pricing")}
-          </Link>
-        </nav>
+          {/* Link groups */}
+          {GROUPS.map((group) => (
+            <nav key={group.titleKey} aria-label={t(group.titleKey)}>
+              <Eyebrow className="mb-3">{t(group.titleKey)}</Eyebrow>
+              <ul className="space-y-2.5">
+                {group.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="inline-block rounded-ut-sm text-body-sm text-ut-text-2 underline-offset-2 transition-colors duration-[var(--ut-dur-fast)] ease-ut-out hover:text-ut-accent hover:underline focus-visible:outline-2 focus-visible:outline-ut-accent"
+                    >
+                      {t(link.labelKey)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
+        </div>
 
-        {/* Credits */}
-        <p className="text-xs text-gray-400">
-          {t("footer.poweredBy")}{" "}
-          <a
-            href="https://aviationstack.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-medium text-gray-500 underline-offset-2 hover:underline"
-          >
-            Aviationstack
-          </a>
-          ,{" "}
-          <a
-            href="https://open-meteo.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-medium text-gray-500 underline-offset-2 hover:underline"
-          >
-            Open-Meteo
-          </a>
-          ,{" "}
-          <a
-            href="https://groq.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-medium text-gray-500 underline-offset-2 hover:underline"
-          >
-            Groq (Llama 3.3)
-          </a>
+        {/* Affiliate disclosure */}
+        <p className="mt-10 border-t border-ut-border pt-6 text-label leading-relaxed text-ut-muted">
+          {t("footer.affiliates")}
         </p>
+
+        {/* Bottom row */}
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-label text-ut-subtle">
+            &copy; {year} tripla. {t("footer.rights")}
+          </p>
+          <p className="text-label text-ut-subtle">
+            {t("footer.poweredBy")}{" "}
+            <a
+              href="https://aviationstack.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-ut-accent"
+            >
+              Aviationstack
+            </a>
+            ,{" "}
+            <a
+              href="https://open-meteo.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-ut-accent"
+            >
+              Open-Meteo
+            </a>
+            ,{" "}
+            <a
+              href="https://groq.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-ut-accent"
+            >
+              Groq
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );

@@ -22,7 +22,6 @@ export function generateSitemapEntries(): MetadataRoute.Sitemap {
   const staticRoutes = [
     { path: "/", priority: 1.0, changeFrequency: "weekly" as const },
     { path: "/guides", priority: 0.7, changeFrequency: "monthly" as const },
-    { path: "/pricing", priority: 0.8, changeFrequency: "monthly" as const },
   ];
 
   const hubEntries: MetadataRoute.Sitemap = hubRoutes.map((r) => ({

@@ -16,9 +16,9 @@ export default function PageWrapper({
   className = "",
 }: PageWrapperProps) {
   return (
-    <div className="flex min-h-screen flex-col bg-gray-50">
+    <div className="flex min-h-screen flex-col bg-ut-bg text-ut-text">
      <Header />
-      <main className={`flex-1 pt-20 ${className}`}>{children}</main>
+      <main className={`flex-1 pt-16 ${className}`}>{children}</main>
      <Footer />
     </div>
   );

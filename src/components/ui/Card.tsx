@@ -10,9 +10,9 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const variantStyles: Record<CardVariant, string> = {
-  default: "bg-white",
-  elevated: "bg-white shadow-lg",
-  bordered: "border border-gray-200 bg-white",
+  default: "bg-ut-surface border border-ut-border",
+  elevated: "bg-ut-surface-elevated border border-ut-border shadow-ut-2",
+  bordered: "bg-ut-surface border border-ut-border-strong",
 };
 
 const paddingStyles: Record<CardPadding, string> = {
@@ -26,7 +26,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     return (
       <div
         ref={ref}
-        className={["rounded-xl", variantStyles[variant], paddingStyles[padding], className]
+        className={["rounded-ut-md", variantStyles[variant], paddingStyles[padding], className]
           .filter(Boolean)
           .join(" ")}
         {...rest}
