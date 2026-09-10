@@ -87,6 +87,7 @@ export default function TimeDock() {
 
       <div
         ref={trackRef}
+        suppressHydrationWarning
         role="slider"
         tabIndex={0}
         aria-label={`Time of day in ${destination.label} — preview the world at a different hour`}
@@ -118,7 +119,7 @@ export default function TimeDock() {
         </div>
       </div>
 
-      <p aria-live="polite" className="mt-1.5 font-mono text-micro text-ut-text-2">
+      <p suppressHydrationWarning aria-live="polite" className="mt-1.5 font-mono text-micro text-ut-text-2">
         {manual ? "Preview · " : ""}{timeLabel(hour)} · {destination.label}
       </p>
     </div>

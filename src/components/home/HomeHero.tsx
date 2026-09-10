@@ -75,6 +75,7 @@ export default function HomeHero() {
         </div>
         {/* 日/月锚定右半空间，与左侧 display 排版形成构图关系；小屏自动右移出文字带 */}
         <div
+          suppressHydrationWarning
           className="ut-body ut-sun"
           style={{
             left: `${58 + sun.x * 30}%`,
@@ -121,7 +122,7 @@ export default function HomeHero() {
           <em className="italic">disappear</em> to?
         </h1>
 
-        <p className="ut-hero-ambient mt-6 max-w-[46ch] font-display italic" style={{ color: "var(--ut-hero-soft)" }}>
+        <p suppressHydrationWarning className="ut-hero-ambient mt-6 max-w-[46ch] font-display italic" style={{ color: "var(--ut-hero-soft)" }}>
           {visual.ambientLine}
         </p>
 

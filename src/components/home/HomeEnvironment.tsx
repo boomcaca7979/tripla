@@ -204,6 +204,7 @@ export default function HomeEnvironment({ children }: { children: ReactNode }) {
     <HomeCtx.Provider value={state}>
       <div
         ref={wrapRef}
+        suppressHydrationWarning
         data-ut-season={season}
         data-ut-mood={mood}
         data-ut-weather={weather}

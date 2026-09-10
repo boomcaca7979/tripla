@@ -15,7 +15,7 @@ export default function TimeGreeting() {
     season === "spring" ? "Spring" : season === "summer" ? "Summer" : season === "autumn" ? "Autumn" : "Winter";
 
   return (
-    <p className="font-mono text-label tracking-wide" style={{ color: "var(--ut-hero-soft)" }}>
+    <p suppressHydrationWarning className="font-mono text-label tracking-wide" style={{ color: "var(--ut-hero-soft)" }}>
       {greetingFor(hour)}{" "}
       <span aria-hidden="true" className="ut-hero-soft">·</span>{" "}
       {timeLabel(hour)} in {destination.label}{" "}
