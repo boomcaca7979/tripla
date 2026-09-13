@@ -1,26 +1,109 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getDestinationBySlug } from "@/data/destinations";
-import { DESTINATIONS, type Destination } from "@/data/destinations";
-import { TRIPS } from "@/data/trips";
 import {
-  getClimateZone,
-  getHemisphere,
-  getMonthName,
-  getMonthRecommendation,
-  getMonthlyClimateNote,
-} from "@/lib/climate-pattern";
+  getDestinationBySlug,
+  getDestinationSlugs,
+  type Destination,
+} from "@/data/destinations";
+import { TRIPS } from "@/data/trips";
+import { getGuidesForCity } from "@/data/guides";
+import InnerBreadcrumb from "@/components/inner/InnerBreadcrumb";
+import InnerSection from "@/components/inner/InnerSection";
+import EditorialIndex from "@/components/inner/EditorialIndex";
+import InnerCTA from "@/components/inner/InnerCTA";
+import FaqList from "@/components/inner/FaqList";
+import PlacePractical from "@/components/destination/PlacePractical";
+import { capitalize } from "@/components/destination/place-state";
+import SeasonAtmosphere from "@/components/besttime/SeasonAtmosphere";
+import ClimateHero from "@/components/besttime/ClimateHero";
+import MonthSelector from "@/components/besttime/MonthSelector";
+import ClimateTable from "@/components/besttime/ClimateTable";
+import SeasonSummary from "@/components/besttime/SeasonSummary";
+import RecommendationModule from "@/components/besttime/RecommendationModule";
+import type { Signal } from "@/components/besttime/DecisionSignals";
+import {
+  buildDecisionReadout,
+  buildMonthRows,
+  canonicalWindowLabel,
+  defaultMonth,
+  seasonLabel,
+  summarizeSeasons,
+  type DecisionReadout,
+  type MonthRow,
+} from "@/components/besttime/besttime-state";
+import {
+  assertCanonicalCoverage,
+  CLIMATE_ARTIFACT_VERSION,
+  CLIMATE_ATTRIBUTION_LINE,
+  getClimateRecord,
+} from "@/data/climate/nasa-canonical";
+
+/**
+ * Best Time To Visit — DECISION SUPPORT EXPERIENCE（第四阶段）。
+ *
+ * Product Role 四分（与既有模板互不重叠）：
+ *   Guide       = Editorial Experience（**阅读**）
+ *   Destination = Place Experience（**抵达**）
+ *   Trip        = Journey Experience（**移动**）
+ *   Best-time   = Decision Support（**决定何时去**）
+ *
+ * 本页必须回答的问题（且只回答这些问题）：
+ *   什么时候去 / 为什么 / 天气如何 / 旺季还是淡季 / 哪几个月适合某种旅行方式 /
+ *   要避开什么 / 最终选哪个月。
+ * 它**不是** Destination 的复制、不是气候博客、不是 SaaS dashboard、不是卡片墙。
+ *
+ * 信息关系（不是章节关系）：
+ *   Decision Hero（Breadcrumb → 决策 eyebrow → H1 → context → best-month signal → 气候读数）
+ *   → Recommendation（决定 + 为什么）
+ *   → MonthSelector（Selected Month 状态：读单月）
+ *   → ClimateTable（**Primary Data Object**）
+ *   → SeasonSummary（季节叙述）
+ *   → Trip shape（真实实用字段）
+ *   → FAQ（与 FAQPage schema 同一数据源）
+ *   → 唯一 Primary CTA → Related（编辑式索引）
+ *
+ * ── 数据来源（NASA POWER PRIMARY MIGRATION）──────────────────────────
+ * Best-time 的气候权威是 production canonical dataset：
+ *   NASA POWER (NASA Langley Research Center) 145 anchors / 1991–2020 / UTC
+ *   → v8.7 normalize / aggregate / validate pipeline（internal-data-freeze-v87）
+ *   → src/data/climate/nasa-power-canonical-v1.json（version-locked artifact）
+ *   → 本页 SSG。
+ * 温度 / 降水 / 降水日数 = NASA POWER climate normals（%d 月值，1991–2020 均值）；
+ * verdict = R1–R7 tier；Best Months = canonical bestMonthsBaseline；
+ * daylightHours = 天文计算（非 NASA 数据）；sunshineHours = 合法 null。
+ * 旧的纬度→气候带→定性模板（climate-pattern 气候函数）已从权威链路移除。
+ * 缺失 canonical 记录 → build FAIL，绝不回退模板。
+ *
+ * 相对旧实现的内容质量修正：
+ *   1) 删除 legacy 蓝色系（blue/indigo/emerald/rose）与 SaaS 卡片墙：全面改用 --ut-* token。
+ *   2) 删除与 Home hero-search 不匹配的"AI planner"渐变区块：改为文末唯一语境 CTA。
+ *   3) 纬度派生的定性气候已被 NASA POWER 实测 normals 取代（migration 后）。
+ *   4) 旧实现有 FAQPage schema 但页面上**没有**可见 FAQ；现在可见 FAQ 与 schema 同源。
+ *   5) 旧 BreadcrumbList 第 2 项名为 "Best Time To Visit" 却指向 /destinations；现修正为
+ *      /best-time-to-visit（该 hub 真实存在并已在 sitemap 中）且与可见面包屑一致。
+ *
+ * 默认 Server Component；唯一 client 组件是 MonthSelector（Selected Month 状态）。
+ * 无图片 hero、无 WebGL / canvas / 视频 / 广告、无 Hotel / Flight affiliate。
+ */
+
+const SITE_URL = "https://www.utripla.xyz";
+const CONTAINER = "mx-auto w-full max-w-7xl px-4 md:px-6";
 
 // ── Static params ─────────────────────────────────────────────────────
 
+// 仅允许 generateStaticParams 返回的 slug 被渲染；其余在路由层 404，
+// 避免 notFound() 被静默吞掉后返回 200。
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return DESTINATIONS.map((d) => ({ slug: d.slug }));
+  const slugs = getDestinationSlugs();
+  // NASA POWER PRIMARY MIGRATION gate：canonical 必须覆盖全部 destination，
+  // 任何缺失 → build FAIL（禁止部分数据集 / 禁止回退纬度模板）。
+  assertCanonicalCoverage(slugs);
+  return slugs.map((slug) => ({ slug }));
 }
 
-// ── Metadata ──────────────────────────────────────────────────────────
+// ── Per-page metadata（保持既有 SEO 实现，未改动）──────────────────────
 
 export async function generateMetadata({
   params,
@@ -30,14 +113,17 @@ export async function generateMetadata({
   const { slug } = await params;
   const dest = getDestinationBySlug(slug);
   if (!dest) return { title: "Destination not found" };
-  // Phase 6.4: title 目标 50-60 chars（含 " | tripla"），description 目标 140-160 chars。
-  // 仅组合已有真实字段，不生成 AI 文案。
-  const title = `Best Time To Visit ${dest.city} · ${dest.bestMonths} Travel Guide`;
+  // Phase 6.4 + NASA migration: title 目标 50-60 chars（含 " | tripla"）。
+  // Best Months 现在来自 canonical bestMonthsBaseline（R1–R7 派生）。
+  const windowLabel = canonicalWindowLabel(getClimateRecord(dest.slug).bestMonthsBaseline);
+  const windowText = windowLabel || "Year-round";
+  const title = `Best Time To Visit ${dest.city} · ${windowText} Travel Guide`;
   const description = buildBestTimeMetaDescription(dest);
   return {
     title,
     description,
     alternates: { canonical: `/best-time-to-visit/${dest.slug}` },
+    robots: { index: true, follow: true },
     openGraph: {
       title,
       description,
@@ -67,7 +153,7 @@ function buildBestTimeMetaDescription(dest: Destination): string {
   return season + " " + weatherPrefix + suffix.trim();
 }
 
-// ── JSON-LD ───────────────────────────────────────────────────────────
+// ── JSON-LD（结构与字段保持既有实现；仅修正面包屑指向与 FAQ 同源）──────
 
 function buildArticleJsonLd(dest: Destination) {
   return {
@@ -75,23 +161,21 @@ function buildArticleJsonLd(dest: Destination) {
     "@type": "Article",
     headline: `Best Time To Visit ${dest.city}`,
     description: `Monthly climate patterns and seasonal travel advice for ${dest.city}, ${dest.country}.`,
-    url: `https://www.utripla.xyz/best-time-to-visit/${dest.slug}`,
-    // Phase 9 Step 6: mainEntityOfPage 强化为 WebPage 实体。
+    url: `${SITE_URL}/best-time-to-visit/${dest.slug}`,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://www.utripla.xyz/best-time-to-visit/${dest.slug}`,
+      "@id": `${SITE_URL}/best-time-to-visit/${dest.slug}`,
     },
     author: {
       "@type": "Organization",
       name: "tripla",
-      url: "https://www.utripla.xyz",
+      url: SITE_URL,
     },
     publisher: {
       "@type": "Organization",
       name: "tripla",
-      url: "https://www.utripla.xyz",
+      url: SITE_URL,
     },
-    // Phase 7.5/8.4: 使用 dest.publishedAt / updatedAt (YYYY-MM-DD)。
     datePublished: dest.publishedAt,
     dateModified: dest.updatedAt,
     about: {
@@ -106,57 +190,100 @@ function buildArticleJsonLd(dest: Destination) {
   };
 }
 
+/**
+ * 面包屑 schema 与页面可见面包屑严格一致：
+ * Home → Best time to visit（/best-time-to-visit，真实存在的 hub）→ {city}。
+ * 旧实现的第 2 项名称与目标 URL 不匹配（"Best Time To Visit" 指向 /destinations），此处修正。
+ */
 function buildBreadcrumbJsonLd(dest: Destination) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.utripla.xyz/" },
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
       {
         "@type": "ListItem",
         position: 2,
-        name: "Best Time To Visit",
-        item: "https://www.utripla.xyz/destinations",
+        name: "Best time to visit",
+        item: `${SITE_URL}/best-time-to-visit`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: dest.city,
-        item: `https://www.utripla.xyz/best-time-to-visit/${dest.slug}`,
+        item: `${SITE_URL}/best-time-to-visit/${dest.slug}`,
       },
     ],
   };
 }
 
-/**
- * Phase 8.3/9 Step 5: FAQPage schema for best-time-to-visit。
- * 答案仅来自 dest.bestSeason / bestMonths / weatherScore 真实字段。
- */
-function buildFaqJsonLd(dest: Destination) {
-  const faqs: { question: string; answer: string }[] = [];
-
-  faqs.push({
-    question: `What are the best months to visit ${dest.city}?`,
-    answer: `The best months to visit ${dest.city} are ${dest.bestMonths}. ${dest.bestSeason} These months offer the most reliable weather for sightseeing, outdoor activities, and local events.`,
-  });
-
-  faqs.push({
-    question: `What is the current weather like in ${dest.city}?`,
-    answer: `Current weather in ${dest.city} is rated ${dest.weatherScore.label} with a score of ${dest.weatherScore.overall}/100. ${dest.weatherScore.recommendation} Temperature, precipitation, wind, and sunshine are all considered in this rating.`,
-  });
-
+function buildFaqJsonLd(faqs: { question: string; answer: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: faqs.map((f) => ({
       "@type": "Question",
       name: f.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: f.answer,
-      },
+      acceptedAnswer: { "@type": "Answer", text: f.answer },
     })),
   };
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────
+
+/**
+ * FAQ 单一真相源：页面可见 FAQ 与 FAQPage schema 由同一数组产生。
+ * Best Months / verdict 均来自 production canonical（NASA POWER + R1–R7）；
+ * bestSeason / weatherScore / recommendedDays 是 destination 的真实编辑字段。
+ */
+function buildBestTimeFaqs(
+  dest: Destination,
+  rows: MonthRow[],
+  readout: DecisionReadout,
+): { question: string; answer: string }[] {
+  const avoidNames = rows
+    .filter((r) => r.verdict === "avoid")
+    .map((r) => r.name);
+  const windowText = readout.window.label || "the whole year";
+  const faqs: { question: string; answer: string }[] = [
+    {
+      question: `What are the best months to visit ${dest.city}?`,
+      answer: `The best months to visit ${dest.city} are ${windowText}, based on the R1–R7 classification of NASA POWER 1991–2020 climate normals. ${dest.bestSeason}`,
+    },
+    {
+      question: `What is the weather like in ${dest.city}?`,
+      answer: `${dest.city} is rated ${dest.weatherScore.label} for climate, with a score of ${dest.weatherScore.overall}/100. ${dest.weatherScore.recommendation}`,
+    },
+  ];
+  if (avoidNames.length > 0) {
+    faqs.push({
+      question: `Which months should I avoid in ${dest.city}?`,
+      answer: `On the R1–R7 classification of NASA POWER climate normals, ${avoidNames.join(", ")} ${
+        avoidNames.length === 1 ? "is the least favourable month" : "are the least favourable months"
+      } in ${dest.city}. This is a historical climate pattern rather than a forecast; the recommended window remains ${windowText}.`,
+    });
+  }
+  faqs.push({
+    question: `How many days do you need in ${dest.city}?`,
+    answer: `We recommend ${dest.recommendedDays} ${
+      dest.recommendedDays === 1 ? "day" : "days"
+    } in ${dest.city}, ideally placed inside the recommended window of ${windowText}.`,
+  });
+  return faqs;
+}
+
+/**
+ * Planner 深链接。当前 /plan 路由**不支持** destination 预填，因此沿用项目既有机制
+ * （Home hero-search 预填：#hero-search 读取 to / travelStyle / interests /
+ * departureDate / returnDate）。本页**不**注入具体日期 —— 真实数据里只有"月份窗口"，
+ * 没有年份，注入一个编造的具体日期会制造假精度。
+ */
+function buildBestTimePlannerHref(dest: Destination): string {
+  const params = new URLSearchParams();
+  params.set("to", dest.city);
+  params.set("travelStyle", dest.travelStyle);
+  if (dest.interests.length > 0) params.set("interests", dest.interests.join(","));
+  return `/?${params.toString()}#hero-search`;
 }
 
 // ── Page ──────────────────────────────────────────────────────────────
@@ -170,273 +297,220 @@ export default async function BestTimeToVisitPage({
   const dest = getDestinationBySlug(slug);
   if (!dest) notFound();
 
-  const planHref = `/?to=${encodeURIComponent(dest.city)}#hero-search`;
-  const zone = getClimateZone(dest);
-  const hemisphere = getHemisphere(dest);
+  // ── 双信号读数（全部来自真实字段 + 已标注的派生层）──────────────────
+  const rows = buildMonthRows(dest);
+  const readout = buildDecisionReadout(dest, rows);
+  const win = readout.window;
+  const seasons = summarizeSeasons(dest, rows);
+  const initialMonth = defaultMonth(dest);
+  const planHref = buildBestTimePlannerHref(dest);
+  const faqs = buildBestTimeFaqs(dest, rows, readout);
 
-  const months = Array.from({ length: 12 }, (_, i) => i);
-  const bestMonths = months.filter((m) => getMonthRecommendation(dest, m) === "best");
-  const worstMonths = months.filter((m) => getMonthRecommendation(dest, m) === "avoid");
-  const goodMonths = months.filter((m) => getMonthRecommendation(dest, m) === "good");
+  // 首屏紧凑读数带：canonical 派生读数标注数据来源，编辑字段标注 Real field。
+  const signals: Signal[] = [
+    {
+      label: "Recommended window",
+      value:
+        win.count > 0
+          ? `${win.count} ${win.count === 1 ? "month" : "months"}`
+          : "Year-round viable",
+      basis: "Canonical best months",
+    },
+    { label: "Climate zone", value: readout.zone, basis: "NASA POWER normals" },
+    ...(win.dominantSeason
+      ? [
+          {
+            label: "Dominant season",
+            value: seasonLabel(win.dominantSeason),
+            basis: "Derived",
+          },
+        ]
+      : []),
+    {
+      label: "Climate score",
+      value: `${dest.weatherScore.label} · ${dest.weatherScore.overall}/100`,
+      basis: "Real field",
+    },
+    ...(readout.avoidMonths.length > 0
+      ? [
+          {
+            label: "Least favourable",
+            value: `${readout.avoidMonths.length} ${
+              readout.avoidMonths.length === 1 ? "month" : "months"
+            }`,
+            basis: "R1–R7 classification",
+          },
+        ]
+      : []),
+    {
+      label: "Typical stay",
+      value: `${dest.recommendedDays} ${
+        dest.recommendedDays === 1 ? "day" : "days"
+      }`,
+      basis: "Real field",
+    },
+  ];
 
-  const relatedTrips = TRIPS.filter(
+  // ── Related（与既有内链级联同一套数据，不改动其来源）───────────────
+  const cityGuides = getGuidesForCity(dest.city).slice(0, 4);
+  const cityTrips = TRIPS.filter(
     (t) => t.city.toLowerCase() === dest.city.toLowerCase(),
   ).slice(0, 3);
 
+  const practicalRows = [
+    {
+      label: "Typical stay",
+      value: `${dest.recommendedDays} ${
+        dest.recommendedDays === 1 ? "day" : "days"
+      }`,
+    },
+    {
+      label: "Daily budget",
+      value: `${dest.budgetPerDay.toLocaleString()} ${dest.budgetCurrency}`,
+    },
+    { label: "Currency", value: dest.currency },
+    { label: "Time zone", value: dest.timezone },
+    { label: "Airport", value: `${dest.airport.iata} · ${dest.airport.city}` },
+    { label: "Travel style", value: capitalize(dest.travelStyle) },
+    { label: "Region", value: dest.region },
+  ];
+
+  const nextStepItems = [
+    {
+      href: `/destinations/${dest.slug}`,
+      title: `${dest.city} destination guide`,
+      meta: "Place",
+      description: dest.description,
+    },
+    {
+      href: `/travel-budget/${dest.slug}`,
+      title: `${dest.city} budget guide`,
+      meta: `${dest.budgetPerDay.toLocaleString()} ${dest.budgetCurrency}/day`,
+      description: `Daily costs and a trip estimate for ${dest.city}, built around a ${dest.recommendedDays}-day stay.`,
+    },
+  ];
+
+  const guideItems = cityGuides.map((g) => ({
+    href: `/guides/${g.slug}`,
+    title: g.title,
+    meta: g.readTime,
+    description: g.excerpt,
+  }));
+
+  const tripItems = cityTrips.map((t) => ({
+    href: `/trips/${t.slug}`,
+    title: t.title,
+    meta: `${t.days} days · ${t.budget.toLocaleString()} ${t.currency}`,
+    description: t.excerpt,
+  }));
+
   return (
-    <article className="min-h-screen bg-white pt-24">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildArticleJsonLd(dest)) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildBreadcrumbJsonLd(dest)) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqJsonLd(dest)) }}
-      />
+    <SeasonAtmosphere season={win.dominantSeason}>
+      <article className="pb-20 pt-6 sm:pt-8">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildArticleJsonLd(dest)) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildBreadcrumbJsonLd(dest)) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqJsonLd(faqs)) }}
+        />
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb */}
-        <nav className="mb-6 text-sm text-gray-500" aria-label="Breadcrumb">
-          <Link href="/" className="hover:text-gray-900">Home</Link>
-          <span className="mx-2">/</span>
-          <Link href="/destinations" className="hover:text-gray-900">Destinations</Link>
-          <span className="mx-2">/</span>
-          <span className="text-gray-900">Best time to visit {dest.city}</span>
-        </nav>
+        {/* Quiet breadcrumb */}
+        <div className={CONTAINER}>
+          <InnerBreadcrumb
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Best time to visit", href: "/best-time-to-visit" },
+              { label: dest.city },
+            ]}
+          />
+        </div>
 
-        {/* Hero */}
-        <header className="mb-10">
-          <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-            Best Time To Visit {dest.city}
-          </h1>
-          <p className="mt-4 text-lg text-gray-600">
-            A month-by-month guide to weather, crowds, and travel conditions in {dest.city}, {dest.country}.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3 text-sm">
-            <span className="rounded-full bg-blue-50 px-3 py-1 font-medium text-blue-700">
-              Climate zone: {zone}
-            </span>
-            <span className="rounded-full bg-gray-100 px-3 py-1 font-medium text-gray-700">
-              Hemisphere: {hemisphere}
-            </span>
-            <span className="rounded-full bg-amber-50 px-3 py-1 font-medium text-amber-700">
-              Current weather: {dest.weatherScore.label} ({dest.weatherScore.overall}/100)
-            </span>
-          </div>
+        {/* Decision Hero（首屏：eyebrow + H1 + context + best-month signal + 气候读数） */}
+        <div className={`${CONTAINER} mt-6 sm:mt-8`}>
+          <ClimateHero
+            dest={dest}
+            window={win}
+            zone={readout.zone}
+            hemisphere={readout.hemisphere}
+            signals={signals}
+          />
+        </div>
 
-          {/* Related guides (Phase 5 Step 4) */}
-          <div className="mt-6 flex flex-wrap gap-3 text-sm">
-            <Link
-              href={`/destinations/${dest.slug}`}
-              className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 font-medium text-blue-700 transition hover:bg-blue-100"
-            >
-              📍 {dest.city} travel guide
-            </Link>
-            <Link
-              href={`/travel-budget/${dest.slug}`}
-              className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 font-medium text-emerald-700 transition hover:bg-emerald-100"
-            >
-              💰 Travel budget for {dest.city}
-            </Link>
-          </div>
-        </header>
+        <div className={`${CONTAINER} mt-12 sm:mt-14`}>
+          {/* 决定 + 为什么（真实窗口 × 派生模式的合成，逐条给出依据） */}
+          <InnerSection title="When to go" eyebrow="Recommendation">
+            <RecommendationModule dest={dest} rows={rows} readout={readout} />
+          </InnerSection>
 
-        {/* City overview */}
-        <section className="mb-10">
-          <h2 className="mb-3 text-2xl font-bold text-gray-900">About {dest.city}</h2>
-          <p className="text-gray-700">{dest.longDescription}</p>
-          <p className="mt-4">
-            <Link
-              href={`/destinations/${dest.slug}`}
-              className="font-semibold text-blue-700 underline-offset-2 hover:underline"
-            >
-              View full {dest.city} travel guide →
-            </Link>
-          </p>
-        </section>
+          {/* Selected Month 状态：读单个月（唯一 client 交互；不改变结构） */}
+          <InnerSection title="Read a single month" eyebrow="Month by month">
+            <MonthSelector
+              rows={rows}
+              initialMonth={initialMonth}
+              city={dest.city}
+            />
+          </InnerSection>
 
-        {/* Monthly weather information */}
-        <section className="mb-10">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">Monthly weather guide</h2>
-          <p className="mb-4 text-sm text-gray-500">
-            The table below shows general climate patterns derived from {dest.city}&apos;s latitude and climate zone.
-            These are not real-time forecasts — for current conditions, use the AI planner which pulls live data from Open-Meteo.
-          </p>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse text-sm">
-              <thead>
-                <tr className="border-b border-gray-200 text-left">
-                  <th className="py-2 pr-4 font-semibold text-gray-900">Month</th>
-                  <th className="py-2 pr-4 font-semibold text-gray-900">Temperature</th>
-                  <th className="py-2 pr-4 font-semibold text-gray-900">Precipitation</th>
-                  <th className="py-2 pr-4 font-semibold text-gray-900">Notes</th>
-                  <th className="py-2 font-semibold text-gray-900">Recommendation</th>
-                </tr>
-              </thead>
-              <tbody>
-                {months.map((m) => {
-                  const note = getMonthlyClimateNote(dest, m);
-                  const rec = getMonthRecommendation(dest, m);
-                  return (
-                    <tr key={m} className="border-b border-gray-100">
-                      <td className="py-2 pr-4 font-medium text-gray-900">{getMonthName(m)}</td>
-                      <td className="py-2 pr-4 text-gray-700">{note.tempLevel}</td>
-                      <td className="py-2 pr-4 text-gray-700">{note.precipTendency}</td>
-                      <td className="py-2 pr-4 text-gray-600">{note.note}</td>
-                      <td className="py-2">
-                        <RecommendationBadge level={rec} />
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </section>
+          {/* Primary Data Object：语义表格，移动端 contained 横向滚动且不删列 */}
+          <InnerSection title="All twelve months" eyebrow="The data">
+            <ClimateTable rows={rows} city={dest.city} country={dest.country} />
+          </InnerSection>
 
-        {/* Best months recommendation */}
-        <section className="mb-10 rounded-2xl bg-emerald-50 p-6">
-          <h2 className="mb-3 text-2xl font-bold text-emerald-900">
-            Best months to visit
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {bestMonths.length > 0 ? (
-              bestMonths.map((m) => (
-                <span
-                  key={m}
-                  className="rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-800"
-                >
-                  {getMonthName(m)}
-                </span>
-              ))
-            ) : (
-              <span className="text-emerald-800">See seasonal notes below.</span>
-            )}
-          </div>
-          <p className="mt-4 text-emerald-900">
-            {dest.bestSeason}
-          </p>
-          <p className="mt-2 text-sm text-emerald-700">
-            Current live conditions: {dest.weatherScore.recommendation}
-          </p>
-        </section>
+          {/* 季节叙述（编辑式 + 数据，不是四张卡片） */}
+          <InnerSection title="Season by season" eyebrow="Seasons">
+            <SeasonSummary seasons={seasons} window={win} city={dest.city} />
+          </InnerSection>
 
-        {/* Good (shoulder) months */}
-        {goodMonths.length > 0 && (
-          <section className="mb-10 rounded-2xl bg-blue-50 p-6">
-            <h2 className="mb-3 text-xl font-bold text-blue-900">
-              Shoulder season (also good)
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              {goodMonths.map((m) => (
-                <span
-                  key={m}
-                  className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800"
-                >
-                  {getMonthName(m)}
-                </span>
-              ))}
+          {/* Trip shape：仅真实字段构成的仪器面（决定"去多久 / 花多少"） */}
+          <InnerSection title="Trip shape" eyebrow="Practical">
+            <PlacePractical rows={practicalRows} />
+          </InnerSection>
+
+          {/* FAQ —— 与 FAQPage schema 同一数据源 */}
+          <InnerSection title="Frequently asked questions" eyebrow="FAQ">
+            <div className="max-w-3xl">
+              <FaqList items={faqs} />
             </div>
-            <p className="mt-3 text-sm text-blue-700">
-              Shoulder months offer fewer crowds and lower prices while weather remains acceptable.
-            </p>
-          </section>
-        )}
+          </InnerSection>
 
-        {/* Worst months */}
-        {worstMonths.length > 0 && (
-          <section className="mb-10 rounded-2xl bg-rose-50 p-6">
-            <h2 className="mb-3 text-2xl font-bold text-rose-900">
-              Months to avoid
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              {worstMonths.map((m) => (
-                <span
-                  key={m}
-                  className="rounded-full bg-rose-100 px-3 py-1 text-sm font-semibold text-rose-800"
-                >
-                  {getMonthName(m)}
-                </span>
-              ))}
-            </div>
-            <p className="mt-3 text-sm text-rose-700">
-              These months typically bring challenging weather (extreme heat, heavy rain, or cold).
-              If you must travel during this period, plan indoor activities and check forecasts closer to your date.
-            </p>
-          </section>
-        )}
-
-        {/* Related trips */}
-        {relatedTrips.length > 0 && (
-          <section className="mb-10">
-            <h2 className="mb-4 text-2xl font-bold text-gray-900">
-              Popular trips in {dest.city}
-            </h2>
-            <div className="grid gap-4 sm:grid-cols-3">
-              {relatedTrips.map((t) => (
-                <Link
-                  key={t.slug}
-                  href={`/trips/${t.slug}`}
-                  className="group block rounded-2xl border border-gray-100 overflow-hidden transition hover:shadow-md"
-                >
-                  <div
-                    className={`h-24 bg-gradient-to-br ${t.gradient} flex items-center justify-center text-white`}
-                  >
-                    <span className="font-bold">{t.days} days</span>
-                  </div>
-                  <div className="p-3">
-                    <h3 className="text-sm font-semibold text-gray-900 group-hover:text-blue-700">
-                      {t.title}
-                    </h3>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* AI planner CTA */}
-        <section className="mb-16 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-center text-white">
-          <h2 className="text-2xl font-bold">Plan your trip to {dest.city}</h2>
-          <p className="mt-2 text-blue-100">
-            Get a personalized itinerary with live weather forecasts and budget estimates.
-          </p>
-          <Link
+          {/* 全页唯一 Primary CTA（语境化，位于推荐之后） */}
+          <InnerCTA
             href={planHref}
-            className="mt-5 inline-flex items-center rounded-full bg-white px-6 py-3 font-semibold text-blue-700 transition hover:bg-blue-50"
-          >
-            Plan a trip to {dest.city} →
-          </Link>
-        </section>
-      </div>
-    </article>
-  );
-}
+            title={`Plan a ${rows.find((r) => r.index === initialMonth)?.name ?? ""} trip to ${dest.city}`}
+            description={`The recommended window is ${win.label || "the whole year"}. The planner opens with ${dest.city} prefilled — set your dates inside that window and build the route around it.`}
+            label={`Plan a ${dest.city} trip`}
+          />
 
-// ── Sub-components ────────────────────────────────────────────────────
+          {/* Related — 编辑式索引（Destination / Budget / Guide / Trip） */}
+          <InnerSection title="Plan around this window" eyebrow="Next steps">
+            <EditorialIndex items={nextStepItems} />
+          </InnerSection>
 
-function RecommendationBadge({ level }: { level: "best" | "good" | "avoid" }) {
-  if (level === "best") {
-    return (
-      <span className="inline-block rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-800">
-        Best
-      </span>
-    );
-  }
-  if (level === "good") {
-    return (
-      <span className="inline-block rounded-full bg-blue-100 px-2 py-0.5 text-xs font-semibold text-blue-800">
-        Good
-      </span>
-    );
-  }
-  return (
-    <span className="inline-block rounded-full bg-rose-100 px-2 py-0.5 text-xs font-semibold text-rose-800">
-      Avoid
-    </span>
+          {guideItems.length > 0 && (
+            <InnerSection title={`Guides for ${dest.city}`} eyebrow="Reading">
+              <EditorialIndex items={guideItems} />
+            </InnerSection>
+          )}
+
+          {tripItems.length > 0 && (
+            <InnerSection title={`Trips in ${dest.city}`} eyebrow="Routes">
+              <EditorialIndex items={tripItems} />
+            </InnerSection>
+          )}
+
+          {/* NASA POWER attribution（compliance v2 要求的事实性来源标注） */}
+          <p className="mt-12 max-w-[72ch] font-mono text-micro uppercase leading-[1.8] tracking-[0.16em] text-ut-subtle">
+            {CLIMATE_ATTRIBUTION_LINE} · dataset{" "}
+            {CLIMATE_ARTIFACT_VERSION}
+          </p>
+        </div>
+      </article>
+    </SeasonAtmosphere>
   );
 }
