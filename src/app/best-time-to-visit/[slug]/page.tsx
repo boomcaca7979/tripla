@@ -9,6 +9,7 @@ import { TRIPS } from "@/data/trips";
 import { getGuidesForCity } from "@/data/guides";
 import InnerBreadcrumb from "@/components/inner/InnerBreadcrumb";
 import InnerSection from "@/components/inner/InnerSection";
+import ClimateYear from "@/components/inner/ClimateYear";
 import EditorialIndex from "@/components/inner/EditorialIndex";
 import InnerCTA from "@/components/inner/InnerCTA";
 import FaqList from "@/components/inner/FaqList";
@@ -440,6 +441,14 @@ export default async function BestTimeToVisitPage({
             hemisphere={readout.hemisphere}
             signals={signals}
           />
+        </div>
+
+        <div className={`${CONTAINER} mt-10 sm:mt-12`}>
+          {/* Climate Year：12 个月视觉轨迹（SPEC v1 §C.5；只读 canonical 派生 rows，
+              与 MonthSelector/ClimateTable 同一数据权威，无第二套 verdict 计算） */}
+          <InnerSection title="Climate year" eyebrow="The year at a glance">
+            <ClimateYear rows={rows} initialMonth={initialMonth} city={dest.city} />
+          </InnerSection>
         </div>
 
         <div className={`${CONTAINER} mt-12 sm:mt-14`}>

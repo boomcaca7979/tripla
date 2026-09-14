@@ -73,10 +73,10 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildWebSiteJsonLd()) }}
       />
       <HomeHero />
+      <PlanLater />
       <DiscoveryStage places={places} />
       <RoutesStage />
       <GuidesStage />
-      <PlanLater />
     </HomeEnvironment>
   );
 }

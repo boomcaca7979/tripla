@@ -13,7 +13,7 @@ export default function PlanLater() {
       className="scroll-mt-20 border-t"
       style={{ borderTopColor: "rgba(var(--ut-accent-rgb), 0.16)" }}
     >
-      <div className="mx-auto max-w-[var(--ut-container-max)] px-4 py-20 md:px-6 md:py-24">
+      <div className="mx-auto max-w-[var(--ut-container-max)] px-4 py-14 md:px-6 md:py-20">
         <div className="mx-auto max-w-3xl text-center">
           <Eyebrow dot>When you&apos;re ready</Eyebrow>
           <h2 className="mt-3 font-display text-h1 text-ut-ink">Already know where?</h2>

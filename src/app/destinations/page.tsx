@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import DestinationsClient from "./DestinationsClient";
+import WorldAtlas, { type AtlasNode } from "@/components/atlas/WorldAtlas";
 import { DESTINATIONS } from "@/data/destinations";
+import { getClimateRecord } from "@/data/climate/nasa-canonical";
+import {
+  monthNormals,
+  nodeEmphasisFor,
+  projectWorldPoint,
+  vibesForInterests,
+} from "@/lib/inner-state";
 
-// ── Metadata（Phase 7.2）──────────────────────────────────────────────
-const DEST_TITLE = "Travel Destinations Guide · Explore Top Cities Worldwide";
+// ── Metadata（保留既有 SEO 结构；文案对齐 World Atlas 定位） ────────────────
+const DEST_TITLE = "UTRIPLA World Atlas · Explore 145 destinations by month";
 const DEST_DESCRIPTION =
-  "Explore curated travel destinations worldwide — Tokyo, Paris, New York, Bangkok, and more. Each guide covers best season, budget, recommended days, and top highlights.";
+  "Drag through twelve months and watch the world rearrange itself — every UTRIPLA destination ranked for that month by NASA POWER climate data. Tap a destination to preview it.";
 
 export const metadata: Metadata = {
   title: DEST_TITLE,
@@ -24,7 +31,7 @@ export const metadata: Metadata = {
   },
 };
 
-// ── JSON-LD（Phase 7.3）────────────────────────────────────────────────
+// ── JSON-LD（CollectionPage / ItemList / BreadcrumbList 全部保留） ─────────
 
 function buildCollectionPageJsonLd() {
   return {
@@ -67,11 +74,35 @@ function buildBreadcrumbJsonLd() {
   };
 }
 
-// ── Page ──────────────────────────────────────────────────────────────
+// ── Page：145 节点 server 装配（canonical 权威 + 真实坐标投影） ─────────────
 
-export default function DestinationsPage() {
+export default function DestinationsAtlasPage() {
+  const nodes: AtlasNode[] = DESTINATIONS.map((d) => {
+    const record = getClimateRecord(d.slug);
+    const proj = projectWorldPoint(d.airport.latitude, d.airport.longitude);
+    const normals = monthNormals(record);
+    return {
+      slug: d.slug,
+      city: d.city,
+      country: d.country,
+      region: d.region,
+      x: proj.x,
+      y: proj.y,
+      hero: d.image,
+      vibes: vibesForInterests(d.interests as string[]),
+      tiers: record.months.map((m) => nodeEmphasisFor(m.tier)),
+      months: normals.map((n) => ({
+        h: n.tempHighC,
+        l: n.tempLowC,
+        p: n.precipMm,
+        rd: n.precipDaysGe1mm,
+      })),
+      budget: `${d.budgetPerDay.toLocaleString()} ${d.budgetCurrency}`,
+    };
+  });
+
   return (
-    <div className="min-h-screen bg-white pt-24">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildCollectionPageJsonLd()) }}
@@ -84,7 +115,7 @@ export default function DestinationsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildBreadcrumbJsonLd()) }}
       />
-      <DestinationsClient />
-    </div>
+      <WorldAtlas nodes={nodes} />
+    </>
   );
 }

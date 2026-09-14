@@ -8,7 +8,10 @@ interface EyebrowProps extends HTMLAttributes<HTMLSpanElement> {
 /**
  * Eyebrow — 10px 等宽大写微标签。
  * 仅用于装饰性 / 分组信息（section 标注、分类、元数据）。
- * 禁止承载价格、时间等关键信息（对比度刻意偏低）。
+ * 禁止承载价格、时间等关键信息（对比度刻意压低至最低层级）。
+ *
+ * 可读性：使用 --ut-subtle，其在浅色暖面上仍满足 WCAG AA ≥4.5:1（见 globals.css）。
+ * Home 由 HomeEnvironment 覆盖为浅色 on-dark 值，不受影响。
  */
 export default function Eyebrow({ dot = false, className = "", children, ...rest }: EyebrowProps) {
   return (

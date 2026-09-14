@@ -9,16 +9,16 @@
 :root {
   /* ── 1. Background / Surface ── */
   --ut-bg: #faf9f6;                /* warm paper, page background */
-  --ut-surface: #ffffff;           /* cards, panels */
-  --ut-surface-hover: #f4f2ee;     /* hover surface */
-  --ut-surface-elevated: #ffffff;  /* elevated surface (pairs with shadow-2) */
+  --ut-surface: #f4f1e9;           /* warm inset panels (FAQ/practical/CTA) — sits on paper, never stark white */
+  --ut-surface-hover: #ece6d9;     /* deeper warm hover/active */
+  --ut-surface-elevated: #fdfcfa;  /* elevated popover surface (pairs with shadow-2) */
 
   /* ── 2. Text ── */
   --ut-ink: #16181d;               /* strongest heading text */
   --ut-text: #23272f;              /* body text */
   --ut-text-2: #4b5261;            /* secondary text */
-  --ut-muted: #667085;             /* de-emphasized but still readable */
-  --ut-subtle: #98a1b2;            /* decorative micro labels only — never key info */
+  --ut-muted: #5b6473;             /* secondary / meta text — AA ≥4.5:1 on warm surfaces (5.30:1) */
+  --ut-subtle: #646d7e;            /* lowest-emphasis micro labels — still AA ≥4.5:1 on warm surfaces (4.61:1) */
   --ut-inverse: #ffffff;           /* text on accent / dark surfaces */
 
   /* ── 3. Border ── */
@@ -26,8 +26,8 @@
   --ut-border-strong: rgba(22, 24, 29, 0.20);
 
   /* ── 4. Accent（SSR 默认值；后续 Phase 由目的地状态驱动重写） ── */
-  --ut-accent: #b45f4d;                    /* terracotta */
-  --ut-accent-rgb: 180, 95, 77;
+  --ut-accent: #a4513b;                    /* terracotta — AA with white text (5.50:1) and as text (4.87:1) */
+  --ut-accent-rgb: 164, 81, 59;
   --ut-accent-strong: #9a4a3a;             /* hover / pressed */
   --ut-accent-soft: rgba(var(--ut-accent-rgb), 0.10);  /* tinted surface */
   --ut-accent-line: rgba(var(--ut-accent-rgb), 0.40);  /* underline / active border */
@@ -88,6 +88,24 @@
   --ut-page-px: 1rem;              /* mobile page padding; md+: 1.5rem */
   --ut-touch-min: 44px;            /* minimum touch target */
 
+  /* ── 10. Verdict status scale（NASA R-tier → 展示档位；Inner Experience SPEC v1 §1.1） ──
+     GOOD = Favourable / WORKABLE = Workable / CHALLENGING = Challenging。
+     编辑化低饱和色，非 SaaS 仪表盘色；文字用途均满足 AA ≥4.5:1（warm paper 底）。
+     颜色永远只是辅助——所有 verdict 同时有文字 label（VerdictTag / readout）。 */
+  --ut-verdict-good: #4f6b4a;              /* moss — 5.68:1 on --ut-bg */
+  --ut-verdict-good-rgb: 79, 107, 74;
+  --ut-verdict-workable: #7d6134;          /* bronze — 5.54:1 on --ut-bg */
+  --ut-verdict-workable-rgb: 125, 97, 52;
+  --ut-verdict-challenging: #7c3a3a;       /* oxblood — 7.97:1 on --ut-bg（与交互用 accent 语义隔离：accent 仅用于选中/CTA） */
+  --ut-verdict-challenging-rgb: 124, 58, 58;
+
+  /* ── 11. Data visualisation（编辑式数据图形；hairline + paper feel，禁 dashboard 蓝/玻璃拟态） ── */
+  --ut-data-line: rgba(22, 24, 29, 0.22);  /* 坐标 / 刻度 / 边缘 hairline */
+  --ut-data-fill: rgba(22, 24, 29, 0.08);  /* 温度区间等柔和面积填充 */
+
+  /* ── 12. Region tints（确定性、server-side 赋值；取值见 src/lib/inner-state.ts regionTintFor） ── */
+  --ut-region-rgb: 140, 112, 92;   /* 默认 clay；由页面级 server wrapper 按 region 覆写 */
+
   /* Backward-compat aliases（旧引用逐步退役） */
   --background: var(--ut-bg);
   --foreground: var(--ut-text);
@@ -116,6 +134,11 @@
   --color-ut-accent-soft: var(--ut-accent-soft);
   --color-ut-accent-line: var(--ut-accent-line);
   --color-ut-on-accent: var(--ut-on-accent);
+  --color-ut-verdict-good: var(--ut-verdict-good);
+  --color-ut-verdict-workable: var(--ut-verdict-workable);
+  --color-ut-verdict-challenging: var(--ut-verdict-challenging);
+  --color-ut-data-line: var(--ut-data-line);
+  --color-ut-data-fill: var(--ut-data-fill);
 
   --font-sans: var(--ut-font-sans);
   --font-mono: var(--ut-font-mono);
@@ -776,3 +799,52 @@ body {
 [data-ut-lite="true"] .ut-precip-snow {
   animation: none;
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   Destination World（3.0 INTERACTIVE TRAVEL WORLD）— 暗色沉浸层
+   ════════════════════════════════════════════════════════════════════ */
+
+.ut-world {
+  background: #0c0f16;
+  color: #f5f3ec;
+}
+
+.ut-world ::selection {
+  background: rgba(164, 81, 59, 0.5);
+  color: #ffffff;
+}
+
+/* 月份雨层（密度来自 canonical precipMm，确定性分布） */
+@keyframes ut-world-rain {
+  from { transform: translateY(-10vh); }
+  to { transform: translateY(110vh); }
+}
+
+.ut-rain-drop {
+  position: absolute;
+  top: -8vh;
+  width: 1px;
+  border-radius: 1px;
+  background: linear-gradient(180deg, transparent, rgba(190, 210, 235, 0.5));
+  animation: ut-world-rain linear infinite;
+  pointer-events: none;
+}
+
+/* 热点脉冲环（探索 affordance） */
+@keyframes ut-hotspot-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(245, 243, 236, 0.5); }
+  70% { box-shadow: 0 0 0 14px rgba(245, 243, 236, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 243, 236, 0); }
+}
+
+.ut-hotspot-ring {
+  animation: ut-hotspot-pulse 2.4s var(--ut-ease-in-out) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ut-hotspot-ring { animation: none; }
+  .ut-rain-drop { animation: none; opacity: 0.35; }
+}
+
+[data-ut-lite="true"] .ut-hotspot-ring { animation: none; }
+[data-ut-lite="true"] .ut-rain-drop { animation: none; opacity: 0.35; }

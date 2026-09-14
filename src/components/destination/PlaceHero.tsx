@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import type { Destination } from "@/data/destinations";
 
 /**
@@ -19,7 +20,14 @@ import type { Destination } from "@/data/destinations";
 /** Eyebrow 在图片 scrim 上需要 on-scrim 颜色，故此处显式给出类名（避免 className 覆盖冲突）。 */
 const EYEBROW = "font-mono text-micro uppercase tracking-[0.18em]";
 
-export default function PlaceHero({ dest }: { dest: Destination }) {
+export default function PlaceHero({
+  dest,
+  children,
+}: {
+  dest: Destination;
+  /** 可选 hero 增强槽（STEP 3：compact NOW 读数），渲染在文字栈内、country 之后 */
+  children?: ReactNode;
+}) {
   const hasImage = Boolean(dest.image);
 
   return (
@@ -106,6 +114,7 @@ export default function PlaceHero({ dest }: { dest: Destination }) {
           >
             {dest.country}
           </p>
+          {children && <div className="mt-3">{children}</div>}
         </div>
       </div>
     </header>
