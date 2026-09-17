@@ -8,11 +8,14 @@ import {
   projectWorldPoint,
   vibesForInterests,
 } from "@/lib/inner-state";
+import { canonicalWindowLabel } from "@/components/besttime/besttime-state";
+import { FEATURED_DESTINATIONS } from "@/data/featured-destinations";
 
-// ── Metadata（保留既有 SEO 结构；文案对齐 World Atlas 定位） ────────────────
-const DEST_TITLE = "UTRIPLA World Atlas · Explore 145 destinations by month";
+// ── Metadata（保留既有 SEO 结构；文案随 destination 数量动态） ───────────────
+const DESTINATIONS_COUNT = DESTINATIONS.length;
+const DEST_TITLE = `UTRIPLA World Atlas · Explore ${DESTINATIONS_COUNT} destinations on a night globe`;
 const DEST_DESCRIPTION =
-  "Drag through twelve months and watch the world rearrange itself — every UTRIPLA destination ranked for that month by NASA POWER climate data. Tap a destination to preview it.";
+  `A glowing night earth with ${DESTINATIONS_COUNT} destinations. Drag to spin the globe, hover a city for its best months and typical budget, then open its full travel guide. Every month is ranked from NASA POWER climate data.`;
 
 export const metadata: Metadata = {
   title: DEST_TITLE,
@@ -88,6 +91,9 @@ export default function DestinationsAtlasPage() {
       region: d.region,
       x: proj.x,
       y: proj.y,
+      // 真实坐标（3D 地球使用；与 2D 投影同源，均为 airport 经纬度）
+      lat: d.airport.latitude,
+      lon: d.airport.longitude,
       hero: d.image,
       vibes: vibesForInterests(d.interests as string[]),
       tiers: record.months.map((m) => nodeEmphasisFor(m.tier)),
@@ -97,7 +103,12 @@ export default function DestinationsAtlasPage() {
         p: n.precipMm,
         rd: n.precipDaysGe1mm,
       })),
-      budget: `${d.budgetPerDay.toLocaleString()} ${d.budgetCurrency}`,
+      // 显式 en-US：不依赖浏览器 locale（否则 zh 环境可能出现中文数字/单位）
+      budget: `${d.budgetPerDay.toLocaleString("en-US")} ${d.budgetCurrency}/day`,
+      bestTime: canonicalWindowLabel(record.bestMonthsBaseline),
+      // 重要目的地（站点精选，见 src/data/featured-destinations.ts）：节点更大一级 +
+      // 地球上的常驻城市标签。未入选的目的地不删除，只是视觉层级低一级。
+      major: FEATURED_DESTINATIONS.has(d.slug),
     };
   });
 

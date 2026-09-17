@@ -1,42 +1,43 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import {
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type PointerEvent as ReactPointerEvent,
-  type WheelEvent as ReactWheelEvent,
-} from "react";
-import {
-  nodeVisualState,
-  REGION_TINTS,
-  VIBE_ORDER,
-  type NodeTier,
-  type Vibe,
-} from "@/lib/inner-state";
-import { useAtlasStore } from "@/components/destination/vibe-store";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 import CompareTray from "./CompareTray";
+import DestinationSearchBox from "./DestinationSearchBox";
+import GlobePreview from "./GlobePreview";
+import type { DestinationSearchDoc } from "@/lib/atlas/destination-search";
+import { COMPARE_MAX, useAtlasStore } from "@/components/destination/vibe-store";
+import { VIBE_ORDER, type NodeTier, type Vibe } from "@/lib/inner-state";
+import type { EarthHover, EarthNode, EarthSceneHandle } from "./globe/earth";
 
 /**
- * WorldAtlas — /destinations 3.0 "ATLAS CORE"（WORLD ATLAS FIRST）。
+ * Globe 引擎走 **dynamic import（ssr:false）**：maplibre-gl 全量运行时不进 /destinations
+ * 的首屏客户端 bundle —— 页面布局 / 搜索 / 控件 / sr-only 链接先于地图引擎 hydration 与
+ * 挂载；引擎 chunk 在浏览器空闲时加载，容器位置由 GlobePreview（纯 CSS 球面）先行占位。
+ */
+const MapLibreGlobeSurface = dynamic(() => import("./MapLibreGlobeSurface"), {
+  ssr: false,
+  loading: () => <GlobePreview visible />,
+});
+
+/**
+ * WorldAtlas — /destinations 的"夜晚地球"（4.1 · GLOBE-FIRST）。
  *
- * 主产品职责：EXPLORE WHERE TO GO。整页 = 一个可拖拽/可缩放/可换季的世界。
+ * 视觉层级（本轮重排）：
+ *   1 导航栏（站点 Header，浮在地球上方）
+ *   2 巨大的夜晚地球（占满整个剩余视口，可出血；尺寸由 globe/earth.ts 反推相机距离）
+ *   3 地球空间标签（大洲常驻 + 重要城市常驻 + hover/选中城市）
+ *   4 发光目的地节点（两档层级 + 深度衰减）
+ *   5 极少量必要交互（左上一句标题 / 底部一条细控件 / 右上列表切换）
  *
- * 交互模型：
- *   PAN        拖拽世界（pointer capture；transform 走 ref + rAF，无 state cascade）
- *   ZOOM       滚轮 / ± 按钮（1–4×，中心缩放）
- *   MONTH      底部 12 月拖轨（连续 scrub + 吸附），绑定 NASA canonical tier
- *   NODE       hover=聚焦+城市名；click=Preview（不导航）
- *   PREVIEW    就地浮出（地图保持可见）→ OPEN DESTINATION
- *   STATE      月份与视图存 sessionStorage——从 Detail 返回时世界保持原样
+ * 已删除的目录式 UI：底部筛选卡片、底部大面板、常驻 CompareTray 面板、常驻信息条。
+ * Compare 功能未删除：它只在用户真的把目的地加入对比后才出现（CompareTray 空即不渲染），
+ * 入口在列表视图行内与触摸钉住卡上。
  *
- * 数据诚信：节点位置 = 真实坐标投影；tier = NASA canonical；无随机、无装饰
- * 伪状态、无"当前天气"声称（这是 travel suitability / climate state）。
+ * 产品定义不变：夜晚地球 → 145 真实节点 → hover 小卡 → 点击进入 /destinations/<slug>/。
+ * SEO/无障碍不变：145 个 destination 链接始终存在于 DOM（地图视图 sr-only）。
  */
 
 export interface AtlasMonthDatum {
@@ -53,646 +54,491 @@ export interface AtlasNode {
   region: string;
   x: number;
   y: number;
+  lat: number;
+  lon: number;
   hero: string | null;
   vibes: Vibe[];
   tiers: NodeTier[];
   months: AtlasMonthDatum[];
   budget: string;
+  bestTime: string;
+  /** 站点精选（major destination）：节点更大一级 + 常驻城市标签 */
+  major: boolean;
 }
 
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-const K_MIN = 1;
-const K_MAX = 4;
-const STORE_KEY = "utlas:v1";
+const MONTHS_LONG = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
 
-const TIER_WORD: Record<NodeTier, string> = {
-  dominant: "Favourable",
-  secondary: "Workable",
-  quiet: "Challenging",
-};
+/** canonical tier → 节点亮度权重（真实适宜度，不是装饰） */
+const EMPHASIS: Record<NodeTier, number> = { dominant: 1, secondary: 0.55, quiet: 0.22 };
+
+const STORE_KEY = "utlas:globe:v1";
 
 export default function WorldAtlas({ nodes }: { nodes: AtlasNode[] }) {
+  const router = useRouter();
+  // 首屏用确定性值（避免 SSR/客户端月份不一致导致 hydration 差异），挂载后校正为当前月
   const [month, setMonth] = useState(0);
-  const [selected, setSelected] = useState<string | null>(null);
-  const [zoom, setZoom] = useState(1);
-  const [dragging, setDragging] = useState(false);
-  const [hovered, setHovered] = useState<string | null>(null);
+  const [view, setView] = useState<"map" | "list">("map");
+  const [hover, setHover] = useState<EarthHover | null>(null);
+  const [pinned, setPinned] = useState<string | null>(null);
+  const [pinnedByTouch, setPinnedByTouch] = useState(false);
+  const [globeFailed, setGlobeFailed] = useState<string | null>(null);
   const [scrubbing, setScrubbing] = useState(false);
-  const vibe = useAtlasStore((st) => st.vibe);
-  const setVibe = useAtlasStore((st) => st.setVibe);
-  const compare = useAtlasStore((st) => st.compare);
-  const addToCompare = useAtlasStore((st) => st.addToCompare);
-  const compareResult: "exists" | "full" | "ready" = useAtlasStore((st) => {
-    if (selected === null) return "ready";
-    if (st.compare.includes(selected)) return "exists";
-    return st.compare.length >= 3 ? "full" : "ready";
-  });
-  const viewRef = useRef({ x: 0, y: 0, k: 1 });
+  const [shellW, setShellW] = useState(1280);
+
+  const vibe = useAtlasStore((s) => s.vibe);
+  const setVibe = useAtlasStore((s) => s.setVibe);
+  const compare = useAtlasStore((s) => s.compare);
+  const addToCompare = useAtlasStore((s) => s.addToCompare);
+  const removeFromCompare = useAtlasStore((s) => s.removeFromCompare);
+
+  const shellRef = useRef<HTMLDivElement>(null);
+  const globeHandle = useRef<EarthSceneHandle | null>(null);
+  const monthTrackRef = useRef<HTMLDivElement>(null);
   const restoredRef = useRef(false);
-  const worldRef = useRef<HTMLDivElement | null>(null);
-  const viewportRef = useRef<HTMLDivElement | null>(null);
-  const dragStart = useRef({ x: 0, y: 0, vx: 0, vy: 0 });
-  const monthTrackRef = useRef<HTMLDivElement | null>(null);
 
-
-  // ── 持久化（恢复完成前不写入，避免把默认态覆盖回存档） ──
-  const persist = useCallback(() => {
-    if (!restoredRef.current) return;
-    const vp = viewportRef.current;
-    if (!vp || vp.clientWidth === 0) return;
-    try {
-      sessionStorage.setItem(
-        STORE_KEY,
-        JSON.stringify({
-          month,
-          vibe: useAtlasStore.getState().vibe,
-          compare: useAtlasStore.getState().compare,
-          view: {
-            nx: viewRef.current.x / vp.clientWidth,
-            ny: viewRef.current.y / vp.clientHeight,
-            k: viewRef.current.k,
-          },
-        }),
-      );
-    } catch {
-      /* ignore */
-    }
-  }, [month]);
-
-  useEffect(() => {
-    persist();
-  }, [month, zoom, vibe, compare, persist]);
-
-  // ── 视图变换（imperative：pan/zoom 不触发 state cascade） ──
-  const applyView = useCallback(() => {
-    const el = worldRef.current;
-    if (!el) return;
-    const { x, y, k } = viewRef.current;
-    el.style.transform = `translate(${x}px, ${y}px) scale(${k})`;
-    el.style.setProperty("--k", String(k));
-  }, []);
-
-  // 每次渲染后重应用视图（防 React 重渲染/元素替换清除 imperative transform）
-  useEffect(() => {
-    applyView();
-  });
-
-  const clampView = useCallback(() => {
-    const vp = viewportRef.current;
-    if (!vp) return;
-    const { k } = viewRef.current;
-    const minX = Math.min(0, vp.clientWidth * (1 - k));
-    const minY = Math.min(0, vp.clientHeight * (1 - k));
-    viewRef.current.x = Math.max(minX, Math.min(0, viewRef.current.x));
-    viewRef.current.y = Math.max(minY, Math.min(0, viewRef.current.y));
-  }, []);
-
-  const zoomTo = useCallback(
-    (factor: number) => {
-      const vp = viewportRef.current;
-      if (!vp) return;
-      const k = Math.max(K_MIN, Math.min(K_MAX, viewRef.current.k * factor));
-      const ratio = k / viewRef.current.k;
-      viewRef.current.x = vp.clientWidth / 2 - (vp.clientWidth / 2 - viewRef.current.x) * ratio;
-      viewRef.current.y = vp.clientHeight / 2 - (vp.clientHeight / 2 - viewRef.current.y) * ratio;
-      viewRef.current.k = k;
-      clampView();
-      applyView();
-      setZoom(k);
-      persist();
-    },
-    [applyView, clampView, persist],
-  );
-
-  // ── 恢复状态（从 Detail 返回时月份/视图保持原样；延迟 setState 避免渲染级联） ──
-  useEffect(() => {
-    const t = setTimeout(() => {
-      try {
-        const raw = sessionStorage.getItem(STORE_KEY);
-        const vw = viewportRef.current?.clientWidth ?? 0;
-        const vh = viewportRef.current?.clientHeight ?? 0;
-        if (!raw) {
-          // 无存档：移动端默认放大，让世界带填满屏幕
-          if (vw > 0 && vw < 640) {
-            viewRef.current = { x: -((vw * 1.8 - vw) / 2), y: -((vh * 1.8 - vh) / 2), k: 1.8 };
-            setZoom(1.8);
-            applyView();
-          }
-          restoredRef.current = true;
-          return;
-        }
-        const saved = JSON.parse(raw) as {
-          month?: number;
-          vibe?: Vibe | null;
-          compare?: string[];
-          view?: { nx: number; ny: number; k: number };
-        };
-        if (typeof saved.month === "number" && saved.month >= 0 && saved.month <= 11) setMonth(saved.month);
-        if (saved.vibe !== undefined) setVibe((saved.vibe as Vibe | null) ?? null);
-        if (Array.isArray(saved.compare)) useAtlasStore.setState({ compare: saved.compare.filter((x) => typeof x === "string") });
-        if (saved.view && isFinite(saved.view.k) && saved.view.k >= K_MIN && saved.view.k <= K_MAX) {
-          // 归一化 pan 还原（跨视口/跨设备可用）；跨视口恢复后立即夹紧边界
-          viewRef.current = {
-            x: saved.view.nx * vw,
-            y: saved.view.ny * vh,
-            k: saved.view.k,
-          };
-          setZoom(saved.view.k);
-          clampView();
-          applyView();
-        }
-        restoredRef.current = true;
-      } catch {
-        /* 私有模式等场景：静默忽略 */
-      }
-    }, 0);
-    return () => clearTimeout(t);
-  }, [applyView, setVibe]);
-  // restoredRef 在 restore 完成后才允许持久化（见上方 persist 守卫）
-
-  // ── PAN（拖拽世界） ──
-  const onMapDown = (event: ReactPointerEvent<HTMLDivElement>) => {
-    event.currentTarget.setPointerCapture(event.pointerId);
-    dragStart.current = { x: event.clientX, y: event.clientY, vx: viewRef.current.x, vy: viewRef.current.y };
-    setDragging(true);
-  };
-  const onMapMove = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (!dragging) return;
-    viewRef.current.x = dragStart.current.vx + (event.clientX - dragStart.current.x);
-    viewRef.current.y = dragStart.current.vy + (event.clientY - dragStart.current.y);
-    clampView();
-    applyView();
-  };
-  const onMapUp = () => {
-    if (!dragging) return;
-    setDragging(false);
-    clampView();
-    applyView();
-    persist();
-  };
-
-  const onWheel = useCallback(
-    (event: ReactWheelEvent<HTMLDivElement>) => {
-      zoomTo(event.deltaY < 0 ? 1.18 : 1 / 1.18);
-    },
-    [zoomTo],
-  );
-
-  // ── MONTH SCRUB（连续 + 吸附） ──
-  const scrubMonth = useCallback(
-    (clientX: number) => {
-      const rect = monthTrackRef.current?.getBoundingClientRect();
-      if (!rect || rect.width === 0) return;
-      const idx = Math.max(0, Math.min(11, Math.floor(((clientX - rect.left) / rect.width) * 12)));
-      setMonth(idx);
-    },
+  const coarse = useMemo(
+    () => typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches,
     [],
   );
-  const onMonthDown = (e: ReactPointerEvent<HTMLDivElement>) => {
-    e.currentTarget.setPointerCapture(e.pointerId);
-    setScrubbing(true);
-    scrubMonth(e.clientX);
-  };
-  const onMonthMove = (e: ReactPointerEvent<HTMLDivElement>) => {
-    if (scrubbing) scrubMonth(e.clientX);
-  };
-  const onMonthUp = () => setScrubbing(false);
 
-  // 拖拽中 window 级收尾（丢 up 兜底）
   useEffect(() => {
-    if (!dragging) return;
-    const end = () => setDragging(false);
-    window.addEventListener("pointerup", end);
-    window.addEventListener("pointercancel", end);
-    return () => {
-      window.removeEventListener("pointerup", end);
-      window.removeEventListener("pointercancel", end);
-    };
-  }, [dragging]);
+    const el = shellRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setShellW(el.clientWidth));
+    ro.observe(el);
+    setShellW(el.clientWidth);
+    return () => ro.disconnect();
+  }, []);
 
-  // PREVIEW 以 Escape 关闭（dialog 模式；无焦点陷阱 —— 地图交互仍可用）
-  useEffect(() => {
-    if (selected === null) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setSelected(null);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [selected]);
+  // ── 节点：重要度（精选优先）+ 月份亮度 + vibe 可见性 ──────────────────
+  const earthNodes = useMemo<EarthNode[]>(() => {
+    // 数组顺序 = 标签优先级：精选目的地排前面（引擎按顺序做去重叠）
+    const ordered = [...nodes].sort((a, b) => Number(b.major) - Number(a.major));
+    return ordered.map((n) => ({
+      slug: n.slug,
+      city: n.city,
+      country: n.country,
+      lat: n.lat,
+      lon: n.lon,
+      emphasis: EMPHASIS[n.tiers[month]],
+      visible: vibe === null || n.vibes.includes(vibe),
+      importance: n.major ? 1 : 0,
+    }));
+  }, [nodes, month, vibe]);
 
-  // ── VIBE LENS 轴（只提供数据中真实存在的玩法） ──
+  const bySlug = useMemo(() => new Map(nodes.map((n) => [n.slug, n])), [nodes]);
+
+  // ── 目的地搜索（索引派生自当前 destination dataset，数量动态） ──────────
+  const searchDocs = useMemo<DestinationSearchDoc[]>(
+    () => nodes.map((n) => ({ slug: n.slug, city: n.city, country: n.country, region: n.region, lon: n.lon, lat: n.lat, major: n.major })),
+    [nodes],
+  );
+
+  /** 搜索选择 = 平滑 flyTo 到该目的地 + 钉住 selected preview（复用既有钉住卡） */
+  const onSearchSelect = useCallback((doc: DestinationSearchDoc) => {
+    setPinned(doc.slug);
+    setPinnedByTouch(true);
+    globeHandle.current?.flyTo(doc.lon, doc.lat);
+  }, []);
+
+  const onSearchClear = useCallback(() => {
+    setPinned(null);
+    // 相机保持不动 —— 用户继续探索当前视角
+  }, []);
+  const hoveredNode = hover ? bySlug.get(hover.slug) ?? null : null;
+  const pinnedNode = pinned ? bySlug.get(pinned) ?? null : null;
+  const cardNode = hoveredNode ?? pinnedNode;
+
   const allVibes = useMemo(
     () => VIBE_ORDER.filter((v) => nodes.some((n) => n.vibes.includes(v))),
     [nodes],
   );
 
-  // ── 世界状态统计（环境信息） ──
-  const counts = useMemo(() => {
-    const c = { dominant: 0, secondary: 0, quiet: 0 };
-    for (const n of nodes) c[n.tiers[month]] += 1;
-    return c;
-  }, [nodes, month]);
+  // ── 持久化（月 / vibe / 对比清单） ────────────────────────────────────
+  useEffect(() => {
+    if (!restoredRef.current) return;
+    try {
+      sessionStorage.setItem(STORE_KEY, JSON.stringify({ month, vibe, compare }));
+    } catch {
+      /* 私有模式：忽略 */
+    }
+  }, [month, vibe, compare]);
 
-  // ── 区域氛围场（真实成员坐标的质心 + 半径，确定性） ──
-  const regionFields = useMemo(() => {
-    const regions = ["Asia", "Europe", "Americas", "Oceania"];
-    return regions.map((region) => {
-      const members = nodes.filter((n) => n.region === region);
-      const cx = members.reduce((s, n) => s + n.x, 0) / members.length;
-      const cy = members.reduce((s, n) => s + n.y, 0) / members.length;
-      const radius = Math.max(...members.map((n) => Math.hypot(n.x - cx, n.y - cy)));
-      return { region, cx, cy, radius: Math.min(0.46, radius * 1.25) };
-    });
-  }, [nodes]);
+  useEffect(() => {
+    const t = setTimeout(() => {
+      let restored = false;
+      try {
+        const raw = sessionStorage.getItem(STORE_KEY);
+        if (raw) {
+          const saved = JSON.parse(raw) as { month?: number; vibe?: Vibe | null; compare?: string[] };
+          if (typeof saved.month === "number" && saved.month >= 0 && saved.month <= 11) {
+            setMonth(saved.month);
+            restored = true;
+          }
+          if (saved.vibe !== undefined) setVibe((saved.vibe as Vibe | null) ?? null);
+          if (Array.isArray(saved.compare)) {
+            useAtlasStore.setState({
+              compare: saved.compare.filter((s) => typeof s === "string").slice(0, COMPARE_MAX),
+            });
+          }
+        }
+      } catch {
+        /* ignore */
+      }
+      // 没有历史选择时，默认落在"当前月份"（真实日历，不是写死的 January）
+      if (!restored) setMonth(new Date().getMonth());
+      restoredRef.current = true;
+    }, 0);
+    return () => clearTimeout(t);
+  }, [setVibe]);
 
-  const selectedNode = nodes.find((n) => n.slug === selected) ?? null;
-  const selectedDatum = selectedNode?.months[month];
-  const selectedTier = selectedNode?.tiers[month] ?? "quiet";
+  // ── 交互回调 ─────────────────────────────────────────────────────────
+  const openDestination = useCallback(
+    (slug: string) => {
+      router.push(`/destinations/${slug}`);
+    },
+    [router],
+  );
+
+  const onNodeClick = useCallback(
+    (slug: string, isTouch: boolean) => {
+      // 桌面：点击节点 = 直接进入目的地内容页
+      if (!isTouch) {
+        openDestination(slug);
+        return;
+      }
+      // 触摸：第一次 tap → 钉住小卡（Explore / Compare）；再 tap 同一个点 → 进入
+      setPinnedByTouch(true);
+      setPinned((cur) => {
+        if (cur === slug) {
+          openDestination(slug);
+          return cur;
+        }
+        return slug;
+      });
+    },
+    [openDestination],
+  );
+
+  const toggleCompare = useCallback(
+    (slug: string) => {
+      if (compare.includes(slug)) removeFromCompare(slug);
+      else addToCompare(slug);
+    },
+    [compare, addToCompare, removeFromCompare],
+  );
+
+  // ── 月份拖轨（细控件，不是面板） ─────────────────────────────────────
+  const scrubMonth = useCallback((clientX: number) => {
+    const rect = monthTrackRef.current?.getBoundingClientRect();
+    if (!rect || rect.width === 0) return;
+    const idx = Math.max(0, Math.min(11, Math.floor(((clientX - rect.left) / rect.width) * 12)));
+    setMonth(idx);
+  }, []);
+  const onMonthDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setScrubbing(true);
+    scrubMonth(e.clientX);
+  };
+  const onMonthMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (scrubbing) scrubMonth(e.clientX);
+  };
+  const onMonthUp = () => setScrubbing(false);
+
+  useEffect(() => {
+    if (!pinned) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setPinned(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [pinned]);
+
+  const dockedCard = Boolean(pinned && (coarse || pinnedByTouch));
+  const cardStyle: React.CSSProperties =
+    dockedCard || !hover
+      ? {}
+      : {
+          left: hover.x > shellW - 240 ? undefined : Math.round(hover.x + 18),
+          right: hover.x > shellW - 240 ? Math.round(shellW - hover.x + 18) : undefined,
+          top: Math.round(Math.max(72, hover.y - 34)),
+        };
+
+  const microBtn =
+    "inline-flex h-7 min-w-[28px] items-center justify-center rounded-ut-sm border border-white/12 px-2 font-mono text-micro uppercase tracking-[0.14em] text-white/55 transition-colors duration-[var(--ut-dur-fast)] hover:border-white/35 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ut-accent";
 
   return (
-    <div className="relative h-[calc(100svh-4rem)] overflow-hidden bg-[#070a12] text-[#f5f3ec]">
-      {/* 顶部环境行（极简 chrome） */}
-      <div className="pointer-events-none absolute inset-x-0 top-4 z-20 flex items-start justify-between px-4 md:px-8">
-        <div>
-          <p className="font-mono text-micro uppercase tracking-[0.22em] text-white/50">
-            Utripla World Atlas
-          </p>
-          <p className="mt-1 font-display text-[1.75rem] leading-none text-white">
-            {MONTHS[month].charAt(0) + MONTHS[month].slice(1).toLowerCase()}
-          </p>
+    <div
+      ref={shellRef}
+      data-atlas-shell=""
+      className="ut-deep-space relative h-[calc(100svh-4rem)] min-h-[520px] overflow-hidden text-[#eef4ff]"
+    >
+      {/* ── 地球（占满整个视口；WebGL 失败则降级为列表） ── */}
+      {!globeFailed && view === "map" && (
+        <div className="absolute inset-0">
+          {/* 正式引擎：MapLibre Globe（map-test 已验证实现；契约见 EarthGlobe.tsx 的替换边界注释） */}
+          <MapLibreGlobeSurface
+            nodes={earthNodes}
+            selectedSlug={pinned}
+            onHover={setHover}
+            onNodeClick={onNodeClick}
+            onFailure={(reason) => {
+              setGlobeFailed(reason);
+              setView("list");
+            }}
+            onHandle={(h) => {
+              globeHandle.current = h;
+            }}
+            basemapId="openfreemap-liberty"
+            className="h-full w-full"
+          />
         </div>
-        <p className="text-right font-mono text-micro uppercase leading-[1.9] tracking-[0.16em] text-white/60">
-          <span className="text-white/90">{counts.dominant} favourable</span>
-          <br />
-          {counts.secondary} workable
-          <br />
-          {counts.quiet} challenging
-        </p>
-      </div>
+      )}
 
-      {/* 世界视口 */}
-      <div
-        ref={viewportRef}
-        onWheel={onWheel}
-        onPointerDown={onMapDown}
-        onPointerMove={onMapMove}
-        onPointerUp={onMapUp}
-        onPointerCancel={onMapUp}
-        className={[
-          "absolute inset-0",
-          dragging ? "cursor-grabbing" : "cursor-grab",
-        ].join(" ")}
-      >
-        <div ref={worldRef} className="absolute inset-0 will-change-transform">
-          {/* 世界带（保持纬度相对间距） */}
-          <div className="absolute inset-x-0 top-1/2 h-[min(100%,42vw)] -translate-y-1/2">
-            {/* 经纬网 */}
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 opacity-[0.13]"
-              style={{
-                backgroundImage:
-                  "repeating-linear-gradient(to right, rgba(245,243,236,0.5) 0 1px, transparent 1px calc(100%/24)), repeating-linear-gradient(to bottom, rgba(245,243,236,0.5) 0 1px, transparent 1px calc(100%/12))",
-              }}
-            />
-            {/* 区域氛围场（真实成员质心） */}
-            {regionFields.map((f) => (
-              <div
-                key={f.region}
-                aria-hidden="true"
-                className="absolute rounded-full"
-                style={{
-                  left: `${(f.cx - f.radius) * 100}%`,
-                  top: `${(f.cy - f.radius) * 100}%`,
-                  width: `${f.radius * 200}%`,
-                  height: `${f.radius * 200}%`,
-                  background: `radial-gradient(circle, rgba(${REGION_TINTS[f.region as keyof typeof REGION_TINTS] ?? "164, 81, 59"}, 0.13) 0%, transparent 70%)`,
-                }}
-              />
-            ))}
-
-            {/* 145 DESTINATION NODES */}
-            {nodes.map((node) => (
-              <AtlasNodeButton
-                key={node.slug}
-                node={node}
-                month={month}
-                vibe={vibe}
-                selected={selected === node.slug}
-                onHover={setHovered}
-                onSelect={setSelected}
-              />
-            ))}
-
-            {/* hover 城市名（跟随节点） */}
-            {hovered &&
-              nodes
-                .filter((n) => n.slug === hovered)
-                .map((n) => (
-                  <span
-                    key={n.slug}
-                    className="pointer-events-none absolute z-10 -translate-x-1/2 font-mono text-[0.625rem] uppercase tracking-[0.14em] text-white"
-                    style={{ left: `${n.x * 100}%`, top: `calc(${n.y * 100}% + 14px)` }}
-                  >
-                    {n.city}
-                  </span>
-                ))}
-          </div>
-        </div>
-
-        {/* 缩放控制（唯一 chrome 按钮） */}
-        <div className="absolute right-4 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-2">
-          <button
-            type="button"
-            onClick={() => zoomTo(1.35)}
-            aria-label="Zoom in"
-            className="flex h-11 w-11 items-center justify-center rounded-ut-pill border border-white/20 bg-black/30 font-mono text-body-sm text-white/85 backdrop-blur-sm transition-colors duration-[var(--ut-dur-fast)] hover:border-white/60 motion-reduce:transition-none"
-          >
-            +
-          </button>
-          <button
-            type="button"
-            onClick={() => zoomTo(1 / 1.35)}
-            aria-label="Zoom out"
-            className="flex h-11 w-11 items-center justify-center rounded-ut-pill border border-white/20 bg-black/30 font-mono text-body-sm text-white/85 backdrop-blur-sm transition-colors duration-[var(--ut-dur-fast)] hover:border-white/60 motion-reduce:transition-none"
-          >
-            −
-          </button>
-        </div>
-      </div>
-
-      {/* COMPARE TRAY（≤3 城 · 年度曲线） */}
-      <CompareTray nodes={nodes} month={month} />
-
-      {/* MONTH SCRUB — 世界时间轴（VIBE LENS 同区，构成 WHERE×WHEN×WHAT 控制台） */}
-      <div className="absolute inset-x-0 bottom-0 z-20 px-4 pb-5 md:px-8">
-        <div className="mx-auto max-w-3xl">
-          {allVibes.length > 0 && (
-            <div
-              role="radiogroup"
-              aria-label="World lens — how do you want to travel?"
-              className="mb-2 flex flex-wrap gap-x-4 gap-y-0.5"
+      {/* ── 顶部：页面文档结构用 sr-only h1（视觉不做 Hero 标题）+ 右上切换与搜索 ──
+          Stage 4：左上是**页面级轻量导航**（Collections → /guides, /trips），
+          让地球 Hub 有通往 Guides / Trips 的内容入口。它是同一行 chrome 里的两个
+          文字链接（不是面板、不是卡片、不加控件），md 以下隐藏（移动端改用
+          列表视图顶部的内容级入口），因此不改变"地球是唯一主角"的视觉层级。 */}
+      <div className="pointer-events-none absolute inset-x-0 top-6 z-20 flex items-start justify-between gap-3 px-4 md:px-8">
+        <h1 className="sr-only">Destinations — global destination discovery map</h1>
+        <nav
+          aria-label="Related collections"
+          className="pointer-events-auto hidden flex-col gap-1.5 md:flex"
+        >
+          <span className="font-mono text-micro uppercase tracking-[0.18em] text-white/35">
+            Collections
+          </span>
+          <span className="flex flex-wrap items-center gap-x-3">
+            <Link
+              href="/guides"
+              className="font-mono text-micro uppercase tracking-[0.14em] text-white/60 underline decoration-white/20 underline-offset-4 transition-colors duration-[var(--ut-dur-fast)] hover:text-white focus-visible:outline-2 focus-visible:outline-ut-accent"
             >
-              <VibeLensChip
-                label="All"
-                selected={vibe === null}
-                onSelect={() => setVibe(null)}
-              />
-              {allVibes.map((v) => (
-                <VibeLensChip
-                  key={v}
-                  label={v}
-                  selected={vibe === v}
-                  onSelect={() => setVibe(v)}
-                />
-              ))}
+              Travel guides
+            </Link>
+            <span aria-hidden="true" className="font-mono text-micro text-white/20">
+              ·
+            </span>
+            <Link
+              href="/trips"
+              className="font-mono text-micro uppercase tracking-[0.14em] text-white/60 underline decoration-white/20 underline-offset-4 transition-colors duration-[var(--ut-dur-fast)] hover:text-white focus-visible:outline-2 focus-visible:outline-ut-accent"
+            >
+              Ready-made trips
+            </Link>
+          </span>
+        </nav>
+        <div className="pointer-events-auto flex flex-col items-end gap-2">
+          <button
+            type="button"
+            onClick={() => setView((v) => (v === "map" ? "list" : "map"))}
+            aria-pressed={view === "list"}
+            className={microBtn}
+          >
+            {view === "map" ? "List" : "Map"}
+          </button>
+          <DestinationSearchBox docs={searchDocs} onSelect={onSearchSelect} onClear={onSearchClear} />
+        </div>
+      </div>
+
+      {/* ── Hover / 触摸 小提示卡：轻，不是 dashboard ── */}
+      {cardNode && (
+        <div
+          data-atlas-card=""
+          className={[
+            "absolute z-30 w-[196px] max-w-[calc(100vw-2rem)] rounded-ut-md",
+            "border border-white/10 bg-[#080d18]/80 p-2.5 backdrop-blur-md",
+            dockedCard ? "bottom-24 left-1/2 -translate-x-1/2" : "",
+          ].join(" ")}
+          style={cardStyle}
+        >
+          <p className="font-display text-body-lg leading-none text-white">{cardNode.city}</p>
+          <p className="mt-1 font-mono text-micro uppercase tracking-[0.16em] text-white/45">
+            {cardNode.country}
+          </p>
+          <dl className="mt-2 space-y-0.5 font-mono text-micro leading-[1.5] text-white/60">
+            <div className="flex gap-2">
+              <dt className="shrink-0 text-white/35">Best</dt>
+              <dd className="truncate">{cardNode.bestTime || "Year-round"}</dd>
+            </div>
+            <div className="flex gap-2">
+              <dt className="shrink-0 text-white/35">Budget</dt>
+              <dd>{cardNode.budget}</dd>
+            </div>
+          </dl>
+          {cardNode.vibes.length > 0 && (
+            <p className="mt-1.5 font-mono text-micro uppercase tracking-[0.14em] text-white/35">
+              {cardNode.vibes.slice(0, 4).join(" · ")}
+            </p>
+          )}
+          {dockedCard && (
+            <div className="mt-2.5 flex items-center gap-1.5">
+              <Link
+                href={`/destinations/${cardNode.slug}`}
+                className="inline-flex min-h-[32px] flex-1 items-center justify-center rounded-ut-sm bg-white/90 px-2 text-body-sm font-medium text-[#080d18]"
+              >
+                Explore
+              </Link>
+              <button
+                type="button"
+                onClick={() => toggleCompare(cardNode.slug)}
+                aria-pressed={compare.includes(cardNode.slug)}
+                className="min-h-[32px] rounded-ut-sm border border-white/20 px-2 font-mono text-micro uppercase tracking-[0.12em] text-white/65"
+              >
+                {compare.includes(cardNode.slug) ? "In" : "Compare"}
+              </button>
             </div>
           )}
+        </div>
+      )}
+
+      {/* ── 底部：一条细控件（月份 / vibe / 缩放），不是面板 ── */}
+      <div className="absolute inset-x-0 bottom-3 z-20 flex items-end justify-between gap-4 px-4 md:px-8">
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-micro uppercase tracking-[0.2em] text-white/45">
+            {MONTHS[month]}
+          </span>
           <div
             ref={monthTrackRef}
             role="slider"
-            tabIndex={0}
-            aria-label="Scrub the world by month"
+            aria-label="Month"
             aria-valuemin={1}
             aria-valuemax={12}
             aria-valuenow={month + 1}
-            aria-valuetext={MONTHS[month]}
+            aria-valuetext={MONTHS_LONG[month]}
+            tabIndex={0}
             onPointerDown={onMonthDown}
             onPointerMove={onMonthMove}
             onPointerUp={onMonthUp}
             onPointerCancel={onMonthUp}
             onKeyDown={(e) => {
-              if (e.key === "ArrowLeft") { e.preventDefault(); setMonth((m) => Math.max(0, m - 1)); }
-              if (e.key === "ArrowRight") { e.preventDefault(); setMonth((m) => Math.min(11, m + 1)); }
-              if (e.key === "Home") { e.preventDefault(); setMonth(0); }
-              if (e.key === "End") { e.preventDefault(); setMonth(11); }
+              if (e.key === "ArrowLeft") setMonth((m) => Math.max(0, m - 1));
+              if (e.key === "ArrowRight") setMonth((m) => Math.min(11, m + 1));
             }}
-            className="relative flex min-h-[44px] cursor-ew-resize items-end gap-1 rounded-ut-pill border border-white/12 bg-black/35 px-3 py-1.5 backdrop-blur-sm"
+            className="relative h-[3px] w-[104px] cursor-pointer rounded-ut-pill bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ut-accent md:w-[132px]"
           >
-            {MONTHS.map((m, i) => {
-              const active = i === month;
-              return (
-                <span
-                  key={m}
-                  aria-hidden="true"
-                  className={[
-                    "relative flex-1 pb-1 text-center font-mono text-[0.5625rem] uppercase tracking-[0.08em] transition-colors duration-200",
-                    active ? "text-white" : "text-white/45",
-                  ].join(" ")}
-                >
-                  {m}
-                  {active && (
-                    <span className="absolute inset-x-1 bottom-0 h-[2px] rounded-full bg-ut-accent" />
-                  )}
-                </span>
-              );
-            })}
+            <span
+              aria-hidden="true"
+              className="absolute top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/85"
+              style={{ left: `${((month + 0.5) / 12) * 100}%` }}
+            />
           </div>
-          <p className="mt-2 text-center font-mono text-[0.5625rem] uppercase tracking-[0.18em] text-white/40">
-            drag the month — the world rearranges itself
-          </p>
+          <span className="hidden font-mono text-micro text-white/30 sm:inline">
+            {MONTHS_LONG[month]}
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <label className="sr-only" htmlFor="atlas-vibe">
+            Vibe filter
+          </label>
+          <select
+            id="atlas-vibe"
+            value={vibe ?? ""}
+            onChange={(e) => setVibe((e.target.value || null) as Vibe | null)}
+            className="h-7 rounded-ut-sm border border-white/12 bg-transparent px-1.5 font-mono text-micro uppercase tracking-[0.14em] text-white/55 transition-colors hover:border-white/35 hover:text-white focus-visible:outline-2 focus-visible:outline-ut-accent"
+          >
+            <option value="">All vibes</option>
+            {allVibes.map((v) => (
+              <option key={v} value={v}>
+                {v}
+              </option>
+            ))}
+          </select>
+          <button type="button" onClick={() => globeHandle.current?.zoomBy(0.85)} aria-label="Zoom in" className={microBtn}>
+            +
+          </button>
+          <button type="button" onClick={() => globeHandle.current?.zoomBy(1.18)} aria-label="Zoom out" className={microBtn}>
+            −
+          </button>
+          <button type="button" onClick={() => globeHandle.current?.resetView()} className={microBtn}>
+            Reset
+          </button>
         </div>
       </div>
 
-      {/* PREVIEW — 从世界浮出的地点 */}
-      {selectedNode && selectedDatum && (
-        <div
-          role="dialog"
-          aria-label={`${selectedNode.city} preview`}
-          className="absolute inset-x-3 bottom-24 z-30 md:inset-x-auto md:bottom-auto md:right-8 md:top-24 md:w-[22rem]"
-        >
-          <div className="overflow-hidden rounded-ut-md border border-white/12 bg-[#0c1018]/95 shadow-[var(--ut-shadow-2)] backdrop-blur-sm">
-            {selectedNode.hero ? (
-              <div className="relative h-36 w-full">
-                <Image
-                  src={selectedNode.hero}
-                  alt={`${selectedNode.city}, ${selectedNode.country}`}
-                  fill
-                  sizes="22rem"
-                  className="object-cover"
-                />
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0"
-                  style={{ background: "linear-gradient(to top, rgba(12,16,24,0.85), transparent 70%)" }}
-                />
-              </div>
-            ) : (
-              <div
-                className="flex h-16 items-end p-4"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(164, 81, 59, 0.35), rgba(12, 16, 24, 0.4))",
-                }}
-              >
-                <p className="font-mono text-micro uppercase tracking-[0.18em] text-white/60">
-                  {selectedNode.region}
-                </p>
-              </div>
-            )}
-            <div className="p-5">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="font-display text-h2 leading-none text-white">{selectedNode.city}</p>
-                  <p className="mt-1.5 font-mono text-label uppercase tracking-[0.16em] text-white/60">
-                    {selectedNode.country} · {MONTHS[month]}
-                    {vibe && (
-                      <span className="ml-2 text-ut-verdict-good" aria-hidden="true">
-                        · {vibe} mode
-                      </span>
-                    )}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setSelected(null)}
-                  aria-label="Close preview"
-                  className="flex h-11 w-11 items-center justify-center font-mono text-white/60 transition-colors hover:text-white"
-                >
-                  ✕
-                </button>
-              </div>
-              <p
-                className={[
-                  "mt-4 font-mono text-label uppercase tracking-[0.18em]",
-                  selectedTier === "dominant"
-                    ? "text-ut-verdict-good"
-                    : selectedTier === "secondary"
-                      ? "text-ut-verdict-workable"
-                      : "text-ut-verdict-challenging",
-                ].join(" ")}
-              >
-                {TIER_WORD[selectedTier]} · {MONTHS[month]}
-              </p>
-              <dl className="mt-4 grid grid-cols-3 gap-3 border-t border-white/10 pt-4 font-mono text-body-sm tabular-nums text-white/90">
-                <div>
-                  <dt className="text-[0.5625rem] uppercase tracking-[0.14em] text-white/45">High / Low</dt>
-                  <dd className="mt-1">{selectedDatum.h.toFixed(0)}° / {selectedDatum.l.toFixed(0)}°</dd>
-                </div>
-                <div>
-                  <dt className="text-[0.5625rem] uppercase tracking-[0.14em] text-white/45">Rain</dt>
-                  <dd className="mt-1">{selectedDatum.p.toFixed(0)} mm</dd>
-                </div>
-                <div>
-                  <dt className="text-[0.5625rem] uppercase tracking-[0.14em] text-white/45">Rain days</dt>
-                  <dd className="mt-1">{selectedDatum.rd.toFixed(0)}</dd>
-                </div>
-              </dl>
-              <button
-                type="button"
-                onClick={() => addToCompare(selectedNode.slug)}
-                disabled={compareResult !== "ready"}
-                className={[
-                  "mt-4 flex min-h-[44px] w-full items-center justify-center rounded-ut-pill border font-mono text-label uppercase tracking-[0.14em] transition-colors duration-[var(--ut-dur-fast)] motion-reduce:transition-none",
-                  compareResult !== "ready"
-                    ? "border-white/15 text-white/40"
-                    : "border-white/30 text-white/90 hover:border-white/70",
-                ].join(" ")}
-              >
-                {compareResult === "exists"
-                  ? "In compare ✓"
-                  : compareResult === "full"
-                    ? "Compare full (3)"
-                    : "+ Add to compare"}
-              </button>
-              <div className="mt-5 flex items-center justify-between gap-3">
-                <p className="font-mono text-micro uppercase tracking-[0.14em] text-white/50">
-                  {selectedNode.budget} / day
-                </p>
-                <Link
-                  href={`/destinations/${selectedNode.slug}`}
-                  className="inline-flex min-h-[44px] items-center rounded-ut-pill bg-ut-accent px-5 font-mono text-label uppercase tracking-[0.14em] text-white transition-colors duration-[var(--ut-dur-fast)] hover:bg-ut-accent-strong motion-reduce:transition-none"
-                >
-                  Open destination
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+      {globeFailed && (
+        <p className="absolute inset-x-0 bottom-12 z-20 px-4 text-center font-mono text-micro uppercase tracking-[0.14em] text-white/45 md:px-8">
+          3D globe unavailable{globeFailed ? ` (${globeFailed})` : ""} — showing the full
+          destination list.
+        </p>
       )}
+
+      {/*
+        145 个目的地链接：**始终存在于 DOM**
+        · 地图视图下视觉隐藏（sr-only）但保留语义 —— 键盘可达 / 读屏可读 / 爬虫可索引；
+        · 列表视图下作为正式浏览方式，也是 WebGL 不可用时的降级界面。
+        这不是 cloaking：内容对键盘与读屏用户完全可用，只是视觉上让位给地球。
+      */}
+      <section
+        aria-label="All destinations"
+        className={
+          view === "list"
+            ? "ut-deep-space absolute inset-0 z-10 overflow-y-auto px-4 pb-20 pt-24 md:px-8"
+            : "sr-only"
+        }
+      >
+        {view === "list" && (
+          <h2 className="font-display text-h2 text-white">All {nodes.length} destinations</h2>
+        )}
+        {/* Stage 4：列表视图里的内容级入口（移动端在 md 以下没有顶部 Collections，
+            这里补上；地图视图下本 section 为 sr-only，链接仍在 DOM 中可被爬取）。 */}
+        {view === "list" && (
+          <p className="mt-3 font-mono text-micro uppercase tracking-[0.14em] text-white/45">
+            <Link
+              href="/guides"
+              className="underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
+            >
+              Travel guides
+            </Link>
+            <span aria-hidden="true" className="mx-2 text-white/20">
+              ·
+            </span>
+            <Link
+              href="/trips"
+              className="underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
+            >
+              Ready-made trips
+            </Link>
+          </p>
+        )}
+        <ul className={view === "list" ? "mt-6 divide-y divide-white/10 border-y border-white/10" : ""}>
+          {nodes.map((n) => (
+            <li key={n.slug} className={view === "list" ? "flex flex-wrap items-baseline gap-x-4 gap-y-1 py-3" : ""}>
+              <Link
+                href={`/destinations/${n.slug}`}
+                className={view === "list" ? "font-display text-h3 text-white transition-colors hover:text-ut-accent" : ""}
+              >
+                {n.city}, {n.country}
+              </Link>
+              {view === "list" && (
+                <>
+                  <span className="font-mono text-micro uppercase tracking-[0.14em] text-white/40">
+                    {n.bestTime || "Year-round"}
+                  </span>
+                  <span className="font-mono text-micro uppercase tracking-[0.14em] text-white/30">
+                    {n.budget}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => toggleCompare(n.slug)}
+                    aria-pressed={compare.includes(n.slug)}
+                    className="ml-auto min-h-[32px] rounded-ut-pill border border-white/20 px-3 font-mono text-micro uppercase tracking-[0.14em] text-white/55 transition-colors hover:border-white/50 hover:text-white focus-visible:outline-2 focus-visible:outline-ut-accent"
+                  >
+                    {compare.includes(n.slug) ? "In compare" : "Compare"}
+                  </button>
+                </>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Compare 只在用户真的加入对比后出现（空即不渲染），不再是常驻视觉组成 */}
+      <CompareTray nodes={nodes} month={month} />
     </div>
-  );
-}
-
-const AtlasNodeButton = memo(function AtlasNodeButton({
-  node,
-  month,
-  vibe,
-  selected,
-  onHover,
-  onSelect,
-}: {
-  node: AtlasNode;
-  month: number;
-  vibe: Vibe | null;
-  selected: boolean;
-  onHover: (slug: string | null) => void;
-  onSelect: (slug: string) => void;
-}) {
-  const tier = node.tiers[month];
-  const vs = nodeVisualState(tier, vibe, node.vibes, selected);
-  const size = 14 * vs.scale;
-  const isMatch = vibe !== null && vs.halo > 0;
-  return (
-    <button
-      type="button"
-      aria-label={`${node.city}, ${node.country} — ${TIER_WORD[tier]} in ${MONTHS[month]}${isMatch ? ` · ${vibe} match` : ""}`}
-      aria-pressed={selected}
-      onClick={(e) => {
-        e.stopPropagation();
-        onSelect(node.slug);
-      }}
-      onPointerDown={(e) => e.stopPropagation()}
-      onMouseEnter={() => onHover(node.slug)}
-      onMouseLeave={() => onHover(null)}
-      className="absolute z-[5] flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full"
-      style={{
-        left: `${node.x * 100}%`,
-        top: `${node.y * 100}%`,
-      }}
-    >
-      <span
-        aria-hidden="true"
-        className="block rounded-full transition-[width,height,opacity,box-shadow] duration-300 ease-ut-out motion-reduce:transition-none"
-        style={{
-          width: `calc(${size}px / var(--k, 1))`,
-          height: `calc(${size}px / var(--k, 1))`,
-          background: vs.halo > 0 ? "#ffffff" : tier === "quiet" ? "rgba(245,243,236,0.3)" : "rgba(245,243,236,0.8)",
-          opacity: vs.opacity,
-          boxShadow:
-            vs.halo > 0
-              ? `0 0 calc(${8 + vs.halo * 16}px / var(--k, 1)) calc(${vs.halo * 3}px / var(--k, 1)) rgba(255, 214, 150, ${vs.halo * 0.6})`
-              : "none",
-        }}
-      />
-    </button>
-  );
-});
-
-
-function VibeLensChip({
-  label,
-  selected,
-  onSelect,
-}: {
-  label: string;
-  selected: boolean;
-  onSelect: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      role="radio"
-      aria-checked={selected}
-      onClick={onSelect}
-      className={[
-        "min-h-[44px] border-b pb-0.5 font-mono text-[0.625rem] uppercase tracking-[0.18em] transition-colors duration-[var(--ut-dur-fast)] motion-reduce:transition-none",
-        selected
-          ? "border-ut-accent text-white"
-          : "border-transparent text-white/45 hover:border-white/40 hover:text-white/80",
-      ].join(" ")}
-    >
-      {label}
-    </button>
   );
 }
