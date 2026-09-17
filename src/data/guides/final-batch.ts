@@ -299,7 +299,7 @@ export const FINAL_GUIDES: Guide[] = [
     sections: [
       { heading: "The Promenade & Vieux Nice", paragraphs: ["The Promenade's five-kilometre seafront walk, Vieux Nice's ochre lanes and the Cours Saleya's flower market, socca at Chez Pipo (the Niçois chickpea pancake), and the Gelateria Fenocchio's artisan scoops."],
       },
-      { heading: "Monaco & Èze", paragraphs: ["The corniche drive to Monaco's casino and old town, then Èze's perched village and Jardin Exotique — the cliff-edge garden with views over both countries. The bus or the超声 car covers both in one day."],
+      { heading: "Monaco & Èze", paragraphs: ["The corniche drive to Monaco's casino and old town, then Èze's perched village and Jardin Exotique — the cliff-edge garden with views over both countries. The bus covers both in one day."],
       },
     ],
     route: { heading: "Your 3 Days in Nice", intro: "Promenade (1), Monaco & Èze (2), museums (3).", days: [

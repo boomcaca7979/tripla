@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   getGuideBySlug,
@@ -7,17 +6,28 @@ import {
   buildPlannerHref,
   type Guide,
 } from "@/data/guides";
-import { DESTINATIONS } from "@/data/destinations";
-import { TRIPS } from "@/data/trips";
+import { DESTINATIONS, type Destination } from "@/data/destinations";
 import ReadingProgress from "@/components/inner/ReadingProgress";
 import InnerBreadcrumb from "@/components/inner/InnerBreadcrumb";
-import EditorialHero from "@/components/inner/EditorialHero";
 import InnerSection from "@/components/inner/InnerSection";
 import EditorialIndex from "@/components/inner/EditorialIndex";
 import InnerCTA from "@/components/inner/InnerCTA";
 import Timeline from "@/components/inner/Timeline";
 import FaqList from "@/components/inner/FaqList";
 import PracticalInfo from "@/components/inner/PracticalInfo";
+import GuideHero from "@/components/guides/GuideHero";
+import GuideQuickFacts from "@/components/guides/GuideQuickFacts";
+import GuideContents from "@/components/guides/GuideContents";
+import {
+  resolveGuideDestination,
+  guideKind,
+  guideQuickFacts,
+  guideToc,
+  relatedGuidesFor,
+  relatedTripsFor,
+  destinationLinks,
+  ITINERARY_ANCHOR,
+} from "@/lib/guide-detail";
 
 const SITE_URL = "https://www.utripla.xyz";
 
@@ -44,6 +54,8 @@ export async function generateMetadata({
   // seoTitle 在数据层已控制 ≤52 字符；metaDescription 已控制在 140-160 字符。
   const title = guide.seoTitle;
   const description = guide.metaDescription;
+  // 有真实 destination 图片时用该图，否则沿用站点 OG 图（不生成新图）。
+  const image = resolveGuideDestination(guide)?.image ?? "/og-image.png";
   return {
     title,
     description,
@@ -56,22 +68,28 @@ export async function generateMetadata({
       type: "article",
       publishedTime: guide.publishedAt,
       modifiedTime: guide.updatedAt,
-      authors: [guide.author.name],
       tags: guide.tags,
-      images: [{ url: "/og-image.png", width: 1200, height: 630, alt: guide.title }],
+      images: [{ url: image }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["/og-image.png"],
+      images: [image],
     },
   };
 }
 
 // ── JSON-LD structured data ───────────────────────────────────────────
 
+/**
+ * Article schema。
+ * 注意：数据层的 `guide.author` 是虚构 persona（"fake author expertise"），
+ * 因此不输出 Person author —— author 使用站点主体 Organization（真实）。
+ */
 function buildArticleJsonLd(guide: Guide) {
+  const rawImage = resolveGuideDestination(guide)?.image ?? "/og-image.png";
+  const image = rawImage.startsWith("http") ? rawImage : `${SITE_URL}${rawImage}`;
   return {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -82,13 +100,13 @@ function buildArticleJsonLd(guide: Guide) {
       "@type": "WebPage",
       "@id": `${SITE_URL}/guides/${guide.slug}`,
     },
-    image: [`${SITE_URL}/og-image.png`],
+    image: [image],
     datePublished: guide.publishedAt,
     dateModified: guide.updatedAt,
     author: {
-      "@type": "Person",
-      name: guide.author.name,
-      jobTitle: guide.author.role,
+      "@type": "Organization",
+      name: "tripla",
+      url: SITE_URL,
     },
     publisher: {
       "@type": "Organization",
@@ -103,17 +121,28 @@ function buildArticleJsonLd(guide: Guide) {
   };
 }
 
-function buildBreadcrumbJsonLd(guide: Guide) {
+/** 与页面可见 breadcrumb 严格一致（4 级，末项为当前页）。 */
+function buildBreadcrumbJsonLd(guide: Guide, destination: Destination | null) {
+  const cityItem = destination
+    ? {
+        "@type": "ListItem",
+        position: 3,
+        name: guide.city,
+        // 城市唯一页规则：城市项指向唯一的正式城市内页。
+        item: `${SITE_URL}/destinations/${destination.slug}`,
+      }
+    : { "@type": "ListItem", position: 3, name: guide.city, item: `${SITE_URL}/guides` };
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
       { "@type": "ListItem", position: 2, name: "Guides", item: `${SITE_URL}/guides` },
+      cityItem,
       {
         "@type": "ListItem",
-        position: 3,
-        name: guide.seoTitle,
+        position: 4,
+        name: guide.title,
         item: `${SITE_URL}/guides/${guide.slug}`,
       },
     ],
@@ -148,8 +177,7 @@ const MONTHS = [
 ];
 
 function formatDate(iso: string): string {
-  const parts = iso.split("-").map(Number);
-  const [y, m, d] = parts;
+  const [y, m, d] = iso.split("-").map(Number);
   if (!y || !m || !d || m < 1 || m > 12) return iso;
   return `${MONTHS[m - 1]} ${d}, ${y}`;
 }
@@ -166,37 +194,51 @@ export default async function GuideDetailPage({
   if (!guide) notFound();
 
   const planHref = buildPlannerHref(guide.planner);
+  const destination = resolveGuideDestination(guide);
+  const kind = guideKind(guide);
+  const quickFacts = guideQuickFacts(guide, destination);
+  const toc = guideToc(guide);
 
-  // Related content（数据文件显式指定的 slug，过滤掉失效引用）。
-  const relatedDestinations = guide.relatedDestinationSlugs
-    .map((s) => DESTINATIONS.find((d) => d.slug === s))
-    .filter((d): d is NonNullable<typeof d> => Boolean(d))
-    .slice(0, 3);
-  const relatedTrips = guide.relatedTripSlugs
-    .map((s) => TRIPS.find((t) => t.slug === s))
-    .filter((t): t is NonNullable<typeof t> => Boolean(t))
-    .slice(0, 3);
-  const relatedGuides = guide.relatedGuideSlugs
-    .map((s) => getGuideBySlug(s))
-    .filter((g): g is Guide => Boolean(g) && g!.slug !== guide.slug)
-    .slice(0, 3);
-
+  // Related guides：可解释的规则排序（显式关联 > 同城 > 共享 tag > 同 region），非随机。
+  const relatedGuides = relatedGuidesFor(guide, 6);
   const relatedGuideItems = relatedGuides.map((g) => ({
     href: `/guides/${g.slug}`,
     title: g.title,
-    meta: g.readTime,
+    meta: `${g.city} · ${g.readTime}`,
     description: g.excerpt,
   }));
-  const relatedDestinationItems = relatedDestinations.map((d) => ({
+
+  // Related destinations：显式声明的真实关联，排除已在 Plan 区块出现的主体目的地。
+  const otherDestinations = guide.relatedDestinationSlugs
+    .map((s) => DESTINATIONS.find((d) => d.slug === s))
+    .filter((d): d is NonNullable<typeof d> => Boolean(d))
+    .filter((d) => d.slug !== destination?.slug)
+    .slice(0, 3);
+  const relatedDestinationItems = otherDestinations.map((d) => ({
     href: `/destinations/${d.slug}`,
     title: d.city,
     meta: d.country,
   }));
-  const relatedTripItems = relatedTrips.map((t) => ({
+
+  // Related trips：只取真实 TRIPS（显式关联优先，同城补齐）。
+  const relatedTripItems = relatedTripsFor(guide, 3).map((t) => ({
     href: `/trips/${t.slug}`,
     title: t.title,
-    meta: `${t.days} days · ${t.budget.toLocaleString()} ${t.currency}`,
+    meta: `${t.days} days · ${t.budget.toLocaleString("en-US")} ${t.currency}`,
   }));
+
+  const planLinks = destinationLinks(destination).map((l) => ({
+    href: l.href,
+    title: l.label,
+    meta: l.meta,
+  }));
+
+  const dates =
+    guide.planner.departureDate && guide.planner.returnDate
+      ? `${formatDate(guide.planner.departureDate)} → ${formatDate(guide.planner.returnDate)}`
+      : guide.planner.departureDate
+        ? formatDate(guide.planner.departureDate)
+        : null;
 
   return (
     <article className="pb-20 pt-8 sm:pt-12">
@@ -207,7 +249,9 @@ export default async function GuideDetailPage({
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildBreadcrumbJsonLd(guide)) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(buildBreadcrumbJsonLd(guide, destination)),
+        }}
       />
       {guide.faq.length > 0 && (
         <script
@@ -216,134 +260,128 @@ export default async function GuideDetailPage({
         />
       )}
 
-      <div className="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb */}
+      <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumb（末项为当前 guide；城市项指向唯一的 /destinations/<slug> 内页） */}
         <InnerBreadcrumb
           items={[
             { label: "Home", href: "/" },
             { label: "Guides", href: "/guides" },
-            { label: guide.city },
+            destination
+              ? { label: guide.city, href: `/destinations/${destination.slug}` }
+              : { label: guide.city, href: "/guides" },
+            { label: guide.title },
           ]}
         />
 
-        {/* Hero（编辑式，无全屏天空 / 无蓝色渐变） */}
-        <div className="mt-8">
-          <EditorialHero
-            eyebrow="Guide"
-            title={guide.title}
-            tags={guide.tags}
-            meta={
-              <div className="flex flex-wrap items-center gap-3">
-                <div
-                  className="flex h-10 w-10 items-center justify-center rounded-ut-pill bg-ut-ink text-body-sm font-semibold text-ut-inverse"
-                  aria-hidden="true"
-                >
-                  {guide.author.initials}
-                </div>
-                <div>
-                  <p className="text-body-sm font-medium text-ut-ink">
-                    {guide.author.name}
-                    <span className="ml-1 font-normal text-ut-muted">
-                      · {guide.author.role}
-                    </span>
-                  </p>
-                  <p className="font-mono text-label text-ut-subtle">
-                    Updated {formatDate(guide.updatedAt)} · {guide.readTime}
-                  </p>
-                </div>
-              </div>
-            }
+        {/* Hero：destination 图片（或 gradient）+ 标题 + 定位 + 主 CTA */}
+        <div className="mt-6">
+          <GuideHero
+            guide={guide}
+            destination={destination}
+            kind={kind}
+            planHref={planHref}
+            updatedLabel={formatDate(guide.updatedAt)}
           />
         </div>
 
-        {/* Introduction（引导段，无 H2，首段以 lede 形态承接 hero） */}
-        <section className="mb-12">
+        {/* Quick facts：destination / duration / timing / style / budget（仅有真实数据时） */}
+        <GuideQuickFacts facts={quickFacts} />
+
+        {/* Guide overview：真实引言（不改写） */}
+        <section className="mb-10 max-w-[68ch]">
           {guide.introduction.map((p, i) => (
             <p
               key={i}
-              className="mb-4 text-body-lg leading-[1.6] text-ut-text last:mb-0"
+              className="mb-4 text-body-lg leading-[1.65] text-ut-text last:mb-0"
             >
               {p}
             </p>
           ))}
-          <p className="mt-2 text-body text-ut-muted">
-            Prefer a ready-made plan?{" "}
-            <Link
-              href={planHref}
-              className="font-medium text-ut-accent underline underline-offset-2 transition-colors hover:text-ut-accent-strong focus-visible:outline-2 focus-visible:outline-ut-accent"
-            >
-              Open this guide in the AI planner →
-            </Link>
-          </p>
         </section>
 
-        {/* Body sections */}
-        {guide.sections.map((section, i) => (
-          <InnerSection key={i} title={section.heading}>
-            {section.paragraphs.map((p, j) => (
-              <p
-                key={j}
-                className="mb-4 text-body leading-[1.6] text-ut-text last:mb-0"
-              >
-                {p}
-              </p>
-            ))}
-            {section.bullets && section.bullets.length > 0 && (
-              <ul className="mt-2 list-disc space-y-2 pl-6 text-ut-text marker:text-ut-accent">
-                {section.bullets.map((b, j) => (
-                  <li key={j}>{b}</li>
-                ))}
-              </ul>
-            )}
-          </InnerSection>
-        ))}
+        {/* What this guide covers（条目 = 该 guide 真实章节标题） */}
+        <GuideContents entries={toc} />
 
-        {/* Itinerary（时间线，非卡片墙） */}
-        <InnerSection title={guide.itinerary.heading} eyebrow="Itinerary">
-          <p className="mb-6 text-body leading-[1.6] text-ut-text-2">
+        {/* Itinerary：真实 itinerary.days，提前为可扫描的行程结构 */}
+        <InnerSection id={ITINERARY_ANCHOR} title={guide.itinerary.heading} eyebrow="Itinerary">
+          <p className="mb-6 max-w-[68ch] text-body leading-[1.65] text-ut-text-2">
             {guide.itinerary.intro}
           </p>
           <Timeline days={guide.itinerary.days} />
         </InnerSection>
 
-        {/* Practical info（紧凑面板网格，非卡片墙） */}
-        <InnerSection title="Practical planning info" eyebrow="Before you go">
+        {/* Body sections（真实正文，未改写） */}
+        {guide.sections.map((section, i) => (
+          <InnerSection
+            key={i}
+            id={`guide-section-${i + 1}`}
+            title={section.heading}
+          >
+            <div className="max-w-[68ch]">
+              {section.paragraphs.map((p, j) => (
+                <p
+                  key={j}
+                  className="mb-4 text-body leading-[1.65] text-ut-text last:mb-0"
+                >
+                  {p}
+                </p>
+              ))}
+              {section.bullets && section.bullets.length > 0 && (
+                <ul className="mt-2 list-disc space-y-2 pl-6 text-ut-text marker:text-ut-accent">
+                  {section.bullets.map((b, j) => (
+                    <li key={j}>{b}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </InnerSection>
+        ))}
+
+        {/* What to know（实用规划信息，真实数据） */}
+        <InnerSection title="What to know before you go" eyebrow="Before you go">
           <PracticalInfo blocks={guide.practicalInfo} />
         </InnerSection>
 
-        {/* FAQ（页面可见，与 FAQPage schema 一致） */}
-        {guide.faq.length > 0 && (
-          <InnerSection title="Frequently asked questions" eyebrow="FAQ">
-            <FaqList items={guide.faq} />
-          </InnerSection>
-        )}
-
-        {/* Single Primary CTA（置于文末，不在 hero / first-screen） */}
+        {/* Plan this trip（主 CTA + destination 生态内链，全部为已生成路由） */}
         <InnerCTA
           href={planHref}
-          title={`Ready to plan your ${guide.planner.destination} trip?`}
-          description="Use this guide as your starting point — the AI planner builds a day-by-day itinerary around your dates and interests."
-          label={guide.planner.label}
+          label="Plan this trip"
+          title="Turn this guide into a trip"
+          description={`The trip planner opens pre-filled with ${guide.planner.destination}${
+            dates ? ` and ${dates}` : ""
+          } — adjust the dates and interests to fit your trip.`}
         />
-
-        {/* Related guides（编辑式索引行） */}
-        {relatedGuideItems.length > 0 && (
-          <InnerSection title="Keep reading" eyebrow="More guides">
-            <EditorialIndex items={relatedGuideItems} />
+        {planLinks.length > 0 && (
+          <InnerSection title="Plan around this destination" eyebrow="Next step">
+            <EditorialIndex items={planLinks} />
           </InnerSection>
         )}
 
-        {/* Related destinations */}
+        {/* Related destinations（显式真实关联，排除主体目的地） */}
         {relatedDestinationItems.length > 0 && (
           <InnerSection title="Related destinations" eyebrow="Explore">
             <EditorialIndex items={relatedDestinationItems} />
           </InnerSection>
         )}
 
-        {/* Related trips */}
+        {/* Related guides（规则排序，非随机） */}
+        {relatedGuideItems.length > 0 && (
+          <InnerSection title="More guides" eyebrow="Keep reading">
+            <EditorialIndex items={relatedGuideItems} />
+          </InnerSection>
+        )}
+
+        {/* Related trips（真实 TRIPS） */}
         {relatedTripItems.length > 0 && (
           <InnerSection title="Ready-made trips" eyebrow="Trips">
             <EditorialIndex items={relatedTripItems} />
+          </InnerSection>
+        )}
+
+        {/* FAQ（页面可见，与 FAQPage schema 一致） */}
+        {guide.faq.length > 0 && (
+          <InnerSection title="Frequently asked questions" eyebrow="FAQ">
+            <FaqList items={guide.faq} />
           </InnerSection>
         )}
       </div>
