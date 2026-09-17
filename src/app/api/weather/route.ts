@@ -5,26 +5,72 @@ export async function GET(request: Request): Promise<Response> {
   const startDate = sp.get("startDate"),
     endDate = sp.get("endDate");
   const tz = sp.get("tz") ?? "UTC";
+  // current=1：只要"当前实况"（首页顶部天气读数用），不需要日期区间。
+  // 复用同一端点与同一数据源（Open-Meteo），不新建第二套天气系统。
+  const wantCurrent = sp.get("current") === "1";
   const latNum = lat ? parseFloat(lat) : NaN;
   const lonNum = lon ? parseFloat(lon) : NaN;
-  if (!lat || !lon || !startDate || !endDate || !isFinite(latNum) || !isFinite(lonNum) || Math.abs(latNum) < 0.01 || Math.abs(lonNum) < 0.01) {
-    const mock = generateMockWeatherData(startDate || "2026-01-01", endDate || "2026-01-07", tz);
+  const coordsInvalid =
+    !lat || !lon || !isFinite(latNum) || !isFinite(lonNum) ||
+    Math.abs(latNum) < 0.01 || Math.abs(lonNum) < 0.01;
+
+  if (wantCurrent) {
+    // 无可靠坐标 / 上游失败 → 明确返回 current:null。
+    // 客户端据此显示通用 "Weather"，绝不把 mock 或静态气候伪装成实时天气。
+    if (coordsInvalid) {
+      return Response.json({ current: null }, { headers: { "Cache-Control": "s-maxage=300" } });
+    }
+    const currentUrl =
+      `https://api.open-meteo.com/v1/forecast?latitude=${latNum}&longitude=${lonNum}` +
+      `&timezone=${encodeURIComponent(tz)}&current=weather_code,is_day,temperature_2m&forecast_days=1`;
+    // 网络失败 / 非 2xx / 非法 JSON / 上游异常 → 一律安全降级为 current:null，
+    // 由客户端显示"天气不可用"，绝不伪造天气，也不会抛出 500 让页面报错。
+    const emptyCurrent = Response.json(
+      { current: null },
+      { headers: { "Cache-Control": "s-maxage=300" } },
+    );
+    let currentRes: Response;
+    try {
+      currentRes = await fetch(currentUrl);
+    } catch {
+      return emptyCurrent;
+    }
+    if (!currentRes.ok) return emptyCurrent;
+    try {
+      const currentData = await currentRes.json();
+      const current = currentData?.current ?? null;
+      return Response.json(
+        { current },
+        { headers: { "Cache-Control": "s-maxage=600" } },
+      );
+    } catch {
+      return emptyCurrent;
+    }
+  }
+
+  if (coordsInvalid || !startDate || !endDate) {
+    const mock = generateMockWeatherData(startDate || "2026-01-01", endDate || "2026-01-07");
     return Response.json(mock, { headers: { "Cache-Control": "s-maxage=3600" } });
   }
  
   const url = `https://api.open-meteo.com/v1/forecast?latitude=${latNum}&longitude=${lonNum}&timezone=${encodeURIComponent(tz)}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,weather_code,uv_index_max,sunrise,sunset&start_date=${startDate}&end_date=${endDate}`;
   const res = await fetch(url);
   if (!res.ok) {
-    const mock = generateMockWeatherData(startDate, endDate, tz);
+    const mock = generateMockWeatherData(startDate, endDate);
     return Response.json(mock, { headers: { "Cache-Control": "s-maxage=3600" } });
   }
-  const data = await res.json();
-  return Response.json(data, {
-    headers: { "Cache-Control": "s-maxage=10800" },
-  });
+  try {
+    const data = await res.json();
+    return Response.json(data, {
+      headers: { "Cache-Control": "s-maxage=10800" },
+    });
+  } catch {
+    const mock = generateMockWeatherData(startDate, endDate);
+    return Response.json(mock, { headers: { "Cache-Control": "s-maxage=3600" } });
+  }
 }
 
-function generateMockWeatherData(startDate: string, endDate: string, timezone: string) {
+function generateMockWeatherData(startDate: string, endDate: string) {
   const startMs = new Date(startDate).getTime();
   const endMs = new Date(endDate).getTime();
   const dayMs = 86_400_000;

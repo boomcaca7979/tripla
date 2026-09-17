@@ -15,7 +15,7 @@ import type { CanonicalClimateRecord } from "@/data/climate/nasa-canonical";
 
 // ── Region tints（§1.3：确定性、server-side、无随机） ─────────────────────
 
-export type RegionName = "Asia" | "Europe" | "Americas" | "Oceania";
+export type RegionName = "Asia" | "Europe" | "Americas" | "Oceania" | "Africa";
 
 /**
  * Region → 暖调泥土色 RGB 三元组（供 `--ut-region-rgb` 覆写）。
@@ -27,6 +27,7 @@ export const REGION_TINTS: Record<RegionName, string> = {
   Europe: "104, 132, 92",    // moss
   Americas: "140, 112, 92",  // clay
   Oceania: "146, 118, 76",   // ochre-earth
+  Africa: "118, 106, 88",    // dry savanna earth
 };
 
 export const REGION_TINT_DEFAULT = "140, 112, 92";

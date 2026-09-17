@@ -19,6 +19,11 @@ import JourneyRoute from "@/components/journey/JourneyRoute";
 import JourneyProgress from "@/components/journey/JourneyProgress";
 import JourneyTimeline from "@/components/journey/JourneyTimeline";
 import JourneyPlaces from "@/components/journey/JourneyPlaces";
+import TripQuickFacts from "@/components/trips/TripQuickFacts";
+// Stage 5：商业层 —— 直接复用 Destination 侧已验收的 Quiet Commerce 组件与 builder，
+// 不新造 provider / 不新写 URL 拼接（见 src/lib/affiliate.ts）。
+import HotelModule from "@/components/destination/HotelModule";
+import FlightModule from "@/components/destination/FlightModule";
 import {
   capitalize,
   daysLabel,
@@ -36,10 +41,19 @@ import {
  *   Trip        = Journey Experience（**移动**：一段有起点、有段数、有节奏的旅程）
  *
  * 因此本页的骨架是"旅程"的信息关系，而不是文章的章节关系：
- *   Journey Arrival（首屏）→ Journey Route（路线总览 / Journey Strip）→
- *   Overview → Highlights → Journey Timeline（逐日 + 显式地点转换）→
- *   Where to eat → Journey practicalities（仪器面）→ When to go（语境）→
- *   Journey budget（语境）→ 唯一 Primary CTA → Related（编辑式索引 ×3）
+ *   Journey Arrival（首屏，含唯一首屏 CTA「Plan this trip」）→ Quick facts（决策条）→
+ *   Journey progression（入口 → 逐日 → 目的地）→ Overview → Highlights →
+ *   Journey Timeline（逐日 + 显式地点转换）→ Where to eat →
+ *   Journey practicalities（仪器面）→ When to go（语境）→ Journey budget（语境）→
+ *   文末规划 CTA → Related（编辑式索引 ×3）
+ *
+ * Stage 3（Trip Detail 产品化）在本页的**增量**：
+ *   1) 首屏新增 style/interests 读数与主 CTA「Plan this trip」（指向既有 planner）；
+ *   2) 新增 Quick facts 决策条（Destination 为真实 /destinations/<slug> 内链）；
+ *   3) 首图解析改为 `coverImage → destination.image → gradient`（+81 个 trip 因此有图）；
+ *   4) 删除 "Route by tripla AI" 归因（AI 品牌 + 虚假作者，见 §6.13）；
+ *   5) JSON-LD 删除 `offers`（trip.budget 是行程估算，不是本站在售商品价格）；
+ *   6) Route 区块改名 "From gateway to destination / Progression"，明确它不是地图路线。
  *
  * 与既有实现相比的**内容质量修正**（Inner Audit 确认的缺陷）：
  *   1) 删除 "Travel tips" 区块 —— 它由 trip.bestSeason + 3 条**跨所有 Trip 完全相同**
@@ -49,8 +63,24 @@ import {
  *   2) Highlights 只在**独立内容**存在时渲染；若 highlights 是 normalize 从
  *      前 3 天 theme 派生的兜底（50 个 trip），则不再重复展示一遍行程标题。
  *
+ * Stage 5（Flights / Hotels 商业层）在本页的**增量**：
+ *   7) 在 "Journey budget" 与页级规划 CTA 之间插入一个 **Quiet Commerce** 区块，
+ *      直接复用 Destination 侧已验收的 `HotelModule` + `FlightModule`（与
+ *      /destinations/[slug] 同一套组件、同一套 builder、同一套披露规则）。
+ *      · Hotels：Hotellook 只按**城市名**检索 → 使用 `trip.city`（真实字段）→ 正常渲染。
+ *      · Flights：Aviasales 深链**必须同时**提供 origin_iata 与 destination_iata
+ *        （Travelpayouts 官方文档：「origin_iata/destination_iata — departure/arrival
+ *        points」；短链格式亦为 {ORIG}{DDMM}{DEST}{N}），**不支持 destination-only**。
+ *        本站目前没有可靠出发地（searchParams 不持久化、无 geolocation、无 home airport），
+ *        因此按既有边界 `FlightModule` 在缺 `originIata` 时返回 null —— **不渲染**，
+ *        绝不伪造默认出发地（如 JFK/LAX）。destinationIata 仍按真实数据传入，
+ *        待未来接入用户出发地即可点亮，页面结构无需改动。
+ *      商业模块**不进** /trips Hub 卡片列表，只出现在 Detail 页；两处均为
+ *      `rel="sponsored noopener noreferrer"` + 可读的 "Sponsored · …" 披露，
+ *      视觉权重低于页级 Primary CTA（描边按钮，非填充 accent）。
+ *
  * 默认 Server Component；唯一 client 组件是 Journey Progress（Day/Stop 状态）。
- * 无 WebGL / canvas / 视频 / 广告；无新增 Flight Affiliate。
+ * 无 WebGL / canvas / 视频 / 广告脚本；商业层仅为外链搜索入口，无内嵌交易组件。
  */
 
 const SITE_URL = "https://www.utripla.xyz";
@@ -81,6 +111,7 @@ export async function generateMetadata({
   // 仅组合已有真实字段，不生成 AI 文案。
   const title = buildTripTitle(trip);
   const description = buildTripMetaDescription(trip);
+  const heroImage = resolveTripImage(trip);
   return {
     title,
     description,
@@ -91,14 +122,26 @@ export async function generateMetadata({
       title,
       description,
       type: "article",
-      images: trip.coverImage ? [{ url: trip.coverImage }] : undefined,
+      images: heroImage ? [{ url: heroImage }] : undefined,
     },
     twitter: {
-      card: trip.coverImage ? "summary_large_image" : "summary",
+      card: heroImage ? "summary_large_image" : "summary",
       title,
       description,
     },
   };
+}
+
+/**
+ * Stage 3 §6.1：Trip 首图解析 —— `trip.coverImage` → `destination.image` → null。
+ * 与 Hub 卡片、Hero 使用**同一口径**，避免同一 trip 在不同位置图片不一致。
+ * 仅在两者都缺失时返回 null（页面走 journey band，不伪造照片）。
+ */
+function resolveTripImage(trip: Trip): string | null {
+  if (trip.coverImage) return trip.coverImage;
+  return (
+    DESTINATIONS.find((d) => d.city.toLowerCase() === trip.city.toLowerCase())?.image ?? null
+  );
 }
 
 /**
@@ -145,24 +188,28 @@ function buildTripMetaDescription(trip: Trip): string {
 
 // ── JSON-LD structured data（结构与字段保持既有实现，未删减）───────────
 
-function buildItineraryJsonLd(trip: Trip) {
+function buildItineraryJsonLd(trip: Trip, image: string | null) {
   return {
     "@context": "https://schema.org",
     "@type": "Trip",
     name: trip.title,
     description: trip.description,
     url: `${SITE_URL}/trips/${trip.slug}`,
-    image: trip.coverImage ?? undefined,
+    image: image ?? undefined,
+    // Stage 3 §6.14：duration 为真实字段（trip.days）的 ISO-8601 表达。
+    // 注意：schema.org 的 Trip 类型并未定义 `destination` 属性，因此这里
+    // **不**为"目的地"生造一个属性名 —— 目的地由 itinerary（逐日 ItemList）
+    // 与页面本体承载，schema 与内容保持一致即可。
+    duration: `P${trip.days}D`,
     // Phase 9 Step 6: mainEntityOfPage 强化为 WebPage 实体。
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${SITE_URL}/trips/${trip.slug}`,
     },
-    offers: {
-      "@type": "Offer",
-      price: trip.budget,
-      priceCurrency: trip.currency,
-    },
+    // Stage 3 §6.14 修订：删除 `offers`。
+    // 旧实现写入 `Offer { price: trip.budget }`，但 trip.budget 是**行程费用估算**，
+    // 不是本站在售商品的价格 —— 用 Offer 声明等价于声称这可被购买，属不实信息。
+    // 本站没有任何真实 affiliate offer 可声明，因此整块移除，不做替换。
     itinerary: trip.itinerary.map((d) => ({
       "@type": "ItemList",
       name: `Day ${d.day}: ${d.theme}`,
@@ -259,6 +306,7 @@ export default async function TripDetailPage({
   const stops = deriveStopCount(trip);
   const pace = derivePace(trip);
   const planHref = buildJourneyPlannerHref(trip);
+  const heroImage = resolveTripImage(trip);
   const showHighlights = hasExplicitHighlights(trip);
 
   // ── Related data（与既有实现同一套内链级联，未改变结果）────────────
@@ -306,27 +354,46 @@ export default async function TripDetailPage({
   const cityGuides = getGuidesForCity(trip.city).slice(0, 3);
 
   // ── Journey practicalities：仅由真实字段构成（无任何模板建议）──────
+  // Stage 3 §6.2 修订：Duration / Travel style / Region 已上移到首屏决策条
+  // （TripQuickFacts），此处不再重复，只保留"出发前必须知道"的仪器读数。
   const practicalRows = [
     { label: "Gateway", value: `${trip.airport.iata} · ${trip.airport.name}` },
     { label: "Time zone", value: trip.airport.timezone },
     { label: "Currency", value: trip.currency },
-    { label: "Duration", value: daysLabel(trip.days) },
     { label: "Scheduled stops", value: String(stops) },
     { label: "Journey pace", value: pace },
+  ];
+
+  // ── Quick facts（决策条）：最多 6 项，缺数据即不出现 ────────────────
+  const quickFacts = [
+    {
+      label: "Destination",
+      value: `${trip.city}, ${trip.country}`,
+      ...(matchedDestination ? { href: `/destinations/${matchedDestination.slug}` } : {}),
+    },
+    { label: "Duration", value: daysLabel(trip.days) },
     { label: "Travel style", value: capitalize(trip.travelStyle) },
-    ...(matchedDestination
-      ? [{ label: "Region", value: matchedDestination.region }]
+    ...(trip.interests.length > 0
+      ? [{ label: "Interests", value: trip.interests.map(capitalize).join(" · ") }]
       : []),
+    ...(matchedDestination ? [{ label: "Region", value: matchedDestination.region }] : []),
+    ...(matchedDestination ? [{ label: "Best time", value: matchedDestination.bestMonths }] : []),
   ];
 
   const perDay = Math.round(trip.budget / Math.max(trip.days, 1));
+
+  // ── Stage 5：商业层用的**真实**目的地 IATA ──────────────────────────
+  // 优先取该 trip 目的地城市在 DESTINATIONS 中的机场 IATA（真实坐标数据）；
+  // 若该城市未收录（理论上 280/280 均已收录），退回 trip 自身 gateway 机场 IATA
+  // —— 二者都是数据集中的真实字段，绝不硬编码、绝不猜测。
+  const destinationIata = matchedDestination?.airport.iata ?? trip.airport.iata;
 
   return (
     <JourneyAtmosphere journeyId={trip.slug}>
       <article className="pb-20 pt-6 sm:pt-8">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildItineraryJsonLd(trip)) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildItineraryJsonLd(trip, heroImage)) }}
         />
         <script
           type="application/ld+json"
@@ -352,7 +419,7 @@ export default async function TripDetailPage({
           />
         </div>
 
-        {/* Journey Arrival（首屏：eyebrow + H1 + 路线读数 + 紧凑旅程状态） */}
+        {/* Journey Arrival（首屏：eyebrow + H1 + 路线读数 + 风格/兴趣 + Plan this trip） */}
         <div className={`${CONTAINER} mt-6 sm:mt-8`}>
           <JourneyHero
             trip={trip}
@@ -360,12 +427,22 @@ export default async function TripDetailPage({
             stops={stops}
             pace={pace}
             region={matchedDestination?.region ?? trip.country}
+            image={heroImage}
+            planHref={planHref}
           />
         </div>
 
-        {/* Journey Route — Route Overview as a Journey Strip */}
+        {/* Quick facts — 首屏之下的决策条（单行读数，非 dashboard） */}
+        <div className={`${CONTAINER} mt-8`}>
+          <TripQuickFacts facts={quickFacts} />
+        </div>
+
+        {/* Journey progression — Route Overview as a Journey Strip。
+            Stage 3 §6.6：这里**不是地图路线**（数据中不存在 route / stop 序列 /
+            距离 / 交通），因此标题明确表达"从入口到目的地、逐日推进"，
+            不声称 Tokyo → Kyoto → Osaka 这类结构化城市序列。 */}
         <div className={`${CONTAINER} mt-12 sm:mt-14`}>
-          <InnerSection title="Journey route" eyebrow="Route">
+          <InnerSection title="From gateway to destination" eyebrow="Progression">
             <JourneyRoute trip={trip} legs={legs} />
           </InnerSection>
 
@@ -375,10 +452,14 @@ export default async function TripDetailPage({
               <p className="max-w-[62ch] text-body-lg leading-[1.6] text-ut-text">
                 {trip.description}
               </p>
-              <p className="mt-5 font-mono text-label uppercase tracking-[0.16em] text-ut-muted">
-                {capitalize(trip.travelStyle)} ·{" "}
-                {trip.interests.map(capitalize).join(" · ")} · Route by {trip.author.name}
-              </p>
+              {/*
+                Stage 3 §6.13：删除原 "Route by {trip.author.name}" 归因行。
+                数据中 57 条 trip 的 author 为 `{ kind: "ai", name: "tripla AI" }`，
+                渲染结果是 "Route by tripla AI" —— 既是 AI 品牌文案，也把一份
+                行程错误地归因给一个不存在的作者。本站不做个人作者伪装，
+                也不再展示 AI 身份；行程的 style / interests 读数已由首屏与
+                决策条承载，此处不再重复。Tags 保留（真实字段，用于分类语义）。
+              */}
               {trip.tags.length > 0 && (
                 <ul className="mt-5 flex flex-wrap gap-2">
                   {trip.tags.map((t) => (
@@ -409,7 +490,7 @@ export default async function TripDetailPage({
                 href={`/destinations/${matchedDestination.slug}`}
                 className="text-body-sm font-medium text-ut-accent-strong underline decoration-ut-accent-line underline-offset-4 transition-colors duration-[var(--ut-dur-fast)] hover:text-ut-ink focus-visible:outline-2 focus-visible:outline-ut-accent"
               >
-                {trip.city} travel guide
+                {`Explore ${trip.city}`}
               </Link>
             )}
             <Link
@@ -514,10 +595,29 @@ export default async function TripDetailPage({
             />
           </InnerSection>
 
-          {/* 唯一 Primary CTA（文末，非首屏；文案非 AI / 非 Generate） */}
+          {/*
+            Stage 5 §Commerce — Quiet Commerce 区块（与 /destinations/[slug] 同构）。
+            顺序遵循"内容先行"：抵达 Journey budget 之后、页级规划 CTA 之前。
+            · Hotels  → Hotellook，按城市名检索（真实入口，无假酒店/假价/假评分）。
+            · Flights → Aviasales 深链需 origin+destination；本站无可靠出发地，
+                        故 FlightModule 在缺 originIata 时返回 null（不渲染、不伪造）。
+            区块本身不加标题/卡片墙 —— 两个模块各自携带 "Sponsored · …" 披露。
+          */}
+          <div className="mb-12 space-y-6">
+            <HotelModule city={trip.city} />
+            <FlightModule city={trip.city} destinationIata={destinationIata} />
+          </div>
+
+          {/*
+            Stage 3 §6.12：本页共两个规划入口，指向**同一个**既有 planner 深链
+            （buildJourneyPlannerHref），不是两个不同的转化路径：
+              ① 首屏 JourneyHero 的「Plan this trip」—— 立即可行动（Stage 3 §6.1）；
+              ② 此处文末的 InnerCTA —— 读完全程后的确认点（沿用既有 InnerCTA 组件）。
+            没有第三个 CTA，也没有新增 commerce 入口。
+          */}
           <InnerCTA
             href={planHref}
-            title="Use this route in your own plan"
+            title="Turn this route into your own trip"
             description={`The planner opens with ${trip.city} and this journey's ${trip.travelStyle} travel style prefilled — adjust the dates and interests to make it yours.`}
             label="Use this route in the planner"
           />

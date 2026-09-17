@@ -1,5 +1,6 @@
 import { buildSystemPrompt, buildUserMessage } from "../../../lib/itinerary-engine";
 import type { Itinerary } from "../../../types/itinerary";
+import type { Airport } from "../../../types/flight";
 import { generateId } from "../../../lib/utils";
 
 const GROQ_BASE_URL = "https://api.groq.com/openai/v1";
@@ -20,7 +21,7 @@ export async function POST(request: Request): Promise<Response> {
   if (!apiKey) {
     console.error("[itinerary] GROQ_API_KEY is not configured or empty");
     // Fallback: return mock itinerary so the page doesn't break
-    return Response.json(buildMockItinerary(input));
+    return Response.json({ ...buildMockItinerary(input), generatedBy: "fallback-template" });
   }
 
   console.log("[itinerary] Request payload (redacted):", {
@@ -70,7 +71,7 @@ export async function POST(request: Request): Promise<Response> {
       const errBody = await response.text().catch(() => "");
       console.error(`[itinerary] Groq error ${response.status}: ${errBody.slice(0, 500)}`);
       console.warn("[itinerary] Falling back to mock itinerary due to Groq error");
-      return Response.json(buildMockItinerary(input));
+      return Response.json({ ...buildMockItinerary(input), generatedBy: "fallback-template" });
     }
 
     const data = await response.json();
@@ -94,7 +95,7 @@ export async function POST(request: Request): Promise<Response> {
       console.error("[itinerary] Unexpected error:", message);
     }
     console.warn("[itinerary] Falling back to mock itinerary");
-    return Response.json(buildMockItinerary(input));
+    return Response.json({ ...buildMockItinerary(input), generatedBy: "fallback-template" });
   }
 }
 
@@ -102,22 +103,26 @@ export async function POST(request: Request): Promise<Response> {
  * Build a mock itinerary to serve when the Groq API is unavailable.
  * Prevents the UI from crashing with a white-screen error.
  */
-function fillAirport(a: Itinerary["input"]["origin"]): Itinerary["input"]["origin"] {
+function fillAirport(a?: Airport): Airport {
   return {
-    iata: a.iata ?? "NRT",
-    icao: a.icao ?? "RJAA",
-    name: a.name ?? a.city ?? "Unknown",
-    city: a.city ?? "Unknown",
-    country: a.country ?? "Unknown",
-    timezone: a.timezone ?? "Asia/Tokyo",
-    latitude: a.latitude ?? 35.772,
-    longitude: a.longitude ?? 140.393,
+    iata: a?.iata ?? "NRT",
+    icao: a?.icao ?? "RJAA",
+    name: a?.name ?? a?.city ?? "Unknown",
+    city: a?.city ?? "Unknown",
+    country: a?.country ?? "Unknown",
+    timezone: a?.timezone ?? "Asia/Tokyo",
+    latitude: a?.latitude ?? 35.772,
+    longitude: a?.longitude ?? 140.393,
   };
 }
 
 
 function buildMockItinerary(input: Itinerary["input"]): Itinerary {
-  const safeInput = { ...input, origin: fillAirport(input.origin), destination: fillAirport(input.destination) };
+  const safeInput = {
+    ...input,
+    origin: input.origin ? fillAirport(input.origin) : undefined,
+    destination: fillAirport(input.destination),
+  };
   const destination = safeInput.destination;
   const days: Itinerary["days"] = [
     {

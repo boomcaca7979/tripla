@@ -559,7 +559,7 @@ const RAW_TRIPS: RawTrip[] = [
   {
     id: "shanghai-urban-experience",
     title: "Shanghai Urban Experience",
-    coverImage: "https://images.unsplash.com/photo-1537531383496-f4749b76ceba?w=800&q=80",
+    coverImage: "https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?w=800&q=80",
     gradient: "from-violet-600 to-purple-800",
     author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
     days: 3,
@@ -1528,7 +1528,7 @@ const RAW_TRIPS: RawTrip[] = [
   {
     id: "amsterdam-canal-romance",
     title: "Amsterdam Canal Romance",
-    coverImage: "https://images.unsplash.com/photo-1534351590666-13e3e96b5571?w=800&q=80",
+    coverImage: "https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?w=800&q=80",
     gradient: "from-blue-500 to-indigo-700",
     author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
     days: 3,

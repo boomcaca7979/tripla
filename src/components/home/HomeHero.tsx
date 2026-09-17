@@ -3,31 +3,31 @@
 import Link from "next/link";
 import Eyebrow from "@/components/ui/Eyebrow";
 import TimeDock from "./TimeDock";
-import TimeGreeting from "./TimeGreeting";
+import HomeStatusLine from "./HomeStatusLine";
 import { useHomeState } from "./HomeEnvironment";
-import { moonShadowShiftFor, type WeatherId } from "@/lib/visual-state";
+import { moonShadowShiftFor } from "@/lib/visual-state";
+import { weatherGlyph, weatherLabel } from "@/lib/weather-state";
 
 /**
  * HomeHero — 一个有状态、有天气、有星月的环境中的空间场景。
  *
  * 页面级环境层（sky / veil / haze）由 HomeEnvironment 提供；
- * 本组件只负责 hero 本地的天体（星/日/月/云/降水/暗角）与内容构图：
+ * 本组件只负责 hero 本地的天体（星/日/月/云/降水/暗角）与内容构图。
  *
- *   eyebrow → display 级 H1（空间锚点）
- *   → 状态感知文案（ambient line）+ greeting
- *   → 底部 instrument zone（TimeDock + 静默天气控件 + 低重量 CTA）
- *   → 底部融合带（envDeep，消灭硬切）
+ * 内容构图（本轮修正）：
+ *   四层文字（eyebrow / H1 / 说明 / 状态行）作为**一个整体文案组**在首屏
+ *   视觉区水平居中（父容器 flex-col + items-center + 每层 text-center）；
+ *   乐器带仍占据面板下方的整宽布局（未改）。
+ *
+ * 文字层级纪律：只有 H1 是 display 级视觉重点；说明与状态行均为文本级。
+ *
+ * 天气读数（本轮修正）：
+ *   右上"天气"不再是"可点选的假氛围"，也不再默认成太阳——它只显示
+ *   HomeEnvironment 解析出的**标准化实时天气状态**（图标与文字同源）：
+ *   地点 = 已选目的地 ?? 用户所在地；未知时显示通用 "Weather"。
  *
  * 指针/滚动变量由 HomeEnvironment 统一写入；本组件零高频 effect。
  */
-
-const WEATHER_OPTIONS: { id: WeatherId; label: string; glyph: string }[] = [
-  { id: "clear", label: "Clear", glyph: "○" },
-  { id: "cloudy", label: "Cloudy", glyph: "◌" },
-  { id: "rain", label: "Rain", glyph: "╱" },
-  { id: "snow", label: "Snow", glyph: "∗" },
-  { id: "storm", label: "Storm", glyph: "⚡" },
-];
 
 // 确定性星点（伪随机但每次渲染一致，避免水合位移）
 function StarField() {
@@ -63,8 +63,11 @@ function useMemoStars() {
 }
 
 export default function HomeHero() {
-  const { destination, visual, weather, setWeather, moonPhase, cycleMoonPhase } = useHomeState();
+  const { focus, condition, visual, cycleMoonPhase } = useHomeState();
   const { sun, moon } = visual.bodies;
+
+  const placeLabel = focus?.label ?? null;
+  const known = condition !== null;
 
   return (
     <section className="relative flex min-h-[calc(100dvh-4rem)] flex-col overflow-clip">
@@ -73,7 +76,7 @@ export default function HomeHero() {
         <div className="ut-stars-layer">
           <StarField />
         </div>
-        {/* 日/月锚定右半空间，与左侧 display 排版形成构图关系；小屏自动右移出文字带 */}
+        {/* 日/月锚定右半空间，与居中的文案组形成构图关系；小屏自动右移出文字带 */}
         <div
           suppressHydrationWarning
           className="ut-body ut-sun"
@@ -111,23 +114,30 @@ export default function HomeHero() {
         <div className="ut-sky-vignette" />
       </div>
 
-      {/* ── Z2 内容：文字区 + 乐器带 ─────────────────────────────── */}
-      <div className="relative z-10 mx-auto flex w-full max-w-[var(--ut-container-max)] flex-1 flex-col justify-center px-4 pb-10 pt-24 md:px-6 md:pt-20">
+      {/* ── Z2 内容：居中的文案组 + 整宽乐器带 ───────────────────── */}
+      <div className="relative z-10 mx-auto flex w-full max-w-[var(--ut-container-max)] flex-1 flex-col items-center justify-center px-4 pb-10 pt-24 text-center md:px-6 md:pt-20">
         <Eyebrow dot className="ut-hero-eyebrow">
           Interactive travel discovery
         </Eyebrow>
 
-        <h1 className="ut-hero-h1 mt-6 font-display" style={{ color: "var(--ut-hero-accent)" }}>
+        {/* L1：核心探索文案 */}
+        <h1 className="ut-hero-h1 mx-auto mt-6 font-display" style={{ color: "var(--ut-hero-accent)" }}>
           Where do you want to{" "}
           <em className="italic">disappear</em> to?
         </h1>
 
-        <p suppressHydrationWarning className="ut-hero-ambient mt-6 max-w-[46ch] font-display italic" style={{ color: "var(--ut-hero-soft)" }}>
-          {visual.ambientLine}
+        {/* L2：这一片区域是做什么的（一句，解释"怎么用"，不抢 H1） */}
+        <p
+          className="mx-auto mt-6 max-w-[46ch] text-balance text-body-lg leading-snug"
+          style={{ color: "var(--ut-hero-soft)" }}
+        >
+          Set a month, a mood and a budget — the atlas answers with places that
+          fit, right now.
         </p>
 
-        <div className="mt-5">
-          <TimeGreeting />
+        {/* L3：只由当前选择派生的状态行 */}
+        <div className="mt-4">
+          <HomeStatusLine />
         </div>
       </div>
 
@@ -138,26 +148,27 @@ export default function HomeHero() {
             <div className="flex flex-col gap-6 px-5 py-5 lg:flex-row lg:items-end lg:justify-between lg:gap-8">
               <TimeDock />
 
-              <div role="group" aria-label="Weather atmosphere" className="md:pb-0.5">
-                <span className="ut-inst-label">Weather · {destination.label}</span>
+              {/*
+                天气读数（不可点击的实况显示）：
+                · 地点名（Local time 同源）：已选目的地 ?? 用户所在地 ?? 不显示
+                · 图标与文字来自同一个标准化 weather state（condition）
+                · 未知 → "Weather" + 中性 glyph，绝不显示太阳
+              */}
+              <div role="status" aria-live="polite" className="md:pb-0.5">
+                <span className="ut-inst-label">
+                  {placeLabel ? `Weather · ${placeLabel}` : "Weather"}
+                </span>
                 <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1">
-                  {WEATHER_OPTIONS.map((w) => {
-                    const active = w.id === weather;
-                    return (
-                      <button
-                        key={w.id}
-                        type="button"
-                        onClick={() => setWeather(w.id)}
-                        aria-pressed={active}
-                        title={w.label}
-                        className="ut-wx-btn focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ut-accent"
-                      >
-                        <span className="ut-wx-glyph" aria-hidden="true">{w.glyph}</span>
-                        {w.label}
-                        <span className="ut-wx-underline" aria-hidden="true" />
-                      </button>
-                    );
-                  })}
+                  <span
+                    className="ut-wx-btn"
+                    data-ut-weather-state={condition?.id ?? "unknown"}
+                    data-active={known ? "true" : "false"}
+                    title={known ? weatherLabel(condition) : "Weather unavailable for this location"}
+                  >
+                    <span className="ut-wx-glyph" aria-hidden="true">{weatherGlyph(condition)}</span>
+                    {weatherLabel(condition)}
+                    <span className="ut-wx-underline" aria-hidden="true" />
+                  </span>
                 </div>
               </div>
 
@@ -184,7 +195,10 @@ export default function HomeHero() {
       <div aria-hidden="true" className="ut-hero-blend" />
 
       <p className="sr-only" aria-live="off">
-        Now in {destination.label}: {Math.floor(visual.hour)}:{String(Math.round((visual.hour % 1) * 60)).padStart(2, "0")} local, {visual.weather}, {visual.season}, {visual.moon.label}
+        {placeLabel
+          ? `Readings for ${placeLabel}${focus?.kind === "user" ? " (your location)" : ""}: ${Math.floor(visual.hour)}:${String(Math.round((visual.hour % 1) * 60)).padStart(2, "0")} local,`
+          : `Readings for your local time:`}{" "}
+        {weatherLabel(condition)}, {visual.season}, {visual.moon.label}
       </p>
     </section>
   );

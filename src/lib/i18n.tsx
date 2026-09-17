@@ -8,6 +8,7 @@ import {
   useCallback,
   type ReactNode,
 } from "react";
+import { usePathname } from "next/navigation";
 
 // ── Types ────────────────────────────────────────────────────────────
 
@@ -266,9 +267,17 @@ const I18nContext = createContext<I18nContextValue | null>(null);
 
 const STORAGE_KEY = "tripla-lang";
 
+/**
+ * 首页（"/"）强制英文：首页面向国际用户，UI 语言不跟随已保存的 locale，
+ * 因此不会在首页出现中文界面文案。其余路由行为完全不变（仍按 locale 渲染）。
+ * 只影响 t() 的解析语言，不改写用户保存的偏好。
+ */
+const ENGLISH_ONLY_ROUTES = new Set(["/"]);
+
 // ── Provider ─────────────────────────────────────────────────────────
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
   const [locale, setLocaleState] = useState<Locale>("en");
 
   // Read from localStorage on mount
@@ -293,9 +302,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLocaleState(l);
   }, []);
 
+  // 解析语言：首页恒为英文，其余路由 = 用户 locale。
+  const resolvedLocale: Locale =
+    ENGLISH_ONLY_ROUTES.has(pathname ?? "/") ? "en" : locale;
+
   const t = useCallback(
-    (key: string) => get(DICTS[locale], key),
-    [locale],
+    (key: string) => get(DICTS[resolvedLocale], key),
+    [resolvedLocale],
   );
 
   return (

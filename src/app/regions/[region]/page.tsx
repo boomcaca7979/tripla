@@ -13,7 +13,7 @@ import { TRIPS } from "@/data/trips";
 
 export const dynamicParams = false;
 
-const ALL_REGIONS: Region[] = ["Asia", "Europe", "Americas", "Oceania"];
+const ALL_REGIONS: Region[] = ["Asia", "Europe", "Americas", "Oceania", "Africa"];
 
 export function generateStaticParams() {
   // 仅返回在 DESTINATIONS 中真实出现的 region
@@ -31,6 +31,7 @@ function parseRegion(slug: string): Region | null {
     europe: "Europe",
     americas: "Americas",
     oceania: "Oceania",
+    africa: "Africa",
   };
   return map[slug] ?? null;
 }

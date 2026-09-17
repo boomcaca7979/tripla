@@ -217,19 +217,21 @@ export default function ItineraryTimeline({
             <ItineraryBuilder itinerary={itinerary} />
             <PDFDownloadButton itinerary={itinerary} flights={flights} />
             <ShareButton itinerary={itinerary} flights={flights} />
-            <a
-              href={buildFlightSearchUrl({
-                originIata: itinerary.input.origin.iata,
-                destinationIata: itinerary.input.destination.iata,
-                departDate: itinerary.input.departureDate,
-                returnDate: itinerary.input.returnDate,
-              })}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-700 transition-colors hover:bg-blue-100"
-            >
-              Find Flights
-            </a>
+            {itinerary.input.origin && (
+              <a
+                href={buildFlightSearchUrl({
+                  originIata: itinerary.input.origin.iata,
+                  destinationIata: itinerary.input.destination.iata,
+                  departDate: itinerary.input.departureDate,
+                  returnDate: itinerary.input.returnDate,
+                })}
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-700 transition-colors hover:bg-blue-100"
+              >
+                Find Flights
+              </a>
+            )}
             <a
               href={buildHotelSearchUrl({
                 city: itinerary.input.destination.city,

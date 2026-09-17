@@ -25,7 +25,7 @@ export const WEATHER_LABEL: Record<WeatherId, string> = {
 /**
  * 目的地当地时间读数（24 小时制，如 "14:32"）。
  * 使用 Intl + 目的地 IANA timeZone 直接格式化，避免手写取模造成的进位漂移。
- * 仅在 hydration 之后的 effect 中调用 —— 不参与 SSR 渲染（见 LocalStateReadout）。
+ * 仅在 hydration 之后的 effect 中调用 —— 不参与 SSR 渲染。
  */
 export function localTimeLabel(timeZone: string, date: Date): string {
   const options: Intl.DateTimeFormatOptions = {

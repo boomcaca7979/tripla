@@ -134,6 +134,8 @@
   --color-ut-accent-soft: var(--ut-accent-soft);
   --color-ut-accent-line: var(--ut-accent-line);
   --color-ut-on-accent: var(--ut-on-accent);
+  --color-ut-teal: var(--ut-teal);
+  --color-ut-mint: var(--ut-mint);
   --color-ut-verdict-good: var(--ut-verdict-good);
   --color-ut-verdict-workable: var(--ut-verdict-workable);
   --color-ut-verdict-challenging: var(--ut-verdict-challenging);
@@ -382,7 +384,8 @@ body {
 
 .ut-wx-btn:hover,
 .ut-wx-btn:focus-visible,
-.ut-wx-btn[aria-pressed="true"] {
+.ut-wx-btn[aria-pressed="true"],
+.ut-wx-btn[data-active="true"] {
   color: var(--ut-ink);
 }
 
@@ -393,7 +396,8 @@ body {
   transition: color var(--ut-dur-fast) var(--ut-ease-out);
 }
 
-.ut-wx-btn[aria-pressed="true"] .ut-wx-glyph {
+.ut-wx-btn[aria-pressed="true"] .ut-wx-glyph,
+.ut-wx-btn[data-active="true"] .ut-wx-glyph {
   color: var(--ut-accent);
 }
 
@@ -409,30 +413,14 @@ body {
   transition: transform var(--ut-dur-med) var(--ut-ease-out);
 }
 
-.ut-wx-btn[aria-pressed="true"] .ut-wx-underline {
+.ut-wx-btn[aria-pressed="true"] .ut-wx-underline,
+.ut-wx-btn[data-active="true"] .ut-wx-underline {
   transform: scaleX(1);
 }
 
 /* Live 徽标（随天空明暗取可读绿） */
 [data-sky-ink="dark"] .ut-live { color: #047857; }
 [data-sky-ink="light"] .ut-live { color: #6ee7b7; }
-
-/* Home 顶部（未滚动）的 Header：与天空同一墨色体系，chrome 控件随之适配 */
-.ut-header-on-env,
-.ut-header-on-env a,
-.ut-header-on-env button,
-.ut-header-on-env select {
-  color: var(--ut-hero-ink);
-}
-.ut-header-on-env button,
-.ut-header-on-env select {
-  border-color: var(--ut-hero-line);
-  background: transparent;
-}
-.ut-header-on-env select option {
-  color: #16181d;
-  background: #ffffff;
-}
 
 /* ════════════════════════════════════════════════════════════════════
    /destinations 深空背景
@@ -456,6 +444,42 @@ body {
     linear-gradient(180deg, #080d1a 0%, #060a14 42%, #05070f 100%);
 }
 
+/* ════════════════════════════════════════════════════════════════════
+   MapLibre globe 页面空间背景（map-test 专用；.ut-deep-space 仍归 Three.js 版使用）
+   深色科技空间：**沿用此前已验证过的暖炭灰深色版**（非新配色、非蓝黑）。
+   层次：上下两圈极轻的暖灰微光 + 由 #3a3537 → #221e20 的纵向渐变 + 只压最外围的暗角。
+   基准色相仍来自导航栏暖炭灰家族（rgba(64,59,61) 同族），只是压到深色档。
+   ════════════════════════════════════════════════════════════════════ */
+
+.ut-globe-space {
+  background:
+    radial-gradient(
+      120% 85% at 50% 116%,
+      rgba(74, 66, 64, 0.32) 0%,
+      rgba(56, 50, 51, 0.16) 34%,
+      rgba(0, 0, 0, 0) 66%
+    ),
+    radial-gradient(
+      75% 55% at 50% -8%,
+      rgba(64, 59, 61, 0.30) 0%,
+      rgba(0, 0, 0, 0) 70%
+    ),
+    linear-gradient(180deg, #3a3537 0%, #2c2729 42%, #221e20 100%);
+}
+
+/* 暗角：只压边缘，不压中心（此前已验证的参数） */
+.ut-globe-space::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    130% 105% at 50% 50%,
+    rgba(0, 0, 0, 0) 52%,
+    rgba(24, 21, 22, 0.5) 100%
+  );
+}
+
 /* 边缘极轻的暗角，给球体留出纵深（不压暗中心） */
 .ut-deep-space::after {
   content: "";
@@ -469,6 +493,56 @@ body {
   );
 }
 
+/* ════════════════════════════════════════════════════════════════════
+   地球空间标签（/destinations）
+   由 components/atlas/globe/earth.ts 逐帧投影定位（DOM 池 + 去重叠），
+   不参与 React 渲染；三类：大洲 / 城市 / 当前交互城市。
+   ════════════════════════════════════════════════════════════════════ */
+
+.ut-globe-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  font-family: var(--ut-font-mono);
+  font-size: 0.625rem;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #dce7f5;
+  text-shadow: 0 0 10px rgba(5, 8, 16, 0.9);
+  will-change: transform, opacity;
+}
+
+/* 大洲：克制、字距更宽 */
+.ut-globe-label[data-kind="region"] {
+  letter-spacing: 0.32em;
+  color: #c8dcf2;
+}
+
+/* 城市：前面一小段细线，像地图标注 */
+.ut-globe-label[data-kind="city"]::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 1px;
+  margin-right: 5px;
+  vertical-align: middle;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+/* 当前 hover / 选中：暖白，最亮 */
+.ut-globe-label[data-kind="hover"],
+.ut-globe-label[data-kind="selected"] {
+  color: #ffe7c0;
+  text-shadow: 0 0 12px rgba(255, 208, 138, 0.45);
+}
+
+/* 说明：首页 Header 不再有"透明/hero 墨色"的初始态（ut-header-on-env 已移除）——
+   首页整个生命周期使用同一套"完整导航栏"外观，其配色由 lib/env-tokens.ts 提供，
+   并在首帧即以内联 token 渲染，避免 hydration 前后换色。 */
 
 .ut-sky-vignette {
   position: absolute;
@@ -690,22 +764,31 @@ body {
 
 /* ════════════════════════════════════════════════════════════════════
    Reveal（滚动显现）
-   规则：仅当 <html> 带 .js-ready 时才应用初始隐藏 —— 无 JS / 爬虫
+   规则：初始隐藏只在"浏览器启用了脚本"时生效（CSS scripting media
+   feature，解析期即生效，无需任何内联脚本打 class）—— 无 JS / 爬虫
    看到的内容默认完全可见（SEO 安全）。.ut-reveal-visible 由
    IntersectionObserver 添加。
+
+   注意：这里刻意**不使用** <html>.js-ready 这类内联脚本标记。内联
+   script 会占用 <head> 的一个 DOM 位置，而第三方脚本（AdSense）在
+   hydration 前会向 <head> 注入自己的 script，导致 React 对 head 子节点
+   做 hydration 比对时错位（"tree hydrated but attributes didn't match"）。
+   改用纯 CSS media feature 后，head 里不再有我们自己的节点，根因消除。
    ════════════════════════════════════════════════════════════════════ */
 
-.js-ready .ut-reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity var(--ut-dur-slow) var(--ut-ease-out),
-    transform var(--ut-dur-slow) var(--ut-ease-out);
-}
+@media (scripting: enabled) {
+  .ut-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity var(--ut-dur-slow) var(--ut-ease-out),
+      transform var(--ut-dur-slow) var(--ut-ease-out);
+  }
 
-.js-ready .ut-reveal.ut-reveal-visible {
-  opacity: 1;
-  transform: none;
+  .ut-reveal.ut-reveal-visible {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════════
@@ -818,7 +901,12 @@ body {
     opacity: 0.35;
   }
 
-  .js-ready .ut-reveal {
+}
+
+/* prefers-reduced-motion：进场动画直接取消（在任何脚本状态下都可见） */
+@media (scripting: enabled) and (prefers-reduced-motion: reduce) {
+  .ut-reveal,
+  .ut-reveal.ut-reveal-visible {
     opacity: 1;
     transform: none;
     transition: none;
@@ -835,6 +923,11 @@ body {
 [data-ut-lite="true"] .ut-precip-snow {
   animation: none;
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   Destination Detail 视觉皮肤（Round 16）→ 定义见文件末尾
+   （站酷「旅游官网」参考体系；置于末尾以覆盖 .ut-world 暗层）
+   ════════════════════════════════════════════════════════════════════ */
 
 /* ════════════════════════════════════════════════════════════════════
    Destination World（3.0 INTERACTIVE TRAVEL WORLD）— 暗色沉浸层
@@ -884,3 +977,80 @@ body {
 
 [data-ut-lite="true"] .ut-hotspot-ring { animation: none; }
 [data-ut-lite="true"] .ut-rain-drop { animation: none; opacity: 0.35; }
+
+
+/* ════════════════════════════════════════════════════════════════════
+   ZCOOL「旅游官网」参考皮肤 — Destination Detail 视觉基准（Round 16）
+   来源：站酷作品「旅游网站」(ZNjYzNzM4MzY) 自带风格定义页 + 6 张设计图。
+   官方色板：#53A38A 主绿 / #3AB2BF 青蓝 / #6CDBC0 薄荷；文字 #333 #666 #999。
+   字体：PingFang SC（Heavy 标题 / Bold / Regular）→ display 指向 sans。
+   本块置于文件末尾：同特异性下覆盖 .ut-world 暗层与 .ut-rain-drop 颜色。
+   ════════════════════════════════════════════════════════════════════ */
+
+[data-ut-skin="editorial"] {
+  --ut-bg: #ffffff;
+  --ut-surface: #f7f8f9;
+  --ut-surface-hover: #eef4f2;
+  --ut-surface-elevated: #ffffff;
+
+  --ut-ink: #333333;
+  --ut-text: #333333;
+  --ut-text-2: #666666;
+  --ut-muted: #999999;
+  --ut-subtle: #999999;
+
+  --ut-border: #e9edef;
+  --ut-border-strong: #d8dfe1;
+
+  --ut-accent: #53a38a;
+  --ut-accent-rgb: 83, 163, 138;
+  --ut-accent-strong: #47897a;
+  --ut-accent-soft: rgba(83, 163, 138, 0.10);
+  --ut-accent-line: rgba(83, 163, 138, 0.40);
+
+  --ut-teal: #3ab2bf;
+  --ut-teal-rgb: 58, 178, 191;
+  --ut-mint: #6cdbc0;
+  --ut-mint-rgb: 108, 219, 192;
+
+  /* 参考作品标题 = PingFang SC 无衬线 Heavy → display 字体改指 sans */
+  --ut-font-display: var(--ut-font-sans);
+
+  --ut-shadow-1: 0 2px 10px rgba(51, 61, 58, 0.06), 0 10px 28px rgba(51, 61, 58, 0.05);
+  --ut-shadow-2: 0 4px 14px rgba(51, 61, 58, 0.08), 0 18px 44px rgba(51, 61, 58, 0.10);
+  --ut-shadow-focus: 0 0 0 2px var(--ut-bg), 0 0 0 4px rgba(83, 163, 138, 0.5);
+
+  /* 覆盖 .ut-world 暗层：本页世界 = 清澈白 */
+  background: #ffffff;
+  color: #333333;
+}
+
+/* 标题字重（参考作品 Heavy 标题语言） */
+[data-ut-skin="editorial"] h1,
+[data-ut-skin="editorial"] h2,
+[data-ut-skin="editorial"] h3 {
+  font-weight: 700;
+}
+
+/* 雨滴在白底上改青蓝（官方 #3AB2BF 家族） */
+[data-ut-skin="editorial"] .ut-rain-drop {
+  background: linear-gradient(180deg, transparent, rgba(58, 178, 191, 0.45));
+}
+
+/* 参考作品装饰元素：极淡冰蓝圆环（页角装饰） */
+.ut-ref-ring {
+  position: absolute;
+  border: 10px solid rgba(58, 178, 191, 0.08);
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+/* 参考作品 section 标签：STYLE DEFINITION 式斜体宽字距 eyebrow */
+.ut-ref-eyebrow {
+  font-family: var(--ut-font-sans);
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  color: var(--ut-accent);
+}

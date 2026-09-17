@@ -5,18 +5,24 @@ import { useHomeState } from "./HomeEnvironment";
 import { timeLabel } from "@/lib/visual-state";
 
 /**
- * TimeDock — 目的地当地时间滑条（quiet instrument）。
- * LIVE = 目的地真实当地时间（Intl 计算）；拖动 = PREVIEW 世界状态；
- * Reset 回 LIVE。驱动 sky/accent/H1/greeting/haze 全站。
+ * TimeDock — 当地时间滑条（quiet instrument）。
+ *
+ * 未选城市：读数是访问者本地时间，标签只写 "Local time"（不假装知道某座城市）。
+ * 已选城市：标签变 "Local time · Tokyo"，读数与时刻锚定该城市时区。
+ * LIVE = 真实当地时刻（Intl 计算）；拖动 = PREVIEW 世界状态；Reset 回 LIVE。
+ * 驱动 sky/accent/H1/状态行/haze 全站。
  */
 export default function TimeDock() {
-  const { destination, hour, hourOverride, setHourOverride } = useHomeState();
+  const { focus, hour, hourOverride, setHourOverride } = useHomeState();
   const [dragging, setDragging] = useState(false);
   const draggingRef = useRef(false);
   const trackRef = useRef<HTMLDivElement>(null);
 
   const pct = (hour / 24) * 100;
   const manual = hourOverride !== null;
+  // 地点名与首屏天气读数同源：已选目的地 ?? 用户所在地；都未确定时不显示城市名。
+  const cityLabel = focus?.label ?? null;
+  const placeLabel = cityLabel ?? "your location";
 
   const posToHour = useCallback((clientX: number): number => {
     const el = trackRef.current;
@@ -61,7 +67,7 @@ export default function TimeDock() {
     <div className="w-full max-w-sm md:min-w-[300px]">
       <div className="mb-1.5 flex items-center justify-between">
         <span className="ut-inst-label">
-          Local time · {destination.label}
+          {cityLabel ? `Local time · ${cityLabel}` : "Local time"}
         </span>
         <span className="flex items-center gap-1.5 font-mono text-micro">
           {manual ? (
@@ -90,11 +96,11 @@ export default function TimeDock() {
         suppressHydrationWarning
         role="slider"
         tabIndex={0}
-        aria-label={`Time of day in ${destination.label} — preview the world at a different hour`}
+        aria-label={`Time of day in ${placeLabel} — preview the world at a different hour`}
         aria-valuemin={0}
         aria-valuemax={24}
         aria-valuenow={Math.round(hour * 10) / 10}
-        aria-valuetext={`${timeLabel(hour)} in ${destination.label}`}
+        aria-valuetext={`${timeLabel(hour)} in ${placeLabel}`}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
@@ -120,7 +126,8 @@ export default function TimeDock() {
       </div>
 
       <p suppressHydrationWarning aria-live="polite" className="mt-1.5 font-mono text-micro text-ut-text-2">
-        {manual ? "Preview · " : ""}{timeLabel(hour)} · {destination.label}
+        {manual ? "Preview · " : ""}{timeLabel(hour)}
+        {cityLabel ? ` · ${cityLabel}` : " · local"}
       </p>
     </div>
   );

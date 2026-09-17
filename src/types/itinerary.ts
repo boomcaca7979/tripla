@@ -26,8 +26,12 @@ export type TravelInterest =
 
 /** User-provided inputs used to generate a travel itinerary. */
 export interface TravelPlanInput {
-  /** Departure airport. */
-  origin: Airport;
+  /**
+   * Departure airport. OPTIONAL since the Destination planner flow:
+   * in-city trip planning starts from the destination page and has no
+   * known origin — the prompt simply omits the flight leg.
+   */
+  origin?: Airport;
   /** Destination airport. */
   destination: Airport;
   /** Departure date in YYYY-MM-DD format. */
@@ -38,10 +42,26 @@ export interface TravelPlanInput {
   travelStyle: TravelStyle;
   /** Budget tier for estimating costs and accommodation. */
   budgetLevel: BudgetLevel;
+  /** Places the traveller already shortlisted (My Trip list). */
+  tripItems?: TripItemRef[];
   /** List of interest categories the traveller wants to explore. */
   interests: TravelInterest[];
   /** Number of people travelling together. */
   groupSize: number;
+}
+
+/** Reference to a place the traveller shortlisted on a Destination page. */
+export interface TripItemRef {
+  /** Display name of the place. */
+  name: string;
+  /** What kind of place it is. */
+  kind: "attraction" | "hotel" | "food" | "experience" | "flight";
+  /**
+   * Confirmed real price for this selection, when one exists. Items without
+   * it have NO live price — the planner must treat their costs as suggestions,
+   * never as confirmed amounts.
+   */
+  price?: { amount: number; currency: string } | null;
 }
 
 /** A single scheduled activity or attraction within a day. */

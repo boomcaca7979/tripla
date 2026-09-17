@@ -101,10 +101,6 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
-      <head>
-        {/* JS 可用标记：Reveal 初始隐藏仅在 .js-ready 下生效（无 JS 内容默认可见） */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js-ready')" }} />
-      </head>
       <body className="min-h-full">
         <Script
           async

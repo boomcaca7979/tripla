@@ -4,7 +4,7 @@ import type { Vibe } from "@/lib/inner-state";
 /**
  * atlas-store — World Atlas 的共享交互状态（STEP 2A/2B）。
  *
- * VIBE LENS：WorldAtlas 节点 ↔ KeepExploring 列表共用。
+ * VIBE LENS：WorldAtlas 节点（/destinations hub）客户端岛内共用。
  * COMPARE：从 Preview 添加（≤3），compare tray / curves 消费。
  * 两个 client island 之间通过本 store 共享，页面主体保持 Server Component。
  *
@@ -41,6 +41,3 @@ export const useAtlasStore = create<AtlasState>((set, get) => ({
 }));
 
 export { COMPARE_MAX };
-
-// 向后兼容的别名（既有消费方：KeepExploring 等）
-export const useDestinationVibeStore = useAtlasStore;

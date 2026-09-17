@@ -45,7 +45,7 @@ export function generateSitemapEntries(): MetadataRoute.Sitemap {
 
   // Phase 8.6: Region landing 页 priority 0.7
   // 仅生成真实存在 destination 的 region
-  const ALL_REGIONS: Region[] = ["Asia", "Europe", "Americas", "Oceania"];
+  const ALL_REGIONS: Region[] = ["Asia", "Europe", "Americas", "Oceania", "Africa"];
   const usedRegions = new Set(DESTINATIONS.map((d) => d.region));
   const regionEntries: MetadataRoute.Sitemap = ALL_REGIONS.filter((r) =>
     usedRegions.has(r),

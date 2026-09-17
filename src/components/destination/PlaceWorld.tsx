@@ -21,6 +21,7 @@ import {
   seasonForLatitudeMonth,
   type MonthNormal,
 } from "@/lib/inner-state";
+import PlaceDataPortrait from "./PlaceDataPortrait";
 import type { Destination } from "@/data/destinations";
 
 /**
@@ -44,6 +45,11 @@ export default function PlaceWorld({
   normals,
   currentMonthPrecipMm,
   timeScrubber = true,
+  facts,
+  interests,
+  planHref,
+  guidesCount,
+  guidesHref,
 }: {
   dest: Destination;
   normals: MonthNormal[];
@@ -51,6 +57,16 @@ export default function PlaceWorld({
   currentMonthPrecipMm: number;
   /** Atlas 拥有时间探索；Destination Detail 只展示当前环境（拖轨关闭） */
   timeScrubber?: boolean;
+  /** Hero essential fact（真实数据：canonical best months；预算/天数不再上 Hero） */
+  facts: { bestTime: string };
+  /** Best for：真实 interests */
+  interests: string[];
+  /** 主 CTA：规划器入口（带该目的地预填） */
+  planHref: string;
+  /** 同城 guide 数（真实 hub 数据）；0 = 无 guide */
+  guidesCount: number;
+  /** 有 guide → 首篇同城 guide 文章；无 guide → null（不造假入口） */
+  guidesHref: string | null;
 }) {
   const hemisphere = hemisphereForLatitude(dest.airport.latitude);
   const [season] = useState<Season>(() => seasonForLatitudeMonth(new Date().getMonth(), hemisphere) ?? "autumn");
@@ -201,13 +217,8 @@ export default function PlaceWorld({
               className="object-cover"
             />
           ) : (
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(var(--ut-place-accent-rgb, 180, 95, 77), 0.3), rgba(12, 15, 22, 1) 90%)",
-              }}
-            />
+            // 数据肖像：温度轨迹 / 降水 / 日照构成的无图目的地视觉主体
+            <PlaceDataPortrait normals={normals} />
           )}
           {/* 城市灯光（夜高昼低）+ 光照压暗 */}
           <div
@@ -242,14 +253,58 @@ export default function PlaceWorld({
         </p>
       </nav>
 
-      {/* 左下：城市身份 */}
+      {/* 底部：居中信息列（层级：环境 → region → 城市 → 国家 → facts → Best for → CTA） */}
       <div
-        className="absolute bottom-[7.5rem] left-4 z-10 md:bottom-32 md:left-6"
-        style={{ transform: `translate(${parallax.x * 10}px, ${parallax.y * 8}px)` }}
+        className="absolute inset-x-0 bottom-8 z-10 flex flex-col items-center px-4 text-center md:bottom-12"
+        style={{ transform: `translate(${parallax.x * 8}px, ${parallax.y * 6}px)` }}
       >
-        <p className="font-mono text-micro uppercase tracking-[0.18em] text-white/70">{dest.region}</p>
-        <h1 className="mt-2 font-display text-[clamp(2.75rem,5vw,4.5rem)] leading-none text-white">{dest.city}</h1>
-        <p className="mt-1.5 font-mono text-body-sm text-white/75">{dest.country}</p>
+        <p className="font-mono text-micro uppercase tracking-[0.16em] text-white/60">
+          {normal ? `RAIN ${normal.precipMm.toFixed(0)} MM · DAYLIGHT ${normal.daylightHours.toFixed(1)} H` : "—"}
+        </p>
+        <div className="mt-4 flex max-w-2xl flex-col items-center">
+          <p className="font-mono text-micro uppercase tracking-[0.24em] text-white/70">{dest.region}</p>
+          <h1 className="mt-2 font-display text-[clamp(2.75rem,7vw,5.5rem)] font-bold leading-[1.02] text-white">{dest.city}</h1>
+          {/* 参考作品 hero 模式：薄荷绿副标 + 两侧白色细线 */}
+          <div className="mt-3 flex items-center justify-center gap-4">
+            <span aria-hidden="true" className="h-px w-10 bg-white/60" />
+            <p className="font-mono text-body-sm uppercase tracking-[0.22em] text-[#6cdbc0]">{dest.country}</p>
+            <span aria-hidden="true" className="h-px w-10 bg-white/60" />
+          </div>
+          <p className="mt-4 font-mono text-micro uppercase tracking-[0.16em] text-white/65">
+            Best time {facts.bestTime}
+          </p>
+          {interests.length > 0 && (
+            <p className="mt-1.5 font-mono text-micro uppercase tracking-[0.16em] text-white/55">
+              Best for {interests.join(" · ")}
+            </p>
+          )}
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href={planHref}
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-[4px] bg-ut-accent px-5 text-body font-medium text-white transition-colors duration-[var(--ut-dur-fast)] hover:bg-ut-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ut-accent"
+            >
+              Plan this trip
+              <span aria-hidden="true">→</span>
+            </Link>
+            {guidesHref ? (
+              <Link
+                href={guidesHref}
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-[4px] border border-white/25 px-5 font-mono text-label uppercase tracking-[0.14em] text-white/85 transition-colors duration-[var(--ut-dur-fast)] hover:border-white/60 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ut-accent"
+              >
+                Explore {guidesCount} {guidesCount === 1 ? "guide" : "guides"}
+                <span aria-hidden="true">→</span>
+              </Link>
+            ) : (
+              <a
+                href="#explore"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-[4px] border border-white/25 px-5 font-mono text-label uppercase tracking-[0.14em] text-white/85 transition-colors duration-[var(--ut-dur-fast)] hover:border-white/60 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ut-accent"
+              >
+                Explore this destination
+                <span aria-hidden="true">→</span>
+              </a>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* 右上：时刻 / 季节 / 温度（环境读数） */}
@@ -263,12 +318,7 @@ export default function PlaceWorld({
         </p>
       </div>
 
-      {/* 左下角（城市块上方）：天气 / daylight 环境行 */}
-      <div className="absolute bottom-40 left-4 z-10 md:bottom-56 md:left-6">
-        <p className="font-mono text-micro uppercase tracking-[0.16em] text-white/60">
-          {normal ? `RAIN ${normal.precipMm.toFixed(0)} MM · DAYLIGHT ${normal.daylightHours.toFixed(1)} H` : "—"}
-        </p>
-      </div>
+
 
       {/* 底部：TIME 拖轨（仅 Atlas 场景；Profile 显示静态实况时钟） */}
       <div

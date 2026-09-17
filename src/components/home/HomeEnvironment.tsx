@@ -4,30 +4,75 @@ import {
   createContext, useContext, useEffect, useMemo, useRef, useState, type ReactNode,
 } from "react";
 import {
-  deriveVisualState, deriveWeatherFor, destinationLocalHour,
-  HOME_DESTINATION, moonPhaseFor, MOON_PHASE_SEQUENCE, seasonFromDate,
-  type MoodId, type MoonPhaseId, type Season, type VisualState, type WeatherId,
+  deriveVisualState, destinationLocalHour,
+  moonPhaseFor, MOON_PHASE_SEQUENCE, seasonFromDate,
+  type DestinationContext, type MoodId, type MoonPhaseId, type Season,
+  type VisualState, type WeatherId,
 } from "@/lib/visual-state";
+import type { BudgetTier, HomePlace } from "@/lib/home-discovery";
+import {
+  EMPTY_USER_LOCATION, resolveUserLocation,
+  type ResolvedUserLocation,
+} from "@/lib/user-location";
+import { fetchCurrentWeather, weatherIdFor, type NormalizedWeather } from "@/lib/weather-state";
+import { ENV_DARK_TOKENS } from "@/lib/env-tokens";
 
 /**
  * HomeEnvironment — Living Home 的状态中枢 + 页面级环境层。
  *
- * State（目的地当地时间 / 季节 / 心情 / 天气）
- *   → deriveVisualState()（src/lib/visual-state.ts，单一真相源，含对比度安全墨色）
- *   → 页面级 fixed 环境层（sky / veil / haze）+ 包裹层 CSS 变量 + data 属性
- *   → Environment / Typography / UI 全部只消费变量。
+ * 三类状态在此汇合，且**严格分离**：
  *
- * 环境是 Home-level 的：hero 之内是天空，滚动后环境以 envDeep 延续到
- * Discovery / Routes / Field Notes / Footer —— 不存在"hero 之外的另一个世界"。
+ *  A. 用户所在地（userLocation）
+ *     由 lib/user-location.ts 解析：已授权的 geolocation > 浏览器时区 > 通用状态。
+ *     绝不写入目的地选择，也绝不硬编码东京。
  *
- * 时间锚定目的地当地（Intl 原生）；天气为确定性状态（无 API）。
- * 指针视差与滚动连续性在此统一以 rAF 直写 CSS 变量（零 React render）。
+ *  B. 发现层选择（destination / month / budget / mood）
+ *     用户主动选择的旅行目的地与筛选条件。
+ *
+ *  C. 环境状态
+ *     focus = 目的地（若有） ?? 用户所在地（若有） → 决定 Local time / Weather 读数；
+ *     实时天气经 lib/weather-state.ts 标准化后同时驱动**图标 + 文字 + 环境氛围**
+ *     （同一状态源）。天气未知时显示通用 "Weather"，不伪造晴天。
+ *
+ * 首屏确定性：SSR 与客户端首次 render 都使用初始常量（地点未解析、天气未知），
+ * 真实位置/时间/天气在 hydration 之后的 effect 中写入。
  */
 
+/** 聚焦地点：当前"Local time / Weather"读数所锚定的位置。 */
+export interface HomeFocus {
+  id: string;
+  kind: "destination" | "user";
+  label: string | null;
+  timeZone: string | null;
+  latitude: number | null;
+  longitude: number | null;
+}
+
 interface HomeState {
-  destination: typeof HOME_DESTINATION;
+  /** 首页数据集（server 装配，含 canonical 月值 + 坐标）。 */
+  places: HomePlace[];
+  /** 构建/首屏所属月份（未筛选月份时的上下文，非筛选条件）。 */
+  currentMonth: number;
+
+  /** 已选目的地；null = 用户尚未选择（首页初始状态）。 */
+  destination: DestinationContext | null;
+  selectDestination: (d: DestinationContext | null) => void;
+  /** 用户所在地（解析后写入；未解析/无法确定为 EMPTY）。 */
+  userLocation: ResolvedUserLocation;
+  /** 读数所在位置 = 目的地 ?? 用户所在地；null = 两者都不确定。 */
+  focus: HomeFocus | null;
+  /** 已选月份；null = 不限月份。 */
+  month: number | null;
+  setMonth: (m: number | null) => void;
+  budget: BudgetTier;
+  setBudget: (b: BudgetTier) => void;
   mood: MoodId;
   setMood: (m: MoodId) => void;
+
+  /** 实时天气的标准化状态；null = 未知（显示 "Weather"）。 */
+  condition: NormalizedWeather | null;
+  /** 天气来源：live = 真实数据源；unknown = 无可靠数据。 */
+  weatherSource: "live" | "unknown";
   weather: WeatherId;
   setWeather: (w: WeatherId) => void;
   moonPhase: MoonPhaseId;
@@ -56,49 +101,103 @@ export function useHomeState(): HomeState {
  * moon phase are applied inside an effect AFTER hydration (see below).
  */
 const INITIAL_SEASON: Season = "summer";
+/** 首屏环境基底（无天气断言：文字/图标此时显示通用 "Weather"）。 */
 const INITIAL_WEATHER: WeatherId = "clear";
+
+/** 天气低频刷新间隔（30 分钟）：不轮询、不制造明显负担。 */
+const WEATHER_REFRESH_MS = 30 * 60 * 1000;
+/** 回到前台时判定"数据过期"的阈值（10 分钟）。 */
+const WEATHER_STALE_MS = 10 * 60 * 1000;
 const INITIAL_HOUR = 12;
 const INITIAL_MOON: MoonPhaseId = "full";
 
-/** 内容区消费的环境 token（浅墨族：envDeep 恒为深色世界） */
-const CONTENT_TOKENS: Record<string, string> = {
-  "--ut-ink": "#f5f2ea",
-  "--ut-text": "rgba(245, 242, 234, 0.92)",
-  "--ut-text-2": "rgba(245, 242, 234, 0.78)",
-  "--ut-muted": "rgba(245, 242, 234, 0.6)",
-  "--ut-subtle": "rgba(245, 242, 234, 0.44)",
-  "--ut-border": "rgba(245, 242, 234, 0.13)",
-  "--ut-border-strong": "rgba(245, 242, 234, 0.24)",
-  "--ut-surface": "rgba(245, 242, 234, 0.05)",
-  "--ut-surface-hover": "rgba(245, 242, 234, 0.1)",
-  "--ut-surface-elevated": "rgba(17, 19, 26, 0.55)",
-};
+export default function HomeEnvironment({
+  children,
+  places,
+  initialMonth,
+}: {
+  children: ReactNode;
+  places: HomePlace[];
+  /** server 首屏月份（与客户端首次 render 一致，hydration 后再校正为真实当前月）。 */
+  initialMonth: number;
+}) {
+  // ── A/B：位置与发现层选择。初始一律"未确定/未选择"。──
+  const [destination, setDestination] = useState<DestinationContext | null>(null);
+  const [userLocation, setUserLocation] = useState<ResolvedUserLocation>(EMPTY_USER_LOCATION);
+  const [month, setMonth] = useState<number | null>(null);
+  const [budget, setBudget] = useState<BudgetTier>("any");
+  const [mood, setMood] = useState<MoodId>("all");
+  const [currentMonth, setCurrentMonth] = useState<number>(initialMonth);
 
-export default function HomeEnvironment({ children }: { children: ReactNode }) {
-  const destination = HOME_DESTINATION;
-  // 确定性首屏状态：SSG 构建时与客户端首次 render 必须使用完全相同的
-  // initial state，否则 React hydration 会在季节/天气/小时/月相上产生 #418。
-  // 真实时间数据在 hydration 完成后的 effect 中再写入（见下方 sync）。
+  // ── C：环境状态（确定性首屏常量，hydration 后写入真实值）──
   const [season, setSeason] = useState<Season>(INITIAL_SEASON);
   const [weather, setWeather] = useState<WeatherId>(INITIAL_WEATHER);
+  const [condition, setCondition] = useState<NormalizedWeather | null>(null);
+  const [weatherSource, setWeatherSource] = useState<"live" | "unknown">("unknown");
   const [liveHour, setLiveHour] = useState<number>(INITIAL_HOUR);
   const [hourOverride, setHourOverride] = useState<number | null>(null);
-  const [mood, setMood] = useState<MoodId>("all");
   const [moonPhase, setMoonPhase] = useState<MoonPhaseId>(INITIAL_MOON);
   const [moonOverride, setMoonOverride] = useState<MoonPhaseId | null>(null);
   const [saveData, setSaveData] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
+  /** 最近一次天气取数（用于前台恢复时的过期判断，避免无意义请求）。 */
+  const lastWeatherFetchRef = useRef<{ key: string; at: number } | null>(null);
 
-  // hydration 后把真实本地时间/季节/天气/月相写入 state；
-  // 首次渲染保持确定性（与 SSG HTML 一致），effect 内更新不再触发 hydration 校验。
+  // ── 用户所在地解析（hydration 后一次；不弹权限框、失败不报错）──
+  // 数据源 = IANA 时区表（src/lib/data/tz-coords.ts），与 145 个旅行目的地数据集
+  // 完全无关：用户所在地不要求在目的地数据集中存在。
+  useEffect(() => {
+    let cancelled = false;
+    resolveUserLocation()
+      .then((loc) => {
+        if (!cancelled) setUserLocation(loc);
+      })
+      .catch(() => {
+        if (!cancelled) setUserLocation(EMPTY_USER_LOCATION);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // 聚焦地点：目的地优先，其次用户所在地（严格分离两个状态）
+  const focus = useMemo<HomeFocus | null>(() => {
+    if (destination) {
+      return {
+        id: destination.id,
+        kind: "destination",
+        label: destination.label,
+        timeZone: destination.timeZone,
+        latitude: destination.latitude ?? null,
+        longitude: destination.longitude ?? null,
+      };
+    }
+    if (userLocation.label || userLocation.latitude !== null) {
+      return {
+        id: "user",
+        kind: "user",
+        label: userLocation.label,
+        timeZone: userLocation.timeZone,
+        latitude: userLocation.latitude,
+        longitude: userLocation.longitude,
+      };
+    }
+    return null;
+  }, [destination, userLocation]);
+
+  const focusTimeZone = focus?.timeZone ?? null;
+  const focusLat = focus?.latitude ?? null;
+  const focusLon = focus?.longitude ?? null;
+  const focusKey = `${focus?.id ?? "none"}|${focusTimeZone ?? ""}|${focusLat ?? ""}|${focusLon ?? ""}`;
+
+  // ── 时间：锚定 focus 当地（无 focus 时为访问者本地时间）──
   useEffect(() => {
     const sync = () => {
       const now = new Date();
-      const s = seasonFromDate(now);
-      setSeason(s);
-      setWeather(deriveWeatherFor(HOME_DESTINATION.id, now, s));
-      setLiveHour(destinationLocalHour(destination.timeZone, now));
+      setSeason(seasonFromDate(now));
+      setLiveHour(destinationLocalHour(focusTimeZone, now));
       setMoonPhase(moonPhaseFor(now));
+      setCurrentMonth(now.getMonth());
     };
     // 异步初始化（避免 effect 内同步 setState 级联渲染）
     const t0 = setTimeout(() => {
@@ -109,7 +208,76 @@ export default function HomeEnvironment({ children }: { children: ReactNode }) {
     }, 0);
     const id = setInterval(sync, 30_000);
     return () => { clearTimeout(t0); clearInterval(id); };
-  }, [destination.timeZone]);
+  }, [focusTimeZone]);
+
+  // ── 实时天气：focus 坐标 → /api/weather(current) → 标准化状态 ──
+  // 图标 / 文字 / 环境氛围全部由这一个状态派生；失败即"未知"，绝不伪造晴天。
+  //
+  // 刷新策略（低频、可预期、无泄漏）：
+  //   · 焦点变化（目的地切换 / 清空）时立即取一次；
+  //   · 页面可见时每 WEATHER_REFRESH_MS 取一次；
+  //   · 页面隐藏 → 停表（不发请求）；回到前台 → 数据过期则立即刷新，并重新起表；
+  //   · 每次 effect 只有一个 interval，cleanup 必定清掉（不会叠加多个 timer）。
+  useEffect(() => {
+    const ac = new AbortController();
+    let cancelled = false;
+    const hasCoords = focusLat !== null && focusLon !== null;
+
+    const load = () => {
+      if (cancelled) return;
+      if (!hasCoords) {
+        // 无可靠坐标 → 读数清空为"未知"（不是伪造天气）
+        setCondition(null);
+        setWeatherSource("unknown");
+        setWeather(INITIAL_WEATHER);
+        return;
+      }
+      fetchCurrentWeather(focusLat!, focusLon!, focusTimeZone ?? "UTC", ac.signal).then((reading) => {
+        if (cancelled) return;
+        lastWeatherFetchRef.current = { key: focusKey, at: Date.now() };
+        setCondition(reading.condition);
+        setWeatherSource(reading.condition ? "live" : "unknown");
+        setWeather(weatherIdFor(reading.condition) ?? INITIAL_WEATHER);
+      });
+    };
+
+    // 异步首帧（避免 effect 内同步 setState 造成级联渲染）
+    const t0 = setTimeout(load, 0);
+
+    let timer: ReturnType<typeof setInterval> | null = null;
+    const startTimer = () => {
+      if (timer !== null || cancelled) return;
+      timer = setInterval(load, WEATHER_REFRESH_MS);
+    };
+    const stopTimer = () => {
+      if (timer !== null) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+    const onVisibility = () => {
+      if (document.hidden) {
+        stopTimer();
+        return;
+      }
+      const last = lastWeatherFetchRef.current;
+      const stale =
+        !last || last.key !== focusKey || Date.now() - last.at > WEATHER_STALE_MS;
+      if (stale) load();
+      startTimer();
+    };
+
+    if (!document.hidden) startTimer();
+    document.addEventListener("visibilitychange", onVisibility);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(t0);
+      stopTimer();
+      document.removeEventListener("visibilitychange", onVisibility);
+      ac.abort();
+    };
+  }, [focusKey, focusLat, focusLon, focusTimeZone]);
 
   const hour = hourOverride ?? liveHour;
   const effectiveMoon: MoonPhaseId = moonOverride ?? moonPhase;
@@ -137,7 +305,8 @@ export default function HomeEnvironment({ children }: { children: ReactNode }) {
       "--ut-hero-muted": visual.hero.muted,
       "--ut-hero-accent": visual.hero.accentText,
       "--ut-hero-line": visual.hero.line,
-      ...CONTENT_TOKENS,
+      // 深色环境墨色族（与 lib/env-tokens.ts 共享，Header 首帧用同一份）
+      ...ENV_DARK_TOKENS,
     };
     for (const [k, v] of Object.entries(vars)) root.style.setProperty(k, v);
     return () => {
@@ -203,13 +372,33 @@ export default function HomeEnvironment({ children }: { children: ReactNode }) {
   }, []);
 
   const state: HomeState = {
-    destination, mood, setMood, weather, setWeather,
+    places,
+    currentMonth,
+    destination,
+    selectDestination: setDestination,
+    userLocation,
+    focus,
+    month,
+    setMonth,
+    budget,
+    setBudget,
+    mood,
+    setMood,
+    condition,
+    weatherSource,
+    weather,
+    setWeather,
     moonPhase: effectiveMoon,
     cycleMoonPhase: () => {
       const i = MOON_PHASE_SEQUENCE.indexOf(effectiveMoon);
       setMoonOverride(MOON_PHASE_SEQUENCE[(i + 1) % MOON_PHASE_SEQUENCE.length]);
     },
-    hour, hourOverride, setHourOverride, season, visual, lite: saveData,
+    hour,
+    hourOverride,
+    setHourOverride,
+    season,
+    visual,
+    lite: saveData,
   };
 
   const vars = {
@@ -228,6 +417,9 @@ export default function HomeEnvironment({ children }: { children: ReactNode }) {
         data-ut-season={season}
         data-ut-mood={mood}
         data-ut-weather={weather}
+        data-ut-condition={condition?.id ?? "unknown"}
+        data-ut-weather-source={weatherSource}
+        data-ut-focus={focus?.kind ?? "none"}
         data-sky-ink={visual.ink}
         data-ut-lite={saveData ? "true" : undefined}
         style={{

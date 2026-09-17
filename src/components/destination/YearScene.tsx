@@ -72,7 +72,7 @@ export default function YearScene({
   return (
     <section aria-labelledby="when-heading" className="relative mt-16 overflow-hidden md:mt-24">
       {/* 暗色时间场 */}
-      <div className="absolute inset-0 bg-[#0c0f16]" />
+      <div className="absolute inset-0 bg-ut-surface" />
       {/* 季节 × tier 氛围（确定性派生） */}
       <div
         aria-hidden="true"
@@ -101,10 +101,10 @@ export default function YearScene({
         <Eyebrow className="mb-3">When to go</Eyebrow>
         <h2
           id="when-heading"
-          className="font-display text-[clamp(1.5rem,3vw,2.25rem)] leading-[1.05] text-[#f5f3ec]"
+          className="font-display text-[clamp(1.5rem,3vw,2.25rem)] leading-[1.05] text-ut-ink"
         >
           {goStatement}
-          <span className="ml-3 font-mono text-micro uppercase tracking-[0.16em] text-white/50">
+          <span className="ml-3 font-mono text-micro uppercase tracking-[0.16em] text-ut-muted">
             drag the year — {city} changes
           </span>
         </h2>
@@ -112,10 +112,10 @@ export default function YearScene({
         {/* 巨型月份 + 读数（TIME AS PLACE STATE） */}
         <div aria-live="polite" className="mt-10 grid gap-x-12 gap-y-8 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <p className="font-display text-[clamp(3rem,7vw,5.5rem)] leading-none text-[#f5f3ec]">
+            <p className="font-display text-[clamp(3rem,7vw,5.5rem)] leading-none text-ut-ink">
               {row?.name ?? "—"}
             </p>
-            <p className="mt-4 font-mono text-label uppercase tracking-[0.18em] text-white/70">
+            <p className="mt-4 font-mono text-label uppercase tracking-[0.18em] text-ut-text-2">
               {row?.seasonName} ·{" "}
               {row?.inWindow ? "In recommended window" : "Outside window"}
             </p>
@@ -136,10 +136,10 @@ export default function YearScene({
                   : "Workable"}{" "}
               (R-tier)
             </p>
-            <p className="mt-5 font-mono text-body-lg tabular-nums text-white/90">
+            <p className="mt-5 font-mono text-body-lg tabular-nums text-ut-ink">
               {row ? `${row.tempHighC.toFixed(1)}° / ${row.tempLowC.toFixed(1)}°C` : "—"}
             </p>
-            <p className="mt-1 font-mono text-label tabular-nums text-white/60">
+            <p className="mt-1 font-mono text-label tabular-nums text-ut-muted">
               {row ? `${row.precipMm.toFixed(0)} mm rain · ${row.precipDaysGe1mm.toFixed(0)} rain days · ${row.daylightHours.toFixed(1)} h daylight` : "—"}
             </p>
           </div>
@@ -184,7 +184,7 @@ export default function YearScene({
                     aria-hidden="true"
                     className={[
                       "relative flex-1 rounded-ut-sm transition-colors duration-300 motion-reduce:transition-none",
-                      active ? "bg-white/10" : "bg-transparent",
+                      active ? "bg-ut-accent/10" : "bg-transparent",
                     ].join(" ")}
                     style={{ height: 120 }}
                   >
@@ -192,7 +192,7 @@ export default function YearScene({
                     <div
                       className={[
                         "absolute inset-x-1 rounded-ut-sm transition-colors duration-300 motion-reduce:transition-none",
-                        active ? "bg-white/80" : r.derived === "avoid" ? "bg-ut-verdict-challenging/70" : "bg-white/35",
+                        active ? "bg-ut-accent" : r.derived === "avoid" ? "bg-ut-verdict-challenging/70" : "bg-ut-border-strong",
                       ].join(" ")}
                       style={{ bottom: 18, height: `${h}%` }}
                     />
@@ -211,7 +211,7 @@ export default function YearScene({
                     <span
                       className={[
                         "absolute inset-x-0 bottom-0 text-center font-mono text-[0.5625rem] uppercase tracking-wide transition-colors duration-300",
-                        active ? "text-white" : "text-white/45",
+                        active ? "text-ut-ink" : "text-ut-muted",
                       ].join(" ")}
                     >
                       {r.short}
@@ -220,10 +220,10 @@ export default function YearScene({
                 );
               })}
             </div>
-            <p className="mt-3 font-mono text-micro uppercase tracking-[0.16em] text-white/45">
+            <p className="mt-3 font-mono text-micro uppercase tracking-[0.16em] text-ut-muted">
               ● verdict (R1–R7) · bars = mean temperature · drag anywhere on the track
             </p>
-            <p suppressHydrationWarning className="mt-2 font-mono text-micro tabular-nums text-white/35">
+            <p suppressHydrationWarning className="mt-2 font-mono text-micro tabular-nums text-ut-subtle">
               NOW {formatHour(new Date().getHours())} · VIEWING {row?.name.toUpperCase()}
             </p>
           </div>
@@ -231,7 +231,7 @@ export default function YearScene({
 
         <a
           href={guideHref}
-          className="mt-10 inline-flex min-h-[44px] items-center font-mono text-label uppercase tracking-[0.16em] text-white/85 underline decoration-[rgba(245,243,236,0.35)] underline-offset-4 transition-colors duration-[var(--ut-dur-fast)] hover:text-white motion-reduce:transition-none"
+          className="mt-10 inline-flex min-h-[44px] items-center font-mono text-label uppercase tracking-[0.16em] text-ut-accent underline decoration-ut-accent/40 underline-offset-4 transition-colors duration-[var(--ut-dur-fast)] hover:text-ut-accent-strong motion-reduce:transition-none"
         >
           Full monthly guide →
         </a>

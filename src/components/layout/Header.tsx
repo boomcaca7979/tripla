@@ -8,6 +8,9 @@ import { useHydration } from "@/hooks/useHydration";
 import { useTranslation } from "@/lib/i18n";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import TriplaLogo from "@/components/ui/TriplaLogo";
+import {
+  ENV_DARK_TOKENS, HEADER_FULL_STATE_CLASS, HEADER_SCROLLED_STATE_CLASS,
+} from "@/lib/env-tokens";
 
 // ── Navigation ───────────────────────────────────────────────────────
 // 仅链接现有路由；Explore / Experiences 槽位等对应路由在 Phase 5 落地后再加入。
@@ -37,13 +40,23 @@ export default function Header() {
   const preferredCurrency = useTravelStore((s) => s.preferredCurrency);
   const setPreferredCurrency = useTravelStore((s) => s.setPreferredCurrency);
 
+  // Home 上 Header 恒为"完整状态"（沉入 envDeep 表面），不再有透明初始态；
+  // 非 Home 页保持既有纸面 chrome 行为（未滚动浅底 / 滚动后实体化）。
+  // 注意：isHome 必须在下面的滚动 effect 之前声明（该 effect 的依赖里用到它）。
+  const isHome = pathname === "/";
+
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
-  // 滚动后导航轻微实体化（rAF 节流， passive listener）
+  // 滚动后导航轻微实体化（rAF 节流， passive listener）。
+  //
+  // 首页例外：首页导航栏**整个生命周期**都使用"完整状态"（见下方 isHome 分支），
+  // 不再存在"透明简化态 → 滚动后实体化"的切换，因此首页不需要这个监听。
+  // 其余路由保持原行为（未滚动 = 纸面浅底，滚动 = 实体化）。
   useEffect(() => {
+    if (isHome) return;
     let raf = 0;
     const onScroll = () => {
       if (raf) return;
@@ -58,7 +71,7 @@ export default function Header() {
       window.removeEventListener("scroll", onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [isHome]);
 
   // Drawer：打开时锁定滚动 + 聚焦关闭按钮；Escape 关闭并归还焦点
   useEffect(() => {
@@ -86,10 +99,6 @@ export default function Header() {
     [pathname],
   );
 
-  // Home 上 Header 属于环境：顶部与天空同墨色、透明；滚动后沉入 envDeep 表面。
-  // 非 Home 页保持既有纸面 chrome 行为。
-  const isHome = pathname === "/";
-
   const navLinkClass = (active: boolean) => [
     "relative px-3 py-1.5 text-body-sm font-medium transition-colors",
     "duration-[var(--ut-dur-fast)] ease-ut-out",
@@ -113,14 +122,17 @@ export default function Header() {
       className={[
         "fixed top-0 left-0 right-0 z-50",
         "border-b transition-[background-color,border-color,box-shadow,color] duration-[var(--ut-dur-med)] ease-ut-out",
-        isHome ? "backdrop-blur-0" : "backdrop-blur-sm",
-        scrolled
-          ? "border-[rgba(var(--ut-accent-rgb,180,95,77),0.16)] bg-[rgba(var(--ut-env-deep-rgb,250,249,246),0.82)] shadow-ut-1 backdrop-blur-md"
-          : isHome
-            ? "border-transparent bg-transparent"
-            : "border-transparent bg-ut-bg/55",
-        isHome && !scrolled ? "ut-header-on-env" : "",
+        // 首页：从首帧起就使用"完整导航栏"状态，且不随滚动改变
+        // （HEADER_FULL_STATE_CLASS = 与滚动后完全同一套外观，不存在第二套样式）
+        isHome
+          ? HEADER_FULL_STATE_CLASS
+          : scrolled
+            ? HEADER_SCROLLED_STATE_CLASS
+            : "border-transparent bg-ut-bg/55 backdrop-blur-sm",
       ].join(" ")}
+      // 首页 Header 渲染在 HomeEnvironment 包裹层之外，拿不到运行时注入 :root 的 token；
+      // 这里在首帧（SSR HTML）就带上同一份深色墨色族，避免 hydration 前后换色。
+      style={isHome ? (ENV_DARK_TOKENS as React.CSSProperties) : undefined}
     >
       <div className="mx-auto flex h-16 max-w-[var(--ut-container-max)] items-center justify-between px-4 md:px-6">
         {/* ── Logo ─────────────────────────────────────────────── */}
@@ -159,7 +171,9 @@ export default function Header() {
             </svg>
           </Link>
 
-          <LanguageSwitcher />
+          {/* 语言切换器只在非首页渲染：首页 UI 恒为英文（面向国际用户），
+              若在首页展示"中文"选项会与英文界面混排。其余路由行为不变。 */}
+          {!isHome && <LanguageSwitcher />}
 
           {hydrated && (
             <>

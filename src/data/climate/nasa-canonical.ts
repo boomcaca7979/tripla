@@ -98,11 +98,11 @@ export function getClimateRecord(destinationId: string): CanonicalClimateRecord 
   return rec;
 }
 
-/** artifact 级自检：记录数必须等于 145（v8.7 freeze 规模）。 */
+/** artifact 级自检：记录数不得少于期望目的地规模（v8.7 冻结时为 145，扩展后 155）。 */
 export function assertCanonicalCoverage(expectedDestinations: string[]): void {
-  if (data.records.length !== 145) {
+  if (data.records.length < expectedDestinations.length) {
     throw new Error(
-      `[nasa-canonical] expected 145 records, found ${data.records.length} — partial dataset detected`,
+      `[nasa-canonical] expected ${expectedDestinations.length} records, found ${data.records.length} — partial dataset detected`,
     );
   }
   const missing = expectedDestinations.filter((id) => !INDEX.has(id));

@@ -74,11 +74,31 @@ export function buildUserMessage(
       ? `Currency: 1 ${exchangeRate.base} = ${exchangeRate.rate} ${exchangeRate.target}`
       : "";
 
+  const tripItemsLines = (input.tripItems ?? [])
+    .map((item) => {
+      const priceNote =
+        item.price && item.price.amount > 0
+          ? `confirmed price ${item.price.currency} ${item.price.amount}`
+          : "no live price — cost figures for it are suggestions only";
+      return `- ${item.name} (${item.kind}, ${priceNote})`;
+    })
+    .join("\n");
+  const tripItemsBlock = tripItemsLines
+    ? [
+        "",
+        "The traveller has already shortlisted these places — build the itinerary AROUND them (schedule every shortlisted attraction, group related stops on the same day to avoid backtracking, and use shortlisted food/hotel entries for meal/accommodation suggestions):",
+        tripItemsLines,
+        "",
+        "Cost integrity: only shortlisted items with a confirmed price count as real money. For everything else, any cost you mention is a suggestion — clearly frame it as approximate guidance, never as a confirmed or booked amount.",
+      ].join("\n")
+    : "";
+
   return [
     `Create a ${duration}-day itinerary for ${input.groupSize} traveler(s).`,
     `Destination: ${input.destination.city}, ${input.destination.country} (${input.destination.iata})`,
     `Travel dates: ${input.departureDate} to ${input.returnDate}`,
     `Travel style: ${input.travelStyle} | Budget: ${input.budgetLevel} | Interests: ${input.interests.join(", ")}`,
+    tripItemsBlock,
     "",
     "Weather forecast:",
     weatherLines,

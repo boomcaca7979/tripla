@@ -4,7 +4,8 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import { TRIPS } from "@/data/trips";
 
 /**
- * RoutesStage — 编辑感路线层（server，零 client JS）。
+ * RoutesStage — 可直接参考/使用的旅行方案示例（server，零 client JS）。
+ * 定位：不是"网站还有 Routes 这个栏目"，而是"这里有可以照着走的完整方案"。
  * 非对称构图：1 张大图特写 + 3 张紧凑行卡，媒体比例刻意不一。
  */
 
@@ -31,11 +32,11 @@ export default function RoutesStage() {
       <div className="mx-auto max-w-[var(--ut-container-max)] px-4 py-20 md:px-6 md:py-28">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <Eyebrow dot>Routes</Eyebrow>
+            <Eyebrow dot>Ready-made plans</Eyebrow>
             <h2 className="mt-3 font-display text-h1 text-ut-ink">Steal a route.</h2>
             <p className="mt-3 max-w-[56ch] text-body text-ut-text-2">
-              Day-by-day plans with times, budgets and where to actually eat —
-              take one as-is or bend it to your dates.
+              Pull a real plan instead of a list of attractions: day-by-day timing,
+              where to eat, what it costs — take one as-is or bend it to your own dates.
             </p>
           </div>
           <Link

@@ -1,65 +1,76 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
-  DESTINATIONS,
   getDestinationBySlug,
   getDestinationSlugs,
   type Destination,
 } from "@/data/destinations";
 import { TRIPS } from "@/data/trips";
 import { getGuidesForCity } from "@/data/guides";
-import InnerSection from "@/components/inner/InnerSection";
-import InnerCTA from "@/components/inner/InnerCTA";
-import FaqList from "@/components/inner/FaqList";
+import { getAttractions } from "@/data/attractions";
+import { getDestinationGallery } from "@/data/destination-gallery";
 import PlaceWorld from "@/components/destination/PlaceWorld";
-import PlacePractical from "@/components/destination/PlacePractical";
-import PlaceDecision from "@/components/destination/PlaceDecision";
-import HotelModule from "@/components/destination/HotelModule";
-import PlaceInAtlas, { type MiniNode } from "@/components/destination/PlaceInAtlas";
 import YearScene from "@/components/destination/YearScene";
-import KeepExploring, { type ExploreSection } from "@/components/destination/KeepExploring";
-import { capitalize } from "@/components/destination/place-state";
 import { getClimateRecord } from "@/data/climate/nasa-canonical";
 import {
   buildMonthRows,
   canonicalWindowLabel,
   defaultMonth,
 } from "@/components/besttime/besttime-state";
-import {
-  haversineKm,
-  monthNormals,
-  nearbyDestinations,
-  projectWorldPoint,
-} from "@/lib/inner-state";
+import { monthNormals } from "@/lib/inner-state";
+import { MyTripProvider } from "@/components/destination/trip/MyTripContext";
+import MyTripPanel from "@/components/destination/trip/MyTripPanel";
+import MobileTripBar from "@/components/destination/trip/MobileTripBar";
+import AttractionCard from "@/components/destination/trip/AttractionCard";
+import { getAttractionPoint } from "@/data/attraction-coordinates";
+import PlaceGallery from "@/components/destination/trip/PlaceGallery";
+import RouteBuilder from "@/components/destination/trip/RouteBuilder";
+import FlightSearch from "@/components/destination/trip/FlightSearch";
+import ExperienceList from "@/components/destination/trip/ExperienceList";
+import RestaurantList from "@/components/destination/trip/RestaurantList";
+import { getCityCenter } from "@/lib/api/restaurants";
+import type { TravelInterest, TravelStyle } from "@/types/itinerary";
 
 /**
- * Destination Detail — DESTINATION 2.0 PHASE 1（SPEC v1 §9/§10）。
+ * Destination Detail — 3.5：CITY TRIP EXPLORER（旅行探索与规划页）。
  *
- * Destination = INTERACTIVE TRAVEL WORLD（3.0：SCENE > UI / MOVEMENT > TEXT）。
- * 全页暗色沉浸世界，三个可玩场景：
- *   SCENE 01 ARRIVAL — 100svh 满出血图像 + city 巨字 + 唯一实时状态行
- *     （Hero + NOW + breadcrumb 合并；NOW 四格与地图已按 SPEC §5 REMOVE）。
- *   SCENE 02 THE LENS — 可拖拽放大透镜（×1.9）游走真实照片；章节 = LENS
- *     WAYPOINT（确定性视觉锚点，非地理坐标）；vibe = 镜环 tint + 列表过滤
- *     （诚实双职）。自由拖拽优先于 waypoint。
- *   SCENE 03 THE YEAR — TIME AS PLACE STATE：ClimateYear moment + 拖拽 scrub，
- *     月份/轨迹/读数/场景氛围 tint（季节色 × tier）同步变化。
- *   之后为后续内容区（About 折叠 / Keep Exploring / Practical / Budget /
- *   Stay / CTA / FAQ），Phase 2 再重构为 Scene 04/05。
+ * 产品关系：看城市 → Getting there（机票/酒店） → 看景点 → 加入旅行清单
+ *   → 清单实时累积 → AI 按清单生成行程。页面主体 = 景点内容单元（每单元带
+ *   Wink 真实周边酒店 + Add to My Trip），桌面右侧 sticky
+ *   MY TRIP，移动端底部常驻 Trip Bar + Bottom Sheet。
  *
- * 数据诚信：
- *   · 气候权威 = canonical bestMonthsBaseline / R-tier（GO IN 宣言同源，无新算法）。
- *   · 温度唯一 live 来源 /api/weather（Open-Meteo 签名校验，mock 回退降级为
- *     CLIMATE NORMAL 标注）—— 不展示哈希天气。
- *   · vibe 只作用于有真实 tag 的内容；highlights 无 tag，不做伪造过滤。
- *   · gateway = Haversine 真实距离（不再使用同 region 冒名 nearby）。
+ * 数据诚信（本轮硬规则）：
+ *   · 预算：页面绝不自动估算 trip total（不再有 daily budget × days）。
+ *     My Trip total 只累计用户显式选择且带真实价格的条目；无真实价格 →
+ *     "Price unavailable"，不进入 total。城市 budgetPerDay 仅作 AI 参考。
+ *   · Flights = 站内价格结果（Aviasales Data API 缓存价格，token 缺失 →
+ *     诚实空态 + 外部搜索兜底），标注 "Prices from recent Aviasales search
+ *     data"；真实价格才进 My Trip。Aviationstack（仅时刻 + mock 回退）不用于本页。
+ *   · 景点 = 结构化真实地点对象（attractions.ts：名称/描述/真图/坐标/类型/
+ *     准入；未收录城市回退 highlights 字符串）。活动/主题文案不作为景点本体。
+ *   · 门票 = Viator attraction 级产品搜索（真实产品 + fromPrice；无产品 →
+ *     "No bookable experience available"）。
+ *   · 酒店 = Wink 唯一数据源：Attraction 真实坐标 → search/geo →
+ *     distanceInMeters 排序（卡片显示真实距离）→ 最近 ≤6 家 + Refresh 下一批；
+ *     nights = Suggested city stay；无坐标/无供给 → 诚实空态，绝不 Hotellook。
+ *   · 美食 = Restaurants（Geoapify Places；key 未配置 → 诚实空态；绝不把
+ *     菜名当餐厅）。
+ *   · 路线 = RouteBuilder：完全由 My Trip 已选条目生成（坐标最近邻排序、
+ *     酒店作住宿 anchor）；空选择 → "Add places to build your route"。
+ *   · AI = 真实 /api/itinerary（Groq llama-3.3-70b），输入含 My Trip tripItems
+ *     （含每条价格状态）；AI 成本只能作为 suggestion，不与 confirmed 混淆。
  *
- * 默认 Server Component（SSG, dynamicParams=false）；client 岛：ArrivalState /
- * KeepExploring / YearScene / FaqList(<details> 原生)。
+ * Scene 整合：SCENE 01 THE PLACE = Hero；SCENE 02 THE YEAR = When to go
+ * （紧跟 City Introduction 之后）。SSG（dynamicParams=false）不变。
  */
 
 const SITE_URL = "https://www.utripla.xyz";
 const CONTAINER = "mx-auto w-full max-w-7xl px-4 md:px-6";
+
+const VALID_TRAVEL_STYLES: TravelStyle[] = ["relaxed", "active", "cultural", "foodie", "adventure"];
+const VALID_INTERESTS: TravelInterest[] = [
+  "museums", "nature", "food", "shopping", "nightlife", "history", "sports", "beaches",
+];
 
 // ── Static params ─────────────────────────────────────────────────────
 
@@ -176,57 +187,17 @@ function buildPopularTripsItemListJsonLd(dest: Destination, trips: typeof TRIPS)
   };
 }
 
-/**
- * FAQ 单一真相源：页面可见 FAQ 与 FAQPage schema 由同一数组产生，
- * 保证结构化数据与可见内容严格一致（既保留既有 schema，又不产生无可见内容的问答）。
- */
-function buildDestinationFaqs(dest: Destination): { question: string; answer: string }[] {
-  const totalBudget = dest.budgetPerDay * dest.recommendedDays;
-  return [
-    {
-      question: `What is the best time to visit ${dest.city}?`,
-      answer: `The best months to visit ${dest.city} are ${dest.bestMonths}. ${dest.bestSeason} Plan your trip around these months for the most favorable weather and crowd levels.`,
-    },
-    {
-      question: `How many days do you need in ${dest.city}?`,
-      answer: `We recommend staying ${dest.recommendedDays} ${dest.recommendedDays === 1 ? "day" : "days"} in ${dest.city} to cover the main attractions at a relaxed pace. Visiting during ${dest.bestMonths} gives you the best weather for that duration.`,
-    },
-    {
-      question: `How much does ${dest.city} cost per day?`,
-      answer: `Estimated daily cost in ${dest.city} is ${dest.budgetPerDay.toLocaleString()} ${dest.budgetCurrency}, covering accommodation, food, local transport, and activities. For the recommended ${dest.recommendedDays}-day stay, plan around ${totalBudget.toLocaleString()} ${dest.budgetCurrency} per person. International flights are not included.`,
-    },
-  ];
-}
-
-function buildFaqJsonLd(faqs: { question: string; answer: string }[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
-      "@type": "Question",
-      name: f.question,
-      acceptedAnswer: { "@type": "Answer", text: f.answer },
-    })),
-  };
-}
-
 // ── Helpers ───────────────────────────────────────────────────────────
 
 /**
- * Related destinations：同 region 优先，不足 3 个时以其它 region 补齐。
- * 行为与既有实现一致（未改变内链结果）。
+ * Wink 酒店入住窗口：nights = Suggested city stay（recommendedDays），与页面
+ * "Suggested city stay N days" / "N-night total" 三者语义一致（项目既有酒店
+ * 日期语义 = checkIn + 自然日）。不再固定 7 nights。
  */
-/**
- * Planner 深链接。当前 /plan 路由**不支持** destination prefilled，
- * 因此沿用项目既有机制（Home hero-search 预填），带入 destination context：
- * to / travelStyle / interests —— 与 Guide 的 buildPlannerHref 输出同形。
- */
-function buildPlacePlannerHref(dest: Destination): string {
-  const params = new URLSearchParams();
-  params.set("to", dest.city);
-  params.set("travelStyle", dest.travelStyle);
-  if (dest.interests.length > 0) params.set("interests", dest.interests.join(","));
-  return `/?${params.toString()}#hero-search`;
+function defaultHotelDates(nights: number) {
+  const checkIn = new Date().toISOString().slice(0, 10);
+  const checkOut = new Date(Date.now() + Math.max(1, nights) * 86400000).toISOString().slice(0, 10);
+  return { checkIn, checkOut };
 }
 
 // ── Page ──────────────────────────────────────────────────────────────
@@ -240,39 +211,35 @@ export default async function DestinationDetailPage({
   const dest = getDestinationBySlug(slug);
   if (!dest) notFound();
 
-  const faqs = buildDestinationFaqs(dest);
-  const planHref = buildPlacePlannerHref(dest);
-
   const popularTrips = TRIPS.filter(
     (t) => t.city.toLowerCase() === dest.city.toLowerCase(),
   ).slice(0, 5);
-  const cityGuides = getGuidesForCity(dest.city).slice(0, 4);
+  const cityGuideCount = getGuidesForCity(dest.city).length;
+  // Hero "Explore N guides" 出口：直接进首篇同城 Guide（真实 Guide URL）。
+  // 不再指向 /guides?city=X —— 城市唯一页规则下该深链会 308 回本页形成循环。
+  const firstCityGuide = getGuidesForCity(dest.city)[0] ?? null;
+  const guidesHref = firstCityGuide ? `/guides/${firstCityGuide.slug}` : null;
 
-  const totalBudget = dest.budgetPerDay * dest.recommendedDays;
+  // ── Gallery（结构化优先）：城市画廊数据收录的城市用结构化真实地标图
+  //    （逐张目检）；未收录城市回退既有拼装（dest.image + 同城 trip 真实封面）。
+  const galleryEntries = getDestinationGallery(dest.slug);
+  const galleryImages =
+    galleryEntries.length > 0
+      ? galleryEntries.map((g) => g.src)
+      : Array.from(
+          new Set([
+            ...(dest.image ? [dest.image] : []),
+            ...TRIPS.filter(
+              (t) => t.city.toLowerCase() === dest.city.toLowerCase() && t.coverImage,
+            ).map((t) => t.coverImage as string),
+          ]),
+        ).slice(0, 6);
 
-  const practicalRows = [
-    { label: "Currency", value: dest.currency },
-    { label: "Time zone", value: dest.timezone },
-    { label: "Airport", value: `${dest.airport.iata} · ${dest.airport.city}` },
-    {
-      label: "Typical stay",
-      value: `${dest.recommendedDays} ${dest.recommendedDays === 1 ? "day" : "days"}`,
-    },
-    {
-      label: "Daily budget",
-      value: `${dest.budgetPerDay.toLocaleString()} ${dest.budgetCurrency}`,
-    },
-    { label: "Travel style", value: capitalize(dest.travelStyle) },
-    { label: "Region", value: dest.region },
-  ];
-
-  // ── Climate authority：canonical record（与 Best-time 页同一数据链） ──────
+  // ── Climate authority（THE YEAR，不变） ──────
   const climateRecord = getClimateRecord(dest.slug);
   const climateRows = buildMonthRows(dest);
   const climateInitialMonth = defaultMonth(dest);
   const normals = monthNormals(climateRecord);
-
-  // GO IN 宣言（Scene 03 主角）：只由 canonical baseline / Challenging tier 派生
   const goLabel = canonicalWindowLabel(climateRecord.bestMonthsBaseline);
   const avoidShorts = climateRows
     .filter((r) => r.verdict === "avoid")
@@ -283,80 +250,32 @@ export default async function DestinationDetailPage({
       ? `Avoid ${avoidShorts.join(" · ")}`
       : "Flexible year-round";
 
-  // ── THE ATLAS：mini world 节点 + 真实最近网关（Haversine） ──────────────
-  const gateways = nearbyDestinations(dest, DESTINATIONS, 3);
-  const atlasMiniNodes: { slug: string; city: string; x: number; y: number }[] = DESTINATIONS.map((d) => {
-    const p = projectWorldPoint(d.airport.latitude, d.airport.longitude);
-    return { slug: d.slug, city: d.city, x: p.x, y: p.y };
-  });
-  const atlasNearest: MiniNode[] = gateways.map((d) => {
-    const p = projectWorldPoint(d.airport.latitude, d.airport.longitude);
-    return {
-      slug: d.slug,
-      city: d.city,
-      x: p.x,
-      y: p.y,
-      km: Math.round(
-        haversineKm(dest.airport.latitude, dest.airport.longitude, d.airport.latitude, d.airport.longitude),
-      ),
-    };
-  });
+  // ── Trip / AI planner inputs（真实字段适配） ────────────────────────
+  const travelStyle = (VALID_TRAVEL_STYLES.includes(dest.travelStyle as TravelStyle)
+    ? dest.travelStyle
+    : "cultural") as TravelStyle;
+  const plannerInterests = dest.interests.filter((i): i is TravelInterest =>
+    (VALID_INTERESTS as string[]).includes(i),
+  );
+  // ── 结构化景点（真实地点对象；未收录城市 → 空数组回退既有 highlights 渲染）
+  const attractions = getAttractions(dest.slug);
+  const hotelDates = defaultHotelDates(dest.recommendedDays);
+  const cityCenter = getCityCenter(dest.slug);
 
-  // ── Keep Exploring：三组真实条目（vibe 经真实 tags 过滤） ────────────────
-  const keepSections: ExploreSection[] = [];
-  if (cityGuides.length > 0) {
-    keepSections.push({
-      key: "guides",
-      title: `${dest.city} field guides`,
-      eyebrow: "Prepare",
-      items: cityGuides.map((g) => ({
-        href: `/guides/${g.slug}`,
-        title: g.title,
-        meta: g.readTime,
-        description: g.excerpt,
-        tags: g.tags as string[],
-      })),
-    });
-  }
-  if (popularTrips.length > 0) {
-    keepSections.push({
-      key: "routes",
-      title: `Routes through ${dest.city}`,
-      eyebrow: "Journey",
-      items: popularTrips.map((t) => ({
-        href: `/trips/${t.slug}`,
-        title: t.title,
-        meta: `${t.days} days · ${t.budget.toLocaleString()} ${t.currency}`,
-        description: t.excerpt,
-        tags: t.interests as string[],
-      })),
-    });
-  }
-  if (gateways.length > 0) {
-    keepSections.push({
-      key: "gateways",
-      title: "Next gateways",
-      eyebrow: "Discover",
-      items: gateways.map((d) => ({
-        href: `/destinations/${d.slug}`,
-        title: d.city,
-        meta: `${Math.round(
-          haversineKm(
-            dest.airport.latitude,
-            dest.airport.longitude,
-            d.airport.latitude,
-            d.airport.longitude,
-          ),
-        )} km away`,
-        description: d.description,
-        tags: d.interests as string[],
-      })),
-    });
-  }
-
+  const plannerPanelProps = {
+    airport: dest.airport,
+    travelStyle,
+    interests: plannerInterests,
+  };
 
   return (
-    <article className="ut-world">
+    <MyTripProvider
+      slug={dest.slug}
+      city={dest.city}
+      defaultDays={dest.recommendedDays}
+      dailyBudget={{ amount: dest.budgetPerDay, currency: dest.budgetCurrency }}
+    >
+      <article className="ut-world" data-ut-skin="editorial">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -379,22 +298,57 @@ export default async function DestinationDetailPage({
             }}
           />
         )}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(buildFaqJsonLd(faqs)),
-          }}
-        />
 
-        {/* ═══ SCENE 01 — THE PLACE（活天空 + 时间拖拽 + 视差 + 环境边缘 UI） ═══ */}
+        {/* ═══ SCENE 01 — THE PLACE（Hero 城市身份，保留） ═══ */}
         <PlaceWorld
           dest={dest}
           normals={normals}
           currentMonthPrecipMm={climateRows[new Date().getMonth()]?.precipMm ?? 0}
           timeScrubber={false}
+          facts={{
+            bestTime: goLabel || dest.bestMonths,
+          }}
+          interests={dest.interests.map((i) => i.charAt(0).toUpperCase() + i.slice(1))}
+          planHref="#explore"
+          guidesCount={cityGuideCount}
+          guidesHref={guidesHref}
         />
 
-        {/* ═══ SCENE 02 — THE YEAR（NASA 气候时间场；Detail 只呈现该地一年） ═══ */}
+        {/* ═══ THE PLACE — Gallery + City identity（Round 15 视觉重构） ═══ */}
+        <section
+          aria-label="The place"
+          className="relative z-10 -mt-8 rounded-t-[1.25rem] bg-ut-bg pb-16 pt-12 shadow-[0_-16px_48px_rgba(5,8,14,0.45)]"
+        >
+          <div className={CONTAINER}>
+            {/* 参考作品 section 标题模式：斜体宽字距 eyebrow + 居中 Heavy 标题 + tiny letterspaced 副标 */}
+            <div className="text-center">
+              <p className="ut-ref-eyebrow text-micro">The Place</p>
+              <h2 className="mt-3 font-display text-[32px] leading-tight text-ut-ink sm:text-[42px]">
+                {dest.city}, {dest.country}
+              </h2>
+              <p className="mt-2 font-mono text-[0.625rem] uppercase tracking-[0.35em] text-ut-muted">
+                City introduction
+              </p>
+            </div>
+
+            <div className="mt-8">
+              <PlaceGallery
+                city={dest.city}
+                country={dest.country}
+                images={galleryImages}
+              />
+            </div>
+
+            {/* 城市简介：历史 / 城市特点 / 代表性景点（真实数据） */}
+            <div className="mt-12">
+              <p className="mx-auto max-w-[68ch] text-center text-body-lg leading-[1.7] text-ut-text-2">
+                {dest.description} {dest.longDescription}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══ THE YEAR — When to go（紧跟 City Introduction 之后；仅移动位置，视觉未改） ═══ */}
         <YearScene
           city={dest.city}
           rows={climateRows}
@@ -403,105 +357,141 @@ export default async function DestinationDetailPage({
           guideHref={`/best-time-to-visit/${dest.slug}`}
         />
 
-        {/* ═══ SCENE 03 — THE ATLAS（全球位置 + 真实最近节点） ═══ */}
-        <section aria-labelledby="atlas-heading" className="pt-16 md:pt-20">
+        {/* ═══ GETTING THERE — 城市级 Flights（先交通，再进景点） ═══ */}
+        <section aria-label={`Getting to ${dest.city}`} className="relative z-10 bg-ut-bg pb-16">
           <div className={CONTAINER}>
-            <h2
-              id="atlas-heading"
-              className="font-mono text-micro uppercase tracking-[0.18em] text-white/50"
-            >
-              In the world atlas
-            </h2>
-            <div className="mt-8">
-              <PlaceInAtlas city={dest.city} nodes={atlasMiniNodes} nearest={atlasNearest} />
+            <div className="text-center">
+              <p className="ut-ref-eyebrow text-micro">Getting there</p>
+              <h2 className="mt-3 font-display text-[32px] leading-tight text-ut-ink sm:text-[42px]">
+                Getting to {dest.city}
+              </h2>
+              <p className="mt-2 font-mono text-[0.625rem] uppercase tracking-[0.35em] text-ut-muted">
+                Flights
+              </p>
+            </div>
+
+            <div className="mt-10">
+              <FlightSearch city={dest.city} destinationIata={dest.airport.iata} />
             </div>
           </div>
         </section>
 
-        {/* ═══ ARCHIVE（降级后的附录层：内容保留 for SEO，层级低于三个场景） ═══ */}
-        <div className="relative z-10 -mt-8 rounded-t-[1.25rem] bg-ut-bg pb-16 pt-8 shadow-[0_-16px_48px_rgba(5,8,14,0.45)]">
-        <div className={`${CONTAINER}`}>
-          <p className="mb-8 flex items-center gap-3 font-mono text-[0.5625rem] uppercase tracking-[0.2em] text-ut-subtle">
-            <span aria-hidden="true" className="h-px flex-1 bg-ut-border" />
-            Utripla archive — reference material
-            <span aria-hidden="true" className="h-px flex-1 bg-ut-border" />
-          </p>
-          {/* ABOUT — 全折叠（SEO 文本完整在 DOM；不再是视觉主角） */}
-          <details className="group mb-12 max-w-3xl">
-            <summary className="inline-flex min-h-[44px] cursor-pointer list-none items-center font-mono text-label uppercase tracking-[0.16em] text-ut-muted transition-colors duration-[var(--ut-dur-fast)] hover:text-ut-text motion-reduce:transition-none [&::-webkit-details-marker]:hidden">
-              <span aria-hidden="true" className="mr-2 inline-block transition-transform duration-[var(--ut-dur-fast)] group-open:rotate-90 motion-reduce:transition-none">
-                →
-              </span>
-              About {dest.city}
-            </summary>
-            <p className="mt-3 max-w-[62ch] text-body leading-[1.6] text-ut-text-2">
-              {dest.longDescription}
-            </p>
-            <p className="mt-4 font-mono text-label uppercase tracking-[0.16em] text-ut-muted">
-              {capitalize(dest.travelStyle)} ·{" "}
-              {dest.interests.map(capitalize).join(" · ")}
-            </p>
-          </details>
-
-          {/* KEEP EXPLORING — guides / routes / nearby（vibe 真实过滤） */}
-          <InnerSection title="Keep exploring" eyebrow="Next">
-            <KeepExploring sections={keepSections} />
-          </InnerSection>
-
-          {/* Practical / Instrument Surface */}
-          <InnerSection title="Practical planning info" eyebrow="Before you go">
-            <PlacePractical rows={practicalRows} />
-          </InnerSection>
-
-          {/* Budget — compact decision context → deep dive */}
-          <InnerSection title="Budget information" eyebrow="Money">
-            <PlaceDecision
-              index="02"
-              eyebrow="Daily range"
-              headline={`${dest.budgetPerDay.toLocaleString()} ${dest.budgetCurrency} per day`}
-              body={
-                <p>
-                  Estimated daily cost covering accommodation, food, local
-                  transport and activities for {dest.city}. International
-                  flights are not included.
-                </p>
-              }
-              lines={[
-                {
-                  label: "Typical stay",
-                  value: `${dest.recommendedDays} ${dest.recommendedDays === 1 ? "day" : "days"}`,
-                },
-                {
-                  label: "Trip estimate",
-                  value: `${totalBudget.toLocaleString()} ${dest.budgetCurrency}`,
-                },
-              ]}
-              href={`/travel-budget/${dest.slug}`}
-              linkLabel={`See the full budget guide for ${dest.city}`}
-            />
-          </InnerSection>
-
-          {/* Commerce — 全页唯一商业模块 */}
-          <div className="mb-12">
-            <HotelModule city={dest.city} />
-          </div>
-
-          {/* Single Page-level Primary CTA */}
-          <InnerCTA
-            href={planHref}
-            title={`Ready to plan your ${dest.city} trip?`}
-            description={`Use this page as your starting point — the planner opens with ${dest.city} prefilled around your dates and interests.`}
-            label={`Build your ${dest.city} plan`}
-          />
-
-          {/* FAQ — 与 FAQPage schema 同一数据源 */}
-          <InnerSection title="Frequently asked questions" eyebrow="FAQ">
-            <div className="max-w-3xl">
-              <FaqList items={faqs} />
+        {/* ═══ EXPLORE — 景点 / 美食 / 路线 / My Trip（页面主体） ═══ */}
+        <div id="explore" className="relative z-10 bg-ut-bg pb-16 pt-16">
+          <div className={CONTAINER}>
+            <div className="text-center">
+              <p className="ut-ref-eyebrow text-micro">Explore</p>
+              <h2 className="mt-3 font-display text-[32px] leading-tight text-ut-ink sm:text-[42px]">
+                Explore {dest.city}
+              </h2>
+              <p className="mt-2 font-mono text-[0.625rem] uppercase tracking-[0.35em] text-ut-muted">
+                Things to do · Stays · Food
+              </p>
             </div>
-          </InnerSection>
+
+            {/* ── 景点主体 + 桌面 Sticky MY TRIP ── */}
+            <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_340px]">
+              <div id="attractions" className="min-w-0 scroll-mt-24">
+                <div className="text-center">
+                  <h2 className="font-display text-[26px] leading-tight text-ut-ink">
+                    Things to see in {dest.city}
+                  </h2>
+                  <p className="mt-2 font-mono text-[0.625rem] uppercase tracking-[0.35em] text-ut-muted">
+                    Attractions
+                  </p>
+                </div>
+
+                <div className="mt-6 space-y-8">
+                  {attractions.length > 0
+                    ? attractions.map((a, i) => (
+                        <AttractionCard
+                          key={a.id}
+                          name={a.name}
+                          index={i}
+                          city={dest.city}
+                          slug={dest.slug}
+                          gradient={dest.gradient}
+                          bestMonths={dest.bestMonths}
+                          suggestedDays={dest.recommendedDays}
+                          checkIn={hotelDates.checkIn}
+                          checkOut={hotelDates.checkOut}
+                          lat={a.lat}
+                          lon={a.lon}
+                          attraction={a}
+                        />
+                      ))
+                    : dest.highlights.map((h, i) => {
+                        const point = getAttractionPoint(dest.slug, h);
+                        return (
+                          <AttractionCard
+                            key={h}
+                            name={h}
+                            index={i}
+                            city={dest.city}
+                            slug={dest.slug}
+                            gradient={dest.gradient}
+                            bestMonths={dest.bestMonths}
+                            suggestedDays={dest.recommendedDays}
+                            checkIn={hotelDates.checkIn}
+                            checkOut={hotelDates.checkOut}
+                            lat={point?.lat}
+                            lon={point?.lon}
+                          />
+                        );
+                      })}
+                </div>
+
+                {/* ── 可预订体验（Viator Basic Affiliate；懒加载 + 真实价格才进预算） ── */}
+                <ExperienceList slug={dest.slug} city={dest.city} />
+
+                {/* ── Food（Restaurants）：真实餐厅数据 = Geoapify Places API。
+                     未收录搜索中心 / 无结果 / key 缺失 → 诚实空态；
+                     绝不把菜名当餐厅、不猜价格/评分/图片。 ── */}
+                <div className="mt-14">
+                  <div className="text-center">
+                    <h2 className="font-display text-[26px] leading-tight text-ut-ink">
+                      Restaurants in {dest.city}
+                    </h2>
+                    <p className="mt-2 font-mono text-[0.625rem] uppercase tracking-[0.35em] text-ut-muted">
+                      Food
+                    </p>
+                  </div>
+                  <RestaurantList
+                    slug={dest.slug}
+                    lat={cityCenter?.lat}
+                    lon={cityCenter?.lon}
+                  />
+                </div>
+
+                {/* ── Build your route（完全由 My Trip 已选条目生成；空选择 = 诚实空态） ── */}
+                <div className="mt-14">
+                  <div className="text-center">
+                    <h2 className="font-display text-[26px] leading-tight text-ut-ink">
+                      Build your route
+                    </h2>
+                    <p className="mt-2 font-mono text-[0.625rem] uppercase tracking-[0.35em] text-ut-muted">
+                      Route
+                    </p>
+                  </div>
+                  <div className="mt-6">
+                    <RouteBuilder slug={dest.slug} city={dest.city} />
+                  </div>
+                </div>
+              </div>
+
+              {/* ── 桌面 Sticky MY TRIP ── */}
+              <aside aria-label="My Trip" className="hidden lg:block">
+                <div className="sticky top-24 rounded-ut-md bg-ut-bg shadow-ut-2">
+                  <MyTripPanel {...plannerPanelProps} />
+                </div>
+              </aside>
+            </div>
+          </div>
         </div>
-        </div>
+
+        {/* ═══ 移动端常驻 Trip Bar + Bottom Sheet（lg 以下；置于 article 内以继承 editorial 皮肤） ═══ */}
+        <MobileTripBar {...plannerPanelProps} />
       </article>
+    </MyTripProvider>
   );
 }

@@ -18,7 +18,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "January to April is dry and slightly cooler — the comfortable window. June to October brings typhoon risk and heavy monsoon rain.",
     currency: "PHP ₱",
     gradient: "from-blue-500 to-yellow-500",
-    image: null,
+    image: "https://images.pexels.com/photos/37179081/pexels-photo-37179081.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 72,
       label: "Good",
@@ -56,7 +56,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "June to September is the drier window. Rain falls year-round in tropical bursts, and flooding season runs November to March.",
     currency: "IDR Rp",
     gradient: "from-red-500 to-slate-600",
-    image: null,
+    image: "https://images.pexels.com/photos/32327756/pexels-photo-32327756.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 66,
       label: "Good",
@@ -94,7 +94,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "May to September is the dry season — ideal for dawn temple trips. The wet season (November–March) greens the rice fields but rains most afternoons.",
     currency: "IDR Rp",
     gradient: "from-amber-500 to-emerald-600",
-    image: null,
+    image: "https://images.pexels.com/photos/38087301/pexels-photo-38087301.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 76,
       label: "Good",
@@ -132,7 +132,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "November to February is cool and clear — the best window. March and April bring the burning-season haze; the wet season greens everything else.",
     currency: "THB ฿",
     gradient: "from-emerald-500 to-amber-600",
-    image: null,
+    image: "https://images.pexels.com/photos/37250801/pexels-photo-37250801.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 82,
       label: "Excellent",
@@ -170,7 +170,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "November to April is the dry, onshore-breeze season with the best seas. May to October brings monsoon swell and beach flags.",
     currency: "THB ฿",
     gradient: "from-cyan-500 to-teal-700",
-    image: null,
+    image: "https://images.pexels.com/photos/34939155/pexels-photo-34939155.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 80,
       label: "Good",
@@ -208,7 +208,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "January to March is Samui's driest window (its seasons run opposite Phuket's). October to December is the island's wettest stretch.",
     currency: "THB ฿",
     gradient: "from-teal-500 to-blue-600",
-    image: null,
+    image: "https://images.pexels.com/photos/35610748/pexels-photo-35610748.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 80,
       label: "Good",
@@ -246,7 +246,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "February to May is dry and warm — the best beach window. September to November is typhoon season on this coast.",
     currency: "VND ₫",
     gradient: "from-sky-500 to-amber-500",
-    image: null,
+    image: "https://images.pexels.com/photos/34373624/pexels-photo-34373624.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 80,
       label: "Good",
@@ -284,7 +284,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "January to August is the dry run on this south-central coast; September to December brings the rains.",
     currency: "VND ₫",
     gradient: "from-cyan-500 to-emerald-600",
-    image: null,
+    image: "https://images.pexels.com/photos/37463680/pexels-photo-37463680.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 78,
       label: "Good",
@@ -322,7 +322,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "November to March is dry and calm on this Gulf-of-Thailand island. The wet season (June–September) is short and fierce.",
     currency: "VND ₫",
     gradient: "from-blue-500 to-orange-500",
-    image: null,
+    image: "https://images.pexels.com/photos/37033307/pexels-photo-37033307.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 80,
       label: "Good",
@@ -360,7 +360,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "November to February is cool and dry — the classic Angkor window. March to May is brutally hot; the wet season greens the moats dramatically.",
     currency: "USD $",
     gradient: "from-stone-500 to-amber-700",
-    image: null,
+    image: "https://images.pexels.com/photos/15890602/pexels-photo-15890602.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 74,
       label: "Good",
@@ -398,7 +398,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "November to February is the cool, dry window. April is the hottest month in Cambodia; the wet season floods but rarely ruins.",
     currency: "USD $",
     gradient: "from-amber-500 to-red-600",
-    image: null,
+    image: "https://images.pexels.com/photos/30965073/pexels-photo-30965073.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 72,
       label: "Good",
@@ -436,7 +436,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "April to June is mild and blooming; September to October is clear and calm. July–August is beach season with crowds; winter brings wind and camellias.",
     currency: "KRW ₩",
     gradient: "from-green-500 to-sky-600",
-    image: null,
+    image: "https://images.pexels.com/photos/28525306/pexels-photo-28525306.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 76,
       label: "Good",
@@ -474,7 +474,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "March to May and October to November are ideal. Summers are hot and humid; winters are mild for Japan, with good ramen weather.",
     currency: "JPY ¥",
     gradient: "from-orange-500 to-blue-600",
-    image: null,
+    image: "https://images.pexels.com/photos/39396660/pexels-photo-39396660.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 80,
       label: "Excellent",
@@ -512,7 +512,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "February for the Snow Festival, July to August for cool-weather escape, December to March for snow. Shoulder months are quiet and pleasant.",
     currency: "JPY ¥",
     gradient: "from-sky-500 to-slate-600",
-    image: null,
+    image: "https://images.pexels.com/photos/37316683/pexels-photo-37316683.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 74,
       label: "Good",
@@ -550,7 +550,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "March to May and October to November are mild and clear. Summers are hot; winters are dry and bright.",
     currency: "JPY ¥",
     gradient: "from-slate-500 to-red-600",
-    image: null,
+    image: "https://images.pexels.com/photos/29241287/pexels-photo-29241287.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 78,
       label: "Good",
@@ -588,7 +588,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "March to May and October to November are comfortable. Summers are humid; winters are mild but grey.",
     currency: "JPY ¥",
     gradient: "from-teal-500 to-indigo-700",
-    image: null,
+    image: "https://images.pexels.com/photos/33531211/pexels-photo-33531211.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 76,
       label: "Good",
@@ -626,7 +626,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "March to May and October to November are ideal. The Peace Park is moving in any season; Miyajima is best at high tide.",
     currency: "JPY ¥",
     gradient: "from-red-500 to-emerald-600",
-    image: null,
+    image: "https://images.pexels.com/photos/30801939/pexels-photo-30801939.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 80,
       label: "Excellent",
@@ -664,7 +664,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "April to June and October to November are ideal. Winter is snowy and atmospheric — Kenrokuen's yukitsuri rope-canopies are a seasonal marvel.",
     currency: "JPY ¥",
     gradient: "from-amber-500 to-teal-700",
-    image: null,
+    image: "https://images.pexels.com/photos/29393691/pexels-photo-29393691.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 78,
       label: "Good",
@@ -702,7 +702,7 @@ export const EXTENDED_DESTINATIONS_A: RawDestination[] = [
       "March to May and October to November are ideal. Summers are hot; winters are mild with clear harbor views.",
     currency: "JPY ¥",
     gradient: "from-red-600 to-slate-700",
-    image: null,
+    image: "https://images.pexels.com/photos/35399276/pexels-photo-35399276.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 80,
       label: "Excellent",

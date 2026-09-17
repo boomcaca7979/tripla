@@ -11,8 +11,10 @@ interface RevealProps extends HTMLAttributes<HTMLDivElement> {
 /**
  * Reveal — 进入视口后 opacity + translateY 进场。
  *
- * SEO / 无 JS 安全：初始隐藏的样式只挂在 `html.js-ready` 下
- * （由 layout 中的内联脚本添加）。无 JS 或爬虫看到的内容默认可见。
+ * SEO / 无 JS 安全：初始隐藏的样式只包在 CSS `@media (scripting: enabled)`
+ * 里（解析期生效，不需要任何内联脚本打 class）。无 JS 或爬虫看到的内容默认可见。
+ * 刻意不用内联 <script> 标记：那会占用 <head> 的 DOM 位置，与在 hydration 前
+ * 向 head 注入节点的第三方脚本（AdSense）冲突，触发 hydration mismatch。
  * `prefers-reduced-motion: reduce` 时直接可见、无动画。
  */
 export default function Reveal({ children, delayMs = 0, className = "", style, ...rest }: RevealProps) {
@@ -21,7 +23,7 @@ export default function Reveal({ children, delayMs = 0, className = "", style, .
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    // JS 未在 <html> 标记 js-ready（理论上不可能走到这里）或 IO 不支持时直接可见
+    // IO 不可用时直接可见（保证内容永远可见）
     if (typeof IntersectionObserver === "undefined") {
       el.classList.add("ut-reveal-visible");
       return;

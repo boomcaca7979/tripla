@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import AirportAutocomplete from "./AirportAutocomplete";
+import AirportAutocomplete, { type CityIndexEntry } from "./AirportAutocomplete";
 import DateRangePicker from "./DateRangePicker";
 import { useTravelStore } from "@/store/travel";
 import { useTranslation } from "@/lib/i18n";
@@ -50,18 +50,42 @@ const INPUT_CLASS =
 
 // ── Props ─────────────────────────────────────────────────────────────
 
+/** 首页专用文案覆盖；不传时沿用 i18n 既有文案（内页行为不变）。 */
+export interface SearchBarCopy {
+  fromPlaceholder?: string;
+  toPlaceholder?: string;
+  /** Budget 档位标签覆盖（首页要求带 $/day 区间）。 */
+  budgetLabels?: Partial<Record<BudgetLevel, string>>;
+  /** Budget 口径说明（如 "Typical daily spend, excluding long-haul airfare."）。 */
+  budgetNote?: string;
+  errorOriginDest?: string;
+  errorDates?: string;
+}
+
 interface SearchBarProps {
   /** Optional external callback — when provided, replaces router.push. */
   onSearch?: (input: TravelPlanInput) => void;
+  /** 本地城市索引（城市名搜索；机场代码只出现在候选项里）。 */
+  cityIndex?: CityIndexEntry[];
+  copy?: SearchBarCopy;
 }
 
 // ── Component ─────────────────────────────────────────────────────────
 
-export default function SearchBar({ onSearch }: SearchBarProps) {
+export default function SearchBar({ onSearch, cityIndex = [], copy }: SearchBarProps) {
   const router = useRouter();
   const setSearchParams = useTravelStore((s) => s.setSearchParams);
   const searchParams = useTravelStore((s) => s.searchParams);
   const { t } = useTranslation();
+
+  // copy 的字段先落成局部常量：既让 useCallback 依赖稳定（字符串/对象引用明确），
+  // 也让下面渲染处的可读性更好。
+  const errOriginDest = copy?.errorOriginDest;
+  const errDates = copy?.errorDates;
+  const budgetLabels = copy?.budgetLabels;
+  const budgetNote = copy?.budgetNote;
+  const fromPlaceholder = copy?.fromPlaceholder;
+  const toPlaceholder = copy?.toPlaceholder;
 
   // ── State ────────────────────────────────────────────────────────────
   const [origin, setOrigin] = useState<Airport | null>(null);
@@ -72,7 +96,9 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
   const [budgetLevel, setBudgetLevel] = useState<BudgetLevel>("mid-range");
   const [interests, setInterests] = useState<TravelInterest[]>([]);
   const [groupSize, setGroupSize] = useState(1);
-  const [error, setError] = useState<string | null>(null);
+  // error 存"错误码"而非文本：文案在渲染处按当前语言/首页覆盖解析，
+  // 使 handleSubmit 不依赖任何外部文案变量。
+  const [error, setError] = useState<"originDest" | "dates" | null>(null);
 
   // ── Sync from store (template auto-fill) ────────────────────────────
   useEffect(() => {
@@ -121,7 +147,6 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
     if (dep) setDepartureDate(dep);
     if (ret) setReturnDate(ret);
     // 仅在首次挂载时读取一次 URL。
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // ── Handlers ─────────────────────────────────────────────────────────
@@ -147,11 +172,11 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
   const handleSubmit = useCallback(() => {
     // ── Validate ─────────────────────────────────────────────────────
     if (!origin || !destination) {
-      setError(t("search.errorOriginDest"));
+      setError("originDest");
       return;
     }
     if (!departureDate || !returnDate) {
-      setError(t("search.errorDates"));
+      setError("dates");
       return;
     }
 
@@ -210,9 +235,10 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
         <div className="flex-1">
           <AirportAutocomplete
             label={t("search.from")}
-            placeholder={t("search.fromPlaceholder")}
+            placeholder={fromPlaceholder ?? t("search.fromPlaceholder")}
             value={origin}
             onChange={setOrigin}
+            cityIndex={cityIndex}
             labelClassName={LABEL_CLASS}
             inputClassName={INPUT_CLASS}
           />
@@ -244,9 +270,10 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
         <div className="flex-1">
           <AirportAutocomplete
             label={t("search.to")}
-            placeholder={t("search.toPlaceholder")}
+            placeholder={toPlaceholder ?? t("search.toPlaceholder")}
             value={destination}
             onChange={setDestination}
+            cityIndex={cityIndex}
             labelClassName={LABEL_CLASS}
             inputClassName={INPUT_CLASS}
           />
@@ -327,10 +354,15 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
           >
             {BUDGET_LEVELS.map((b) => (
               <option key={b.value} value={b.value}>
-                {t(b.labelKey)}
+                {budgetLabels?.[b.value] ?? t(b.labelKey)}
               </option>
             ))}
           </select>
+          {budgetNote && (
+            <p className="mt-1.5 text-label leading-snug text-ut-subtle">
+              {budgetNote}
+            </p>
+          )}
         </div>
       </div>
 
@@ -367,7 +399,9 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
       {/* ── Error message ───────────────────────────────────────────── */}
       {error && (
         <p className="mt-3 text-sm text-red-500" role="alert">
-          {error}
+          {error === "dates"
+            ? errDates ?? t("search.errorDates")
+            : errOriginDest ?? t("search.errorOriginDest")}
         </p>
       )}
 

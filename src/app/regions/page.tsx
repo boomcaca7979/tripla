@@ -6,7 +6,7 @@ import { DESTINATIONS, type Region } from "@/data/destinations";
 
 const RG_TITLE = "Travel Regions Guide | Explore Destinations Worldwide";
 const RG_DESCRIPTION =
-  "Browse travel destinations by region — Asia, Europe, the Americas, and Oceania. Each region guide covers top cities, best season, daily budget, and ready-to-use trip templates.";
+  "Browse travel destinations by region — Asia, Europe, the Americas, Oceania, and Africa. Each region guide covers top cities, best season, daily budget, and ready-to-use trip templates.";
 
 export const metadata: Metadata = {
   title: RG_TITLE,
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 
 // ── Helpers ────────────────────────────────────────────────────────────
 
-const ALL_REGIONS: Region[] = ["Asia", "Europe", "Americas", "Oceania"];
+const ALL_REGIONS: Region[] = ["Asia", "Europe", "Americas", "Oceania", "Africa"];
 
 function regionOverview(region: Region, destCount: number): string {
   const countries = Array.from(

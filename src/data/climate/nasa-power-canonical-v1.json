@@ -1,6 +1,6 @@
 {
  "artifactClass": "PRODUCTION STATIC CLIMATE DATA - NASA POWER PRIMARY",
- "artifactVersion": "nasa-power-canonical-production-v1",
+ "artifactVersion": "nasa-power-canonical-production-v1.1-ext10",
  "attribution": {
   "accessDate": "2026-09-13",
   "brandingConstraints": "no NASA insignia or logotype; no wording implying NASA endorsement",
@@ -16,11 +16,27 @@
  },
  "dailyBoundary": "UTC+00:00",
  "daylightHoursPolicy": "astronomical computation (UTRIPLA methodology) - not NASA data",
+ "extension": {
+  "addedAt": "2026-09-15",
+  "addedRecords": [
+   "cape-town",
+   "cairo",
+   "nairobi",
+   "doha",
+   "rio-de-janeiro",
+   "cusco",
+   "bogota",
+   "santiago",
+   "havana",
+   "nadi"
+  ],
+  "method": "Same endpoints/params/semantics as the v8.7 pilot pipeline (Daily API T2M_MAX/T2M_MIN/PRECTOTCORR 1991-2020; Climatology T2M/PRECTOTCORR_SUM; r1-r7.v4 tiers; NOAA civil-twilight daylight). Core hashes recomputed over the full record set; v8.7 freeze files left untouched."
+ },
  "hashes": {
-  "bestMonthsHash": "417c40eb6246caf5b46236827e6606422bce6ef795fab94a31ec4eda52afbe40",
-  "coreClimateHash": "7d884fd2334b092b27081c055b8ab860981577bddbeb833512e2818e64ff58ed",
-  "productionArtifactSha256": "c92bd293cb7932a2c654ffa2861b4a042f2c13062ce706bec07a73b28b602cea",
-  "recommendationHash": "28d6a16cd5abcdaf3be842673d23945858d81ed61b888faafab7afa561771e84",
+  "bestMonthsHash": "17e58bf3feb855ba533bd1c7043f5a6a2fcb85969e276a08d79f9be8880e14b9",
+  "coreClimateHash": "d795a0d43cbc7cdebf04f479587453982b6781b68455fb75ac0d579ef641140e",
+  "productionArtifactSha256": "cbb3c5ac5ed9214c3148c8bd12c25f2d68e81a501cd766a1e204e006be44a741",
+  "recommendationHash": "c4d46b3a3909b34d2f2cb52d298cdec42fdfa9203aef24b4a63fdf8ff478f1f0",
   "sourceCanonicalDatasetHash": "9ac50d81a0b2d952518b6339c7b3d03e74d0093df0963f65872789f630c0e321"
  },
  "licence": {
@@ -51021,6 +51037,3284 @@
    "ruleVersion": "r1-r7.v4",
    "selection": {
     "reason": "pilot v8.5 canonical dry-run; NASA POWER fallback family; NOT a production selection",
+    "ruleVersion": "r1-r7.v4"
+   },
+   "sourceFamily": "NASA POWER / MERRA-2"
+  },
+  {
+   "anchor": {
+    "elevationM": 46.0,
+    "latitude": -33.9715,
+    "longitude": 18.6021,
+    "type": "airport"
+   },
+   "bestMonthsBaseline": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    9,
+    10,
+    11
+   ],
+   "city": "Cape Town",
+   "country": "South Africa",
+   "dailyBoundary": "UTC+00:00",
+   "destinationId": "cape-town",
+   "fieldProvenance": {
+    "daylightHours": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily civil daylight duration (equal year weights; leap years exact; polar night 0.0 h / midnight sun 24.0 h handled)",
+     "dailyAggregationBoundary": "not-applicable",
+     "derived": true,
+     "endpoint": null,
+     "formulaReference": "NOAA General Solar Position Calculations (published methodology, not a data product)",
+     "grid": "not-applicable (point astronomy)",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": null,
+     "parameter": null,
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": null,
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "UTRIPLA astronomy",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipDaysGe1mm": {
+     "aggregationMethod": "UTRIPLA derived statistic (v8.6 authorised): count of daily precipitation >= 1.0 mm (WMO rain-day convention) per calendar month per year, then arithmetic mean over 1991-2020",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "derivationKind": "internal-deterministic-count",
+     "derived": true,
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+     "officialProduct": "Daily API",
+     "parameter": "PRECTOTCORR",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Option A of methodology decision v8.6: deterministic count from the same source family's official daily product",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipMm": {
+     "aggregationMethod": "1991-2020 average of the monthly total precipitation",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "PRECTOTCORR_SUM",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    },
+    "sunshineHours": {
+     "policy": "null is the legal state: no sunshine-duration product exists in the NASA POWER family"
+    },
+    "tempHighC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily maximum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MAX",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MAX_AVG rejected: 30-year average of monthly EXTREME maximum, not mean of daily max",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempLowC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily minimum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MIN",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MIN_AVG rejected: 30-year average of monthly EXTREME minimum, not mean of daily min",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempMeanC": {
+     "aggregationMethod": "1991-2020 average of the monthly mean 2m temperature",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "T2M",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    }
+   },
+   "flags": [
+    "mapping:climatology-T2M_MAX_AVG-rejected-semantic-mismatch",
+    "mapping:climatology-T2M_MIN_AVG-rejected-semantic-mismatch",
+    "extension:post-v87-acquisition-2026-09"
+   ],
+   "grid": {
+    "elevationM": 209.37,
+    "latitude": -33.971,
+    "longitude": 18.602,
+    "resolution": "NASA/POWER Source Native Resolution (tested: ~0.5 deg lat x 0.625 deg lon)"
+   },
+   "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+   "months": [
+    {
+     "daylightHours": 14.12,
+     "monthIndex": 0,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 19.2,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 27.15,
+     "tempLowC": 16.32,
+     "tempMeanC": 21.28,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 13.32,
+     "monthIndex": 1,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 15.2,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 27.61,
+     "tempLowC": 16.69,
+     "tempMeanC": 21.56,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.29,
+     "monthIndex": 2,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 25.0,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 26.01,
+     "tempLowC": 15.62,
+     "tempMeanC": 20.14,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 11.24,
+     "monthIndex": 3,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 49.5,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 22.98,
+     "tempLowC": 13.49,
+     "tempMeanC": 17.54,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 10.37,
+     "monthIndex": 4,
+     "precipDaysGe1mm": 0.3,
+     "precipMm": 72.2,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 19.72,
+     "tempLowC": 11.72,
+     "tempMeanC": 15.1,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 9.93,
+     "monthIndex": 5,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 124.3,
+     "rawRuleHits": [
+      "R5",
+      "R6"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 16.44,
+     "tempLowC": 9.58,
+     "tempMeanC": 12.61,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 10.13,
+     "monthIndex": 6,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 114.7,
+     "rawRuleHits": [
+      "R5",
+      "R6"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 15.69,
+     "tempLowC": 8.71,
+     "tempMeanC": 11.82,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 10.88,
+     "monthIndex": 7,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 101.9,
+     "rawRuleHits": [
+      "R5",
+      "R6"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 15.89,
+     "tempLowC": 8.75,
+     "tempMeanC": 12.0,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.88,
+     "monthIndex": 8,
+     "precipDaysGe1mm": 0.3,
+     "precipMm": 58.2,
+     "rawRuleHits": [
+      "R6"
+     ],
+     "ruleId": "R6",
+     "sunshineHours": null,
+     "tempHighC": 17.65,
+     "tempLowC": 9.8,
+     "tempMeanC": 13.37,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.94,
+     "monthIndex": 9,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 47.5,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 20.53,
+     "tempLowC": 11.46,
+     "tempMeanC": 15.62,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 13.88,
+     "monthIndex": 10,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 41.1,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 22.76,
+     "tempLowC": 12.95,
+     "tempMeanC": 17.51,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 14.37,
+     "monthIndex": 11,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 23.5,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 25.49,
+     "tempLowC": 15.15,
+     "tempMeanC": 19.94,
+     "tier": "Favourable"
+    }
+   ],
+   "periodEnd": "2020-12-31",
+   "periodStart": "1991-01-01",
+   "recommendationStatus": "ok-favourable",
+   "region": "Africa",
+   "ruleVersion": "r1-r7.v4",
+   "selection": {
+    "reason": "extension anchor 2026-09: NASA POWER canonical-semantics acquisition (same endpoints/params as pilot v8.7)",
+    "ruleVersion": "r1-r7.v4"
+   },
+   "sourceFamily": "NASA POWER / MERRA-2"
+  },
+  {
+   "anchor": {
+    "elevationM": 74.0,
+    "latitude": 30.1219,
+    "longitude": 31.4056,
+    "type": "airport"
+   },
+   "bestMonthsBaseline": [
+    0,
+    1,
+    2,
+    3,
+    9,
+    10,
+    11
+   ],
+   "city": "Cairo",
+   "country": "Egypt",
+   "dailyBoundary": "UTC+00:00",
+   "destinationId": "cairo",
+   "fieldProvenance": {
+    "daylightHours": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily civil daylight duration (equal year weights; leap years exact; polar night 0.0 h / midnight sun 24.0 h handled)",
+     "dailyAggregationBoundary": "not-applicable",
+     "derived": true,
+     "endpoint": null,
+     "formulaReference": "NOAA General Solar Position Calculations (published methodology, not a data product)",
+     "grid": "not-applicable (point astronomy)",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": null,
+     "parameter": null,
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": null,
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "UTRIPLA astronomy",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipDaysGe1mm": {
+     "aggregationMethod": "UTRIPLA derived statistic (v8.6 authorised): count of daily precipitation >= 1.0 mm (WMO rain-day convention) per calendar month per year, then arithmetic mean over 1991-2020",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "derivationKind": "internal-deterministic-count",
+     "derived": true,
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+     "officialProduct": "Daily API",
+     "parameter": "PRECTOTCORR",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Option A of methodology decision v8.6: deterministic count from the same source family's official daily product",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipMm": {
+     "aggregationMethod": "1991-2020 average of the monthly total precipitation",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "PRECTOTCORR_SUM",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    },
+    "sunshineHours": {
+     "policy": "null is the legal state: no sunshine-duration product exists in the NASA POWER family"
+    },
+    "tempHighC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily maximum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MAX",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MAX_AVG rejected: 30-year average of monthly EXTREME maximum, not mean of daily max",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempLowC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily minimum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MIN",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MIN_AVG rejected: 30-year average of monthly EXTREME minimum, not mean of daily min",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempMeanC": {
+     "aggregationMethod": "1991-2020 average of the monthly mean 2m temperature",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "T2M",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    }
+   },
+   "flags": [
+    "mapping:climatology-T2M_MAX_AVG-rejected-semantic-mismatch",
+    "mapping:climatology-T2M_MIN_AVG-rejected-semantic-mismatch",
+    "extension:post-v87-acquisition-2026-09"
+   ],
+   "grid": {
+    "elevationM": 135.44,
+    "latitude": 30.122,
+    "longitude": 31.406,
+    "resolution": "NASA/POWER Source Native Resolution (tested: ~0.5 deg lat x 0.625 deg lon)"
+   },
+   "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+   "months": [
+    {
+     "daylightHours": 10.45,
+     "monthIndex": 0,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 7.8,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 18.96,
+     "tempLowC": 6.74,
+     "tempMeanC": 12.07,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 11.12,
+     "monthIndex": 1,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 6.9,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 20.75,
+     "tempLowC": 7.37,
+     "tempMeanC": 13.37,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 11.99,
+     "monthIndex": 2,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 6.7,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 24.88,
+     "tempLowC": 9.42,
+     "tempMeanC": 16.6,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.9,
+     "monthIndex": 3,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 6.2,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 29.55,
+     "tempLowC": 12.68,
+     "tempMeanC": 20.82,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 13.67,
+     "monthIndex": 4,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 0.8,
+     "rawRuleHits": [
+      "R4"
+     ],
+     "ruleId": "R4",
+     "sunshineHours": null,
+     "tempHighC": 33.97,
+     "tempLowC": 16.57,
+     "tempMeanC": 25.18,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 14.05,
+     "monthIndex": 5,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 0.2,
+     "rawRuleHits": [
+      "R4"
+     ],
+     "ruleId": "R4",
+     "sunshineHours": null,
+     "tempHighC": 37.34,
+     "tempLowC": 19.45,
+     "tempMeanC": 28.4,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 13.87,
+     "monthIndex": 6,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 0.2,
+     "rawRuleHits": [
+      "R4"
+     ],
+     "ruleId": "R4",
+     "sunshineHours": null,
+     "tempHighC": 38.56,
+     "tempLowC": 21.21,
+     "tempMeanC": 29.8,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 13.21,
+     "monthIndex": 7,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 0.0,
+     "rawRuleHits": [
+      "R4"
+     ],
+     "ruleId": "R4",
+     "sunshineHours": null,
+     "tempHighC": 38.3,
+     "tempLowC": 21.66,
+     "tempMeanC": 29.73,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.35,
+     "monthIndex": 8,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 0.4,
+     "rawRuleHits": [
+      "R4"
+     ],
+     "ruleId": "R4",
+     "sunshineHours": null,
+     "tempHighC": 35.73,
+     "tempLowC": 19.9,
+     "tempMeanC": 27.33,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.44,
+     "monthIndex": 9,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 3.4,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 31.34,
+     "tempLowC": 17.35,
+     "tempMeanC": 23.69,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 10.65,
+     "monthIndex": 10,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 12.7,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 25.63,
+     "tempLowC": 13.01,
+     "tempMeanC": 18.57,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 10.24,
+     "monthIndex": 11,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 6.4,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 20.52,
+     "tempLowC": 8.75,
+     "tempMeanC": 13.84,
+     "tier": "Favourable"
+    }
+   ],
+   "periodEnd": "2020-12-31",
+   "periodStart": "1991-01-01",
+   "recommendationStatus": "ok-favourable",
+   "region": "Africa",
+   "ruleVersion": "r1-r7.v4",
+   "selection": {
+    "reason": "extension anchor 2026-09: NASA POWER canonical-semantics acquisition (same endpoints/params as pilot v8.7)",
+    "ruleVersion": "r1-r7.v4"
+   },
+   "sourceFamily": "NASA POWER / MERRA-2"
+  },
+  {
+   "anchor": {
+    "elevationM": 1620.0,
+    "latitude": -1.3192,
+    "longitude": 36.9278,
+    "type": "airport"
+   },
+   "bestMonthsBaseline": [
+    0,
+    1,
+    2,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "city": "Nairobi",
+   "country": "Kenya",
+   "dailyBoundary": "UTC+00:00",
+   "destinationId": "nairobi",
+   "fieldProvenance": {
+    "daylightHours": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily civil daylight duration (equal year weights; leap years exact; polar night 0.0 h / midnight sun 24.0 h handled)",
+     "dailyAggregationBoundary": "not-applicable",
+     "derived": true,
+     "endpoint": null,
+     "formulaReference": "NOAA General Solar Position Calculations (published methodology, not a data product)",
+     "grid": "not-applicable (point astronomy)",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": null,
+     "parameter": null,
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": null,
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "UTRIPLA astronomy",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipDaysGe1mm": {
+     "aggregationMethod": "UTRIPLA derived statistic (v8.6 authorised): count of daily precipitation >= 1.0 mm (WMO rain-day convention) per calendar month per year, then arithmetic mean over 1991-2020",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "derivationKind": "internal-deterministic-count",
+     "derived": true,
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+     "officialProduct": "Daily API",
+     "parameter": "PRECTOTCORR",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Option A of methodology decision v8.6: deterministic count from the same source family's official daily product",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipMm": {
+     "aggregationMethod": "1991-2020 average of the monthly total precipitation",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "PRECTOTCORR_SUM",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    },
+    "sunshineHours": {
+     "policy": "null is the legal state: no sunshine-duration product exists in the NASA POWER family"
+    },
+    "tempHighC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily maximum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MAX",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MAX_AVG rejected: 30-year average of monthly EXTREME maximum, not mean of daily max",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempLowC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily minimum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MIN",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MIN_AVG rejected: 30-year average of monthly EXTREME minimum, not mean of daily min",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempMeanC": {
+     "aggregationMethod": "1991-2020 average of the monthly mean 2m temperature",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "T2M",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    }
+   },
+   "flags": [
+    "mapping:climatology-T2M_MAX_AVG-rejected-semantic-mismatch",
+    "mapping:climatology-T2M_MIN_AVG-rejected-semantic-mismatch",
+    "extension:post-v87-acquisition-2026-09"
+   ],
+   "grid": {
+    "elevationM": 1642.2,
+    "latitude": -1.319,
+    "longitude": 36.928,
+    "resolution": "NASA/POWER Source Native Resolution (tested: ~0.5 deg lat x 0.625 deg lon)"
+   },
+   "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+   "months": [
+    {
+     "daylightHours": 12.19,
+     "monthIndex": 0,
+     "precipDaysGe1mm": 0.3,
+     "precipMm": 44.0,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 27.78,
+     "tempLowC": 14.17,
+     "tempMeanC": 20.27,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.15,
+     "monthIndex": 1,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 29.7,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 29.3,
+     "tempLowC": 14.52,
+     "tempMeanC": 21.27,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.12,
+     "monthIndex": 2,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 63.0,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 29.25,
+     "tempLowC": 15.28,
+     "tempMeanC": 21.47,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.08,
+     "monthIndex": 3,
+     "precipDaysGe1mm": 0.7,
+     "precipMm": 108.1,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 27.46,
+     "tempLowC": 15.4,
+     "tempMeanC": 20.47,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.06,
+     "monthIndex": 4,
+     "precipDaysGe1mm": 0.6,
+     "precipMm": 78.8,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 26.01,
+     "tempLowC": 14.07,
+     "tempMeanC": 19.21,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.05,
+     "monthIndex": 5,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 24.6,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 25.83,
+     "tempLowC": 12.92,
+     "tempMeanC": 18.6,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.05,
+     "monthIndex": 6,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 17.1,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 26.13,
+     "tempLowC": 12.24,
+     "tempMeanC": 18.49,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.07,
+     "monthIndex": 7,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 20.7,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 27.08,
+     "tempLowC": 12.6,
+     "tempMeanC": 19.06,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.1,
+     "monthIndex": 8,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 18.4,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 28.63,
+     "tempLowC": 13.31,
+     "tempMeanC": 20.16,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.14,
+     "monthIndex": 9,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 51.2,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 28.79,
+     "tempLowC": 14.27,
+     "tempMeanC": 20.65,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.18,
+     "monthIndex": 10,
+     "precipDaysGe1mm": 0.7,
+     "precipMm": 89.0,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 26.79,
+     "tempLowC": 15.1,
+     "tempMeanC": 19.95,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.2,
+     "monthIndex": 11,
+     "precipDaysGe1mm": 0.5,
+     "precipMm": 63.7,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 26.46,
+     "tempLowC": 14.69,
+     "tempMeanC": 19.72,
+     "tier": "Favourable"
+    }
+   ],
+   "periodEnd": "2020-12-31",
+   "periodStart": "1991-01-01",
+   "recommendationStatus": "ok-favourable",
+   "region": "Africa",
+   "ruleVersion": "r1-r7.v4",
+   "selection": {
+    "reason": "extension anchor 2026-09: NASA POWER canonical-semantics acquisition (same endpoints/params as pilot v8.7)",
+    "ruleVersion": "r1-r7.v4"
+   },
+   "sourceFamily": "NASA POWER / MERRA-2"
+  },
+  {
+   "anchor": {
+    "elevationM": 4.0,
+    "latitude": 25.2731,
+    "longitude": 51.6081,
+    "type": "airport"
+   },
+   "bestMonthsBaseline": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    10,
+    11
+   ],
+   "city": "Doha",
+   "country": "Qatar",
+   "dailyBoundary": "UTC+00:00",
+   "destinationId": "doha",
+   "fieldProvenance": {
+    "daylightHours": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily civil daylight duration (equal year weights; leap years exact; polar night 0.0 h / midnight sun 24.0 h handled)",
+     "dailyAggregationBoundary": "not-applicable",
+     "derived": true,
+     "endpoint": null,
+     "formulaReference": "NOAA General Solar Position Calculations (published methodology, not a data product)",
+     "grid": "not-applicable (point astronomy)",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": null,
+     "parameter": null,
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": null,
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "UTRIPLA astronomy",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipDaysGe1mm": {
+     "aggregationMethod": "UTRIPLA derived statistic (v8.6 authorised): count of daily precipitation >= 1.0 mm (WMO rain-day convention) per calendar month per year, then arithmetic mean over 1991-2020",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "derivationKind": "internal-deterministic-count",
+     "derived": true,
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+     "officialProduct": "Daily API",
+     "parameter": "PRECTOTCORR",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Option A of methodology decision v8.6: deterministic count from the same source family's official daily product",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipMm": {
+     "aggregationMethod": "1991-2020 average of the monthly total precipitation",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "PRECTOTCORR_SUM",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    },
+    "sunshineHours": {
+     "policy": "null is the legal state: no sunshine-duration product exists in the NASA POWER family"
+    },
+    "tempHighC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily maximum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MAX",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MAX_AVG rejected: 30-year average of monthly EXTREME maximum, not mean of daily max",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempLowC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily minimum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MIN",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MIN_AVG rejected: 30-year average of monthly EXTREME minimum, not mean of daily min",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempMeanC": {
+     "aggregationMethod": "1991-2020 average of the monthly mean 2m temperature",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "T2M",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    }
+   },
+   "flags": [
+    "mapping:climatology-T2M_MAX_AVG-rejected-semantic-mismatch",
+    "mapping:climatology-T2M_MIN_AVG-rejected-semantic-mismatch",
+    "extension:post-v87-acquisition-2026-09"
+   ],
+   "grid": {
+    "elevationM": 3.0,
+    "latitude": 25.273,
+    "longitude": 51.608,
+    "resolution": "NASA/POWER Source Native Resolution (tested: ~0.5 deg lat x 0.625 deg lon)"
+   },
+   "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+   "months": [
+    {
+     "daylightHours": 10.76,
+     "monthIndex": 0,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 10.2,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 20.62,
+     "tempLowC": 18.01,
+     "tempMeanC": 19.3,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 11.3,
+     "monthIndex": 1,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 7.5,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 20.8,
+     "tempLowC": 17.84,
+     "tempMeanC": 19.25,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.01,
+     "monthIndex": 2,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 12.3,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 22.96,
+     "tempLowC": 19.53,
+     "tempMeanC": 21.16,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.75,
+     "monthIndex": 3,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 5.1,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 26.94,
+     "tempLowC": 22.96,
+     "tempMeanC": 24.84,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 13.37,
+     "monthIndex": 4,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 0.7,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 31.48,
+     "tempLowC": 27.0,
+     "tempMeanC": 29.18,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 13.68,
+     "monthIndex": 5,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 0.3,
+     "rawRuleHits": [
+      "R4"
+     ],
+     "ruleId": "R4",
+     "sunshineHours": null,
+     "tempHighC": 34.15,
+     "tempLowC": 29.32,
+     "tempMeanC": 31.77,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 13.54,
+     "monthIndex": 6,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 0.1,
+     "rawRuleHits": [
+      "R4"
+     ],
+     "ruleId": "R4",
+     "sunshineHours": null,
+     "tempHighC": 35.61,
+     "tempLowC": 31.32,
+     "tempMeanC": 33.49,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 13.0,
+     "monthIndex": 7,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 0.2,
+     "rawRuleHits": [
+      "R4"
+     ],
+     "ruleId": "R4",
+     "sunshineHours": null,
+     "tempHighC": 36.14,
+     "tempLowC": 32.47,
+     "tempMeanC": 34.29,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.3,
+     "monthIndex": 8,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 0.2,
+     "rawRuleHits": [
+      "R4"
+     ],
+     "ruleId": "R4",
+     "sunshineHours": null,
+     "tempHighC": 35.04,
+     "tempLowC": 31.47,
+     "tempMeanC": 33.18,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.56,
+     "monthIndex": 9,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 2.1,
+     "rawRuleHits": [
+      "R4"
+     ],
+     "ruleId": "R4",
+     "sunshineHours": null,
+     "tempHighC": 32.26,
+     "tempLowC": 29.22,
+     "tempMeanC": 30.64,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 10.92,
+     "monthIndex": 10,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 9.6,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 27.59,
+     "tempLowC": 25.11,
+     "tempMeanC": 26.32,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 10.59,
+     "monthIndex": 11,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 14.1,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 23.17,
+     "tempLowC": 20.67,
+     "tempMeanC": 21.9,
+     "tier": "Favourable"
+    }
+   ],
+   "periodEnd": "2020-12-31",
+   "periodStart": "1991-01-01",
+   "recommendationStatus": "ok-favourable",
+   "region": "Asia",
+   "ruleVersion": "r1-r7.v4",
+   "selection": {
+    "reason": "extension anchor 2026-09: NASA POWER canonical-semantics acquisition (same endpoints/params as pilot v8.7)",
+    "ruleVersion": "r1-r7.v4"
+   },
+   "sourceFamily": "NASA POWER / MERRA-2"
+  },
+  {
+   "anchor": {
+    "elevationM": 9.0,
+    "latitude": -22.81,
+    "longitude": -43.2506,
+    "type": "airport"
+   },
+   "bestMonthsBaseline": [
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "city": "Rio de Janeiro",
+   "country": "Brazil",
+   "dailyBoundary": "UTC+00:00",
+   "destinationId": "rio-de-janeiro",
+   "fieldProvenance": {
+    "daylightHours": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily civil daylight duration (equal year weights; leap years exact; polar night 0.0 h / midnight sun 24.0 h handled)",
+     "dailyAggregationBoundary": "not-applicable",
+     "derived": true,
+     "endpoint": null,
+     "formulaReference": "NOAA General Solar Position Calculations (published methodology, not a data product)",
+     "grid": "not-applicable (point astronomy)",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": null,
+     "parameter": null,
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": null,
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "UTRIPLA astronomy",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipDaysGe1mm": {
+     "aggregationMethod": "UTRIPLA derived statistic (v8.6 authorised): count of daily precipitation >= 1.0 mm (WMO rain-day convention) per calendar month per year, then arithmetic mean over 1991-2020",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "derivationKind": "internal-deterministic-count",
+     "derived": true,
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+     "officialProduct": "Daily API",
+     "parameter": "PRECTOTCORR",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Option A of methodology decision v8.6: deterministic count from the same source family's official daily product",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipMm": {
+     "aggregationMethod": "1991-2020 average of the monthly total precipitation",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "PRECTOTCORR_SUM",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    },
+    "sunshineHours": {
+     "policy": "null is the legal state: no sunshine-duration product exists in the NASA POWER family"
+    },
+    "tempHighC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily maximum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MAX",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MAX_AVG rejected: 30-year average of monthly EXTREME maximum, not mean of daily max",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempLowC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily minimum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MIN",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MIN_AVG rejected: 30-year average of monthly EXTREME minimum, not mean of daily min",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempMeanC": {
+     "aggregationMethod": "1991-2020 average of the monthly mean 2m temperature",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "T2M",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    }
+   },
+   "flags": [
+    "mapping:climatology-T2M_MAX_AVG-rejected-semantic-mismatch",
+    "mapping:climatology-T2M_MIN_AVG-rejected-semantic-mismatch",
+    "extension:post-v87-acquisition-2026-09"
+   ],
+   "grid": {
+    "elevationM": 80.76,
+    "latitude": -22.81,
+    "longitude": -43.251,
+    "resolution": "NASA/POWER Source Native Resolution (tested: ~0.5 deg lat x 0.625 deg lon)"
+   },
+   "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+   "months": [
+    {
+     "daylightHours": 13.35,
+     "monthIndex": 0,
+     "precipDaysGe1mm": 0.7,
+     "precipMm": 209.2,
+     "rawRuleHits": [
+      "R3",
+      "R5"
+     ],
+     "ruleId": "R3",
+     "sunshineHours": null,
+     "tempHighC": 28.43,
+     "tempLowC": 23.51,
+     "tempMeanC": 25.55,
+     "tier": "Challenging"
+    },
+    {
+     "daylightHours": 12.86,
+     "monthIndex": 1,
+     "precipDaysGe1mm": 0.6,
+     "precipMm": 149.9,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 28.77,
+     "tempLowC": 23.62,
+     "tempMeanC": 25.79,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.22,
+     "monthIndex": 2,
+     "precipDaysGe1mm": 0.7,
+     "precipMm": 178.7,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 27.9,
+     "tempLowC": 23.39,
+     "tempMeanC": 25.27,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.56,
+     "monthIndex": 3,
+     "precipDaysGe1mm": 0.5,
+     "precipMm": 99.3,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 26.75,
+     "tempLowC": 22.2,
+     "tempMeanC": 24.11,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.02,
+     "monthIndex": 4,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 80.9,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 24.94,
+     "tempLowC": 20.19,
+     "tempMeanC": 22.19,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 10.76,
+     "monthIndex": 5,
+     "precipDaysGe1mm": 0.3,
+     "precipMm": 53.3,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 24.48,
+     "tempLowC": 18.94,
+     "tempMeanC": 21.29,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 10.88,
+     "monthIndex": 6,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 49.8,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 24.22,
+     "tempLowC": 18.2,
+     "tempMeanC": 20.73,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 11.34,
+     "monthIndex": 7,
+     "precipDaysGe1mm": 0.3,
+     "precipMm": 48.0,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 24.86,
+     "tempLowC": 18.27,
+     "tempMeanC": 20.98,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 11.96,
+     "monthIndex": 8,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 87.1,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 25.56,
+     "tempLowC": 19.1,
+     "tempMeanC": 21.69,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.62,
+     "monthIndex": 9,
+     "precipDaysGe1mm": 0.5,
+     "precipMm": 108.7,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 26.29,
+     "tempLowC": 20.27,
+     "tempMeanC": 22.69,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 13.2,
+     "monthIndex": 10,
+     "precipDaysGe1mm": 0.7,
+     "precipMm": 201.7,
+     "rawRuleHits": [
+      "R3",
+      "R5"
+     ],
+     "ruleId": "R3",
+     "sunshineHours": null,
+     "tempHighC": 26.39,
+     "tempLowC": 21.17,
+     "tempMeanC": 23.31,
+     "tier": "Challenging"
+    },
+    {
+     "daylightHours": 13.5,
+     "monthIndex": 11,
+     "precipDaysGe1mm": 0.7,
+     "precipMm": 218.6,
+     "rawRuleHits": [
+      "R3",
+      "R5"
+     ],
+     "ruleId": "R3",
+     "sunshineHours": null,
+     "tempHighC": 27.63,
+     "tempLowC": 22.57,
+     "tempMeanC": 24.66,
+     "tier": "Challenging"
+    }
+   ],
+   "periodEnd": "2020-12-31",
+   "periodStart": "1991-01-01",
+   "recommendationStatus": "ok-favourable",
+   "region": "Americas",
+   "ruleVersion": "r1-r7.v4",
+   "selection": {
+    "reason": "extension anchor 2026-09: NASA POWER canonical-semantics acquisition (same endpoints/params as pilot v8.7)",
+    "ruleVersion": "r1-r7.v4"
+   },
+   "sourceFamily": "NASA POWER / MERRA-2"
+  },
+  {
+   "anchor": {
+    "elevationM": 3310.0,
+    "latitude": -13.5357,
+    "longitude": -71.9388,
+    "type": "airport"
+   },
+   "bestMonthsBaseline": [
+    5
+   ],
+   "city": "Cusco",
+   "country": "Peru",
+   "dailyBoundary": "UTC+00:00",
+   "destinationId": "cusco",
+   "fieldProvenance": {
+    "daylightHours": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily civil daylight duration (equal year weights; leap years exact; polar night 0.0 h / midnight sun 24.0 h handled)",
+     "dailyAggregationBoundary": "not-applicable",
+     "derived": true,
+     "endpoint": null,
+     "formulaReference": "NOAA General Solar Position Calculations (published methodology, not a data product)",
+     "grid": "not-applicable (point astronomy)",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": null,
+     "parameter": null,
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": null,
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "UTRIPLA astronomy",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipDaysGe1mm": {
+     "aggregationMethod": "UTRIPLA derived statistic (v8.6 authorised): count of daily precipitation >= 1.0 mm (WMO rain-day convention) per calendar month per year, then arithmetic mean over 1991-2020",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "derivationKind": "internal-deterministic-count",
+     "derived": true,
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+     "officialProduct": "Daily API",
+     "parameter": "PRECTOTCORR",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Option A of methodology decision v8.6: deterministic count from the same source family's official daily product",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipMm": {
+     "aggregationMethod": "1991-2020 average of the monthly total precipitation",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "PRECTOTCORR_SUM",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    },
+    "sunshineHours": {
+     "policy": "null is the legal state: no sunshine-duration product exists in the NASA POWER family"
+    },
+    "tempHighC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily maximum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MAX",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MAX_AVG rejected: 30-year average of monthly EXTREME maximum, not mean of daily max",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempLowC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily minimum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MIN",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MIN_AVG rejected: 30-year average of monthly EXTREME minimum, not mean of daily min",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempMeanC": {
+     "aggregationMethod": "1991-2020 average of the monthly mean 2m temperature",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "T2M",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    }
+   },
+   "flags": [
+    "mapping:climatology-T2M_MAX_AVG-rejected-semantic-mismatch",
+    "mapping:climatology-T2M_MIN_AVG-rejected-semantic-mismatch",
+    "extension:post-v87-acquisition-2026-09"
+   ],
+   "grid": {
+    "elevationM": 3739.76,
+    "latitude": -13.536,
+    "longitude": -71.939,
+    "resolution": "NASA/POWER Source Native Resolution (tested: ~0.5 deg lat x 0.625 deg lon)"
+   },
+   "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+   "months": [
+    {
+     "daylightHours": 12.82,
+     "monthIndex": 0,
+     "precipDaysGe1mm": 0.7,
+     "precipMm": 132.6,
+     "rawRuleHits": [
+      "R5",
+      "R6"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 14.21,
+     "tempLowC": 4.15,
+     "tempMeanC": 8.53,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.54,
+     "monthIndex": 1,
+     "precipDaysGe1mm": 0.7,
+     "precipMm": 123.5,
+     "rawRuleHits": [
+      "R5",
+      "R6"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 14.08,
+     "tempLowC": 4.16,
+     "tempMeanC": 8.48,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.17,
+     "monthIndex": 2,
+     "precipDaysGe1mm": 0.6,
+     "precipMm": 94.9,
+     "rawRuleHits": [
+      "R5",
+      "R6"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 14.08,
+     "tempLowC": 3.94,
+     "tempMeanC": 8.32,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.8,
+     "monthIndex": 3,
+     "precipDaysGe1mm": 0.3,
+     "precipMm": 38.8,
+     "rawRuleHits": [
+      "R6"
+     ],
+     "ruleId": "R6",
+     "sunshineHours": null,
+     "tempHighC": 13.95,
+     "tempLowC": 4.08,
+     "tempMeanC": 8.27,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.49,
+     "monthIndex": 4,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 8.0,
+     "rawRuleHits": [
+      "R6"
+     ],
+     "ruleId": "R6",
+     "sunshineHours": null,
+     "tempHighC": 14.24,
+     "tempLowC": 3.64,
+     "tempMeanC": 8.02,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.34,
+     "monthIndex": 5,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 3.9,
+     "rawRuleHits": [
+      "R6"
+     ],
+     "ruleId": "R6",
+     "sunshineHours": null,
+     "tempHighC": 14.36,
+     "tempLowC": 2.75,
+     "tempMeanC": 7.51,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.41,
+     "monthIndex": 6,
+     "precipDaysGe1mm": 0.0,
+     "precipMm": 7.6,
+     "rawRuleHits": [
+      "R6"
+     ],
+     "ruleId": "R6",
+     "sunshineHours": null,
+     "tempHighC": 14.64,
+     "tempLowC": 2.07,
+     "tempMeanC": 7.23,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.67,
+     "monthIndex": 7,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 8.7,
+     "rawRuleHits": [
+      "R6"
+     ],
+     "ruleId": "R6",
+     "sunshineHours": null,
+     "tempHighC": 15.44,
+     "tempLowC": 2.63,
+     "tempMeanC": 7.84,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.02,
+     "monthIndex": 8,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 18.0,
+     "rawRuleHits": [
+      "R6"
+     ],
+     "ruleId": "R6",
+     "sunshineHours": null,
+     "tempHighC": 15.7,
+     "tempLowC": 3.61,
+     "tempMeanC": 8.52,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.4,
+     "monthIndex": 9,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 58.4,
+     "rawRuleHits": [
+      "R6"
+     ],
+     "ruleId": "R6",
+     "sunshineHours": null,
+     "tempHighC": 15.68,
+     "tempLowC": 4.05,
+     "tempMeanC": 8.9,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.74,
+     "monthIndex": 10,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 71.9,
+     "rawRuleHits": [
+      "R6"
+     ],
+     "ruleId": "R6",
+     "sunshineHours": null,
+     "tempHighC": 15.65,
+     "tempLowC": 4.31,
+     "tempMeanC": 9.14,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.91,
+     "monthIndex": 11,
+     "precipDaysGe1mm": 0.7,
+     "precipMm": 129.7,
+     "rawRuleHits": [
+      "R5",
+      "R6"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 14.84,
+     "tempLowC": 4.26,
+     "tempMeanC": 8.84,
+     "tier": "Workable"
+    }
+   ],
+   "periodEnd": "2020-12-31",
+   "periodStart": "1991-01-01",
+   "recommendationStatus": "ok-workable-fallback",
+   "region": "Americas",
+   "ruleVersion": "r1-r7.v4",
+   "selection": {
+    "reason": "extension anchor 2026-09: NASA POWER canonical-semantics acquisition (same endpoints/params as pilot v8.7)",
+    "ruleVersion": "r1-r7.v4"
+   },
+   "sourceFamily": "NASA POWER / MERRA-2"
+  },
+  {
+   "anchor": {
+    "elevationM": 2548.0,
+    "latitude": 4.7016,
+    "longitude": -74.1469,
+    "type": "airport"
+   },
+   "bestMonthsBaseline": [
+    0,
+    1
+   ],
+   "city": "Bogotá",
+   "country": "Colombia",
+   "dailyBoundary": "UTC+00:00",
+   "destinationId": "bogota",
+   "fieldProvenance": {
+    "daylightHours": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily civil daylight duration (equal year weights; leap years exact; polar night 0.0 h / midnight sun 24.0 h handled)",
+     "dailyAggregationBoundary": "not-applicable",
+     "derived": true,
+     "endpoint": null,
+     "formulaReference": "NOAA General Solar Position Calculations (published methodology, not a data product)",
+     "grid": "not-applicable (point astronomy)",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": null,
+     "parameter": null,
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": null,
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "UTRIPLA astronomy",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipDaysGe1mm": {
+     "aggregationMethod": "UTRIPLA derived statistic (v8.6 authorised): count of daily precipitation >= 1.0 mm (WMO rain-day convention) per calendar month per year, then arithmetic mean over 1991-2020",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "derivationKind": "internal-deterministic-count",
+     "derived": true,
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+     "officialProduct": "Daily API",
+     "parameter": "PRECTOTCORR",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Option A of methodology decision v8.6: deterministic count from the same source family's official daily product",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipMm": {
+     "aggregationMethod": "1991-2020 average of the monthly total precipitation",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "PRECTOTCORR_SUM",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    },
+    "sunshineHours": {
+     "policy": "null is the legal state: no sunshine-duration product exists in the NASA POWER family"
+    },
+    "tempHighC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily maximum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MAX",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MAX_AVG rejected: 30-year average of monthly EXTREME maximum, not mean of daily max",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempLowC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily minimum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MIN",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MIN_AVG rejected: 30-year average of monthly EXTREME minimum, not mean of daily min",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempMeanC": {
+     "aggregationMethod": "1991-2020 average of the monthly mean 2m temperature",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "T2M",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    }
+   },
+   "flags": [
+    "mapping:climatology-T2M_MAX_AVG-rejected-semantic-mismatch",
+    "mapping:climatology-T2M_MIN_AVG-rejected-semantic-mismatch",
+    "extension:post-v87-acquisition-2026-09"
+   ],
+   "grid": {
+    "elevationM": 1790.38,
+    "latitude": 4.702,
+    "longitude": -74.147,
+    "resolution": "NASA/POWER Source Native Resolution (tested: ~0.5 deg lat x 0.625 deg lon)"
+   },
+   "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+   "months": [
+    {
+     "daylightHours": 11.88,
+     "monthIndex": 0,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 54.5,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 24.19,
+     "tempLowC": 14.41,
+     "tempMeanC": 18.74,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 11.97,
+     "monthIndex": 1,
+     "precipDaysGe1mm": 0.6,
+     "precipMm": 85.8,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 24.78,
+     "tempLowC": 14.86,
+     "tempMeanC": 19.23,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.09,
+     "monthIndex": 2,
+     "precipDaysGe1mm": 0.7,
+     "precipMm": 139.5,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 24.37,
+     "tempLowC": 15.32,
+     "tempMeanC": 19.27,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.22,
+     "monthIndex": 3,
+     "precipDaysGe1mm": 0.9,
+     "precipMm": 221.7,
+     "rawRuleHits": [
+      "R3",
+      "R5"
+     ],
+     "ruleId": "R3",
+     "sunshineHours": null,
+     "tempHighC": 23.78,
+     "tempLowC": 15.15,
+     "tempMeanC": 18.98,
+     "tier": "Challenging"
+    },
+    {
+     "daylightHours": 12.33,
+     "monthIndex": 4,
+     "precipDaysGe1mm": 0.9,
+     "precipMm": 219.2,
+     "rawRuleHits": [
+      "R3",
+      "R5"
+     ],
+     "ruleId": "R3",
+     "sunshineHours": null,
+     "tempHighC": 23.41,
+     "tempLowC": 14.63,
+     "tempMeanC": 18.65,
+     "tier": "Challenging"
+    },
+    {
+     "daylightHours": 12.39,
+     "monthIndex": 5,
+     "precipDaysGe1mm": 0.8,
+     "precipMm": 157.7,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 23.19,
+     "tempLowC": 13.72,
+     "tempMeanC": 18.13,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.36,
+     "monthIndex": 6,
+     "precipDaysGe1mm": 0.7,
+     "precipMm": 132.8,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 23.33,
+     "tempLowC": 13.28,
+     "tempMeanC": 17.96,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.27,
+     "monthIndex": 7,
+     "precipDaysGe1mm": 0.7,
+     "precipMm": 113.8,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 24.03,
+     "tempLowC": 13.28,
+     "tempMeanC": 18.25,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.14,
+     "monthIndex": 8,
+     "precipDaysGe1mm": 0.7,
+     "precipMm": 129.7,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 24.41,
+     "tempLowC": 13.65,
+     "tempMeanC": 18.59,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.02,
+     "monthIndex": 9,
+     "precipDaysGe1mm": 0.8,
+     "precipMm": 190.0,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 23.54,
+     "tempLowC": 14.33,
+     "tempMeanC": 18.44,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.91,
+     "monthIndex": 10,
+     "precipDaysGe1mm": 0.8,
+     "precipMm": 168.2,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 22.8,
+     "tempLowC": 14.59,
+     "tempMeanC": 18.17,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.85,
+     "monthIndex": 11,
+     "precipDaysGe1mm": 0.6,
+     "precipMm": 105.9,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 23.44,
+     "tempLowC": 14.51,
+     "tempMeanC": 18.46,
+     "tier": "Workable"
+    }
+   ],
+   "periodEnd": "2020-12-31",
+   "periodStart": "1991-01-01",
+   "recommendationStatus": "ok-favourable",
+   "region": "Americas",
+   "ruleVersion": "r1-r7.v4",
+   "selection": {
+    "reason": "extension anchor 2026-09: NASA POWER canonical-semantics acquisition (same endpoints/params as pilot v8.7)",
+    "ruleVersion": "r1-r7.v4"
+   },
+   "sourceFamily": "NASA POWER / MERRA-2"
+  },
+  {
+   "anchor": {
+    "elevationM": 474.0,
+    "latitude": -33.393,
+    "longitude": -70.7858,
+    "type": "airport"
+   },
+   "bestMonthsBaseline": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    8,
+    9,
+    10,
+    11
+   ],
+   "city": "Santiago",
+   "country": "Chile",
+   "dailyBoundary": "UTC+00:00",
+   "destinationId": "santiago",
+   "fieldProvenance": {
+    "daylightHours": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily civil daylight duration (equal year weights; leap years exact; polar night 0.0 h / midnight sun 24.0 h handled)",
+     "dailyAggregationBoundary": "not-applicable",
+     "derived": true,
+     "endpoint": null,
+     "formulaReference": "NOAA General Solar Position Calculations (published methodology, not a data product)",
+     "grid": "not-applicable (point astronomy)",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": null,
+     "parameter": null,
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": null,
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "UTRIPLA astronomy",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipDaysGe1mm": {
+     "aggregationMethod": "UTRIPLA derived statistic (v8.6 authorised): count of daily precipitation >= 1.0 mm (WMO rain-day convention) per calendar month per year, then arithmetic mean over 1991-2020",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "derivationKind": "internal-deterministic-count",
+     "derived": true,
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+     "officialProduct": "Daily API",
+     "parameter": "PRECTOTCORR",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Option A of methodology decision v8.6: deterministic count from the same source family's official daily product",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipMm": {
+     "aggregationMethod": "1991-2020 average of the monthly total precipitation",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "PRECTOTCORR_SUM",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    },
+    "sunshineHours": {
+     "policy": "null is the legal state: no sunshine-duration product exists in the NASA POWER family"
+    },
+    "tempHighC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily maximum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MAX",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MAX_AVG rejected: 30-year average of monthly EXTREME maximum, not mean of daily max",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempLowC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily minimum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MIN",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MIN_AVG rejected: 30-year average of monthly EXTREME minimum, not mean of daily min",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempMeanC": {
+     "aggregationMethod": "1991-2020 average of the monthly mean 2m temperature",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "T2M",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    }
+   },
+   "flags": [
+    "mapping:climatology-T2M_MAX_AVG-rejected-semantic-mismatch",
+    "mapping:climatology-T2M_MIN_AVG-rejected-semantic-mismatch",
+    "extension:post-v87-acquisition-2026-09"
+   ],
+   "grid": {
+    "elevationM": 1154.13,
+    "latitude": -33.393,
+    "longitude": -70.786,
+    "resolution": "NASA/POWER Source Native Resolution (tested: ~0.5 deg lat x 0.625 deg lon)"
+   },
+   "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+   "months": [
+    {
+     "daylightHours": 14.08,
+     "monthIndex": 0,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 7.5,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 29.75,
+     "tempLowC": 14.48,
+     "tempMeanC": 21.83,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 13.29,
+     "monthIndex": 1,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 7.6,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 29.02,
+     "tempLowC": 14.29,
+     "tempMeanC": 21.08,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.29,
+     "monthIndex": 2,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 9.4,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 27.62,
+     "tempLowC": 13.16,
+     "tempMeanC": 19.49,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 11.26,
+     "monthIndex": 3,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 16.9,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 23.85,
+     "tempLowC": 10.41,
+     "tempMeanC": 15.91,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 10.4,
+     "monthIndex": 4,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 48.4,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 19.76,
+     "tempLowC": 7.74,
+     "tempMeanC": 12.42,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 9.97,
+     "monthIndex": 5,
+     "precipDaysGe1mm": 0.3,
+     "precipMm": 76.9,
+     "rawRuleHits": [
+      "R6"
+     ],
+     "ruleId": "R6",
+     "sunshineHours": null,
+     "tempHighC": 15.97,
+     "tempLowC": 4.66,
+     "tempMeanC": 9.03,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 10.18,
+     "monthIndex": 6,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 47.0,
+     "rawRuleHits": [
+      "R6"
+     ],
+     "ruleId": "R6",
+     "sunshineHours": null,
+     "tempHighC": 15.47,
+     "tempLowC": 3.77,
+     "tempMeanC": 8.36,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 10.91,
+     "monthIndex": 7,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 40.3,
+     "rawRuleHits": [
+      "R6"
+     ],
+     "ruleId": "R6",
+     "sunshineHours": null,
+     "tempHighC": 17.14,
+     "tempLowC": 4.51,
+     "tempMeanC": 9.71,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.88,
+     "monthIndex": 8,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 24.7,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 19.24,
+     "tempLowC": 5.9,
+     "tempMeanC": 11.71,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.92,
+     "monthIndex": 9,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 13.7,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 22.29,
+     "tempLowC": 7.83,
+     "tempMeanC": 14.44,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 13.84,
+     "monthIndex": 10,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 8.0,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 26.06,
+     "tempLowC": 10.43,
+     "tempMeanC": 17.87,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 14.32,
+     "monthIndex": 11,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 7.4,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 28.45,
+     "tempLowC": 12.77,
+     "tempMeanC": 20.43,
+     "tier": "Favourable"
+    }
+   ],
+   "periodEnd": "2020-12-31",
+   "periodStart": "1991-01-01",
+   "recommendationStatus": "ok-favourable",
+   "region": "Americas",
+   "ruleVersion": "r1-r7.v4",
+   "selection": {
+    "reason": "extension anchor 2026-09: NASA POWER canonical-semantics acquisition (same endpoints/params as pilot v8.7)",
+    "ruleVersion": "r1-r7.v4"
+   },
+   "sourceFamily": "NASA POWER / MERRA-2"
+  },
+  {
+   "anchor": {
+    "elevationM": 64.0,
+    "latitude": 22.9892,
+    "longitude": -82.4091,
+    "type": "airport"
+   },
+   "bestMonthsBaseline": [
+    0,
+    1,
+    2,
+    3,
+    10,
+    11
+   ],
+   "city": "Havana",
+   "country": "Cuba",
+   "dailyBoundary": "UTC+00:00",
+   "destinationId": "havana",
+   "fieldProvenance": {
+    "daylightHours": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily civil daylight duration (equal year weights; leap years exact; polar night 0.0 h / midnight sun 24.0 h handled)",
+     "dailyAggregationBoundary": "not-applicable",
+     "derived": true,
+     "endpoint": null,
+     "formulaReference": "NOAA General Solar Position Calculations (published methodology, not a data product)",
+     "grid": "not-applicable (point astronomy)",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": null,
+     "parameter": null,
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": null,
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "UTRIPLA astronomy",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipDaysGe1mm": {
+     "aggregationMethod": "UTRIPLA derived statistic (v8.6 authorised): count of daily precipitation >= 1.0 mm (WMO rain-day convention) per calendar month per year, then arithmetic mean over 1991-2020",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "derivationKind": "internal-deterministic-count",
+     "derived": true,
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+     "officialProduct": "Daily API",
+     "parameter": "PRECTOTCORR",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Option A of methodology decision v8.6: deterministic count from the same source family's official daily product",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipMm": {
+     "aggregationMethod": "1991-2020 average of the monthly total precipitation",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "PRECTOTCORR_SUM",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    },
+    "sunshineHours": {
+     "policy": "null is the legal state: no sunshine-duration product exists in the NASA POWER family"
+    },
+    "tempHighC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily maximum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MAX",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MAX_AVG rejected: 30-year average of monthly EXTREME maximum, not mean of daily max",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempLowC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily minimum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MIN",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MIN_AVG rejected: 30-year average of monthly EXTREME minimum, not mean of daily min",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempMeanC": {
+     "aggregationMethod": "1991-2020 average of the monthly mean 2m temperature",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "T2M",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    }
+   },
+   "flags": [
+    "mapping:climatology-T2M_MAX_AVG-rejected-semantic-mismatch",
+    "mapping:climatology-T2M_MIN_AVG-rejected-semantic-mismatch",
+    "extension:post-v87-acquisition-2026-09"
+   ],
+   "grid": {
+    "elevationM": 49.11,
+    "latitude": 22.989,
+    "longitude": -82.409,
+    "resolution": "NASA/POWER Source Native Resolution (tested: ~0.5 deg lat x 0.625 deg lon)"
+   },
+   "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+   "months": [
+    {
+     "daylightHours": 10.9,
+     "monthIndex": 0,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 39.7,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 27.02,
+     "tempLowC": 19.18,
+     "tempMeanC": 22.47,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 11.39,
+     "monthIndex": 1,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 28.3,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 28.4,
+     "tempLowC": 19.46,
+     "tempMeanC": 23.31,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.02,
+     "monthIndex": 2,
+     "precipDaysGe1mm": 0.1,
+     "precipMm": 27.0,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 29.69,
+     "tempLowC": 20.34,
+     "tempMeanC": 24.42,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.69,
+     "monthIndex": 3,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 39.0,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 31.64,
+     "tempLowC": 22.19,
+     "tempMeanC": 26.37,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 13.24,
+     "monthIndex": 4,
+     "precipDaysGe1mm": 0.3,
+     "precipMm": 65.9,
+     "rawRuleHits": [
+      "R4"
+     ],
+     "ruleId": "R4",
+     "sunshineHours": null,
+     "tempHighC": 32.43,
+     "tempLowC": 23.84,
+     "tempMeanC": 27.7,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 13.52,
+     "monthIndex": 5,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 110.9,
+     "rawRuleHits": [
+      "R4",
+      "R5"
+     ],
+     "ruleId": "R4",
+     "sunshineHours": null,
+     "tempHighC": 32.07,
+     "tempLowC": 25.26,
+     "tempMeanC": 28.33,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 13.39,
+     "monthIndex": 6,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 81.9,
+     "rawRuleHits": [
+      "R4"
+     ],
+     "ruleId": "R4",
+     "sunshineHours": null,
+     "tempHighC": 32.8,
+     "tempLowC": 25.51,
+     "tempMeanC": 28.82,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.91,
+     "monthIndex": 7,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 107.9,
+     "rawRuleHits": [
+      "R4",
+      "R5"
+     ],
+     "ruleId": "R4",
+     "sunshineHours": null,
+     "tempHighC": 32.68,
+     "tempLowC": 25.75,
+     "tempMeanC": 28.82,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.28,
+     "monthIndex": 8,
+     "precipDaysGe1mm": 0.5,
+     "precipMm": 116.8,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 31.56,
+     "tempLowC": 25.45,
+     "tempMeanC": 28.09,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.62,
+     "monthIndex": 9,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 92.2,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 30.44,
+     "tempLowC": 24.23,
+     "tempMeanC": 26.84,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.04,
+     "monthIndex": 10,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 42.4,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 28.76,
+     "tempLowC": 21.87,
+     "tempMeanC": 24.73,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 10.75,
+     "monthIndex": 11,
+     "precipDaysGe1mm": 0.2,
+     "precipMm": 33.0,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 27.72,
+     "tempLowC": 20.31,
+     "tempMeanC": 23.37,
+     "tier": "Favourable"
+    }
+   ],
+   "periodEnd": "2020-12-31",
+   "periodStart": "1991-01-01",
+   "recommendationStatus": "ok-favourable",
+   "region": "Americas",
+   "ruleVersion": "r1-r7.v4",
+   "selection": {
+    "reason": "extension anchor 2026-09: NASA POWER canonical-semantics acquisition (same endpoints/params as pilot v8.7)",
+    "ruleVersion": "r1-r7.v4"
+   },
+   "sourceFamily": "NASA POWER / MERRA-2"
+  },
+  {
+   "anchor": {
+    "elevationM": 9.0,
+    "latitude": -17.7554,
+    "longitude": 177.4434,
+    "type": "airport"
+   },
+   "bestMonthsBaseline": [
+    5,
+    6,
+    7
+   ],
+   "city": "Nadi",
+   "country": "Fiji",
+   "dailyBoundary": "UTC+00:00",
+   "destinationId": "nadi",
+   "fieldProvenance": {
+    "daylightHours": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily civil daylight duration (equal year weights; leap years exact; polar night 0.0 h / midnight sun 24.0 h handled)",
+     "dailyAggregationBoundary": "not-applicable",
+     "derived": true,
+     "endpoint": null,
+     "formulaReference": "NOAA General Solar Position Calculations (published methodology, not a data product)",
+     "grid": "not-applicable (point astronomy)",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": null,
+     "parameter": null,
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": null,
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "UTRIPLA astronomy",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipDaysGe1mm": {
+     "aggregationMethod": "UTRIPLA derived statistic (v8.6 authorised): count of daily precipitation >= 1.0 mm (WMO rain-day convention) per calendar month per year, then arithmetic mean over 1991-2020",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "derivationKind": "internal-deterministic-count",
+     "derived": true,
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+     "officialProduct": "Daily API",
+     "parameter": "PRECTOTCORR",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Option A of methodology decision v8.6: deterministic count from the same source family's official daily product",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "precipMm": {
+     "aggregationMethod": "1991-2020 average of the monthly total precipitation",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "PRECTOTCORR_SUM",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    },
+    "sunshineHours": {
+     "policy": "null is the legal state: no sunshine-duration product exists in the NASA POWER family"
+    },
+    "tempHighC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily maximum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MAX",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MAX_AVG rejected: 30-year average of monthly EXTREME maximum, not mean of daily max",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempLowC": {
+     "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily minimum temperature",
+     "dailyAggregationBoundary": "UTC+00:00",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+     "officialProduct": "Daily API",
+     "parameter": "T2M_MIN",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "selectionReason": "Climatology T2M_MIN_AVG rejected: 30-year average of monthly EXTREME minimum, not mean of daily min",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "daily-aggregated-to-monthly"
+    },
+    "tempMeanC": {
+     "aggregationMethod": "1991-2020 average of the monthly mean 2m temperature",
+     "dailyAggregationBoundary": "not-applicable",
+     "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+     "grid": "NASA/POWER Source Native Resolution",
+     "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+     "officialProduct": "Climatology API",
+     "parameter": "T2M",
+     "periodEnd": "2020-12-31",
+     "periodStart": "1991-01-01",
+     "provider": "NASA POWER (NASA Langley Research Center)",
+     "ruleVersion": "r1-r7.v4",
+     "sourceFamily": "NASA POWER / MERRA-2",
+     "temporalLevel": "climatology-monthly"
+    }
+   },
+   "flags": [
+    "mapping:climatology-T2M_MAX_AVG-rejected-semantic-mismatch",
+    "mapping:climatology-T2M_MIN_AVG-rejected-semantic-mismatch",
+    "extension:post-v87-acquisition-2026-09"
+   ],
+   "grid": {
+    "elevationM": 98.96,
+    "latitude": -17.755,
+    "longitude": 177.443,
+    "resolution": "NASA/POWER Source Native Resolution (tested: ~0.5 deg lat x 0.625 deg lon)"
+   },
+   "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+   "months": [
+    {
+     "daylightHours": 13.05,
+     "monthIndex": 0,
+     "precipDaysGe1mm": 0.7,
+     "precipMm": 270.7,
+     "rawRuleHits": [
+      "R3",
+      "R5"
+     ],
+     "ruleId": "R3",
+     "sunshineHours": null,
+     "tempHighC": 29.36,
+     "tempLowC": 25.56,
+     "tempMeanC": 27.15,
+     "tier": "Challenging"
+    },
+    {
+     "daylightHours": 12.68,
+     "monthIndex": 1,
+     "precipDaysGe1mm": 0.8,
+     "precipMm": 237.6,
+     "rawRuleHits": [
+      "R3",
+      "R5"
+     ],
+     "ruleId": "R3",
+     "sunshineHours": null,
+     "tempHighC": 29.37,
+     "tempLowC": 25.88,
+     "tempMeanC": 27.34,
+     "tier": "Challenging"
+    },
+    {
+     "daylightHours": 12.19,
+     "monthIndex": 2,
+     "precipDaysGe1mm": 0.8,
+     "precipMm": 286.1,
+     "rawRuleHits": [
+      "R3",
+      "R5"
+     ],
+     "ruleId": "R3",
+     "sunshineHours": null,
+     "tempHighC": 29.07,
+     "tempLowC": 25.84,
+     "tempMeanC": 27.17,
+     "tier": "Challenging"
+    },
+    {
+     "daylightHours": 11.69,
+     "monthIndex": 3,
+     "precipDaysGe1mm": 0.6,
+     "precipMm": 204.7,
+     "rawRuleHits": [
+      "R3",
+      "R5"
+     ],
+     "ruleId": "R3",
+     "sunshineHours": null,
+     "tempHighC": 28.37,
+     "tempLowC": 25.07,
+     "tempMeanC": 26.42,
+     "tier": "Challenging"
+    },
+    {
+     "daylightHours": 11.28,
+     "monthIndex": 4,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 120.4,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 27.2,
+     "tempLowC": 23.66,
+     "tempMeanC": 25.1,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 11.08,
+     "monthIndex": 5,
+     "precipDaysGe1mm": 0.3,
+     "precipMm": 87.1,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 26.54,
+     "tempLowC": 22.88,
+     "tempMeanC": 24.35,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 11.18,
+     "monthIndex": 6,
+     "precipDaysGe1mm": 0.3,
+     "precipMm": 66.2,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 26.03,
+     "tempLowC": 22.0,
+     "tempMeanC": 23.6,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 11.53,
+     "monthIndex": 7,
+     "precipDaysGe1mm": 0.3,
+     "precipMm": 78.0,
+     "rawRuleHits": [
+      "R7"
+     ],
+     "ruleId": "R7",
+     "sunshineHours": null,
+     "tempHighC": 26.16,
+     "tempLowC": 21.77,
+     "tempMeanC": 23.53,
+     "tier": "Favourable"
+    },
+    {
+     "daylightHours": 12.0,
+     "monthIndex": 8,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 90.8,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 26.98,
+     "tempLowC": 22.27,
+     "tempMeanC": 24.17,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.5,
+     "monthIndex": 9,
+     "precipDaysGe1mm": 0.4,
+     "precipMm": 123.6,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 27.79,
+     "tempLowC": 23.08,
+     "tempMeanC": 25.0,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 12.94,
+     "monthIndex": 10,
+     "precipDaysGe1mm": 0.5,
+     "precipMm": 141.7,
+     "rawRuleHits": [
+      "R5"
+     ],
+     "ruleId": "R5",
+     "sunshineHours": null,
+     "tempHighC": 28.67,
+     "tempLowC": 24.13,
+     "tempMeanC": 26.02,
+     "tier": "Workable"
+    },
+    {
+     "daylightHours": 13.17,
+     "monthIndex": 11,
+     "precipDaysGe1mm": 0.6,
+     "precipMm": 209.4,
+     "rawRuleHits": [
+      "R3",
+      "R5"
+     ],
+     "ruleId": "R3",
+     "sunshineHours": null,
+     "tempHighC": 29.2,
+     "tempLowC": 25.0,
+     "tempMeanC": 26.74,
+     "tier": "Challenging"
+    }
+   ],
+   "periodEnd": "2020-12-31",
+   "periodStart": "1991-01-01",
+   "recommendationStatus": "ok-favourable",
+   "region": "Oceania",
+   "ruleVersion": "r1-r7.v4",
+   "selection": {
+    "reason": "extension anchor 2026-09: NASA POWER canonical-semantics acquisition (same endpoints/params as pilot v8.7)",
     "ruleVersion": "r1-r7.v4"
    },
    "sourceFamily": "NASA POWER / MERRA-2"

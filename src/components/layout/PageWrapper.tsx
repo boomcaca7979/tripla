@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Header from "./Header";
-import Footer from "./Footer";
+import FooterGate from "./FooterGate";
 
 // ── Props ────────────────────────────────────────────────────────────
 
@@ -19,7 +19,7 @@ export default function PageWrapper({
     <div className="flex min-h-screen flex-col bg-ut-bg text-ut-text">
      <Header />
       <main className={`flex-1 pt-16 ${className}`}>{children}</main>
-     <Footer />
+     <FooterGate />
     </div>
   );
 }

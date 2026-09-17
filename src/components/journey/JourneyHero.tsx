@@ -1,6 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Trip } from "@/data/trips";
-import { daysLabel, type JourneyLeg } from "./journey-state";
+import { capitalize, daysLabel, type JourneyLeg } from "./journey-state";
 
 /**
  * JourneyHero — Journey Arrival（首屏）。
@@ -8,15 +9,32 @@ import { daysLabel, type JourneyLeg } from "./journey-state";
  * CONTRACT：
  *   §8  首屏回答"这是一段怎样的旅程"：Journey eyebrow（mono）+ H1（Instrument
  *       Serif，唯一视觉焦点）+ 路线读数（城市/国家 · 天数 · 停靠点 · 节奏）+
- *       紧凑的旅程状态（leg 进度）。
+ *       风格/兴趣读数 + 紧凑的旅程状态（leg 进度）。
  *   §8  首屏**禁止**：大段正文、蓝色 AI CTA、多个按钮、任何 commerce 入口。
- *       因此这里没有任何 <Link> / <button>，正文只有一行归因读数。
- *   §29 图片优先：19 个 trip 有 coverImage → next/image + preload（Next 16 起
- *       旧 priority 属性已 deprecated）+ 精确 sizes + descriptive alt + scrim。
- *       其余 261 个 trip 无图 → **不使用假照片渐变**，改为 journey band：
+ *       因此这里除唯一的「Plan this trip」规划入口外没有任何按钮。
+ *
+ *   Stage 3 §6.1 修订（Product Requirement）：Trip Detail 首屏必须明确给出
+ *   **主 CTA = Plan this trip**（指向既有 planner 深链），因此本组件新增
+ *   `planHref` 与 `image` 两个 prop：
+ *     · planHref —— 唯一首屏行动入口，指向既有 `/` planner（buildJourneyPlannerHref）。
+ *       它**不是** commerce 入口，也不新造 planner 能力。
+ *     · image    —— 首图解析结果：`trip.coverImage` → `destination.image` → null。
+ *       19 个 trip 有自有封面；+81 个可由真实目的地图片补足；其余仍走 journey band。
+ *   §29 图片优先：有图 → next/image + preload（Next 16 起旧 priority 属性已
+ *       deprecated）+ 精确 sizes + descriptive alt + scrim。
+ *       无图 → **不使用假照片渐变**，改为 journey band：
  *       旅程色调 + 装饰性 route rail（呼应本页的 Journey Strip）+ 12 栏竖线 +
  *       底部 accent hairline，读起来像"一段路线的题头"，而不是"缺图的卡片"。
- *   §33 高度：mobile 21rem / sm 23rem / lg 26rem（紧凑、image-led；不是 60vh）。
+ *   §33 高度：mobile 30rem / sm 26rem / lg 28rem（image-led；不是 60vh）。
+ *       Stage 3 上调口径（**实测驱动**，非审美偏好）：首屏新增 style/interests
+ *       读数行 + 「Plan this trip」(44px) 后，文字块增高约 90px。按既有的
+ *       "文字块 ≤ 80% 带高"约束重新标定，取全语料最坏标题
+ *       （vietnam-north-5d 52 字符 3 行；europe-10d-highlights 50 字符 3 行且有图）
+ *       在 390 / 768 / 1280 的实测值：
+ *         390  ：旧 27rem(432px) → 文字块 380px = 88% ✗ → 30rem(480px) = 79% ✓
+ *         768  ：旧 24rem(384px) → 文字块 330px = 86% ✗ → 26rem(416px) = 79% ✓
+ *         1280 ：旧 27rem(432px) → 文字块 354px = 82% ✗ → 28rem(448px) = 79% ✓
+ *       该约束的来源与测量口径见下方 §33/WCAG 段。
  *
  *   §33 / §WCAG 高度与 scrim 回归（实测驱动，非审美偏好）：
  *       全语料 280 个 trip 的 H1 最长 52 字符（vietnam-north-5d），在 390 宽度下
@@ -46,14 +64,20 @@ export default function JourneyHero({
   stops,
   pace,
   region,
+  image,
+  planHref,
 }: {
   trip: Trip;
   legs: JourneyLeg[];
   stops: number;
   pace: string;
   region: string;
+  /** 首图解析结果：trip.coverImage → destination.image → null */
+  image: string | null;
+  /** 唯一首屏规划入口（既有 planner 深链） */
+  planHref: string;
 }) {
-  const hasImage = Boolean(trip.coverImage);
+  const hasImage = Boolean(image);
   const legCount = legs.length;
   const progressLabel = `Day 1 of ${trip.days}`;
 
@@ -62,14 +86,14 @@ export default function JourneyHero({
       <div
         className={[
           "relative isolate overflow-hidden rounded-ut-lg border border-ut-border",
-          "h-[21rem] sm:h-[23rem] lg:h-[26rem]",
+          "h-[30rem] sm:h-[26rem] lg:h-[28rem]",
           hasImage ? "" : "bg-ut-surface",
         ].join(" ")}
       >
         {hasImage ? (
           <>
             <Image
-              src={trip.coverImage as string}
+              src={image as string}
               alt={`${trip.title} — ${trip.city}, ${trip.country}`}
               fill
               preload
@@ -171,6 +195,18 @@ export default function JourneyHero({
             {trip.city}, {trip.country} · {daysLabel(trip.days)} · {stops} stops · {pace}
           </p>
 
+          {/* Style / interests 读数 —— 受控枚举，全部来自真实字段 */}
+          {trip.interests.length > 0 && (
+            <p
+              className={[
+                "mt-2 font-mono text-label uppercase tracking-[0.16em]",
+                hasImage ? "text-white/75" : "text-ut-muted",
+              ].join(" ")}
+            >
+              {capitalize(trip.travelStyle)} · {trip.interests.map(capitalize).join(" · ")}
+            </p>
+          )}
+
           {/* Compact journey state：leg 进度（外观状态，SSR 确定性 = Day 1） */}
           <div className="mt-5 flex items-center gap-3">
             <span
@@ -202,6 +238,23 @@ export default function JourneyHero({
                 />
               ))}
             </span>
+          </div>
+
+          {/* 唯一首屏规划入口 —— Plan this trip → 既有 planner 深链（非 commerce） */}
+          <div className="mt-6">
+            <Link
+              href={planHref}
+              data-trip-primary-cta=""
+              className={[
+                "inline-flex min-h-[44px] items-center gap-2 rounded-ut-sm bg-ut-accent px-5",
+                "text-body font-medium text-ut-inverse transition-colors duration-[var(--ut-dur-fast)] ease-ut-out",
+                "hover:bg-ut-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2",
+                hasImage ? "focus-visible:outline-white" : "focus-visible:outline-ut-accent",
+              ].join(" ")}
+            >
+              Plan this trip
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </div>
       </div>

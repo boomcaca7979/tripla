@@ -178,12 +178,25 @@ export type CurrencyInfoType = z.infer<typeof CurrencyInfoSchema>;
  * Validates the user-provided inputs used to generate an itinerary.
  */
 export const TravelPlanInputSchema = z.object({
-  origin: AirportSchema,
+  // Optional since the Destination planner flow starts in-city (no origin).
+  origin: AirportSchema.optional(),
   destination: AirportSchema,
   departureDate: DateString,
   returnDate: DateString,
   travelStyle: z.enum(["relaxed", "active", "cultural", "foodie", "adventure"]),
   budgetLevel: z.enum(["budget", "mid-range", "luxury"]),
+  tripItems: z
+    .array(
+      z.object({
+        name: z.string().min(1),
+        kind: z.enum(["attraction", "hotel", "food", "experience"]),
+        price: z
+          .object({ amount: z.number().positive(), currency: z.string().min(1) })
+          .nullable()
+          .optional(),
+      }),
+    )
+    .optional(),
   interests: z.array(
     z.enum([
       "museums",

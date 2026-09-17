@@ -1,13 +1,24 @@
 import type { Airport } from "@/types/flight";
 import type { WeatherScore } from "@/types/weather";
 import type { TravelStyle, TravelInterest } from "@/types/itinerary";
+
+/**
+ * 数据层允许的 travelStyle 值：除 planner 的 5 值 TravelStyle 枚举外，
+ * 部分扩展目的地数据使用 nature / history / culture / beaches 等描述值。
+ * 消费端（planner 输入）必须经页面 guard 收敛为 TravelStyle，不得直传。
+ */
+export type DestinationTravelStyle = TravelStyle | "nature" | "history" | "culture" | "beaches";
+
+/** interests 同理：数据层允许扩展值 culture，消费端 guard 收敛为 TravelInterest。 */
+export type DestinationTravelInterest = TravelInterest | "culture" | "relaxation";
 import { EXTENDED_DESTINATIONS_A } from "./destinations-extended-a";
 import { EXTENDED_DESTINATIONS_B } from "./destinations-extended-b";
 import { EXTENDED_DESTINATIONS_C } from "./destinations-extended-d";
+import { EXTENDED_DESTINATIONS_E } from "./destinations-extended-e";
 
 // ── Types ──────────────────────────────────────────────────────────────
 
-export type Region = "Asia" | "Europe" | "Americas" | "Oceania";
+export type Region = "Asia" | "Europe" | "Americas" | "Oceania" | "Africa";
 
 /**
  * Destination 字面量输入类型，保留历史字段名（id/bestMonths/image 等）
@@ -27,8 +38,8 @@ export interface RawDestination {
   image: string | null;
   weatherScore: WeatherScore;
   airport: Airport;
-  travelStyle: TravelStyle;
-  interests: TravelInterest[];
+  travelStyle: DestinationTravelStyle;
+  interests: DestinationTravelInterest[];
   /** Phase 2 新增：完整描述（如未提供则与 description 同值）。 */
   longDescription?: string;
   /** Phase 2 新增：最佳旅行季节说明。 */
@@ -68,8 +79,8 @@ export interface Destination {
   image: string | null;
   weatherScore: WeatherScore;
   airport: Airport;
-  travelStyle: TravelStyle;
-  interests: TravelInterest[];
+  travelStyle: DestinationTravelStyle;
+  interests: DestinationTravelInterest[];
   /** 时区（IANA / IATA 时区），从 airport.timezone 派生。 */
   timezone: string;
   /** 推荐旅行天数。 */
@@ -110,7 +121,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "March to May (cherry blossoms) and October to November (autumn foliage) are ideal. Summers are hot and humid; winters are dry and cool.",
     currency: "JPY ¥",
     gradient: "from-rose-500 to-pink-700",
-    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80",
+    image: "/images/destinations/tokyo-ai-hero.png",
     weatherScore: {
       overall: 86,
       label: "Excellent",
@@ -239,7 +250,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "November to February is cool and dry. Avoid March to May (very hot) and September (heavy rains).",
     currency: "THB ฿",
     gradient: "from-orange-500 to-yellow-600",
-    image: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=800&q=80",
+    image: "https://images.pexels.com/photos/11105014/pexels-photo-11105014.jpeg?auto=compress&cs=tinysrgb&w=2400",
     weatherScore: {
       overall: 81,
       label: "Excellent",
@@ -626,7 +637,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "March to May is dry and warm — ideal for walking the centro histórico. June to September brings afternoon thunderstorms; winters are mild and dry.",
     currency: "MXN $",
     gradient: "from-orange-500 to-red-700",
-    image: null,
+    image: "https://images.pexels.com/photos/38597266/pexels-photo-38597266.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 78,
       label: "Good",
@@ -672,7 +683,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "March to May and September to November are pleasant. Summers are extremely hot (often above 40°C); winters are cool with chilly desert nights.",
     currency: "USD $",
     gradient: "from-fuchsia-500 to-purple-700",
-    image: null,
+    image: "https://images.pexels.com/photos/33448109/pexels-photo-33448109.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 74,
       label: "Good",
@@ -718,7 +729,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "March to May and October bring mild weather and festival season. Summers are hot (35°C+); winters are mild.",
     currency: "USD $",
     gradient: "from-violet-500 to-indigo-700",
-    image: null,
+    image: "https://images.pexels.com/photos/37215504/pexels-photo-37215504.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 77,
       label: "Good",
@@ -764,7 +775,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "May to September is warm and festival season. Mid-September to early October brings Oktoberfest (September 19 to October 4, 2026). December sparkles with Christmas markets.",
     currency: "EUR €",
     gradient: "from-sky-600 to-blue-800",
-    image: null,
+    image: "https://images.pexels.com/photos/39105204/pexels-photo-39105204.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 76,
       label: "Good",
@@ -810,7 +821,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "Late March to April for cherry blossoms, and mid-November to early December for autumn foliage, are the most scenic. Summer is hot and humid; winter is cold but serene.",
     currency: "JPY ¥",
     gradient: "from-red-500 to-orange-700",
-    image: null,
+    image: "https://images.pexels.com/photos/18257604/pexels-photo-18257604.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 80,
       label: "Good",
@@ -856,7 +867,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "April to June and September to October are mild. Late November to December brings the Christmas markets (Christkindlmarkt at Rathausplatz runs November 13 to December 26, 2026).",
     currency: "EUR €",
     gradient: "from-amber-500 to-red-600",
-    image: null,
+    image: "https://images.pexels.com/photos/16292000/pexels-photo-16292000.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 76,
       label: "Good",
@@ -902,7 +913,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "December to March is the aurora-and-snow season with polar-night twilight. June to August offers midnight sun and hiking under 24-hour daylight.",
     currency: "EUR €",
     gradient: "from-cyan-500 to-blue-700",
-    image: null,
+    image: "https://images.pexels.com/photos/30301008/pexels-photo-30301008.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 68,
       label: "Fair",
@@ -948,7 +959,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "April to June and September to October are warm and comfortable. July and August are hot and busy; winter is mild enough for sightseeing but too cool for swimming.",
     currency: "TRY ₺",
     gradient: "from-teal-500 to-cyan-700",
-    image: null,
+    image: "https://images.pexels.com/photos/30690755/pexels-photo-30690755.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 82,
       label: "Excellent",
@@ -994,7 +1005,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "April to June and September to October are warm and sunny. Summers are hot (often above 35°C); winters are cold at night but bright.",
     currency: "EUR €",
     gradient: "from-red-500 to-yellow-600",
-    image: null,
+    image: "https://images.pexels.com/photos/14366474/pexels-photo-14366474.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 84,
       label: "Excellent",
@@ -1039,7 +1050,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "April to June and September to October are mild. August is hot and half the city closes for holidays; winters are foggy and damp.",
     currency: "EUR €",
     gradient: "from-slate-500 to-slate-700",
-    image: null,
+    image: "https://images.pexels.com/photos/37536322/pexels-photo-37536322.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 76,
       label: "Good",
@@ -1085,7 +1096,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "April to June and September to October are warm and comfortable. Summers are hot; winters are windy and cool.",
     currency: "AZN ₼",
     gradient: "from-teal-500 to-cyan-700",
-    image: null,
+    image: "https://images.pexels.com/photos/19998483/pexels-photo-19998483.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 77,
       label: "Good",
@@ -1130,7 +1141,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "November to March is warm and sunny — peak season. Summers (June to September) are extremely hot and humid.",
     currency: "AED د.إ",
     gradient: "from-amber-500 to-orange-600",
-    image: null,
+    image: "https://images.pexels.com/photos/37930023/pexels-photo-37930023.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 86,
       label: "Excellent",
@@ -1175,7 +1186,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "April to June and September to December are pleasant; the Christmas markets run November 28 to January 6. Summers are warm and crowded.",
     currency: "CZK Kč",
     gradient: "from-indigo-500 to-violet-700",
-    image: null,
+    image: "https://images.pexels.com/photos/16922415/pexels-photo-16922415.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 74,
       label: "Good",
@@ -1220,7 +1231,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "May to September is mild and festival season; late November to December brings the Christmas markets (the market by the Dom runs November 16 to December 23, 2026).",
     currency: "EUR €",
     gradient: "from-stone-500 to-stone-700",
-    image: null,
+    image: "https://images.pexels.com/photos/20314803/pexels-photo-20314803.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 72,
       label: "Good",
@@ -1265,7 +1276,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "March to May and October to November are mild and festival-friendly. Summers are hot and humid; winters are cold but dry and the neon looks better in it.",
     currency: "JPY ¥",
     gradient: "from-orange-500 to-red-600",
-    image: null,
+    image: "https://images.pexels.com/photos/37746985/pexels-photo-37746985.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 82,
       label: "Excellent",
@@ -1310,7 +1321,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "October to December is cool, dry and clear — the hiking and harbor-view window. Summers are hot, humid and typhoon-prone; spring carries rain.",
     currency: "HKD $",
     gradient: "from-fuchsia-600 to-purple-800",
-    image: null,
+    image: "https://images.pexels.com/photos/18093482/pexels-photo-18093482.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 80,
       label: "Excellent",
@@ -1355,7 +1366,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "April to June and September are the mild, bright windows; April adds tulip season. Winters are cold, damp and quiet — with a leaner, cheaper city as consolation.",
     currency: "EUR €",
     gradient: "from-orange-500 to-amber-700",
-    image: null,
+    image: "https://images.pexels.com/photos/17080606/pexels-photo-17080606.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 72,
       label: "Good",
@@ -1400,7 +1411,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "September and October are the locals' secret — warm, clear and calm. Summer is cold and foggy by the water; winter is mild with most of the year's rain.",
     currency: "USD $",
     gradient: "from-cyan-500 to-blue-700",
-    image: null,
+    image: "https://images.pexels.com/photos/15883139/pexels-photo-15883139.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 76,
       label: "Good",
@@ -1445,7 +1456,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "April to October is the dry season — surf and clear days. November to March is the wet monsoon: cheaper, greener, and genuinely rain-heavy.",
     currency: "IDR Rp",
     gradient: "from-teal-500 to-emerald-700",
-    image: null,
+    image: "https://images.pexels.com/photos/34136180/pexels-photo-34136180.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 84,
       label: "Excellent",
@@ -1490,7 +1501,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "May to June and September to October are the mild windows; October adds foliage color at the region's doorstep. Winters are genuinely cold and snow is real.",
     currency: "USD $",
     gradient: "from-slate-600 to-blue-800",
-    image: null,
+    image: "https://images.pexels.com/photos/21314036/pexels-photo-21314036.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 72,
       label: "Good",
@@ -1538,7 +1549,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "April to May and September to October are best — dry, mild and clear. Summers are hot and humid; winters are cold and dry.",
     currency: "CNY ¥",
     gradient: "from-red-600 to-amber-700",
-    image: null,
+    image: "https://images.pexels.com/photos/34449584/pexels-photo-34449584.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 76,
       label: "Good",
@@ -1583,7 +1594,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "March to May and September to November are ideal. Summers are hot and humid; winters are chilly.",
     currency: "CNY ¥",
     gradient: "from-blue-500 to-purple-700",
-    image: null,
+    image: "https://images.pexels.com/photos/31772150/pexels-photo-31772150.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 76,
       label: "Good",
@@ -1628,7 +1639,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "October to December is the most pleasant window — dry and warm. Spring is rainy; summers are hot and humid with typhoons possible.",
     currency: "CNY ¥",
     gradient: "from-lime-500 to-emerald-700",
-    image: null,
+    image: "https://images.pexels.com/photos/14055760/pexels-photo-14055760.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 74,
       label: "Good",
@@ -1673,7 +1684,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "March to June and September to November are best. Summers are hot and muggy; winters are grey and damp.",
     currency: "CNY ¥",
     gradient: "from-green-600 to-emerald-800",
-    image: null,
+    image: "https://images.pexels.com/photos/35557996/pexels-photo-35557996.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 74,
       label: "Good",
@@ -1718,7 +1729,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "March to May and September to November offer the best weather. Summers are hot; winters are cold.",
     currency: "CNY ¥",
     gradient: "from-amber-600 to-orange-800",
-    image: null,
+    image: "https://images.pexels.com/photos/31467013/pexels-photo-31467013.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 74,
       label: "Good",
@@ -1763,7 +1774,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "March to May and September to November are perfect. Plum blossoms bloom in February; lotus flowers peak in July.",
     currency: "CNY ¥",
     gradient: "from-teal-500 to-green-700",
-    image: null,
+    image: "https://images.pexels.com/photos/38075805/pexels-photo-38075805.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 78,
       label: "Good",
@@ -1808,7 +1819,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "March to May and October to November are best. Summers are extremely hot; winters are foggy and mild.",
     currency: "CNY ¥",
     gradient: "from-fuchsia-600 to-indigo-800",
-    image: null,
+    image: "https://images.pexels.com/photos/25338517/pexels-photo-25338517.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 72,
       label: "Good",
@@ -1853,7 +1864,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "October to March is the most pleasant — dry and warm. Summers are hot and typhoon-prone; autumn is the driest season.",
     currency: "MOP MOP$",
     gradient: "from-rose-500 to-fuchsia-700",
-    image: null,
+    image: "https://images.pexels.com/photos/28807189/pexels-photo-28807189.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 78,
       label: "Good",
@@ -1898,7 +1909,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "June to September is warmest and best, with lake swimming. December to February brings the Christmas markets; spring is unpredictable.",
     currency: "CHF CHF",
     gradient: "from-cyan-600 to-blue-800",
-    image: null,
+    image: "https://images.pexels.com/photos/18225155/pexels-photo-18225155.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 76,
       label: "Good",
@@ -1943,7 +1954,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "Year-round sunshine, with September to November the clearest stretch — June's morning fog ('June Gloom') burns off by midday.",
     currency: "USD $",
     gradient: "from-orange-400 to-rose-600",
-    image: null,
+    image: "https://images.pexels.com/photos/8508710/pexels-photo-8508710.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 84,
       label: "Excellent",
@@ -1988,7 +1999,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "June to September is the driest and warmest stretch. Winters are rainy but mild; ski season runs December to March.",
     currency: "CAD C$",
     gradient: "from-sky-600 to-emerald-700",
-    image: null,
+    image: "https://images.pexels.com/photos/11296760/pexels-photo-11296760.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 76,
       label: "Good",
@@ -2033,7 +2044,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "March to May and September to November are most pleasant. Summers can be very hot; winters are cool and grey.",
     currency: "AUD A$",
     gradient: "from-violet-500 to-indigo-700",
-    image: null,
+    image: "https://images.pexels.com/photos/9262261/pexels-photo-9262261.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 76,
       label: "Good",
@@ -2078,7 +2089,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "December to March is summer and the best time. Winters (June to August) are mild but rainy.",
     currency: "NZD NZ$",
     gradient: "from-cyan-500 to-sky-700",
-    image: null,
+    image: "https://images.pexels.com/photos/30706012/pexels-photo-30706012.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 78,
       label: "Good",
@@ -2123,7 +2134,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "October to November is the sweet spot — cooler, drier, and pre-typhoon. Summers are hot, humid and wet; winters are mild but grey.",
     currency: "TWD NT$",
     gradient: "from-cyan-500 to-blue-700",
-    image: null,
+    image: "https://images.pexels.com/photos/28617722/pexels-photo-28617722.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 76,
       label: "Good",
@@ -2166,7 +2177,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "September to October brings warm seas and clear skies. Spring (April–May) is mild and blossomy; summers peak with beach crowds and the Busan Fireworks Festival.",
     currency: "KRW ₩",
     gradient: "from-sky-500 to-teal-600",
-    image: null,
+    image: "https://images.pexels.com/photos/32470935/pexels-photo-32470935.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 80,
       label: "Good",
@@ -2209,7 +2220,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "October to November is dry, warm and clear — Hanoi's best window. Summer (May–August) is hot and rainy; winter is cool and drizzly.",
     currency: "VND ₫",
     gradient: "from-red-500 to-orange-600",
-    image: null,
+    image: "https://images.pexels.com/photos/31688722/pexels-photo-31688722.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 74,
       label: "Good",
@@ -2252,7 +2263,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "December to January is dry and slightly cooler — the city's best window. The rainy season (May–October) delivers short, fierce afternoon downpours.",
     currency: "VND ₫",
     gradient: "from-amber-500 to-red-600",
-    image: null,
+    image: "https://images.pexels.com/photos/25651816/pexels-photo-25651816.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 72,
       label: "Good",
@@ -2295,7 +2306,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "May to July is relatively dry on the west coast. Rain falls year-round in short tropical bursts; the city stays hot and humid every month.",
     currency: "MYR RM",
     gradient: "from-emerald-500 to-teal-700",
-    image: null,
+    image: "https://images.pexels.com/photos/19697641/pexels-photo-19697641.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 70,
       label: "Good",
@@ -2338,7 +2349,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "January to April is the dry, sunny window. The wet season (June–December) brings typhoon risk; March hosts the Sinulog festival street parties.",
     currency: "PHP ₱",
     gradient: "from-teal-500 to-cyan-700",
-    image: null,
+    image: "https://images.pexels.com/photos/36288096/pexels-photo-36288096.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 78,
       label: "Good",
@@ -2381,7 +2392,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "April to June is sunny and mild before the summer surge; September to October is the locals' favorite. July–August is hot and crowded; winters are mild but wet.",
     currency: "EUR €",
     gradient: "from-yellow-500 to-blue-600",
-    image: null,
+    image: "https://images.pexels.com/photos/19513490/pexels-photo-19513490.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 84,
       label: "Excellent",
@@ -2424,7 +2435,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "April to June and September to October are ideal. Summers are hot; winter is cold but atmospheric — the baths steam, and Advent markets fill the squares.",
     currency: "HUF Ft",
     gradient: "from-emerald-600 to-amber-600",
-    image: null,
+    image: "https://images.pexels.com/photos/16532817/pexels-photo-16532817.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 76,
       label: "Good",
@@ -2467,7 +2478,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "April to May and late September to October deliver mild weather and thinner crowds than summer. July–August is hot and at peak density; November is quiet and moody.",
     currency: "EUR €",
     gradient: "from-orange-500 to-red-700",
-    image: null,
+    image: "https://images.pexels.com/photos/16156601/pexels-photo-16156601.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 82,
       label: "Excellent",
@@ -2510,7 +2521,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "April to May and September to October are mild and navigable. Summer is hot, crowded and occasionally malodorous; winter is cold, foggy and — for locals — the best-kept secret.",
     currency: "EUR €",
     gradient: "from-blue-500 to-indigo-700",
-    image: null,
+    image: "https://images.pexels.com/photos/20079042/pexels-photo-20079042.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 80,
       label: "Good",
@@ -2553,7 +2564,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "April to May and September to October are warm without the furnace of summer. June–August regularly clears 35°C; winter is mild but many sites shorten hours.",
     currency: "EUR €",
     gradient: "from-blue-500 to-amber-600",
-    image: null,
+    image: "https://images.pexels.com/photos/18976383/pexels-photo-18976383.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 82,
       label: "Excellent",
@@ -2596,7 +2607,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "May to June is mild, green and pre-crowd. August brings the Fringe — phenomenal and packed. Winters are cold, dark and atmospheric, with Hogmanay fireworks over the castle.",
     currency: "GBP £",
     gradient: "from-slate-600 to-emerald-700",
-    image: null,
+    image: "https://images.pexels.com/photos/35769512/pexels-photo-35769512.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 70,
       label: "Good",
@@ -2639,7 +2650,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "May to August is the season — long Nordic evenings, harbor swimming, café life on every corner. Winters are dark and cold but cozy, with Christmas markets at Tivoli.",
     currency: "DKK kr",
     gradient: "from-red-500 to-cyan-600",
-    image: null,
+    image: "https://images.pexels.com/photos/31707003/pexels-photo-31707003.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 72,
       label: "Good",
@@ -2682,7 +2693,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "March to May is Seville at its best — orange blossom, Feria de Abril, warm nights. Summer regularly exceeds 40°C; autumn and winter are mild alternatives.",
     currency: "EUR €",
     gradient: "from-orange-500 to-amber-700",
-    image: null,
+    image: "https://images.pexels.com/photos/37894608/pexels-photo-37894608.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 80,
       label: "Good",
@@ -2725,7 +2736,7 @@ const RAW_DESTINATIONS: RawDestination[] = [
       "June to September is patio season — warm, long and festival-filled. Autumn color peaks in October; winters are genuinely cold but the PATH's underground city keeps the downtown walkable.",
     currency: "CAD C$",
     gradient: "from-blue-600 to-cyan-500",
-    image: null,
+    image: "https://images.pexels.com/photos/33338749/pexels-photo-33338749.jpeg?auto=compress&cs=tinysrgb&w=800",
     weatherScore: {
       overall: 74,
       label: "Good",
@@ -2795,6 +2806,7 @@ export const DESTINATIONS: Destination[] = [
   ...EXTENDED_DESTINATIONS_A,
   ...EXTENDED_DESTINATIONS_B,
   ...EXTENDED_DESTINATIONS_C,
+  ...EXTENDED_DESTINATIONS_E,
 ].map(normalizeDestination);
 
 /** 返回所有 destination 的 slug。 */

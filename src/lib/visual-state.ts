@@ -90,19 +90,49 @@ export function moonShadowShiftFor(phase: MoonPhaseId): string {
 
 export interface DestinationContext {
   id: string;
-  label: string;
-  timeZone: string;
+  /** 城市显示名；null = 用户尚未选择任何城市（首页初始状态）。 */
+  label: string | null;
+  /** IANA 时区；null = 未选择城市 → 回退到访问者本地时区。 */
+  timeZone: string | null;
+  /** 坐标（可选）：用于该位置的实时天气读数。 */
+  latitude?: number | null;
+  longitude?: number | null;
 }
 
-/** Home 环境当前锚定的目的地（Phase 4 将扩展为多目的地/用户自选） */
-export const HOME_DESTINATION: DestinationContext = {
-  id: "tokyo",
-  label: "Tokyo",
-  timeZone: "Asia/Tokyo",
+/**
+ * 无城市上下文：首页的初始状态。不绑定任何预设城市——时间回退到访问者本地
+ * 时区，天气/季节是环境状态而非某城市的断言。
+ * （旧实现把 Tokyo 硬编码为默认主角，已在本次修正中移除。）
+ */
+export const NO_DESTINATION: DestinationContext = {
+  id: "local",
+  label: null,
+  timeZone: null,
 };
 
-/** 用 Intl 原生能力取目的地当地小时（无外部依赖、SSR/客户端一致） */
-export function destinationLocalHour(timeZone: string, date: Date): number {
+/** 从目的地数据构造上下文（选择城市时使用）。 */
+export function destinationContextFrom(d: {
+  slug: string;
+  city: string;
+  timezone: string;
+  latitude?: number | null;
+  longitude?: number | null;
+}): DestinationContext {
+  return {
+    id: d.slug,
+    label: d.city,
+    timeZone: d.timezone,
+    latitude: d.latitude ?? null,
+    longitude: d.longitude ?? null,
+  };
+}
+
+/**
+ * 目的地当地小时；timeZone 为 null 时回退到访问者本地时间
+ * （Intl 原生能力，无外部依赖、SSR/客户端一致）。
+ */
+export function destinationLocalHour(timeZone: string | null, date: Date): number {
+  if (!timeZone) return date.getHours() + date.getMinutes() / 60;
   try {
     const parts = new Intl.DateTimeFormat("en-US", {
       timeZone,
@@ -455,51 +485,11 @@ function envDeepFor(sky: SkyState, accent: AccentState): { deep: string; deepRgb
   return { deep, deepRgb: rgbTripletFromHex(deep) };
 }
 
-// ── Ambient line（状态感知文案：网站知道现在几点、什么天气） ────────────
-
-export function ambientLineFor(hour: number, weather: WeatherId): string {
-  const h = ((hour % 24) + 24) % 24;
-  const night = h >= 22 || h < 5;
-  const dawn = h >= 5 && h < 8;
-  const morning = h >= 8 && h < 11;
-  const midday = h >= 11 && h < 15;
-  const afternoon = h >= 15 && h < 17;
-  const golden = h >= 17 && h < 19;
-  if (weather === "storm") return "A storm is rewriting the skyline in flashes of white.";
-  if (night) {
-    if (weather === "rain") return "Rain after midnight — the streets shine back twice as loud.";
-    if (weather === "snow") return "Snow is falling through the streetlights; nobody is in a hurry.";
-    return "It's late, and the best ideas come at night.";
-  }
-  if (dawn) {
-    if (weather === "clear") return "First light over the rooftops — the city belongs to no one yet.";
-    if (weather === "rain") return "A wet grey dawn; the first trains hiss through the mist.";
-    return "The sky is waking up slowly this morning.";
-  }
-  if (morning) {
-    if (weather === "clear") return "Morning light warming the pavements, one café at a time.";
-    if (weather === "cloudy") return "A soft grey morning — good lines and short queues.";
-    if (weather === "snow") return "Snow hushes the first trains of the morning.";
-    return "The morning is moving at walking pace.";
-  }
-  if (midday) {
-    if (weather === "clear") return "High sun, long shadows — the alleys are coolest right now.";
-    if (weather === "rain") return "Rain keeps the crowds away; the museums are all yours.";
-    return "Midday haze settles over the rooftops.";
-  }
-  if (afternoon) {
-    if (weather === "clear") return "The afternoon is stretching; find the shade and keep wandering.";
-    return "The light is turning soft at the edges.";
-  }
-  if (golden) {
-    if (weather === "clear") return "Golden hour is bending every facade into amber.";
-    if (weather === "cloudy") return "A low sun keeps trying to break through the cloud.";
-    return "The day is folding into its warmest hour.";
-  }
-  if (weather === "rain") return "Neon blooms in the wet streets as the light drains away.";
-  if (weather === "snow") return "Snow hushes the evening rush; the lamps come on early.";
-  return "Lanterns are coming on across the old town.";
-}
+// ── Ambient line 已移除 ───────────────────────────────────────────────
+// 旧实现按"小时 × 天气"生成氛围句（如 "Rain keeps the crowds away…"），与用户
+// 在首页当前的选择无关，且与 H1 / 说明 / 状态行争抢注意力。
+// 首页第三层文字现由 lib/home-discovery.ts 的 buildStatusLine() 生成——只由
+// 用户当前的 月份 / mood / budget / 已选城市 派生。
 
 // ── Greeting（随有效小时变化；拖动即变） ───────────────────────────────
 
@@ -564,8 +554,6 @@ export interface VisualState extends SkyState, AccentState {
   envDeepRgb: string;
   /** accent 上的前景色（按最终 accent 亮度选择深/浅，保证交互文本可读） */
   onAccent: string;
-  /** 状态感知文案 */
-  ambientLine: string;
 }
 
 export function deriveVisualState(input: {
@@ -597,6 +585,5 @@ export function deriveVisualState(input: {
     envDeep: deep.deep,
     envDeepRgb: deep.deepRgb,
     onAccent,
-    ambientLine: ambientLineFor(input.hour, input.weather),
   };
 }
