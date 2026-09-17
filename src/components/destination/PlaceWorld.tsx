@@ -166,7 +166,7 @@ export default function PlaceWorld({
 
   return (
     <header
-      className="relative isolate flex h-[100svh] flex-col overflow-hidden"
+      className="relative isolate flex h-[50svh] min-h-[380px] flex-col overflow-hidden"
       onPointerMove={onScenePointer}
       data-ut-world-scene="place"
     >

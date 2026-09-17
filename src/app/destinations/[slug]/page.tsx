@@ -10,13 +10,8 @@ import { getGuidesForCity } from "@/data/guides";
 import { getAttractions } from "@/data/attractions";
 import { getDestinationGallery } from "@/data/destination-gallery";
 import PlaceWorld from "@/components/destination/PlaceWorld";
-import YearScene from "@/components/destination/YearScene";
 import { getClimateRecord } from "@/data/climate/nasa-canonical";
-import {
-  buildMonthRows,
-  canonicalWindowLabel,
-  defaultMonth,
-} from "@/components/besttime/besttime-state";
+import { buildMonthRows, canonicalWindowLabel } from "@/components/besttime/besttime-state";
 import { monthNormals } from "@/lib/inner-state";
 import { MyTripProvider } from "@/components/destination/trip/MyTripContext";
 import MyTripPanel from "@/components/destination/trip/MyTripPanel";
@@ -60,8 +55,8 @@ import type { TravelInterest, TravelStyle } from "@/types/itinerary";
  *   · AI = 真实 /api/itinerary（Groq llama-3.3-70b），输入含 My Trip tripItems
  *     （含每条价格状态）；AI 成本只能作为 suggestion，不与 confirmed 混淆。
  *
- * Scene 整合：SCENE 01 THE PLACE = Hero；SCENE 02 THE YEAR = When to go
- * （紧跟 City Introduction 之后）。SSG（dynamicParams=false）不变。
+ * Scene 整合：SCENE 01 THE PLACE = Hero（When to go 模块已移除）。
+ * SSG（dynamicParams=false）不变。
  */
 
 const SITE_URL = "https://www.utripla.xyz";
@@ -235,20 +230,11 @@ export default async function DestinationDetailPage({
           ]),
         ).slice(0, 6);
 
-  // ── Climate authority（THE YEAR，不变） ──────
+  // ── Climate authority（不变） ────────────────────────────────────────
   const climateRecord = getClimateRecord(dest.slug);
   const climateRows = buildMonthRows(dest);
-  const climateInitialMonth = defaultMonth(dest);
   const normals = monthNormals(climateRecord);
   const goLabel = canonicalWindowLabel(climateRecord.bestMonthsBaseline);
-  const avoidShorts = climateRows
-    .filter((r) => r.verdict === "avoid")
-    .map((r) => r.short);
-  const goStatement = goLabel
-    ? `Go in ${goLabel}`
-    : avoidShorts.length > 0
-      ? `Avoid ${avoidShorts.join(" · ")}`
-      : "Flexible year-round";
 
   // ── Trip / AI planner inputs（真实字段适配） ────────────────────────
   const travelStyle = (VALID_TRAVEL_STYLES.includes(dest.travelStyle as TravelStyle)
@@ -347,15 +333,6 @@ export default async function DestinationDetailPage({
             </div>
           </div>
         </section>
-
-        {/* ═══ THE YEAR — When to go（紧跟 City Introduction 之后；仅移动位置，视觉未改） ═══ */}
-        <YearScene
-          city={dest.city}
-          rows={climateRows}
-          initialMonth={climateInitialMonth}
-          goStatement={goStatement}
-          guideHref={`/best-time-to-visit/${dest.slug}`}
-        />
 
         {/* ═══ GETTING THERE — 城市级 Flights（先交通，再进景点） ═══ */}
         <section aria-label={`Getting to ${dest.city}`} className="relative z-10 bg-ut-bg pb-16">
