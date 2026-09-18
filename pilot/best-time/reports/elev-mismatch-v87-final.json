@@ -1,0 +1,196 @@
+{
+  "generatedAt": "2026-09-13T04:07:56.939561+00:00",
+  "trigger": "abs(gridElevation - anchorElevation) > 150 m (PROVISIONAL, unchanged)",
+  "evaluated": 145,
+  "le150": 114,
+  "gt150": 31,
+  "gt150List": [
+    {
+      "destinationId": "rome",
+      "gridElevationM": 198.41,
+      "anchorElevationM": 4.0,
+      "deltaM": 194.4
+    },
+    {
+      "destinationId": "barcelona",
+      "gridElevationM": 302.35,
+      "anchorElevationM": 3.7,
+      "deltaM": 298.7
+    },
+    {
+      "destinationId": "mexico-city",
+      "gridElevationM": 2626.86,
+      "anchorElevationM": 2229.9,
+      "deltaM": 397.0
+    },
+    {
+      "destinationId": "antalya",
+      "gridElevationM": 455.92,
+      "anchorElevationM": 53.9,
+      "deltaM": 402.0
+    },
+    {
+      "destinationId": "madrid",
+      "gridElevationM": 779.85,
+      "anchorElevationM": 609.0,
+      "deltaM": 170.9
+    },
+    {
+      "destinationId": "bali",
+      "gridElevationM": 313.73,
+      "anchorElevationM": 4.3,
+      "deltaM": 309.4
+    },
+    {
+      "destinationId": "los-angeles",
+      "gridElevationM": 395.0,
+      "anchorElevationM": 39.0,
+      "deltaM": 356.0
+    },
+    {
+      "destinationId": "taipei",
+      "gridElevationM": 228.85,
+      "anchorElevationM": 32.3,
+      "deltaM": 196.6
+    },
+    {
+      "destinationId": "florence",
+      "gridElevationM": 571.22,
+      "anchorElevationM": 43.3,
+      "deltaM": 527.9
+    },
+    {
+      "destinationId": "manila",
+      "gridElevationM": 201.16,
+      "anchorElevationM": 22.9,
+      "deltaM": 178.3
+    },
+    {
+      "destinationId": "chiang-mai",
+      "gridElevationM": 759.08,
+      "anchorElevationM": 315.8,
+      "deltaM": 443.3
+    },
+    {
+      "destinationId": "fukuoka",
+      "gridElevationM": 185.36,
+      "anchorElevationM": 9.8,
+      "deltaM": 175.6
+    },
+    {
+      "destinationId": "sapporo",
+      "gridElevationM": 208.24,
+      "anchorElevationM": 25.0,
+      "deltaM": 183.2
+    },
+    {
+      "destinationId": "naples",
+      "gridElevationM": 264.43,
+      "anchorElevationM": 89.6,
+      "deltaM": 174.8
+    },
+    {
+      "destinationId": "amalfi-coast",
+      "gridElevationM": 264.43,
+      "anchorElevationM": 89.6,
+      "deltaM": 174.8
+    },
+    {
+      "destinationId": "bologna",
+      "gridElevationM": 198.28,
+      "anchorElevationM": 37.5,
+      "deltaM": 160.8
+    },
+    {
+      "destinationId": "turin",
+      "gridElevationM": 705.88,
+      "anchorElevationM": 301.4,
+      "deltaM": 404.5
+    },
+    {
+      "destinationId": "valencia",
+      "gridElevationM": 388.86,
+      "anchorElevationM": 73.2,
+      "deltaM": 315.7
+    },
+    {
+      "destinationId": "granada",
+      "gridElevationM": 720.12,
+      "anchorElevationM": 566.9,
+      "deltaM": 153.2
+    },
+    {
+      "destinationId": "quebec-city",
+      "gridElevationM": 332.2,
+      "anchorElevationM": 74.4,
+      "deltaM": 257.8
+    },
+    {
+      "destinationId": "perth",
+      "gridElevationM": 213.52,
+      "anchorElevationM": 20.4,
+      "deltaM": 193.1
+    },
+    {
+      "destinationId": "queenstown",
+      "gridElevationM": 962.79,
+      "anchorElevationM": 356.9,
+      "deltaM": 605.9
+    },
+    {
+      "destinationId": "ubud",
+      "gridElevationM": 313.73,
+      "anchorElevationM": 4.3,
+      "deltaM": 309.4
+    },
+    {
+      "destinationId": "luang-prabang",
+      "gridElevationM": 756.19,
+      "anchorElevationM": 291.1,
+      "deltaM": 465.1
+    },
+    {
+      "destinationId": "split",
+      "gridElevationM": 212.42,
+      "anchorElevationM": 24.1,
+      "deltaM": 188.3
+    },
+    {
+      "destinationId": "geneva",
+      "gridElevationM": 849.99,
+      "anchorElevationM": 430.1,
+      "deltaM": 419.9
+    },
+    {
+      "destinationId": "lyon",
+      "gridElevationM": 432.85,
+      "anchorElevationM": 250.2,
+      "deltaM": 182.7
+    },
+    {
+      "destinationId": "cordoba",
+      "gridElevationM": 409.24,
+      "anchorElevationM": 90.5,
+      "deltaM": 318.7
+    },
+    {
+      "destinationId": "lima",
+      "gridElevationM": 1194.76,
+      "anchorElevationM": 34.4,
+      "deltaM": 1160.4
+    },
+    {
+      "destinationId": "adelaide",
+      "gridElevationM": 167.35,
+      "anchorElevationM": 6.1,
+      "deltaM": 161.2
+    },
+    {
+      "destinationId": "cairns",
+      "gridElevationM": 404.05,
+      "anchorElevationM": 3.0,
+      "deltaM": 401.1
+    }
+  ],
+  "phnomPenhDelta": 3.4
+}

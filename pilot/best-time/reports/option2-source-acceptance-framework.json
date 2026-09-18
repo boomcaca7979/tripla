@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-09-12T09:29:38.305072+00:00",
+  "artifact": "option2-source-acceptance-framework.json",
+  "status": "v8.7-DRAFT — NOT APPLIED to the strategy; activation requires the user's Decision C = Option 2 and a formal methodology version bump with full re-audit",
+  "sourceHierarchy": {
+    "Tier 1": "official aviation authority / national AIP / airport operator (FAA NFDC model)",
+    "Tier 2": "authoritative aviation database or official-derived database (e.g. ch-aviation)",
+    "Tier 3": "reputable airport dataset with traceable provenance (e.g. OurAirports public-domain CSV)",
+    "Tier 4": "generic secondary source (Wikipedia, travel sites, search snippets) — never sufficient alone"
+  },
+  "productionApprovedSourceRequirements": [
+    "traceable to a named source with URL/product/version and retrieval date",
+    "airport identity matched (IATA + independently resolved ICAO, or Tier-1 ident)",
+    "coordinate consistency (anchor-to-source within tolerance, conflicts resolved and recorded)",
+    "elevation semantics known (MSL stated)",
+    "unit known (ft/m; conversion recorded)",
+    "source version/date recorded",
+    "reviewed (per-item disposition recorded with reviewer = agent + user gate for policy)",
+    "conflict resolution recorded (deltas above threshold escalate, never silently averaged)"
+  ],
+  "verificationMatrix": {
+    "Tier1": "single source sufficient (authority assumed from provenance)",
+    "Tier2": "single source sufficient with identity + tolerance checks",
+    "Tier3": "requires ONE independent corroborating source (any tier) with elevation delta within 10 m OR documented resolution",
+    "Tier4": "insufficient alone; usable only as corroboration"
+  },
+  "conflictHandling": {
+    "delta <= 5 m": "accept candidate; record delta",
+    "5 m < delta <= 20 m": "accept with representativeness flag + record both values",
+    "delta > 20 m or identity conflict": "NOT APPROVED; escalate",
+    "principle": "never average sources; never upgrade a source's tier by agreement alone"
+  },
+  "approvalStatuses": [
+    "APPROVED-TIER1",
+    "APPROVED-VERIFIED",
+    "PENDING-CORROBORATION",
+    "PENDING-ANCHOR-DECISION",
+    "REJECTED"
+  ],
+  "anchorSeparation": "elevation source acceptance is INDEPENDENT of anchor identity acceptance; approving an elevation value does not approve an anchor coordinate change (Decisions A/B remain separate)"
+}

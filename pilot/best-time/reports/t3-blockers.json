@@ -1,0 +1,74 @@
+{
+ "generatedAt": "2026-09-12T01:33:44.238617+00:00",
+ "t2": {
+  "result": "BLOCKED",
+  "reason": "Copernicus ERA5 PRIMARY is strategy-mandatory and has not been exercised; NASA fallback 145/145 alone cannot satisfy T2."
+ },
+ "t3": {
+  "result": "BLOCKED",
+  "reason": "T2 not passed; anchor elevation unapproved; NASA licence unresolved; database rights unresolved."
+ },
+ "categories": {
+  "TECHNICAL": [
+   {
+    "id": "T-1",
+    "blocker": "CDS credentials unavailable (no cdsapi, no ~/.cdsapirc, no CDSAPI_URL/KEY)",
+    "closesWith": "obtain CDS account + API key, install cdsapi, accept dataset licences, run the three request builders"
+   },
+   {
+    "id": "T-2",
+    "blocker": "ERA5 / ERA5-Land grid elevation unavailable (0/145 from CDS)",
+    "closesWith": "CDS retrieval; then run elev_trigger_analysis.py"
+   }
+  ],
+  "DATA": [
+   {
+    "id": "D-1",
+    "blocker": "anchor elevation candidate coverage 145/145 but exact coverage 135/145; 10 records in review queue",
+    "closesWith": "manual/final source approval per record; resolve 8 ICAO-code conflicts and 2 anchor-coordinate conflicts"
+   },
+   {
+    "id": "D-2",
+    "blocker": "precipDaysGe1mm source UNRESOLVED (no official parameter in either family)",
+    "closesWith": "methodology decision: authorise a deterministic derived field with documented threshold, or keep null permanently"
+   },
+   {
+    "id": "D-3",
+    "blocker": "sunshineHours source UNRESOLVED (no ERA5/NASA sunshine duration; Open-Meteo is cross-check only)",
+    "closesWith": "product decision: drop the field, or clear an Open-Meteo commercial subscription"
+   }
+  ],
+  "LEGAL": [
+   {
+    "id": "L-1",
+    "blocker": "NASA POWER commercial / redistribution licence unresolved",
+    "closesWith": "obtain formal licence text or written confirmation from NASA POWER; or drop the NASA fallback family from production"
+   },
+   {
+    "id": "L-2",
+    "blocker": "database rights (EU sui generis) unresolved",
+    "closesWith": "lightweight legal confirmation; retain transformation scripts"
+   }
+  ],
+  "METHODOLOGY": [
+   {
+    "id": "M-1",
+    "blocker": "daylightHours monthly aggregation only partially defined",
+    "detail": "S6 states '逐日求月均' (mean of daily daylight over the month), which defines the monthly statistic, but the leap-year February day-count (28 vs 29 days) is not specified, and no vetted implementation is adopted",
+    "closesWith": "fix the February day-count rule in the strategy, then adopt a reproducible implementation"
+   },
+   {
+    "id": "M-2",
+    "blocker": "precipDaysGe1mm derived-field policy undefined",
+    "closesWith": "strategy amendment authorising or forbidding derived fields"
+   }
+  ]
+ },
+ "counts": {
+  "TECHNICAL": 2,
+  "DATA": 3,
+  "LEGAL": 2,
+  "METHODOLOGY": 2
+ },
+ "total": 9
+}

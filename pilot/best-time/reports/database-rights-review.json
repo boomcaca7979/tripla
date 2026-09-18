@@ -1,0 +1,38 @@
+{
+  "generatedAt": "2026-09-12T09:00:53.356376+00:00",
+  "artifact": "database-rights-review.json (final matrix)",
+  "conclusion": "BLOCKED_EXTERNAL (no legal self-judgement by the agent)",
+  "matrix": [
+    {
+      "source": "NASA POWER / MERRA-2 (canonical fallback)",
+      "rightsHolder": "NASA (U.S. government work; 17 U.S.C. \u00a7105 analysis NOT performed by agent)",
+      "databaseRights": "sui generis n/a (US); EU database rights assessed only if redistributed in EU \u2014 UNASSESSED",
+      "licenceBasis": "no formal instrument; AWS registry self-statement + referencing guide only",
+      "commercialUse": "UNVERIFIED",
+      "redistribution": "UNVERIFIED",
+      "status": "BLOCKED_EXTERNAL / LEGAL REVIEW REQUIRED",
+      "evidence": "reports/nasa-licence-final-evidence.json"
+    },
+    {
+      "source": "Copernicus ERA5 / ERA5-Land (PRIMARY, pending credentials)",
+      "rightsHolder": "European Union / ECMWF (Copernicus programme)",
+      "databaseRights": "licence to use Copernicus Products (rev. 12) governs; sui generis language not independently verified",
+      "licenceBasis": "Licence to use Copernicus Products (rev. 12) \u2014 official name + five conditions research-confirmed (commercial/reproduction/distribution/modification permitted; attribution + modification notice + disclaimer required)",
+      "commercialUse": "permitted per licence text (research-confirmed)",
+      "redistribution": "permitted per licence text (research-confirmed)",
+      "status": "licence text confirmed (technical/research level); PROJECT LEGAL SIGN-OFF = BLOCKED_EXTERNAL",
+      "evidence": "reports/license-status.json"
+    },
+    {
+      "source": "OurAirports airports.csv (elevation candidates; Tier-3)",
+      "rightsHolder": "public domain (per source)",
+      "databaseRights": "none applicable (public domain claim); source disclaims accuracy/fitness",
+      "licenceBasis": "public domain self-declaration",
+      "commercialUse": "n/a (candidate/review use only)",
+      "redistribution": "n/a",
+      "status": "candidate source only \u2014 REMOVABLE FROM PRODUCTION DEPENDENCIES (superseded for 17 US records by FAA NFDC Tier-1)",
+      "evidence": "reports/elevation-authority-ledger.json"
+    }
+  ],
+  "note": "OurAirports is NOT a production climate source; if the FAA/other Tier-1 path covers all 145, OurAirports can be dropped entirely from the production dependency set."
+}

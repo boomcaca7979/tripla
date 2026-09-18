@@ -16,6 +16,8 @@
  * 增量补充，组件零改动（数据驱动，155 → 1000+ 城可扩展）。
  */
 
+import { ATTRACTIONS_WAVE2 } from "./attractions-wave2";
+
 export interface AttractionRecord {
   /** 稳定 id（slug 化）。 */
   id: string;
@@ -39,7 +41,12 @@ export interface AttractionRecord {
     | "Park"
     | "Museum"
     | "Landmark"
-    | "Viewpoint";
+    | "Viewpoint"
+    // wave2 补录景点使用的补充标签（真实类别，非新 feature）
+    | "Beach"
+    | "Nature reserve"
+    | "Square"
+    | "Street";
   /** 准入状态（事实性，无票价数字；无法可靠验证 → 缺省不写）。 */
   admission?: "Paid admission" | "Free entry";
   /** Viator attraction 级产品搜索词（无合适产品 → null，页面诚实空态）。 */
@@ -50,7 +57,7 @@ export interface AttractionRecord {
   verifiedAt: string;
 }
 
-export const ATTRACTIONS: Record<string, AttractionRecord[]> = {
+const ATTRACTIONS_CORE: Record<string, AttractionRecord[]> = {
   bangkok: [
     {
       id: "the-grand-palace",
@@ -13921,6 +13928,14 @@ export const ATTRACTIONS: Record<string, AttractionRecord[]> = {
       verifiedAt: "2026-09-16",
     },
   ],
+};
+
+
+/** 合并视图：既有 129 城 + wave2 新增 50 城。消费端（getAttractions /
+ *  findAttractionByName / 页面）接口不变，新增城市自动生效。 */
+export const ATTRACTIONS: Record<string, AttractionRecord[]> = {
+  ...ATTRACTIONS_CORE,
+  ...ATTRACTIONS_WAVE2,
 };
 
 

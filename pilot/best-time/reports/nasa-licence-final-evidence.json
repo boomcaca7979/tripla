@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-09-12T09:00:53.356117+00:00",
+  "artifact": "nasa-licence-final-evidence.json",
+  "searchScope": "POWER-specific formal terms (site-restricted + LaRC contact references); NOT general policy pages",
+  "formalLicenceInstrumentFound": false,
+  "evidenceInventory": [
+    {
+      "source": "POWER Referencing Guide",
+      "url": "https://power.larc.nasa.gov/docs/referencing/",
+      "classification": "citation/acknowledgment guidance \u2014 NOT a licence"
+    },
+    {
+      "source": "AWS Open Data Registry \u2014 NASA POWER",
+      "url": "https://registry.opendata.aws/nasa-power/",
+      "classification": "self-statement on a registry page \u2014 NOT a licence"
+    },
+    {
+      "source": "NASA Earthdata Data Use and Citation Guidance",
+      "url": "https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance",
+      "classification": "NASA-wide open-data POLICY page (lead) \u2014 not POWER-specific, not retrieved as primary text"
+    }
+  ],
+  "conclusion": {
+    "commercialUse": "UNVERIFIED",
+    "redistribution": "UNVERIFIED",
+    "gate": "BLOCKED_EXTERNAL / LEGAL REVIEW REQUIRED"
+  },
+  "escalationChannel": {
+    "recommendedContact": "larc-power-project@mail.nasa.gov (NASA POWER project office, LaRC)",
+    "recommendedAsk": "written confirmation that commercial use and redistribution of a derived static climate dataset built from POWER Daily/Climatology API responses is permitted, with attribution per the POWER Referencing Guide",
+    "actionedByAgent": "NO \u2014 the agent must not send email, impersonate the user, or make legal judgements"
+  }
+}

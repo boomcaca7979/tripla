@@ -1,0 +1,145 @@
+{
+  "artifact": "era5-primary-preflight-report-v1",
+  "generatedAt": "2026-09-13",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.7",
+  "pilotVersion": "copernicus-pilot-2026.09.13.v1",
+  "decision": "BLOCKED",
+  "decisionMeaning": "ERA5 Primary validation blocked by credentials (state B). NOT successfully validated (state A). NOT a methodology failure (state C).",
+  "gitSafety": {
+    "branch": "main",
+    "head": "2873745f96737515a441b829de68d4c2e1ee9343",
+    "productionChanges": "none this round (pre-existing working-tree modifications untouched)",
+    "commitPushDeploy": "none"
+  },
+  "credentialStatus": {
+    "env": "NOT FOUND (no CDS/ECMWF variables)",
+    "cdsapirc": "NOT FOUND (~/.cdsapirc absent)",
+    "projectEnvFiles": "NOT FOUND (.env.local exists, no CDS key reference)",
+    "client": "NOT FOUND (cdsapi and ecmwf-datastores-client not installed)",
+    "overall": "NOT FOUND",
+    "secretsPrinted": false
+  },
+  "freezeIntegrityRecheck": {
+    "canonicalDatasetHash": "MATCH (sha256 of canonical JSON sort_keys = 9ac50d81a0b2d952518b6339c7b3d03e74d0093df0963f65872789f630c0e321)",
+    "coreClimateHash": "MATCH (7d884fd2334b092b27081c055b8ab860981577bddbeb833512e2818e64ff58ed, 1740 months x 4 fields)",
+    "nasaCanonicalFile": "pilot/best-time/normalized/nasa_canonical_145_final-v87.json EXISTS",
+    "conclusion": "v8.7 Internal Data Freeze untouched and intact"
+  },
+  "contractVerification": {
+    "A_datasetShortName": {
+      "status": "PASS",
+      "evidence": "Official CDS retrieve process schemas + catalogue metadata (fetched 2026-09-13): reanalysis-era5-single-levels-monthly-means (DOI 10.24381/cds.f17050d7), derived-era5-single-levels-daily-statistics (DOI 10.24381/cds.4991cf48)"
+    },
+    "B_canonicalMapping": {
+      "status": "PASS",
+      "evidence": "2m_temperature and total_precipitation present in the variable enum of BOTH datasets' official schemas; field plan in copernicus_request_template.py maps them exactly"
+    },
+    "C_monthlyAggregation": {
+      "status": "PASS",
+      "evidence": "product_type monthly_averaged_reanalysis confirmed (official schema); tempHighC/tempLowC use derived daily statistics, NOT the monthly-means min/max fields (which are monthly extremes)"
+    },
+    "D_precipitationUnitConversion": {
+      "status": "PASS",
+      "evidence": "ECMWF conversion table for accumulated variables: 'accumulations in monthly means of daily means have been scaled to have units that include per day'; tp[mm] = tp[m/day] x 1000 x N (N = days in month). Template and pilot_request_v1 encode exactly this."
+    },
+    "E_period1991_2020": {
+      "status": "PASS",
+      "evidence": "Official year enum 1940-2026 covers 1991-2020; monthly-means temporal extent 1940-01-01 to 2026-08-01 (catalogue)"
+    },
+    "F_gridCoordinateSelection": {
+      "status": "PASS (request-side) / BLOCKED (output-side)",
+      "evidence": "0.25 deg regular lat-lon (catalogue description); area order N/W/S/E confirmed by schema default [90,-180,-90,180]; deterministic nearest-point rule fixed in pilot_request_v1; actual returned grid assertion BLOCKED pending execution"
+    },
+    "G_timeStandard": {
+      "status": "PASS",
+      "evidence": "Official time_zone enum default = utc+00:00 (daily-statistics schema); UTRIPLA sets time_zone=utc+00:00 explicitly; daily statistics computed from UTC-referenced hourly data (ECMWF documentation)"
+    },
+    "H_latLonOrientation": {
+      "status": "BLOCKED",
+      "evidence": "Request-side contract defined; returned-array orientation (netCDF latitude descending) can only be asserted after execution"
+    },
+    "I_leapYearFebruary": {
+      "status": "PASS (contract) / BLOCKED (data proof)",
+      "evidence": "Conversion formula uses N = days in actual month (28/29) per official conversion table; checks script asserts via calendar.monthrange and monthly-vs-daily_sum cross-check; data proof BLOCKED pending execution"
+    },
+    "J_nasaSemanticLeakage": {
+      "status": "PASS",
+      "evidence": "No NASA parameter names (T2M_MAX_AVG/T2M_MIN_AVG/PRECTOTCORR) in the ERA5 field plan; strategy sections 280/469 explicitly forbid the monthly-extreme mapping error"
+    },
+    "K_era5Era5LandMixing": {
+      "status": "PASS",
+      "evidence": "B1 closed: ERA5 and ERA5-Land are official products within the single Copernicus ERA5 Reanalysis Family; pilot uses ERA5 single-levels products only; ERA5-Land documented as unable to supply daily accumulated variables (ECMWF: 'ERA5-Land daily accumulated parameters are not available from the catalogue entry')"
+    },
+    "L_provenance": {
+      "status": "PASS",
+      "evidence": "Per-request sidecars capture provider, source family, official product, dataset ID, full parameters, retrieval timestamp, byte size, sha256; no secrets recorded; pilot_request_v1 + manifest are the audit trail"
+    }
+  },
+  "findings": [
+    {
+      "id": "F-1",
+      "severity": "contract-error (request would be rejected by CDS API)",
+      "exactFinding": "copernicus_request_template.py sent data_format=netcdf on derived-era5-single-levels-daily-statistics requests; that dataset defines NO data_format input",
+      "affected": "pilot/best-time/scripts/copernicus_request_template.py build_daily_statistics_request + build_era5land_request (daily branch)",
+      "oldAssumption": "all CDS requests accept data_format",
+      "officialEvidence": "Official retrieve process schema for derived-era5-single-levels-daily-statistics (fetched 2026-09-13): inputs = [product_type, variable, year, month, day, daily_statistic, time_zone, frequency, area]",
+      "correction": "removed data_format from both daily-statistics builders; output is netCDF-in-zip per ECMWF documentation",
+      "blockedByCredentials": false,
+      "canonicalNumericImpact": "none"
+    },
+    {
+      "id": "F-2",
+      "severity": "schema-shape constraint",
+      "exactFinding": "year is a single string (not an array) for derived-era5-single-levels-daily-statistics",
+      "affected": "pilot request design; fetcher manifest generates 30 x 3 = 90 per-year daily requests",
+      "oldAssumption": "year could be requested as an array for all ERA5 datasets",
+      "officialEvidence": "Official retrieve process schema (fetched 2026-09-13): year type string with enum 1940-2026 (monthly-means year IS an array)",
+      "correction": "encoded in pilot_request_v1.json and copernicus_pilot_fetch.py",
+      "blockedByCredentials": false,
+      "canonicalNumericImpact": "none"
+    },
+    {
+      "id": "F-3",
+      "severity": "observational (no code change)",
+      "exactFinding": "CDS catalogue labels both ERA5 datasets 'CC-BY licence' / licence 'CC-BY-4.0'; strategy v8.7 names the licence 'Licence to use Copernicus Products (rev. 12)'",
+      "affected": "strategy licensing wording (out of scope this round; no numeric data impact)",
+      "officialEvidence": "CDS dataset overview page + catalogue metadata (fetched 2026-09-13)",
+      "correction": "none applied; flag for the licensing review (NASA_licence / databaseRights are separately BLOCKED_EXTERNAL)",
+      "blockedByCredentials": false,
+      "canonicalNumericImpact": "none"
+    },
+    {
+      "id": "F-4",
+      "severity": "operational",
+      "exactFinding": "ECMWF documented a +1 hour time misalignment bug affecting daily-aggregated 2m temperature max/min (and other variables), fixed 30-Jul-2026",
+      "affected": "any ERA5 daily max/min data downloaded before 2026-07-30 must be re-requested",
+      "officialEvidence": "ERA5 family post-processed daily statistics documentation (Confluence), fetched 2026-09-13",
+      "correction": "pilot fetches fresh data at execution time; note recorded in pilot README",
+      "blockedByCredentials": false,
+      "canonicalNumericImpact": "none"
+    }
+  ],
+  "pilotExecution": {
+    "executed": false,
+    "reason": "CDS credentials NOT FOUND (no cdsapi, no ~/.cdsapirc, no CDSAPI_URL/CDSAPI_KEY)",
+    "requestExecutable": "YES (code path ready; copernicus_pilot_fetch.py exits BLOCKED by design until prerequisites exist)",
+    "authentication": "BLOCKED",
+    "datasetAccess": "BLOCKED",
+    "parameterAvailability": "BLOCKED",
+    "temporalCompleteness": "BLOCKED",
+    "semanticValidation": "BLOCKED",
+    "coordinateGridValidation": "BLOCKED",
+    "aggregationValidation": "BLOCKED",
+    "determinism": "BLOCKED"
+  },
+  "filesChangedThisRound": [
+    {"path": "pilot/best-time/copernicus/pilot_request_v1.json", "change": "NEW - exact pilot request contract (datasets, parameters, area, period, grid-selection rule, unit expectations, semantic-proof requirements, 91-request plan)"},
+    {"path": "pilot/best-time/copernicus/copernicus_pilot_fetch.py", "change": "NEW - credentials-gated fetcher; deterministic 91-request manifest; sha256 sidecars; BLOCKED exit without credentials"},
+    {"path": "pilot/best-time/copernicus/copernicus_pilot_checks.py", "change": "NEW - strict PASS/FAIL/BLOCKED validator (12 checks incl. monthly-vs-daily_sum aggregation cross-check, leap Feb, determinism)"},
+    {"path": "pilot/best-time/copernicus/copernicus_pilot_report.json", "change": "NEW - generated status: 12/12 checks BLOCKED"},
+    {"path": "pilot/best-time/copernicus/README.md", "change": "NEW - runbook, isolation guarantees, findings F-1..F-4 with evidence"},
+    {"path": "pilot/best-time/scripts/copernicus_request_template.py", "change": "MODIFIED - build_daily_statistics_request: removed data_format (F-1), documented per-year year (F-2); build_era5land_request: data_format only on monthly branch; KNOWN_CONSTRAINTS + header updated with 2026-09-13 schema-verified corrections"}
+  ],
+  "untouched": "src/ production data, Best-time runtime, API routes, sitemap, UI, NASA dataset, anchors, elevation, recommendation rules, Best Months, v8.7 canonical numeric data - all untouched",
+  "nextAction": "obtain CDS account + API token, install cdsapi>=0.7.7, accept both dataset licences in the CDS profile, then run copernicus_pilot_fetch.py followed by copernicus_pilot_checks.py"
+}

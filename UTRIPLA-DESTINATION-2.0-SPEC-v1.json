@@ -1,0 +1,88 @@
+{
+  "spec": "UTRIPLA-DESTINATION-2.0-SPEC-v1",
+  "type": "DESIGN_ONLY",
+  "date": "2026-09-13",
+  "auditBasis": {
+    "url": "http://localhost:3111/destinations/tokyo",
+    "viewports": ["1440x900 x5 viewport-scrolls", "1280x800", "390x844"],
+    "crossChecked": ["paris", "singapore"],
+    "evidence": ["full-page rhythm walk", "map label collision on 390 (KOBE/OSAKA/KANAZAWA overlap)", "duplicate hero/NOW readouts", "Nearby list (Bangkok/Dubai/Singapore, region-based) contradicts map (Sapporo/Nagoya, distance-based)"]
+  },
+  "verdict": {
+    "functional": "PASS (previous round)",
+    "visual": "FAIL",
+    "distinctivenessWithoutLogo": "NO"
+  },
+  "whyUgly": "页面是组件清单的纵向排列，不是被构图成的一个地方：所有组件等权、等宽、等节奏、同底色，没有大于一屏的视觉主角、没有明暗与色彩旅程、没有 scale 对比。Hero 照片被卡片化降级后，页面再无主角。这是把数据库字段渲染成控件的'数据库可视化'，不是'地方体验'。",
+  "top15Failures": [
+    {"pos": "Hero", "problem": "照片卡片化（rounded card + 两侧纸边 + 370px 高）", "fix": "100svh full-bleed 到达屏"},
+    {"pos": "Hero vs NOW", "problem": "同一实时数据 100px 内出现两遍", "fix": "合并为一处 environmental state"},
+    {"pos": "NOW", "problem": "四格等权小数字框 = admin 仪表条", "fix": "并入 hero 状态行 + 页面氛围层"},
+    {"pos": "Explorer", "problem": "左右两个小工具等权，无主角", "fix": "巨型编号章节，字即图像"},
+    {"pos": "Map", "problem": "米色网格+8 小点像占位图；390 标签重叠成乱码", "fix": "移出 Destination，移居 Hub Atlas"},
+    {"pos": "Nearby", "problem": "地图 nearby（距离）与列表 nearby（region）同名不同义", "fix": "统一真实距离，列表改名 Next in {region}"},
+    {"pos": "Vibe", "problem": "三个小表单 pill 漂浮空白，microcopy 比控件长", "fix": "升格为玩法选择器并入探索场景"},
+    {"pos": "ClimateYear", "problem": "12 个小刻度读不出轨迹，决策数据视觉权重排第 6", "fix": "放大 ×2.5-3 + GO IN 宣言"},
+    {"pos": "Rhythm", "problem": "全页同宽同底同 padding 的 block 堆叠", "fix": "5 scenes 明暗/宽度节奏"},
+    {"pos": "Scale", "problem": "除 H1 外无 >2rem 元素，无 scale 对比", "fix": "HERO/CHAPTER/INSTRUMENT 三级字阶"},
+    {"pos": "Color", "problem": "一张照片外全页米色，最该有氛围的页面最没氛围", "fix": "place-accent 季节/时段驱动的场景过渡氛围"},
+    {"pos": "Imagery", "problem": "旅行页全页 1 张图", "fix": "满出血主角 + 决策面板同图异裁再出场（不伪造新图）"},
+    {"pos": "Affordance", "problem": "可点的东西看起来都像静态文本/表单", "fix": "默认态交互信号 + hover 预览增强"},
+    {"pos": "Whitespace", "problem": "空白是组件缩小后的剩余，不是构图", "fix": "留白必须指向主角，否则填实或收窄"},
+    {"pos": "Distinctiveness", "problem": "隐去 logo 认不出 UTRIPLA", "fix": "把 home 的活时间/氛围场基因带入内页到达屏"}
+  ],
+  "rootCauses": [
+    "缺主角：所有组件都是配角尺寸，无独奏",
+    "缺场景：按数据库表结构排列而非体验叙事（到达→感受→探索→决定），模块间无因果过渡",
+    "缺对比：等宽/等距/等权/单色把编辑设计的张力全部磨平"
+  ],
+  "destination20Concept": "Destination = ONE CONTINUOUS EXPLORATION EXPERIENCE（抵达一个活着的地方）— 5 个 scene，每幕唯一主角+唯一动作+明暗节奏",
+  "scenes": [
+    {"id": "01", "name": "ARRIVAL", "protagonist": "100svh full-bleed image（无图=全屏氛围场）", "content": "city display-xl + country + on-image 实时状态（temp·season·local time）+ on-image breadcrumb + scroll cue", "interaction": "时间真实跳动；温度 LIVE/NORMAL 标注", "height": "100svh", "action": "看、感受", "next": "明暗过渡→02"},
+    {"id": "02", "name": "CHAPTERS (EXPLORE)", "protagonist": "巨型编号章节（5 highlights，display 级 serif）", "content": "highlight 名称+序号+命中 vibe 的 routes 计数（真实统计）", "interaction": "选 chapter 置顶放大；选 vibe→Scene05 联动+计数变化", "height": "120-150vh", "action": "选、扫", "next": "季节色带→03"},
+    {"id": "03", "name": "WHEN", "protagonist": "GO IN {MONTH} 巨型宣言 + 放大 ClimateYear", "content": "12 月轨迹+读数+full guide 链接", "interaction": "月份选择（键盘完整）", "height": "~100vh", "action": "判断", "next": "结论下探→04"},
+    {"id": "04", "name": "DECIDE", "protagonist": "display 级价格 + 唯一主 CTA", "content": "budget/day、trip estimate、best window 复述、practical 折叠、hotel quiet 行、同图异裁背景", "interaction": "CTA、折叠", "height": "~80vh", "action": "决定", "next": "→05"},
+    {"id": "05", "name": "NEXT", "protagonist": "hairline 目的行", "content": "guides×3、routes×3、next gateways（真实 Haversine 距离）", "interaction": "vibe 联动过滤、show all", "height": "~80vh", "action": "续逛", "next": "离开"}
+  ],
+  "decisions": {
+    "REMOVE": ["NowPanel full 读数带", "RegionMiniMap（出 Destination 页）", "独立 PICK YOUR VIBE section", "同 region 冒名的 Nearby places", "独立 About section", "独立 Practical section"],
+    "MERGE": ["Hero+NOW+breadcrumb → Scene 01", "Explorer+Vibe → Scene 02", "Budget+Stay+Window+CTA → Scene 04", "About 长文折叠入场景尾部"],
+    "KEEP": ["ClimateYear（数据/交互契约原样）", "HotelModule（降级）", "FaqList", "InnerCTA", "KeepExploring 机制（收敛为 Scene 05）", "/api/weather 签名校验降级逻辑", "vibe-store"],
+    "REDESIGN": ["到达屏（全出血）", "Explorer（巨型章节）", "Climate 呈现（宣言+放大）", "决策面板", "Destinations Hub（World Atlas）"],
+    "RELOCATE": ["地图能力 → Hub Atlas", "practical → 折叠 DOM", "breadcrumb → on-image 浮层"],
+    "ENLARGE": ["图像", "GO IN 宣言", "价格", "章节字", "ClimateYear"],
+    "REDUCE": ["microcopy", "keep-exploring 默认行数（每组 3 条）", "HotelModule 存在感", "practical 存在感"]
+  },
+  "typography": {"hero": "clamp(3.5rem,8vw,7rem) — city 名 / GO IN 宣言 / 价格", "chapter": "clamp(2rem,4vw,3.75rem) — 章节/组标题", "instrument": "现有 label/micro/body", "rule": "mono=机器信息，serif=人的感受"},
+  "motion": {"sceneTransitions": "CSS 渐变带（24vh），无 JS", "entrance": "ut-reveal 复用 + Scene01 图像 scale 1.03→1 一次（reduced-motion 关）", "feedback": "150-300ms color/transform/opacity", "banned": "新动画库、parallax 重效果、WebGL"},
+  "performance": {"ssg": true, "newClientJSBudget": "<=10KB gz（删 map 岛反而减重）", "lcp": "Scene01 图像 preload", "cls": 0, "newDeps": 0, "noNasaInClientBundle": true},
+  "seo": {"unchanged": ["URL", "metadata", "canonical", "JSON-LD", "FAQ", "robots", "sitemap", "内链"], "longDescription": "完整保留在 details DOM", "goInStatement": "来自 canonical bestMonthsBaseline/Challenging tier，不新造文案"},
+  "dataIntegrity": {"climate": "canonical baseline + R-tier 唯一权威", "weather": "/api/weather 签名校验 + CLIMATE NORMAL 降级标注", "nearby": "Haversine 真实距离统一语义", "imagery": "仅 dest.image 的两种构图用法，无伪造", "vibe": "只作用于真实 tags 内容（列表计数/过滤），不伪造 highlight 过滤"},
+  "hub": {
+    "concept": "UTRIPLA WORLD ATLAS — 打开即'我可以在这里逛世界'",
+    "firstViewport": "满版世界图（145 真实坐标点，equirectangular，hairline graticule）+ mono 头行 '145 PLACES · 12 MONTHS · YOUR MOVE'",
+    "threeAxes": [
+      {"axis": "MONTH", "effect": "全图点变 GOOD/WORKABLE/CHALLENGING（NASA tier）+ 侧读数 N places good in April"},
+      {"axis": "VIBE", "effect": "有该 interest 的城市点亮 + 数量"},
+      {"axis": "POINT", "effect": "preview 卡（image+city+best window+budget/day+Open→）"}
+    ],
+    "below": "当月 GOOD 目的 editorial 行（替代旧 card grid）",
+    "whyPlay": "每个月份/玩法都是一次世界重新洗牌；preview 卡给出下一步",
+    "implementation": "145 HTML 定位 button 点集，SSG 预渲染默认态，无 canvas/无库；移动端图 60svh 横滑+列表承接",
+    "projection": "lat -60..75 裁剪，graticule 每 15°"
+  },
+  "references": [
+    {"product": "Apple Weather", "learning": "环境是一体的状态语言，不是数据格"},
+    {"product": "Polarsteps", "learning": "图像必须统治首屏才有到达感"},
+    {"product": "Kinfolk/Cereal", "learning": "巨型 serif 与 hairline 的张力——字可以当图"},
+    {"product": "Airbnb Explore", "learning": "无发现任务的地图不配存在"},
+    {"product": "Flightconnections", "learning": "点图+筛选=世界重新洗牌"},
+    {"product": "National Geographic Atlas", "learning": "graticule 作为版面审美语言"},
+    {"product": "Spotify Wrapped", "learning": "数据结论要喊出来（巨型字）"},
+    {"product": "Time.is", "learning": "城市当地时间本身是主角级内容"}
+  ],
+  "implementationSequence": ["Scene01 Arrival 合并", "Scene02 Chapters+vibe", "Scene03 GO IN+放大 ClimateYear", "Scene04 决策面板", "Scene05 Keep Exploring 收敛", "删除清单执行", "Hub World Atlas", "三视口回归 QA（含 1 个无图目的地）"],
+  "acceptanceCriteria": ["明确视觉主角", "非组件堆叠（≤5 scenes）", "3 秒理解城市", "不读长文可探索", "interaction 有明确价值", "imagery 有存在理由", "typography 三级层级（字差 ≥3x）", "visual rhythm 有变化（≥2 次明暗/色相）", "旅行感", "UTRIPLA 独特性（隐 logo 可识别）"],
+  "acceptanceRule": "任一 FAIL → DESTINATION VISUAL = FAIL",
+  "finalDecision": "FAIL（当前页面未达新视觉标准；本轮无代码改动，下一轮按本 spec 实施）"
+}

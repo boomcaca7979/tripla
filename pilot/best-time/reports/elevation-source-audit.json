@@ -1,0 +1,1481 @@
+{
+ "generatedAt": "2026-09-12T01:15:52.503961+00:00",
+ "purpose": "anchor elevation source investigation (pilot brief S4-S8)",
+ "source": {
+  "sourceName": "OurAirports open data — airports.csv",
+  "sourceURL": "https://davidmegginson.github.io/ourairports-data/airports.csv",
+  "sourceDocURL": "https://ourairports.com/data/",
+  "dataDictionaryURL": "https://ourairports.com/help/data-dictionary.html",
+  "sourceType": "open airport database (curated from national AIP / FAA and community sources)",
+  "licence": "Released to the Public Domain (no guarantee of accuracy or fitness for use)",
+  "licenceURL": "https://ourairports.com/data/",
+  "fieldMeaning": "elevation_ft = airport elevation MSL in feet",
+  "originalUnit": "feet (ft) above MSL",
+  "conversion": "elevationM = elevation_ft * 0.3048, rounded to 1 decimal",
+  "priorityTier": 4,
+  "retrievedAt": "2026-09-12T01:15:52.503961+00:00",
+  "fileSha256": "d3d1a7511696c6e09e614200eea297654c787a5b3b788945d39db3349e6664f9",
+  "fileBytes": 12721696
+ },
+ "coverage": {
+  "destinations": 145,
+  "candidateCoverage": "145/145",
+  "exactCoverage": "135/145",
+  "exactCoverageDefinition": "IATA/ICAO match AND anchor-to-source distance <= 2 km AND no ICAO conflict",
+  "reviewQueueCount": 10,
+  "reviewQueue": [
+   {
+    "destinationId": "rovaniemi",
+    "anchorIata": "RVN",
+    "anchorIcao": "EFKT",
+    "matchedIdent": "EFRO",
+    "matchedIcao": "EFRO",
+    "distanceKm": 0.189,
+    "icaoConflict": true,
+    "reason": "ICAO code differs from destinations.ts"
+   },
+   {
+    "destinationId": "chengdu",
+    "anchorIata": "CTU",
+    "anchorIcao": "ZUUU",
+    "matchedIdent": "ZUUU",
+    "matchedIcao": "ZUUU",
+    "distanceKm": 2.254,
+    "icaoConflict": false,
+    "reason": "anchor-to-source distance 2.254 km > 2 km"
+   },
+   {
+    "destinationId": "ho-chi-minh-city",
+    "anchorIata": "SGN",
+    "anchorIcao": "VVTS",
+    "matchedIdent": "VVTS",
+    "matchedIcao": "VVTS",
+    "distanceKm": 16.918,
+    "icaoConflict": false,
+    "reason": "anchor-to-source distance 16.918 km > 2 km"
+   },
+   {
+    "destinationId": "cebu",
+    "anchorIata": "CEB",
+    "anchorIcao": "RPVB",
+    "matchedIdent": "RPVM",
+    "matchedIcao": "RPVM",
+    "distanceKm": 0.212,
+    "icaoConflict": true,
+    "reason": "ICAO code differs from destinations.ts"
+   },
+   {
+    "destinationId": "yogyakarta",
+    "anchorIata": "YIA",
+    "anchorIcao": "WIHI",
+    "matchedIdent": "WAHI",
+    "matchedIcao": "WAHI",
+    "distanceKm": 0.439,
+    "icaoConflict": true,
+    "reason": "ICAO code differs from destinations.ts"
+   },
+   {
+    "destinationId": "nha-trang",
+    "anchorIata": "CXR",
+    "anchorIcao": "VVNT",
+    "matchedIdent": "VVCR",
+    "matchedIcao": "VVCR",
+    "distanceKm": 0.054,
+    "icaoConflict": true,
+    "reason": "ICAO code differs from destinations.ts"
+   },
+   {
+    "destinationId": "siem-reap",
+    "anchorIata": "SAI",
+    "anchorIcao": "VDSR",
+    "matchedIdent": "VDSA",
+    "matchedIcao": "VDSA",
+    "distanceKm": 44.652,
+    "icaoConflict": true,
+    "reason": "ICAO code differs from destinations.ts; anchor-to-source distance 44.652 km > 2 km"
+   },
+   {
+    "destinationId": "bologna",
+    "anchorIata": "BLQ",
+    "anchorIcao": "LIPQ",
+    "matchedIdent": "LIPE",
+    "matchedIcao": "LIPE",
+    "distanceKm": 0.0,
+    "icaoConflict": true,
+    "reason": "ICAO code differs from destinations.ts"
+   },
+   {
+    "destinationId": "lombok",
+    "anchorIata": "LOP",
+    "anchorIcao": "WATB",
+    "matchedIdent": "WADL",
+    "matchedIcao": "WADL",
+    "distanceKm": 0.341,
+    "icaoConflict": true,
+    "reason": "ICAO code differs from destinations.ts"
+   },
+   {
+    "destinationId": "pattaya",
+    "anchorIata": "UTP",
+    "anchorIcao": "VTPH",
+    "matchedIdent": "VTBU",
+    "matchedIcao": "VTBU",
+    "distanceKm": 0.101,
+    "icaoConflict": true,
+    "reason": "ICAO code differs from destinations.ts"
+   }
+  ],
+  "missingAirportMatch": 0,
+  "missingElevationInSource": 0,
+  "duplicateAnchorIata": {
+   "KIX": [
+    "kyoto",
+    "osaka"
+   ],
+   "DPS": [
+    "bali",
+    "ubud"
+   ],
+   "NAP": [
+    "naples",
+    "amalfi-coast"
+   ],
+   "CUN": [
+    "cancun",
+    "tulum"
+   ]
+  },
+  "duplicateAnchorIataNote": "destinations that legitimately share one anchor airport; same elevation is expected",
+  "unitConflicts": 0,
+  "conflictingValues": 0,
+  "distanceGt10km": [
+   {
+    "destinationId": "ho-chi-minh-city",
+    "distanceKm": 16.92
+   },
+   {
+    "destinationId": "siem-reap",
+    "distanceKm": 44.65
+   }
+  ]
+ },
+ "confidenceDistribution": {
+  "high": 142,
+  "medium": 1,
+  "low": 2
+ },
+ "gate": {
+  "candidateCoverageGate": "ELEVATION REVIEW = READY FOR MANUAL/FINAL SOURCE APPROVAL",
+  "exactCoverageGate": "ELEVATION GATE = BLOCKED",
+  "productionStatus": "BLOCKED - candidate artifact only; no value written to src/data",
+  "note": "candidate coverage 145/145 satisfies the numeric bar, but 10 records carry ICAO-code conflicts or anchor-coordinate conflicts and must be resolved by manual/final source approval before any production use"
+ },
+ "productionWrite": "NONE — no src/data file was modified",
+ "rows": [
+  {
+   "destinationId": "tokyo",
+   "iata": "NRT",
+   "icao": "RJAA",
+   "status": "CANDIDATE",
+   "elevationM": 43.0,
+   "distanceKm": 0.479,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "paris",
+   "iata": "CDG",
+   "icao": "LFPG",
+   "status": "CANDIDATE",
+   "elevationM": 119.5,
+   "distanceKm": 0.461,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "newyork",
+   "iata": "JFK",
+   "icao": "KJFK",
+   "status": "CANDIDATE",
+   "elevationM": 4.0,
+   "distanceKm": 0.23,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "bangkok",
+   "iata": "BKK",
+   "icao": "VTBS",
+   "status": "CANDIDATE",
+   "elevationM": 1.5,
+   "distanceKm": 1.045,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "london",
+   "iata": "LHR",
+   "icao": "EGLL",
+   "status": "CANDIDATE",
+   "elevationM": 25.3,
+   "distanceKm": 0.397,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "sydney",
+   "iata": "SYD",
+   "icao": "YSSY",
+   "status": "CANDIDATE",
+   "elevationM": 6.4,
+   "distanceKm": 0.707,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "dubai",
+   "iata": "DXB",
+   "icao": "OMDB",
+   "status": "CANDIDATE",
+   "elevationM": 18.9,
+   "distanceKm": 0.653,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "rome",
+   "iata": "FCO",
+   "icao": "LIRF",
+   "status": "CANDIDATE",
+   "elevationM": 4.0,
+   "distanceKm": 1.183,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "barcelona",
+   "iata": "BCN",
+   "icao": "LEBL",
+   "status": "CANDIDATE",
+   "elevationM": 3.7,
+   "distanceKm": 0.406,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "singapore",
+   "iata": "SIN",
+   "icao": "WSSS",
+   "status": "CANDIDATE",
+   "elevationM": 6.7,
+   "distanceKm": 1.604,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "istanbul",
+   "iata": "IST",
+   "icao": "LTFM",
+   "status": "CANDIDATE",
+   "elevationM": 99.1,
+   "distanceKm": 1.652,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "seoul",
+   "iata": "ICN",
+   "icao": "RKSI",
+   "status": "CANDIDATE",
+   "elevationM": 7.0,
+   "distanceKm": 1.344,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "mexico-city",
+   "iata": "MEX",
+   "icao": "MMMX",
+   "status": "CANDIDATE",
+   "elevationM": 2229.9,
+   "distanceKm": 0.193,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "las-vegas",
+   "iata": "LAS",
+   "icao": "KLAS",
+   "status": "CANDIDATE",
+   "elevationM": 664.8,
+   "distanceKm": 0.192,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "austin",
+   "iata": "AUS",
+   "icao": "KAUS",
+   "status": "CANDIDATE",
+   "elevationM": 165.2,
+   "distanceKm": 0.421,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "munich",
+   "iata": "MUC",
+   "icao": "EDDM",
+   "status": "CANDIDATE",
+   "elevationM": 453.2,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "kyoto",
+   "iata": "KIX",
+   "icao": "RJBB",
+   "status": "CANDIDATE",
+   "elevationM": 7.9,
+   "distanceKm": 0.036,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "vienna",
+   "iata": "VIE",
+   "icao": "LOWW",
+   "status": "CANDIDATE",
+   "elevationM": 182.9,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "rovaniemi",
+   "iata": "RVN",
+   "icao": "EFKT",
+   "status": "CANDIDATE",
+   "elevationM": 195.7,
+   "distanceKm": 0.189,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "antalya",
+   "iata": "AYT",
+   "icao": "LTAI",
+   "status": "CANDIDATE",
+   "elevationM": 53.9,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "madrid",
+   "iata": "MAD",
+   "icao": "LEMD",
+   "status": "CANDIDATE",
+   "elevationM": 609.0,
+   "distanceKm": 0.461,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "milan",
+   "iata": "MXP",
+   "icao": "LIMC",
+   "status": "CANDIDATE",
+   "elevationM": 234.1,
+   "distanceKm": 0.001,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "baku",
+   "iata": "GYD",
+   "icao": "UBBB",
+   "status": "CANDIDATE",
+   "elevationM": 3.0,
+   "distanceKm": 0.688,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "abu-dhabi",
+   "iata": "AUH",
+   "icao": "OMAA",
+   "status": "CANDIDATE",
+   "elevationM": 26.8,
+   "distanceKm": 0.906,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "prague",
+   "iata": "PRG",
+   "icao": "LKPR",
+   "status": "CANDIDATE",
+   "elevationM": 380.1,
+   "distanceKm": 0.01,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "cologne",
+   "iata": "CGN",
+   "icao": "EDDK",
+   "status": "CANDIDATE",
+   "elevationM": 92.0,
+   "distanceKm": 0.003,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "osaka",
+   "iata": "KIX",
+   "icao": "RJBB",
+   "status": "CANDIDATE",
+   "elevationM": 7.9,
+   "distanceKm": 0.823,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "hong-kong",
+   "iata": "HKG",
+   "icao": "VHHH",
+   "status": "CANDIDATE",
+   "elevationM": 8.5,
+   "distanceKm": 0.568,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "amsterdam",
+   "iata": "AMS",
+   "icao": "EHAM",
+   "status": "CANDIDATE",
+   "elevationM": -3.4,
+   "distanceKm": 0.367,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "san-francisco",
+   "iata": "SFO",
+   "icao": "KSFO",
+   "status": "CANDIDATE",
+   "elevationM": 4.0,
+   "distanceKm": 0.404,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "bali",
+   "iata": "DPS",
+   "icao": "WADD",
+   "status": "CANDIDATE",
+   "elevationM": 4.3,
+   "distanceKm": 0.048,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "boston",
+   "iata": "BOS",
+   "icao": "KBOS",
+   "status": "CANDIDATE",
+   "elevationM": 6.1,
+   "distanceKm": 0.427,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "beijing",
+   "iata": "PEK",
+   "icao": "ZBAA",
+   "status": "CANDIDATE",
+   "elevationM": 35.4,
+   "distanceKm": 0.614,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "shanghai",
+   "iata": "PVG",
+   "icao": "ZSPD",
+   "status": "CANDIDATE",
+   "elevationM": 4.0,
+   "distanceKm": 0.33,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "guangzhou",
+   "iata": "CAN",
+   "icao": "ZGGG",
+   "status": "CANDIDATE",
+   "elevationM": 15.2,
+   "distanceKm": 0.024,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "chengdu",
+   "iata": "CTU",
+   "icao": "ZUUU",
+   "status": "CANDIDATE",
+   "elevationM": 495.3,
+   "distanceKm": 2.254,
+   "confidence": "medium"
+  },
+  {
+   "destinationId": "xian",
+   "iata": "XIY",
+   "icao": "ZLXY",
+   "status": "CANDIDATE",
+   "elevationM": 479.1,
+   "distanceKm": 1.105,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "hangzhou",
+   "iata": "HGH",
+   "icao": "ZSHC",
+   "status": "CANDIDATE",
+   "elevationM": 7.0,
+   "distanceKm": 0.149,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "chongqing",
+   "iata": "CKG",
+   "icao": "ZUCK",
+   "status": "CANDIDATE",
+   "elevationM": 416.1,
+   "distanceKm": 1.251,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "macau",
+   "iata": "MFM",
+   "icao": "VMMC",
+   "status": "CANDIDATE",
+   "elevationM": 6.1,
+   "distanceKm": 0.062,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "zurich",
+   "iata": "ZRH",
+   "icao": "LSZH",
+   "status": "CANDIDATE",
+   "elevationM": 431.9,
+   "distanceKm": 0.744,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "los-angeles",
+   "iata": "LAX",
+   "icao": "KLAX",
+   "status": "CANDIDATE",
+   "elevationM": 38.1,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "vancouver",
+   "iata": "YVR",
+   "icao": "CYVR",
+   "status": "CANDIDATE",
+   "elevationM": 4.3,
+   "distanceKm": 0.36,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "melbourne",
+   "iata": "MEL",
+   "icao": "YMML",
+   "status": "CANDIDATE",
+   "elevationM": 132.3,
+   "distanceKm": 0.334,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "auckland",
+   "iata": "AKL",
+   "icao": "NZAA",
+   "status": "CANDIDATE",
+   "elevationM": 7.0,
+   "distanceKm": 0.438,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "taipei",
+   "iata": "TPE",
+   "icao": "RCTP",
+   "status": "CANDIDATE",
+   "elevationM": 32.3,
+   "distanceKm": 0.02,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "busan",
+   "iata": "PUS",
+   "icao": "RKPK",
+   "status": "CANDIDATE",
+   "elevationM": 1.8,
+   "distanceKm": 0.018,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "hanoi",
+   "iata": "HAN",
+   "icao": "VVNB",
+   "status": "CANDIDATE",
+   "elevationM": 11.9,
+   "distanceKm": 0.021,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "ho-chi-minh-city",
+   "iata": "SGN",
+   "icao": "VVTS",
+   "status": "CANDIDATE",
+   "elevationM": 10.1,
+   "distanceKm": 16.918,
+   "confidence": "low"
+  },
+  {
+   "destinationId": "kuala-lumpur",
+   "iata": "KUL",
+   "icao": "WMKK",
+   "status": "CANDIDATE",
+   "elevationM": 21.0,
+   "distanceKm": 0.011,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "cebu",
+   "iata": "CEB",
+   "icao": "RPVB",
+   "status": "CANDIDATE",
+   "elevationM": 9.4,
+   "distanceKm": 0.212,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "lisbon",
+   "iata": "LIS",
+   "icao": "LPPT",
+   "status": "CANDIDATE",
+   "elevationM": 114.0,
+   "distanceKm": 0.803,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "budapest",
+   "iata": "BUD",
+   "icao": "LHBP",
+   "status": "CANDIDATE",
+   "elevationM": 150.9,
+   "distanceKm": 0.905,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "florence",
+   "iata": "FLR",
+   "icao": "LIRQ",
+   "status": "CANDIDATE",
+   "elevationM": 43.3,
+   "distanceKm": 0.243,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "venice",
+   "iata": "VCE",
+   "icao": "LIPZ",
+   "status": "CANDIDATE",
+   "elevationM": 2.1,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "athens",
+   "iata": "ATH",
+   "icao": "LGAV",
+   "status": "CANDIDATE",
+   "elevationM": 93.9,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "edinburgh",
+   "iata": "EDI",
+   "icao": "EGPH",
+   "status": "CANDIDATE",
+   "elevationM": 41.1,
+   "distanceKm": 0.021,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "copenhagen",
+   "iata": "CPH",
+   "icao": "EKCH",
+   "status": "CANDIDATE",
+   "elevationM": 5.2,
+   "distanceKm": 0.011,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "seville",
+   "iata": "SVQ",
+   "icao": "LEZL",
+   "status": "CANDIDATE",
+   "elevationM": 34.1,
+   "distanceKm": 0.001,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "toronto",
+   "iata": "YYZ",
+   "icao": "CYYZ",
+   "status": "CANDIDATE",
+   "elevationM": 173.4,
+   "distanceKm": 0.42,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "manila",
+   "iata": "MNL",
+   "icao": "RPLL",
+   "status": "CANDIDATE",
+   "elevationM": 22.9,
+   "distanceKm": 0.021,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "jakarta",
+   "iata": "CGK",
+   "icao": "WIII",
+   "status": "CANDIDATE",
+   "elevationM": 10.4,
+   "distanceKm": 0.022,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "yogyakarta",
+   "iata": "YIA",
+   "icao": "WIHI",
+   "status": "CANDIDATE",
+   "elevationM": 7.3,
+   "distanceKm": 0.439,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "chiang-mai",
+   "iata": "CNX",
+   "icao": "VTCC",
+   "status": "CANDIDATE",
+   "elevationM": 315.8,
+   "distanceKm": 0.011,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "phuket",
+   "iata": "HKT",
+   "icao": "VTSP",
+   "status": "CANDIDATE",
+   "elevationM": 25.0,
+   "distanceKm": 0.055,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "koh-samui",
+   "iata": "USM",
+   "icao": "VTSM",
+   "status": "CANDIDATE",
+   "elevationM": 19.5,
+   "distanceKm": 0.079,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "da-nang",
+   "iata": "DAD",
+   "icao": "VVDN",
+   "status": "CANDIDATE",
+   "elevationM": 10.1,
+   "distanceKm": 0.043,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "nha-trang",
+   "iata": "CXR",
+   "icao": "VVNT",
+   "status": "CANDIDATE",
+   "elevationM": 12.2,
+   "distanceKm": 0.054,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "phu-quoc",
+   "iata": "PQC",
+   "icao": "VVPQ",
+   "status": "CANDIDATE",
+   "elevationM": 11.3,
+   "distanceKm": 0.187,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "siem-reap",
+   "iata": "SAI",
+   "icao": "VDSR",
+   "status": "CANDIDATE",
+   "elevationM": 58.2,
+   "distanceKm": 44.652,
+   "confidence": "low"
+  },
+  {
+   "destinationId": "phnom-penh",
+   "iata": "PNH",
+   "icao": "VDPP",
+   "status": "CANDIDATE",
+   "elevationM": 12.2,
+   "distanceKm": 0.09,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "jeju",
+   "iata": "CJU",
+   "icao": "RKPC",
+   "status": "CANDIDATE",
+   "elevationM": 36.0,
+   "distanceKm": 0.094,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "fukuoka",
+   "iata": "FUK",
+   "icao": "RJFF",
+   "status": "CANDIDATE",
+   "elevationM": 9.8,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "sapporo",
+   "iata": "CTS",
+   "icao": "RJCC",
+   "status": "CANDIDATE",
+   "elevationM": 25.0,
+   "distanceKm": 0.162,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "nagoya",
+   "iata": "NGO",
+   "icao": "RJGG",
+   "status": "CANDIDATE",
+   "elevationM": 4.6,
+   "distanceKm": 0.037,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "nagasaki",
+   "iata": "NGS",
+   "icao": "RJFU",
+   "status": "CANDIDATE",
+   "elevationM": 4.6,
+   "distanceKm": 0.019,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "hiroshima",
+   "iata": "HIJ",
+   "icao": "RJOA",
+   "status": "CANDIDATE",
+   "elevationM": 331.6,
+   "distanceKm": 0.036,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "kanazawa",
+   "iata": "KMQ",
+   "icao": "RJNK",
+   "status": "CANDIDATE",
+   "elevationM": 11.0,
+   "distanceKm": 0.061,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "kobe",
+   "iata": "UKB",
+   "icao": "RJBE",
+   "status": "CANDIDATE",
+   "elevationM": 6.7,
+   "distanceKm": 0.009,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "berlin",
+   "iata": "BER",
+   "icao": "EDDB",
+   "status": "CANDIDATE",
+   "elevationM": 47.9,
+   "distanceKm": 0.556,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "frankfurt",
+   "iata": "FRA",
+   "icao": "EDDF",
+   "status": "CANDIDATE",
+   "elevationM": 110.9,
+   "distanceKm": 1.275,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "naples",
+   "iata": "NAP",
+   "icao": "LIRN",
+   "status": "CANDIDATE",
+   "elevationM": 89.6,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "amalfi-coast",
+   "iata": "NAP",
+   "icao": "LIRN",
+   "status": "CANDIDATE",
+   "elevationM": 89.6,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "bologna",
+   "iata": "BLQ",
+   "icao": "LIPQ",
+   "status": "CANDIDATE",
+   "elevationM": 37.5,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "turin",
+   "iata": "TRN",
+   "icao": "LIMF",
+   "status": "CANDIDATE",
+   "elevationM": 301.4,
+   "distanceKm": 0.002,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "valencia",
+   "iata": "VLC",
+   "icao": "LEVC",
+   "status": "CANDIDATE",
+   "elevationM": 73.2,
+   "distanceKm": 0.057,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "malaga",
+   "iata": "AGP",
+   "icao": "LEMG",
+   "status": "CANDIDATE",
+   "elevationM": 16.2,
+   "distanceKm": 0.001,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "granada",
+   "iata": "GRX",
+   "icao": "LEGR",
+   "status": "CANDIDATE",
+   "elevationM": 566.9,
+   "distanceKm": 0.018,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "porto",
+   "iata": "OPO",
+   "icao": "LPPR",
+   "status": "CANDIDATE",
+   "elevationM": 69.5,
+   "distanceKm": 0.001,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "brussels",
+   "iata": "BRU",
+   "icao": "EBBR",
+   "status": "CANDIDATE",
+   "elevationM": 53.3,
+   "distanceKm": 0.003,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "stockholm",
+   "iata": "ARN",
+   "icao": "ESSA",
+   "status": "CANDIDATE",
+   "elevationM": 41.8,
+   "distanceKm": 0.689,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "oslo",
+   "iata": "OSL",
+   "icao": "ENGM",
+   "status": "CANDIDATE",
+   "elevationM": 207.6,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "reykjavik",
+   "iata": "KEF",
+   "icao": "BIKF",
+   "status": "CANDIDATE",
+   "elevationM": 52.1,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "dublin",
+   "iata": "DUB",
+   "icao": "EIDW",
+   "status": "CANDIDATE",
+   "elevationM": 73.8,
+   "distanceKm": 0.979,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "dubrovnik",
+   "iata": "DBV",
+   "icao": "LDDU",
+   "status": "CANDIDATE",
+   "elevationM": 160.6,
+   "distanceKm": 0.237,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "santorini",
+   "iata": "JTR",
+   "icao": "LGSR",
+   "status": "CANDIDATE",
+   "elevationM": 38.7,
+   "distanceKm": 0.108,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "miami",
+   "iata": "MIA",
+   "icao": "KMIA",
+   "status": "CANDIDATE",
+   "elevationM": 2.4,
+   "distanceKm": 0.276,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "orlando",
+   "iata": "MCO",
+   "icao": "KMCO",
+   "status": "CANDIDATE",
+   "elevationM": 29.3,
+   "distanceKm": 0.219,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "chicago",
+   "iata": "ORD",
+   "icao": "KORD",
+   "status": "CANDIDATE",
+   "elevationM": 207.3,
+   "distanceKm": 0.531,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "washington-dc",
+   "iata": "IAD",
+   "icao": "KIAD",
+   "status": "CANDIDATE",
+   "elevationM": 95.1,
+   "distanceKm": 0.958,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "seattle",
+   "iata": "SEA",
+   "icao": "KSEA",
+   "status": "CANDIDATE",
+   "elevationM": 132.0,
+   "distanceKm": 0.274,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "san-diego",
+   "iata": "SAN",
+   "icao": "KSAN",
+   "status": "CANDIDATE",
+   "elevationM": 5.2,
+   "distanceKm": 0.309,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "new-orleans",
+   "iata": "MSY",
+   "icao": "KMSY",
+   "status": "CANDIDATE",
+   "elevationM": 1.2,
+   "distanceKm": 0.633,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "cancun",
+   "iata": "CUN",
+   "icao": "MMUN",
+   "status": "CANDIDATE",
+   "elevationM": 6.7,
+   "distanceKm": 0.61,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "montreal",
+   "iata": "YUL",
+   "icao": "CYUL",
+   "status": "CANDIDATE",
+   "elevationM": 36.0,
+   "distanceKm": 0.329,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "quebec-city",
+   "iata": "YQB",
+   "icao": "CYQB",
+   "status": "CANDIDATE",
+   "elevationM": 74.4,
+   "distanceKm": 0.336,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "brisbane",
+   "iata": "BNE",
+   "icao": "YBBN",
+   "status": "CANDIDATE",
+   "elevationM": 4.0,
+   "distanceKm": 0.049,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "gold-coast",
+   "iata": "OOL",
+   "icao": "YBCG",
+   "status": "CANDIDATE",
+   "elevationM": 6.4,
+   "distanceKm": 0.224,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "perth",
+   "iata": "PER",
+   "icao": "YPPH",
+   "status": "CANDIDATE",
+   "elevationM": 20.4,
+   "distanceKm": 0.01,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "queenstown",
+   "iata": "ZQN",
+   "icao": "NZQN",
+   "status": "CANDIDATE",
+   "elevationM": 356.9,
+   "distanceKm": 0.602,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "wellington",
+   "iata": "WLG",
+   "icao": "NZWN",
+   "status": "CANDIDATE",
+   "elevationM": 12.5,
+   "distanceKm": 0.136,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "ubud",
+   "iata": "DPS",
+   "icao": "WADD",
+   "status": "CANDIDATE",
+   "elevationM": 4.3,
+   "distanceKm": 0.048,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "lombok",
+   "iata": "LOP",
+   "icao": "WATB",
+   "status": "CANDIDATE",
+   "elevationM": 97.2,
+   "distanceKm": 0.341,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "luang-prabang",
+   "iata": "LPQ",
+   "icao": "VLLB",
+   "status": "CANDIDATE",
+   "elevationM": 291.1,
+   "distanceKm": 0.863,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "kathmandu",
+   "iata": "KTM",
+   "icao": "VNKT",
+   "status": "CANDIDATE",
+   "elevationM": 1338.1,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "colombo",
+   "iata": "CMB",
+   "icao": "VCBI",
+   "status": "CANDIDATE",
+   "elevationM": 9.1,
+   "distanceKm": 0.004,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "male",
+   "iata": "MLE",
+   "icao": "VRMM",
+   "status": "CANDIDATE",
+   "elevationM": 1.8,
+   "distanceKm": 0.003,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "mumbai",
+   "iata": "BOM",
+   "icao": "VABB",
+   "status": "CANDIDATE",
+   "elevationM": 11.9,
+   "distanceKm": 0.261,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "jaipur",
+   "iata": "JAI",
+   "icao": "VIJP",
+   "status": "CANDIDATE",
+   "elevationM": 385.0,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "goa",
+   "iata": "GOI",
+   "icao": "VOGO",
+   "status": "CANDIDATE",
+   "elevationM": 45.7,
+   "distanceKm": 0.222,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "penang",
+   "iata": "PEN",
+   "icao": "WMKP",
+   "status": "CANDIDATE",
+   "elevationM": 3.4,
+   "distanceKm": 0.119,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "pattaya",
+   "iata": "UTP",
+   "icao": "VTPH",
+   "status": "CANDIDATE",
+   "elevationM": 12.8,
+   "distanceKm": 0.101,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "yangon",
+   "iata": "RGN",
+   "icao": "VYYY",
+   "status": "CANDIDATE",
+   "elevationM": 33.2,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "warsaw",
+   "iata": "WAW",
+   "icao": "EPWA",
+   "status": "CANDIDATE",
+   "elevationM": 110.3,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "krakow",
+   "iata": "KRK",
+   "icao": "EPKK",
+   "status": "CANDIDATE",
+   "elevationM": 241.1,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "tallinn",
+   "iata": "TLL",
+   "icao": "EETN",
+   "status": "CANDIDATE",
+   "elevationM": 39.9,
+   "distanceKm": 0.011,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "zagreb",
+   "iata": "ZAG",
+   "icao": "LDZA",
+   "status": "CANDIDATE",
+   "elevationM": 107.6,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "split",
+   "iata": "SPU",
+   "icao": "LDSP",
+   "status": "CANDIDATE",
+   "elevationM": 24.1,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "geneva",
+   "iata": "GVA",
+   "icao": "LSGG",
+   "status": "CANDIDATE",
+   "elevationM": 430.1,
+   "distanceKm": 0.004,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "lyon",
+   "iata": "LYS",
+   "icao": "LFLL",
+   "status": "CANDIDATE",
+   "elevationM": 250.2,
+   "distanceKm": 0.703,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "nice",
+   "iata": "NCE",
+   "icao": "LFMN",
+   "status": "CANDIDATE",
+   "elevationM": 3.7,
+   "distanceKm": 0.002,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "cordoba",
+   "iata": "ODB",
+   "icao": "LEBA",
+   "status": "CANDIDATE",
+   "elevationM": 90.5,
+   "distanceKm": 0.268,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "san-sebastian",
+   "iata": "EAS",
+   "icao": "LESO",
+   "status": "CANDIDATE",
+   "elevationM": 4.9,
+   "distanceKm": 0.011,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "philadelphia",
+   "iata": "PHL",
+   "icao": "KPHL",
+   "status": "CANDIDATE",
+   "elevationM": 11.0,
+   "distanceKm": 0.3,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "denver",
+   "iata": "DEN",
+   "icao": "KDEN",
+   "status": "CANDIDATE",
+   "elevationM": 1655.4,
+   "distanceKm": 0.437,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "nashville",
+   "iata": "BNA",
+   "icao": "KBNA",
+   "status": "CANDIDATE",
+   "elevationM": 182.6,
+   "distanceKm": 0.213,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "honolulu",
+   "iata": "HNL",
+   "icao": "PHNL",
+   "status": "CANDIDATE",
+   "elevationM": 4.0,
+   "distanceKm": 0.682,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "banff",
+   "iata": "YYC",
+   "icao": "CYYC",
+   "status": "CANDIDATE",
+   "elevationM": 1084.2,
+   "distanceKm": 0.907,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "tulum",
+   "iata": "CUN",
+   "icao": "MMUN",
+   "status": "CANDIDATE",
+   "elevationM": 6.7,
+   "distanceKm": 0.61,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "lima",
+   "iata": "LIM",
+   "icao": "SPJC",
+   "status": "CANDIDATE",
+   "elevationM": 34.4,
+   "distanceKm": 0.001,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "buenos-aires",
+   "iata": "EZE",
+   "icao": "SAEZ",
+   "status": "CANDIDATE",
+   "elevationM": 20.4,
+   "distanceKm": 0.0,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "adelaide",
+   "iata": "ADL",
+   "icao": "YPAD",
+   "status": "CANDIDATE",
+   "elevationM": 6.1,
+   "distanceKm": 0.519,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "cairns",
+   "iata": "CNS",
+   "icao": "YBCS",
+   "status": "CANDIDATE",
+   "elevationM": 3.0,
+   "distanceKm": 0.984,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "christchurch",
+   "iata": "CHC",
+   "icao": "NZCH",
+   "status": "CANDIDATE",
+   "elevationM": 37.5,
+   "distanceKm": 0.043,
+   "confidence": "high"
+  },
+  {
+   "destinationId": "rotorua",
+   "iata": "ROT",
+   "icao": "NZRO",
+   "status": "CANDIDATE",
+   "elevationM": 285.0,
+   "distanceKm": 0.045,
+   "confidence": "high"
+  }
+ ]
+}

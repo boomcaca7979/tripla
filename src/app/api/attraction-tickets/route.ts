@@ -1,11 +1,12 @@
 import { getDestinationBySlug, getDestinationSlugs } from "@/data/destinations";
-import { searchAttractionTickets } from "@/lib/api/viator";
+import { searchAttractionTickets, viatorCacheControl } from "@/lib/api/viator";
 
 /**
  * /api/attraction-tickets — 单个 Attraction 的可预订门票/体验（Viator）。
  *
  * 入参：slug（白名单）+ name（attraction 真实名）。返回 provider 真实产品；
  * 无 key / 无结果 / 上游失败 → { available:false }，客户端渲染诚实空态。
+ * 缓存分级见 `viatorCacheControl`（失败态不得被 CDN 长缓存）。
  */
 
 export async function GET(request: Request): Promise<Response> {
@@ -28,6 +29,6 @@ export async function GET(request: Request): Promise<Response> {
 
   const result = await searchAttractionTickets({ attraction: name, city: dest.city, limit: 4 });
   return Response.json(result, {
-    headers: { "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=3600" },
+    headers: { "Cache-Control": viatorCacheControl(result) },
   });
 }

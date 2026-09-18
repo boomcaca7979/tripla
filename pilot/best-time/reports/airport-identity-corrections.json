@@ -1,0 +1,100 @@
+{
+  "generatedAt": "2026-09-12T08:19:42.449594+00:00",
+  "source": "reports/elevation-source-audit.json reviewQueue (read directly, not from summaries)",
+  "count": 7,
+  "items": [
+    {
+      "destination": "bologna",
+      "currentIATA": "BLQ",
+      "currentICAO": "LIPQ",
+      "correctICAO": "LIPE",
+      "identityEvidence": "IATA BLQ match + anchor-to-source distance 0.0 km + elevation consistent with second source (TIER 1 (bologna-airport.it operator site) + TIER 4 (Wikipedia))",
+      "elevationUnaffected": true,
+      "productionDataImpact": {
+        "climate": "none (anchor coordinates unchanged -> same grid cells)",
+        "recommendation": "none (R1-R7 inputs unchanged)",
+        "metadata": "destinations.ts ICAO field only"
+      }
+    },
+    {
+      "destination": "cebu",
+      "currentIATA": "CEB",
+      "currentICAO": "RPVB",
+      "correctICAO": "RPVM",
+      "identityEvidence": "IATA CEB match + anchor-to-source distance 0.212 km + elevation consistent with second source (TIER 4 (Wikipedia citing AIP) + TIER 3 (SKYbrary, airport-data))",
+      "elevationUnaffected": true,
+      "productionDataImpact": {
+        "climate": "none (anchor coordinates unchanged -> same grid cells)",
+        "recommendation": "none (R1-R7 inputs unchanged)",
+        "metadata": "destinations.ts ICAO field only"
+      }
+    },
+    {
+      "destination": "lombok",
+      "currentIATA": "LOP",
+      "currentICAO": "WATB",
+      "correctICAO": "WADL",
+      "identityEvidence": "IATA LOP match + anchor-to-source distance 0.341 km + elevation consistent with second source (TIER 1 (lombokairportonline.com operator site) + TIER 4 (Wikipedia) + TIER 3 (SKYbrary))",
+      "elevationUnaffected": true,
+      "productionDataImpact": {
+        "climate": "none (anchor coordinates unchanged -> same grid cells)",
+        "recommendation": "none (R1-R7 inputs unchanged)",
+        "metadata": "destinations.ts ICAO field only"
+      }
+    },
+    {
+      "destination": "nha-trang",
+      "currentIATA": "CXR",
+      "currentICAO": "VVNT",
+      "correctICAO": "VVCR",
+      "identityEvidence": "IATA CXR match + anchor-to-source distance 0.054 km + elevation consistent with second source (TIER 1 (nhatrangairport.com operator site) + TIER 4 (Wikipedia) + TIER 3 (SkyVector))",
+      "elevationUnaffected": true,
+      "productionDataImpact": {
+        "climate": "none (anchor coordinates unchanged -> same grid cells)",
+        "recommendation": "none (R1-R7 inputs unchanged)",
+        "metadata": "destinations.ts ICAO field only"
+      }
+    },
+    {
+      "destination": "pattaya",
+      "currentIATA": "UTP",
+      "currentICAO": "VTPH",
+      "correctICAO": "VTBU",
+      "identityEvidence": "IATA UTP match + anchor-to-source distance 0.101 km + elevation consistent with second source (TIER 1 (utapao.com operator site) + TIER 4 (Wikipedia) + TIER 3 (METAR-TAF))",
+      "elevationUnaffected": true,
+      "productionDataImpact": {
+        "climate": "none (anchor coordinates unchanged -> same grid cells)",
+        "recommendation": "none (R1-R7 inputs unchanged)",
+        "metadata": "destinations.ts ICAO field only"
+      }
+    },
+    {
+      "destination": "rovaniemi",
+      "currentIATA": "RVN",
+      "currentICAO": "EFKT",
+      "correctICAO": "EFRO",
+      "identityEvidence": "IATA RVN match + anchor-to-source distance 0.189 km + elevation consistent with second source (TIER 4 (Wikipedia citing AIP) + TIER 3 (METAR-TAF / FltPlan))",
+      "elevationUnaffected": true,
+      "productionDataImpact": {
+        "climate": "none (anchor coordinates unchanged -> same grid cells)",
+        "recommendation": "none (R1-R7 inputs unchanged)",
+        "metadata": "destinations.ts ICAO field only"
+      }
+    },
+    {
+      "destination": "yogyakarta",
+      "currentIATA": "YIA",
+      "currentICAO": "WIHI",
+      "correctICAO": "WAHI",
+      "identityEvidence": "IATA YIA match + anchor-to-source distance 0.439 km + elevation consistent with second source (TIER 4 (Wikipedia) + TIER 2 (WAHI AIP chart, tertiary-hosted copy))",
+      "elevationUnaffected": true,
+      "productionDataImpact": {
+        "climate": "none (anchor coordinates unchanged -> same grid cells)",
+        "recommendation": "none (R1-R7 inputs unchanged)",
+        "metadata": "destinations.ts ICAO field only"
+      }
+    }
+  ],
+  "note": "siem-reap is EXCLUDED here: its ICAO fix is part of the spatial anchor correction (both flags, one root cause). chengdu has no ICAO conflict.",
+  "productionWrite": "NONE"
+}

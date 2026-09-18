@@ -1,0 +1,84 @@
+{
+  "assertions": [
+    {
+      "assert": "baseline-hashes-reproduce",
+      "pass": true
+    },
+    {
+      "assert": "contract-extraction-contradictions=0",
+      "pass": true
+    },
+    {
+      "assert": "elevation-literal-contract-governs (authoritative required until Decision C)",
+      "pass": true
+    },
+    {
+      "assert": "faa-tier1-matched=17/17-us",
+      "pass": true
+    },
+    {
+      "assert": "faa-vs-ourairports-max-delta<=1.5m",
+      "pass": true
+    },
+    {
+      "assert": "non-us-not-force-filled",
+      "pass": true
+    },
+    {
+      "assert": "hcmc-impact-hashes-unchanged",
+      "pass": true
+    },
+    {
+      "assert": "siemreap-impact-hashes-changed",
+      "pass": true
+    },
+    {
+      "assert": "unexpected-nulls=0",
+      "pass": true,
+      "detail": {
+        "tempMeanC": 0,
+        "tempHighC": 0,
+        "tempLowC": 0,
+        "precipMm": 0,
+        "precipDaysGe1mm": 0,
+        "sunshineHours": 1740,
+        "daylightHours": 0
+      }
+    },
+    {
+      "assert": "sunshine-only-null-field",
+      "pass": true
+    },
+    {
+      "assert": "r1r7-stable",
+      "pass": true
+    },
+    {
+      "assert": "icao-ledger=7-and-climate-impact-none",
+      "pass": true
+    },
+    {
+      "assert": "both-anchor-proposals-user-decision-required",
+      "pass": true
+    },
+    {
+      "assert": "no-production-write",
+      "pass": true,
+      "detail": "all outputs under pilot/best-time/"
+    }
+  ],
+  "passed": 14,
+  "failed": 0,
+  "canonical": {
+    "nulls": {
+      "tempMeanC": 0,
+      "tempHighC": 0,
+      "tempLowC": 0,
+      "precipMm": 0,
+      "precipDaysGe1mm": 0,
+      "sunshineHours": 1740,
+      "daylightHours": 0
+    },
+    "unexpectedNulls": []
+  }
+}

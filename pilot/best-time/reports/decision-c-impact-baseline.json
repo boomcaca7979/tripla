@@ -1,0 +1,16 @@
+{
+  "generatedAt": "2026-09-12T09:29:38.305072+00:00",
+  "artifact": "decision-c-impact-baseline.json",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+  "ruleVersion": "r1-r7.v4",
+  "destinationCount": 145,
+  "authoritativeElevationCoverage": "17/145",
+  "secondaryVerifiedCoverage": "143/145 (status vocabulary; incl. the 17 now Tier-1)",
+  "blockedElevationCoverage": "2/145 (ho-chi-minh-city, siem-reap — anchor decisions)",
+  "T2": "BLOCKED (CDS credentials)",
+  "T3": "BLOCKED (T2 + elevation gate per §19.2 literal wording + legal)",
+  "frozenHashes": {
+    "core": "7edfaa493e113cf141956b24bcdb05268a2322cfdb7c688233bc1f1b53ce7d6a",
+    "recommendation": "9a831211d557baa3f3e83638cb6cdedb3aa1c18f66c0f298554fa44d5ca85cc1"
+  }
+}

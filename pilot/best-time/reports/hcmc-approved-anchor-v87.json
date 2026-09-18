@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-09-12",
+  "artifact": "hcmc-approved-anchor-v87.json",
+  "destinationId": "ho-chi-minh-city",
+  "userDecision": "A = YES (2026-09-12)",
+  "status": "APPROVED_FOR_PILOT_REBUILD (NOT production)",
+  "applied": {
+    "old": {
+      "lat": 10.8188,
+      "lon": 106.8069
+    },
+    "new": {
+      "lat": 10.8188,
+      "lon": 106.652,
+      "iata": "SGN",
+      "icao": "VVTS"
+    }
+  },
+  "verification": {
+    "climateImpact": 0,
+    "classificationChanged": [],
+    "bestMonthsChanged": false,
+    "conclusion": "data-integrity fix; zero climate/recommendation impact"
+  }
+}

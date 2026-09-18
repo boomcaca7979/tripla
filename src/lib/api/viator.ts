@@ -71,45 +71,146 @@ interface ViatorDestination {
   name: string;
 }
 
-/** 城市 → Viator destinationId（全量列表缓存 7 天；找不到 → null；key 无效 → "unauthorized"）。 */
-async function resolveDestinationId(
-  city: string,
-): Promise<number | "unauthorized" | null> {
-  const key = `viator_destinations`;
-  let list = cache.get<ViatorDestination[]>(key);
-  if (list === null) {
-    const key2 = apiKey();
-    if (!key2) return null;
+/**
+ * 目的地解析结果 —— **必须区分三种失败**，否则"上游抖动/限流/超时"会被
+ * 误报成"这个城市在 Viator 不存在"，并被下游当成正常空态缓存下来。
+ */
+type DestinationResolution =
+  | { kind: "ok"; destinationId: number }
+  /** key 无效/未激活（401）。 */
+  | { kind: "unauthorized" }
+  /** 列表**成功取回**，但确实没有这个城市 —— 唯一的真 no-destination。 */
+  | { kind: "not-found" }
+  /** 列表没取回来（非 2xx / 超时 / 空列表）—— 基建问题，不是城市不存在。 */
+  | { kind: "upstream" };
+
+const DEST_FETCH_ATTEMPTS = 3; // 1 次首发 + 2 次重试
+const DEST_FAILURE_TTL = 60_000; // 上游失败短缓存 60s，避免 1.19MB 列表被反复请求
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * 拉取城市 → destinationId 全量映射（约 1.19MB / 3394 条）。带有限重试：
+ * 单次抖动不应让整个城市空态化。空列表同样视为上游异常（正常响应不会是空的）。
+ */
+async function fetchDestinationList(
+  key: string,
+): Promise<ViatorDestination[] | "unauthorized" | "upstream"> {
+  let lastDetail = "unknown";
+  for (let attempt = 0; attempt < DEST_FETCH_ATTEMPTS; attempt++) {
+    if (attempt > 0) await sleep(250 * attempt);
     try {
       const res = await fetch(`${VIATOR_BASE}/destinations`, {
         headers: {
-          "exp-api-key": key2,
+          "exp-api-key": key,
           Accept: "application/json;version=2.0",
           "Accept-Language": "en",
         },
-        signal: AbortSignal.timeout(10_000),
+        signal: AbortSignal.timeout(15_000),
       });
       if (res.status === 401) return "unauthorized";
       if (!res.ok) {
-        console.warn(`[viator] /destinations upstream ${res.status}`);
-        return null;
+        lastDetail = `HTTP ${res.status}`;
+        console.warn(`[viator] /destinations upstream ${res.status} (attempt ${attempt + 1})`);
+        continue;
       }
       const body = (await res.json()) as { destinations?: ViatorDestination[] };
-      list = body.destinations ?? [];
-      if (list.length === 0) return null;
-      cache.set(key, list, DEST_TTL);
+      const list = body.destinations ?? [];
+      if (list.length === 0) {
+        lastDetail = "empty list";
+        console.warn(`[viator] /destinations returned 0 entries (attempt ${attempt + 1})`);
+        continue;
+      }
+      return list;
     } catch (err) {
-      console.warn("[viator] /destinations fetch failed:", err instanceof Error ? err.message : err);
-      return null;
+      lastDetail = err instanceof Error ? err.message : String(err);
+      console.warn(`[viator] /destinations fetch failed (attempt ${attempt + 1}):`, lastDetail);
     }
   }
+  console.warn("[viator] /destinations giving up:", lastDetail);
+  return "upstream";
+}
+
+/**
+ * 城市 → Viator destinationId（全量列表缓存 7 天）。
+ *
+ * 关键：`upstream` 失败**绝不**降级为 `not-found`，也**绝不**进入 7 天列表缓存
+ * ——只有 60s 的失败短缓存，让上游恢复后立刻自愈。
+ */
+async function resolveDestination(
+  city: string,
+): Promise<DestinationResolution> {
+  const listKey = `viator_destinations`;
+  const failureKey = `viator_destinations_failed`;
+
+  let list = cache.get<ViatorDestination[]>(listKey);
+  if (list === null) {
+    // 上游刚失败过 → 60s 内不再重复拉 1.19MB（但仍如实报告 upstream）。
+    if (cache.get<number>(failureKey) !== null) return { kind: "upstream" };
+
+    const key = apiKey();
+    if (!key) return { kind: "upstream" };
+
+    const fetched = await fetchDestinationList(key);
+    if (fetched === "unauthorized") return { kind: "unauthorized" };
+    if (fetched === "upstream") {
+      cache.set(failureKey, Date.now(), DEST_FAILURE_TTL);
+      return { kind: "upstream" };
+    }
+    list = fetched;
+    cache.set(listKey, list, DEST_TTL);
+  }
+
   const q = city.trim().toLowerCase();
   const exact = list.find((d) => (d.name ?? "").trim().toLowerCase() === q);
-  if (exact) return exact.destinationId;
+  if (exact) return { kind: "ok", destinationId: exact.destinationId };
   const prefix = list.find((d) =>
     (d.name ?? "").trim().toLowerCase().startsWith(q),
   );
-  return prefix ? prefix.destinationId : null;
+  return prefix
+    ? { kind: "ok", destinationId: prefix.destinationId }
+    : { kind: "not-found" };
+}
+
+/** 统一的解析失败 → 空态结果映射（不 mock、不猜）。 */
+function resolutionFailure(
+  resolution: Exclude<DestinationResolution, { kind: "ok" }>,
+  searchUrl: string,
+): ViatorSearchResult {
+  const reason: NonNullable<ViatorSearchResult["reason"]> =
+    resolution.kind === "unauthorized"
+      ? "no-api-key"
+      : resolution.kind === "upstream"
+        ? "upstream-error"
+        : "no-destination";
+  return { available: false, reason, searchUrl, products: [] };
+}
+
+/**
+ * Viator 结果的 HTTP 缓存策略（route handler 唯一出口，避免各处手写漂移）。
+ *
+ * 致命反模式（已修）：对**所有**结果统一下发 `s-maxage=86400`。一次上游抖动
+ * 产生的 `upstream-error` / `no-destination` 会被 CDN 锁死 24 小时，表现为
+ * "某个城市整天空白、其它城市正常"。因此只有成功结果长缓存，失败必须短 TTL
+ * 或不缓存，保证自愈。
+ */
+export function viatorCacheControl(result: ViatorSearchResult): string {
+  if (result.available && result.products.length > 0) {
+    return "public, s-maxage=86400, stale-while-revalidate=3600";
+  }
+  switch (result.reason) {
+    // provider 明确回答"这里没有可售产品" → 可缓存，但比成功短。
+    case "no-results":
+      return "public, s-maxage=3600, stale-while-revalidate=600";
+    // 不在 Viator 列表 → 列表本身是静态的，短 TTL 以便数据侧修正。
+    case "no-destination":
+      return "public, s-maxage=300, stale-while-revalidate=60";
+    // 缺 key / 上游故障 = 基建问题，**绝不缓存**。
+    default:
+      return "no-store";
+  }
 }
 
 /** 防御性提取封面图（优先 isCover；provider 返回才展示）。 */
@@ -174,13 +275,9 @@ export async function searchCityExperiences(city: string, limit = 6): Promise<Vi
   const searchUrl = buildViatorUrl(undefined, `${city} things to do`);
   if (!apiKey()) return { available: false, reason: "no-api-key", searchUrl, products: [] };
 
-  const destId = await resolveDestinationId(city);
-  if (destId === "unauthorized") {
-    return { available: false, reason: "no-api-key", searchUrl, products: [] };
-  }
-  if (destId === null) {
-    return { available: false, reason: "no-destination", searchUrl, products: [] };
-  }
+  const dest = await resolveDestination(city);
+  if (dest.kind !== "ok") return resolutionFailure(dest, searchUrl);
+  const destId = dest.destinationId;
 
   const key = `viator_products_${destId}_${limit}`;
   const cached = cache.get<ViatorSearchResult>(key);
@@ -244,13 +341,9 @@ export async function searchAttractionTickets(params: {
   const searchUrl = buildViatorUrl(undefined, `${attraction} ${city}`);
   if (!apiKey()) return { available: false, reason: "no-api-key", searchUrl, products: [] };
 
-  const destId = await resolveDestinationId(city);
-  if (destId === "unauthorized") {
-    return { available: false, reason: "no-api-key", searchUrl, products: [] };
-  }
-  if (destId === null) {
-    return { available: false, reason: "no-destination", searchUrl, products: [] };
-  }
+  const dest = await resolveDestination(city);
+  if (dest.kind !== "ok") return resolutionFailure(dest, searchUrl);
+  const destId = dest.destinationId;
 
   const key = `viator_attr_${destId}_${attraction.trim().toLowerCase()}_${limit}`;
   const cached = cache.get<ViatorSearchResult>(key);

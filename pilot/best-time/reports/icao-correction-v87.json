@@ -1,0 +1,45 @@
+{
+  "generatedAt": "2026-09-12",
+  "artifact": "icao-correction-v87.json",
+  "count": 7,
+  "items": [
+    {
+      "destinationId": "rovaniemi",
+      "currentICAO": "EFKT",
+      "proposedICAO": "EFRO"
+    },
+    {
+      "destinationId": "cebu",
+      "currentICAO": "RPVB",
+      "proposedICAO": "RPVM"
+    },
+    {
+      "destinationId": "yogyakarta",
+      "currentICAO": "WIHI",
+      "proposedICAO": "WAHI"
+    },
+    {
+      "destinationId": "nha-trang",
+      "currentICAO": "VVNT",
+      "proposedICAO": "VVCR"
+    },
+    {
+      "destinationId": "bologna",
+      "currentICAO": "LIPQ",
+      "proposedICAO": "LIPE"
+    },
+    {
+      "destinationId": "lombok",
+      "currentICAO": "WATB",
+      "proposedICAO": "WADL"
+    },
+    {
+      "destinationId": "pattaya",
+      "currentICAO": "VTPH",
+      "proposedICAO": "VTBU"
+    }
+  ],
+  "evidence": "elevation-review-v1c.json (independent ICAO resolution; identity + coordinates match)",
+  "climateImpact": "none (metadata-only; anchor coordinates unchanged)",
+  "productionWrite": "NONE"
+}

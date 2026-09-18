@@ -1,0 +1,132 @@
+{
+  "artifact": "nasa-primary-production-migration-v1",
+  "executedAt": "2026-09-13",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.7",
+  "migrationVersion": "nasa-power-primary-migration-2026.09.13.v1",
+  "prerequisites": {
+    "commercialCompliance": "PASS (nasa-power-commercial-compliance-v2.json)",
+    "migrationReadiness": "READY (nasa-primary-migration-readiness-v1.json)",
+    "internalDataFreeze": "PASS (internal-data-freeze-v87.json)"
+  },
+  "preMigration": {
+    "gitBranch": "main",
+    "gitHead": "2873745f96737515a441b829de68d4c2e1ee9343",
+    "productionSource": "latitude-derived climate-zone templates (src/lib/climate-pattern.ts: getClimateZone/getMonthlyClimateNote/getMonthRecommendation)",
+    "pageHashBefore": "d0c7381d374fb16b07ae62e546fed66dd1163f7f97ebfca6283ed91ec9fcf5df",
+    "climatePatternHashBefore": "4dd750218a0ae7921e4b7c57cce6cc7d6c726a6700862c1478f895edccd4bde3",
+    "pilotCanonicalHash": "63fbc9c1aa4e35e051d83e1f5258c8a88d430d91efc6c959c29b9e898a0da5e6",
+    "preExistingUncommittedChanges": [
+      "src/app/destinations/[slug]/page.tsx",
+      "src/app/guides/[slug]/page.tsx",
+      "src/app/trips/[slug]/page.tsx",
+      "src/app/globals.css",
+      "src/components/ui/Eyebrow.tsx",
+      "src/app/best-time-to-visit/[slug]/page.tsx (had prior-phase edits; migration edits are additive on top)"
+    ],
+    "note": "the 5 non-best-time files above were modified BEFORE this migration and were NOT touched by it"
+  },
+  "postMigration": {
+    "productionSource": "NASA POWER canonical static dataset (src/data/climate/nasa-power-canonical-v1.json) — NASA POWER (NASA Langley Research Center), 145 anchors, 1991-2020, UTC+00:00 daily boundary",
+    "architecture": "NASA POWER build-time acquisition (already executed in pilot) → frozen v8.7 validated canonical → production static data module → Best-time SSG; runtime climate API = 0",
+    "latitudeTemplateStatus": "climatology authority RETIRED: getClimateZone/getMonthlyClimateNote/getMonthRecommendation removed from src/lib/climate-pattern.ts; remaining exports are geographic/calendar helpers only (hemisphere, season months, month names)"
+  },
+  "dataset": {
+    "artifactVersion": "nasa-power-canonical-production-v1",
+    "sourceDatasetVersion": "pilot-nasa-canonical-145-final-v87",
+    "sourceDatasetSha256": "63fbc9c1aa4e35e051d83e1f5258c8a88d430d91efc6c959c29b9e898a0da5e6",
+    "sourceCanonicalDatasetHash": "9ac50d81a0b2d952518b6339c7b3d03e74d0093df0963f65872789f630c0e321",
+    "productionArtifactSelfHash": "c92bd293cb7932a2c654ffa2861b4a042f2c13062ce706bec07a73b28b602cea (embedded, recomputation-verified)",
+    "productionArtifactFileSha256": "fb8d12c6de58d61664887e5e328416f5f3900ef28b4152c2c0a09db98292e361",
+    "methodologyVersion": "utrip-methodology-2026.09.v8.7",
+    "ruleVersion": "r1-r7.v4",
+    "generationTimestamp": "deterministic - provenance timestamps inherited from source artifact; generation script produces byte-identical output across runs (verified)",
+    "versionLock": "generation script pilot/best-time/scripts/build_production_canonical.py aborts unless the source artifact hash matches the v8.7 freeze report before writing",
+    "provenanceUpgraded": {
+      "licenceStatus": "UNVERIFIED / LEGAL REVIEW REQUIRED → PASS (compliance v2 rights chain: CC0 default / CC BY 4.0 label; EU database right = LEGAL REVIEW REQUIRED residual)",
+      "attribution": "Climate data source: NASA POWER (NASA Langley Research Center) · Climatology / Daily / Monthly point APIs · 1991–2020 · accessed 2026-09-13",
+      "brandingConstraints": "no NASA insignia/logotype; no endorsement implication; factual source naming only"
+    }
+  },
+  "filesChanged": {
+    "migrationProductionChanges": [
+      "src/data/climate/nasa-power-canonical-v1.json (NEW - production canonical artifact, 145 records, version+hash locked)",
+      "src/data/climate/nasa-canonical.ts (NEW - typed static loader; missing record → throw = build FAIL; 145/145 coverage assert in generateStaticParams)",
+      "src/components/besttime/besttime-state.ts (REWRITTEN - climate authority switched to canonical: buildMonthRows/windowMonths/zone from NASA POWER values with fixed deterministic buckets; verdict = R1–R7 tier × canonical bestMonthsBaseline; latitude template calls removed)",
+      "src/components/besttime/besttime-labels.ts (MODIFIED - MonthRow extended with canonical numeric fields; VERDICT_MEANING reworded to R1–R7 semantics)",
+      "src/components/besttime/ClimateTable.tsx (MODIFIED - real NASA POWER normals in cells; honest source copy; visible NASA attribution line)",
+      "src/components/besttime/MonthSelector.tsx (MODIFIED - numeric readout rows (temp high/low, precip, rain days, daylight); disclaimer updated to NASA POWER normals)",
+      "src/components/besttime/RecommendationModule.tsx (MODIFIED - reasoning paragraph and signals legend now cite NASA POWER normals + R1–R7)",
+      "src/components/besttime/SeasonSummary.tsx (MODIFIED - copy updated from 'general pattern, not measurements' to NASA POWER 1991–2020 normals)",
+      "src/app/best-time-to-visit/[slug]/page.tsx (MODIFIED - metadata/FAQ/CTA/signals read canonical Best Months; NASA attribution footer; 145/145 coverage assert)",
+      "src/lib/climate-pattern.ts (MODIFIED - latitude climate functions REMOVED; geographic/calendar helpers retained)",
+      "pilot/best-time/scripts/build_production_canonical.py (NEW - deterministic artifact generator with freeze-hash abort guard)",
+      "pilot/best-time/scripts/migration_gates.py (NEW - numerical + schema gate runner)",
+      "pilot/best-time/nasa/migration/* (NEW - gate result + this report)"
+    ],
+    "untouchedByMigration": [
+      "src/app/destinations/[slug]/page.tsx (pre-existing edits only)",
+      "src/app/guides/[slug]/page.tsx (pre-existing edits only)",
+      "src/app/trips/[slug]/page.tsx (pre-existing edits only)",
+      "src/app/globals.css (pre-existing edits only)",
+      "src/components/ui/Eyebrow.tsx (pre-existing edits only)",
+      "src/app/api/weather/route.ts (UNCHANGED - Open-Meteo planner)",
+      "src/app/api/geocoding/route.ts (UNCHANGED)",
+      "src/app/sitemap.ts (UNCHANGED)"
+    ],
+    "pilotAssetsUntouched": "pilot/best-time/normalized/nasa_canonical_145_final-v87.json frozen and unmodified (hash re-verified post-migration)"
+  },
+  "gates": {
+    "numerical": {
+      "status": "PASS",
+      "evidence": "migration_gates.py on the PRODUCTION artifact: coreClimateHash 7d884fd2…, recommendationHash 28d6a16c…, bestMonthsHash 417c40eb… all MATCH the v8.7 freeze baseline; sourceCanonicalDatasetHash 9ac50d81… MATCH",
+      "rule": "wrapper/provenance metadata changes allowed; any core climate number / recommendation / Best Months change = FAIL"
+    },
+    "schema": {
+      "status": "PASS",
+      "evidence": "145 records × 12 months = 1740 months; 0 missing / 0 ambiguous / 0 contradictory; sunshineHours null 1740/1740 (legal); daylightHours number 1740/1740; all 15 provenance dimensions present per record; tiers ∈ {Favourable, Workable, Challenging}; ruleIds ∈ R1–R7"
+    },
+    "determinism": {
+      "status": "PASS",
+      "evidence": "artifact generation byte-identical across two runs; clean production build ×3: all 145 Best-time pages byte-identical after excluding only the Next.js BUILD_ID (build metadata, one occurrence per page)"
+    },
+    "runtimeIsolation": {
+      "status": "PASS",
+      "evidence": "0 fetch/axios in besttime components and climate data modules; power.larc.nasa.gov appears ONLY as provenance strings inside the static JSON artifact; /api/weather + /api/geocoding unchanged"
+    },
+    "pageCoverage": {
+      "status": "PASS",
+      "evidence": "145/145 best-time pages prerendered; every page contains the NASA attribution line; January tempHighC spot-verified against canonical on all 145 pages (0 mismatches); canonical window labels render (e.g. tokyo → December)"
+    },
+    "regression": {
+      "status": "PASS",
+      "evidence": "3 clean builds × 1132 static pages, 0 build errors; planner routes untouched; sitemap untouched; other templates untouched"
+    },
+    "security": {
+      "status": "PASS",
+      "evidence": "no credentials/secrets in src/; no NetCDF/raw NASA responses in src/ (only the validated canonical artifact); pilot raw files remain under pilot/"
+    }
+  },
+  "rollbackPlan": {
+    "beforeAuthority": "src/lib/climate-pattern.ts latitude templates (git HEAD 2873745 file state, hashes recorded in preMigration)",
+    "afterAuthority": "src/data/climate/nasa-power-canonical-v1.json (self-hash c92bd293cb7932a2…, file sha256 fb8d12c6de58d616…)",
+    "rollbackAction": "revert src/lib/climate-pattern.ts + src/components/besttime/* + src/app/best-time-to-visit/[slug]/page.tsx to pre-migration state and delete src/data/climate/ — or, for data-only rollback, regenerate the artifact from the frozen source (deterministic) or repoint the loader to a prior artifact version",
+    "rollbackConditions": "numerical gate mismatch vs v8.7 baseline; canonical artifact corruption (sha256 mismatch); NASA POWER dataset structural break discovered post-deploy; legal hold",
+    "executedThisRound": false
+  },
+  "remainingRisks": [
+    "EU sui generis database right: LEGAL REVIEW REQUIRED (jurisdiction-specific residual; non-blocking, per compliance v2)",
+    "NASA POWER automation policy: UNVERIFIED quota (operational only — affects future re-acquisition runs, not the shipped static dataset)",
+    "bestMonthsBaseline = [] (no-favourable-month) destinations would render an empty window label; current dataset has 0 such destinations (branch3=0) and defensive handling exists ('Year-round viable' / 'the whole year'), but this path is not exercised by live data",
+    "sunshineHours remains null until a product decision (unchanged, out of migration scope)"
+  ],
+  "productionSafety": {
+    "PRODUCTION_SOURCE_BEFORE": "latitude-derived climate-zone templates (src/lib/climate-pattern.ts)",
+    "PRODUCTION_SOURCE_AFTER": "NASA POWER canonical static dataset (src/data/climate/nasa-power-canonical-v1.json, artifact nasa-power-canonical-production-v1)",
+    "PRODUCTION_DATA_CHANGED": "YES (production climate authority replaced — climate numbers are now real NASA POWER values; the v8.7 validated values themselves unchanged, hash-verified)",
+    "PRODUCTION_CODE_CHANGED": "YES (data module + loader + besttime state/components + page wiring)",
+    "COMMIT": "NO",
+    "PUSH": "NO",
+    "DEPLOY": "NO"
+  },
+  "finalDecision": "PASS"
+}

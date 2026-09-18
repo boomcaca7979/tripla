@@ -1,0 +1,94 @@
+{
+  "generatedAt": "2026-09-12T12:47:20.156989+00:00",
+  "artifact": "v87-vs-v86-diff.json",
+  "climateCellsChanged": 59,
+  "climateCellsChangedScope": [
+    "siem-reap"
+  ],
+  "recommendationChanged": [
+    {
+      "destinationId": "siem-reap",
+      "monthIndex": 6,
+      "field": "ruleId",
+      "old": "R5",
+      "new": "R3"
+    },
+    {
+      "destinationId": "siem-reap",
+      "monthIndex": 11,
+      "field": "ruleId",
+      "old": "R4",
+      "new": "R7"
+    }
+  ],
+  "bestMonthsChanged": [
+    {
+      "destinationId": "siem-reap",
+      "old": [
+        10
+      ],
+      "new": [
+        10,
+        11
+      ],
+      "oldStatus": "ok-favourable",
+      "newStatus": "ok-favourable"
+    }
+  ],
+  "anchorChanged": [
+    {
+      "destinationId": "ho-chi-minh-city",
+      "old": {
+        "type": "airport",
+        "latitude": 10.8188,
+        "longitude": 106.8069,
+        "elevationM": null
+      },
+      "new": {
+        "type": "airport",
+        "latitude": 10.8188,
+        "longitude": 106.652,
+        "elevationM": 10.1,
+        "icao": "VVTS",
+        "approvedDecision": "A (approved 2026-09-12)"
+      }
+    },
+    {
+      "destinationId": "siem-reap",
+      "old": {
+        "type": "airport",
+        "latitude": 13.4107,
+        "longitude": 103.8132,
+        "elevationM": null
+      },
+      "new": {
+        "type": "airport",
+        "latitude": 13.36974,
+        "longitude": 104.223831,
+        "elevationM": 58.2,
+        "icao": "VDSA",
+        "approvedDecision": "B (approved 2026-09-12)"
+      }
+    }
+  ],
+  "elevationPopulated": 145,
+  "unexplainedChanges": [],
+  "r1r7": {
+    "counts": {
+      "R1": 5,
+      "R2": 16,
+      "R3": 158,
+      "R4": 91,
+      "R5": 483,
+      "R6": 460,
+      "R7": 527
+    },
+    "unclassified": 0,
+    "multipleFinalRules": 0
+  },
+  "bestMonthsBranches": {
+    "branch1": 117,
+    "branch2": 28,
+    "branch3": 0
+  }
+}

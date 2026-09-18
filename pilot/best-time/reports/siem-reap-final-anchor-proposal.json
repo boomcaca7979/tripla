@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-09-12",
+  "artifact": "siem-reap-final-anchor-proposal.json",
+  "destinationId": "siem-reap",
+  "status": "USER_DECISION_REQUIRED",
+  "currentAnchor": {
+    "iata": "SAI",
+    "icao": "VDSR",
+    "latitude": 13.4107,
+    "longitude": 103.8132,
+    "note": "IATA already new; ICAO+coords = CLOSED old REP airport"
+  },
+  "proposedAnchor": {
+    "iata": "SAI",
+    "icao": "VDSA",
+    "latitude": 13.36974,
+    "longitude": 104.223831
+  },
+  "recommendation": "MUST CORRECT BEFORE PRODUCTION",
+  "classification": "PRODUCTION-DATA-AFFECTING (NOT metadata-only)",
+  "verifiedImpact": {
+    "climateCellsChanged": 59,
+    "gridElevationM": "36.86 -> 70.78",
+    "july": "precip 198.55 -> 205.39 mm; R5 -> R3 (Workable -> Challenging; old rule was R5, tempHigh 30.55 < 32 so R4 did not fire)",
+    "december": "R4 -> R7 (-> Favourable)",
+    "bestMonths": "old [10] -> new [10, 11]",
+    "postApprovalChain": [
+      "anchor update",
+      "new grid mapping",
+      "climate re-fetch/reuse",
+      "normalization",
+      "precipitation",
+      "R1-R7",
+      "Best Months",
+      "provenance",
+      "hash refresh"
+    ],
+    "simulation": "normalized/anchor-correction-simulated-siem-reap.json"
+  },
+  "productionWrite": "NONE"
+}

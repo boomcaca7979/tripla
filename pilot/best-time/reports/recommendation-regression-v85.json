@@ -1,0 +1,202 @@
+{
+ "generatedAt": "2026-09-12T01:27:31.763748+00:00",
+ "months": 1740,
+ "ruleCounts": {
+  "R1": 5,
+  "R2": 16,
+  "R3": 157,
+  "R4": 92,
+  "R5": 484,
+  "R6": 460,
+  "R7": 526
+ },
+ "classified": 1740,
+ "unclassified": 0,
+ "duplicateFinalRules": 0,
+ "ruleIdMismatches": [],
+ "ruleIdMismatchCount": 0,
+ "bestMonthsBranchCounts": {
+  "branch1": 117,
+  "branch2": 28,
+  "branch3": 0
+ },
+ "bestMonthsMismatchCount": 0,
+ "bestMonthsMismatches": [],
+ "gate": "PASS - exhaustive, 0 unclassified, 0 mismatches",
+ "oldBestMonthsDiff": {
+  "exact": 14,
+  "partial": 106,
+  "disjoint": 25,
+  "unparsed": 0,
+  "samples": [
+   {
+    "destinationId": "tokyo",
+    "oldBestMonths": "Mar-May",
+    "newBestMonthsBaseline": [
+     11
+    ],
+    "kind": "disjoint"
+   },
+   {
+    "destinationId": "paris",
+    "oldBestMonths": "Apr-Jun",
+    "newBestMonthsBaseline": [
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "kind": "partial"
+   },
+   {
+    "destinationId": "newyork",
+    "oldBestMonths": "Sep-Oct",
+    "newBestMonthsBaseline": [
+     1
+    ],
+    "kind": "disjoint"
+   },
+   {
+    "destinationId": "bangkok",
+    "oldBestMonths": "Nov-Feb",
+    "newBestMonthsBaseline": [
+     0,
+     10,
+     11
+    ],
+    "kind": "partial"
+   },
+   {
+    "destinationId": "london",
+    "oldBestMonths": "May-Sep",
+    "newBestMonthsBaseline": [
+     5,
+     6,
+     7,
+     8
+    ],
+    "kind": "partial"
+   },
+   {
+    "destinationId": "sydney",
+    "oldBestMonths": "Sep-Nov",
+    "newBestMonthsBaseline": [
+     0,
+     3,
+     4,
+     8,
+     9,
+     10,
+     11
+    ],
+    "kind": "partial"
+   },
+   {
+    "destinationId": "dubai",
+    "oldBestMonths": "Nov-Mar",
+    "newBestMonthsBaseline": [
+     0,
+     1,
+     2,
+     10,
+     11
+    ],
+    "kind": "exact"
+   },
+   {
+    "destinationId": "rome",
+    "oldBestMonths": "Apr-Jun",
+    "newBestMonthsBaseline": [
+     3,
+     4,
+     5,
+     6,
+     8
+    ],
+    "kind": "partial"
+   },
+   {
+    "destinationId": "barcelona",
+    "oldBestMonths": "May-Jun",
+    "newBestMonthsBaseline": [
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "kind": "partial"
+   },
+   {
+    "destinationId": "singapore",
+    "oldBestMonths": "Feb-Apr",
+    "newBestMonthsBaseline": [
+     1
+    ],
+    "kind": "partial"
+   },
+   {
+    "destinationId": "istanbul",
+    "oldBestMonths": "Apr-May",
+    "newBestMonthsBaseline": [
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "kind": "disjoint"
+   },
+   {
+    "destinationId": "seoul",
+    "oldBestMonths": "Mar-May",
+    "newBestMonthsBaseline": [
+     0
+    ],
+    "kind": "disjoint"
+   },
+   {
+    "destinationId": "mexico-city",
+    "oldBestMonths": "Mar-May",
+    "newBestMonthsBaseline": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     9,
+     10,
+     11
+    ],
+    "kind": "partial"
+   },
+   {
+    "destinationId": "las-vegas",
+    "oldBestMonths": "Mar-May",
+    "newBestMonthsBaseline": [
+     2,
+     3,
+     9,
+     10
+    ],
+    "kind": "partial"
+   },
+   {
+    "destinationId": "austin",
+    "oldBestMonths": "Mar-May",
+    "newBestMonthsBaseline": [
+     1,
+     2,
+     3,
+     10
+    ],
+    "kind": "partial"
+   }
+  ],
+  "note": "historical editorial claim set - read only; monthIndex contract is 0-11 for BOTH sides, so no schema-driven change from Phase 1B",
+  "monthIndexContract": "0..11"
+ }
+}

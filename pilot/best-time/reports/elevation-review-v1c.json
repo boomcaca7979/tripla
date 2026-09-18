@@ -1,0 +1,550 @@
+{
+  "generatedAt": "2026-09-12T06:41:56.132394+00:00",
+  "artifact": "elevation-review-v1c.json",
+  "revisedBy": "Phase 1C Final Evidence Audit (status vocabulary corrected: APPROVED -> SECONDARY-VERIFIED; authority tiers recorded; no value changed)",
+  "reviewArtifactOnly": "NOT a production value; no src/data file modified",
+  "acceptanceRule": "same airport identity + same IATA or independently resolved ICAO + coordinate conflict within approved tolerance + known elevation unit (ft MSL) + MSL semantics + traceable source, with an independent second source; values confirmed only by Tier 2-4 sources are SECONDARY-VERIFIED, never AUTHORITATIVE",
+  "sourceA": {
+    "sourceName": "OurAirports open data — airports.csv",
+    "sourceURL": "https://davidmegginson.github.io/ourairports-data/airports.csv",
+    "licence": "Public Domain (source states no guarantee of accuracy or fitness for use)",
+    "retrievedAt": "2026-09-12"
+  },
+  "sourceBMethod": "server-side web search 2026-09-12 (Wikipedia infoboxes citing AIP; aviation databases METAR-TAF / SKYbrary / AirportGuide / ch-aviation; official operator sites)",
+  "sourceHierarchyNote": "Wikipedia hits are recorded as 'secondary page citing primary source' (TIER 4) — NOT as AIP itself; no Tier-1 primary AIP text was retrieved for any record except operator-site values for nha-trang / bologna / lombok / pattaya (TIER 1).",
+  "classificationsUsed": [
+    "RESOLVED_SAME_AIRPORT",
+    "PROJECT_ANCHOR_ERROR",
+    "SOURCE_DATABASE_ERROR",
+    "AMBIGUOUS_NEEDS_MANUAL_REVIEW"
+  ],
+  "conflictReconciliation": {
+    "rawConflictRecords": 11,
+    "uniqueDestinations": 10,
+    "icaoOnly": 7,
+    "coordinateOnly": 2,
+    "both": 1,
+    "other": 0,
+    "note": "Independent recount of reports/elevation-source-audit.json reviewQueue: 8 icaoConflict=true flags + 3 distance>2km flags = 11 records across 10 unique destinations (siem-reap carries both). The Phase 1B handoff summary '8 ICAO + 2 coordinate' was a summary error: it counted siem-reap twice and omitted chengdu (2.254 km)."
+  },
+  "reviewQueueCount": 10,
+  "secondaryVerifiedCount": 8,
+  "pendingCount": 2,
+  "summary": {
+    "candidateCoverage": "145/145 (OurAirports, TIER 3 source)",
+    "sourceReviewedCoverage": "145/145 (identity + tolerance screening applied to all)",
+    "secondaryVerifiedCoverage": "10/145 flagged records have an independent second source; 135/145 exact records remain single-source",
+    "secondaryVerifiedApprovedCoverage": "143/145 (135 single-source + 10 reviewed; 8 review items resolved + 2 blocked)",
+    "authoritativeApprovedCoverage": "0/145 (no Tier-1 primary confirmation obtained)",
+    "blockedCoverage": "2/145 (ho-chi-minh-city, siem-reap — pending project anchor decision)",
+    "elevationGate": "BLOCKED (143/145 SECONDARY-VERIFIED; 2 pending anchor decision; AUTHORITATIVE status requires Tier-1 confirmation)",
+    "note": "All 10 flags were project-side data issues (ICAO field typos/staleness or anchor-coordinate staleness), not OurAirports data errors. SOURCE_DATABASE_ERROR and AMBIGUOUS_NEEDS_MANUAL_REVIEW were not needed.",
+    "destinationsTsIcaoCorrectionsIdentified": {
+      "rovaniemi": {
+        "wrong": "EFKT",
+        "correct": "EFRO"
+      },
+      "cebu": {
+        "wrong": "RPVB",
+        "correct": "RPVM"
+      },
+      "yogyakarta": {
+        "wrong": "WIHI",
+        "correct": "WAHI"
+      },
+      "nha-trang": {
+        "wrong": "VVNT",
+        "correct": "VVCR"
+      },
+      "siem-reap": {
+        "wrong": "VDSR",
+        "correct": "VDSA"
+      },
+      "bologna": {
+        "wrong": "LIPQ",
+        "correct": "LIPE"
+      },
+      "lombok": {
+        "wrong": "WATB",
+        "correct": "WADL"
+      },
+      "pattaya": {
+        "wrong": "VTPH",
+        "correct": "VTBU"
+      }
+    }
+  },
+  "items": [
+    {
+      "destinationId": "rovaniemi",
+      "project": {
+        "anchorType": "airport",
+        "iata": "RVN",
+        "icaoInDestinationsTs": "EFKT",
+        "anchorCoords": [
+          66.5648,
+          25.8319
+        ]
+      },
+      "sourceA_ourairports": {
+        "ident": "EFRO",
+        "name": "Rovaniemi Airport",
+        "authorityLevel": "TIER 3 — open curated aviation database (public domain; self-disclaims accuracy)",
+        "elevationFt": 642.0,
+        "elevationM": 195.7,
+        "anchorToSourceDistanceKm": 0.189
+      },
+      "sourceB_independent": {
+        "icao": "EFRO",
+        "elevationFt": 642,
+        "elevationM": 196,
+        "coords": [
+          66.5633,
+          25.83
+        ],
+        "authorityLevel": "TIER 4 (Wikipedia citing AIP) + TIER 3 (METAR-TAF / FltPlan)",
+        "sources": [
+          "https://en.wikipedia.org/wiki/Rovaniemi_Airport",
+          "https://metar-taf.com/ (EFRO 642 ft)",
+          "FltPlan / Universal Weather (642 ft)"
+        ],
+        "note": "majority of aviation sources agree on 642 ft; one outlier 645 ft"
+      },
+      "elevationDeltaM": 0.3,
+      "icaoResolution": {
+        "inDestinationsTs": "EFKT",
+        "authoritative": "EFRO",
+        "conflict": true
+      },
+      "classification": "PROJECT_ANCHOR_ERROR",
+      "disposition": "SECONDARY-VERIFIED",
+      "approvedElevationM": 195.7,
+      "rationale": "IATA RVN + coordinates match EFRO within 0.19 km; project ICAO field EFKT is wrong (EFKT = Kittilä). ICAO independently resolved to EFRO per acceptance rule; elevation 642 ft/195.7 m consistent across Tier-3/4 sources. Not AUTHORITATIVE: no Tier-1 AIP text retrieved.",
+      "productionWrite": "NONE"
+    },
+    {
+      "destinationId": "chengdu",
+      "project": {
+        "anchorType": "airport",
+        "iata": "CTU",
+        "icaoInDestinationsTs": "ZUUU",
+        "anchorCoords": [
+          30.5785,
+          103.9471
+        ]
+      },
+      "sourceA_ourairports": {
+        "ident": "ZUUU",
+        "name": "Chengdu Shuangliu International Airport",
+        "authorityLevel": "TIER 3 — open curated aviation database (public domain; self-disclaims accuracy)",
+        "elevationFt": 1625.0,
+        "elevationM": 495.3,
+        "anchorToSourceDistanceKm": 2.254
+      },
+      "sourceB_independent": {
+        "icao": "ZUUU",
+        "elevationFt": 1625,
+        "elevationM": 495,
+        "coords": [
+          30.5783,
+          103.9469
+        ],
+        "authorityLevel": "TIER 4 (Wikipedia citing AIP) + TIER 2 (ch-aviation)",
+        "sources": [
+          "https://en.wikipedia.org/wiki/Chengdu_Shuangliu_International_Airport",
+          "https://www.ch-aviation.com (495 m / 1624 ft)",
+          "airport-data listings 1625 ft / 495.3 m"
+        ],
+        "note": "metric sources round 495 m, aviation DBs 1624-1625 ft; Wikipedia reference point 30.5783N/103.9469E vs OurAirports 30.5583N/103.9460E — same-airport reference-point convention difference (~2.2 km), consistent with the project anchor's own position"
+      },
+      "elevationDeltaM": 0.3,
+      "icaoResolution": {
+        "inDestinationsTs": "ZUUU",
+        "authoritative": "ZUUU",
+        "conflict": false
+      },
+      "classification": "RESOLVED_SAME_AIRPORT",
+      "disposition": "SECONDARY-VERIFIED",
+      "approvedElevationM": 495.3,
+      "rationale": "IATA/ICAO agree (CTU/ZUUU); 2.254 km offset is a reference-point convention difference inside the same airport (Wikipedia ref point ≈ project anchor; OurAirports ref point 2.2 km SW). Elevation 1625 ft/495.3 m consistent. Not AUTHORITATIVE: no Tier-1 AIP text retrieved.",
+      "productionWrite": "NONE"
+    },
+    {
+      "destinationId": "ho-chi-minh-city",
+      "project": {
+        "anchorType": "airport",
+        "iata": "SGN",
+        "icaoInDestinationsTs": "VVTS",
+        "anchorCoords": [
+          10.8188,
+          106.8069
+        ]
+      },
+      "sourceA_ourairports": {
+        "ident": "VVTS",
+        "name": "Tan Son Nhat International Airport",
+        "authorityLevel": "TIER 3 — open curated aviation database (public domain; self-disclaims accuracy)",
+        "elevationFt": 33.0,
+        "elevationM": 10.1,
+        "anchorToSourceDistanceKm": 16.918
+      },
+      "sourceB_independent": {
+        "icao": "VVTS",
+        "elevationFt": 33,
+        "elevationM": 10,
+        "coords": [
+          10.8188,
+          106.652
+        ],
+        "authorityLevel": "TIER 4 (Wikipedia citing AIP) + TIER 2 (ch-aviation) + TIER 3 (METAR-TAF, AirportGuide)",
+        "sources": [
+          "https://en.wikipedia.org/wiki/Tan_Son_Nhat_International_Airport",
+          "https://metar-taf.com/airport/VVTS-tan-son-nhat-international-airport",
+          "https://airportguide.com/airport/info/SGN",
+          "https://www.ch-aviation.com/airports/SGN"
+        ],
+        "note": "all sources agree 10.8188N 106.652E / 33 ft — the airport LATITUDE equals the project anchor latitude exactly; the project anchor LONGITUDE 106.8069 points at the city centre"
+      },
+      "elevationDeltaM": 0.1,
+      "icaoResolution": {
+        "inDestinationsTs": "VVTS",
+        "authoritative": "VVTS",
+        "conflict": false
+      },
+      "classification": "PROJECT_ANCHOR_ERROR",
+      "disposition": "NOT APPROVED - PENDING PROJECT ANCHOR DECISION",
+      "approvedElevationM": null,
+      "rationale": "Airport identity is established (SGN/VVTS, 33 ft/10.1 m at 10.8188N 106.652E — latitude identical to the project anchor), but the project anchor longitude 106.8069 points at the city centre, 16.92 km from the airport. The elevation at the CLIMATE anchor point is NOT the airport elevation; approving one or the other is a project/product decision (and affects which grid cell the climate data represents).",
+      "productionWrite": "NONE"
+    },
+    {
+      "destinationId": "cebu",
+      "project": {
+        "anchorType": "airport",
+        "iata": "CEB",
+        "icaoInDestinationsTs": "RPVB",
+        "anchorCoords": [
+          10.3075,
+          123.979
+        ]
+      },
+      "sourceA_ourairports": {
+        "ident": "RPVM",
+        "name": "Mactan Cebu International Airport",
+        "authorityLevel": "TIER 3 — open curated aviation database (public domain; self-disclaims accuracy)",
+        "elevationFt": 31.0,
+        "elevationM": 9.4,
+        "anchorToSourceDistanceKm": 0.212
+      },
+      "sourceB_independent": {
+        "icao": "RPVM",
+        "elevationFt": 31,
+        "elevationM": 9.4,
+        "coords": [
+          10.3093,
+          123.9797
+        ],
+        "authorityLevel": "TIER 4 (Wikipedia citing AIP) + TIER 3 (SKYbrary, airport-data)",
+        "sources": [
+          "https://en.wikipedia.org/wiki/Mactan%E2%80%93Cebu_International_Airport",
+          "https://skybrary.aero/airports/rpvm",
+          "https://airport-data.com/world-airports/RPVM-CEB/"
+        ],
+        "note": "31 ft is the standard published aviation elevation"
+      },
+      "elevationDeltaM": 0.0,
+      "icaoResolution": {
+        "inDestinationsTs": "RPVB",
+        "authoritative": "RPVM",
+        "conflict": true
+      },
+      "classification": "PROJECT_ANCHOR_ERROR",
+      "disposition": "SECONDARY-VERIFIED",
+      "approvedElevationM": 9.4,
+      "rationale": "IATA CEB + coordinates match RPVM within 0.21 km; project ICAO RPVB is wrong (RPVB = Bacolod–Silay). ICAO independently resolved; 31 ft/9.4 m consistent. Not AUTHORITATIVE: no Tier-1 AIP text retrieved.",
+      "productionWrite": "NONE"
+    },
+    {
+      "destinationId": "yogyakarta",
+      "project": {
+        "anchorType": "airport",
+        "iata": "YIA",
+        "icaoInDestinationsTs": "WIHI",
+        "anchorCoords": [
+          -7.9014,
+          110.0576
+        ]
+      },
+      "sourceA_ourairports": {
+        "ident": "WAHI",
+        "name": "Yogyakarta International Airport",
+        "authorityLevel": "TIER 3 — open curated aviation database (public domain; self-disclaims accuracy)",
+        "elevationFt": 24.0,
+        "elevationM": 7.3,
+        "anchorToSourceDistanceKm": 0.439
+      },
+      "sourceB_independent": {
+        "icao": "WAHI",
+        "elevationFt": 24,
+        "elevationM": 7.3,
+        "coords": [
+          -7.9053,
+          110.0573
+        ],
+        "authorityLevel": "TIER 4 (Wikipedia) + TIER 2 (WAHI AIP chart, tertiary-hosted copy)",
+        "sources": [
+          "https://en.wikipedia.org/wiki/Yogyakarta_International_Airport",
+          "WAHI AIP chart (S07°54.2' E110°03.4', elev 24 ft)",
+          "https://decodermetartaf.com/en/indonesia/yogyakarta-yogyakarta-international-airport-WAHI/"
+        ],
+        "note": "opened May 2019; replaced Adisutjipto (JOG)"
+      },
+      "elevationDeltaM": 0.0,
+      "icaoResolution": {
+        "inDestinationsTs": "WIHI",
+        "authoritative": "WAHI",
+        "conflict": true
+      },
+      "classification": "PROJECT_ANCHOR_ERROR",
+      "disposition": "SECONDARY-VERIFIED",
+      "approvedElevationM": 7.3,
+      "rationale": "IATA YIA + coordinates match WAHI within 0.44 km; project ICAO WIHI is wrong (WAHI is the correct code of Yogyakarta International, opened 2019). 24 ft/7.3 m per AIP chart copy. Not AUTHORITATIVE: chart read via a tertiary-hosted copy, not the primary AIP.",
+      "productionWrite": "NONE"
+    },
+    {
+      "destinationId": "nha-trang",
+      "project": {
+        "anchorType": "airport",
+        "iata": "CXR",
+        "icaoInDestinationsTs": "VVNT",
+        "anchorCoords": [
+          11.9982,
+          109.2195
+        ]
+      },
+      "sourceA_ourairports": {
+        "ident": "VVCR",
+        "name": "Cam Ranh International Airport / Cam Ranh Air Base",
+        "authorityLevel": "TIER 3 — open curated aviation database (public domain; self-disclaims accuracy)",
+        "elevationFt": 40.0,
+        "elevationM": 12.2,
+        "anchorToSourceDistanceKm": 0.054
+      },
+      "sourceB_independent": {
+        "icao": "VVCR",
+        "elevationFt": 40,
+        "elevationM": 12.2,
+        "coords": [
+          11.9982,
+          109.219
+        ],
+        "authorityLevel": "TIER 1 (nhatrangairport.com operator site) + TIER 4 (Wikipedia) + TIER 3 (SkyVector)",
+        "sources": [
+          "https://en.wikipedia.org/wiki/Cam_Ranh_International_Airport",
+          "https://www.nhatrangairport.com/nha-trang-airport-quick-facts/",
+          "https://skyvector.com/airport/VVCR/Cam-Ranh-International-Airport"
+        ],
+        "note": "40 ft standard; Acukwik 43 ft / SkyVector 46 ft are threshold/high-point variants"
+      },
+      "elevationDeltaM": 0.0,
+      "icaoResolution": {
+        "inDestinationsTs": "VVNT",
+        "authoritative": "VVCR",
+        "conflict": true
+      },
+      "classification": "PROJECT_ANCHOR_ERROR",
+      "disposition": "SECONDARY-VERIFIED",
+      "approvedElevationM": 12.2,
+      "rationale": "IATA CXR + coordinates match VVCR (Cam Ranh) within 0.05 km; project ICAO VVNT is wrong (VVNT = the old Nha Trang city airport). 40 ft/12.2 m confirmed by the official operator site (Tier 1).",
+      "productionWrite": "NONE"
+    },
+    {
+      "destinationId": "siem-reap",
+      "project": {
+        "anchorType": "airport",
+        "iata": "SAI",
+        "icaoInDestinationsTs": "VDSR",
+        "anchorCoords": [
+          13.4107,
+          103.8132
+        ]
+      },
+      "sourceA_ourairports": {
+        "ident": "VDSA",
+        "name": "Siem Reap-Angkor International Airport",
+        "authorityLevel": "TIER 3 — open curated aviation database (public domain; self-disclaims accuracy)",
+        "elevationFt": 191.0,
+        "elevationM": 58.2,
+        "anchorToSourceDistanceKm": 44.652
+      },
+      "sourceB_independent": {
+        "icao": "VDSA",
+        "elevationFt": 191,
+        "elevationM": 58.2,
+        "coords": [
+          13.36974,
+          104.223831
+        ],
+        "authorityLevel": "TIER 4 (Wikipedia) + TIER 3 (METAR-TAF)",
+        "sources": [
+          "https://en.wikipedia.org/wiki/Siem_Reap%E2%80%93Angkor_International_Airport",
+          "https://ourairports.com/airports/VDSA/",
+          "https://metar-taf.com/airport/VDSA-siem-reap-angkor-international-airport"
+        ],
+        "note": "NEW airport (opened Oct/Nov 2023): IATA SAI / ICAO VDSA. ICAO VDSR belonged to the OLD Siem Reap International (REP, elev ~18 m) which closed on the new airport's opening. Some sources list 158 ft (~53 m)."
+      },
+      "elevationDeltaM": 0.0,
+      "icaoResolution": {
+        "inDestinationsTs": "VDSR",
+        "authoritative": "VDSA",
+        "conflict": true
+      },
+      "classification": "PROJECT_ANCHOR_ERROR",
+      "disposition": "NOT APPROVED - PENDING PROJECT ANCHOR DECISION",
+      "approvedElevationM": null,
+      "rationale": "The new Siem Reap–Angkor International (IATA SAI) has ICAO VDSA and stands 44.65 km east of the project anchor coordinates, which are the site of the CLOSED old airport (REP/VDSR, elev ~18 m). Project ICAO VDSR + anchor coords are both stale after the 2023 relocation; project IATA SAI already points at the NEW airport (mixed-state anchor). Airport elevation 191 ft/58.2 m is consistent for SAI, but the climate anchor point does not represent the declared airport — approving requires a project decision (anchor coords AND ICAO would need updating, which also changes the sampled climate grid cell).",
+      "productionWrite": "NONE"
+    },
+    {
+      "destinationId": "bologna",
+      "project": {
+        "anchorType": "airport",
+        "iata": "BLQ",
+        "icaoInDestinationsTs": "LIPQ",
+        "anchorCoords": [
+          44.5354,
+          11.2887
+        ]
+      },
+      "sourceA_ourairports": {
+        "ident": "LIPE",
+        "name": "Bologna Guglielmo Marconi Airport",
+        "authorityLevel": "TIER 3 — open curated aviation database (public domain; self-disclaims accuracy)",
+        "elevationFt": 123.0,
+        "elevationM": 37.5,
+        "anchorToSourceDistanceKm": 0.0
+      },
+      "sourceB_independent": {
+        "icao": "LIPE",
+        "elevationFt": 123,
+        "elevationM": 37.5,
+        "coords": [
+          44.5354,
+          11.2887
+        ],
+        "authorityLevel": "TIER 1 (bologna-airport.it operator site) + TIER 4 (Wikipedia)",
+        "sources": [
+          "https://en.wikipedia.org/wiki/Bologna_Guglielmo_Marconi_Airport",
+          "https://flightmapper.io/airports/bologna-guglielmo-marconi-airport-blq-4354",
+          "https://www.bologna-airport.it"
+        ],
+        "note": "123 ft / 37 m consistent across sources; coords identical to project anchor"
+      },
+      "elevationDeltaM": 0.0,
+      "icaoResolution": {
+        "inDestinationsTs": "LIPQ",
+        "authoritative": "LIPE",
+        "conflict": true
+      },
+      "classification": "PROJECT_ANCHOR_ERROR",
+      "disposition": "SECONDARY-VERIFIED",
+      "approvedElevationM": 37.5,
+      "rationale": "IATA BLQ + coordinates match LIPE exactly (0.0 km); project ICAO LIPQ is wrong (LIPQ = Parma). 123 ft/37.5 m consistent incl. the official operator site (Tier 1).",
+      "productionWrite": "NONE"
+    },
+    {
+      "destinationId": "lombok",
+      "project": {
+        "anchorType": "airport",
+        "iata": "LOP",
+        "icaoInDestinationsTs": "WATB",
+        "anchorCoords": [
+          -8.7569,
+          116.2784
+        ]
+      },
+      "sourceA_ourairports": {
+        "ident": "WADL",
+        "name": "Lombok International Airport",
+        "authorityLevel": "TIER 3 — open curated aviation database (public domain; self-disclaims accuracy)",
+        "elevationFt": 319.0,
+        "elevationM": 97.2,
+        "anchorToSourceDistanceKm": 0.341
+      },
+      "sourceB_independent": {
+        "icao": "WADL",
+        "elevationFt": 319,
+        "elevationM": 97.2,
+        "coords": [
+          -8.75996,
+          116.27817
+        ],
+        "authorityLevel": "TIER 1 (lombokairportonline.com operator site) + TIER 4 (Wikipedia) + TIER 3 (SKYbrary)",
+        "sources": [
+          "https://en.wikipedia.org/wiki/Lombok_International_Airport",
+          "https://skybrary.aero/airports/wadl",
+          "https://www.lombokairportonline.com/lombok-airport-quick-facts/"
+        ],
+        "note": "319 ft / 97 m consistent; aka Zainuddin Abdul Madjid International"
+      },
+      "elevationDeltaM": 0.0,
+      "icaoResolution": {
+        "inDestinationsTs": "WATB",
+        "authoritative": "WADL",
+        "conflict": true
+      },
+      "classification": "PROJECT_ANCHOR_ERROR",
+      "disposition": "SECONDARY-VERIFIED",
+      "approvedElevationM": 97.2,
+      "rationale": "IATA LOP + coordinates match WADL within 0.34 km; project ICAO WATB is wrong (WATB = the closed Selaparang airport). 319 ft/97.2 m consistent incl. the official operator site (Tier 1).",
+      "productionWrite": "NONE"
+    },
+    {
+      "destinationId": "pattaya",
+      "project": {
+        "anchorType": "airport",
+        "iata": "UTP",
+        "icaoInDestinationsTs": "VTPH",
+        "anchorCoords": [
+          12.6806,
+          101.0044
+        ]
+      },
+      "sourceA_ourairports": {
+        "ident": "VTBU",
+        "name": "U-Tapao–Rayong–Pattaya International Airport",
+        "authorityLevel": "TIER 3 — open curated aviation database (public domain; self-disclaims accuracy)",
+        "elevationFt": 42.0,
+        "elevationM": 12.8,
+        "anchorToSourceDistanceKm": 0.101
+      },
+      "sourceB_independent": {
+        "icao": "VTBU",
+        "elevationFt": 42,
+        "elevationM": 12.8,
+        "coords": [
+          12.6799,
+          101.005
+        ],
+        "authorityLevel": "TIER 1 (utapao.com operator site) + TIER 4 (Wikipedia) + TIER 3 (METAR-TAF)",
+        "sources": [
+          "https://en.wikipedia.org/wiki/U-Tapao_International_Airport",
+          "https://ourairports.com/airports/VTBU/",
+          "https://metar-taf.com/airport/VTBU-u-tapao-international-airport"
+        ],
+        "note": "42 ft / 13 m standard; one outlier (AlbaJet 17 m) disregarded"
+      },
+      "elevationDeltaM": 0.0,
+      "icaoResolution": {
+        "inDestinationsTs": "VTPH",
+        "authoritative": "VTBU",
+        "conflict": true
+      },
+      "classification": "PROJECT_ANCHOR_ERROR",
+      "disposition": "SECONDARY-VERIFIED",
+      "approvedElevationM": 12.8,
+      "rationale": "IATA UTP + coordinates match VTBU within 0.10 km; project ICAO VTPH is wrong. 42 ft/12.8 m consistent incl. the official operator site (Tier 1).",
+      "productionWrite": "NONE"
+    }
+  ]
+}

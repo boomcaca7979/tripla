@@ -1,0 +1,54 @@
+{
+  "assertions": [
+    {
+      "assert": "tier-distribution-sums-to-145",
+      "pass": true
+    },
+    {
+      "assert": "tier1=17",
+      "pass": true
+    },
+    {
+      "assert": "tier3-single=118",
+      "pass": true
+    },
+    {
+      "assert": "reviewed-secondary=8",
+      "pass": true
+    },
+    {
+      "assert": "anchor-pending=2",
+      "pass": true
+    },
+    {
+      "assert": "option2-sim-coverage-computed-not-preset",
+      "pass": true
+    },
+    {
+      "assert": "siem-reap-table-12-months-complete",
+      "pass": true
+    },
+    {
+      "assert": "siem-reap-july-crossing-in-table",
+      "pass": true
+    },
+    {
+      "assert": "siem-reap-december-r4-to-r7",
+      "pass": true
+    },
+    {
+      "assert": "hcmc-zero-impact-reconfirmed",
+      "pass": true
+    },
+    {
+      "assert": "strategy-not-modified (v8.6 stays; framework is DRAFT)",
+      "pass": true
+    },
+    {
+      "assert": "comparison-has-no-scores",
+      "pass": true
+    }
+  ],
+  "passed": 12,
+  "failed": 0
+}

@@ -1,0 +1,121 @@
+{
+  "artifact": "copernicus-pilot-request-v1",
+  "createdAt": "2026-09-13",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.7",
+  "pilotVersion": "copernicus-pilot-2026.09.13.v1",
+  "status": "DEFINED - NOT EXECUTED (BLOCKED: CDS credentials unavailable, verified 2026-09-13)",
+  "purpose": "Minimal, reproducible, auditable ERA5 Primary pilot that validates the v8.7 canonical contract (tempMeanC / tempHighC / tempLowC / precipMm / precipDaysGe1mm-derived-input) for ONE anchor across 1991-2020 before any 145-destination retrieval.",
+  "apiEndpoint": "https://cds.climate.copernicus.eu/api",
+  "apiClientMinimum": "cdsapi>=0.7.7",
+  "prerequisites": {
+    "cdsapiInstalled": "BLOCKED (not installed, verified 2026-09-13)",
+    "cdsapirc": "BLOCKED (~/.cdsapirc absent, verified 2026-09-13)",
+    "envCredentials": "BLOCKED (CDSAPI_URL / CDSAPI_KEY absent, verified 2026-09-13)",
+    "datasetLicenceAcceptance": "BLOCKED (must be accepted manually in the CDS user profile per dataset, per current official CDS documentation)",
+    "netcdfReader": "BLOCKED (netCDF4/xarray absent in system python, verified 2026-09-13)"
+  },
+  "anchor": {
+    "destinationId": "tokyo",
+    "iata": "NRT",
+    "icao": "RJAA",
+    "name": "Narita International Airport",
+    "latitude": 35.7647,
+    "longitude": 140.3864,
+    "source": "pilot/best-time/config/anchor-inventory-v87-final.json (anchorStatus: NO ISSUE, legacy sweep 2026-09-12)",
+    "selectionReason": "Tokyo is the instructed preferred pilot anchor; the canonical anchor for destinationId 'tokyo' is NRT/RJAA."
+  },
+  "gridSelection": {
+    "datasetGrid": "0.25 deg regular lat-lon (ERA5 atmosphere reanalysis, per official CDS catalogue description)",
+    "requestAreaRule": "[lat+0.25, lon-0.25, lat-0.25, lon+0.25] (CDS area order North, West, South, East; official schema default [90,-180,-90,180] confirms N/W/S/E)",
+    "pointSelectionRule": "From the returned grid points, select the single point minimizing great-circle (haversine) distance to the anchor coordinates; tie-break: higher latitude first, then lower longitude. Fully deterministic.",
+    "expectedNearestGridPoint": {
+      "latitude": 35.75,
+      "longitude": 140.5,
+      "note": "Precomputed from ERA5 0.25 deg lattice; the checks script re-derives it from the returned grid and asserts equality."
+    }
+  },
+  "timeStandard": {
+    "dailyRequestsKey": "time_zone",
+    "dailyRequestsValue": "utc+00:00",
+    "officialDefault": "utc+00:00 (confirmed in the official CDS retrieve process schema for derived-era5-single-levels-daily-statistics, fetched 2026-09-13)",
+    "utripBasis": "dailyAggregationBoundary = UTC+00:00 is a UTRIPLA methodology choice; the official default equals it but it is set explicitly in every request anyway."
+  },
+  "period": {
+    "years": ["1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"],
+    "months": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+    "note": "1991-2020 inclusive = 360 calendar months = 10958 days (8 leap years: 1992, 1996, 2000, 2004, 2008, 2012, 2016, 2020)."
+  },
+  "requestPlan": [
+    {
+      "requestId": "R1-monthly-means",
+      "validatesCanonicalFields": ["tempMeanC", "precipMm"],
+      "dataset": "reanalysis-era5-single-levels-monthly-means",
+      "request": {
+        "product_type": ["monthly_averaged_reanalysis"],
+        "variable": ["2m_temperature", "total_precipitation"],
+        "year": "PERIOD.years (array)",
+        "month": "PERIOD.months (array)",
+        "time": ["00:00"],
+        "area": "GRID.requestAreaRule(tokyo anchor)",
+        "data_format": "netcdf",
+        "download_format": "unarchived"
+      },
+      "requestCount": 1,
+      "officialSchemaBasis": "data_format IS a defined input for this dataset (enum grib|netcdf); product_type monthly_averaged_reanalysis confirmed; variable enum contains 2m_temperature and total_precipitation (official retrieve process schema, fetched 2026-09-13)",
+      "outputUnitExpectations": {
+        "2m_temperature": "K",
+        "total_precipitation": "m of water equivalent PER DAY (ECMWF conversion table: tp[mm] = tp[m/day] * 1000 * N, N = days in month; NOT a monthly total)"
+      }
+    },
+    {
+      "requestId": "R2-daily-maximum",
+      "validatesCanonicalFields": ["tempHighC"],
+      "dataset": "derived-era5-single-levels-daily-statistics",
+      "request": {
+        "product_type": "reanalysis",
+        "variable": ["2m_temperature"],
+        "year": "ONE year per request (official schema: year is a SINGLE string, not an array)",
+        "month": "PERIOD.months (array)",
+        "day": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"],
+        "daily_statistic": "daily_maximum",
+        "time_zone": "utc+00:00",
+        "frequency": "1_hourly",
+        "area": "GRID.requestAreaRule(tokyo anchor)"
+      },
+      "requestCount": 30,
+      "forbiddenKeys": ["data_format"],
+      "forbiddenKeysReason": "FINDING F-1 (2026-09-13): the official CDS retrieve process schema for derived-era5-single-levels-daily-statistics defines inputs [product_type, variable, year, month, day, daily_statistic, time_zone, frequency, area] and contains NO data_format input; output is netCDF-in-zip per the official daily statistics documentation. The previous request template included data_format=netcdf, which is a non-schema input and must be removed.",
+      "officialSchemaBasis": "daily_statistic enum [daily_sum, daily_mean, daily_maximum, daily_minimum] (single string); time_zone default utc+00:00; year single string enum 1940..2026 (official retrieve process schema, fetched 2026-09-13)"
+    },
+    {
+      "requestId": "R3-daily-minimum",
+      "validatesCanonicalFields": ["tempLowC"],
+      "dataset": "derived-era5-single-levels-daily-statistics",
+      "request": "identical to R2-daily-maximum except daily_statistic = daily_minimum",
+      "requestCount": 30,
+      "forbiddenKeys": ["data_format"]
+    },
+    {
+      "requestId": "R4-daily-sum-precipitation",
+      "validatesCanonicalFields": ["precipDaysGe1mm (approved derived field, v8.6 Option A: count(daily total precipitation >= 1.0 mm, UTC+00:00 day) -> 1991-2020 mean)"],
+      "dataset": "derived-era5-single-levels-daily-statistics",
+      "request": "product_type=reanalysis, variable=[total_precipitation], daily_statistic=daily_sum, time_zone=utc+00:00, frequency=1_hourly, one year per request, months 01-12, days 01-31, area per rule",
+      "requestCount": 30,
+      "forbiddenKeys": ["data_format"],
+      "outputUnitExpectations": {
+        "total_precipitation": "metres per day of accumulation (daily sum); the >= 1 mm comparison uses 0.001 m threshold"
+      }
+    }
+  ],
+  "totalRequestCount": 91,
+  "output": {
+    "rawDirectory": "pilot/best-time/copernicus/raw/",
+    "isolation": "NO file outside pilot/best-time/copernicus/ is written; NASA raw, v8.7 canonical, and all normalized/ artifacts are read-only for this pilot.",
+    "perRequestSidecar": "Each raw response is accompanied by a metadata sidecar: requestId, dataset, full request parameters, retrieval timestamp, byte size, sha256 of the raw file. No credentials, tokens or headers are ever recorded."
+  },
+  "semanticProofRequirement": {
+    "tempHighC": "MUST be 'mean over 1991-2020 of (per-calendar-month mean of daily maximum temperature)' where daily maximum comes from hourly data via daily_maximum. It MUST NOT be the ERA5 Monthly Means min/max fields (those are monthly extremes) and MUST NOT be 'monthly average of a monthly extreme statistic'. Official basis: derived daily statistics are computed from hourly data with earthkit-transforms daily_reduce(how='max') (ECMWF daily statistics documentation).",
+    "tempLowC": "Mirror of tempHighC with daily_minimum.",
+    "precipMm": "MUST be mean over 1991-2020 of (monthly total) where monthly total = monthly-mean rate [m/day] * 1000 * days_in_month(actual year/month, incl. leap Feb 29). Official basis: ECMWF conversion table for accumulated variables."
+  }
+}

@@ -1,0 +1,652 @@
+{
+  "pilotVersion": "pilot-2026.09.11.v1",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+  "ruleVersion": "r1-r7.v4",
+  "generatedAt": "2026-09-11T16:32:22.191255+00:00",
+  "coverage": {
+    "T2M": 145,
+    "T2M_MAX": 145,
+    "T2M_MIN": 145,
+    "PRECTOTCORR_SUM": 145,
+    "PRECTOTCORR": 145,
+    "monthlyT2M": 145,
+    "climatologyHttp200": 145,
+    "dailyHttp200": 145,
+    "monthlyHttp200": 145
+  },
+  "destinations": 145,
+  "months": 1740,
+  "missingDailyValues": 0,
+  "tempMeanVerification": {
+    "basis": "Climatology T2M vs mean(1991-2020) of Monthly-endpoint T2M (independent NASA temporal endpoint)",
+    "n": 1740,
+    "meanDelta": 1.1e-05,
+    "medianDelta": 0.0,
+    "maxAbsDelta": 0.005,
+    "outliersGt0_05": [],
+    "outlierCount": 0
+  },
+  "canonicalHighVerification": {
+    "definition": "mean(y=1991..2020, mean(daily T2M_MAX in calendar month))",
+    "comparedAgainst": "normalized/nasa_canonical_145.json (v8.4 artifact)",
+    "tolerance": 0.005,
+    "semantic_match_high": "1679/1740",
+    "max_delta_high": 0.02,
+    "mean_delta_high": 0.000374,
+    "fails": [
+      [
+        "newyork",
+        2,
+        4.22,
+        4.21,
+        0.01
+      ],
+      [
+        "sydney",
+        2,
+        25.3,
+        25.31,
+        0.01
+      ],
+      [
+        "las-vegas",
+        2,
+        17.23,
+        17.22,
+        0.01
+      ],
+      [
+        "austin",
+        2,
+        19.44,
+        19.43,
+        0.01
+      ],
+      [
+        "munich",
+        2,
+        4.04,
+        4.03,
+        0.01
+      ],
+      [
+        "kyoto",
+        2,
+        9.95,
+        9.96,
+        0.01
+      ],
+      [
+        "rovaniemi",
+        2,
+        -9.11,
+        -9.12,
+        0.01
+      ],
+      [
+        "antalya",
+        2,
+        12.75,
+        12.76,
+        0.01
+      ],
+      [
+        "madrid",
+        2,
+        11.22,
+        11.21,
+        0.01
+      ],
+      [
+        "milan",
+        2,
+        9.09,
+        9.08,
+        0.01
+      ],
+      [
+        "osaka",
+        2,
+        9.95,
+        9.96,
+        0.01
+      ],
+      [
+        "hong-kong",
+        2,
+        20.52,
+        20.53,
+        0.01
+      ],
+      [
+        "amsterdam",
+        2,
+        5.82,
+        5.81,
+        0.01
+      ],
+      [
+        "boston",
+        2,
+        1.82,
+        1.81,
+        0.01
+      ],
+      [
+        "guangzhou",
+        2,
+        21.81,
+        21.83,
+        0.02
+      ],
+      [
+        "chengdu",
+        2,
+        13.3,
+        13.31,
+        0.01
+      ],
+      [
+        "xian",
+        2,
+        10.5,
+        10.51,
+        0.01
+      ],
+      [
+        "chongqing",
+        2,
+        14.03,
+        14.05,
+        0.02
+      ],
+      [
+        "macau",
+        2,
+        19.23,
+        19.24,
+        0.01
+      ],
+      [
+        "zurich",
+        2,
+        4.19,
+        4.18,
+        0.01
+      ]
+    ],
+    "failCount": 61,
+    "pooledAggregationDelta": {
+      "max": 0.0,
+      "mean": 0.0
+    }
+  },
+  "canonicalLowVerification": {
+    "definition": "mean(y=1991..2020, mean(daily T2M_MIN in calendar month))",
+    "comparedAgainst": "normalized/nasa_canonical_145.json (v8.4 artifact)",
+    "tolerance": 0.005,
+    "semantic_match_low": "1690/1740",
+    "max_delta_low": 0.02,
+    "mean_delta_low": 0.000305,
+    "fails": [
+      [
+        "paris",
+        2,
+        0.31,
+        0.3,
+        0.01
+      ],
+      [
+        "newyork",
+        2,
+        -1.01,
+        -1.02,
+        0.01
+      ],
+      [
+        "dubai",
+        2,
+        17.66,
+        17.67,
+        0.01
+      ],
+      [
+        "barcelona",
+        2,
+        4.11,
+        4.1,
+        0.01
+      ],
+      [
+        "munich",
+        2,
+        -3.93,
+        -3.94,
+        0.01
+      ],
+      [
+        "kyoto",
+        2,
+        4.89,
+        4.9,
+        0.01
+      ],
+      [
+        "vienna",
+        2,
+        -3.03,
+        -3.04,
+        0.01
+      ],
+      [
+        "antalya",
+        2,
+        3.58,
+        3.59,
+        0.01
+      ],
+      [
+        "abu-dhabi",
+        2,
+        17.95,
+        17.96,
+        0.01
+      ],
+      [
+        "osaka",
+        2,
+        4.89,
+        4.9,
+        0.01
+      ],
+      [
+        "hong-kong",
+        2,
+        14.85,
+        14.87,
+        0.02
+      ],
+      [
+        "san-francisco",
+        2,
+        9.36,
+        9.35,
+        0.01
+      ],
+      [
+        "boston",
+        2,
+        -6.48,
+        -6.49,
+        0.01
+      ],
+      [
+        "beijing",
+        2,
+        -6.25,
+        -6.24,
+        0.01
+      ],
+      [
+        "guangzhou",
+        2,
+        10.24,
+        10.26,
+        0.02
+      ],
+      [
+        "chengdu",
+        2,
+        2.87,
+        2.88,
+        0.01
+      ],
+      [
+        "xian",
+        2,
+        -1.02,
+        -1.01,
+        0.01
+      ],
+      [
+        "hangzhou",
+        2,
+        2.42,
+        2.43,
+        0.01
+      ],
+      [
+        "chongqing",
+        2,
+        4.08,
+        4.09,
+        0.01
+      ],
+      [
+        "macau",
+        2,
+        17.06,
+        17.07,
+        0.01
+      ]
+    ],
+    "failCount": 50,
+    "pooledAggregationDelta": {
+      "max": 0.0,
+      "mean": 0.0
+    }
+  },
+  "precipitationScaling": {
+    "formula": "PRECTOTCORR (mm/day) * mean days in calendar month over 1991-2020 vs PRECTOTCORR_SUM",
+    "n": 1740,
+    "ratioMedian": 0.999954,
+    "ratioMin": 0.790323,
+    "ratioMax": 1.2,
+    "maxAbsResidualMm": 0.904,
+    "climatologyVsMonthlyEndpointMeanDelta": 7.2e-05,
+    "climatologyVsMonthlyEndpointMaxAbsDelta": 0.005
+  },
+  "r1r7": {
+    "counts": {
+      "R1": 5,
+      "R2": 16,
+      "R3": 157,
+      "R4": 92,
+      "R5": 484,
+      "R6": 460,
+      "R7": 526
+    },
+    "classified": 1740,
+    "unclassified": 0,
+    "multipleFinalRules": 0,
+    "total": 1740
+  },
+  "bestMonths": {
+    "branchCounts": {
+      "branch1": 117,
+      "branch2": 28,
+      "branch3": 0
+    },
+    "total": 145
+  },
+  "openMeteoCrossCheck": {
+    "purpose": "ERA5-family cross-check ONLY - NOT a production source",
+    "nDestinations": 30,
+    "nMonths": 360,
+    "overall": {
+      "dHigh": {
+        "n": 360,
+        "mean": -0.1807,
+        "median": -0.0917,
+        "min": -3.5888,
+        "max": 2.484,
+        "meanAbs": 0.8166
+      },
+      "dLow": {
+        "n": 360,
+        "mean": -0.0398,
+        "median": 0.0183,
+        "min": -4.0113,
+        "max": 3.4695,
+        "meanAbs": 1.2278
+      },
+      "dMean": {
+        "n": 360,
+        "mean": -0.2286,
+        "median": -0.0481,
+        "min": -3.224,
+        "max": 2.0643,
+        "meanAbs": 0.7903
+      },
+      "dPrecip": {
+        "n": 360,
+        "mean": 2.3995,
+        "median": 0.9033,
+        "min": -85.3133,
+        "max": 282.5267,
+        "meanAbs": 16.1926
+      }
+    },
+    "byZone": {
+      "northern": {
+        "dHigh": {
+          "n": 240,
+          "mean": -0.1633,
+          "median": -0.0757,
+          "min": -3.5888,
+          "max": 2.484,
+          "meanAbs": 0.8962
+        },
+        "dLow": {
+          "n": 240,
+          "mean": -0.2103,
+          "median": -0.5034,
+          "min": -2.6186,
+          "max": 3.4695,
+          "meanAbs": 1.2444
+        },
+        "dMean": {
+          "n": 240,
+          "mean": -0.333,
+          "median": -0.2795,
+          "min": -3.224,
+          "max": 2.0643,
+          "meanAbs": 0.8132
+        },
+        "dPrecip": {
+          "n": 240,
+          "mean": 0.6785,
+          "median": 0.97,
+          "min": -57.9667,
+          "max": 89.3233,
+          "meanAbs": 9.2229
+        }
+      },
+      "tropical": {
+        "dHigh": {
+          "n": 108,
+          "mean": -0.2253,
+          "median": -0.1061,
+          "min": -2.6116,
+          "max": 2.1523,
+          "meanAbs": 0.7024
+        },
+        "dLow": {
+          "n": 108,
+          "mean": 0.1555,
+          "median": 0.5203,
+          "min": -4.0113,
+          "max": 1.9916,
+          "meanAbs": 1.1481
+        },
+        "dMean": {
+          "n": 108,
+          "mean": -0.0921,
+          "median": 0.272,
+          "min": -3.1214,
+          "max": 1.0802,
+          "meanAbs": 0.7561
+        },
+        "dPrecip": {
+          "n": 108,
+          "mean": 4.6203,
+          "median": -6.025,
+          "min": -85.3133,
+          "max": 282.5267,
+          "meanAbs": 31.6099
+        }
+      },
+      "southern": {
+        "dHigh": {
+          "n": 12,
+          "mean": -0.1266,
+          "median": -0.1932,
+          "min": -0.512,
+          "max": 0.2912,
+          "meanAbs": 0.2525
+        },
+        "dLow": {
+          "n": 12,
+          "mean": 1.6117,
+          "median": 1.6042,
+          "min": 0.6468,
+          "max": 2.4623,
+          "meanAbs": 1.6117
+        },
+        "dMean": {
+          "n": 12,
+          "mean": 0.6312,
+          "median": 0.5261,
+          "min": -0.0329,
+          "max": 1.4062,
+          "meanAbs": 0.6402
+        },
+        "dPrecip": {
+          "n": 12,
+          "mean": 16.8311,
+          "median": 14.66,
+          "min": 9.6767,
+          "max": 33.13,
+          "meanAbs": 16.8311
+        }
+      }
+    }
+  },
+  "oldVsNewDiff": {
+    "exact": 13,
+    "partial": 105,
+    "disjoint": 27,
+    "unparsed": 0,
+    "samples": [
+      {
+        "destinationId": "tokyo",
+        "oldBestMonths": "Mar-May",
+        "newBestMonthsBaseline": [
+          11
+        ],
+        "kind": "disjoint"
+      },
+      {
+        "destinationId": "paris",
+        "oldBestMonths": "Apr-Jun",
+        "newBestMonthsBaseline": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "kind": "partial"
+      },
+      {
+        "destinationId": "newyork",
+        "oldBestMonths": "Sep-Oct",
+        "newBestMonthsBaseline": [
+          1
+        ],
+        "kind": "disjoint"
+      },
+      {
+        "destinationId": "bangkok",
+        "oldBestMonths": "Nov-Feb",
+        "newBestMonthsBaseline": [
+          0,
+          10,
+          11
+        ],
+        "kind": "partial"
+      },
+      {
+        "destinationId": "london",
+        "oldBestMonths": "May-Sep",
+        "newBestMonthsBaseline": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "kind": "partial"
+      },
+      {
+        "destinationId": "sydney",
+        "oldBestMonths": "Sep-Nov",
+        "newBestMonthsBaseline": [
+          0,
+          3,
+          4,
+          8,
+          9,
+          10,
+          11
+        ],
+        "kind": "partial"
+      },
+      {
+        "destinationId": "dubai",
+        "oldBestMonths": "Nov-Mar",
+        "newBestMonthsBaseline": [
+          0,
+          1,
+          2,
+          10,
+          11
+        ],
+        "kind": "exact"
+      },
+      {
+        "destinationId": "rome",
+        "oldBestMonths": "Apr-Jun",
+        "newBestMonthsBaseline": [
+          3,
+          4,
+          5,
+          6,
+          8
+        ],
+        "kind": "partial"
+      },
+      {
+        "destinationId": "barcelona",
+        "oldBestMonths": "May-Jun",
+        "newBestMonthsBaseline": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "kind": "partial"
+      },
+      {
+        "destinationId": "singapore",
+        "oldBestMonths": "Feb-Apr",
+        "newBestMonthsBaseline": [
+          1
+        ],
+        "kind": "partial"
+      },
+      {
+        "destinationId": "istanbul",
+        "oldBestMonths": "Apr-May",
+        "newBestMonthsBaseline": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "kind": "disjoint"
+      },
+      {
+        "destinationId": "seoul",
+        "oldBestMonths": "Mar-May",
+        "newBestMonthsBaseline": [
+          0
+        ],
+        "kind": "disjoint"
+      }
+    ]
+  }
+}

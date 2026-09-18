@@ -1,0 +1,37 @@
+{
+  "frozenAt": "2026-09-12",
+  "artifact": "internal-data-freeze-v87.json",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.7",
+  "ruleVersion": "r1-r7.v4",
+  "destinationCount": 145,
+  "monthCount": 1740,
+  "datasetVersion": "pilot-nasa-canonical-145-final-v87",
+  "anchorIntegrity": "PASS (145/145; 3 corrections applied A/B/D; 0 unresolved legacy airports)",
+  "elevation": "PASS (145/145 production-approved; 5 flagged; 0 pending/blocked)",
+  "nasaFallback": "PASS (technical; 145/145 all endpoints)",
+  "canonicalSchema": "PASS (missing/ambiguous/contradictory = 0; sunshineHours only null)",
+  "recommendation": "PASS (1740/1740; unclassified 0; duplicates 0)",
+  "bestMonths": "PASS (branch1=117 branch2=28 branch3=0)",
+  "runtime": "PASS (Best-time runtime climate API = 0; planner /api/weather + /api/geocoding isolated)",
+  "determinism": "PASS (double rebuild byte-identical excluding timestamps)",
+  "hashes": {
+    "coreClimateHash": "7d884fd2334b092b27081c055b8ab860981577bddbeb833512e2818e64ff58ed",
+    "recommendationHash": "28d6a16cd5abcdaf3be842673d23945858d81ed61b888faafab7afa561771e84",
+    "bestMonthsHash": "417c40eb6246caf5b46236827e6606422bce6ef795fab94a31ec4eda52afbe40",
+    "anchorHash": "c45980e28bf49f797d9049c14deee4001212d3b19857c9a3282dfa1985ed0fb4",
+    "elevationHash": "eeab71ae6b12f9cf5e908d6e95a31e39da24f9511a74f3c0bb68d128618a0d2b",
+    "canonicalDatasetHash": "9ac50d81a0b2d952518b6339c7b3d03e74d0093df0963f65872789f630c0e321"
+  },
+  "elevMismatch": {
+    "le150": 114,
+    "gt150": 31
+  },
+  "externalBlockers": {
+    "ERA5_PRIMARY": "BLOCKED (CDS credentials; FROZEN by user)",
+    "NASA_licence": "BLOCKED_EXTERNAL / LEGAL REVIEW REQUIRED",
+    "databaseRights": "BLOCKED_EXTERNAL / LEGAL REVIEW REQUIRED"
+  },
+  "T2": "BLOCKED",
+  "T3": "BLOCKED",
+  "meaning": "INTERNAL PILOT DATA FREEZE COMPLETE - NOT a production release"
+}

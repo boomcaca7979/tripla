@@ -1,0 +1,133 @@
+{
+  "artifact": "nasa-power-release-gate-v1",
+  "executedAt": "2026-09-13",
+  "gateVersion": "nasa-power-production-release-gate-2026.09.13.v1",
+  "prerequisites": {
+    "commercialCompliance": "PASS",
+    "migrationReadiness": "READY",
+    "productionMigration": "PASS (all 7 gates)"
+  },
+  "sourceBefore": "latitude-derived climate-zone templates (src/lib/climate-pattern.ts climate functions)",
+  "sourceAfter": "NASA POWER canonical static dataset (src/data/climate/nasa-power-canonical-v1.json, artifact nasa-power-canonical-production-v1)",
+  "artifactHash": {
+    "fileSha256": "fb8d12c6de58d61664887e5e328416f5f3900ef28b4152c2c0a09db98292e361",
+    "selfHash": "c92bd293cb7932a2c654ffa2861b4a042f2c13062ce706bec07a73b28b602cea",
+    "verified": true
+  },
+  "coreClimateHash": "7d884fd2334b092b27081c055b8ab860981577bddbeb833512e2818e64ff58ed",
+  "recommendationHash": "28d6a16cd5abcdaf3be842673d23945858d81ed61b888faafab7afa561771e84",
+  "bestMonthsHash": "417c40eb6246caf5b46236827e6606422bce6ef795fab94a31ec4eda52afbe40",
+  "sourceCanonicalDatasetHash": "9ac50d81a0b2d952518b6339c7b3d03e74d0093df0963f65872789f630c0e321",
+  "pageCoverage": {
+    "bestTimePages": "145/145",
+    "withNasaAttribution": "145/145",
+    "januaryValueSpotCheck": "145/145 match canonical",
+    "canonicalBestMonthsRendered": "145/145 (0 mismatch)"
+  },
+  "legacyBestMonthsLeakage": {
+    "oldStringRenderedAsWindowOnMigratedPages": 0,
+    "oldSentenceStatedBestTimeWindow": 0,
+    "oldClimateAuthorityCallsInCode": 0,
+    "note": "RecommendationModule legacy dest.bestMonths display found during release gate and FIXED before release (window now renders canonical label); hub/listing pages (/best-time-to-visit hub, DestinationsClient) display dest.bestMonths as pre-existing editorial metadata, not climate authority — out of migration scope, unchanged by it"
+  },
+  "runtimeClimateRequests": 0,
+  "attribution": {
+    "line": "Climate data source: NASA POWER (NASA Langley Research Center) · Climatology / Daily / Monthly point APIs · 1991–2020 · UTC+00:00 daily boundary",
+    "nasaLogoCount": 0,
+    "insigniaCount": 0,
+    "endorsementClaims": 0,
+    "forbiddenPhrases": ["NASA tested", "NASA approved", "NASA endorsed", "NASA-powered", "endorsed by NASA"],
+    "forbiddenPhraseHits": 0,
+    "oldCopyHits": {"notMeasurements": 0, "generalPattern": 0, "latitudeDerived": 0}
+  },
+  "gitFileList": {
+    "RELEASE_COMMIT_FILE_LIST": [
+      "src/app/best-time-to-visit/[slug]/page.tsx",
+      "src/lib/climate-pattern.ts",
+      "src/data/climate/nasa-power-canonical-v1.json",
+      "src/data/climate/nasa-canonical.ts",
+      "src/components/besttime/",
+      "src/components/inner/",
+      "src/components/destination/"
+    ],
+    "classification": {
+      "A_migrationNecessary": [
+        "src/data/climate/* (NEW production artifact + loader)",
+        "src/lib/climate-pattern.ts (latitude climate authority removed)",
+        "src/app/best-time-to-visit/[slug]/page.tsx (canonical wiring + attribution + coverage assert)",
+        "src/components/besttime/* (canonical-driven state/components; dir created by the best-time phase this migration completes)"
+      ],
+      "A_prerequisitesOfA": [
+        "src/components/inner/* (imported by the best-time page)",
+        "src/components/destination/* (place-state/PlacePractical imported by the best-time page)"
+      ],
+      "B_internalAssets_notCommitted": [
+        "pilot/best-time/** (all pilot raw data, scripts, reports — stays untracked)",
+        "*.md strategy/report files at repo root (stay untracked)"
+      ],
+      "C_preExisting_excluded": [
+        "src/app/destinations/[slug]/page.tsx",
+        "src/app/guides/[slug]/page.tsx",
+        "src/app/trips/[slug]/page.tsx",
+        "src/app/globals.css (design-token contrast tweaks from a prior phase)",
+        "src/components/ui/Eyebrow.tsx (comment-only change; HEAD version API-identical)"
+      ],
+      "D_unrelated_excluded": [
+        "src/components/journey/ (only consumed by the excluded trips page)"
+      ]
+    },
+    "coherenceProof": "git worktree at HEAD + RELEASE_COMMIT_FILE_LIST only → clean production build, 1132/1132 static pages, 0 errors (proves the pushed tree is self-consistent without the excluded C/D files)"
+  },
+  "seo": {
+    "canonicalLink": "PASS (sampled 7 regions: correct /best-time-to-visit/<slug> canonicals, no NASA API URLs)",
+    "noindex": "PASS (0 occurrences)",
+    "openGraph": "PASS",
+    "jsonLd": "PASS (Article + BreadcrumbList + FAQPage on every sampled page)",
+    "sitemap": "UNCHANGED (src/app/sitemap.ts not touched by migration)"
+  },
+  "allGateResults": {
+    "step0_secrets": "PASS (0 env/secret/token/NetCDF/raw-data files in src/)",
+    "step1_scopeClassification": "PASS (A/B/C/D fully partitioned; coherence proven by worktree build)",
+    "step2_authorityAudit": "PASS (latitude climate functions: 0 code-path calls; canonical is the only climate authority)",
+    "step3_bestMonths131Audit": "PASS (145/145 canonical Best Months rendered, 0 mismatch; legacy string leakage on migrated pages = 0 after in-gate fix)",
+    "step4_contentTruthfulness": "PASS (old copy hits = 0; forbidden NASA branding hits = 0)",
+    "step5_artifactIntegrity": "PASS (file sha256 + self-hash + all 4 climate hashes re-verified, match migration report)",
+    "step6_fullDataGate": "PASS (145 records / 1740 months / 0 schema errors / 0 classification differences / 0 Best Months differences)",
+    "step7_runtimeBuildGate": "PASS (worktree release-commit build 1132/1132; /api/weather + /api/geocoding byte-unchanged; 0 runtime NASA/climate requests)",
+    "step8_seoRegression": "PASS",
+    "step9_attributionFinal": "PASS",
+    "step10_gitReleaseDiff": "PASS (git diff --check clean; scope fully classified)",
+    "step11_commitPreparation": "PASS"
+  },
+  "status": "PASS",
+  "releaseExecution": {
+    "commit": {
+      "status": "PASS",
+      "sha": "0c4488a5c0fc28dc2072b9afa70ca7517521b744",
+      "message": "feat(best-time): promote NASA POWER climate dataset",
+      "filesCommitted": 34,
+      "stagedDiffCheck": "clean; 0 secret patterns; excluded C-class edits remain uncommitted in working tree (5 files)"
+    },
+    "push": {
+      "status": "PASS",
+      "remote": "origin/main",
+      "syncVerified": "main == origin/main == 0c4488a5c0fc28dc2072b9afa70ca7517521b744"
+    },
+    "deployment": {
+      "status": "PASS",
+      "provider": "Vercel (production)",
+      "url": "https://travel-planner-b4au1gk7r-boomcaca666s-projects.vercel.app",
+      "productionDomain": "https://utripla.xyz",
+      "builtFrom": "github.com/boomcaca7979/tripla Branch: main, Commit: 0c4488a (verified in build logs)",
+      "deploymentStatus": "Ready",
+      "duration": "1m"
+    },
+    "liveAudit": {
+      "status": "PASS",
+      "sampled": ["tokyo", "paris", "singapore", "newyork", "phnom-penh", "siem-reap", "ho-chi-minh-city", "home (/)"],
+      "checksPerPage": ["HTTP 200", "NASA POWER attribution line", "January tempHighC equals canonical", "canonical bestMonthsBaseline window rendered", "correct rel=canonical", "0 forbidden branding phrases"],
+      "results": "8/8 PASS",
+      "liveTitleExample": "Best Time To Visit Tokyo · December Travel Guide | tripla (canonical baseline [11] → December)"
+    }
+  }
+}

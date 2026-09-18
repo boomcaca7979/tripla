@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-09-13T03:43:47.941350+00:00",
+  "proposals": [
+    {
+      "destinationId": "phnom-penh",
+      "reference": "reports/phnom-penh-anchor-correction-proposal.json",
+      "status": "USER DECISION REQUIRED",
+      "impact": "METADATA-ONLY IMPACT",
+      "recommended": "update anchor to KTI/VDTI (11.36, 104.9213), elevation 6.1 m"
+    }
+  ],
+  "alreadyApprovedAndApplied": [
+    {
+      "destinationId": "ho-chi-minh-city",
+      "decision": "A approved 2026-09-12, applied to pilot (metadata-only)"
+    },
+    {
+      "destinationId": "siem-reap",
+      "decision": "B approved 2026-09-12, applied to pilot (production-data-affecting)"
+    }
+  ]
+}

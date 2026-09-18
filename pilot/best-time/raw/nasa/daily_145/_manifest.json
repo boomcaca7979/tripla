@@ -1,0 +1,4231 @@
+{
+  "pilotVersion": "pilot-2026.09.11.v1",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.5",
+  "provider": "NASA POWER (NASA Langley Research Center)",
+  "sourceFamily": "NASA POWER / MERRA-2",
+  "officialProduct": "Daily API (point)",
+  "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+  "parameters": [
+    "T2M_MAX",
+    "T2M_MIN"
+  ],
+  "community": "AG",
+  "start": "19910101",
+  "end": "20201231",
+  "timeStandardRequested": "UTC",
+  "manifestKind": "RECONSTRUCTED from stored responses (no fetch manifest existed)",
+  "generatedAt": "2026-09-11T16:36:42.387646+00:00",
+  "summary": {
+    "requested": 145,
+    "filesPresent": 145,
+    "allResponseTimeStandardUTC": true,
+    "allDayCountsEqual10958": true
+  },
+  "records": [
+    {
+      "destinationId": "tokyo",
+      "anchorLatitude": 35.7647,
+      "anchorLongitude": 140.3864,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=140.3864&latitude=35.7647&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:56:55.439317+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        140.386,
+        35.765,
+        12.09
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "paris",
+      "anchorLatitude": 49.0097,
+      "anchorLongitude": 2.5479,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=2.5479&latitude=49.0097&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:56:58.110503+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        2.548,
+        49.01,
+        92.41
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "newyork",
+      "anchorLatitude": 40.6413,
+      "anchorLongitude": -73.7781,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-73.7781&latitude=40.6413&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:00.695186+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -73.778,
+        40.641,
+        10.17
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "bangkok",
+      "anchorLatitude": 13.69,
+      "anchorLongitude": 100.7501,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=100.7501&latitude=13.69&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:03.314758+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        100.75,
+        13.69,
+        8.01
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "london",
+      "anchorLatitude": 51.47,
+      "anchorLongitude": -0.4543,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-0.4543&latitude=51.47&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:07.017025+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -0.454,
+        51.47,
+        87.34
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "sydney",
+      "anchorLatitude": -33.9399,
+      "anchorLongitude": 151.1753,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=151.1753&latitude=-33.9399&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:09.550167+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        151.175,
+        -33.94,
+        31.72
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "dubai",
+      "anchorLatitude": 25.2532,
+      "anchorLongitude": 55.3657,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=55.3657&latitude=25.2532&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:12.188565+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        55.366,
+        25.253,
+        67.09
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "rome",
+      "anchorLatitude": 41.8003,
+      "anchorLongitude": 12.2389,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=12.2389&latitude=41.8003&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:14.612618+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        12.239,
+        41.8,
+        198.41
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "barcelona",
+      "anchorLatitude": 41.2974,
+      "anchorLongitude": 2.0833,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=2.0833&latitude=41.2974&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:17.087940+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        2.083,
+        41.297,
+        302.35
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "singapore",
+      "anchorLatitude": 1.3644,
+      "anchorLongitude": 103.9915,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=103.9915&latitude=1.3644&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:19.855368+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        103.992,
+        1.364,
+        25.8
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "istanbul",
+      "anchorLatitude": 41.2753,
+      "anchorLongitude": 28.7519,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=28.7519&latitude=41.2753&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:22.653889+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        28.752,
+        41.275,
+        6.36
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "seoul",
+      "anchorLatitude": 37.4602,
+      "anchorLongitude": 126.4407,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=126.4407&latitude=37.4602&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:25.344583+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        126.441,
+        37.46,
+        11.85
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "mexico-city",
+      "anchorLatitude": 19.4363,
+      "anchorLongitude": -99.0721,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-99.0721&latitude=19.4363&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:28.175748+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -99.072,
+        19.436,
+        2626.86
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "las-vegas",
+      "anchorLatitude": 36.084,
+      "anchorLongitude": -115.1538,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-115.1538&latitude=36.084&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:30.495970+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -115.154,
+        36.084,
+        725.38
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "austin",
+      "anchorLatitude": 30.1975,
+      "anchorLongitude": -97.6664,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-97.6664&latitude=30.1975&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:32.926372+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -97.666,
+        30.198,
+        155.2
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "munich",
+      "anchorLatitude": 48.3538,
+      "anchorLongitude": 11.7861,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=11.7861&latitude=48.3538&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:35.590146+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        11.786,
+        48.354,
+        463.45
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "kyoto",
+      "anchorLatitude": 34.4273,
+      "anchorLongitude": 135.2444,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=135.2444&latitude=34.4273&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:37.955624+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        135.244,
+        34.427,
+        54.1
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "vienna",
+      "anchorLatitude": 48.1103,
+      "anchorLongitude": 16.5697,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=16.5697&latitude=48.1103&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:40.724184+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        16.57,
+        48.11,
+        162.22
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "rovaniemi",
+      "anchorLatitude": 66.5648,
+      "anchorLongitude": 25.8319,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=25.8319&latitude=66.5648&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:43.426794+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        25.832,
+        66.565,
+        151.72
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "antalya",
+      "anchorLatitude": 36.8987,
+      "anchorLongitude": 30.8005,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=30.8005&latitude=36.8987&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:46.184008+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        30.8,
+        36.899,
+        455.92
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "madrid",
+      "anchorLatitude": 40.4936,
+      "anchorLongitude": -3.5668,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-3.5668&latitude=40.4936&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:48.843152+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -3.567,
+        40.494,
+        779.85
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "milan",
+      "anchorLatitude": 45.6306,
+      "anchorLongitude": 8.7281,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=8.7281&latitude=45.6306&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:51.444343+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        8.728,
+        45.631,
+        232.25
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "baku",
+      "anchorLatitude": 40.4675,
+      "anchorLongitude": 50.0467,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=50.0467&latitude=40.4675&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:54.351498+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        50.047,
+        40.468,
+        -10.22
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "abu-dhabi",
+      "anchorLatitude": 24.433,
+      "anchorLongitude": 54.6511,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=54.6511&latitude=24.433&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:57:57.502927+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        54.651,
+        24.433,
+        8.25
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "prague",
+      "anchorLatitude": 50.1008,
+      "anchorLongitude": 14.26,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=14.26&latitude=50.1008&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:00.680781+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        14.26,
+        50.101,
+        353.91
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "cologne",
+      "anchorLatitude": 50.8659,
+      "anchorLongitude": 7.1427,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=7.1427&latitude=50.8659&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:04.824443+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        7.143,
+        50.866,
+        125.18
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "osaka",
+      "anchorLatitude": 34.4347,
+      "anchorLongitude": 135.2441,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=135.2441&latitude=34.4347&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:07.821980+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        135.244,
+        34.435,
+        54.1
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "hong-kong",
+      "anchorLatitude": 22.308,
+      "anchorLongitude": 113.9185,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=113.9185&latitude=22.308&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:10.849065+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        113.918,
+        22.308,
+        17.55
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "amsterdam",
+      "anchorLatitude": 52.3105,
+      "anchorLongitude": 4.7683,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=4.7683&latitude=52.3105&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:13.496107+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        4.768,
+        52.31,
+        -0.95
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "san-francisco",
+      "anchorLatitude": 37.6213,
+      "anchorLongitude": -122.379,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-122.379&latitude=37.6213&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:16.402262+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -122.379,
+        37.621,
+        65.91
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "bali",
+      "anchorLatitude": -8.7482,
+      "anchorLongitude": 115.1675,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=115.1675&latitude=-8.7482&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:19.672782+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        115.168,
+        -8.748,
+        313.73
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "boston",
+      "anchorLatitude": 42.3656,
+      "anchorLongitude": -71.0096,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-71.0096&latitude=42.3656&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:22.227749+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -71.01,
+        42.366,
+        71.06
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "beijing",
+      "anchorLatitude": 40.0799,
+      "anchorLongitude": 116.6031,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=116.6031&latitude=40.0799&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:24.603032+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        116.603,
+        40.08,
+        58.96
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "shanghai",
+      "anchorLatitude": 31.1443,
+      "anchorLongitude": 121.8083,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=121.8083&latitude=31.1443&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:27.722445+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        121.808,
+        31.144,
+        1.48
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "guangzhou",
+      "anchorLatitude": 23.3925,
+      "anchorLongitude": 113.2988,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=113.2988&latitude=23.3925&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:30.527409+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        113.299,
+        23.392,
+        91.46
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "chengdu",
+      "anchorLatitude": 30.5785,
+      "anchorLongitude": 103.9471,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=103.9471&latitude=30.5785&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:32.938439+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        103.947,
+        30.578,
+        641.57
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "xian",
+      "anchorLatitude": 34.4471,
+      "anchorLongitude": 108.7519,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=108.7519&latitude=34.4471&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:35.317916+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        108.752,
+        34.447,
+        592.71
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "hangzhou",
+      "anchorLatitude": 30.2348,
+      "anchorLongitude": 120.4293,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=120.4293&latitude=30.2348&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:37.637680+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        120.429,
+        30.235,
+        94.28
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "chongqing",
+      "anchorLatitude": 29.7192,
+      "anchorLongitude": 106.6417,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=106.6417&latitude=29.7192&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:40.372303+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        106.642,
+        29.719,
+        509.3
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "macau",
+      "anchorLatitude": 22.1496,
+      "anchorLongitude": 113.5914,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=113.5914&latitude=22.1496&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:42.705581+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        113.591,
+        22.15,
+        6.2
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "zurich",
+      "anchorLatitude": 47.4647,
+      "anchorLongitude": 8.5492,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=8.5492&latitude=47.4647&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:45.845167+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        8.549,
+        47.465,
+        566.56
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "los-angeles",
+      "anchorLatitude": 33.9425,
+      "anchorLongitude": -118.408,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-118.408&latitude=33.9425&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:48.675106+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -118.408,
+        33.943,
+        395.0
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "vancouver",
+      "anchorLatitude": 49.1947,
+      "anchorLongitude": -123.1792,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-123.1792&latitude=49.1947&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:51.376378+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -123.179,
+        49.195,
+        62.89
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "melbourne",
+      "anchorLatitude": -37.669,
+      "anchorLongitude": 144.841,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=144.841&latitude=-37.669&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:53.921581+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        144.841,
+        -37.669,
+        267.1
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "auckland",
+      "anchorLatitude": -37.0082,
+      "anchorLongitude": 174.785,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=174.785&latitude=-37.0082&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:56.558903+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        174.785,
+        -37.008,
+        50.23
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "taipei",
+      "anchorLatitude": 25.0777,
+      "anchorLongitude": 121.2328,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=121.2328&latitude=25.0777&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:58:59.255305+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        121.233,
+        25.078,
+        228.85
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "busan",
+      "anchorLatitude": 35.1795,
+      "anchorLongitude": 128.9382,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=128.9382&latitude=35.1795&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:01.772730+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        128.938,
+        35.179,
+        70.47
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "hanoi",
+      "anchorLatitude": 21.2212,
+      "anchorLongitude": 105.8072,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=105.8072&latitude=21.2212&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:05.439624+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        105.807,
+        21.221,
+        87.73
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "ho-chi-minh-city",
+      "anchorLatitude": 10.8188,
+      "anchorLongitude": 106.8069,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=106.8069&latitude=10.8188&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:08.115730+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        106.807,
+        10.819,
+        46.81
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "kuala-lumpur",
+      "anchorLatitude": 2.7456,
+      "anchorLongitude": 101.7099,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=101.7099&latitude=2.7456&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:10.819027+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        101.71,
+        2.746,
+        65.29
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "cebu",
+      "anchorLatitude": 10.3075,
+      "anchorLongitude": 123.979,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=123.979&latitude=10.3075&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:13.557707+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        123.979,
+        10.307,
+        98.77
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "lisbon",
+      "anchorLatitude": 38.7742,
+      "anchorLongitude": -9.1342,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-9.1342&latitude=38.7742&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:15.984026+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -9.134,
+        38.774,
+        52.0
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "budapest",
+      "anchorLatitude": 47.4369,
+      "anchorLongitude": 19.2556,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=19.2556&latitude=47.4369&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:18.361948+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        19.256,
+        47.437,
+        160.32
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "florence",
+      "anchorLatitude": 43.81,
+      "anchorLongitude": 11.2051,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=11.2051&latitude=43.81&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:21.149194+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        11.205,
+        43.81,
+        571.22
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "venice",
+      "anchorLatitude": 45.5053,
+      "anchorLongitude": 12.3519,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=12.3519&latitude=45.5053&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:23.890932+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        12.352,
+        45.505,
+        8.66
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "athens",
+      "anchorLatitude": 37.9364,
+      "anchorLongitude": 23.9445,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=23.9445&latitude=37.9364&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:26.223581+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        23.945,
+        37.936,
+        140.03
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "edinburgh",
+      "anchorLatitude": 55.95,
+      "anchorLongitude": -3.3725,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-3.3725&latitude=55.95&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:29.626606+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -3.373,
+        55.95,
+        128.13
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "copenhagen",
+      "anchorLatitude": 55.618,
+      "anchorLongitude": 12.656,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=12.656&latitude=55.618&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:32.218239+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        12.656,
+        55.618,
+        16.47
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "seville",
+      "anchorLatitude": 37.418,
+      "anchorLongitude": -5.8931,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-5.8931&latitude=37.418&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:34.694312+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -5.893,
+        37.418,
+        174.78
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "toronto",
+      "anchorLatitude": 43.6777,
+      "anchorLongitude": -79.6248,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-79.6248&latitude=43.6777&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:37.913457+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -79.625,
+        43.678,
+        98.64
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "manila",
+      "anchorLatitude": 14.5086,
+      "anchorLongitude": 121.0198,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=121.0198&latitude=14.5086&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:40.136539+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        121.02,
+        14.509,
+        201.16
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "jakarta",
+      "anchorLatitude": -6.1256,
+      "anchorLongitude": 106.6558,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=106.6558&latitude=-6.1256&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:42.871575+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        106.656,
+        -6.126,
+        12.32
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "yogyakarta",
+      "anchorLatitude": -7.9014,
+      "anchorLongitude": 110.0576,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=110.0576&latitude=-7.9014&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:45.602175+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        110.058,
+        -7.901,
+        49.37
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "chiang-mai",
+      "anchorLatitude": 18.7669,
+      "anchorLongitude": 98.9626,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=98.9626&latitude=18.7669&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:48.471649+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        98.963,
+        18.767,
+        759.08
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "phuket",
+      "anchorLatitude": 8.1132,
+      "anchorLongitude": 98.3169,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=98.3169&latitude=8.1132&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:50.894196+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        98.317,
+        8.113,
+        10.57
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "koh-samui",
+      "anchorLatitude": 9.5476,
+      "anchorLongitude": 100.0613,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=100.0613&latitude=9.5476&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:53.479386+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        100.061,
+        9.548,
+        19.29
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "da-nang",
+      "anchorLatitude": 16.0439,
+      "anchorLongitude": 108.1994,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=108.1994&latitude=16.0439&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:56.066973+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        108.199,
+        16.044,
+        155.61
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "nha-trang",
+      "anchorLatitude": 11.9982,
+      "anchorLongitude": 109.2195,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=109.2195&latitude=11.9982&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T15:59:58.771651+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        109.219,
+        11.998,
+        52.16
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "phu-quoc",
+      "anchorLatitude": 10.1713,
+      "anchorLongitude": 103.9928,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=103.9928&latitude=10.1713&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:02.576276+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        103.993,
+        10.171,
+        3.23
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "siem-reap",
+      "anchorLatitude": 13.4107,
+      "anchorLongitude": 103.8132,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=103.8132&latitude=13.4107&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:06.398725+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        103.813,
+        13.411,
+        36.86
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "phnom-penh",
+      "anchorLatitude": 11.5466,
+      "anchorLongitude": 104.8441,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=104.8441&latitude=11.5466&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:09.121456+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        104.844,
+        11.547,
+        9.54
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "jeju",
+      "anchorLatitude": 33.5113,
+      "anchorLongitude": 126.493,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=126.493&latitude=33.5113&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:11.510772+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        126.493,
+        33.511,
+        53.71
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "fukuoka",
+      "anchorLatitude": 33.5859,
+      "anchorLongitude": 130.451,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=130.451&latitude=33.5859&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:14.984748+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        130.451,
+        33.586,
+        185.36
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "sapporo",
+      "anchorLatitude": 42.7752,
+      "anchorLongitude": 141.6923,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=141.6923&latitude=42.7752&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:17.629791+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        141.692,
+        42.775,
+        208.24
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "nagoya",
+      "anchorLatitude": 34.8584,
+      "anchorLongitude": 136.8054,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=136.8054&latitude=34.8584&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:20.301646+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        136.805,
+        34.858,
+        79.37
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "nagasaki",
+      "anchorLatitude": 32.9169,
+      "anchorLongitude": 129.9138,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=129.9138&latitude=32.9169&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:22.780192+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        129.914,
+        32.917,
+        115.92
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "hiroshima",
+      "anchorLatitude": 34.4361,
+      "anchorLongitude": 132.9194,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=132.9194&latitude=34.4361&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:25.595895+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        132.919,
+        34.436,
+        211.07
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "kanazawa",
+      "anchorLatitude": 36.3939,
+      "anchorLongitude": 136.4072,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=136.4072&latitude=36.3939&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:28.199517+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        136.407,
+        36.394,
+        40.19
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "kobe",
+      "anchorLatitude": 34.6328,
+      "anchorLongitude": 135.2239,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=135.2239&latitude=34.6328&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:30.918747+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        135.224,
+        34.633,
+        54.1
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "berlin",
+      "anchorLatitude": 52.3667,
+      "anchorLongitude": 13.5033,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=13.5033&latitude=52.3667&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:34.164455+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        13.503,
+        52.367,
+        53.46
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "frankfurt",
+      "anchorLatitude": 50.0379,
+      "anchorLongitude": 8.5622,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=8.5622&latitude=50.0379&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:36.385264+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        8.562,
+        50.038,
+        171.61
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "naples",
+      "anchorLatitude": 40.886,
+      "anchorLongitude": 14.2908,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=14.2908&latitude=40.886&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:38.748832+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        14.291,
+        40.886,
+        264.43
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "amalfi-coast",
+      "anchorLatitude": 40.886,
+      "anchorLongitude": 14.2908,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=14.2908&latitude=40.886&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:41.308607+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        14.291,
+        40.886,
+        264.43
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "bologna",
+      "anchorLatitude": 44.5354,
+      "anchorLongitude": 11.2887,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=11.2887&latitude=44.5354&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:43.491951+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        11.289,
+        44.535,
+        198.28
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "turin",
+      "anchorLatitude": 45.2008,
+      "anchorLongitude": 7.6496,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=7.6496&latitude=45.2008&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:45.944279+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        7.65,
+        45.201,
+        705.88
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "valencia",
+      "anchorLatitude": 39.4893,
+      "anchorLongitude": -0.4816,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-0.4816&latitude=39.4893&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:48.861578+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -0.482,
+        39.489,
+        388.86
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "malaga",
+      "anchorLatitude": 36.6749,
+      "anchorLongitude": -4.4991,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-4.4991&latitude=36.6749&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:51.185505+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -4.499,
+        36.675,
+        144.54
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "granada",
+      "anchorLatitude": 37.1888,
+      "anchorLongitude": -3.7772,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-3.7772&latitude=37.1888&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:53.987530+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -3.777,
+        37.189,
+        720.12
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "porto",
+      "anchorLatitude": 41.2481,
+      "anchorLongitude": -8.6814,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-8.6814&latitude=41.2481&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:00:57.394918+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -8.681,
+        41.248,
+        76.08
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "brussels",
+      "anchorLatitude": 50.9014,
+      "anchorLongitude": 4.4844,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=4.4844&latitude=50.9014&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:00.034612+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        4.484,
+        50.901,
+        36.84
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "stockholm",
+      "anchorLatitude": 59.6519,
+      "anchorLongitude": 17.9186,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=17.9186&latitude=59.6519&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:02.731625+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        17.919,
+        59.652,
+        26.64
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "oslo",
+      "anchorLatitude": 60.1939,
+      "anchorLongitude": 11.1004,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=11.1004&latitude=60.1939&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:06.104820+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        11.1,
+        60.194,
+        209.58
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "reykjavik",
+      "anchorLatitude": 63.985,
+      "anchorLongitude": -22.6056,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-22.6056&latitude=63.985&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:08.878623+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -22.606,
+        63.985,
+        58.88
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "dublin",
+      "anchorLatitude": 53.4213,
+      "anchorLongitude": -6.2701,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-6.2701&latitude=53.4213&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:11.628370+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -6.27,
+        53.421,
+        46.03
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "dubrovnik",
+      "anchorLatitude": 42.5614,
+      "anchorLongitude": 18.2682,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=18.2682&latitude=42.5614&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:14.352716+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        18.268,
+        42.561,
+        143.82
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "santorini",
+      "anchorLatitude": 36.3991,
+      "anchorLongitude": 25.4789,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=25.4789&latitude=36.3991&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:16.867968+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        25.479,
+        36.399,
+        13.36
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "miami",
+      "anchorLatitude": 25.7959,
+      "anchorLongitude": -80.287,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-80.287&latitude=25.7959&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:19.400378+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -80.287,
+        25.796,
+        2.81
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "orlando",
+      "anchorLatitude": 28.4312,
+      "anchorLongitude": -81.3081,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-81.3081&latitude=28.4312&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:22.013951+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -81.308,
+        28.431,
+        22.07
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "chicago",
+      "anchorLatitude": 41.9742,
+      "anchorLongitude": -87.9073,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-87.9073&latitude=41.9742&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:24.633093+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -87.907,
+        41.974,
+        231.39
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "washington-dc",
+      "anchorLatitude": 38.9531,
+      "anchorLongitude": -77.4565,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-77.4565&latitude=38.9531&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:27.322307+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -77.457,
+        38.953,
+        120.54
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "seattle",
+      "anchorLatitude": 47.4502,
+      "anchorLongitude": -122.3088,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-122.3088&latitude=47.4502&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:29.934745+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -122.309,
+        47.45,
+        110.01
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "san-diego",
+      "anchorLatitude": 32.7338,
+      "anchorLongitude": -117.1933,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-117.1933&latitude=32.7338&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:32.752000+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -117.193,
+        32.734,
+        21.09
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "new-orleans",
+      "anchorLatitude": 29.9934,
+      "anchorLongitude": -90.2581,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-90.2581&latitude=29.9934&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:35.149346+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -90.258,
+        29.993,
+        1.69
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "cancun",
+      "anchorLatitude": 21.0365,
+      "anchorLongitude": -86.8771,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-86.8771&latitude=21.0365&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:37.726985+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -86.877,
+        21.037,
+        6.36
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "montreal",
+      "anchorLatitude": 45.4706,
+      "anchorLongitude": -73.7408,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-73.7408&latitude=45.4706&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:40.411389+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -73.741,
+        45.471,
+        37.97
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "quebec-city",
+      "anchorLatitude": 46.7881,
+      "anchorLongitude": -71.3928,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-71.3928&latitude=46.7881&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:42.998815+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -71.393,
+        46.788,
+        332.2
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "brisbane",
+      "anchorLatitude": -27.3842,
+      "anchorLongitude": 153.1175,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=153.1175&latitude=-27.3842&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:45.670887+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        153.118,
+        -27.384,
+        61.5
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "gold-coast",
+      "anchorLatitude": -28.1644,
+      "anchorLongitude": 153.5052,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=153.5052&latitude=-28.1644&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:48.162277+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        153.505,
+        -28.164,
+        17.12
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "perth",
+      "anchorLatitude": -31.9403,
+      "anchorLongitude": 115.9669,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=115.9669&latitude=-31.9403&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:50.928089+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        115.967,
+        -31.94,
+        213.52
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "queenstown",
+      "anchorLatitude": -45.0211,
+      "anchorLongitude": 168.7392,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=168.7392&latitude=-45.0211&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:53.661195+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        168.739,
+        -45.021,
+        962.79
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "wellington",
+      "anchorLatitude": -41.3272,
+      "anchorLongitude": 174.8053,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=174.8053&latitude=-41.3272&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:56.152341+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        174.805,
+        -41.327,
+        70.62
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "ubud",
+      "anchorLatitude": -8.7482,
+      "anchorLongitude": 115.1675,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=115.1675&latitude=-8.7482&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:01:58.870244+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        115.168,
+        -8.748,
+        313.73
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "lombok",
+      "anchorLatitude": -8.7569,
+      "anchorLongitude": 116.2784,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=116.2784&latitude=-8.7569&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:01.527990+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        116.278,
+        -8.757,
+        47.65
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "luang-prabang",
+      "anchorLatitude": 19.8996,
+      "anchorLongitude": 102.1606,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=102.1606&latitude=19.8996&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:04.976926+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        102.161,
+        19.9,
+        756.19
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "kathmandu",
+      "anchorLatitude": 27.6966,
+      "anchorLongitude": 85.3591,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=85.3591&latitude=27.6966&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:07.370291+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        85.359,
+        27.697,
+        1269.39
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "colombo",
+      "anchorLatitude": 7.1808,
+      "anchorLongitude": 79.8841,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=79.8841&latitude=7.1808&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:10.067594+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        79.884,
+        7.181,
+        123.66
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "male",
+      "anchorLatitude": 4.1918,
+      "anchorLongitude": 73.5291,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=73.5291&latitude=4.1918&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:12.965863+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        73.529,
+        4.192,
+        0.01
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "mumbai",
+      "anchorLatitude": 19.0896,
+      "anchorLongitude": 72.8656,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=72.8656&latitude=19.0896&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:15.646930+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        72.866,
+        19.09,
+        97.15
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "jaipur",
+      "anchorLatitude": 26.8242,
+      "anchorLongitude": 75.8122,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=75.8122&latitude=26.8242&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:18.234104+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        75.812,
+        26.824,
+        405.74
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "goa",
+      "anchorLatitude": 15.3808,
+      "anchorLongitude": 73.8314,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=73.8314&latitude=15.3808&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:20.486340+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        73.831,
+        15.381,
+        76.19
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "penang",
+      "anchorLatitude": 5.2971,
+      "anchorLongitude": 100.2769,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=100.2769&latitude=5.2971&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:23.093934+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        100.277,
+        5.297,
+        9.27
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "pattaya",
+      "anchorLatitude": 12.6806,
+      "anchorLongitude": 101.0044,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=101.0044&latitude=12.6806&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:25.852430+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        101.004,
+        12.681,
+        11.54
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "yangon",
+      "anchorLatitude": 16.9073,
+      "anchorLongitude": 96.1332,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=96.1332&latitude=16.9073&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:28.406551+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        96.133,
+        16.907,
+        10.91
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "warsaw",
+      "anchorLatitude": 52.1657,
+      "anchorLongitude": 20.9671,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=20.9671&latitude=52.1657&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:31.175411+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        20.967,
+        52.166,
+        125.44
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "krakow",
+      "anchorLatitude": 50.0777,
+      "anchorLongitude": 19.7848,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=19.7848&latitude=50.0777&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:33.732756+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        19.785,
+        50.078,
+        307.33
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "tallinn",
+      "anchorLatitude": 59.4133,
+      "anchorLongitude": 24.8328,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=24.8328&latitude=59.4133&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:36.477851+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        24.833,
+        59.413,
+        27.07
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "zagreb",
+      "anchorLatitude": 45.7429,
+      "anchorLongitude": 16.0688,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=16.0688&latitude=45.7429&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:40.093376+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        16.069,
+        45.743,
+        135.81
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "split",
+      "anchorLatitude": 43.5389,
+      "anchorLongitude": 16.298,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=16.298&latitude=43.5389&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:42.848610+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        16.298,
+        43.539,
+        212.42
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "geneva",
+      "anchorLatitude": 46.2381,
+      "anchorLongitude": 6.1089,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=6.1089&latitude=46.2381&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:45.737459+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        6.109,
+        46.238,
+        849.99
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "lyon",
+      "anchorLatitude": 45.7256,
+      "anchorLongitude": 5.0811,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=5.0811&latitude=45.7256&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:48.063221+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        5.081,
+        45.726,
+        432.85
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "nice",
+      "anchorLatitude": 43.6584,
+      "anchorLongitude": 7.2159,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=7.2159&latitude=43.6584&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:50.344329+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        7.216,
+        43.658,
+        85.72
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "cordoba",
+      "anchorLatitude": 37.8444,
+      "anchorLongitude": -4.8491,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-4.8491&latitude=37.8444&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:52.986529+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -4.849,
+        37.844,
+        409.24
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "san-sebastian",
+      "anchorLatitude": 43.3564,
+      "anchorLongitude": -1.7906,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-1.7906&latitude=43.3564&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:55.710878+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -1.791,
+        43.356,
+        118.13
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "philadelphia",
+      "anchorLatitude": 39.8744,
+      "anchorLongitude": -75.2424,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-75.2424&latitude=39.8744&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:02:59.111499+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -75.242,
+        39.874,
+        46.88
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "denver",
+      "anchorLatitude": 39.8561,
+      "anchorLongitude": -104.6737,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-104.6737&latitude=39.8561&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:03:01.928549+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -104.674,
+        39.856,
+        1511.21
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "nashville",
+      "anchorLatitude": 36.1263,
+      "anchorLongitude": -86.6774,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-86.6774&latitude=36.1263&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:03:04.782005+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -86.677,
+        36.126,
+        209.36
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "honolulu",
+      "anchorLatitude": 21.3245,
+      "anchorLongitude": -157.9251,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-157.9251&latitude=21.3245&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:03:07.297977+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -157.925,
+        21.325,
+        78.06
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "banff",
+      "anchorLatitude": 51.1139,
+      "anchorLongitude": -114.0203,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-114.0203&latitude=51.1139&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:03:26.998983+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -114.02,
+        51.114,
+        1039.79
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "tulum",
+      "anchorLatitude": 21.0365,
+      "anchorLongitude": -86.8771,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-86.8771&latitude=21.0365&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:03:33.851233+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -86.877,
+        21.037,
+        6.36
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "lima",
+      "anchorLatitude": -12.0219,
+      "anchorLongitude": -77.1143,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-77.1143&latitude=-12.0219&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:03:47.177220+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -77.114,
+        -12.022,
+        1194.76
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "buenos-aires",
+      "anchorLatitude": -34.8222,
+      "anchorLongitude": -58.5358,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=-58.5358&latitude=-34.8222&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:03:52.626601+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        -58.536,
+        -34.822,
+        25.6
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "adelaide",
+      "anchorLatitude": -34.945,
+      "anchorLongitude": 138.5286,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=138.5286&latitude=-34.945&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:04:04.523849+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        138.529,
+        -34.945,
+        167.35
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "cairns",
+      "anchorLatitude": -16.8858,
+      "anchorLongitude": 145.7553,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=145.7553&latitude=-16.8858&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:04:15.846545+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        145.755,
+        -16.886,
+        404.05
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "christchurch",
+      "anchorLatitude": -43.4894,
+      "anchorLongitude": 172.5322,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=172.5322&latitude=-43.4894&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:04:18.339717+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        172.532,
+        -43.489,
+        76.4
+      ],
+      "error": null
+    },
+    {
+      "destinationId": "rotorua",
+      "anchorLatitude": -38.1093,
+      "anchorLongitude": 176.3165,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN&community=AG&longitude=176.3165&latitude=-38.1093&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "retrievedAt": null,
+      "retrievedAtNote": "not captured at fetch time; fileModifiedAt reported instead",
+      "fileModifiedAt": "2026-09-11T16:04:20.943943+00:00",
+      "responseTimeStandard": "UTC",
+      "responseTitle": "NASA/POWER Source Native Resolution Daily Data",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "parametersReturned": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "dayCountT2M_MAX": 10958,
+      "dayCountT2M_MIN": 10958,
+      "gridCoordinates": [
+        176.316,
+        -38.109,
+        287.29
+      ],
+      "error": null
+    }
+  ]
+}

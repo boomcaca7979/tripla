@@ -1,0 +1,119 @@
+{
+  "generatedAt": "2026-09-12T15:03:52.796079+00:00",
+  "artifact": "phnom-penh-anchor-review.json",
+  "destinationId": "phnom-penh",
+  "currentAnchor": {
+    "iata": "PNH",
+    "icao": "VDPP",
+    "lat": 11.5466,
+    "lon": 104.8441,
+    "nameInSrc": "Phnom Penh International Airport",
+    "sourceFile": "src/data/destinations-extended-a.ts (read-only)"
+  },
+  "currentAnchorTarget": "OLD_AIRPORT (distance to published VDPP ARP = 0.07 km; to VDTI ARP = 22.39 km)",
+  "currentAirportStatus": "CLOSED — last commercial flights 2025-09-08 23:59 local; closed from 2025-09-09 00:01; all operations transferred to Techo International (KTI/VDTI)",
+  "identityMatrix": {
+    "IATA": "IDENTITY_MATCH (PNH = VDPP's IATA)",
+    "ICAO": "LEGACY_AIRPORT (VDPP closed 2025-09-09)",
+    "coordinates": "IDENTITY_MATCH with OLD airport (0.02 km)",
+    "airportName": "LEGACY_AIRPORT (old name still current in src)"
+  },
+  "proposedAnchor": {
+    "iata": "KTI",
+    "icao": "VDTI",
+    "lat": 11.36,
+    "lon": 104.9213
+  },
+  "evidence": [
+    {
+      "fact": "PNH last flights 2025-09-08 23:59; closed 2025-09-09 00:01; all flights transferred to KTI",
+      "tier": 3,
+      "sources": [
+        "Air Cambodia official notice",
+        "Cathay Pacific agent notice",
+        "Vietnam Airlines travel guide",
+        "Kiripost",
+        "https://en.wikipedia.org/wiki/Phnom_Penh_International_Airport"
+      ]
+    },
+    {
+      "fact": "KTI/VDTI commercial operations began 2025-09-09 (inauguration 2025-10-20)",
+      "tier": 3,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Techo_International_Airport",
+        "https://www.ocic.com.kh/projects/techo-international-airport",
+        "https://www.techoairport.com.kh/ (official operator site — Tier 1)"
+      ]
+    },
+    {
+      "fact": "VDTI coordinates ~11.36N 104.9213E; elevation 20 ft / 6 m MSL",
+      "tier": 3,
+      "sources": [
+        "https://metar-taf.com/airport/VDTI-techo-international-airport",
+        "official site 20 ft / 6 m (Tier 1)",
+        "OSM 7 m (Tier 4 corroboration; delta 0.9 m)"
+      ]
+    },
+    {
+      "fact": "phnompenhairport.com '13,123 ft / 4000 m' elevation claim is FALSE (4000 m is the runway length); discarded per elevation-semantics rule",
+      "tier": "-",
+      "sources": [
+        "https://www.phnompenhairport.com/"
+      ]
+    }
+  ],
+  "elevation": {
+    "currentApprovedLedgerValueM": 12.2,
+    "currentLedgerStatus": "APPROVED-VERIFIED (for VDPP identity)",
+    "proposedElevationM": 6.1,
+    "proposedSource": "official operator site 20 ft (Tier 1) + METAR-TAF 20 ft (Tier 3) + OSM 7 m (Tier 4, delta 0.9 m)",
+    "proposedTier": 1,
+    "deltaM": -6.1
+  },
+  "gridComparison": {
+    "old": {
+      "latitude": 11.547,
+      "longitude": 104.844,
+      "elevationM": 9.54,
+      "resolution": "NASA/POWER Source Native Resolution (tested: ~0.5 deg lat x 0.625 deg lon)"
+    },
+    "new": {
+      "latitude": 11.36,
+      "longitude": 104.921,
+      "elevationM": 9.54
+    },
+    "gridCellChanged": true
+  },
+  "simulation": "normalized/anchor-correction-simulated-phnom-penh.json",
+  "impactClassification": {
+    "climateValueCellsChanged": 8,
+    "classificationChangedMonths": [],
+    "bestMonthsChanged": false,
+    "oldBestMonths": [
+      10,
+      11
+    ],
+    "newBestMonths": [
+      10,
+      11
+    ],
+    "maxAbsDelta": {
+      "tempMeanC": 0.0,
+      "tempHighC": 0.0,
+      "tempLowC": 0.0,
+      "precipMm": 0.0,
+      "precipDaysGe1mm": 0.0,
+      "daylightHours": 0.01
+    },
+    "meanAbsDelta": {
+      "tempMeanC": 0.0,
+      "tempHighC": 0.0,
+      "tempLowC": 0.0,
+      "precipMm": 0.0,
+      "precipDaysGe1mm": 0.0,
+      "daylightHours": 0.01
+    },
+    "observedClimateCellsChanged": 0,
+    "daylightHoursCellsChanged": 8
+  }
+}

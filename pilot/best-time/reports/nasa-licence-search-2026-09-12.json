@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-09-12T08:20:32.341266+00:00",
+  "search": "NASA POWER formal licence text (commercial/redistribution)",
+  "newEvidence": [
+    {
+      "source": "NASA Earthdata \u2014 Data Use and Citation Guidance",
+      "url": "https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance",
+      "claim": "NASA open data policy: data generally free and unrestricted including commercial use and redistribution, with NASA acknowledgment where applicable",
+      "classification": "policy guidance page (search-result level) \u2014 NOT a POWER-specific formal licence instrument; not retrieved as full primary text this round",
+      "action": "recorded as LEAD only; does NOT close the blocker"
+    }
+  ],
+  "unchangedConclusion": {
+    "commercialUse": "UNVERIFIED",
+    "redistribution": "UNVERIFIED",
+    "gate": "BLOCKED_EXTERNAL / LEGAL REVIEW REQUIRED",
+    "closesWith": "either written confirmation from larc-power-project@mail.nasa.gov, or user legal review accepting the Earthdata policy + POWER referencing guide as governing terms"
+  }
+}

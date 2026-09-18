@@ -1,0 +1,52 @@
+{
+ "cape-town": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 606452
+ },
+ "cairo": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 600029
+ },
+ "nairobi": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 610822
+ },
+ "doha": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 603002
+ },
+ "rio-de-janeiro": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 611099
+ },
+ "cusco": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 597776
+ },
+ "bogota": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 612213
+ },
+ "santiago": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 600359
+ },
+ "havana": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 609379
+ },
+ "nadi": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 612254
+ }
+}

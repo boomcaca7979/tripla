@@ -1,0 +1,26 @@
+{
+  "gate": "nasa-primary-production-migration-gates",
+  "artifact": "src/data/climate/nasa-power-canonical-v1.json",
+  "numerical": {
+    "coreClimateHash": {
+      "match": true,
+      "expected": "7d884fd2334b092b27081c055b8ab860981577bddbeb833512e2818e64ff58ed",
+      "computed": "7d884fd2334b092b27081c055b8ab860981577bddbeb833512e2818e64ff58ed"
+    },
+    "recommendationHash": {
+      "match": true,
+      "expected": "28d6a16cd5abcdaf3be842673d23945858d81ed61b888faafab7afa561771e84",
+      "computed": "28d6a16cd5abcdaf3be842673d23945858d81ed61b888faafab7afa561771e84"
+    },
+    "bestMonthsHash": {
+      "match": true,
+      "expected": "417c40eb6246caf5b46236827e6606422bce6ef795fab94a31ec4eda52afbe40",
+      "computed": "417c40eb6246caf5b46236827e6606422bce6ef795fab94a31ec4eda52afbe40"
+    }
+  },
+  "schemaErrors": [],
+  "schemaErrorCount": 0,
+  "recordsChecked": 145,
+  "monthsChecked": 1740,
+  "status": "PASS"
+}

@@ -1,0 +1,13 @@
+{
+  "frozenAt": "2026-09-13T04:07:56.915066+00:00",
+  "artifact": "v87-pre-phnom-penh-baseline.json",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.7",
+  "ruleVersion": "r1-r7.v4",
+  "datasetVersion": "pilot-nasa-canonical-145-v87",
+  "coreClimateHash": "7d884fd2334b092b27081c055b8ab860981577bddbeb833512e2818e64ff58ed",
+  "recommendationHash": "28d6a16cd5abcdaf3be842673d23945858d81ed61b888faafab7afa561771e84",
+  "bestMonthsHash": "417c40eb6246caf5b46236827e6606422bce6ef795fab94a31ec4eda52afbe40",
+  "anchorHash": "ab0a5ab9cef44337256c034aca0634c96bd1dd48c10597ec8f519a0442c54e77",
+  "elevationHash": "cda49b45c98172907d1d6ce8ac958008cb554d28939565cf6ffe9c1b409a9d14",
+  "canonicalDatasetHash": "f6bf9eadf814cf7d0b8ac7b59eeac17cfb0eb41d34bde53279b28ef642610bfb"
+}

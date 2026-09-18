@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-09-12T08:19:42.449594+00:00",
+  "principle": "spatial anchor problems are handled SEPARATELY from ICAO-only metadata issues",
+  "spatialAnchorCases": [
+    {
+      "destinationId": "ho-chi-minh-city",
+      "problem": "anchor longitude points at the city centre (16.92 km from SGN/VVTS); latitude identical",
+      "conflictType": "coordinate-only",
+      "climateImpactUnderCurrentNasaGrid": "NONE (full 12-month simulation: 0 value cells, 0 classifications, Best Months unchanged)",
+      "dataIntegrityImpact": "YES",
+      "correctionClass": "data-integrity correction WITHOUT climate-value change"
+    },
+    {
+      "destinationId": "siem-reap",
+      "problem": "mixed-state anchor: IATA=SAI (new airport) but ICAO=VDSR + coordinates = CLOSED old REP airport",
+      "conflictType": "both (ICAO + coordinate), single root cause: 2023 relocation",
+      "climateImpactUnderCurrentNasaGrid": "PRODUCTION-DATA-AFFECTING (59 value cells; July R4->R3 crossing precip 200 mm; Dec R4->R7; Best Months [10] -> [10,11])",
+      "dataIntegrityImpact": "YES",
+      "correctionClass": "climate-value correction (requires full re-bake + re-derivation)"
+    }
+  ],
+  "excludedFromThisGate": {
+    "icaoOnlyCases": 7,
+    "note": "handled in airport-identity-corrections.json; no spatial component"
+  }
+}

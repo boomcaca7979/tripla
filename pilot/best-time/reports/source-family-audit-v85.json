@@ -1,0 +1,14 @@
+{
+ "generatedAt": "2026-09-12T01:26:07.898255+00:00",
+ "rule": "VALID SAME-FAMILY MULTI-ENDPOINT: NASA POWER / MERRA-2 may combine Climatology API and Daily API inside one record. INVALID: NASA + Open-Meteo, ERA5 + NASA.",
+ "observedFamilyPerRecord": [
+  "NASA POWER / MERRA-2"
+ ],
+ "observedFieldCombinations": {
+  "tempMeanC:Climatology API/T2M@climatology|tempHighC:Daily API/T2M_MAX@daily|tempLowC:Daily API/T2M_MIN@daily|precipMm:Climatology API/PRECTOTCORR_SUM@climatology": 145
+ },
+ "crossFamilyViolations": [],
+ "violationCount": 0,
+ "openMeteoReferencedInCanonical": false,
+ "gate": "PASS - single source family, multi-endpoint legitimate"
+}

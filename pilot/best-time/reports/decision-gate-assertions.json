@@ -1,0 +1,48 @@
+{
+  "assertions": [
+    {
+      "assert": "baseline-hashes-recorded",
+      "pass": true
+    },
+    {
+      "assert": "hcmc-sim-metadata-only",
+      "pass": true
+    },
+    {
+      "assert": "siemreap-sim-climate-affecting",
+      "pass": true
+    },
+    {
+      "assert": "siemreap-july-r3-crossing",
+      "pass": true
+    },
+    {
+      "assert": "icao-only-count-from-original-json=7",
+      "pass": true,
+      "detail": [
+        "bologna",
+        "cebu",
+        "lombok",
+        "nha-trang",
+        "pattaya",
+        "rovaniemi",
+        "yogyakarta"
+      ]
+    },
+    {
+      "assert": "anchor-decision-status=user-decision-required",
+      "pass": true
+    },
+    {
+      "assert": "no-production-write",
+      "pass": true,
+      "detail": "all outputs under pilot/best-time/"
+    },
+    {
+      "assert": "elevation-contract-literal-reading-recorded",
+      "pass": true
+    }
+  ],
+  "passed": 8,
+  "failed": 0
+}

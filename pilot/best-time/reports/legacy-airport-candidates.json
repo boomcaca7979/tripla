@@ -1,0 +1,239 @@
+{
+  "generatedAt": "2026-09-13T03:43:47.941350+00:00",
+  "candidateCount": 8,
+  "candidates": [
+    {
+      "destinationId": "phnom-penh",
+      "country": "Cambodia",
+      "suspectedIssue": "airport replaced: PNH/VDPP closed 2025-09-09, replaced by Techo KTI/VDTI",
+      "oldAirport": {
+        "iata": "PNH",
+        "icao": "VDPP",
+        "lat": 11.5466,
+        "lon": 104.8441
+      },
+      "newAirport": {
+        "iata": "KTI",
+        "icao": "VDTI",
+        "lat": 11.36,
+        "lon": 104.9213
+      },
+      "replacementDate": "2025-09-09",
+      "evidence": [
+        {
+          "tier": 3,
+          "fact": "last commercial flights 2025-09-08 23:59; airport closed 2025-09-09 00:01; all flights transferred",
+          "sources": [
+            "Air Cambodia official notice",
+            "Cathay Pacific agent notice",
+            "Vietnam Airlines",
+            "https://en.wikipedia.org/wiki/Phnom_Penh_International_Airport"
+          ]
+        },
+        {
+          "tier": 1,
+          "fact": "KTI operator site (techoairport.com.kh); OCIC project page",
+          "sources": [
+            "https://www.techoairport.com.kh/",
+            "https://www.ocic.com.kh/projects/techo-international-airport"
+          ]
+        }
+      ],
+      "decision": "LEGACY AIRPORT — impact simulated last round: METADATA-ONLY IMPACT (observed climate byte-identical, R1-R7/BM unchanged, daylightHours 8 cells ±0.01 h)",
+      "status": "CONFIRMED LEGACY AIRPORT — correction proposal exists, USER DECISION REQUIRED",
+      "impact": "METADATA-ONLY IMPACT",
+      "nasaSimulation": "normalized/anchor-correction-simulated-phnom-penh.json (reuse, no recompute)"
+    },
+    {
+      "destinationId": "chengdu",
+      "country": "China",
+      "suspectedIssue": "dual-airport city: Tianfu (TFU) opened 2021-06; is Shuangliu (CTU) still operational?",
+      "oldAirport": null,
+      "newAirport": {
+        "iata": "TFU",
+        "icao": "ZUTF",
+        "note": "new second airport"
+      },
+      "replacementDate": null,
+      "evidence": [
+        {
+          "tier": 3,
+          "fact": "CTU fully operational in 2026 (live flight info; ~222k movements 2025; Cathay Pacific relocates ops BACK to CTU from 2026-07-31)",
+          "sources": [
+            "https://www.cdairport.com/en/ (official)",
+            "https://www.cathaypacific.com/cx/id_ID/latest-news/security-and-operational-changes/relocation-of-passenger-flight-operations-to-ctu.html"
+          ]
+        }
+      ],
+      "decision": "NO ISSUE — anchored airport (CTU) remains operational (dual-airport city)",
+      "status": "CURRENT AIRPORT",
+      "impact": "NO IMPACT",
+      "nasaSimulation": null
+    },
+    {
+      "destinationId": "goa",
+      "country": "India",
+      "suspectedIssue": "dual-airport: Mopa (GOX) opened 2022-12; Dabolim (GOI) traffic shifting",
+      "oldAirport": null,
+      "newAirport": {
+        "iata": "GOX",
+        "icao": "VOGA",
+        "note": "Manohar International"
+      },
+      "replacementDate": null,
+      "evidence": [
+        {
+          "tier": 3,
+          "fact": "Dabolim still operating civil + navy use; Goa government: no closure plan (movements 55,080 (2022) -> 40,701 (2025), declining but open)",
+          "sources": [
+            "https://timesofindia.indiatimes.com/city/goa/dabolim-airport-will-continue-ops-for-civil-navy-use-says-cm/articleshow/128321885.cms",
+            "https://goemkarponn.com/dabolims-flight-exodus-govt-admits-no-impact-assessment-after-mopa-launch/"
+          ]
+        }
+      ],
+      "decision": "NO ISSUE — anchored airport (GOI) remains operational (watch item: traffic declining)",
+      "status": "CURRENT AIRPORT",
+      "impact": "NO IMPACT",
+      "nasaSimulation": null
+    },
+    {
+      "destinationId": "mexico-city",
+      "country": "Mexico",
+      "suspectedIssue": "dual-airport: Felipe Ángeles (NLU/AIFA) opened 2022-03",
+      "oldAirport": null,
+      "newAirport": {
+        "iata": "NLU",
+        "icao": "MMSM",
+        "note": "Felipe Ángeles"
+      },
+      "replacementDate": null,
+      "evidence": [
+        {
+          "tier": 3,
+          "fact": "MEX remains Mexico's busiest airport and the main international gateway; NLU is a growing secondary (7.08M pax 2025, 7th busiest)",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Felipe_%C3%81ngeles_International_Airport",
+            "Mexico Business News"
+          ]
+        }
+      ],
+      "decision": "NO ISSUE — anchored airport (MEX) remains operational and primary",
+      "status": "CURRENT AIRPORT",
+      "impact": "NO IMPACT",
+      "nasaSimulation": null
+    },
+    {
+      "destinationId": "mumbai",
+      "country": "India",
+      "suspectedIssue": "dual-airport: Navi Mumbai (NMI) opened 2025-12-25; from 2026-10 a third of international flights shift",
+      "oldAirport": null,
+      "newAirport": {
+        "iata": "NMI",
+        "icao": "VANM",
+        "note": "Navi Mumbai International"
+      },
+      "replacementDate": null,
+      "evidence": [
+        {
+          "tier": 3,
+          "fact": "BOM/CSMIA remains operational and primary; NMI phased in from 2025-12-25",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Navi_Mumbai_International_Airport",
+            "https://edition.cnn.com/2025/10/08/travel/navi-mumbai-international-airport-opens-intl-hnk"
+          ]
+        }
+      ],
+      "decision": "NO ISSUE — anchored airport (BOM) remains operational (watch item: 2026-10 partial shift)",
+      "status": "CURRENT AIRPORT",
+      "impact": "NO IMPACT",
+      "nasaSimulation": null
+    },
+    {
+      "destinationId": "beijing",
+      "country": "China",
+      "suspectedIssue": "dual-airport: Daxing (PKX) opened 2019-09",
+      "oldAirport": null,
+      "newAirport": {
+        "iata": "PKX",
+        "icao": "ZBAD",
+        "note": "Beijing Daxing"
+      },
+      "replacementDate": null,
+      "evidence": [
+        {
+          "tier": 3,
+          "fact": "PEK never closed; both airports handled 100.06M pax in 2025; PEK alone ~1.67M trips in one holiday period",
+          "sources": [
+            "https://www.chinadaily.com.cn/a/202509/29/WS68da0986a310f735438b2e95.html",
+            "https://en.wikipedia.org/wiki/Beijing_Capital_International_Airport"
+          ]
+        }
+      ],
+      "decision": "NO ISSUE — anchored airport (PEK) remains operational",
+      "status": "CURRENT AIRPORT",
+      "impact": "NO IMPACT",
+      "nasaSimulation": null
+    },
+    {
+      "destinationId": "berlin",
+      "country": "Germany",
+      "suspectedIssue": "BER (2020-10-31) replaced Tegel (closed 2020-11-08) — is the project anchor on the new airport?",
+      "oldAirport": {
+        "iata": "TXL",
+        "icao": "EDDT",
+        "lat": 52.5547,
+        "lon": 13.2868
+      },
+      "newAirport": {
+        "iata": "BER",
+        "icao": "EDDB",
+        "note": "project anchor already BER"
+      },
+      "replacementDate": "2020-11-08",
+      "evidence": [
+        {
+          "tier": 3,
+          "fact": "Tegel closed 2020-11-08 (decommissioned 2021-05-04); project anchor is BER/EDDB with OurAirports coordinate match 0.556 km — project is on the CURRENT airport",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Berlin_Tegel_Airport",
+            "https://corporate.berlin-airport.de/en/company-media/history/berlin-tegel-airport.html"
+          ]
+        }
+      ],
+      "decision": "NO ISSUE — project anchor already the current airport (pre-migrated correctly)",
+      "status": "CURRENT AIRPORT",
+      "impact": "NO IMPACT",
+      "nasaSimulation": null
+    },
+    {
+      "destinationId": "istanbul",
+      "country": "Turkey",
+      "suspectedIssue": "IST/LTFM (2018-10-29) replaced Atatürk (closed to passenger traffic 2019-04-06)",
+      "oldAirport": {
+        "iata": "ISL",
+        "icao": "LTBA",
+        "lat": 40.9769,
+        "lon": 28.8146
+      },
+      "newAirport": {
+        "iata": "IST",
+        "icao": "LTFM",
+        "note": "project anchor already IST"
+      },
+      "replacementDate": "2019-04-06",
+      "evidence": [
+        {
+          "tier": 3,
+          "fact": "Atatürk closed to commercial traffic 2019-04-06; project anchor is IST/LTFM with OurAirports coordinate match 1.652 km — project is on the CURRENT airport",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Atat%C3%BCrk_Airport"
+          ]
+        }
+      ],
+      "decision": "NO ISSUE — project anchor already the current airport (pre-migrated correctly)",
+      "status": "CURRENT AIRPORT",
+      "impact": "NO IMPACT",
+      "nasaSimulation": null
+    }
+  ]
+}

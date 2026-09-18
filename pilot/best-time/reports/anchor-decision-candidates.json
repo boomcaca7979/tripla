@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-09-12T08:19:42.449594+00:00",
+  "ho-chi-minh-city": {
+    "current": {
+      "iata": "SGN",
+      "icao": "VVTS",
+      "latitude": 10.8188,
+      "longitude": 106.8069,
+      "elevationM": null
+    },
+    "recommendedAnchor": {
+      "iata": "SGN",
+      "icao": "VVTS",
+      "latitude": 10.8188,
+      "longitude": 106.652,
+      "elevationM": 10.1
+    },
+    "recommendedStatus": "recommend correction",
+    "climateImpact": "NONE under current NASA grid resolution (full simulation 0 diffs)",
+    "dataIntegrityImpact": "YES (anchor semantics wrong: coordinates point at city centre)",
+    "reFetchNasaRequired": "NO — probe + full simulation prove identical values; existing canonical values remain valid for this destination"
+  },
+  "siem-reap": {
+    "current": {
+      "iata": "SAI",
+      "icao": "VDSR",
+      "latitude": 13.4107,
+      "longitude": 103.8132,
+      "elevationM": null,
+      "note": "IATA already new airport; ICAO + coords = closed old REP"
+    },
+    "recommendedAnchor": {
+      "iata": "SAI",
+      "icao": "VDSA",
+      "latitude": 13.36974,
+      "longitude": 104.223831,
+      "elevationM": 58.2
+    },
+    "recommendedStatus": "MUST CORRECT before production",
+    "climateImpact": "PRODUCTION-DATA-AFFECTING — July precip 198.55 -> 205.39 mm crosses R3 >= 200 (Workable -> Challenging); December R4 -> R7 (Favourable); Best Months [10] -> [10, 11]; grid elevation 36.86 -> 70.78 m",
+    "dataIntegrityImpact": "YES (anchor identity error)",
+    "reFetchNasaRequired": "YES — full retrieval done in pilot (raw/nasa/anchor_sim/siemreap-proposed/); production re-bake + full 1740-month re-derivation required after approval"
+  }
+}

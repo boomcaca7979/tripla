@@ -1,0 +1,66 @@
+{
+  "assertions": [
+    {
+      "assert": "hcmc-core-climate-changed=0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "hcmc-classification-changed=0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "hcmc-bestMonths-changed=0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "hcmc-is-metadata-only-correction",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "ho-chi-minh-city-daily-precip-complete",
+      "pass": true,
+      "detail": "missing=0"
+    },
+    {
+      "assert": "ho-chi-minh-city-same-source-family",
+      "pass": true,
+      "detail": "NASA POWER / MERRA-2 (Climatology + Daily), no cross-family mixing"
+    },
+    {
+      "assert": "siemreap-climate-values-changed-recorded",
+      "pass": true,
+      "detail": "59 cells differ"
+    },
+    {
+      "assert": "siemreap-july-precip-crosses-R3-threshold-as-predicted",
+      "pass": true,
+      "detail": "198.55 -> 205.39"
+    },
+    {
+      "assert": "siemreap-full-12-month-rederivation-done",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "siemreap-rules-recomputed-not-copied",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "siem-reap-daily-precip-complete",
+      "pass": true,
+      "detail": "missing=0"
+    },
+    {
+      "assert": "siem-reap-same-source-family",
+      "pass": true,
+      "detail": "NASA POWER / MERRA-2 (Climatology + Daily), no cross-family mixing"
+    }
+  ],
+  "passed": 12,
+  "failed": 0
+}

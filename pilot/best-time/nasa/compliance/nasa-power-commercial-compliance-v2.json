@@ -1,0 +1,327 @@
+{
+  "artifact": "nasa-power-commercial-compliance-v2",
+  "generatedAt": "2026-09-13",
+  "auditVersion": "nasa-power-compliance-audit-2026.09.13.v2-second-pass",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.7",
+  "supersedesRelationship": "SECOND PASS on top of nasa-power-commercial-compliance-v1.json (v1 file untouched). v1 UNVERIFIED rows for commercial-use-explicit, licence-instrument, derived-dataset-commercial-publication and raw-redistribution are re-graded here under the newly captured NASA science-data licensing policy rights chain.",
+  "principle": "No POWER-specific PDF is required if the general NASA science-data licensing policy plus POWER-specific metadata plus UTRIPLA's use pattern form a complete rights chain. Copyright, database right, contract restriction and API terms are assessed as separate concepts.",
+  "statusVocabulary": ["PASS", "FAIL", "BLOCKED", "UNVERIFIED"],
+  "captures": [
+    {
+      "id": "V2-SRC-01",
+      "source": "NASA Science Data Portal - Science Data Licenses",
+      "sourceURL": "https://science.data.nasa.gov/about/license",
+      "officialSourceTitle": "Science Data Licenses | Science Data Portal",
+      "sourceDate": "page footer 'Last updated:' not populated (page live 2026-09-13)",
+      "capturedAt": "2026-09-13",
+      "evidenceQuote": "Unless the data file is marked with a restrictive notice or license, data that is provided from a NASA-led mission ... is licensed as Creative Commons Zero. ... There are no restrictions on the usage of these data.",
+      "evidenceScope": "NASA-wide default licence for NASA-led data; exception: a provided/labeled licence governs; exception: data where NASA is not the original source (validate source rights); media/imagery governed separately by media usage guidance (explicitly NOT this policy)"
+    },
+    {
+      "id": "V2-SRC-02",
+      "source": "Creative Commons CC0 1.0 deed (linked by V2-SRC-01 as the default licence)",
+      "sourceURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "officialSourceTitle": "CC0 1.0 Deed",
+      "sourceDate": "static licence text",
+      "capturedAt": "2026-09-13",
+      "evidenceQuote": "You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission. ... dedicated the work to the public domain by waiving all of his or her rights to the work worldwide under copyright law.",
+      "evidenceScope": "meaning of the CC0 default: commercial use, modification, distribution, derived works all included"
+    },
+    {
+      "id": "V2-SRC-03",
+      "source": "NASA Earthdata - Data Use and Citation Guidance",
+      "sourceURL": "https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance",
+      "officialSourceTitle": "Data Use and Citation Guidance | NASA Earthdata",
+      "sourceDate": "Site last Updated: Sept. 10, 2026",
+      "capturedAt": "2026-09-13",
+      "evidenceQuote": "NASA ESDIS content ... are generally not copyrighted. ... Unless the content is marked with a use restriction or license, data provided from a NASA-led mission are licensed as Creative Commons Zero (CC0). ... data users are very strongly urged to cite the data used in their work products. ... NASA material may not be used to suggest or imply endorsement by NASA ... [NASA] occasionally uses copyrighted material by permission on its website. NASA's use does not convey any rights to others ... ESDIS content that is subject to usage restrictions ... shall be labeled as such.",
+      "evidenceScope": "Earthdata-level default CC0; non-copyrighted status; citation urged (not stated as legally mandatory); endorsement prohibition; labelled-restriction and third-party carve-out rules"
+    },
+    {
+      "id": "V2-SRC-04",
+      "source": "NASA Earthdata - Open Data, Services, and Software Policies",
+      "sourceURL": "https://www.earthdata.nasa.gov/engage/open-data-services-software-policies",
+      "officialSourceTitle": "Open Data, Services, and Software Policies | NASA Earthdata",
+      "sourceDate": "Site last Updated: Sept. 10, 2026",
+      "capturedAt": "2026-09-13",
+      "evidenceQuote": "The ESDS Program promotes the full and open sharing of all data, metadata, documentation, models, images and research results ... with research and applications communities, private industry, academia, and the general public. ... consistent with NASA's Scientific Information Policy for the Science Mission Directorate (SPD-41a).",
+      "evidenceScope": "full and open sharing including private industry; policy anchored in SPD-41a"
+    },
+    {
+      "id": "V2-SRC-05",
+      "source": "AWS Registry of Open Data - NASA POWER (NASA-authored; re-captured with licence-scope question)",
+      "sourceURL": "https://registry.opendata.aws/nasa-power/",
+      "officialSourceTitle": "NASA Prediction of Worldwide Energy Resources (POWER) - Registry of Open Data on AWS",
+      "sourceDate": "undated on page",
+      "capturedAt": "2026-09-13",
+      "evidenceQuote": "License section: 'Creative Commons BY 4.0' (dataset-level metadata field of the entry) and 'There are no restrictions on the use, access, and/or download of data from the NASA POWER Project.' ... POWER Project is 'funded through the Applied Sciences Program at NASA Langley Research Center' ... sources named: CERES ... GMAO.",
+      "evidenceScope": "licence field is entry-level and its text refers broadly to POWER Project data (not scoped explicitly to S3 vs API); POWER provenance = NASA LaRC project over NASA sources (CERES = NASA LaRC mission; GMAO = NASA modeling office)"
+    },
+    {
+      "id": "V2-SRC-06",
+      "source": "NASA POWER Referencing Guide + Acknowledgements (re-read, v1 captures confirmed current 2026-09-13)",
+      "sourceURL": "https://power.larc.nasa.gov/docs/referencing/ + /docs/acknowledgements/",
+      "officialSourceTitle": "Referencing Guide / Acknowledgement - NASA POWER | Docs",
+      "sourceDate": "undated",
+      "capturedAt": "2026-09-13",
+      "evidenceQuote": "please include the service name, version number, and date accessed. ... the Project requests notification if POWER data is transmitted to other researchers.",
+      "evidenceScope": "attribution = requested practice with a fixed template; notification requests are NOT permission requirements (verified wording: 'requests notification', 'kindly requests')"
+    }
+  ],
+  "rightsChain": {
+    "layer1_nasaScienceDataPortalPolicy": {
+      "status": "PASS",
+      "rule": "NASA-led data without restrictive notice/license = CC0; 'no restrictions on the usage'; a labeled licence, if provided, governs; media policy explicitly excluded from this scope"
+    },
+    "layer2_nasaEarthdataPolicy": {
+      "status": "PASS",
+      "rule": "same CC0 default; content generally not copyrighted; use for Internet webpages within stated scope; sharing includes private industry; restricted/third-party content must be labelled, otherwise default applies"
+    },
+    "layer3_powerSpecificMetadata": {
+      "status": "PASS",
+      "rule": "POWER = NASA LaRC Applied Sciences project over NASA sources (CERES, GMAO); project self-declares 'no restrictions on the use, access, and/or download'; the only licence label anywhere is CC BY 4.0 (permissive); NO restrictive notice found on any POWER official page (0 keyword hits, 2026-09-13 sweep)"
+    },
+    "layer4_powerAttributionRules": {
+      "status": "PASS",
+      "rule": "citation of POWER + service name + version + access date = officially requested practice with fixed template; acknowledgement text provided; publication/redistribution notifications are requests, not permission requirements"
+    },
+    "layer5_utripaActualUse": {
+      "status": "PASS",
+      "rule": "build-time fetch -> store -> normalize -> aggregate -> derived canonical -> commercial SSG display with attribution; no raw mirror, no bulk download to users, no endorsement, no NASA marks"
+    },
+    "chainVerdict": "The five layers form a complete authorization chain. Two licence branches both authorize the usage: (A) CC0 default applies to unlabelled API-delivered POWER data -> 'even for commercial purposes ... without asking permission'; (B) the CC BY 4.0 label applies -> 'share and adapt for any purpose, even commercially' with attribution. Under either branch UTRIPLA's use is authorized; the ambiguity between branches is therefore non-blocking and is recorded only as a documentation caveat (which attribution wording to prefer)."
+  },
+  "matrix": [
+    {
+      "requirement": "L1-science-data-default-license",
+      "rightsLayer": "Layer 1 - NASA Science Data Portal policy",
+      "officialPolicy": "https://science.data.nasa.gov/about/license",
+      "exactQuestion": "What is the default licensing status of NASA-led data with no restrictive notice/license?",
+      "status": "PASS",
+      "licenseType": "CC0 (default)",
+      "evidenceQuote": "Unless the data file is marked with a restrictive notice or license, data that is provided from a NASA-led mission ... is licensed as Creative Commons Zero. ... There are no restrictions on the usage of these data.",
+      "commercialUse": "covered by CC0 (V2-SRC-02: 'even for commercial purposes')",
+      "modification": "covered by CC0",
+      "redistribution": "covered by CC0",
+      "derivedProducts": "covered by CC0",
+      "residualLegalRisk": "policy scoped to 'NASA-led mission' data; POWER is a NASA project rather than a mission - covered via Layer 2 wording and POWER provenance (Layer 3)"
+    },
+    {
+      "requirement": "L1-cc0-meaning",
+      "rightsLayer": "Layer 1 - CC0 deed (linked by policy)",
+      "officialPolicy": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "exactQuestion": "Does the CC0 default include commercial use, modification, distribution and derived products?",
+      "status": "PASS",
+      "licenseType": "CC0",
+      "evidenceQuote": "You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission.",
+      "commercialUse": "YES", "modification": "YES", "redistribution": "YES", "derivedProducts": "YES",
+      "residualLegalRisk": "none at this layer"
+    },
+    {
+      "requirement": "L2-earthdata-cc0-default",
+      "rightsLayer": "Layer 2 - NASA Earthdata policy",
+      "officialPolicy": "https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance",
+      "exactQuestion": "Does the Earthdata data-use guidance confirm the CC0 default and non-copyrighted status?",
+      "status": "PASS",
+      "licenseType": "CC0 default; content 'generally not copyrighted'",
+      "evidenceQuote": "Unless the content is marked with a use restriction or license, data provided from a NASA-led mission are licensed as Creative Commons Zero (CC0). ... NASA ESDIS content ... are generally not copyrighted.",
+      "commercialUse": "not prohibited; sharing includes private industry (V2-SRC-04)",
+      "modification": "covered by CC0 default",
+      "redistribution": "covered by CC0 default",
+      "derivedProducts": "covered by CC0 default",
+      "residualLegalRisk": "none at this layer"
+    },
+    {
+      "requirement": "L2-webpage-work-product-use",
+      "rightsLayer": "Layer 2 - NASA Earthdata policy",
+      "officialPolicy": "same as above",
+      "exactQuestion": "Are webpages/work-products an officially contemplated use of NASA Earth science data?",
+      "status": "PASS",
+      "evidenceQuote": "use ... for educational or informational purposes, including ... Internet webpages ... NASA generally has no objection to the reproduction and use of these materials.",
+      "commercialUse": "implied by scope; private industry named in V2-SRC-04",
+      "residualLegalRisk": "none at this layer"
+    },
+    {
+      "requirement": "L2-third-party-carve-out",
+      "rightsLayer": "Layer 2 - NASA Earthdata policy",
+      "officialPolicy": "same as above",
+      "exactQuestion": "Does the third-party copyrighted-content carve-out apply to POWER data?",
+      "status": "PASS",
+      "evidenceQuote": "NASA's use does not convey any rights to others ... ESDIS content that is subject to usage restrictions ... shall be labeled as such.",
+      "reasoning": "The carve-out exists as a rule but is trigger-gated: restricted content MUST be labelled. No restrictive label exists anywhere in POWER documentation (0 keyword hits on power.larc.nasa.gov 2026-09-13); POWER's named sources (CERES, GMAO) are NASA entities.",
+      "residualLegalRisk": "underlying source chain (e.g. IMERG precipitation correction input) cannot be exhaustively cleared from POWER docs alone; no restrictive label found, so the carve-out is not triggered by any visible label"
+    },
+    {
+      "requirement": "L3-power-nasa-provenance",
+      "rightsLayer": "Layer 3 - POWER-specific",
+      "officialPolicy": "https://registry.opendata.aws/nasa-power/",
+      "exactQuestion": "Is POWER data NASA-led/NASA-generated scientific data?",
+      "status": "PASS",
+      "evidenceQuote": "POWER Project is 'funded through the Applied Sciences Program at NASA Langley Research Center' ... sources named: CERES (NASA LaRC mission) ... GMAO (NASA Global Modeling and Assimilation Office).",
+      "residualLegalRisk": "registry description names CERES and GMAO; full source list (e.g. GPM IMERG for precipitation correction) documented in POWER methodology citations; all named sources are NASA-generated"
+    },
+    {
+      "requirement": "L3-no-restrictions-scope",
+      "rightsLayer": "Layer 3 - POWER-specific",
+      "officialPolicy": "https://registry.opendata.aws/nasa-power/",
+      "exactQuestion": "Does the POWER 'no restrictions' sentence cover use and download, or only accessibility?",
+      "status": "PASS",
+      "evidenceQuote": "There are no restrictions on the use, access, and/or download of data from the NASA POWER Project.",
+      "reasoning": "Text enumerates use + access + download. Not limited to accessibility.",
+      "residualLegalRisk": "hosted on AWS registry (NASA-authored); not a nasa.gov-hosted instrument - non-blocking under the Layer 1/2 policy chain"
+    },
+    {
+      "requirement": "L3-ccby40-label-scope",
+      "rightsLayer": "Layer 3 - POWER-specific",
+      "officialPolicy": "https://registry.opendata.aws/nasa-power/",
+      "exactQuestion": "Does the CC BY 4.0 registry label apply to API-delivered data?",
+      "status": "UNVERIFIED",
+      "licenseType": "CC BY 4.0 (entry-level metadata field)",
+      "evidenceQuote": "License section of the entry (dataset-level field); entry registers the nasa-power (Zarr) and power-datastore (NetCDF) S3 resources; text refers broadly to POWER Project data; API not explicitly addressed.",
+      "reasoning": "Scope ambiguity is NON-BLOCKING: if the label does not apply to API data, no restrictive label exists and the Layer 1/2 CC0 default governs; if it does apply, CC BY 4.0 authorizes the same practical rights with attribution.",
+      "residualLegalRisk": "documentation-level only: which attribution formula to prefer"
+    },
+    {
+      "requirement": "L3-power-restrictive-notice",
+      "rightsLayer": "Layer 3 - POWER-specific",
+      "officialPolicy": "power.larc.nasa.gov keyword sweep 2026-09-13",
+      "exactQuestion": "Does any POWER official page carry a restrictive licence, usage limitation or commercial condition?",
+      "status": "PASS",
+      "evidenceQuote": "(absence) 0 hits for license/licence/copyright/Creative Commons/restrictions/commercial/public domain across homepage, docs, services, API, temporal, climatology, referencing, acknowledgements, FAQ-data",
+      "residualLegalRisk": "none at this layer"
+    },
+    {
+      "requirement": "L4-attribution-requested-practice",
+      "rightsLayer": "Layer 4 - POWER attribution rules",
+      "officialPolicy": "https://power.larc.nasa.gov/docs/referencing/ + Earthdata guidance",
+      "exactQuestion": "Is POWER attribution a legal mandate or a requested practice?",
+      "status": "PASS",
+      "attribution": "requested practice, officially documented with fixed template ('service name, version number, and date accessed'); Earthdata: 'very strongly urged'; NASA Brand Center: 'NASA should be acknowledged as the source of the material'",
+      "reasoning": "UTRIPLA records it as requested-practice/strong-policy and implements it as mandatory internally. Not misrepresented as a forced legal term.",
+      "residualLegalRisk": "none at this layer"
+    },
+    {
+      "requirement": "L4-notification-vs-permission",
+      "rightsLayer": "Layer 4 - POWER attribution rules",
+      "officialPolicy": "https://power.larc.nasa.gov/docs/referencing/",
+      "exactQuestion": "Are POWER's publication/redistribution notifications permission requirements?",
+      "status": "PASS",
+      "evidenceQuote": "the Project requests notification if POWER data is transmitted to other researchers. / The Project kindly requests that users ... send a reference ...",
+      "reasoning": "Wording is 'requests'/'kindly requests' - notifications, NOT permission requirements. No permission, registration or commercial-licence step exists anywhere in POWER documentation.",
+      "residualLegalRisk": "none at this layer"
+    },
+    {
+      "requirement": "L5-api-request",
+      "rightsLayer": "Layer 5 - UTRIPLA actual use",
+      "officialPolicy": "v1 smoke test 2026-09-13 (HTTP 200 JSON, no key) + v1 SRC-02/03/05",
+      "exactQuestion": "Build-time HTTPS GET of POWER climatology/daily/monthly point JSON - authorized?",
+      "status": "PASS",
+      "automation": "legality PASS; see automation-policy row for operational policy",
+      "residualLegalRisk": "none"
+    },
+    {
+      "requirement": "L5-storing-response",
+      "rightsLayer": "Layer 5 - UTRIPLA actual use",
+      "officialPolicy": "L1 CC0 + L3 'no restrictions on ... download'",
+      "exactQuestion": "Storing raw JSON responses for computation - authorized?",
+      "status": "PASS",
+      "residualLegalRisk": "none"
+    },
+    {
+      "requirement": "L5-transformation",
+      "rightsLayer": "Layer 5 - UTRIPLA actual use",
+      "officialPolicy": "L1 CC0 ('modify ... even for commercial purposes')",
+      "exactQuestion": "Normalization / unit conversion / UTC+00:00 daily boundary - authorized?",
+      "status": "PASS",
+      "residualLegalRisk": "none"
+    },
+    {
+      "requirement": "L5-derived-dataset",
+      "rightsLayer": "Layer 5 - UTRIPLA actual use",
+      "officialPolicy": "L1 CC0 + L2 CC0 default",
+      "exactQuestion": "Building monthly aggregates and 1991-2020 canonical climate normals - authorized?",
+      "status": "PASS",
+      "derivedProducts": "YES (CC0/CC BY 4.0 both authorize derivatives)",
+      "residualLegalRisk": "none at US-copyright layer; EU database right assessed separately"
+    },
+    {
+      "requirement": "L5-static-storage-deployment",
+      "rightsLayer": "Layer 5 - UTRIPLA actual use",
+      "officialPolicy": "L1/L2 as above",
+      "exactQuestion": "Deploying the derived dataset as static JSON/JS build artifacts - authorized?",
+      "status": "PASS",
+      "redistribution": "authorized as distribution of derived works (CC0) or adapted material (CC BY 4.0 with attribution)",
+      "residualLegalRisk": "none at this layer"
+    },
+    {
+      "requirement": "L5-webpage-display-commercial",
+      "rightsLayer": "Layer 5 - UTRIPLA actual use",
+      "officialPolicy": "L2 ('Internet webpages'; 'private industry') + L1 CC0 ('even for commercial purposes')",
+      "exactQuestion": "Commercial monetization around webpages displaying derived climate information - authorized?",
+      "status": "PASS",
+      "commercialUse": "YES - general commercial authorization now established at policy layers; no longer inferred from 'free'",
+      "residualLegalRisk": "subject to endorsement/branding rules (see below) and attribution practice"
+    },
+    {
+      "requirement": "L5-recommendations-derived",
+      "rightsLayer": "Layer 5 - UTRIPLA actual use",
+      "officialPolicy": "L1/L2 as above",
+      "exactQuestion": "R1-R7 classifications and Best Months computed from the derived dataset - authorized?",
+      "status": "PASS",
+      "reasoning": "Recommendation logic is UTRIPLA's own original methodology applied to authorized derived factual data; no NASA restriction attaches to outputs of permitted transformation.",
+      "residualLegalRisk": "none"
+    },
+    {
+      "requirement": "automation-policy",
+      "rightsLayer": "Operational (not a rights layer)",
+      "officialPolicy": "https://power.larc.nasa.gov/docs/services/api/ (429 documented)",
+      "exactQuestion": "Is there a published automated-access / fair-use / quota policy?",
+      "status": "UNVERIFIED",
+      "automation": "API legality = PASS; automation policy = UNVERIFIED (429 exists; no published quota; Earthdata forum POWER-team statement is supplementary-only and was unreachable 2026-09-13)",
+      "residualLegalRisk": "operational, not a rights gap; throttling + caching in build scripts is prudent"
+    },
+    {
+      "requirement": "branding-logo",
+      "rightsLayer": "NASA-wide branding rules",
+      "officialPolicy": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "exactQuestion": "May UTRIPLA use NASA insignia/logotype?",
+      "status": "FAIL",
+      "endorsementRestriction": "Insignia/Logotype 'not in the public domain'; use 'protected by law'",
+      "reasoning": "Prohibition definitively established; compliance achieved by not using NASA marks (text-only factual attribution is unaffected).",
+      "residualLegalRisk": "none if marks are not used"
+    },
+    {
+      "requirement": "endorsement-implication",
+      "rightsLayer": "NASA-wide branding rules",
+      "officialPolicy": "same as above",
+      "exactQuestion": "May UTRIPLA wording imply NASA endorsement?",
+      "status": "FAIL",
+      "endorsementRestriction": "'must not explicitly or implicitly convey NASA's endorsement of commercial goods or services'",
+      "reasoning": "Prohibition definitively established; compliance achieved by factual source naming only.",
+      "residualLegalRisk": "none if avoided"
+    },
+    {
+      "requirement": "EU-database-rights",
+      "rightsLayer": "Jurisdiction-specific (separate legal concept from copyright/contract/API terms)",
+      "officialPolicy": "no official NASA source addresses EU sui generis database rights",
+      "exactQuestion": "Does the EU sui generis database right attach to the POWER dataset or to UTRIPLA's derived dataset?",
+      "status": "UNVERIFIED",
+      "reasoning": "Deliberately separated from the US copyright/CC0 analysis. No official NASA text resolves it. Classification: jurisdiction-specific residual risk requiring lightweight legal confirmation, NOT a blocker of the established US/public-domain usage authorization.",
+      "residualLegalRisk": "LEGAL REVIEW REQUIRED (EU-facing scope); relevance to a US-government maker and to derived factual display should be assessed in that review"
+    }
+  ],
+  "decision": {
+    "primaryDataUsage": "PASS",
+    "commercialUse": "PASS",
+    "modification": "PASS",
+    "derivedProducts": "PASS",
+    "commercialWebpageDisplay": "PASS",
+    "apiDirectUse": "PASS",
+    "attribution": "PASS (requested practice; implemented as mandatory internally)",
+    "automationPolicy": "UNVERIFIED (operational only)",
+    "databaseRights": "LEGAL REVIEW REQUIRED (jurisdiction-specific residual, non-blocking for the established usage authorization)",
+    "overall": "PASS",
+    "overallReasoning": "The five-layer rights chain closes: NASA science-data policy (CC0 default) + Earthdata policy (same default; webpages/private industry in scope) + POWER metadata (no restrictions; only permissive CC BY 4.0 label; no restrictive notice anywhere) + POWER attribution rules (requested practice) + UTRIPLA's use pattern (derived display, no raw mirror, no endorsement, no marks). Under every licence branch the usage is authorized."
+  },
+  "smokeTestReused": "v1 smoke test 2026-09-13 (same calendar day; HTTP 200, JSON, no key, climatology 2001-2020, x-data-sources: merra2,power) - not re-executed to avoid unnecessary API load"
+}

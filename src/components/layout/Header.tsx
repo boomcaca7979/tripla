@@ -45,6 +45,19 @@ export default function Header() {
   // 注意：isHome 必须在下面的滚动 effect 之前声明（该 effect 的依赖里用到它）。
   const isHome = pathname === "/";
 
+  /**
+   * 深色"世界"页：首页 + Trips Hub。
+   *
+   * /trips 的页面背景来自 .ut-world（#0c0f16），而 Header 默认是纸面浅底，
+   * 于是浅色 Header 直接压在近黑页面上形成一道明显接缝。这里让它复用首页
+   * 已经确认的同一套 Header 外观（HEADER_FULL_STATE_CLASS + ENV_DARK_TOKENS），
+   * 不新增样式、不改变 Header 设计。
+   *
+   * 注意与 isHome 的区别：isHome 还控制 LanguageSwitcher 是否渲染（首页恒英文），
+   * 而 /trips 需要保留语言切换器 —— 因此两者分开判断。
+   */
+  const isDarkWorld = isHome || pathname === "/trips";
+
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -52,11 +65,12 @@ export default function Header() {
 
   // 滚动后导航轻微实体化（rAF 节流， passive listener）。
   //
-  // 首页例外：首页导航栏**整个生命周期**都使用"完整状态"（见下方 isHome 分支），
-  // 不再存在"透明简化态 → 滚动后实体化"的切换，因此首页不需要这个监听。
+  // 深色世界页例外：首页与 /trips 的导航栏**整个生命周期**都使用"完整状态"
+  // （见下方 isDarkWorld 分支），不存在"透明简化态 → 滚动后实体化"的切换，
+  // 因此这两类页面不需要这个监听。
   // 其余路由保持原行为（未滚动 = 纸面浅底，滚动 = 实体化）。
   useEffect(() => {
-    if (isHome) return;
+    if (isDarkWorld) return;
     let raf = 0;
     const onScroll = () => {
       if (raf) return;
@@ -71,7 +85,7 @@ export default function Header() {
       window.removeEventListener("scroll", onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [isHome]);
+  }, [isDarkWorld]);
 
   // Drawer：打开时锁定滚动 + 聚焦关闭按钮；Escape 关闭并归还焦点
   useEffect(() => {
@@ -122,17 +136,18 @@ export default function Header() {
       className={[
         "fixed top-0 left-0 right-0 z-50",
         "border-b transition-[background-color,border-color,box-shadow,color] duration-[var(--ut-dur-med)] ease-ut-out",
-        // 首页：从首帧起就使用"完整导航栏"状态，且不随滚动改变
+        // 首页 / Trips Hub：从首帧起就使用"完整导航栏"状态，且不随滚动改变
         // （HEADER_FULL_STATE_CLASS = 与滚动后完全同一套外观，不存在第二套样式）
-        isHome
+        isDarkWorld
           ? HEADER_FULL_STATE_CLASS
           : scrolled
             ? HEADER_SCROLLED_STATE_CLASS
             : "border-transparent bg-ut-bg/55 backdrop-blur-sm",
       ].join(" ")}
-      // 首页 Header 渲染在 HomeEnvironment 包裹层之外，拿不到运行时注入 :root 的 token；
-      // 这里在首帧（SSR HTML）就带上同一份深色墨色族，避免 hydration 前后换色。
-      style={isHome ? (ENV_DARK_TOKENS as React.CSSProperties) : undefined}
+      // 深色世界页的 Header 渲染在 HomeEnvironment 包裹层之外，拿不到运行时注入
+      // :root 的 token；这里在首帧（SSR HTML）就带上同一份深色墨色族，
+      // 避免 hydration 前后换色。（/trips 同样适用）
+      style={isDarkWorld ? (ENV_DARK_TOKENS as React.CSSProperties) : undefined}
     >
       <div className="mx-auto flex h-16 max-w-[var(--ut-container-max)] items-center justify-between px-4 md:px-6">
         {/* ── Logo ─────────────────────────────────────────────── */}
@@ -220,13 +235,23 @@ export default function Header() {
       </div>
 
       {/* ── Mobile drawer（全屏，Escape 关闭，焦点管理） ──────────── */}
+      {/*
+        ⚠️ 尺寸必须用**视口单位**，不能用 `inset-0`。
+        Header 带 backdrop-blur（backdrop-filter），按规范它会成为 fixed 后代的
+        **包含块** —— 于是 `inset-0` 解析成 header 自己的盒子（只有 64px 高），
+        抽屉被压成 64px；内部 <nav> 又带 overflow-y-auto，直接把 5 个导航项
+        裁成 0 高 → 打开菜单后什么都看不到、也点不到。
+        改用 `left-0 top-0 w-full h-[100dvh]`：vw/vh/dvh 恒以视口为参照，
+        不受包含块影响；`top-0 left-0` 落在 header padding box 原点，
+        即视口原点。结论：抽屉恢复为真正的全屏覆盖层。
+      */}
       {drawerOpen && (
         <div
           id="mobile-drawer"
           role="dialog"
           aria-modal="true"
           aria-label="Site menu"
-          className="fixed inset-0 z-[60] flex flex-col bg-ut-bg lg:hidden"
+          className="fixed left-0 top-0 z-[60] flex h-[100dvh] w-full flex-col bg-ut-bg lg:hidden"
         >
           <div className="flex h-16 items-center justify-between border-b border-ut-border px-4 md:px-6">
             <TriplaLogo />

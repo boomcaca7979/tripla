@@ -1,0 +1,38 @@
+{
+  "generatedAt": "2026-09-13T04:07:56.939561+00:00",
+  "pre": {
+    "coreClimateHash": "7d884fd2334b092b27081c055b8ab860981577bddbeb833512e2818e64ff58ed",
+    "recommendationHash": "28d6a16cd5abcdaf3be842673d23945858d81ed61b888faafab7afa561771e84",
+    "bestMonthsHash": "417c40eb6246caf5b46236827e6606422bce6ef795fab94a31ec4eda52afbe40",
+    "anchorHash": "ab0a5ab9cef44337256c034aca0634c96bd1dd48c10597ec8f519a0442c54e77",
+    "elevationHash": "cda49b45c98172907d1d6ce8ac958008cb554d28939565cf6ffe9c1b409a9d14"
+  },
+  "post": {
+    "coreClimateHash": "7d884fd2334b092b27081c055b8ab860981577bddbeb833512e2818e64ff58ed",
+    "recommendationHash": "28d6a16cd5abcdaf3be842673d23945858d81ed61b888faafab7afa561771e84",
+    "bestMonthsHash": "417c40eb6246caf5b46236827e6606422bce6ef795fab94a31ec4eda52afbe40",
+    "anchorHash": "c45980e28bf49f797d9049c14deee4001212d3b19857c9a3282dfa1985ed0fb4",
+    "elevationHash": "eeab71ae6b12f9cf5e908d6e95a31e39da24f9511a74f3c0bb68d128618a0d2b",
+    "canonicalDatasetHash": "9ac50d81a0b2d952518b6339c7b3d03e74d0093df0963f65872789f630c0e321"
+  },
+  "expected": {
+    "coreClimateHash": "UNCHANGED",
+    "recommendationHash": "UNCHANGED",
+    "bestMonthsHash": "UNCHANGED",
+    "anchorHash": "CHANGED",
+    "elevationHash": "CHANGED (phnom-penh 12.2 -> 6.1)"
+  },
+  "actual": {
+    "coreClimateHashUnchanged": true,
+    "recommendationHashUnchanged": true,
+    "bestMonthsHashUnchanged": true,
+    "anchorHashChanged": true,
+    "elevationHashChanged": true
+  },
+  "daylightEffect": {
+    "changedCells": 8,
+    "maxAbsDeltaH": 0.01,
+    "note": "astronomical quantity; NOT an observed climate data change"
+  },
+  "honestSummary": "observed climate fields changed = 0; recommendation changed = 0; Best Months changed = 0; daylightHours changed = 8 cells (±0.01 h); anchor metadata changed = YES; NOT 'dataset completely unchanged'"
+}

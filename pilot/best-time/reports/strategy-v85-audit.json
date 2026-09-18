@@ -1,0 +1,287 @@
+{
+ "generatedAt": "2026-09-12T01:33:44.410711+00:00",
+ "document": "BEST-TIME-DATA-STRATEGY-REPORT.md",
+ "documentVersion": "v8.5",
+ "totalChecks": 49,
+ "passed": 49,
+ "failed": 0,
+ "contradictions": [],
+ "semanticConflicts": [],
+ "schemaConflicts": [],
+ "checks": [
+  {
+   "check": "monthIndex contract stated 0-11 in S12.3",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "no normative 1..12 monthIndex contract",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "canonical tempHighC = Daily T2M_MAX (UTC)",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "canonical tempLowC = Daily T2M_MIN (UTC)",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "Climatology T2M_MAX_AVG prohibited for tempHighC",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "Climatology T2M_MIN_AVG prohibited for tempLowC",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "no 'tempHighC → T2M_MAX_AVG' normative mapping",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "temporal-level judgement rule present",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "no normative 'Climatology default = UTC'",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "no normative 'time-standard parameter not supported'",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "LST default recorded as pilot-measured fact",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "three concepts separated (source standard / boundary / display tz)",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "resolution = 0.5 x 0.625 stated",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "no 0.5x0.5 as POWER source-native",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "fieldProvenance 15-key contract present",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "provenance key 'endpoint' present",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "provenance key 'parameter' present",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "provenance key 'temporalLevel' present",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "provenance key 'periodStart' present",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "provenance key 'periodEnd' present",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "provenance key 'grid' present",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "provenance key 'selectionReason' present",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "provenance key 'ruleVersion' present",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "provenance key 'methodologyVersion' present",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "Copernicus contract is 5 items and excludes NASA params",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "NASA fallback contract has 5 + source-specific temporal",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "precipDaysGe1mm declared UNRESOLVED",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "sunshineHours declared UNRESOLVED",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "daylightHours declared UNRESOLVED",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "daylightHours monthly aggregation defined or defect registered",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "elevation 0/145 recorded",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "ERA5 PRIMARY blocked by CDS credentials",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "ELEV_MISMATCH_M = 150 m provisional engineering trigger",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "NASA licence UNVERIFIED",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "Copernicus official licence name used",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "Copernicus licence not simplified to CC BY 4.0",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "database rights UNRESOLVED",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "threshold 40 unchanged",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "threshold 32 unchanged",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "threshold 18 unchanged",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "threshold −10 unchanged",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "threshold 90 unchanged",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "threshold 200 unchanged",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "ruleVersion r1-r7.v4",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "methodologyVersion v8.5",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "S23.4 declares 10 remaining unverified items",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "final gate line present",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "T2/T3 gates present",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "code fences balanced",
+   "result": "PASS",
+   "detail": "fences=0"
+  }
+ ],
+ "verdict": "STRATEGY v8.5 = unchanged",
+ "monthIndexContract": {
+  "contract": "0..11",
+  "strategyEvidence": "S12.3: `monthIndex` | number | 必有 | - | 0-11（0 = 1 月）",
+  "productionEvidence": [
+   "src/lib/climate-pattern.ts:18  `spring: [2, 3, 4], // Mar-May (index 0-11)`",
+   "src/lib/climate-pattern.ts:21  `winter: [11, 0, 1], // Dec-Feb`",
+   "src/lib/climate-pattern.ts:31-34  MONTH_NAMES[0] = 'January'",
+   "src/lib/climate-pattern.ts:62  JSDoc: '月份 index（0-11）'",
+   "src/components/besttime/besttime-state.ts:40-42  MONTH_ABBR jan:0 .. dec:11",
+   "src/components/besttime/besttime-state.ts:146-167  buildMonthRows: Array.from({length: 12}, (_, m) => ({ index: m, ... })) -> 0..11"
+  ],
+  "pilotArtifact": "nasa_canonical_145_v85.json uses 0..11 (v8.4 artifact used 1..12 = defect)",
+  "contradictions": 0
+ },
+ "phase1bAmendment": {
+  "applied": true,
+  "reason": "real methodology defect found during Copernicus readiness (S13/S27)",
+  "change": "ERA5 / ERA5-Land monthly averaged total_precipitation unit is 'm of water per day'; monthly total requires x N days. Previously documented as 'monthly total'.",
+  "sections": [
+   "S3.3",
+   "S7.2 row B",
+   "S19.2",
+   "S23.0.1",
+   "S23.2 B19"
+  ],
+  "methodologyVersionBump": false,
+  "bumpRationale": "provider-side unit clarification only; canonical definition unchanged; v8.5 pilot dataset (NASA fallback path) values unaffected"
+ }
+}

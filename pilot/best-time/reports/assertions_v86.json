@@ -1,0 +1,124 @@
+{
+  "generatedAt": "2026-09-12T02:26:50.803759+00:00",
+  "dataset": "nasa_canonical_145_v86.json",
+  "assertions": [
+    {
+      "assert": "datasetVersion=v86",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "methodologyVersion=v8.6-all-records",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "destinations=145",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "months=1740",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "monthIndex=0..11",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "assert": "six-fields-populated",
+      "pass": true,
+      "detail": "{\"tempMeanC\": 0, \"tempHighC\": 0, \"tempLowC\": 0, \"precipMm\": 0, \"precipDaysGe1mm\": 0, \"daylightHours\": 0, \"sunshineHours\": 1740}"
+    },
+    {
+      "assert": "sunshineHours-null-by-contract",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "provenance-15-keys-x-8-fields-x-145",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "assert": "single-climate-source-family=NASA/MERRA-2",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "assert": "precipDays-derived-flag",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "daylight-derived-flag",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "regression-climate-truth-identical-to-v85",
+      "pass": true,
+      "detail": "differing cells = 0"
+    },
+    {
+      "assert": "bestMonths-identical-to-v85",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "r1r7-counts-unchanged",
+      "pass": true,
+      "detail": "validated in nasa_v86_validation.json regressionVsV85"
+    },
+    {
+      "assert": "daylightHours-in-[0,24]",
+      "pass": true,
+      "detail": "0"
+    },
+    {
+      "assert": "precipDays-in-[0,days-in-month]",
+      "pass": true,
+      "detail": "0"
+    },
+    {
+      "assert": "precipDays<=precipMm",
+      "pass": true,
+      "detail": "0"
+    },
+    {
+      "assert": "daylightHours=daylight_calc.json",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "assert": "daylight-equator-sanity(sin~12.1)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "daylight-polar-sanity(rovaniemi-june>=23)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "daylight-southern-hemisphere-phase(sydney-dec>jan)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "daily-precip-10958-days-x-145",
+      "pass": true,
+      "detail": "destinations with missing = 0"
+    },
+    {
+      "assert": "precipDays-zero-when-dry-month",
+      "pass": true,
+      "detail": "0"
+    }
+  ],
+  "passed": 23,
+  "failed": 0,
+  "gate": "ALL PASS"
+}

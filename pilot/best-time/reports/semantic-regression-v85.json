@@ -1,0 +1,14 @@
+{
+ "generatedAt": "2026-09-12T01:26:21.323683+00:00",
+ "source": "recomputed from raw/nasa/daily_145 (no network)",
+ "months": 1740,
+ "semanticMatchHigh": "1740/1740",
+ "semanticMatchLow": "1740/1740",
+ "maxDeltaHigh": 0.0,
+ "maxDeltaLow": 0.0,
+ "failCount": 0,
+ "fails": [],
+ "missingDays": 0,
+ "missingDailyValues": 0,
+ "duplicateDailyKeys": 0
+}

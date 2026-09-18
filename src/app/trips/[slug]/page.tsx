@@ -92,6 +92,15 @@ const CONTAINER = "mx-auto w-full max-w-7xl px-4 md:px-6";
 // 其他 slug 在路由层直接 404，避免 notFound() 被静默吞掉返回 200。
 export const dynamicParams = false;
 
+/**
+ * 酒店入住窗口（HotelModule）在构建期求值，若页面永不重生成，静态 HTML 会把
+ * 构建当天的日期永久冻结 —— 部署第二天起，用户点到的就是"昨天入住"。
+ * 这里让页面每日重生成一次，使 HTML 内的入住日期随日历自愈；用户实际点击的
+ * 链接另由 HotelSearchLink 在客户端刷成当天（见该组件），两者共同保证
+ * checkIn >= 今天。
+ */
+export const revalidate = 86400;
+
 export function generateStaticParams() {
   return getTripSlugs().map((slug) => ({ slug }));
 }

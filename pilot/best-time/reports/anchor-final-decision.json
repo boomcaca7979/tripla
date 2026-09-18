@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-09-12T08:19:42.449594+00:00",
+  "ho-chi-minh-city": {
+    "current": {
+      "iata": "SGN",
+      "icao": "VVTS",
+      "latitude": 10.8188,
+      "longitude": 106.8069,
+      "elevationM": null
+    },
+    "proposed": {
+      "iata": "SGN",
+      "icao": "VVTS",
+      "latitude": 10.8188,
+      "longitude": 106.652,
+      "elevationM": 10.1
+    },
+    "decision": "recommend correction (USER DECISION REQUIRED)",
+    "status": "USER DECISION REQUIRED — not approved production data"
+  },
+  "siem-reap": {
+    "current": {
+      "iata": "SAI",
+      "icao": "VDSR",
+      "latitude": 13.4107,
+      "longitude": 103.8132,
+      "elevationM": null,
+      "note": "IATA already new airport; ICAO + coords = closed old REP"
+    },
+    "proposed": {
+      "iata": "SAI",
+      "icao": "VDSA",
+      "latitude": 13.36974,
+      "longitude": 104.223831,
+      "elevationM": 58.2
+    },
+    "decision": "MUST CORRECT before production (USER DECISION REQUIRED)",
+    "status": "USER DECISION REQUIRED — pilot simulation complete; nothing written to src/data"
+  },
+  "approvalSemantics": "the proposals and simulations are engineering recommendations; neither is approved production data until the user explicitly approves; approval triggers: destinations.ts update + full NASA re-bake for affected destinations + R1-R7/Best Months re-derivation + baseline hash re-computation"
+}

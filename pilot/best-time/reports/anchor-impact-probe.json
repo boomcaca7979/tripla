@@ -1,0 +1,58 @@
+[
+ {
+  "tag": "ho-chi-minh-city-current",
+  "lat": 10.8188,
+  "lon": 106.8069,
+  "grid": [
+   106.807,
+   10.819,
+   46.81
+  ],
+  "T2M_JAN": 26.1,
+  "T2M_JUL": 26.6,
+  "PREC_JAN": 10.0,
+  "PREC_JUL": 225.88
+ },
+ {
+  "tag": "ho-chi-minh-city-proposed",
+  "lat": 10.8188,
+  "lon": 106.652,
+  "grid": [
+   106.652,
+   10.819,
+   46.81
+  ],
+  "T2M_JAN": 26.1,
+  "T2M_JUL": 26.6,
+  "PREC_JAN": 10.0,
+  "PREC_JUL": 225.88
+ },
+ {
+  "tag": "siem-reap-current",
+  "lat": 13.4107,
+  "lon": 103.8132,
+  "grid": [
+   103.813,
+   13.411,
+   36.86
+  ],
+  "T2M_JAN": 26.89,
+  "T2M_JUL": 27.11,
+  "PREC_JAN": 11.58,
+  "PREC_JUL": 198.55
+ },
+ {
+  "tag": "siem-reap-proposed",
+  "lat": 13.36974,
+  "lon": 104.223831,
+  "grid": [
+   104.224,
+   13.37,
+   70.78
+  ],
+  "T2M_JAN": 26.13,
+  "T2M_JUL": 26.95,
+  "PREC_JAN": 9.47,
+  "PREC_JUL": 205.39
+ }
+]

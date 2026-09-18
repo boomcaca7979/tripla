@@ -1,0 +1,158 @@
+{
+  "dataset": "nasa_canonical_145_v85",
+  "total": 30,
+  "passed": 30,
+  "failed": 0,
+  "results": [
+    {
+      "assertion": "assert destinationCount === 145",
+      "result": "PASS",
+      "detail": "config=145 records=145"
+    },
+    {
+      "assertion": "assert monthCountPerDestination === 12",
+      "result": "PASS",
+      "detail": "violations=0 []"
+    },
+    {
+      "assertion": "assert noInvalidCoordinates",
+      "result": "PASS",
+      "detail": "violations=0"
+    },
+    {
+      "assertion": "assert monthIndexRange === 0..11",
+      "result": "PASS",
+      "detail": "violations=0 []"
+    },
+    {
+      "assertion": "assert noTempOutOfRange",
+      "result": "PASS",
+      "detail": "violations=0"
+    },
+    {
+      "assertion": "assert noPrecipOutOfRange",
+      "result": "PASS",
+      "detail": "violations=0"
+    },
+    {
+      "assertion": "assert noNegativePrecipitation",
+      "result": "PASS",
+      "detail": "violations=0"
+    },
+    {
+      "assertion": "assert noTempHighBelowTempLow",
+      "result": "PASS",
+      "detail": "violations=0"
+    },
+    {
+      "assertion": "assert noUnknownCanonicalField",
+      "result": "PASS",
+      "detail": "violations=0 []"
+    },
+    {
+      "assertion": "assert fieldProvenanceComplete (15 keys)",
+      "result": "PASS",
+      "detail": "violations=0 []"
+    },
+    {
+      "assertion": "assert mandatoryFieldProductNotNull",
+      "result": "PASS",
+      "detail": "violations=0 []"
+    },
+    {
+      "assertion": "assert climatology T2M_MAX_AVG cannot map to tempHighC",
+      "result": "PASS",
+      "detail": "violations=0 []"
+    },
+    {
+      "assertion": "assert climatology T2M_MIN_AVG cannot map to tempLowC",
+      "result": "PASS",
+      "detail": "violations=0 []"
+    },
+    {
+      "assertion": "assert Daily T2M_MAX accepted for tempHighC",
+      "result": "PASS",
+      "detail": "145/145"
+    },
+    {
+      "assertion": "assert Daily T2M_MIN accepted for tempLowC",
+      "result": "PASS",
+      "detail": "145/145"
+    },
+    {
+      "assertion": "assert dailyTemperaturePathRequiresUTC",
+      "result": "PASS",
+      "detail": "violations=0 []"
+    },
+    {
+      "assertion": "assert noCrossFamilyFieldMixing",
+      "result": "PASS",
+      "detail": "violations=0 []"
+    },
+    {
+      "assertion": "assert unresolvedFieldsAreNull",
+      "result": "PASS",
+      "detail": "violations=0 []"
+    },
+    {
+      "assertion": "assert noLatitudeTemplateFallback",
+      "result": "PASS",
+      "detail": "violations=0"
+    },
+    {
+      "assertion": "assert noFakeElevation",
+      "result": "PASS",
+      "detail": "non-null anchor elevation=0"
+    },
+    {
+      "assertion": "assert R1toR7Unclassified === 0",
+      "result": "PASS",
+      "detail": "unclassified=0 []"
+    },
+    {
+      "assertion": "assert R1toR7RecomputationMatches",
+      "result": "PASS",
+      "detail": "violations=0 []"
+    },
+    {
+      "assertion": "assert R1toR7SingleFinalClassification",
+      "result": "PASS",
+      "detail": "violations=0"
+    },
+    {
+      "assertion": "assert bestMonthsOutputDefinedForAllDestinations",
+      "result": "PASS",
+      "detail": "violations=0"
+    },
+    {
+      "assertion": "assert noForbiddenSourceInCanonicalMapping",
+      "result": "PASS",
+      "detail": "violations=0 []"
+    },
+    {
+      "assertion": "assert forbiddenTokensConfinedToRejectionContext",
+      "result": "PASS",
+      "detail": "totalOccurrences=580 (flags/selectionReason) stray=0 []"
+    },
+    {
+      "assertion": "assert noOldBestMonthsOrWeatherScoreInCanonical",
+      "result": "PASS",
+      "detail": "found=[]"
+    },
+    {
+      "assertion": "assert noRuntimeClimateAPI",
+      "result": "PASS",
+      "detail": "records missing methodologyVersion=0"
+    },
+    {
+      "assertion": "assert methodologyAndRuleVersionPinned",
+      "result": "PASS",
+      "detail": "violations=0"
+    },
+    {
+      "assertion": "assert periodIs1991to2020",
+      "result": "PASS",
+      "detail": "violations=0"
+    }
+  ]
+}

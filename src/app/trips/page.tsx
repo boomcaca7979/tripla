@@ -98,7 +98,7 @@ function FeaturedTripCard({ card, eager }: { card: TripHubCard; eager: boolean }
   return (
     <Link
       href={`/trips/${card.slug}`}
-      className="group block overflow-hidden rounded-ut-md border border-white/10 bg-ut-surface transition-colors hover:border-white/30"
+      className="ut-paper-panel group block overflow-hidden rounded-ut-md border border-white/10 bg-ut-surface transition-colors hover:border-white/30"
     >
       <div className="relative h-56 overflow-hidden">
         {card.image ? (
@@ -223,7 +223,7 @@ export default async function TripsHubPage({
   const destinationEntries = hub.cities.slice(0, 12);
 
   return (
-    <div className="ut-world min-h-screen">
+    <div className="ut-world min-h-screen" data-ut-page="trips">
       {/* ═══ Structured data ═══ */}
       <script
         type="application/ld+json"

@@ -1,0 +1,75 @@
+{
+  "generatedAt": "2026-09-12",
+  "artifact": "anchor-correction-candidates.json",
+  "status": "CANDIDATES ONLY — src/data/destinations.ts NOT modified this phase",
+  "warning": "anchor correction is production-data-affecting (see impact probes)",
+  "candidates": [
+    {
+      "destinationId": "ho-chi-minh-city",
+      "currentAnchor": {
+        "iata": "SGN",
+        "icao": "VVTS",
+        "lat": 10.8188,
+        "lon": 106.8069,
+        "elevationM": null
+      },
+      "proposedAnchor": {
+        "iata": "SGN",
+        "icao": "VVTS",
+        "lat": 10.8188,
+        "lon": 106.652,
+        "elevationM": 10.1
+      },
+      "reason": "anchor longitude points at the city centre; the airport latitude is IDENTICAL (10.8188) and only the longitude is wrong — all independent sources place VVTS at 10.8188N 106.652E",
+      "source": [
+        "OurAirports VVTS",
+        "https://en.wikipedia.org/wiki/Tan_Son_Nhat_International_Airport",
+        "https://metar-taf.com/airport/VVTS-tan-son-nhat-international-airport",
+        "https://airportguide.com/airport/info/SGN"
+      ],
+      "impact": {
+        "nasaGridCell": "UNCHANGED (probe: same T2M 26.6 Jul, precip 225.88 Jul, grid elevation 46.81 m)",
+        "era5GridCell": "to verify with CDS credentials (0.25 deg cell; 0.155 deg lon shift likely same/adjacent cell)",
+        "climateValues": "expected unchanged (NASA probe delta = 0.0)",
+        "recommendation": "expected unchanged",
+        "elevation": "candidate 10.1 m becomes usable (SECONDARY-VERIFIED)"
+      }
+    },
+    {
+      "destinationId": "siem-reap",
+      "currentAnchor": {
+        "iata": "SAI",
+        "icao": "VDSR",
+        "lat": 13.4107,
+        "lon": 103.8132,
+        "elevationM": null,
+        "note": "MIXED-STATE anchor: IATA already = new airport; ICAO + coords = closed old airport (REP)"
+      },
+      "proposedAnchor": {
+        "iata": "SAI",
+        "icao": "VDSA",
+        "lat": 13.36974,
+        "lon": 104.223831,
+        "elevationM": 58.2
+      },
+      "reason": "2023 relocation: new Siem Reap–Angkor International (SAI/VDSA) replaced REP/VDSR; project ICAO and coordinates are stale while IATA is already new",
+      "source": [
+        "OurAirports VDSA",
+        "https://en.wikipedia.org/wiki/Siem_Reap%E2%80%93Angkor_International_Airport",
+        "https://metar-taf.com/airport/VDSA-siem-reap-angkor-international-airport"
+      ],
+      "impact": {
+        "nasaGridCell": "CHANGED (probe: grid elevation 36.86 -> 70.78 m)",
+        "era5GridCell": "CHANGED expected (44.65 km shift spans 0.25 deg cells); verify with CDS credentials",
+        "climateValues": "CHANGED (probe: T2M Jul -0.16 C, precip Jul +6.84 mm)",
+        "recommendation": "MAY CHANGE: July precip moves 198.55 -> 205.39 mm, CROSSING the R3 >= 200 mm threshold (Workable -> Challenging for July if the other rules do not fire first); full R1-R7 re-derivation required after any anchor re-bake",
+        "elevation": "58.2 m (SECONDARY-VERIFIED) after re-bake"
+      }
+    },
+    {
+      "destinationId": "_icao_field_fixes_only_eight_destinations",
+      "note": "ICAO-only corrections (no coordinate change, no climate impact): rovaniemi EFKT->EFRO, cebu RPVB->RPVM, yogyakarta WIHI->WAHI, nha-trang VVNT->VVCR, bologna LIPQ->LIPE, lombok WATB->WADL, pattaya VTPH->VTBU",
+      "impact": "metadata-only (destinations.ts ICAO field); climate grid unaffected"
+    }
+  ]
+}

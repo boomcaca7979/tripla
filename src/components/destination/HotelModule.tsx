@@ -1,4 +1,5 @@
 import { buildHotelSearchUrl } from "@/lib/affiliate";
+import HotelSearchLink from "./HotelSearchLink";
 
 /**
  * HotelModule — Destination 上唯一的商业模块（Quiet Commerce Module）。
@@ -11,14 +12,26 @@ import { buildHotelSearchUrl } from "@/lib/affiliate";
  *   · 视觉权重必须**低于**页面 Primary CTA —— 因此这里用描边按钮（非填充 accent），
  *     使商业入口始终 subordinate to editorial experience。
  *
- * §26：本组件是 Server Component。日期在 server 端确定性求值（SSG 构建期），
- * 不参与客户端渲染，因此不会产生 hydration 不一致。
+ * §26：本组件仍是 Server Component；入住窗口的**最终**取值交给 client 叶子
+ * HotelSearchLink 在点击前刷新（见该文件）。原因：日期一旦在构建期定死，就会被
+ * 静态 HTML 永久冻结，部署后用户点到的恒为"构建当天"。此处保留服务端生成值
+ * 作为首帧 / 无 JS 兜底，两处共用同一套 URL 语义。
  */
 
-/** 默认入住窗口（今天起 7 晚）。仅在 server 端执行。 */
+/** 默认住宿晚数（与原实现一致：今天起 7 晚）。 */
+const HOTEL_NIGHTS = 7;
+
+/** 链接视觉契约 —— 原样保留，设计不变。 */
+const LINK_CLASS = [
+  "mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-ut-sm border border-ut-border-strong",
+  "px-5 py-3 text-body font-medium text-ut-text transition-colors duration-[var(--ut-dur-fast)]",
+  "hover:bg-ut-surface-hover focus-visible:outline-2 focus-visible:outline-ut-accent",
+].join(" ");
+
+/** 服务端兜底入住窗口（首帧 / 无 JS）。仅在 server 端执行。 */
 function defaultHotelDates() {
   const checkIn = new Date().toISOString().slice(0, 10);
-  const checkOut = new Date(Date.now() + 7 * 86400000)
+  const checkOut = new Date(Date.now() + HOTEL_NIGHTS * 86400000)
     .toISOString()
     .slice(0, 10);
   return { checkIn, checkOut };
@@ -43,15 +56,10 @@ export default function HotelModule({ city }: { city: string }) {
         Compare live rates for {city} accommodation. Opens the provider in a new
         tab with a date window prefilled.
       </p>
-      <a
-        href={href}
-        target="_blank"
-        rel="sponsored noopener noreferrer"
-        className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-ut-sm border border-ut-border-strong px-5 py-3 text-body font-medium text-ut-text transition-colors duration-[var(--ut-dur-fast)] hover:bg-ut-surface-hover focus-visible:outline-2 focus-visible:outline-ut-accent"
-      >
+      <HotelSearchLink href={href} nights={HOTEL_NIGHTS} className={LINK_CLASS}>
         Search hotels in {city}
         <span aria-hidden="true">→</span>
-      </a>
+      </HotelSearchLink>
     </section>
   );
 }

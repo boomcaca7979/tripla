@@ -9,6 +9,8 @@
  *   · 未收录城市 → page 回退既有拼装逻辑（行为不变）。
  */
 
+import { DESTINATION_GALLERY_WAVE2 } from "./destination-gallery-wave2";
+
 export interface GalleryEntry {
   src: string;
   /** 图片主体描述（alt 用）。 */
@@ -19,7 +21,7 @@ export interface GalleryEntry {
   verifiedAt: string;
 }
 
-export const DESTINATION_GALLERY: Record<string, GalleryEntry[]> = {
+const DESTINATION_GALLERY_CORE: Record<string, GalleryEntry[]> = {
   bangkok: [
     {
       src: "https://images.pexels.com/photos/11105014/pexels-photo-11105014.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -4554,6 +4556,13 @@ export const DESTINATION_GALLERY: Record<string, GalleryEntry[]> = {
       verifiedAt: "2026-09-16",
     },
   ],
+};
+
+
+/** 合并视图：既有 129 城画廊 + wave2 新增 50 城。 */
+export const DESTINATION_GALLERY: Record<string, GalleryEntry[]> = {
+  ...DESTINATION_GALLERY_CORE,
+  ...DESTINATION_GALLERY_WAVE2,
 };
 
 

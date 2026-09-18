@@ -1,0 +1,87 @@
+{
+  "audit": "UTRIPLA-DESTINATION-3.0-VISUAL-AUDIT",
+  "date": "2026-09-13",
+  "method": "live browser audit (1440x900 full walk, 390x844, forced tests: no-text / no-click / 3-second / Home comparison), screenshot evidence",
+  "noCodeThisRound": true,
+  "phase2SelfReviewFailure": "验收表把 'interaction works / crop changes / tint changes' 当作证据——把 visual feedback 当成 discovery，用自定义标准自证 PASS。真实浏览：点击第 2 章后帧内照片几乎不变（同一张图轻微平移），只有标题与 ON VIEW 标记移动；第二次点击后探索循环死亡。",
+  "interactionAudit": [
+    { "interaction": "NOW chip", "functional": true, "playful": false, "why": "面板出现=叠层，页面与环境未变，无新信息" },
+    { "interaction": "chapter click", "functional": true, "playful": false, "why": "同一张照片轻微平移 + 标题/ON VIEW/计数——第二次点击后零发现" },
+    { "interaction": "vibe click", "functional": true, "playful": false, "why": "低透明 tint + 计数 + 列表过滤 = 换名的过滤器" },
+    { "interaction": "month scrub/drag", "functional": true, "playful": false, "why": "操作图表：数字变了，世界没变" }
+  ],
+  "playfulInteractionCount": 0,
+  "fakeInteractions": ["crop change（同图 pan ~20%）", "tint change（纯装饰反馈）", "counter change（过滤副产品）", "ON VIEW 移动（选中态）"],
+  "textHeavyRootCauses": [
+    "信息单元仍是词（章节/vibe/结论都是短语）",
+    "唯一图像资产从不改变身份——视觉通道无内容变化",
+    "无空间：一维纵向流，没有可在其中移动的东西",
+    "无结果反馈：点击不产生页面上不存在的新信息",
+    "guides/routes/related 仍是阅读行"
+  ],
+  "noTextTest": {
+    "result": "FAIL",
+    "evidence": "隐藏词语后：Hero 失去城市身份（不知是 Tokyo 甚至不知是目的地页）；5 个章节完全消失（无视觉差异）；Scene 03 只剩数字"
+  },
+  "noClickTest": {
+    "result": "WEAK FAIL",
+    "evidence": "滚动=翻页：所有场景在滚动前已定型，无状态随滚动变化"
+  },
+  "threeSecondTest": {
+    "result": "PASS",
+    "evidence": "3 秒内可识别照片+城市名+NOW chip；但可探索性在 3 秒内不可知"
+  },
+  "homeComparison": {
+    "homeHas": ["活天空环境（时间/天气/季节驱动）", "ambient motion", "叙事声音 mood line", "TimeDock 可拖拽乐器", "anticipation 承诺", "curiosity hooks"],
+    "destinationHas": ["静态照片", "文字模块", "零 ambient", "零可拖拽对象"],
+    "inheritDecision": "环境氛围层 + 一个可拖拽乐器（THE LENS / THE YEAR），不复制 Home 视觉"
+  },
+  "currentVisualObjects": ["Image（静态）", "City（词）", "NOW（数字面板）", "Highlights（词）", "Vibe（词）", "Year（数据刻度）", "Lists（词行）"],
+  "explorableObjectsCount": 0,
+  "productExperienceVerdict": "FAIL",
+  "destination30": {
+    "concept": "PLACE YOU CAN TOUCH — 页面 = 两个可触摸的真实资产：那张照片（THE LENS）+ 那 12 个月（THE YEAR）",
+    "experiences": [
+      {
+        "id": "E1 THE PLACE",
+        "primaryObject": "满出血照片 + 活氛围层",
+        "primaryInteraction": "看 + NOW 状态层（保留）",
+        "stateChange": "轻 ambient 呼吸（reduced-motion 关）",
+        "discovery": "场景气质（不伪装可玩）"
+      },
+      {
+        "id": "E2 THE LENS",
+        "primaryObject": "可拖拽放大透镜 × 真实街景照片",
+        "primaryInteraction": "自由拖拽 + 5 章节锚点飞镜（确定性落点）",
+        "stateChange": "透镜位置/放大区域/章节字幕/vibe tint",
+        "discovery": "照片的真实区域首次可见——新发现来自真实照片"
+      },
+      {
+        "id": "E3 THE YEAR",
+        "primaryObject": "时间场（12 月大对象）",
+        "primaryInteraction": "横向拖拽 scrub",
+        "stateChange": "巨型月份 + verdict + 场景底色 tint + 读数",
+        "discovery": "什么时候是什么样（TimeDock 原则继承）"
+      }
+    ],
+    "structureChange": "5 scenes → 3 experiences + 后续内容区",
+    "removed": ["DiscoveryBoard crop-swap 交互模型", "巨型章节=可探索对象的宣称", "vibe 场景模式过度宣称"],
+    "merged": ["vibe → 透镜滤镜 + 列表过滤双职", "章节 → 透镜锚点"],
+    "kept": ["Scene01 构图与 NOW 层", "ClimateYear 数据/算法契约", "全部数据链路", "SEO", "KeepExploring（下阶段）"]
+  },
+  "rulesAdded": [
+    "RULE 01 Interaction must reveal information",
+    "RULE 02 Visual change alone is not sufficient",
+    "RULE 03 Every core interaction must create a new discovery",
+    "RULE 04 Text cannot be the primary exploration mechanism",
+    "RULE 05 At least one scene must work primarily through visual objects",
+    "RULE 06 A destination page must feel alive before user reads anything",
+    "RULE 07 If an interaction could be replaced by a link without losing experience, it is not meaningful",
+    "RULE 08 More components do not equal more experience"
+  ],
+  "hubClosure": "World Atlas（145 点）→ select → PLACE（本页）→ THE LENS → THE YEAR → DECIDE → next gateway 回到 Atlas；Atlas 保留 RegionMiniMap 能力，detail 无地图",
+  "implementationSequence": ["E2 THE LENS", "E3 THE YEAR 场景氛围化", "E1 活氛围层", "删除清单执行", "回归 QA（4 城 × 双视口 × 四强制测试）"],
+  "acceptanceCriteria": ["无文字后 E2/E3 仍可玩", "滚动中 ≥2 处状态变化", "30 秒连续操作 ≥3 次仍有新视野", "RULE01-03 全满足", "有自身 ambient life", "每 scene 一个视觉主角", "数据诚信零违规", "SEO 零破坏", "perf 预算内", "4 城 × 双视口通过"],
+  "finalDecision": "DESTINATION 2.0 = FAIL（playful=0、可探索对象=0、无文字=FAIL）；3.0 = THE LENS + THE YEAR 设计定案，待批准后实施",
+  "localPreview": { "devServer": "RUNNING", "url": "http://localhost:3111", "destinationsTokyo": 200 }
+}

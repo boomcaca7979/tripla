@@ -1,0 +1,139 @@
+{
+  "pilotVersion": "pilot-2026.09.11.v1",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+  "provider": "NASA POWER (NASA Langley Research Center)",
+  "sourceFamily": "NASA POWER / MERRA-2",
+  "officialProduct": "Climatology API (point)",
+  "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+  "parameters": [
+    "T2M",
+    "T2M_MAX_AVG",
+    "T2M_MIN_AVG",
+    "PRECTOTCORR_SUM",
+    "PRECTOTCORR"
+  ],
+  "community": "AG",
+  "start": "1991",
+  "end": "2020",
+  "timeStandardRequested": null,
+  "generatedAt": "2026-09-11T15:33:02.218096+00:00",
+  "records": [
+    {
+      "destinationId": "singapore",
+      "anchorLatitude": 1.3644,
+      "anchorLongitude": 103.9915,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/climatology/point?parameters=T2M,T2M_MAX_AVG,T2M_MIN_AVG,PRECTOTCORR_SUM,PRECTOTCORR&community=AG&longitude=103.9915&latitude=1.3644&start=1991&end=2020&format=JSON",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-11T15:33:40.623665+00:00",
+      "responseTimeStandard": "LST",
+      "responseTitle": "NASA/POWER Source Native Resolution Climatology Climatologies",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "gridCoordinates": [
+        103.992,
+        1.364,
+        25.8
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR",
+        "PRECTOTCORR_SUM",
+        "T2M",
+        "T2M_MAX_AVG",
+        "T2M_MIN_AVG"
+      ]
+    },
+    {
+      "destinationId": "rovaniemi",
+      "anchorLatitude": 66.5648,
+      "anchorLongitude": 25.8319,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/climatology/point?parameters=T2M,T2M_MAX_AVG,T2M_MIN_AVG,PRECTOTCORR_SUM,PRECTOTCORR&community=AG&longitude=25.8319&latitude=66.5648&start=1991&end=2020&format=JSON",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-11T15:33:45.268370+00:00",
+      "responseTimeStandard": "LST",
+      "responseTitle": "NASA/POWER Source Native Resolution Climatology Climatologies",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "gridCoordinates": [
+        25.832,
+        66.565,
+        151.72
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR",
+        "PRECTOTCORR_SUM",
+        "T2M",
+        "T2M_MAX_AVG",
+        "T2M_MIN_AVG"
+      ]
+    },
+    {
+      "destinationId": "bali",
+      "anchorLatitude": -8.7482,
+      "anchorLongitude": 115.1675,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/climatology/point?parameters=T2M,T2M_MAX_AVG,T2M_MIN_AVG,PRECTOTCORR_SUM,PRECTOTCORR&community=AG&longitude=115.1675&latitude=-8.7482&start=1991&end=2020&format=JSON",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-11T15:33:48.481006+00:00",
+      "responseTimeStandard": "LST",
+      "responseTitle": "NASA/POWER Source Native Resolution Climatology Climatologies",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "gridCoordinates": [
+        115.168,
+        -8.748,
+        313.73
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR",
+        "PRECTOTCORR_SUM",
+        "T2M",
+        "T2M_MAX_AVG",
+        "T2M_MIN_AVG"
+      ]
+    },
+    {
+      "destinationId": "queenstown",
+      "anchorLatitude": -45.0211,
+      "anchorLongitude": 168.7392,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/climatology/point?parameters=T2M,T2M_MAX_AVG,T2M_MIN_AVG,PRECTOTCORR_SUM,PRECTOTCORR&community=AG&longitude=168.7392&latitude=-45.0211&start=1991&end=2020&format=JSON",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-11T15:33:51.908324+00:00",
+      "responseTimeStandard": "LST",
+      "responseTitle": "NASA/POWER Source Native Resolution Climatology Climatologies",
+      "apiVersion": "v2.9.7",
+      "sources": [
+        "MERRA2",
+        "POWER"
+      ],
+      "gridCoordinates": [
+        168.739,
+        -45.021,
+        962.79
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR",
+        "PRECTOTCORR_SUM",
+        "T2M",
+        "T2M_MAX_AVG",
+        "T2M_MIN_AVG"
+      ]
+    }
+  ],
+  "summary": {
+    "requested": 4,
+    "http200": 4,
+    "failed": 0
+  }
+}

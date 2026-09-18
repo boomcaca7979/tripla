@@ -9,12 +9,22 @@ import type { TravelStyle, TravelInterest } from "@/types/itinerary";
  */
 export type DestinationTravelStyle = TravelStyle | "nature" | "history" | "culture" | "beaches";
 
-/** interests 同理：数据层允许扩展值 culture，消费端 guard 收敛为 TravelInterest。 */
-export type DestinationTravelInterest = TravelInterest | "culture" | "relaxation";
+/**
+ * interests 同理：数据层允许扩展值 culture / relaxation / adventure（adventure 亦
+ * 是 travelStyle 的合法取值，用于户外型目的地，如 Victoria Falls、Ushuaia）。
+ * 消费端 guard 收敛为 TravelInterest；/destinations 的 vibe 映射对未知值不命中、
+ * 不硬造映射（见 inner-state.vibesForInterests）。
+ */
+export type DestinationTravelInterest =
+  | TravelInterest
+  | "culture"
+  | "relaxation"
+  | "adventure";
 import { EXTENDED_DESTINATIONS_A } from "./destinations-extended-a";
 import { EXTENDED_DESTINATIONS_B } from "./destinations-extended-b";
 import { EXTENDED_DESTINATIONS_C } from "./destinations-extended-d";
 import { EXTENDED_DESTINATIONS_E } from "./destinations-extended-e";
+import { EXTENDED_DESTINATIONS_F } from "./destinations-extended-f";
 
 // ── Types ──────────────────────────────────────────────────────────────
 
@@ -2807,6 +2817,7 @@ export const DESTINATIONS: Destination[] = [
   ...EXTENDED_DESTINATIONS_B,
   ...EXTENDED_DESTINATIONS_C,
   ...EXTENDED_DESTINATIONS_E,
+  ...EXTENDED_DESTINATIONS_F,
 ].map(normalizeDestination);
 
 /** 返回所有 destination 的 slug。 */

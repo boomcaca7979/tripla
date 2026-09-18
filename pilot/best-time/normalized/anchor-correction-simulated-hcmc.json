@@ -1,0 +1,433 @@
+{
+ "simulationVersion": "anchor-correction-simulation-v1",
+ "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+ "ruleVersion": "r1-r7.v4",
+ "generatedAt": "2026-09-12T08:17:34.805965+00:00",
+ "destinationId": "ho-chi-minh-city",
+ "status": "PILOT SIMULATION - NOT PRODUCTION DATA - NOT AN APPROVAL",
+ "oldAnchor": {
+  "latitude": 10.8188,
+  "longitude": 106.8069,
+  "iata": null,
+  "gridElevationM": 46.81
+ },
+ "newAnchor": {
+  "latitude": 10.8188,
+  "longitude": 106.652,
+  "gridElevationM": 46.81
+ },
+ "source": {
+  "provider": "NASA POWER",
+  "sourceFamily": "NASA POWER / MERRA-2",
+  "officialProducts": [
+   "Climatology API",
+   "Daily API"
+  ],
+  "timeStandard": "UTC",
+  "dailyBoundary": "UTC+00:00",
+  "rawDir": "raw/nasa/anchor_sim/hcmc-proposed/"
+ },
+ "old": {
+  "months": [
+   {
+    "monthIndex": 0,
+    "tempMeanC": 26.1,
+    "tempHighC": 32.6,
+    "tempLowC": 20.89,
+    "precipMm": 10.0,
+    "precipDaysGe1mm": 2.0,
+    "sunshineHours": null,
+    "daylightHours": 11.57,
+    "ruleId": "R4",
+    "tier": "Workable",
+    "rawRuleHits": [
+     "R4"
+    ]
+   },
+   {
+    "monthIndex": 1,
+    "tempMeanC": 27.93,
+    "tempHighC": 35.7,
+    "tempLowC": 22.01,
+    "precipMm": 6.5,
+    "precipDaysGe1mm": 1.0,
+    "sunshineHours": null,
+    "daylightHours": 11.79,
+    "ruleId": "R4",
+    "tier": "Workable",
+    "rawRuleHits": [
+     "R4"
+    ]
+   },
+   {
+    "monthIndex": 2,
+    "tempMeanC": 29.72,
+    "tempHighC": 37.64,
+    "tempLowC": 24.03,
+    "precipMm": 14.11,
+    "precipDaysGe1mm": 2.6,
+    "sunshineHours": null,
+    "daylightHours": 12.08,
+    "ruleId": "R4",
+    "tier": "Workable",
+    "rawRuleHits": [
+     "R4"
+    ]
+   },
+   {
+    "monthIndex": 3,
+    "tempMeanC": 30.53,
+    "tempHighC": 37.43,
+    "tempLowC": 25.62,
+    "precipMm": 48.33,
+    "precipDaysGe1mm": 6.7,
+    "sunshineHours": null,
+    "daylightHours": 12.38,
+    "ruleId": "R4",
+    "tier": "Workable",
+    "rawRuleHits": [
+     "R4"
+    ]
+   },
+   {
+    "monthIndex": 4,
+    "tempMeanC": 29.17,
+    "tempHighC": 33.95,
+    "tempLowC": 25.54,
+    "precipMm": 167.25,
+    "precipDaysGe1mm": 19.0,
+    "sunshineHours": null,
+    "daylightHours": 12.63,
+    "ruleId": "R4",
+    "tier": "Workable",
+    "rawRuleHits": [
+     "R4",
+     "R5"
+    ]
+   },
+   {
+    "monthIndex": 5,
+    "tempMeanC": 27.31,
+    "tempHighC": 30.86,
+    "tempLowC": 24.49,
+    "precipMm": 225.6,
+    "precipDaysGe1mm": 22.6,
+    "sunshineHours": null,
+    "daylightHours": 12.75,
+    "ruleId": "R3",
+    "tier": "Challenging",
+    "rawRuleHits": [
+     "R3",
+     "R5"
+    ]
+   },
+   {
+    "monthIndex": 6,
+    "tempMeanC": 26.6,
+    "tempHighC": 29.87,
+    "tempLowC": 24.0,
+    "precipMm": 225.88,
+    "precipDaysGe1mm": 25.6,
+    "sunshineHours": null,
+    "daylightHours": 12.68,
+    "ruleId": "R3",
+    "tier": "Challenging",
+    "rawRuleHits": [
+     "R3",
+     "R5"
+    ]
+   },
+   {
+    "monthIndex": 7,
+    "tempMeanC": 26.51,
+    "tempHighC": 29.81,
+    "tempLowC": 23.9,
+    "precipMm": 207.66,
+    "precipDaysGe1mm": 23.4,
+    "sunshineHours": null,
+    "daylightHours": 12.46,
+    "ruleId": "R3",
+    "tier": "Challenging",
+    "rawRuleHits": [
+     "R3",
+     "R5"
+    ]
+   },
+   {
+    "monthIndex": 8,
+    "tempMeanC": 26.42,
+    "tempHighC": 29.68,
+    "tempLowC": 23.85,
+    "precipMm": 206.37,
+    "precipDaysGe1mm": 23.8,
+    "sunshineHours": null,
+    "daylightHours": 12.18,
+    "ruleId": "R3",
+    "tier": "Challenging",
+    "rawRuleHits": [
+     "R3",
+     "R5"
+    ]
+   },
+   {
+    "monthIndex": 9,
+    "tempMeanC": 26.34,
+    "tempHighC": 29.93,
+    "tempLowC": 23.49,
+    "precipMm": 221.92,
+    "precipDaysGe1mm": 23.9,
+    "sunshineHours": null,
+    "daylightHours": 11.88,
+    "ruleId": "R3",
+    "tier": "Challenging",
+    "rawRuleHits": [
+     "R3",
+     "R5"
+    ]
+   },
+   {
+    "monthIndex": 10,
+    "tempMeanC": 26.1,
+    "tempHighC": 30.44,
+    "tempLowC": 22.44,
+    "precipMm": 100.69,
+    "precipDaysGe1mm": 13.7,
+    "sunshineHours": null,
+    "daylightHours": 11.63,
+    "ruleId": "R5",
+    "tier": "Workable",
+    "rawRuleHits": [
+     "R5"
+    ]
+   },
+   {
+    "monthIndex": 11,
+    "tempMeanC": 25.44,
+    "tempHighC": 30.52,
+    "tempLowC": 21.16,
+    "precipMm": 33.76,
+    "precipDaysGe1mm": 6.0,
+    "sunshineHours": null,
+    "daylightHours": 11.5,
+    "ruleId": "R7",
+    "tier": "Favourable",
+    "rawRuleHits": [
+     "R7"
+    ]
+   }
+  ],
+  "bestMonthsBaseline": [
+   11
+  ],
+  "recommendationStatus": "ok-favourable"
+ },
+ "new": {
+  "months": [
+   {
+    "monthIndex": 0,
+    "tempMeanC": 26.1,
+    "tempHighC": 32.6,
+    "tempLowC": 20.89,
+    "precipMm": 10.0,
+    "precipDaysGe1mm": 2,
+    "sunshineHours": null,
+    "daylightHours": 11.57,
+    "ruleId": "R4",
+    "tier": "Workable",
+    "rawRuleHits": [
+     "R4"
+    ]
+   },
+   {
+    "monthIndex": 1,
+    "tempMeanC": 27.93,
+    "tempHighC": 35.7,
+    "tempLowC": 22.01,
+    "precipMm": 6.5,
+    "precipDaysGe1mm": 1.0,
+    "sunshineHours": null,
+    "daylightHours": 11.79,
+    "ruleId": "R4",
+    "tier": "Workable",
+    "rawRuleHits": [
+     "R4"
+    ]
+   },
+   {
+    "monthIndex": 2,
+    "tempMeanC": 29.72,
+    "tempHighC": 37.64,
+    "tempLowC": 24.03,
+    "precipMm": 14.11,
+    "precipDaysGe1mm": 2.6,
+    "sunshineHours": null,
+    "daylightHours": 12.08,
+    "ruleId": "R4",
+    "tier": "Workable",
+    "rawRuleHits": [
+     "R4"
+    ]
+   },
+   {
+    "monthIndex": 3,
+    "tempMeanC": 30.53,
+    "tempHighC": 37.43,
+    "tempLowC": 25.62,
+    "precipMm": 48.33,
+    "precipDaysGe1mm": 6.7,
+    "sunshineHours": null,
+    "daylightHours": 12.38,
+    "ruleId": "R4",
+    "tier": "Workable",
+    "rawRuleHits": [
+     "R4"
+    ]
+   },
+   {
+    "monthIndex": 4,
+    "tempMeanC": 29.17,
+    "tempHighC": 33.95,
+    "tempLowC": 25.54,
+    "precipMm": 167.25,
+    "precipDaysGe1mm": 19.0,
+    "sunshineHours": null,
+    "daylightHours": 12.63,
+    "ruleId": "R4",
+    "tier": "Workable",
+    "rawRuleHits": [
+     "R4",
+     "R5"
+    ]
+   },
+   {
+    "monthIndex": 5,
+    "tempMeanC": 27.31,
+    "tempHighC": 30.86,
+    "tempLowC": 24.49,
+    "precipMm": 225.6,
+    "precipDaysGe1mm": 22.6,
+    "sunshineHours": null,
+    "daylightHours": 12.75,
+    "ruleId": "R3",
+    "tier": "Challenging",
+    "rawRuleHits": [
+     "R3",
+     "R5"
+    ]
+   },
+   {
+    "monthIndex": 6,
+    "tempMeanC": 26.6,
+    "tempHighC": 29.87,
+    "tempLowC": 24.0,
+    "precipMm": 225.88,
+    "precipDaysGe1mm": 25.6,
+    "sunshineHours": null,
+    "daylightHours": 12.68,
+    "ruleId": "R3",
+    "tier": "Challenging",
+    "rawRuleHits": [
+     "R3",
+     "R5"
+    ]
+   },
+   {
+    "monthIndex": 7,
+    "tempMeanC": 26.51,
+    "tempHighC": 29.81,
+    "tempLowC": 23.9,
+    "precipMm": 207.66,
+    "precipDaysGe1mm": 23.4,
+    "sunshineHours": null,
+    "daylightHours": 12.46,
+    "ruleId": "R3",
+    "tier": "Challenging",
+    "rawRuleHits": [
+     "R3",
+     "R5"
+    ]
+   },
+   {
+    "monthIndex": 8,
+    "tempMeanC": 26.42,
+    "tempHighC": 29.68,
+    "tempLowC": 23.85,
+    "precipMm": 206.37,
+    "precipDaysGe1mm": 23.8,
+    "sunshineHours": null,
+    "daylightHours": 12.18,
+    "ruleId": "R3",
+    "tier": "Challenging",
+    "rawRuleHits": [
+     "R3",
+     "R5"
+    ]
+   },
+   {
+    "monthIndex": 9,
+    "tempMeanC": 26.34,
+    "tempHighC": 29.93,
+    "tempLowC": 23.49,
+    "precipMm": 221.92,
+    "precipDaysGe1mm": 23.9,
+    "sunshineHours": null,
+    "daylightHours": 11.88,
+    "ruleId": "R3",
+    "tier": "Challenging",
+    "rawRuleHits": [
+     "R3",
+     "R5"
+    ]
+   },
+   {
+    "monthIndex": 10,
+    "tempMeanC": 26.1,
+    "tempHighC": 30.44,
+    "tempLowC": 22.44,
+    "precipMm": 100.69,
+    "precipDaysGe1mm": 13.7,
+    "sunshineHours": null,
+    "daylightHours": 11.63,
+    "ruleId": "R5",
+    "tier": "Workable",
+    "rawRuleHits": [
+     "R5"
+    ]
+   },
+   {
+    "monthIndex": 11,
+    "tempMeanC": 25.44,
+    "tempHighC": 30.52,
+    "tempLowC": 21.16,
+    "precipMm": 33.76,
+    "precipDaysGe1mm": 6,
+    "sunshineHours": null,
+    "daylightHours": 11.5,
+    "ruleId": "R7",
+    "tier": "Favourable",
+    "rawRuleHits": [
+     "R7"
+    ]
+   }
+  ],
+  "bestMonthsBaseline": [
+   11
+  ],
+  "recommendationStatus": "ok-favourable",
+  "missingDailyPrecipDays": 0
+ },
+ "diffs": [],
+ "summary": {
+  "climateValueCellsChanged": 0,
+  "classificationChangedMonths": [],
+  "rulesChanged": [],
+  "bestMonthsChanged": false,
+  "oldBestMonths": [
+   11
+  ],
+  "newBestMonths": [
+   11
+  ],
+  "recommendationStatusChanged": false
+ }
+}

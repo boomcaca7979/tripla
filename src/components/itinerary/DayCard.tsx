@@ -37,6 +37,19 @@ function formatDate(dateStr: string): string {
   return m && d ? `${MONTHS[m - 1] ?? ""} ${d}` : dateStr;
 }
 
+/**
+ * YYYY-MM-DD 加一天（UTC 计算，避免时区漂移）。
+ *
+ * 用于行程**最后一天**的酒店窗口：最后一天没有 nextDate，若退化为当天会让
+ * checkIn === checkOut（0 晚，Hotellook 视为无效窗口）。这里兜底为「住一晚」。
+ */
+function nextDay(dateStr: string): string {
+  const d = new Date(`${dateStr}T00:00:00Z`);
+  if (Number.isNaN(d.getTime())) return dateStr;
+  d.setUTCDate(d.getUTCDate() + 1);
+  return d.toISOString().slice(0, 10);
+}
+
 function formatDuration(minutes: number): string {
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
@@ -148,7 +161,10 @@ export default function DayCard({
               href={buildHotelSearchUrl({
                 city: destinationCity,
                 checkIn: day.date,
-                checkOut: nextDate ?? day.date,
+                // 保证 checkOut > checkIn：行程最后一天的上游兜底值可能等于当天
+                // （ItineraryTimeline 用 returnDate 兜底，而末日 date === returnDate），
+                // 那样会生成 0 晚的无效窗口，故仅在严格更大时采用。
+                checkOut: nextDate && nextDate > day.date ? nextDate : nextDay(day.date),
               })}
               target="_blank"
               rel="noopener noreferrer sponsored"

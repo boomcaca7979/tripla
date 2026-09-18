@@ -1,0 +1,43 @@
+{
+ "generatedAt": "2026-09-12T01:33:44.238617+00:00",
+ "status": "CONFIRMED",
+ "scope": "attribution / citation only - NOT a commercial-use licence",
+ "officialSource": {
+  "name": "NASA POWER Referencing Guide",
+  "url": "https://power.larc.nasa.gov/docs/referencing/",
+  "retrievedAt": "2026-09-12"
+ },
+ "requiredStatements": [
+  {
+   "id": "power-reference",
+   "when": "When POWER data products are used in a publication include both POWER's Reference and POWER's Data Reference in any work product or publication.",
+   "text": "The data was obtained from National Aeronautics and Space Administration (NASA) Langley Research Center's Prediction Of Worldwide Energy Resources (POWER) project funded through the NASA Earth Science Division. When referencing POWER data products please include the service name, version number, and date accessed."
+  },
+  {
+   "id": "power-data-reference",
+   "when": "Data reference template (service name, version, date accessed).",
+   "text": "The data was obtained from the POWER Project's Hourly 2.x.x version on YYYY/MM/DD."
+  },
+  {
+   "id": "acknowledgment-alt",
+   "when": "NASA POWER ArcGIS item metadata (Data Use).",
+   "text": "These data were obtained from the NASA Langley Research Center POWER Project funded through the NASA Earth Science Directorate Applied Science Program.",
+   "url": "https://www.arcgis.com/home/item.html?id=cd8b70a2570647e6b82aab57c17928f3"
+  }
+ ],
+ "providerNaming": "NASA POWER (NASA Langley Research Center)",
+ "datasetNaming": "NASA Prediction of Worldwide Energy Resources (POWER)",
+ "requestsNotRequirements": [
+  {
+   "id": "publication-notification",
+   "text": "The POWER Project kindly requests that users of POWER data products send a reference, web link and/or a reprint ... to larc-power-project@mail.nasa.gov.",
+   "kind": "request"
+  },
+  {
+   "id": "redistribution-notification",
+   "text": "To assist the POWER Project in providing the best service to the scientific community, the Project requests notification if POWER data is transmitted to other researchers.",
+   "kind": "request"
+  }
+ ],
+ "note": "'requests notification' is a courtesy request, not a prohibition - but it is also not a grant of commercial redistribution rights."
+}

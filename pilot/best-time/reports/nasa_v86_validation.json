@@ -1,0 +1,48 @@
+{
+  "pilotVersion": "pilot-2026.09.11.v1",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+  "ruleVersion": "r1-r7.v4",
+  "generatedAt": "2026-09-12T02:26:50.802684+00:00",
+  "coverage": {
+    "destinations": 145,
+    "months": 1740,
+    "dailyPrecipHttp200": 145,
+    "missingDailyPrecipDays": 0,
+    "destinationsWithMissingPrecipDays": 0
+  },
+  "r1r7": {
+    "counts": {
+      "R1": 5,
+      "R2": 16,
+      "R3": 157,
+      "R4": 92,
+      "R5": 484,
+      "R6": 460,
+      "R7": 526
+    },
+    "classified": 1740,
+    "unclassified": 0,
+    "multipleFinalRules": 0
+  },
+  "bestMonths": {
+    "branchCounts": {
+      "branch1": 117,
+      "branch2": 28,
+      "branch3": 0
+    }
+  },
+  "regressionVsV85": {
+    "comparedFields": [
+      "tempMeanC",
+      "tempHighC",
+      "tempLowC",
+      "precipMm",
+      "ruleId",
+      "tier",
+      "rawRuleHits"
+    ],
+    "differingCells": 0,
+    "r1r7CountsIdentical": true,
+    "sample": []
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "generatedAt": "2026-09-12",
+  "audited": "pilot/best-time/scripts/copernicus_request_template.py",
+  "assertions": [
+    {
+      "assert": "template-import-is-network-free",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "precip-conversion-month-length-unit-tests",
+      "pass": true,
+      "detail": "{\"Jan 31 days\": \"62 mm\", \"Feb 28 days\": \"56 mm\", \"Feb 29 leap\": \"58 mm\", \"Apr 30 days\": \"60 mm\", \"Feb 29 leap 2000\": \"58 mm\", \"Feb 29 leap 2020\": \"58 mm\"} (0.002 m/day * 1000 * N)"
+    },
+    {
+      "assert": "no-fixed-30-days",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "precipMm-post-processing-cites-days_in_month",
+      "pass": true,
+      "detail": "tp_mm = tp_m_per_day * 1000 * days_in_month(year, month); then mean over 1991..2020"
+    },
+    {
+      "assert": "strategy-worked-example-62mm",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "area-order-N-W-S-E",
+      "pass": true,
+      "detail": "[10.25, 106.55, 9.75, 107.05]"
+    },
+    {
+      "assert": "era5-dataset-id",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "era5-daily-dataset-id",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "era5land-dataset-ids",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "timezone-key-and-value",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "era5-daily-sum-available",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "era5land-daily-sum-absent",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "era5land-cannot-provide-precipDays",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "era5land-cannot-provide-sunshine",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "era5land-conclusion-no-full-replacement",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "monthly-request-structure",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "daily-request-structure",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "era5land-request-refuses-unavailable-fields",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "field-plan-precipDays-approved-derived-v86",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "passed": 19,
+  "failed": 0,
+  "gate": "COPERNICUS REQUEST/UNIT LOGIC = PASS",
+  "note": "Request-level audit only. ERA5 PRIMARY data retrieval remains BLOCKED_BY_MISSING_CDS_CREDENTIALS."
+}

@@ -1,0 +1,88 @@
+{
+  "dataset": "nasa_canonical_145_v86_final.json",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+  "fields": [
+    {
+      "field": "tempMeanC",
+      "unit": "degC",
+      "source": "NASA Climatology T2M",
+      "temporalLevel": "climatology",
+      "aggregation": "official",
+      "nullability": "required",
+      "nullCount": 0,
+      "populatedCount": 1740,
+      "status": "RESOLVED"
+    },
+    {
+      "field": "tempHighC",
+      "unit": "degC",
+      "source": "NASA Daily T2M_MAX (UTC)",
+      "temporalLevel": "daily",
+      "aggregation": "official",
+      "nullability": "required",
+      "nullCount": 0,
+      "populatedCount": 1740,
+      "status": "RESOLVED"
+    },
+    {
+      "field": "tempLowC",
+      "unit": "degC",
+      "source": "NASA Daily T2M_MIN (UTC)",
+      "temporalLevel": "daily",
+      "aggregation": "official",
+      "nullability": "required",
+      "nullCount": 0,
+      "populatedCount": 1740,
+      "status": "RESOLVED"
+    },
+    {
+      "field": "precipMm",
+      "unit": "mm",
+      "source": "NASA Climatology PRECTOTCORR_SUM",
+      "temporalLevel": "climatology",
+      "aggregation": "official",
+      "nullability": "required",
+      "nullCount": 0,
+      "populatedCount": 1740,
+      "status": "RESOLVED"
+    },
+    {
+      "field": "precipDaysGe1mm",
+      "unit": "days",
+      "source": "NASA Daily PRECTOTCORR (official daily precipitation); count is UTRIPLA-derived",
+      "temporalLevel": "daily -> monthly mean",
+      "aggregation": "official source data + internal deterministic derivation (derived=true, thresholdMm=1.0, WMO rain-day)",
+      "nullability": "required",
+      "nullCount": 0,
+      "populatedCount": 1740,
+      "status": "RESOLVED"
+    },
+    {
+      "field": "sunshineHours",
+      "unit": "h",
+      "source": null,
+      "temporalLevel": null,
+      "aggregation": "UNRESOLVED - no official product in either family; canonical null",
+      "nullability": "nullable",
+      "nullCount": 1740,
+      "populatedCount": 0,
+      "status": "RESOLVED"
+    },
+    {
+      "field": "daylightHours",
+      "unit": "h",
+      "source": "astronomical-derived (non-climate): NOAA solar position, officialProduct=null, formulaVersion noaa-solar-position-2026.09.v1",
+      "temporalLevel": "daily -> monthly mean",
+      "aggregation": "deterministic formula: year-level monthly mean -> mean over 30 years; leap Feb = actual 29 calendar days; polar 0/24 h",
+      "nullability": "required",
+      "nullCount": 0,
+      "populatedCount": 1740,
+      "status": "RESOLVED"
+    }
+  ],
+  "missingDefinitionCount": 0,
+  "ambiguousDefinitionCount": 0,
+  "contradictoryNullabilityCount": 0,
+  "leapYearAnswer": "February in a leap year contributes its ACTUAL 29 calendar days to that year's February mean (8 leap years of 30); non-leap February = 28 days",
+  "gate": "missing = 0; ambiguous = 0; contradictory = 0"
+}

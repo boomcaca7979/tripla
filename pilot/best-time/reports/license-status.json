@@ -1,0 +1,46 @@
+{
+ "generatedAt": "2026-09-12T01:33:44.238617+00:00",
+ "principle": "API accessibility and open-website status never imply commercial redistribution permission.",
+ "nasaPower": {
+  "status": "UNVERIFIED / LEGAL REVIEW REQUIRED",
+  "formalLicenceInstrumentFound": false,
+  "evidenceLocated": [
+   {
+    "source": "AWS Open Data Registry - NASA POWER",
+    "url": "https://registry.opendata.aws/nasa-power/",
+    "quote": "There are no restrictions on the use, access, and/or download of data from the NASA POWER Project. We request that you cite the NASA POWER Project when using the data provided from NASA POWER Project.",
+    "classification": "self-statement on a registry page - NOT a licence instrument"
+   },
+   {
+    "source": "NASA POWER Referencing Guide",
+    "url": "https://power.larc.nasa.gov/docs/referencing/",
+    "quote": "The Project requests notification if POWER data is transmitted to other researchers.",
+    "classification": "attribution / notification guidance - NOT a licence"
+   }
+  ],
+  "commercialUse": "UNVERIFIED",
+  "redistributionOfDerivedStaticDataset": "UNVERIFIED",
+  "attribution": "CONFIRMED (see nasa-attribution.json)",
+  "hardPrerequisiteIfFallbackShips": true
+ },
+ "copernicus": {
+  "officialName": "Licence to use Copernicus Products (rev. 12)",
+  "mustNotBeShortenedTo": "CC BY 4.0",
+  "status": "official name confirmed; conditions as previously research-confirmed; no new official text retrieved this round",
+  "conditions": {
+   "commercialUse": "permitted",
+   "reproduction": "permitted",
+   "distribution": "permitted",
+   "modification": "permitted",
+   "attribution": "required",
+   "modificationNotice": "required where applicable",
+   "disclaimer": "required as specified by the licence"
+  },
+  "attributionStatement": "Generated using Copernicus Climate Change Service information (Year)",
+  "modifiedNoticeStatement": "Contains modified Copernicus ... (Year)"
+ },
+ "databaseRights": {
+  "status": "UNRESOLVED / LEGAL REVIEW REQUIRED",
+  "note": "EU sui generis database rights; no legal basis located in the repository. Retain full transformation scripts and retrieval records."
+ }
+}

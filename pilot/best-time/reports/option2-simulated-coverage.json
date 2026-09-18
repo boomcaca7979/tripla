@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2026-09-12T09:29:38.305072+00:00",
+  "artifact": "option2-simulated-coverage.json",
+  "framework": "v8.7-DRAFT (above)",
+  "simulatedStatuses": {
+    "PENDING-CORROBORATION": 118,
+    "APPROVED-TIER1": 17,
+    "APPROVED-VERIFIED": 8,
+    "PENDING-ANCHOR-DECISION": 2
+  },
+  "sum": 145,
+  "coverageNow": "25/145",
+  "achievableAfterCorroborationCampaign": "143/145 — the 118 PENDING-CORROBORATION records each need one independent corroborating source (proven feasible: the 10 review items were all corroborated via search in Phase 1C); the 2 anchor-pending records stay blocked until Decisions A/B regardless of elevation source acceptance",
+  "note": "computed from data, not preset; single-source Tier-3 records do NOT auto-approve"
+}

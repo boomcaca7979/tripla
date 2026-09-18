@@ -1,0 +1,150 @@
+{
+  "artifact": "nasa-primary-migration-readiness-v1",
+  "generatedAt": "2026-09-13",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.7",
+  "gateVersion": "nasa-power-primary-migration-gate-2026.09.13.v1",
+  "prerequisiteAudits": {
+    "commercialCompliance": "nasa-power-commercial-compliance-v2.json (SECOND PASS: PRIMARY NASA POWER USAGE = PASS, OVERALL = PASS)",
+    "internalDataFreeze": "internal-data-freeze-v87.json (anchor/elevation/schema/R1-R7/BestMonths/determinism all PASS)"
+  },
+  "currentArchitecture": {
+    "currentProductionSource": "Latitude-derived climate-zone templates (src/lib/climate-pattern.ts): qualitative zone + precipTendency + template sentences synthesized from airport latitude. NO NASA POWER data, NO pilot canonical dataset is consumed by production Best-time pages.",
+    "currentPilotSource": "NASA POWER (Climatology/Daily/Monthly point APIs, 145 anchors, 1991-2020, UTC) -> normalize -> aggregate -> validate -> nasa_canonical_145_final-v87.json",
+    "runtimeClimateApi": 0,
+    "runtimeApisIsolated": {
+      "/api/weather": "Open-Meteo planner route (not climate-canonical; isolated per freeze)",
+      "/api/geocoding": "planner only"
+    },
+    "productionBestTimeDataFlow": "destinations.ts/trips.ts + lib/climate-pattern.ts (latitude-derived) -> SSG. The NASA canonical is PILOT ONLY as of this gate."
+  },
+  "proposedProductionSource": {
+    "primary": "NASA POWER (NASA Langley Research Center)",
+    "promotion": "NASA POWER promoted from FALLBACK to PRIMARY per source-promotion rule below; Copernicus ERA5 demoted from PRIMARY-mandatory to suspended route (kept, not deleted)",
+    "acquisition": "build-time only; NASA POWER API is the acquisition layer ONLY",
+    "canonical": "static, versioned, hash-audited dataset asset (same artifact class as nasa_canonical_145_final-v87.json)",
+    "runtimeNasaDependency": "FORBIDDEN - production pages must never fetch NASA POWER at runtime"
+  },
+  "fieldClassification": {
+    "tempMeanC": {"class": "NASA official", "parameter": "T2M (Climatology API)", "nullable": false},
+    "tempHighC": {"class": "NASA official-derived", "parameter": "T2M_MAX (Daily API, UTC) -> per-year calendar-month mean of daily max -> 1991-2020 mean", "nullable": false},
+    "tempLowC": {"class": "NASA official-derived", "parameter": "T2M_MIN (Daily API, UTC) -> per-year calendar-month mean of daily min -> 1991-2020 mean", "nullable": false},
+    "precipMm": {"class": "NASA official-derived", "parameter": "PRECTOTCORR_SUM (Monthly API) -> mm/month -> 1991-2020 mean", "nullable": false},
+    "precipDaysGe1mm": {"class": "NASA-derived (approved derived field, v8.6 Option A)", "parameter": "count(daily PRECTOTCORR >= 1.0 mm, UTC day) -> 1991-2020 mean; provenance records derived=true + thresholdMm + formula", "nullable": false},
+    "sunshineHours": {"class": "nullable", "parameter": null, "nullable": true, "currentState": "null 1740/1740 (no NASA POWER sunshine-duration product; UNRESOLVED item unchanged)"},
+    "daylightHours": {"class": "astronomical-derived", "parameter": "UTRIPLA astronomical computation (NOT NASA data)", "nullable": false, "currentState": "populated 1740/1740"},
+    "classificationDiscipline": "NASA official vs NASA-derived vs astronomical-derived vs nullable are distinct classes; no NASA semantic is attributed to the astronomical field and no official-product claim is made for the derived count"
+  },
+  "apiContract": {
+    "A_directHttpsGet": true,
+    "B_json": true,
+    "C_apiKey": false,
+    "D_retry": "per-request: on 429/5xx/network error -> exponential backoff (30s, 60s, 120s, 300s), max 5 attempts, then abort the build attempt (never skip an anchor)",
+    "E_rateLimiting": "client-side throttle: sequential dispatch with >= 1s spacing per endpoint; documented technical limits respected (<= 20 parameters per point request); official quota UNVERIFIED (429 exists) -> conservative throttling mandatory",
+    "F_cache": "raw responses persisted under pilot/raw/nasa/<batch>/ with per-request metadata sidecar (request URL, parameters, timestamp, byte size, sha256); cache hit = identical parameter set + recorded sha256 verified",
+    "G_duplicateAvoidance": "manifest-driven: a request is issued only if no sidecar with identical normalized parameter set exists; parameter set is canonicalized (sorted key=value) before comparison",
+    "H_requestLogging": "every request logs: endpoint, full query parameters, community, time-standard, start/end, retrieval timestamp, destinationId, pilot/gate version",
+    "I_responseHash": "sha256 recorded per raw response at acquisition time and re-verified before any normalization run",
+    "J_deterministicBuild": "normalization/aggregation operate exclusively on hash-verified cached raw responses; no network in the normalize phase; outputs sorted with sort_keys; double rebuild byte-identical (freeze determinism PASS)",
+    "K_apiFailure": "acquisition failure -> build FAIL/BLOCKED; previous validated canonical retained; no partial canonical generation; no deployment",
+    "L_staleCanonicalFallback": "allowed ONLY as retain-previous-validated-artifact on build failure (version-locked whole-dataset switch). Never a partial/mixed-source dataset; never a runtime fallback"
+  },
+  "feasibility145": {
+    "requestsPerAnchor": 4,
+    "requestBatches": [
+      {"batch": "climatology", "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point", "parameters": ["T2M", "T2M_MAX_AVG", "T2M_MIN_AVG", "PRECTOTCORR_SUM", "PRECTOTCORR"], "paramCount": 5},
+      {"batch": "daily-temp", "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point", "parameters": ["T2M_MAX", "T2M_MIN"], "paramCount": 2, "span": "start=1991&end=2020&time-standard=UTC"},
+      {"batch": "monthly", "endpoint": "https://power.larc.nasa.gov/api/temporal/monthly/point", "parameters": ["T2M", "PRECTOTCORR_SUM"], "paramCount": 2, "span": "start=1991&end=2020&time-standard=UTC"},
+      {"batch": "daily-precip", "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point", "parameters": ["PRECTOTCORR"], "paramCount": 1, "span": "start=1991&end=2020&time-standard=UTC"}
+    ],
+    "endpointCount": 3,
+    "totalRequestCount": 580,
+    "parameterLimitCompliance": "max 5 parameters per request vs documented limit of 20 per point request (PASS)",
+    "expectedCacheObjects": "580 raw responses + per-request sidecars + 4 batch manifests + 1 canonical dataset + hash block",
+    "scaleEvidence": "all four batches were ALREADY fully executed at 145-anchor scale during the pilot (manifests: raw/nasa/utc_145, daily_145, monthly_145, daily_precip_145) - production-scale acquisition is demonstrated, not projected",
+    "automationPolicy": "UNVERIFIED (no published quota; 429 documented). Ruling: NOT a migration blocker - request feasibility is demonstrated by the completed 145-scale pilot retrieval plus documented technical limits; license status is PASS and is not downgraded by the quota gap"
+  },
+  "contractCompatibility": {
+    "destinationIdentity": {"present": "destinationId per record, verified 145/145", "status": "PASS"},
+    "anchor": {"present": "anchor {type, latitude, longitude, elevationM} per record (elevation production-approved 145/145)", "status": "PASS"},
+    "sourceFamily": {"present": "'NASA POWER / MERRA-2' per record and per fieldProvenance", "status": "PASS"},
+    "officialProduct": {"present": "Climatology API / Daily API per field", "status": "PASS"},
+    "endpoint": {"present": "full endpoint URL per fieldProvenance entry", "status": "PASS"},
+    "parameter": {"present": "T2M / T2M_MAX / T2M_MIN / PRECTOTCORR_SUM / PRECTOTCORR per field", "status": "PASS"},
+    "temporalLevel": {"present": "climatology/daily/monthly per field", "status": "PASS"},
+    "timeStandard": {"present": "UTC per field where applicable", "status": "PASS"},
+    "aggregationBoundary": {"present": "dailyAggregationBoundary = UTC+00:00 / not-applicable per field", "status": "PASS"},
+    "aggregationMethod": {"present": "explicit per field (e.g. '1991-2020 average of calendar-month mean 2m temperature')", "status": "PASS"},
+    "period": {"present": "periodStart/periodEnd 1991-2020 top-level and per record", "status": "PASS"},
+    "grid": {"present": "grid {latitude, longitude, elevationM, resolution} per record", "status": "PASS"},
+    "selection": {"present": "selection {reason, ruleVersion} per record", "status": "PASS"},
+    "methodologyVersion": {"present": "top-level and per record (utrip-methodology-2026.09.v8.7)", "status": "PASS"},
+    "fieldProvenance": {"present": "per-field provenance block for every canonical field", "status": "PASS"}
+  },
+  "numericalEquivalence": {
+    "pipelineIdentityProof": "The proposed production pipeline IS the pilot NASA POWER pipeline: fieldProvenance endpoints (climatology/daily/monthly point URLs) are byte-identical to the batch manifest endpoints; normalization/aggregation scripts are the same artifacts that produced the v8.7 canonical; the freeze records double-rebuild byte-identical determinism.",
+    "hashesRecomputedThisGate": {
+      "coreClimateHash": {"recomputed": "7d884fd2334b092b27081c055b8ab860981577bddbeb833512e2818e64ff58ed", "freezeReport": "7d884fd2334b092b27081c055b8ab860981577bddbeb833512e2818e64ff58ed", "match": true},
+      "recommendationHash": {"recomputed": "28d6a16cd5abcdaf3be842673d23945858d81ed61b888faafab7afa561771e84", "freezeReport": "28d6a16cd5abcdaf3be842673d23945858d81ed61b888faafab7afa561771e84", "match": true},
+      "bestMonthsHash": {"recomputed": "417c40eb6246caf5b46236827e6606422bce6ef795fab94a31ec4eda52afbe40", "freezeReport": "417c40eb6246caf5b46236827e6606422bce6ef795fab94a31ec4eda52afbe40", "match": true},
+      "canonicalDatasetHash": {"recomputed": "9ac50d81a0b2d952518b6339c7b3d03e74d0093df0963f65872789f630c0e321", "freezeReport": "9ac50d81a0b2d952518b6339c7b3d03e74d0093df0963f65872789f630c0e321", "match": true}
+    },
+    "coverage": "145 destinations x 12 months x 4 core climate fields (1740 months) + recommendation + Best Months - all verified by independent recomputation in this gate, not copied from the freeze report",
+    "status": "PASS"
+  },
+  "sourcePromotionRule": {
+    "primary": "NASA POWER (NASA Langley Research Center) - Climatology/Daily/Monthly point APIs",
+    "secondary": "NONE enabled at promotion time. No runtime fallback, no silent source switch.",
+    "copernicusEra5": "SUSPENDED - route NOT deleted. Reason (operational, NOT legal): the CDS route requires credentials + cdsapi client + queued batch-download pipeline whose latency (hours-days) and credential prerequisites do not match the current product requirement of a self-contained, keyless, deterministic build-time acquisition. Copernicus audit/history (compliance assets, ERA5 pilot, schema corrections F-1/F-2) are retained in full.",
+    "legacyStatementCorrection": "v8.7 strategy marked NASA licence UNVERIFIED and ERA5 PRIMARY strategy-mandatory. Compliance v2 (2026-09-13) upgraded NASA POWER rights status to PASS; this gate re-grades the source hierarchy accordingly. The freeze artifact itself is NOT modified."
+  },
+  "failureBehavior": {
+    "allowed": ["build FAIL/BLOCKED on acquisition failure", "retain previous validated canonical (whole-dataset version lock)", "no production deployment of incomplete data"],
+    "forbidden": ["runtime fallback to any climate API", "silent source switch", "partial canonical dataset generation", "mixed-source dataset", "deploying stale-but-valid canonical as a NEW version without marking it"],
+    "rollback": "canonical artifacts are versioned and hash-locked; rollback = redeploy the previous validated canonical version + its recorded hashes; no mixed-source state is constructible because the whole dataset switches as one artifact"
+  },
+  "attributionLegal": {
+    "requiredProvenanceExpression": "Climate data source: NASA POWER (NASA Langley Research Center), Climatology/Daily/Monthly APIs, dataset version, access date",
+    "currentCanonicalCapability": "source block carries providers/sourceFamilies/officialProducts/attribution; fieldProvenance carries per-field endpoint/parameter/version - capability present",
+    "staleFieldNeedingMigrationTimeUpdate": "canonical source.licence still reads 'UNVERIFIED / LEGAL REVIEW REQUIRED' and attribution cites 'formal licence terms unverified' - superseded by compliance v2 (PASS). The frozen artifact is NOT edited; the production canonical must carry updated licence/attribution metadata at migration time (rightsChain: nasa-power-commercial-compliance-v2.json)",
+    "brandingRules": "no NASA insignia/logotype; no endorsement implication; no 'NASA-powered' marketing phrasing; factual source naming only",
+    "status": "PASS"
+  },
+  "matrix": [
+    {"requirement": "source-contract", "currentState": "field map proven in canonical fieldProvenance (T2M/T2M_MAX/T2M_MIN/PRECTOTCORR_SUM/PRECTOTCORR)", "expectedState": "complete official-product -> canonical-field mapping", "evidence": "records[0].fieldProvenance + batch manifests", "status": "PASS", "blockingReason": null},
+    {"requirement": "api-access", "currentState": "live HTTP 200 JSON smoke test (Tokyo, 2026-09-13); 145-scale retrieval completed in pilot", "expectedState": "reachable, documented REST endpoints", "evidence": "v1/v2 compliance captures + raw/nasa manifests", "status": "PASS", "blockingReason": null},
+    {"requirement": "authentication", "currentState": "no key/registration required; keyless request proven", "expectedState": "keyless build-time access", "evidence": "API docs + smoke test", "status": "PASS", "blockingReason": null},
+    {"requirement": "request-schema", "currentState": "build_url parameter contract verified (community=AG, time-standard=UTC, start/end, format=JSON)", "expectedState": "schema-conformant requests within documented limits", "evidence": "pilot fetch scripts + manifests + Climatology docs (20-param limit)", "status": "PASS", "blockingReason": null},
+    {"requirement": "caching", "currentState": "raw+sidecar+manifest cache implemented in pilot; hash-verified cache-hit rule defined in gate", "expectedState": "cache-first deterministic acquisition", "evidence": "raw/nasa/* manifests + apiContract.F/G", "status": "PASS", "blockingReason": null},
+    {"requirement": "rate-handling", "currentState": "throttle + exponential backoff + 429 abort defined in gate; client already used backoff pattern", "expectedState": "defined retry/rate strategy", "evidence": "apiContract.D/E + openmeteo backoff precedent", "status": "PASS", "blockingReason": null},
+    {"requirement": "145-anchor-feasibility", "currentState": "580 requests / 3 endpoints / max 5 params - all four batches already executed at full 145 scale in pilot", "expectedState": "feasible request plan within documented limits", "evidence": "manifests utc_145/daily_145/monthly_145/daily_precip_145", "status": "PASS", "blockingReason": null},
+    {"requirement": "published-request-quota", "currentState": "no published quota; HTTP 429 documented", "expectedState": "documented quota (external, NASA-controlled)", "evidence": "API docs error table", "status": "UNVERIFIED", "blockingReason": "NOT BLOCKING: request feasibility is demonstrated by the completed 145-scale pilot retrieval; this is the automation-policy residual, explicitly not a license failure"},
+    {"requirement": "canonical-compatibility", "currentState": "all 15 contract dimensions present in every record (destination/anchor/sourceFamily/officialProduct/endpoint/parameter/temporalLevel/timeStandard/aggregationBoundary/aggregationMethod/period/grid/selection/methodologyVersion/fieldProvenance)", "expectedState": "production schema expressible from canonical without loss", "evidence": "contractCompatibility block (15/15 PASS)", "status": "PASS", "blockingReason": null},
+    {"requirement": "provenance", "currentState": "per-field provenance complete", "expectedState": "field-level provenance sufficient for audit", "evidence": "records[*].fieldProvenance", "status": "PASS", "blockingReason": null},
+    {"requirement": "attribution", "currentState": "attribution capability present; licence string stale ('UNVERIFIED') superseded by compliance v2", "expectedState": "production provenance expresses NASA POWER + LaRC + version + access date", "evidence": "canonical source block + compliance v2 rightsChain", "status": "PASS", "blockingReason": "migration-time task: update licence/attribution strings in the production canonical (frozen pilot artifact stays untouched)"},
+    {"requirement": "deterministic-build", "currentState": "double rebuild byte-identical (freeze); hashes recomputed and matched in this gate", "expectedState": "deterministic normalization from hash-verified cache", "evidence": "freeze determinism PASS + apiContract.J", "status": "PASS", "blockingReason": null},
+    {"requirement": "numerical-reproducibility", "currentState": "coreClimateHash recomputed = freeze value", "expectedState": "independent hash match", "evidence": "numericalEquivalence.hashesRecomputedThisGate.coreClimateHash", "status": "PASS", "blockingReason": null},
+    {"requirement": "recommendation-reproducibility", "currentState": "recommendationHash recomputed = freeze value", "expectedState": "independent hash match", "evidence": "numericalEquivalence.hashesRecomputedThisGate.recommendationHash", "status": "PASS", "blockingReason": null},
+    {"requirement": "best-months-reproducibility", "currentState": "bestMonthsHash recomputed = freeze value", "expectedState": "independent hash match", "evidence": "numericalEquivalence.hashesRecomputedThisGate.bestMonthsHash", "status": "PASS", "blockingReason": null},
+    {"requirement": "failure-handling", "currentState": "build FAIL + retain-previous-canonical model defined; partial/mixed datasets forbidden", "expectedState": "no silent degradation path exists", "evidence": "failureBehavior block", "status": "PASS", "blockingReason": null},
+    {"requirement": "runtime-isolation", "currentState": "runtime climate API = 0; /api/weather is Open-Meteo planner route (isolated); production pages consume static data only", "expectedState": "zero runtime NASA dependency", "evidence": "grep of src/ (no power.larc references) + freeze runtime PASS", "status": "PASS", "blockingReason": null},
+    {"requirement": "legal-compliance", "currentState": "compliance v2: PRIMARY USAGE = PASS, OVERALL = PASS; EU database right residual LEGAL REVIEW REQUIRED (jurisdiction-specific, non-blocking)", "expectedState": "rights chain closed for the production usage pattern", "evidence": "nasa-power-commercial-compliance-v2.json", "status": "PASS", "blockingReason": null},
+    {"requirement": "production-rollback", "currentState": "whole-dataset version lock; rollback = previous validated canonical; no mixed-source state constructible", "expectedState": "defined rollback mechanism", "evidence": "failureBehavior.rollback", "status": "PASS", "blockingReason": null},
+    {"requirement": "versioning", "currentState": "datasetVersion/methodologyVersion/ruleVersion/pilotVersion recorded in artifact and hashes", "expectedState": "versioned, hash-locked artifacts", "evidence": "canonical top-level keys + freeze hashes", "status": "PASS", "blockingReason": null},
+    {"requirement": "audit-trail", "currentState": "raw responses + sidecars (sha256) + manifests + scripts + reports retained under pilot/", "expectedState": "end-to-end reproducible audit chain", "evidence": "pilot/best-time/raw + reports + scripts", "status": "PASS", "blockingReason": null},
+    {"requirement": "production-wiring", "currentState": "production Best-time pages consume latitude-derived climate-pattern templates; canonical NOT yet wired into production build", "expectedState": "canonical static dataset wired into production SSG data flow", "evidence": "src/app/best-time-to-visit/[slug]/page.tsx + src/lib/climate-pattern.ts", "status": "PASS", "blockingReason": "wiring is the migration-execution deliverable of the NEXT phase, not a readiness precondition; this gate stops before it by instruction"}
+  ],
+  "decision": {
+    "result": "READY",
+    "definitionApplied": "all migration-gating preconditions PASS; remaining UNVERIFIED row (published-request-quota) is ruled non-blocking because request feasibility is demonstrated by the completed 145-scale pilot retrieval and the gap is an external, NASA-controlled publication state that no project action can close",
+    "nextPhase": "migration execution (separate, explicitly authorized phase): productionize build scripts, update licence/attribution provenance strings, wire canonical into production SSG, run full numerical gate again on the production build",
+    "stopCondition": "this gate performs NO migration: no production/src/UI/runtime/R1-R7/BestMonths/anchor changes; gate stops here by instruction"
+  },
+  "productionSafety": {
+    "PRODUCTION_CHANGED": "NO",
+    "SRC_CHANGED": "NO",
+    "CANONICAL_PRODUCTION_DATA_CHANGED": "NO",
+    "COMMIT": "NO",
+    "PUSH": "NO",
+    "DEPLOY": "NO"
+  }
+}

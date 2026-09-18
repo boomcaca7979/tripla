@@ -1,0 +1,111 @@
+{
+  "assertions": [
+    {
+      "assert": "raw-reuse-integrity",
+      "pass": true,
+      "detail": "{\"climatologyTimeStandard\": true, \"dailyTimeStandard\": true, \"dailyPrecipValidDays\": true, \"dailyT2MMaxValidDays\": true, \"dailyT2MMinValidDays\": true, \"climatologyMonthsComplete\": true, \"grid\": [104.921, 11.36, 9.54]}"
+    },
+    {
+      "assert": "observed-climate-60-cells-unchanged",
+      "pass": true,
+      "detail": "changed = 0"
+    },
+    {
+      "assert": "daylight-changed-cells=8",
+      "pass": true,
+      "detail": "[{\"monthIndex\": 0, \"old\": 11.53, \"new\": 11.54}, {\"monthIndex\": 4, \"old\": 12.66, \"new\": 12.65}, {\"monthIndex\": 5, \"old\": 12.79, \"new\": 12.78}, {\"monthIndex\": 6, \"old\": 12.72, \"new\": 12.71}, {\"monthIndex\": 7, \"old\": 12.49, \"new\": 12.48}, {\"monthIndex\": 9, \"old\": 11.86, \"new\": 11.87}, {\"monthIndex\": 10, \"old\": 11.59, \"new\": 11.6}, {\"monthIndex\": 11, \"old\": 11.46, \"new\": 11.47}]"
+    },
+    {
+      "assert": "daylight-max-delta=0.01h",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "phnom-penh-classification-changes=0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "phnom-penh-best-months-unchanged",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "final-dataset-145x12",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "r1r7-unclassified=0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "r1r7-duplicates=0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "r1r7-counts",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "branches-117-28-0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "core-climate-hash-unchanged",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "recommendation-hash-unchanged",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "best-months-hash-unchanged",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "anchor-hash-changed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "elevation-hash-changed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "source-family-145-single",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "elevation-145-approved",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "elev-mismatch-recomputed",
+      "pass": true,
+      "detail": "le150=114 gt150=31 phnomPenh=3.4"
+    },
+    {
+      "assert": "anchor-integrity-145-pass",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "no-production-write",
+      "pass": true,
+      "detail": "all outputs under pilot/best-time/"
+    }
+  ],
+  "passed": 21,
+  "failed": 0
+}

@@ -1,0 +1,390 @@
+{
+ "destinationId": "phnom-penh",
+ "city": "Phnom Penh",
+ "country": "Cambodia",
+ "region": "Asia",
+ "anchor": {
+  "latitude": 11.36,
+  "longitude": 104.9213,
+  "iata": "KTI",
+  "icao": "VDTI",
+  "elevationM": 6.1,
+  "approvedDecision": "D (approved 2026-09-12)"
+ },
+ "grid": {
+  "latitude": 11.36,
+  "longitude": 104.921,
+  "elevationM": 9.54,
+  "resolution": "NASA/POWER Source Native Resolution (tested: ~0.5 deg lat x 0.625 deg lon)"
+ },
+ "sourceFamily": "NASA POWER / MERRA-2",
+ "periodStart": "1991-01-01",
+ "periodEnd": "2020-12-31",
+ "methodologyVersion": "utrip-methodology-2026.09.v8.7",
+ "ruleVersion": "r1-r7.v4",
+ "selection": {
+  "reason": "pilot v8.5 canonical dry-run; NASA POWER fallback family; NOT a production selection",
+  "ruleVersion": "r1-r7.v4"
+ },
+ "dailyBoundary": "UTC+00:00",
+ "fieldProvenance": {
+  "tempMeanC": {
+   "provider": "NASA POWER (NASA Langley Research Center)",
+   "sourceFamily": "NASA POWER / MERRA-2",
+   "officialProduct": "Climatology API",
+   "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+   "parameter": "T2M",
+   "temporalLevel": "climatology",
+   "timeStandard": "UTC",
+   "dailyAggregationBoundary": "not-applicable",
+   "aggregationMethod": "1991-2020 average of calendar-month mean 2m temperature",
+   "periodStart": "1991",
+   "periodEnd": "2020",
+   "grid": "NASA/POWER Source Native Resolution",
+   "selectionReason": "semantics match canonical tempMeanC (verified S17)",
+   "ruleVersion": "r1-r7.v4",
+   "methodologyVersion": "utrip-methodology-2026.09.v8.5"
+  },
+  "tempHighC": {
+   "provider": "NASA POWER (NASA Langley Research Center)",
+   "sourceFamily": "NASA POWER / MERRA-2",
+   "officialProduct": "Daily API",
+   "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+   "parameter": "T2M_MAX",
+   "temporalLevel": "daily",
+   "timeStandard": "UTC",
+   "dailyAggregationBoundary": "UTC+00:00",
+   "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily maximum temperature",
+   "periodStart": "1991-01-01",
+   "periodEnd": "2020-12-31",
+   "grid": "NASA/POWER Source Native Resolution",
+   "selectionReason": "Climatology T2M_MAX_AVG rejected: 30-year average of monthly EXTREME maximum, not mean of daily max",
+   "ruleVersion": "r1-r7.v4",
+   "methodologyVersion": "utrip-methodology-2026.09.v8.5"
+  },
+  "tempLowC": {
+   "provider": "NASA POWER (NASA Langley Research Center)",
+   "sourceFamily": "NASA POWER / MERRA-2",
+   "officialProduct": "Daily API",
+   "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+   "parameter": "T2M_MIN",
+   "temporalLevel": "daily",
+   "timeStandard": "UTC",
+   "dailyAggregationBoundary": "UTC+00:00",
+   "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily minimum temperature",
+   "periodStart": "1991-01-01",
+   "periodEnd": "2020-12-31",
+   "grid": "NASA/POWER Source Native Resolution",
+   "selectionReason": "Climatology T2M_MIN_AVG rejected: 30-year average of monthly EXTREME minimum, not mean of daily min",
+   "ruleVersion": "r1-r7.v4",
+   "methodologyVersion": "utrip-methodology-2026.09.v8.5"
+  },
+  "precipMm": {
+   "provider": "NASA POWER (NASA Langley Research Center)",
+   "sourceFamily": "NASA POWER / MERRA-2",
+   "officialProduct": "Climatology API",
+   "endpoint": "https://power.larc.nasa.gov/api/temporal/climatology/point",
+   "parameter": "PRECTOTCORR_SUM",
+   "temporalLevel": "climatology",
+   "timeStandard": "UTC",
+   "dailyAggregationBoundary": "not-applicable",
+   "aggregationMethod": "1991-2020 average of the monthly total (accumulated) precipitation",
+   "periodStart": "1991",
+   "periodEnd": "2020",
+   "grid": "NASA/POWER Source Native Resolution",
+   "selectionReason": "accumulated monthly total; PRECTOTCORR (mm/day rate) rejected for precipMm",
+   "ruleVersion": "r1-r7.v4",
+   "methodologyVersion": "utrip-methodology-2026.09.v8.5"
+  },
+  "precipDaysGe1mm": {
+   "provider": "NASA POWER (NASA Langley Research Center)",
+   "sourceFamily": "NASA POWER / MERRA-2",
+   "officialProduct": "Daily API",
+   "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+   "parameter": "PRECTOTCORR",
+   "temporalLevel": "daily",
+   "timeStandard": "UTC",
+   "dailyAggregationBoundary": "UTC+00:00",
+   "aggregationMethod": "UTRIPLA derived statistic (v8.6 authorised): count of daily precipitation >= 1.0 mm (WMO rain-day convention) per calendar month per year, then arithmetic mean over 1991-2020",
+   "derived": true,
+   "thresholdMm": 1.0,
+   "periodStart": "1991-01-01",
+   "periodEnd": "2020-12-31",
+   "grid": "NASA/POWER Source Native Resolution",
+   "selectionReason": "Option A of methodology decision v8.6: deterministic count from the same source family's official daily product; not a proxy, no cross-family mixing; R1-R7 does not consume this field",
+   "ruleVersion": "r1-r7.v4",
+   "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+   "derivationKind": "internal-deterministic-count"
+  },
+  "sunshineHours": {
+   "provider": null,
+   "sourceFamily": null,
+   "officialProduct": null,
+   "endpoint": null,
+   "parameter": null,
+   "temporalLevel": null,
+   "timeStandard": "not-applicable",
+   "dailyAggregationBoundary": "not-applicable",
+   "aggregationMethod": "UNRESOLVED - no production-grade source in the accepted families; canonical value null",
+   "periodStart": null,
+   "periodEnd": null,
+   "grid": null,
+   "selectionReason": "unresolved provenance",
+   "ruleVersion": "r1-r7.v4",
+   "methodologyVersion": "utrip-methodology-2026.09.v8.5"
+  },
+  "daylightHours": {
+   "provider": "UTRIPLA methodology (deterministic astronomical computation)",
+   "sourceFamily": "astronomical-derived (non-climate)",
+   "officialProduct": null,
+   "endpoint": null,
+   "parameter": "solar declination + standard sunrise/sunset hour angle (z0 = 90.833 deg)",
+   "temporalLevel": "daily -> monthly mean",
+   "timeStandard": "not-applicable (duration is timezone-independent)",
+   "dailyAggregationBoundary": "not-applicable",
+   "aggregationMethod": "mean over 1991-2020 of the per-year calendar-month mean of daily civil daylight duration (equal year weights; leap years exact; polar night 0.0 h / midnight sun 24.0 h handled)",
+   "derived": true,
+   "formulaVersion": "noaa-solar-position-2026.09.v1",
+   "periodStart": "1991-01-01",
+   "periodEnd": "2020-12-31",
+   "grid": "not-applicable (function of anchor latitude only)",
+   "selectionReason": "v8.6 closes M-1: explicit reproducible implementation adopted; must never be labelled as observed climate data",
+   "ruleVersion": "r1-r7.v4",
+   "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+   "formulaReference": "NOAA General Solar Position Calculations (published methodology, not a data product); formulaVersion noaa-solar-position-2026.09.v1"
+  },
+  "anchorCorrection": {
+   "decision": "D — USER_APPROVED (2026-09-12)",
+   "oldIdentity": {
+    "iata": "PNH",
+    "icao": "VDPP",
+    "name": "Phnom Penh International Airport",
+    "latitude": 11.5466,
+    "longitude": 104.8441
+   },
+   "newIdentity": {
+    "iata": "KTI",
+    "icao": "VDTI",
+    "name": "Techo International Airport",
+    "latitude": 11.36,
+    "longitude": 104.9213,
+    "elevationM": 6.1
+   },
+   "reason": "VDPP closed 2025-09-09 (last flights 2025-09-08 23:59); all operations transferred to Techo International (KTI/VDTI)",
+   "evidence": {
+    "airportIdentity": [
+     "Air Cambodia notice",
+     "Cathay Pacific notice",
+     "Vietnam Airlines",
+     "https://en.wikipedia.org/wiki/Phnom_Penh_International_Airport",
+     "https://en.wikipedia.org/wiki/Techo_International_Airport",
+     "https://www.techoairport.com.kh/ (Tier 1 operator)"
+    ],
+    "elevation": [
+     "official operator site 20 ft / 6 m MSL (Tier 1)",
+     "METAR-TAF 20 ft",
+     "OSM 7 m corroboration (delta 0.9 m)"
+    ],
+    "climateData": "NASA POWER Climatology + Daily at the new anchor (UTC; raw archived raw/nasa/anchor_sim/phnompenh-proposed/)",
+    "astronomical": "daylightHours recomputed for latitude 11.36 (deterministic NOAA formula)"
+   },
+   "methodologyVersion": "utrip-methodology-2026.09.v8.7"
+  }
+ },
+ "flags": [
+  "fallback-source:pilot-only",
+  "mapping:climatology-T2M_MAX_AVG-rejected-semantic-mismatch",
+  "mapping:climatology-T2M_MIN_AVG-rejected-semantic-mismatch",
+  "anchor-corrected-v87:D"
+ ],
+ "months": [
+  {
+   "monthIndex": 0,
+   "tempMeanC": 27.4,
+   "tempHighC": 34.0,
+   "tempLowC": 21.82,
+   "precipMm": 18.58,
+   "precipDaysGe1mm": 3.8,
+   "sunshineHours": null,
+   "daylightHours": 11.54,
+   "ruleId": "R4",
+   "tier": "Workable",
+   "rawRuleHits": [
+    "R4"
+   ]
+  },
+  {
+   "monthIndex": 1,
+   "tempMeanC": 29.59,
+   "tempHighC": 36.53,
+   "tempLowC": 23.43,
+   "precipMm": 12.45,
+   "precipDaysGe1mm": 3.1,
+   "sunshineHours": null,
+   "daylightHours": 11.77,
+   "ruleId": "R4",
+   "tier": "Workable",
+   "rawRuleHits": [
+    "R4"
+   ]
+  },
+  {
+   "monthIndex": 2,
+   "tempMeanC": 31.19,
+   "tempHighC": 37.72,
+   "tempLowC": 25.43,
+   "precipMm": 29.43,
+   "precipDaysGe1mm": 6.9,
+   "sunshineHours": null,
+   "daylightHours": 12.07,
+   "ruleId": "R4",
+   "tier": "Workable",
+   "rawRuleHits": [
+    "R4"
+   ]
+  },
+  {
+   "monthIndex": 3,
+   "tempMeanC": 31.17,
+   "tempHighC": 36.8,
+   "tempLowC": 26.3,
+   "precipMm": 68.64,
+   "precipDaysGe1mm": 12.4,
+   "sunshineHours": null,
+   "daylightHours": 12.39,
+   "ruleId": "R4",
+   "tier": "Workable",
+   "rawRuleHits": [
+    "R4"
+   ]
+  },
+  {
+   "monthIndex": 4,
+   "tempMeanC": 29.43,
+   "tempHighC": 34.0,
+   "tempLowC": 25.71,
+   "precipMm": 144.06,
+   "precipDaysGe1mm": 21.1,
+   "sunshineHours": null,
+   "daylightHours": 12.65,
+   "ruleId": "R4",
+   "tier": "Workable",
+   "rawRuleHits": [
+    "R4",
+    "R5"
+   ]
+  },
+  {
+   "monthIndex": 5,
+   "tempMeanC": 27.83,
+   "tempHighC": 31.61,
+   "tempLowC": 24.82,
+   "precipMm": 213.28,
+   "precipDaysGe1mm": 22.4,
+   "sunshineHours": null,
+   "daylightHours": 12.78,
+   "ruleId": "R3",
+   "tier": "Challenging",
+   "rawRuleHits": [
+    "R3",
+    "R5"
+   ]
+  },
+  {
+   "monthIndex": 6,
+   "tempMeanC": 27.15,
+   "tempHighC": 30.63,
+   "tempLowC": 24.39,
+   "precipMm": 197.01,
+   "precipDaysGe1mm": 23.5,
+   "sunshineHours": null,
+   "daylightHours": 12.71,
+   "ruleId": "R5",
+   "tier": "Workable",
+   "rawRuleHits": [
+    "R5"
+   ]
+  },
+  {
+   "monthIndex": 7,
+   "tempMeanC": 26.99,
+   "tempHighC": 30.41,
+   "tempLowC": 24.27,
+   "precipMm": 197.07,
+   "precipDaysGe1mm": 23.0,
+   "sunshineHours": null,
+   "daylightHours": 12.48,
+   "ruleId": "R5",
+   "tier": "Workable",
+   "rawRuleHits": [
+    "R5"
+   ]
+  },
+  {
+   "monthIndex": 8,
+   "tempMeanC": 26.86,
+   "tempHighC": 30.14,
+   "tempLowC": 24.18,
+   "precipMm": 207.68,
+   "precipDaysGe1mm": 23.2,
+   "sunshineHours": null,
+   "daylightHours": 12.18,
+   "ruleId": "R3",
+   "tier": "Challenging",
+   "rawRuleHits": [
+    "R3",
+    "R5"
+   ]
+  },
+  {
+   "monthIndex": 9,
+   "tempMeanC": 26.67,
+   "tempHighC": 30.06,
+   "tempLowC": 23.87,
+   "precipMm": 183.41,
+   "precipDaysGe1mm": 24.4,
+   "sunshineHours": null,
+   "daylightHours": 11.87,
+   "ruleId": "R5",
+   "tier": "Workable",
+   "rawRuleHits": [
+    "R5"
+   ]
+  },
+  {
+   "monthIndex": 10,
+   "tempMeanC": 26.37,
+   "tempHighC": 30.56,
+   "tempLowC": 22.86,
+   "precipMm": 87.47,
+   "precipDaysGe1mm": 13.9,
+   "sunshineHours": null,
+   "daylightHours": 11.6,
+   "ruleId": "R7",
+   "tier": "Favourable",
+   "rawRuleHits": [
+    "R7"
+   ]
+  },
+  {
+   "monthIndex": 11,
+   "tempMeanC": 26.26,
+   "tempHighC": 31.7,
+   "tempLowC": 21.75,
+   "precipMm": 30.19,
+   "precipDaysGe1mm": 6.2,
+   "sunshineHours": null,
+   "daylightHours": 11.47,
+   "ruleId": "R7",
+   "tier": "Favourable",
+   "rawRuleHits": [
+    "R7"
+   ]
+  }
+ ],
+ "bestMonthsBaseline": [
+  10,
+  11
+ ],
+ "recommendationStatus": "ok-favourable"
+}

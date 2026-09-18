@@ -3,6 +3,7 @@ import {
   isValidLatLng,
   isValidStayDates,
   searchHotelsNearPoint,
+  type NearbyHotelsResult,
 } from "@/lib/api/hotels";
 
 /**
@@ -11,7 +12,22 @@ import {
  * 额度保护：server-side 请求 + 6h 内存缓存/景点（key = geo|lat|lon|radius|dates|
  * adults|currency，日期进 key 绝不跨日期复用价格）；客户端进入视口才调用。
  * 无坐标 / 无结果 / 上游失败 → { available:false }，客户端渲染诚实空态 —— 绝不 mock。
+ *
+ * 缓存分级：只有真实供给才长缓存；上游失败**绝不**进 CDN（否则一次抖动会被
+ * 锁死数小时，表现为"某个景点酒店区整片空白"）。
  */
+function hotelsCacheControl(result: NearbyHotelsResult): string {
+  if (result.available && (result.hotels?.length ?? 0) > 0) {
+    return "public, s-maxage=21600, stale-while-revalidate=3600";
+  }
+  switch (result.reason) {
+    case "empty":
+    case "no-coordinates":
+      return "public, s-maxage=600, stale-while-revalidate=120";
+    default:
+      return "no-store";
+  }
+}
 
 export async function GET(request: Request): Promise<Response> {
   const { searchParams } = new URL(request.url);
@@ -55,6 +71,6 @@ export async function GET(request: Request): Promise<Response> {
     offset,
   });
   return Response.json(result, {
-    headers: { "Cache-Control": "public, s-maxage=21600, stale-while-revalidate=3600" },
+    headers: { "Cache-Control": hotelsCacheControl(result) },
   });
 }

@@ -1,0 +1,37 @@
+{
+  "generatedAt": "2026-09-12",
+  "artifact": "siem-reap-approved-anchor-v87.json",
+  "destinationId": "siem-reap",
+  "userDecision": "B = YES (2026-09-12)",
+  "status": "APPROVED_FOR_PILOT_REBUILD (NOT production)",
+  "applied": {
+    "old": {
+      "iata": "SAI",
+      "icao": "VDSR",
+      "lat": 13.4107,
+      "lon": 103.8132
+    },
+    "new": {
+      "iata": "SAI",
+      "icao": "VDSA",
+      "lat": 13.36974,
+      "lon": 104.223831
+    }
+  },
+  "verification": {
+    "climateCellsChanged": 59,
+    "july": "R5 -> R3 (precip 198.55 -> 205.39 mm)",
+    "december": "R4 -> R7",
+    "bestMonths": {
+      "old": [
+        10
+      ],
+      "new": [
+        10,
+        11
+      ]
+    },
+    "gridElevationM": "36.86 -> 70.78",
+    "note": "full chain re-baked: anchor -> grid -> months -> R1-R7 -> Best Months -> provenance -> flags"
+  }
+}

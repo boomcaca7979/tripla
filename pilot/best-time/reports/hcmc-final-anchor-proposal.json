@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-09-12",
+  "artifact": "hcmc-final-anchor-proposal.json",
+  "destinationId": "ho-chi-minh-city",
+  "status": "USER_DECISION_REQUIRED",
+  "currentAnchor": {
+    "iata": "SGN",
+    "icao": "VVTS",
+    "latitude": 10.8188,
+    "longitude": 106.8069
+  },
+  "proposedAnchor": {
+    "iata": "SGN",
+    "icao": "VVTS",
+    "latitude": 10.8188,
+    "longitude": 106.652
+  },
+  "recommendation": "anchor correction = REQUIRED DATA-INTEGRITY FIX",
+  "verifiedImpact": {
+    "climateMonthsDiff": 0,
+    "classificationDiff": 0,
+    "bestMonthsDiff": 0,
+    "simulation": "normalized/anchor-correction-simulated-hcmc.json"
+  },
+  "productionWrite": "NONE"
+}

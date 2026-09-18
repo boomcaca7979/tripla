@@ -1,0 +1,129 @@
+{
+  "audit_date": "2026-09-13",
+  "audit_type": "read-only investigation",
+  "destructive_operations_performed": false,
+  "vercel_team": {
+    "id": "team_szRLX8YrEzFPhJNUjXT4yZ9H",
+    "name": "boomcaca666's projects",
+    "plan": "hobby"
+  },
+  "git_repository": {
+    "host": "github.com",
+    "org": "boomcaca7979",
+    "repo": "tripla",
+    "repoId": 1263673862,
+    "visibility": "public",
+    "productionBranch": "main",
+    "sharedGitCredentialId": "cred_1a69eb283d242db388e3139d19c0c3a2b1395e0a"
+  },
+  "projects": [
+    {
+      "name": "travel-planner",
+      "projectId": "prj_xJk9idoYPsrn4vBgrpTjpFBsRVkn",
+      "createdAt": "2026-06-08T14:09:42Z",
+      "dormantUntil": "2026-09-10T08:27:11Z",
+      "totalDeployments": 6,
+      "domains": ["travel-planner-two-livid.vercel.app", "travel-planner-boomcaca666s-projects.vercel.app", "travel-planner-git-main-boomcaca666s-projects.vercel.app"],
+      "customDomains": [],
+      "envVars": [
+        { "key": "NEXT_PUBLIC_SUPABASE_ANON_KEY", "target": ["production"], "valueDisclosed": false },
+        { "key": "NEXT_PUBLIC_SUPABASE_URL", "target": ["production"], "valueDisclosed": false }
+      ],
+      "settings": { "framework": "nextjs", "nodeVersion": "24.x", "serverlessFunctionRegion": "iad1", "rootDirectory": null, "buildCommand": null, "installCommand": null, "outputDirectory": null, "cronJobs": [] },
+      "latestProductionDeployment": { "uid": "dpl_2JgdtLE751VddkMizmiVQgqYXf3B", "sha": "0c4488a5c0fc28dc2072b9afa70ca7517521b744", "created": "2026-09-13T09:52:23.499Z", "state": "READY", "target": "production" },
+      "vercelAppReachabilityFromOperatorNetwork": "BLOCKED (DNS poisoning of *.vercel.app, resolves to 199.59.148.106, connection timeout)",
+      "localRepoLink": "/Users/boomcaca/projects/tripla/.vercel/project.json currently points to this project"
+    },
+    {
+      "name": "tripla-v2",
+      "projectId": "prj_AiGj8U2uZUUeB1zbLrRGL7O7NjAO",
+      "createdAt": "2026-09-10T14:08:31Z",
+      "totalDeployments": 4,
+      "domains": ["utripla.xyz", "www.utripla.xyz", "tripla-v2.vercel.app", "tripla-v2-boomcaca666s-projects.vercel.app", "tripla-v2-git-main-boomcaca666s-projects.vercel.app"],
+      "customDomains": [
+        { "name": "utripla.xyz", "added": "2026-09-10T15:47:22Z" },
+        { "name": "www.utripla.xyz", "added": "2026-09-10T15:48:13Z" }
+      ],
+      "envVars": [
+        { "key": "NEXT_PUBLIC_SUPABASE_ANON_KEY", "target": ["production"], "valueDisclosed": false },
+        { "key": "NEXT_PUBLIC_SUPABASE_URL", "target": ["production"], "valueDisclosed": false }
+      ],
+      "settings": { "framework": "nextjs", "nodeVersion": "24.x", "serverlessFunctionRegion": "iad1", "rootDirectory": null, "buildCommand": null, "installCommand": null, "outputDirectory": null, "cronJobs": [] },
+      "latestProductionDeployment": { "uid": "dpl_584nDf5EyYKJpCC4ksyXdVN5u3SV", "sha": "0c4488a5c0fc28dc2072b9afa70ca7517521b744", "created": "2026-09-13T09:52:23.510Z", "state": "READY", "target": "production", "aliases": ["utripla.xyz", "www.utripla.xyz"] },
+      "vercelAppReachabilityFromOperatorNetwork": "not separately tested; *.vercel.app generally poisoned in operator network"
+    }
+  ],
+  "domainAudit": {
+    "utripla.xyz": { "ownerProject": "tripla-v2", "dns": "A 216.198.79.1 (Vercel anycast)", "http": "200, UTRIPLA Next.js app" },
+    "www.utripla.xyz": { "ownerProject": "tripla-v2", "dns": "CNAME 0d2b99dd58e65367.vercel-dns-017.com", "http": "200" },
+    "historicalNote": "utripla.xyz was briefly pointed at travel-planner's 2026-09-10 deployment (dpl_8At8vudD…) before being moved to tripla-v2 the same day"
+  },
+  "deploymentCorrelation": {
+    "sameCommitMirroredDeployments": true,
+    "mechanism": "single GitHub webhook fans out to both projects (0c4488a deployments created 11ms apart on both projects)",
+    "commit_0c4488a": {
+      "message": "feat(best-time): promote NASA POWER climate dataset",
+      "travelPlannerDeployment": "dpl_2JgdtLE751VddkMizmiVQgqYXf3B",
+      "triplaV2Deployment": "dpl_584nDf5EyYKJpCC4ksyXdVN5u3SV",
+      "servesUtriplaDotXyz": "tripla-v2"
+    }
+  },
+  "relationshipClassification": "C: two independent projects duplicating production of the same repo; travel-planner is also E: historical leftover (dormant 94 days, no domain, no traffic)",
+  "whyTwoProjectsExist": "travel-planner was created 2026-06-08 and never used until 2026-09-10. During the UTRIPLA 2.0 pivot (2026-09-10) a fresh project tripla-v2 was created from the same repo and utripla.xyz was attached to it. travel-planner was left connected to the repo, so every push now double-deploys.",
+  "envVarAnalysis": {
+    "aOnly": [],
+    "bOnly": [],
+    "both": ["NEXT_PUBLIC_SUPABASE_ANON_KEY", "NEXT_PUBLIC_SUPABASE_URL"],
+    "uniqueProductionSecrets": [],
+    "usageInCurrentCodebase": "NEITHER variable is referenced anywhere in src/ (verified by grep); leftovers from an earlier iteration"
+  },
+  "deleteSafety": {
+    "travel-planner": {
+      "verdict": "SAFE_TO_DELETE_YES",
+      "conditions": ["re-link local repo to tripla-v2 first: cd /Users/boomcaca/projects/tripla && vercel link --yes --project tripla-v2"],
+      "blockingIssues": [],
+      "notes": "No custom domain, no traffic, no unique env vars, no unique config, all deployed commits preserved in git; GitHub repo and tripla-v2's Git integration are independent of this project."
+    },
+    "tripla-v2": {
+      "verdict": "SAFE_TO_DELETE_NO_BLOCKED",
+      "blockingIssues": ["live production owner of utripla.xyz and www.utripla.xyz", "serves the current NASA POWER release on the real domain", "only reachable public URL for UTRIPLA (*.vercel.app DNS-poisoned in operator network)"]
+    }
+  },
+  "migrationOptions": {
+    "A_keep_travel-planner_delete_tripla-v2": "REJECTED: requires domain move + re-verification, real downtime risk, zero benefit",
+    "B_keep_tripla-v2_delete_travel-planner": "RECOMMENDED: zero production change; only cost is re-linking the local repo",
+    "C_keep_both_stop_one": "REJECTED: stopped project still receives auto-deploys unless Git integration removed; ambiguity remains",
+    "D_migrate_then_delete": "NOT NEEDED: domain/env/settings already live on tripla-v2",
+    "E_reimport_new_project": "REJECTED: creates a third project and a new URL for no gain"
+  },
+  "finalDecision": {
+    "CURRENT_PRODUCTION_PROJECT": "tripla-v2",
+    "CURRENT_PRODUCTION_DOMAIN_OWNER": "tripla-v2",
+    "KEEP": "tripla-v2",
+    "DELETE": "travel-planner",
+    "DELETE_SAFETY": "YES (after re-linking local repo to tripla-v2)",
+    "REQUIRES_MIGRATION": "YES (minimal: local vercel link re-point only; no domain/env/settings migration needed)",
+    "evidence": [
+      "GET /v9/projects/prj_AiGj8U2uZUUeB1zbLrRGL7O7NjAO/domains returns utripla.xyz + www.utripla.xyz exclusively",
+      "GET /v9/projects/prj_xJk9idoYPsrn4vBgrpTjpFBsRVkn/domains returns only *.vercel.app aliases",
+      "vercel domains inspect utripla.xyz shows Projects: tripla-v2 only",
+      "DNS: utripla.xyz -> 216.198.79.1 (Vercel); HTTP 200 serving UTRIPLA app",
+      "commit 0c4488a (NASA POWER) deployed READY/production on both projects; utripla.xyz aliases dpl_584nDf5EyYK… (tripla-v2)",
+      "travel-planner: created 2026-06-08, dormant 94 days, 6 total deployments all mirrored/duplicated, no custom domain",
+      "both projects' settings and Git config are identical; env vars identical and unused by current code"
+    ]
+  },
+  "safetyConfirmation": {
+    "PROJECT_DELETED": false,
+    "PROJECT_RENAMED": false,
+    "DOMAIN_CHANGED": false,
+    "ENV_CHANGED": false,
+    "DEPLOYMENT": false,
+    "COMMIT": false,
+    "PUSH": false
+  },
+  "reports": {
+    "markdown": "vercel-tripla-project-relationship-audit.md",
+    "json": "vercel-tripla-project-relationship-audit.json"
+  }
+}

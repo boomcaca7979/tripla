@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useCallback } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useItinerary } from "@/hooks/useItinerary";
 import { useFlightSearch } from "@/hooks/useFlightSearch";
@@ -185,15 +186,26 @@ export default function PlanPageClient() {
   }, [destination, departureDate, returnDate, weather.fetchForDestination]);
 
   // ── Empty state ───────────────────────────────────────────────────
+  // 无参数进入时给出可恢复的用户流程：页面主标题 + 明确的返回首页入口。
+  // （此前只有两行说明文字，main 内既无 h1 也无任何链接/按钮 —— 用户被"告知"
+  //  回首页却没有任何可供性。带参数的 /plan 完全不受影响。）
   if (!travelPlanInput) {
     return (
       <div className="flex flex-col items-center gap-3 py-20 text-center">
-        <p className="text-lg font-medium text-gray-500">
+        <h1 className="text-2xl font-semibold text-gray-700">Plan a trip</h1>
+        <p className="mt-1 text-lg font-medium text-gray-500">
           No search parameters found.
         </p>
         <p className="text-sm text-gray-400">
           Go back to the homepage and search for a trip.
         </p>
+        <Link
+          href="/"
+          className="mt-4 inline-flex min-h-[44px] items-center gap-2 rounded-md border border-gray-300 px-5 text-sm font-medium text-gray-700 transition-colors hover:border-gray-400 hover:text-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400"
+        >
+          Back to homepage
+          <span aria-hidden="true">→</span>
+        </Link>
       </div>
     );
   }

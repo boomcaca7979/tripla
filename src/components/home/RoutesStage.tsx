@@ -43,7 +43,7 @@ export default function RoutesStage() {
             href="/trips"
             className="inline-flex min-h-[44px] items-center rounded-ut-sm border border-ut-border-strong px-5 py-2.5 text-body-sm font-medium text-ut-text transition-[border-color,color] duration-[var(--ut-dur-fast)] ease-ut-out hover:border-ut-accent-line hover:text-ut-accent focus-visible:outline-2 focus-visible:outline-ut-accent"
           >
-            All routes →
+            All trips →
           </Link>
         </div>
 

@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-09-12",
+  "artifact": "icao-correction-ledger.json",
+  "count": 7,
+  "items": [
+    {
+      "destinationId": "rovaniemi",
+      "currentICAO": "EFKT",
+      "proposedICAO": "EFRO",
+      "evidence": "IATA match + coordinates match + independent ICAO resolution (elevation-review-v1c.json)",
+      "sameAirport": true,
+      "climateImpact": "none"
+    },
+    {
+      "destinationId": "cebu",
+      "currentICAO": "RPVB",
+      "proposedICAO": "RPVM",
+      "evidence": "IATA match + coordinates match + independent ICAO resolution (elevation-review-v1c.json)",
+      "sameAirport": true,
+      "climateImpact": "none"
+    },
+    {
+      "destinationId": "yogyakarta",
+      "currentICAO": "WIHI",
+      "proposedICAO": "WAHI",
+      "evidence": "IATA match + coordinates match + independent ICAO resolution (elevation-review-v1c.json)",
+      "sameAirport": true,
+      "climateImpact": "none"
+    },
+    {
+      "destinationId": "nha-trang",
+      "currentICAO": "VVNT",
+      "proposedICAO": "VVCR",
+      "evidence": "IATA match + coordinates match + independent ICAO resolution (elevation-review-v1c.json)",
+      "sameAirport": true,
+      "climateImpact": "none"
+    },
+    {
+      "destinationId": "bologna",
+      "currentICAO": "LIPQ",
+      "proposedICAO": "LIPE",
+      "evidence": "IATA match + coordinates match + independent ICAO resolution (elevation-review-v1c.json)",
+      "sameAirport": true,
+      "climateImpact": "none"
+    },
+    {
+      "destinationId": "lombok",
+      "currentICAO": "WATB",
+      "proposedICAO": "WADL",
+      "evidence": "IATA match + coordinates match + independent ICAO resolution (elevation-review-v1c.json)",
+      "sameAirport": true,
+      "climateImpact": "none"
+    },
+    {
+      "destinationId": "pattaya",
+      "currentICAO": "VTPH",
+      "proposedICAO": "VTBU",
+      "evidence": "IATA match + coordinates match + independent ICAO resolution (elevation-review-v1c.json)",
+      "sameAirport": true,
+      "climateImpact": "none"
+    }
+  ],
+  "productionWrite": "NONE"
+}

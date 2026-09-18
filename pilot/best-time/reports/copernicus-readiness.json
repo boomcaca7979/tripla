@@ -1,0 +1,123 @@
+{
+ "generatedAt": "2026-09-12T01:33:44.238617+00:00",
+ "credentialStatus": {
+  "cdsapiInstalled": false,
+  "cdsapircPresent": false,
+  "envVarsPresent": false,
+  "result": "ERA5_PRIMARY_TEST = BLOCKED_BY_MISSING_CDS_CREDENTIALS"
+ },
+ "datasetIdsVerified": {
+  "reanalysis-era5-single-levels-monthly-means": "verified 2026-09-12",
+  "derived-era5-single-levels-daily-statistics": "verified 2026-09-12",
+  "reanalysis-era5-land-monthly-means": "verified 2026-09-12",
+  "derived-era5-land-daily-statistics": "verified 2026-09-12"
+ },
+ "canonicalFieldMatrix": [
+  {
+   "field": "tempMeanC",
+   "dataset": "reanalysis-era5-single-levels-monthly-means",
+   "variable": "2m_temperature",
+   "temporalLevel": "monthly",
+   "unit": "K",
+   "aggregation": "1991-2020 mean of calendar-month mean",
+   "utcSemantics": "not-applicable"
+  },
+  {
+   "field": "precipMm",
+   "dataset": "reanalysis-era5-single-levels-monthly-means",
+   "variable": "total_precipitation",
+   "temporalLevel": "monthly",
+   "unit": "m of water equivalent PER DAY",
+   "aggregation": "tp[m/day]*1000*N_days -> monthly total; 1991-2020 mean",
+   "utcSemantics": "not-applicable"
+  },
+  {
+   "field": "tempHighC",
+   "dataset": "derived-era5-single-levels-daily-statistics",
+   "variable": "2m_temperature",
+   "daily_statistic": "daily_maximum",
+   "temporalLevel": "daily",
+   "unit": "K",
+   "aggregation": "per-year calendar-month mean of daily max; 1991-2020 mean",
+   "utcSemantics": "time_zone = utc+00:00"
+  },
+  {
+   "field": "tempLowC",
+   "dataset": "derived-era5-single-levels-daily-statistics",
+   "variable": "2m_temperature",
+   "daily_statistic": "daily_minimum",
+   "temporalLevel": "daily",
+   "unit": "K",
+   "aggregation": "per-year calendar-month mean of daily min; 1991-2020 mean",
+   "utcSemantics": "time_zone = utc+00:00"
+  },
+  {
+   "field": "precipDaysGe1mm",
+   "dataset": "derived-era5-single-levels-daily-statistics",
+   "variable": "total_precipitation",
+   "daily_statistic": "daily_sum",
+   "temporalLevel": "daily",
+   "unit": "m",
+   "status": "UNRESOLVED - derived, not authorised"
+  },
+  {
+   "field": "sunshineHours",
+   "dataset": null,
+   "variable": null,
+   "status": "UNRESOLVED - no sunshine-duration parameter in the ERA5 family"
+  },
+  {
+   "field": "daylightHours",
+   "dataset": null,
+   "variable": null,
+   "status": "UNRESOLVED - astronomical; no vetted implementation"
+  }
+ ],
+ "timezone": {
+  "requestKey": "time_zone",
+  "value": "utc+00:00",
+  "officialSemantics": "option to shift to any local time zone in UTC; no shift means the statistic is computed from UTC+00:00",
+  "separation": "ERA5 daily time-zone boundary != destination display timezone"
+ },
+ "dailyStatisticsOptions": {
+  "era5": [
+   "daily_mean",
+   "daily_maximum",
+   "daily_minimum",
+   "daily_sum (accumulated only)"
+  ],
+  "era5land": [
+   "daily_mean",
+   "daily_maximum",
+   "daily_minimum"
+  ]
+ },
+ "era5LandFieldMatrix": {
+  "tempMeanC": "AVAILABLE (reanalysis-era5-land-monthly-means / 2m_temperature)",
+  "tempHighC": "AVAILABLE (derived-era5-land-daily-statistics / daily_maximum)",
+  "tempLowC": "AVAILABLE (derived-era5-land-daily-statistics / daily_minimum)",
+  "precipMm": "AVAILABLE with caveat (reanalysis-era5-land-monthly-means / total_precipitation; per-day rate -> x N days)",
+  "precipDaysGe1mm": "NOT AVAILABLE - ERA5-Land daily statistics OMIT accumulated variables (total precipitation absent at daily level)",
+  "sunshineHours": "NOT AVAILABLE - no sunshine-duration parameter",
+  "daylightHours": "NOT AVAILABLE - astronomical",
+  "conclusion": "ERA5-Land CANNOT fully replace ERA5: no daily precipitation, so precipDaysGe1mm can never originate from ERA5-Land."
+ },
+ "precipitationUnitDefect": {
+  "found": true,
+  "description": "monthly averaged total_precipitation unit is 'm of water per day'; previous template omitted the x N days factor (~30x under-estimate)",
+  "fixedIn": "pilot/best-time/scripts/copernicus_request_template.py",
+  "strategySectionsCorrected": [
+   "S3.3",
+   "S7.2 row B",
+   "S19.2",
+   "S23.0.1",
+   "S23.2 B19"
+  ]
+ },
+ "requestBuilders": [
+  "build_monthly_means_request",
+  "build_daily_statistics_request",
+  "build_era5land_request"
+ ],
+ "templateExecutable": false
+}

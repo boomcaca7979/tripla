@@ -1,0 +1,46 @@
+{
+  "extractedFrom": "BEST-TIME-DATA-STRATEGY-REPORT.md (direct read, no summary)",
+  "sections": [
+    "§19.2",
+    "§20",
+    "§23.4",
+    "§23.5",
+    "§23.6"
+  ],
+  "requirements": {
+    "T2": "Copernicus ERA5 PRIMARY must be REALLY exercised (retrieval/schema/range/parameter-semantics/completeness per §20 Copernicus contract); NASA fallback 145/145 alone cannot pass T2",
+    "T3": {
+      "found": true,
+      "marker": "T3 需 T2 全过",
+      "excerpt": "T3 需 T2 全过 + 质量旗标审毕 + schema valid + 质量门。当前 **T2 = BLOCKED，T3 = BLOCKED**。\n10. P-1~P-9 产品决策（均有建议默认值，见 §19.3）；其中 P-2（`ELEV_MISMATCH_M` = 150 m）因 elevation 数据缺失，**无法在 Pilot 期完成评估**（§23.0）。\n\n（注：Copernicus daily st"
+    },
+    "t3QualityGates": [
+      "T2 PASS",
+      "质量旗标审毕",
+      "schema valid",
+      "质量门（coverage/provenance/licensing）"
+    ],
+    "elevationRequirement": {
+      "found": true,
+      "marker": "authoritative elevation source",
+      "excerpt": "best-time/scripts/copernicus_request_template.py` 执行取数。当前 **BLOCKED_BY_MISSING_CDS_CREDENTIALS**（§23.6）。\n- **anchor elevation 前置（v8.5 新增；v8.6 更新）**：必须使用 **可审查的 authoritative elevation source** 并记录来源、覆盖率与逐项审批。当前：OurAirports candidate 145/145、**approved 143/145**（`reports/elevation-review-v1c.json`）；**ho-chi-mi"
+    },
+    "elevationReading": {
+      "literalText": "「必须使用可审查的 authoritative elevation source 并记录来源、覆盖率与逐项审批」",
+      "termDefinedInStrategy": false,
+      "note": "the word 'authoritative' is present but NOT defined in the strategy; the user's Phase 1C acceptance rule (handoff §48.6) requires only 'traceable source' + per-item approval. Two readings exist: (a) strict — external authoritative (Tier-1/2) source required; (b) process — a traceable source elevated to authority through recorded per-item review. Under acceptance discipline the STRICT reading governs until the user decides (Decision C).",
+      "tension": "strategy 'authoritative' vs acceptance-rule 'traceable' — surfaced, not resolved by the agent"
+    },
+    "sourceAuthority": "family/product hierarchy rules §8/§12.2; no cross-family mixing",
+    "licensing": {
+      "found": true,
+      "marker": "NASA POWER 正式 licence 条文确认",
+      "excerpt": "ataset licence/attribution 元数据 + database rights 轻量法务确认 + **NASA POWER 正式 licence 条文确认（commercial/redistribution，当前 UNVERIFIED / LEGAL REVIEW REQUIRED）**——若最终采用 POWER fallback 上线，此项为硬前置。\n4. **方法学文档**：normal"
+    },
+    "coverage": "T1 = arithmetic fact; T2/T3 = 145/145 real coverage required (§20 item 1)",
+    "provenance": "fieldProvenance 15 keys x 8 fields per record (§12.2)",
+    "schema": "§12 data contract + null policy (null legal only for unresolved optional fields; sunshineHours only)"
+  },
+  "contractExtractionContradictions": 0,
+  "contradictionNote": "extraction is internally consistent with the document; the authoritative-vs-traceable elevation tension is a CONTRACT AMBIGUITY (undefined term), escalated as user Decision C — it is recorded, not silently resolved"
+}

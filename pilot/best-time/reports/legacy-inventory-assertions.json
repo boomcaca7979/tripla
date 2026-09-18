@@ -1,0 +1,56 @@
+{
+  "assertions": [
+    {
+      "assert": "destinationCount=145",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "no-duplicate-destination-ids",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "inventory-sum=145",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "every-candidate-has-evidence",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "no-tier4-only-final-approval",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "every-confirmed-legacy-has-impact-classification",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "every-production-impacting-issue-has-12-month-comparison",
+      "pass": true,
+      "detail": "siem-reap: applied in v8.7 (12-month re-bake); phnom-penh: metadata-only, 12-month comparison exists (anchor-correction-simulated-phnom-penh.json); no new production-impacting cases found in this sweep"
+    },
+    {
+      "assert": "no-new-nasa-simulations-required",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "no-production-files-modified",
+      "pass": true,
+      "detail": "all outputs under pilot/best-time/"
+    },
+    {
+      "assert": "phnom-penh-registered-not-recomputed",
+      "pass": true,
+      "detail": "reuses reports/phnom-penh-anchor-review.json METADATA-ONLY verdict"
+    }
+  ],
+  "passed": 10,
+  "failed": 0
+}

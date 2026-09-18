@@ -1,0 +1,408 @@
+{
+  "generatedAt": "2026-09-12T09:29:38.305072+00:00",
+  "artifact": "siem-reap-impact-table.json",
+  "simulation": "normalized/anchor-correction-simulated-siem-reap.json (full NASA retrieval at proposed anchor)",
+  "months": [
+    {
+      "month": "Jan",
+      "tempMeanC": {
+        "old": 26.89,
+        "new": 26.13,
+        "delta": -0.76
+      },
+      "tempHighC": {
+        "old": 33.76,
+        "new": 33.48,
+        "delta": -0.28
+      },
+      "tempLowC": {
+        "old": 20.83,
+        "new": 20.04,
+        "delta": -0.79
+      },
+      "precipMm": {
+        "old": 11.58,
+        "new": 9.47,
+        "delta": -2.11
+      },
+      "rule": {
+        "old": "R4",
+        "new": "R4"
+      },
+      "tier": {
+        "old": "Workable",
+        "new": "Workable"
+      }
+    },
+    {
+      "month": "Feb",
+      "tempMeanC": {
+        "old": 29.04,
+        "new": 28.54,
+        "delta": -0.5
+      },
+      "tempHighC": {
+        "old": 35.75,
+        "new": 35.82,
+        "delta": 0.07
+      },
+      "tempLowC": {
+        "old": 23.06,
+        "new": 22.37,
+        "delta": -0.69
+      },
+      "precipMm": {
+        "old": 17.81,
+        "new": 14.29,
+        "delta": -3.52
+      },
+      "rule": {
+        "old": "R4",
+        "new": "R4"
+      },
+      "tier": {
+        "old": "Workable",
+        "new": "Workable"
+      }
+    },
+    {
+      "month": "Mar",
+      "tempMeanC": {
+        "old": 30.64,
+        "new": 30.48,
+        "delta": -0.16
+      },
+      "tempHighC": {
+        "old": 36.73,
+        "new": 37.03,
+        "delta": 0.3
+      },
+      "tempLowC": {
+        "old": 25.19,
+        "new": 24.88,
+        "delta": -0.31
+      },
+      "precipMm": {
+        "old": 45.68,
+        "new": 38.37,
+        "delta": -7.31
+      },
+      "rule": {
+        "old": "R4",
+        "new": "R4"
+      },
+      "tier": {
+        "old": "Workable",
+        "new": "Workable"
+      }
+    },
+    {
+      "month": "Apr",
+      "tempMeanC": {
+        "old": 30.66,
+        "new": 30.58,
+        "delta": -0.08
+      },
+      "tempHighC": {
+        "old": 35.97,
+        "new": 36.3,
+        "delta": 0.33
+      },
+      "tempLowC": {
+        "old": 25.96,
+        "new": 25.78,
+        "delta": -0.18
+      },
+      "precipMm": {
+        "old": 74.41,
+        "new": 70.96,
+        "delta": -3.45
+      },
+      "rule": {
+        "old": "R4",
+        "new": "R4"
+      },
+      "tier": {
+        "old": "Workable",
+        "new": "Workable"
+      }
+    },
+    {
+      "month": "May",
+      "tempMeanC": {
+        "old": 29.43,
+        "new": 29.3,
+        "delta": -0.13
+      },
+      "tempHighC": {
+        "old": 34.0,
+        "new": 34.18,
+        "delta": 0.18
+      },
+      "tempLowC": {
+        "old": 25.61,
+        "new": 25.38,
+        "delta": -0.23
+      },
+      "precipMm": {
+        "old": 143.99,
+        "new": 146.51,
+        "delta": 2.52
+      },
+      "rule": {
+        "old": "R4",
+        "new": "R4"
+      },
+      "tier": {
+        "old": "Workable",
+        "new": "Workable"
+      }
+    },
+    {
+      "month": "Jun",
+      "tempMeanC": {
+        "old": 27.95,
+        "new": 27.82,
+        "delta": -0.13
+      },
+      "tempHighC": {
+        "old": 31.79,
+        "new": 31.89,
+        "delta": 0.1
+      },
+      "tempLowC": {
+        "old": 24.87,
+        "new": 24.69,
+        "delta": -0.18
+      },
+      "precipMm": {
+        "old": 180.01,
+        "new": 179.15,
+        "delta": -0.86
+      },
+      "rule": {
+        "old": "R5",
+        "new": "R5"
+      },
+      "tier": {
+        "old": "Workable",
+        "new": "Workable"
+      }
+    },
+    {
+      "month": "Jul",
+      "tempMeanC": {
+        "old": 27.11,
+        "new": 26.95,
+        "delta": -0.16
+      },
+      "tempHighC": {
+        "old": 30.55,
+        "new": 30.64,
+        "delta": 0.09
+      },
+      "tempLowC": {
+        "old": 24.35,
+        "new": 24.16,
+        "delta": -0.19
+      },
+      "precipMm": {
+        "old": 198.55,
+        "new": 205.39,
+        "delta": 6.84
+      },
+      "rule": {
+        "old": "R5",
+        "new": "R3"
+      },
+      "tier": {
+        "old": "Workable",
+        "new": "Challenging"
+      }
+    },
+    {
+      "month": "Aug",
+      "tempMeanC": {
+        "old": 26.96,
+        "new": 26.8,
+        "delta": -0.16
+      },
+      "tempHighC": {
+        "old": 30.36,
+        "new": 30.4,
+        "delta": 0.04
+      },
+      "tempLowC": {
+        "old": 24.28,
+        "new": 24.08,
+        "delta": -0.2
+      },
+      "precipMm": {
+        "old": 210.56,
+        "new": 215.64,
+        "delta": 5.08
+      },
+      "rule": {
+        "old": "R3",
+        "new": "R3"
+      },
+      "tier": {
+        "old": "Challenging",
+        "new": "Challenging"
+      }
+    },
+    {
+      "month": "Sep",
+      "tempMeanC": {
+        "old": 26.88,
+        "new": 26.7,
+        "delta": -0.18
+      },
+      "tempHighC": {
+        "old": 30.15,
+        "new": 30.3,
+        "delta": 0.15
+      },
+      "tempLowC": {
+        "old": 24.22,
+        "new": 23.95,
+        "delta": -0.27
+      },
+      "precipMm": {
+        "old": 233.1,
+        "new": 228.35,
+        "delta": -4.75
+      },
+      "rule": {
+        "old": "R3",
+        "new": "R3"
+      },
+      "tier": {
+        "old": "Challenging",
+        "new": "Challenging"
+      }
+    },
+    {
+      "month": "Oct",
+      "tempMeanC": {
+        "old": 26.72,
+        "new": 26.49,
+        "delta": -0.23
+      },
+      "tempHighC": {
+        "old": 30.66,
+        "new": 30.93,
+        "delta": 0.27
+      },
+      "tempLowC": {
+        "old": 23.41,
+        "new": 23.02,
+        "delta": -0.39
+      },
+      "precipMm": {
+        "old": 138.82,
+        "new": 123.15,
+        "delta": -15.67
+      },
+      "rule": {
+        "old": "R5",
+        "new": "R5"
+      },
+      "tier": {
+        "old": "Workable",
+        "new": "Workable"
+      }
+    },
+    {
+      "month": "Nov",
+      "tempMeanC": {
+        "old": 26.08,
+        "new": 25.71,
+        "delta": -0.37
+      },
+      "tempHighC": {
+        "old": 31.18,
+        "new": 31.12,
+        "delta": -0.06
+      },
+      "tempLowC": {
+        "old": 21.75,
+        "new": 21.39,
+        "delta": -0.36
+      },
+      "precipMm": {
+        "old": 34.29,
+        "new": 31.59,
+        "delta": -2.7
+      },
+      "rule": {
+        "old": "R7",
+        "new": "R7"
+      },
+      "tier": {
+        "old": "Favourable",
+        "new": "Favourable"
+      }
+    },
+    {
+      "month": "Dec",
+      "tempMeanC": {
+        "old": 25.71,
+        "new": 24.99,
+        "delta": -0.72
+      },
+      "tempHighC": {
+        "old": 32.06,
+        "new": 31.46,
+        "delta": -0.6
+      },
+      "tempLowC": {
+        "old": 20.19,
+        "new": 19.67,
+        "delta": -0.52
+      },
+      "precipMm": {
+        "old": 5.93,
+        "new": 6.32,
+        "delta": 0.39
+      },
+      "rule": {
+        "old": "R4",
+        "new": "R7"
+      },
+      "tier": {
+        "old": "Workable",
+        "new": "Favourable"
+      }
+    }
+  ],
+  "highlights": {
+    "july": {
+      "precipMm": "198.55 -> 205.39 mm",
+      "rule": "R4 -> R3",
+      "tier": "Workable -> Challenging"
+    },
+    "december": {
+      "rule": "R4 -> R7",
+      "tier": "Workable -> Favourable"
+    },
+    "bestMonths": {
+      "old": [
+        10
+      ],
+      "new": [
+        10,
+        11
+      ]
+    }
+  },
+  "bestMonths": {
+    "old": [
+      10
+    ],
+    "new": [
+      10,
+      11
+    ]
+  }
+}

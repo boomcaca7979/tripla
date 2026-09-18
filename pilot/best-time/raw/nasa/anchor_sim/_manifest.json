@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2026-09-12T08:16:01.151942+00:00",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+  "purpose": "anchor-correction impact simulation (PROPOSED anchors only; production untouched)",
+  "records": [
+    {
+      "tag": "hcmc-proposed",
+      "destinationId": "ho-chi-minh-city",
+      "kind": "climatology",
+      "lat": 10.8188,
+      "lon": 106.652,
+      "httpStatus": 200,
+      "timeStandard": "UTC",
+      "grid": [
+        106.652,
+        10.819,
+        46.81
+      ],
+      "params": [
+        "PRECTOTCORR",
+        "PRECTOTCORR_SUM",
+        "T2M"
+      ]
+    },
+    {
+      "tag": "hcmc-proposed",
+      "destinationId": "ho-chi-minh-city",
+      "kind": "daily",
+      "lat": 10.8188,
+      "lon": 106.652,
+      "httpStatus": 200,
+      "timeStandard": "UTC",
+      "grid": [
+        106.652,
+        10.819,
+        46.81
+      ],
+      "params": [
+        "PRECTOTCORR",
+        "T2M_MAX",
+        "T2M_MIN"
+      ]
+    },
+    {
+      "tag": "siemreap-proposed",
+      "destinationId": "siem-reap",
+      "kind": "climatology",
+      "lat": 13.36974,
+      "lon": 104.223831,
+      "httpStatus": 200,
+      "timeStandard": "UTC",
+      "grid": [
+        104.224,
+        13.37,
+        70.78
+      ],
+      "params": [
+        "PRECTOTCORR",
+        "PRECTOTCORR_SUM",
+        "T2M"
+      ]
+    },
+    {
+      "tag": "siemreap-proposed",
+      "destinationId": "siem-reap",
+      "kind": "daily",
+      "lat": 13.36974,
+      "lon": 104.223831,
+      "httpStatus": 200,
+      "timeStandard": "UTC",
+      "grid": [
+        104.224,
+        13.37,
+        70.78
+      ],
+      "params": [
+        "PRECTOTCORR",
+        "T2M_MAX",
+        "T2M_MIN"
+      ]
+    }
+  ],
+  "summary": {
+    "ok": 4,
+    "failed": 0
+  }
+}

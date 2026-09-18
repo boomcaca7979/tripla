@@ -1,0 +1,2620 @@
+{
+  "pilotVersion": "pilot-2026.09.11.v1",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.6",
+  "provider": "NASA POWER (NASA Langley Research Center)",
+  "sourceFamily": "NASA POWER / MERRA-2",
+  "officialProduct": "Daily API (point)",
+  "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+  "parameters": [
+    "PRECTOTCORR"
+  ],
+  "community": "AG",
+  "start": "19910101",
+  "end": "20201231",
+  "timeStandardRequested": "UTC",
+  "generatedAt": "2026-09-12T02:17:33.469091+00:00",
+  "records": [
+    {
+      "destinationId": "tokyo",
+      "httpStatus": 200,
+      "cached": true
+    },
+    {
+      "destinationId": "paris",
+      "anchorLatitude": 49.0097,
+      "anchorLongitude": 2.5479,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=2.5479&latitude=49.0097&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:17:34.766994+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        2.548,
+        49.01,
+        92.41
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "newyork",
+      "anchorLatitude": 40.6413,
+      "anchorLongitude": -73.7781,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-73.7781&latitude=40.6413&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:17:36.155179+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -73.778,
+        40.641,
+        10.17
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "bangkok",
+      "anchorLatitude": 13.69,
+      "anchorLongitude": 100.7501,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=100.7501&latitude=13.69&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:17:37.797526+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        100.75,
+        13.69,
+        8.01
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "london",
+      "anchorLatitude": 51.47,
+      "anchorLongitude": -0.4543,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-0.4543&latitude=51.47&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:17:39.330054+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -0.454,
+        51.47,
+        87.34
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "sydney",
+      "anchorLatitude": -33.9399,
+      "anchorLongitude": 151.1753,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=151.1753&latitude=-33.9399&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:17:40.895025+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        151.175,
+        -33.94,
+        31.72
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "dubai",
+      "anchorLatitude": 25.2532,
+      "anchorLongitude": 55.3657,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=55.3657&latitude=25.2532&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:17:42.289572+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        55.366,
+        25.253,
+        67.09
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "rome",
+      "anchorLatitude": 41.8003,
+      "anchorLongitude": 12.2389,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=12.2389&latitude=41.8003&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:17:43.555861+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        12.239,
+        41.8,
+        198.41
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "barcelona",
+      "anchorLatitude": 41.2974,
+      "anchorLongitude": 2.0833,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=2.0833&latitude=41.2974&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:17:45.985744+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        2.083,
+        41.297,
+        302.35
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "singapore",
+      "anchorLatitude": 1.3644,
+      "anchorLongitude": 103.9915,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=103.9915&latitude=1.3644&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:17:48.611307+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        103.992,
+        1.364,
+        25.8
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "istanbul",
+      "anchorLatitude": 41.2753,
+      "anchorLongitude": 28.7519,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=28.7519&latitude=41.2753&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:17:51.255907+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        28.752,
+        41.275,
+        6.36
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "seoul",
+      "anchorLatitude": 37.4602,
+      "anchorLongitude": 126.4407,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=126.4407&latitude=37.4602&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:17:54.079077+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        126.441,
+        37.46,
+        11.85
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "mexico-city",
+      "anchorLatitude": 19.4363,
+      "anchorLongitude": -99.0721,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-99.0721&latitude=19.4363&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:17:56.800589+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -99.072,
+        19.436,
+        2626.86
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "las-vegas",
+      "anchorLatitude": 36.084,
+      "anchorLongitude": -115.1538,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-115.1538&latitude=36.084&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:17:59.002624+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -115.154,
+        36.084,
+        725.38
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "austin",
+      "anchorLatitude": 30.1975,
+      "anchorLongitude": -97.6664,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-97.6664&latitude=30.1975&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:01.253790+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -97.666,
+        30.198,
+        155.2
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "munich",
+      "anchorLatitude": 48.3538,
+      "anchorLongitude": 11.7861,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=11.7861&latitude=48.3538&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:03.621068+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        11.786,
+        48.354,
+        463.45
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "kyoto",
+      "anchorLatitude": 34.4273,
+      "anchorLongitude": 135.2444,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=135.2444&latitude=34.4273&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:06.256343+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        135.244,
+        34.427,
+        54.1
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "vienna",
+      "anchorLatitude": 48.1103,
+      "anchorLongitude": 16.5697,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=16.5697&latitude=48.1103&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:08.780799+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        16.57,
+        48.11,
+        162.22
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "rovaniemi",
+      "anchorLatitude": 66.5648,
+      "anchorLongitude": 25.8319,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=25.8319&latitude=66.5648&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:11.529353+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        25.832,
+        66.565,
+        151.72
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "antalya",
+      "anchorLatitude": 36.8987,
+      "anchorLongitude": 30.8005,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=30.8005&latitude=36.8987&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:14.226306+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        30.8,
+        36.899,
+        455.92
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "madrid",
+      "anchorLatitude": 40.4936,
+      "anchorLongitude": -3.5668,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-3.5668&latitude=40.4936&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:17.309048+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -3.567,
+        40.494,
+        779.85
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "milan",
+      "anchorLatitude": 45.6306,
+      "anchorLongitude": 8.7281,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=8.7281&latitude=45.6306&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:19.914289+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        8.728,
+        45.631,
+        232.25
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "baku",
+      "anchorLatitude": 40.4675,
+      "anchorLongitude": 50.0467,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=50.0467&latitude=40.4675&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:22.567223+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        50.047,
+        40.468,
+        -10.22
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "abu-dhabi",
+      "anchorLatitude": 24.433,
+      "anchorLongitude": 54.6511,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=54.6511&latitude=24.433&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:25.041492+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        54.651,
+        24.433,
+        8.25
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "prague",
+      "anchorLatitude": 50.1008,
+      "anchorLongitude": 14.26,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=14.26&latitude=50.1008&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:28.127242+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        14.26,
+        50.101,
+        353.91
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "cologne",
+      "anchorLatitude": 50.8659,
+      "anchorLongitude": 7.1427,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=7.1427&latitude=50.8659&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:30.741393+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        7.143,
+        50.866,
+        125.18
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "osaka",
+      "anchorLatitude": 34.4347,
+      "anchorLongitude": 135.2441,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=135.2441&latitude=34.4347&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:32.977779+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        135.244,
+        34.435,
+        54.1
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "hong-kong",
+      "anchorLatitude": 22.308,
+      "anchorLongitude": 113.9185,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=113.9185&latitude=22.308&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:35.241870+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        113.918,
+        22.308,
+        17.55
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "amsterdam",
+      "anchorLatitude": 52.3105,
+      "anchorLongitude": 4.7683,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=4.7683&latitude=52.3105&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:37.879907+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        4.768,
+        52.31,
+        -0.95
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "san-francisco",
+      "anchorLatitude": 37.6213,
+      "anchorLongitude": -122.379,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-122.379&latitude=37.6213&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:40.541633+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -122.379,
+        37.621,
+        65.91
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "bali",
+      "anchorLatitude": -8.7482,
+      "anchorLongitude": 115.1675,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=115.1675&latitude=-8.7482&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:43.575536+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        115.168,
+        -8.748,
+        313.73
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "boston",
+      "anchorLatitude": 42.3656,
+      "anchorLongitude": -71.0096,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-71.0096&latitude=42.3656&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:44.982113+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -71.01,
+        42.366,
+        71.06
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "beijing",
+      "anchorLatitude": 40.0799,
+      "anchorLongitude": 116.6031,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=116.6031&latitude=40.0799&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:46.303724+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        116.603,
+        40.08,
+        58.96
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "shanghai",
+      "anchorLatitude": 31.1443,
+      "anchorLongitude": 121.8083,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=121.8083&latitude=31.1443&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:47.678312+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        121.808,
+        31.144,
+        1.48
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "guangzhou",
+      "anchorLatitude": 23.3925,
+      "anchorLongitude": 113.2988,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=113.2988&latitude=23.3925&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:49.051244+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        113.299,
+        23.392,
+        91.46
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "chengdu",
+      "anchorLatitude": 30.5785,
+      "anchorLongitude": 103.9471,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=103.9471&latitude=30.5785&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:50.458163+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        103.947,
+        30.578,
+        641.57
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "xian",
+      "anchorLatitude": 34.4471,
+      "anchorLongitude": 108.7519,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=108.7519&latitude=34.4471&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:51.688701+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        108.752,
+        34.447,
+        592.71
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "hangzhou",
+      "anchorLatitude": 30.2348,
+      "anchorLongitude": 120.4293,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=120.4293&latitude=30.2348&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:52.930000+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        120.429,
+        30.235,
+        94.28
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "chongqing",
+      "anchorLatitude": 29.7192,
+      "anchorLongitude": 106.6417,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=106.6417&latitude=29.7192&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:54.180322+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        106.642,
+        29.719,
+        509.3
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "macau",
+      "anchorLatitude": 22.1496,
+      "anchorLongitude": 113.5914,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=113.5914&latitude=22.1496&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:55.554301+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        113.591,
+        22.15,
+        6.2
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "zurich",
+      "anchorLatitude": 47.4647,
+      "anchorLongitude": 8.5492,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=8.5492&latitude=47.4647&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:57.119430+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        8.549,
+        47.465,
+        566.56
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "los-angeles",
+      "anchorLatitude": 33.9425,
+      "anchorLongitude": -118.408,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-118.408&latitude=33.9425&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:58.269875+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -118.408,
+        33.943,
+        395.0
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "vancouver",
+      "anchorLatitude": 49.1947,
+      "anchorLongitude": -123.1792,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-123.1792&latitude=49.1947&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:18:59.867850+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -123.179,
+        49.195,
+        62.89
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "melbourne",
+      "anchorLatitude": -37.669,
+      "anchorLongitude": 144.841,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=144.841&latitude=-37.669&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:21:13.758984+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        144.841,
+        -37.669,
+        267.1
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "auckland",
+      "anchorLatitude": -37.0082,
+      "anchorLongitude": 174.785,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=174.785&latitude=-37.0082&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:21:16.366842+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        174.785,
+        -37.008,
+        50.23
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "taipei",
+      "anchorLatitude": 25.0777,
+      "anchorLongitude": 121.2328,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=121.2328&latitude=25.0777&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:21:19.044629+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        121.233,
+        25.078,
+        228.85
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "busan",
+      "anchorLatitude": 35.1795,
+      "anchorLongitude": 128.9382,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=128.9382&latitude=35.1795&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:21:21.708990+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        128.938,
+        35.179,
+        70.47
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "hanoi",
+      "anchorLatitude": 21.2212,
+      "anchorLongitude": 105.8072,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=105.8072&latitude=21.2212&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:21:24.287563+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        105.807,
+        21.221,
+        87.73
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "ho-chi-minh-city",
+      "anchorLatitude": 10.8188,
+      "anchorLongitude": 106.8069,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=106.8069&latitude=10.8188&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:21:28.335795+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        106.807,
+        10.819,
+        46.81
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "kuala-lumpur",
+      "anchorLatitude": 2.7456,
+      "anchorLongitude": 101.7099,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=101.7099&latitude=2.7456&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:21:33.015509+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        101.71,
+        2.746,
+        65.29
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "cebu",
+      "anchorLatitude": 10.3075,
+      "anchorLongitude": 123.979,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=123.979&latitude=10.3075&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:21:36.623803+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        123.979,
+        10.307,
+        98.77
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "lisbon",
+      "anchorLatitude": 38.7742,
+      "anchorLongitude": -9.1342,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-9.1342&latitude=38.7742&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:21:45.132337+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -9.134,
+        38.774,
+        52.0
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "budapest",
+      "anchorLatitude": 47.4369,
+      "anchorLongitude": 19.2556,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=19.2556&latitude=47.4369&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:21:47.950427+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        19.256,
+        47.437,
+        160.32
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "florence",
+      "anchorLatitude": 43.81,
+      "anchorLongitude": 11.2051,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=11.2051&latitude=43.81&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:21:50.705688+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        11.205,
+        43.81,
+        571.22
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "venice",
+      "anchorLatitude": 45.5053,
+      "anchorLongitude": 12.3519,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=12.3519&latitude=45.5053&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:21:53.442511+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        12.352,
+        45.505,
+        8.66
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "athens",
+      "anchorLatitude": 37.9364,
+      "anchorLongitude": 23.9445,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=23.9445&latitude=37.9364&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:21:56.079989+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        23.945,
+        37.936,
+        140.03
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "edinburgh",
+      "anchorLatitude": 55.95,
+      "anchorLongitude": -3.3725,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-3.3725&latitude=55.95&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:21:59.379399+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -3.373,
+        55.95,
+        128.13
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "copenhagen",
+      "anchorLatitude": 55.618,
+      "anchorLongitude": 12.656,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=12.656&latitude=55.618&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:02.573420+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        12.656,
+        55.618,
+        16.47
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "seville",
+      "anchorLatitude": 37.418,
+      "anchorLongitude": -5.8931,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-5.8931&latitude=37.418&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:05.589555+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -5.893,
+        37.418,
+        174.78
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "toronto",
+      "anchorLatitude": 43.6777,
+      "anchorLongitude": -79.6248,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-79.6248&latitude=43.6777&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:08.402997+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -79.625,
+        43.678,
+        98.64
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "manila",
+      "anchorLatitude": 14.5086,
+      "anchorLongitude": 121.0198,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=121.0198&latitude=14.5086&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:11.100587+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        121.02,
+        14.509,
+        201.16
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "jakarta",
+      "anchorLatitude": -6.1256,
+      "anchorLongitude": 106.6558,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=106.6558&latitude=-6.1256&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:14.086395+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        106.656,
+        -6.126,
+        12.32
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "yogyakarta",
+      "anchorLatitude": -7.9014,
+      "anchorLongitude": 110.0576,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=110.0576&latitude=-7.9014&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:17.011958+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        110.058,
+        -7.901,
+        49.37
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "chiang-mai",
+      "anchorLatitude": 18.7669,
+      "anchorLongitude": 98.9626,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=98.9626&latitude=18.7669&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:19.804045+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        98.963,
+        18.767,
+        759.08
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "phuket",
+      "anchorLatitude": 8.1132,
+      "anchorLongitude": 98.3169,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=98.3169&latitude=8.1132&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:22.655035+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        98.317,
+        8.113,
+        10.57
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "koh-samui",
+      "anchorLatitude": 9.5476,
+      "anchorLongitude": 100.0613,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=100.0613&latitude=9.5476&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:25.166161+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        100.061,
+        9.548,
+        19.29
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "da-nang",
+      "anchorLatitude": 16.0439,
+      "anchorLongitude": 108.1994,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=108.1994&latitude=16.0439&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:28.185645+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        108.199,
+        16.044,
+        155.61
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "nha-trang",
+      "anchorLatitude": 11.9982,
+      "anchorLongitude": 109.2195,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=109.2195&latitude=11.9982&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:31.257476+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        109.219,
+        11.998,
+        52.16
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "phu-quoc",
+      "anchorLatitude": 10.1713,
+      "anchorLongitude": 103.9928,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=103.9928&latitude=10.1713&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:34.079928+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        103.993,
+        10.171,
+        3.23
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "siem-reap",
+      "anchorLatitude": 13.4107,
+      "anchorLongitude": 103.8132,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=103.8132&latitude=13.4107&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:36.842212+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        103.813,
+        13.411,
+        36.86
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "phnom-penh",
+      "anchorLatitude": 11.5466,
+      "anchorLongitude": 104.8441,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=104.8441&latitude=11.5466&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:39.291502+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        104.844,
+        11.547,
+        9.54
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "jeju",
+      "anchorLatitude": 33.5113,
+      "anchorLongitude": 126.493,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=126.493&latitude=33.5113&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:42.936941+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        126.493,
+        33.511,
+        53.71
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "fukuoka",
+      "anchorLatitude": 33.5859,
+      "anchorLongitude": 130.451,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=130.451&latitude=33.5859&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:46.417912+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        130.451,
+        33.586,
+        185.36
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "sapporo",
+      "anchorLatitude": 42.7752,
+      "anchorLongitude": 141.6923,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=141.6923&latitude=42.7752&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:49.272828+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        141.692,
+        42.775,
+        208.24
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "nagoya",
+      "anchorLatitude": 34.8584,
+      "anchorLongitude": 136.8054,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=136.8054&latitude=34.8584&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:52.234875+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        136.805,
+        34.858,
+        79.37
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "nagasaki",
+      "anchorLatitude": 32.9169,
+      "anchorLongitude": 129.9138,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=129.9138&latitude=32.9169&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:55.522400+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        129.914,
+        32.917,
+        115.92
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "hiroshima",
+      "anchorLatitude": 34.4361,
+      "anchorLongitude": 132.9194,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=132.9194&latitude=34.4361&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:22:58.810892+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        132.919,
+        34.436,
+        211.07
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "kanazawa",
+      "anchorLatitude": 36.3939,
+      "anchorLongitude": 136.4072,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=136.4072&latitude=36.3939&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:01.880446+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        136.407,
+        36.394,
+        40.19
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "kobe",
+      "anchorLatitude": 34.6328,
+      "anchorLongitude": 135.2239,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=135.2239&latitude=34.6328&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:04.800161+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        135.224,
+        34.633,
+        54.1
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "berlin",
+      "anchorLatitude": 52.3667,
+      "anchorLongitude": 13.5033,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=13.5033&latitude=52.3667&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:07.518842+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        13.503,
+        52.367,
+        53.46
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "frankfurt",
+      "anchorLatitude": 50.0379,
+      "anchorLongitude": 8.5622,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=8.5622&latitude=50.0379&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:10.735351+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        8.562,
+        50.038,
+        171.61
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "naples",
+      "anchorLatitude": 40.886,
+      "anchorLongitude": 14.2908,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=14.2908&latitude=40.886&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:13.364361+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        14.291,
+        40.886,
+        264.43
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "amalfi-coast",
+      "anchorLatitude": 40.886,
+      "anchorLongitude": 14.2908,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=14.2908&latitude=40.886&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:17.131608+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        14.291,
+        40.886,
+        264.43
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "bologna",
+      "anchorLatitude": 44.5354,
+      "anchorLongitude": 11.2887,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=11.2887&latitude=44.5354&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:19.601207+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        11.289,
+        44.535,
+        198.28
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "turin",
+      "anchorLatitude": 45.2008,
+      "anchorLongitude": 7.6496,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=7.6496&latitude=45.2008&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:22.811605+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        7.65,
+        45.201,
+        705.88
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "valencia",
+      "anchorLatitude": 39.4893,
+      "anchorLongitude": -0.4816,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-0.4816&latitude=39.4893&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:25.472728+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -0.482,
+        39.489,
+        388.86
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "malaga",
+      "anchorLatitude": 36.6749,
+      "anchorLongitude": -4.4991,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-4.4991&latitude=36.6749&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:28.061489+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -4.499,
+        36.675,
+        144.54
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "granada",
+      "anchorLatitude": 37.1888,
+      "anchorLongitude": -3.7772,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-3.7772&latitude=37.1888&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:30.817226+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -3.777,
+        37.189,
+        720.12
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "porto",
+      "anchorLatitude": 41.2481,
+      "anchorLongitude": -8.6814,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-8.6814&latitude=41.2481&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:33.173765+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -8.681,
+        41.248,
+        76.08
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "brussels",
+      "anchorLatitude": 50.9014,
+      "anchorLongitude": 4.4844,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=4.4844&latitude=50.9014&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:35.938594+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        4.484,
+        50.901,
+        36.84
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "stockholm",
+      "anchorLatitude": 59.6519,
+      "anchorLongitude": 17.9186,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=17.9186&latitude=59.6519&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:38.990412+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        17.919,
+        59.652,
+        26.64
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "oslo",
+      "anchorLatitude": 60.1939,
+      "anchorLongitude": 11.1004,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=11.1004&latitude=60.1939&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:41.964730+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        11.1,
+        60.194,
+        209.58
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "reykjavik",
+      "anchorLatitude": 63.985,
+      "anchorLongitude": -22.6056,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-22.6056&latitude=63.985&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:46.018984+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -22.606,
+        63.985,
+        58.88
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "dublin",
+      "anchorLatitude": 53.4213,
+      "anchorLongitude": -6.2701,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-6.2701&latitude=53.4213&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:48.775477+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -6.27,
+        53.421,
+        46.03
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "dubrovnik",
+      "anchorLatitude": 42.5614,
+      "anchorLongitude": 18.2682,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=18.2682&latitude=42.5614&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:51.724211+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        18.268,
+        42.561,
+        143.82
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "santorini",
+      "anchorLatitude": 36.3991,
+      "anchorLongitude": 25.4789,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=25.4789&latitude=36.3991&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:54.735845+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        25.479,
+        36.399,
+        13.36
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "miami",
+      "anchorLatitude": 25.7959,
+      "anchorLongitude": -80.287,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-80.287&latitude=25.7959&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:23:57.375654+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -80.287,
+        25.796,
+        2.81
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "orlando",
+      "anchorLatitude": 28.4312,
+      "anchorLongitude": -81.3081,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-81.3081&latitude=28.4312&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:00.294142+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -81.308,
+        28.431,
+        22.07
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "chicago",
+      "anchorLatitude": 41.9742,
+      "anchorLongitude": -87.9073,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-87.9073&latitude=41.9742&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:03.241978+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -87.907,
+        41.974,
+        231.39
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "washington-dc",
+      "anchorLatitude": 38.9531,
+      "anchorLongitude": -77.4565,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-77.4565&latitude=38.9531&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:06.250429+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -77.457,
+        38.953,
+        120.54
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "seattle",
+      "anchorLatitude": 47.4502,
+      "anchorLongitude": -122.3088,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-122.3088&latitude=47.4502&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:08.988719+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -122.309,
+        47.45,
+        110.01
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "san-diego",
+      "anchorLatitude": 32.7338,
+      "anchorLongitude": -117.1933,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-117.1933&latitude=32.7338&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:11.623832+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -117.193,
+        32.734,
+        21.09
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "new-orleans",
+      "anchorLatitude": 29.9934,
+      "anchorLongitude": -90.2581,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-90.2581&latitude=29.9934&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:14.548343+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -90.258,
+        29.993,
+        1.69
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "cancun",
+      "anchorLatitude": 21.0365,
+      "anchorLongitude": -86.8771,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-86.8771&latitude=21.0365&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:16.947919+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -86.877,
+        21.037,
+        6.36
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "montreal",
+      "anchorLatitude": 45.4706,
+      "anchorLongitude": -73.7408,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-73.7408&latitude=45.4706&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:20.366388+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -73.741,
+        45.471,
+        37.97
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "quebec-city",
+      "anchorLatitude": 46.7881,
+      "anchorLongitude": -71.3928,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-71.3928&latitude=46.7881&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:22.978693+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -71.393,
+        46.788,
+        332.2
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "brisbane",
+      "anchorLatitude": -27.3842,
+      "anchorLongitude": 153.1175,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=153.1175&latitude=-27.3842&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:26.170576+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        153.118,
+        -27.384,
+        61.5
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "gold-coast",
+      "anchorLatitude": -28.1644,
+      "anchorLongitude": 153.5052,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=153.5052&latitude=-28.1644&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:28.442476+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        153.505,
+        -28.164,
+        17.12
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "perth",
+      "anchorLatitude": -31.9403,
+      "anchorLongitude": 115.9669,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=115.9669&latitude=-31.9403&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:31.507565+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        115.967,
+        -31.94,
+        213.52
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "queenstown",
+      "anchorLatitude": -45.0211,
+      "anchorLongitude": 168.7392,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=168.7392&latitude=-45.0211&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:34.243364+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        168.739,
+        -45.021,
+        962.79
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "wellington",
+      "anchorLatitude": -41.3272,
+      "anchorLongitude": 174.8053,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=174.8053&latitude=-41.3272&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:37.673467+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        174.805,
+        -41.327,
+        70.62
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "ubud",
+      "anchorLatitude": -8.7482,
+      "anchorLongitude": 115.1675,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=115.1675&latitude=-8.7482&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:40.401991+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        115.168,
+        -8.748,
+        313.73
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "lombok",
+      "anchorLatitude": -8.7569,
+      "anchorLongitude": 116.2784,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=116.2784&latitude=-8.7569&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:43.815192+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        116.278,
+        -8.757,
+        47.65
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "luang-prabang",
+      "anchorLatitude": 19.8996,
+      "anchorLongitude": 102.1606,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=102.1606&latitude=19.8996&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:46.775247+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        102.161,
+        19.9,
+        756.19
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "kathmandu",
+      "anchorLatitude": 27.6966,
+      "anchorLongitude": 85.3591,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=85.3591&latitude=27.6966&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:49.096744+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        85.359,
+        27.697,
+        1269.39
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "colombo",
+      "anchorLatitude": 7.1808,
+      "anchorLongitude": 79.8841,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=79.8841&latitude=7.1808&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:52.383488+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        79.884,
+        7.181,
+        123.66
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "male",
+      "anchorLatitude": 4.1918,
+      "anchorLongitude": 73.5291,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=73.5291&latitude=4.1918&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:55.427595+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        73.529,
+        4.192,
+        0.01
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "mumbai",
+      "anchorLatitude": 19.0896,
+      "anchorLongitude": 72.8656,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=72.8656&latitude=19.0896&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:24:58.161186+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        72.866,
+        19.09,
+        97.15
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "jaipur",
+      "anchorLatitude": 26.8242,
+      "anchorLongitude": 75.8122,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=75.8122&latitude=26.8242&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:00.958395+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        75.812,
+        26.824,
+        405.74
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "goa",
+      "anchorLatitude": 15.3808,
+      "anchorLongitude": 73.8314,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=73.8314&latitude=15.3808&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:03.329652+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        73.831,
+        15.381,
+        76.19
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "penang",
+      "anchorLatitude": 5.2971,
+      "anchorLongitude": 100.2769,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=100.2769&latitude=5.2971&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:05.636142+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        100.277,
+        5.297,
+        9.27
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "pattaya",
+      "anchorLatitude": 12.6806,
+      "anchorLongitude": 101.0044,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=101.0044&latitude=12.6806&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:08.637790+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        101.004,
+        12.681,
+        11.54
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "yangon",
+      "anchorLatitude": 16.9073,
+      "anchorLongitude": 96.1332,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=96.1332&latitude=16.9073&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:11.413601+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        96.133,
+        16.907,
+        10.91
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "warsaw",
+      "anchorLatitude": 52.1657,
+      "anchorLongitude": 20.9671,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=20.9671&latitude=52.1657&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:14.009210+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        20.967,
+        52.166,
+        125.44
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "krakow",
+      "anchorLatitude": 50.0777,
+      "anchorLongitude": 19.7848,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=19.7848&latitude=50.0777&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:16.620079+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        19.785,
+        50.078,
+        307.33
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "tallinn",
+      "anchorLatitude": 59.4133,
+      "anchorLongitude": 24.8328,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=24.8328&latitude=59.4133&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:19.384439+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        24.833,
+        59.413,
+        27.07
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "zagreb",
+      "anchorLatitude": 45.7429,
+      "anchorLongitude": 16.0688,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=16.0688&latitude=45.7429&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:22.058022+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        16.069,
+        45.743,
+        135.81
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "split",
+      "anchorLatitude": 43.5389,
+      "anchorLongitude": 16.298,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=16.298&latitude=43.5389&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:25.378533+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        16.298,
+        43.539,
+        212.42
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "geneva",
+      "anchorLatitude": 46.2381,
+      "anchorLongitude": 6.1089,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=6.1089&latitude=46.2381&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:27.901362+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        6.109,
+        46.238,
+        849.99
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "lyon",
+      "anchorLatitude": 45.7256,
+      "anchorLongitude": 5.0811,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=5.0811&latitude=45.7256&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:30.069265+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        5.081,
+        45.726,
+        432.85
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "nice",
+      "anchorLatitude": 43.6584,
+      "anchorLongitude": 7.2159,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=7.2159&latitude=43.6584&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:32.984596+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        7.216,
+        43.658,
+        85.72
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "cordoba",
+      "anchorLatitude": 37.8444,
+      "anchorLongitude": -4.8491,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-4.8491&latitude=37.8444&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:35.827305+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -4.849,
+        37.844,
+        409.24
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "san-sebastian",
+      "anchorLatitude": 43.3564,
+      "anchorLongitude": -1.7906,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-1.7906&latitude=43.3564&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:38.098665+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -1.791,
+        43.356,
+        118.13
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "philadelphia",
+      "anchorLatitude": 39.8744,
+      "anchorLongitude": -75.2424,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-75.2424&latitude=39.8744&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:41.070239+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -75.242,
+        39.874,
+        46.88
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "denver",
+      "anchorLatitude": 39.8561,
+      "anchorLongitude": -104.6737,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-104.6737&latitude=39.8561&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:43.700349+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -104.674,
+        39.856,
+        1511.21
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "nashville",
+      "anchorLatitude": 36.1263,
+      "anchorLongitude": -86.6774,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-86.6774&latitude=36.1263&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:46.332278+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -86.677,
+        36.126,
+        209.36
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "honolulu",
+      "anchorLatitude": 21.3245,
+      "anchorLongitude": -157.9251,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-157.9251&latitude=21.3245&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:48.602094+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -157.925,
+        21.325,
+        78.06
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "banff",
+      "anchorLatitude": 51.1139,
+      "anchorLongitude": -114.0203,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-114.0203&latitude=51.1139&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:51.208122+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -114.02,
+        51.114,
+        1039.79
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "tulum",
+      "anchorLatitude": 21.0365,
+      "anchorLongitude": -86.8771,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-86.8771&latitude=21.0365&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:53.838264+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -86.877,
+        21.037,
+        6.36
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "lima",
+      "anchorLatitude": -12.0219,
+      "anchorLongitude": -77.1143,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-77.1143&latitude=-12.0219&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:25:56.470894+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -77.114,
+        -12.022,
+        1194.76
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "buenos-aires",
+      "anchorLatitude": -34.8222,
+      "anchorLongitude": -58.5358,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-58.5358&latitude=-34.8222&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:26:00.177155+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        -58.536,
+        -34.822,
+        25.6
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "adelaide",
+      "anchorLatitude": -34.945,
+      "anchorLongitude": 138.5286,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=138.5286&latitude=-34.945&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:26:03.131407+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        138.529,
+        -34.945,
+        167.35
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "cairns",
+      "anchorLatitude": -16.8858,
+      "anchorLongitude": 145.7553,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=145.7553&latitude=-16.8858&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:26:05.752668+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        145.755,
+        -16.886,
+        404.05
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "christchurch",
+      "anchorLatitude": -43.4894,
+      "anchorLongitude": 172.5322,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=172.5322&latitude=-43.4894&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:26:08.372148+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        172.532,
+        -43.489,
+        76.4
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    },
+    {
+      "destinationId": "rotorua",
+      "anchorLatitude": -38.1093,
+      "anchorLongitude": 176.3165,
+      "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=176.3165&latitude=-38.1093&start=19910101&end=20201231&format=JSON&time-standard=UTC",
+      "httpStatus": 200,
+      "fetchedAt": "2026-09-12T02:26:10.847686+00:00",
+      "responseTimeStandard": "UTC",
+      "gridCoordinates": [
+        176.316,
+        -38.109,
+        287.29
+      ],
+      "error": null,
+      "parametersReturned": [
+        "PRECTOTCORR"
+      ]
+    }
+  ],
+  "summary": {
+    "requested": 145,
+    "http200": 145,
+    "failed": 0
+  }
+}

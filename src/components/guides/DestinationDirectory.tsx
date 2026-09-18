@@ -57,7 +57,7 @@ function RegionSection({ group }: { group: DirectoryRegionGroup }) {
                       {city.name}
                     </span>
                     {city.guides > 0 && (
-                      <span className="ml-[6px] text-[12px] text-[#bbb] transition-colors group-hover/city:text-[#ff9d00]">
+                      <span className="ml-[6px] text-[12px] text-[#757575] transition-colors group-hover/city:text-[#ff9d00]">
                         · {city.guides} {city.guides === 1 ? "guide" : "guides"}
                       </span>
                     )}

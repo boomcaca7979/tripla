@@ -1,0 +1,1363 @@
+{
+  "generatedAt": "2026-09-12T09:29:38.305072+00:00",
+  "artifact": "elevation-source-distribution.json",
+  "recountFrom": "elevation-authority-ledger.json + elevation-review-v1c.json (raw, not summaries)",
+  "tiers": {
+    "tier1_authoritative": 17,
+    "tier3_single_source": 118,
+    "tier3_with_independent_corroboration": 8,
+    "anchor_pending": 2,
+    "tier2_only": 0,
+    "tier4_only": 0,
+    "missing": 0,
+    "review": 10
+  },
+  "sum": 145,
+  "arithmeticCheck": true,
+  "rows": [
+    {
+      "destinationId": "tokyo",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "paris",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "newyork",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "bangkok",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "london",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "sydney",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "dubai",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "rome",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "barcelona",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "singapore",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "istanbul",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "seoul",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "mexico-city",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "las-vegas",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "austin",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "munich",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "kyoto",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "vienna",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "rovaniemi",
+      "class": "reviewed-secondary",
+      "secondSourceTier": "TIER 4 (Wikipedia citing AIP) + TIER 3 (METAR-TAF / FltPlan)"
+    },
+    {
+      "destinationId": "antalya",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "madrid",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "milan",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "baku",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "abu-dhabi",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "prague",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "cologne",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "osaka",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "hong-kong",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "amsterdam",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "san-francisco",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "bali",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "boston",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "beijing",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "shanghai",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "guangzhou",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "chengdu",
+      "class": "reviewed-secondary",
+      "secondSourceTier": "TIER 4 (Wikipedia citing AIP) + TIER 2 (ch-aviation)"
+    },
+    {
+      "destinationId": "xian",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "hangzhou",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "chongqing",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "macau",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "zurich",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "los-angeles",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "vancouver",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "melbourne",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "auckland",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "taipei",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "busan",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "hanoi",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "ho-chi-minh-city",
+      "class": "anchor-pending",
+      "secondSourceTier": "TIER 4 (Wikipedia citing AIP) + TIER 2 (ch-aviation) + TIER 3 (METAR-TAF, AirportGuide)"
+    },
+    {
+      "destinationId": "kuala-lumpur",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "cebu",
+      "class": "reviewed-secondary",
+      "secondSourceTier": "TIER 4 (Wikipedia citing AIP) + TIER 3 (SKYbrary, airport-data)"
+    },
+    {
+      "destinationId": "lisbon",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "budapest",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "florence",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "venice",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "athens",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "edinburgh",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "copenhagen",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "seville",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "toronto",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "manila",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "jakarta",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "yogyakarta",
+      "class": "reviewed-secondary",
+      "secondSourceTier": "TIER 4 (Wikipedia) + TIER 2 (WAHI AIP chart, tertiary-hosted copy)"
+    },
+    {
+      "destinationId": "chiang-mai",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "phuket",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "koh-samui",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "da-nang",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "nha-trang",
+      "class": "reviewed-secondary",
+      "secondSourceTier": "TIER 1 (nhatrangairport.com operator site) + TIER 4 (Wikipedia) + TIER 3 (SkyVector)"
+    },
+    {
+      "destinationId": "phu-quoc",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "siem-reap",
+      "class": "anchor-pending",
+      "secondSourceTier": "TIER 4 (Wikipedia) + TIER 3 (METAR-TAF)"
+    },
+    {
+      "destinationId": "phnom-penh",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "jeju",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "fukuoka",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "sapporo",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "nagoya",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "nagasaki",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "hiroshima",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "kanazawa",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "kobe",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "berlin",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "frankfurt",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "naples",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "amalfi-coast",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "bologna",
+      "class": "reviewed-secondary",
+      "secondSourceTier": "TIER 1 (bologna-airport.it operator site) + TIER 4 (Wikipedia)"
+    },
+    {
+      "destinationId": "turin",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "valencia",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "malaga",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "granada",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "porto",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "brussels",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "stockholm",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "oslo",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "reykjavik",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "dublin",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "dubrovnik",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "santorini",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "miami",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "orlando",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "chicago",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "washington-dc",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "seattle",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "san-diego",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "new-orleans",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "cancun",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "montreal",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "quebec-city",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "brisbane",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "gold-coast",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "perth",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "queenstown",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "wellington",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "ubud",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "lombok",
+      "class": "reviewed-secondary",
+      "secondSourceTier": "TIER 1 (lombokairportonline.com operator site) + TIER 4 (Wikipedia) + TIER 3 (SKYbrary)"
+    },
+    {
+      "destinationId": "luang-prabang",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "kathmandu",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "colombo",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "male",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "mumbai",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "jaipur",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "goa",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "penang",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "pattaya",
+      "class": "reviewed-secondary",
+      "secondSourceTier": "TIER 1 (utapao.com operator site) + TIER 4 (Wikipedia) + TIER 3 (METAR-TAF)"
+    },
+    {
+      "destinationId": "yangon",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "warsaw",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "krakow",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "tallinn",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "zagreb",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "split",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "geneva",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "lyon",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "nice",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "cordoba",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "san-sebastian",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "philadelphia",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "denver",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "nashville",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "honolulu",
+      "class": "Tier1",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "banff",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "tulum",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "lima",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "buenos-aires",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "adelaide",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "cairns",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "christchurch",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    },
+    {
+      "destinationId": "rotorua",
+      "class": "tier3-single-source",
+      "secondSourceTier": null
+    }
+  ],
+  "option1Scope": {
+    "generatedAt": "2026-09-12T09:29:38.305072+00:00",
+    "artifact": "elevation-source-distribution.json#option1Scope",
+    "alreadyTier1": {
+      "countries": [
+        "United States"
+      ],
+      "destinations": 17,
+      "source": "FAA NFDC NASR bulk CSV"
+    },
+    "remaining": {
+      "countries": 49,
+      "destinations": 128
+    },
+    "countryTable": [
+      {
+        "country": "Japan",
+        "destinationCount": 10,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 10,
+        "sourceType": "eAIP PDF (unreachable from this environment)",
+        "portalReachableThisEnvironment": false,
+        "batchMachineReadable": false,
+        "note": "no FAA-style bulk CSV product identified; per-airport AIP PDF parsing would be required"
+      },
+      {
+        "country": "Italy",
+        "destinationCount": 8,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 8,
+        "sourceType": "eAIP PDF (AD 2 sections per airport)",
+        "portalReachableThisEnvironment": true,
+        "batchMachineReadable": false,
+        "note": "no FAA-style bulk CSV product identified; per-airport AIP PDF parsing would be required"
+      },
+      {
+        "country": "Spain",
+        "destinationCount": 8,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 8,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "China",
+        "destinationCount": 8,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 8,
+        "sourceType": "CAAC AIP not publicly distributed; no free bulk source known",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Australia",
+        "destinationCount": 7,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 7,
+        "sourceType": "AIP PDF bundle; aeronautical data products are subscription/paid",
+        "portalReachableThisEnvironment": true,
+        "batchMachineReadable": false,
+        "note": "no FAA-style bulk CSV product identified; per-airport AIP PDF parsing would be required"
+      },
+      {
+        "country": "Thailand",
+        "destinationCount": 5,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 5,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Indonesia",
+        "destinationCount": 5,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 5,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Canada",
+        "destinationCount": 5,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 5,
+        "sourceType": "CAP/CSA PDFs per aerodrome",
+        "portalReachableThisEnvironment": true,
+        "batchMachineReadable": false,
+        "note": "no FAA-style bulk CSV product identified; per-airport AIP PDF parsing would be required"
+      },
+      {
+        "country": "New Zealand",
+        "destinationCount": 5,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 5,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Vietnam",
+        "destinationCount": 5,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 5,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Germany",
+        "destinationCount": 4,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 4,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "France",
+        "destinationCount": 3,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 3,
+        "sourceType": "eAIP / VFR PDF bundles",
+        "portalReachableThisEnvironment": true,
+        "batchMachineReadable": false,
+        "note": "no FAA-style bulk CSV product identified; per-airport AIP PDF parsing would be required"
+      },
+      {
+        "country": "South Korea",
+        "destinationCount": 3,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 3,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Mexico",
+        "destinationCount": 3,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 3,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Croatia",
+        "destinationCount": 3,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 3,
+        "sourceType": "eAIP PDF (unreachable)",
+        "portalReachableThisEnvironment": false,
+        "batchMachineReadable": false,
+        "note": "no FAA-style bulk CSV product identified; per-airport AIP PDF parsing would be required"
+      },
+      {
+        "country": "India",
+        "destinationCount": 3,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 3,
+        "sourceType": "AIP PDF (unreachable)",
+        "portalReachableThisEnvironment": false,
+        "batchMachineReadable": false,
+        "note": "no FAA-style bulk CSV product identified; per-airport AIP PDF parsing would be required"
+      },
+      {
+        "country": "United Kingdom",
+        "destinationCount": 2,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 2,
+        "sourceType": "regulatory publications",
+        "portalReachableThisEnvironment": true,
+        "batchMachineReadable": false,
+        "note": "no FAA-style bulk CSV product identified; per-airport AIP PDF parsing would be required"
+      },
+      {
+        "country": "UAE",
+        "destinationCount": 2,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 2,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Turkey",
+        "destinationCount": 2,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 2,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Switzerland",
+        "destinationCount": 2,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 2,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Malaysia",
+        "destinationCount": 2,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 2,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Philippines",
+        "destinationCount": 2,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 2,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Portugal",
+        "destinationCount": 2,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 2,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Greece",
+        "destinationCount": 2,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 2,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Cambodia",
+        "destinationCount": 2,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 2,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Poland",
+        "destinationCount": 2,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 2,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Singapore",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Austria",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Finland",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "HTTP 406 on root; AIP PDF behind portal",
+        "portalReachableThisEnvironment": true,
+        "batchMachineReadable": false,
+        "note": "no FAA-style bulk CSV product identified; per-airport AIP PDF parsing would be required"
+      },
+      {
+        "country": "Azerbaijan",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Czechia",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Hong Kong SAR",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "eAIP PDF (unreachable)",
+        "portalReachableThisEnvironment": false,
+        "batchMachineReadable": false,
+        "note": "no FAA-style bulk CSV product identified; per-airport AIP PDF parsing would be required"
+      },
+      {
+        "country": "Netherlands",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Taiwan",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "AIP PDF (unreachable)",
+        "portalReachableThisEnvironment": false,
+        "batchMachineReadable": false,
+        "note": "no FAA-style bulk CSV product identified; per-airport AIP PDF parsing would be required"
+      },
+      {
+        "country": "Hungary",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Denmark",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Belgium",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Sweden",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "AIP PDF (unreachable)",
+        "portalReachableThisEnvironment": false,
+        "batchMachineReadable": false,
+        "note": "no FAA-style bulk CSV product identified; per-airport AIP PDF parsing would be required"
+      },
+      {
+        "country": "Norway",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "AIP PDF / Open data pages",
+        "portalReachableThisEnvironment": true,
+        "batchMachineReadable": false,
+        "note": "no FAA-style bulk CSV product identified; per-airport AIP PDF parsing would be required"
+      },
+      {
+        "country": "Iceland",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Ireland",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Laos",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "no accessible AIP; limited publication",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Nepal",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "AIP PDF only; low accessibility",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Sri Lanka",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "AIP PDF only; low accessibility",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Maldives",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "AIP PDF only; low accessibility",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Myanmar",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "no accessible AIP; limited publication",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Estonia",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Peru",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      },
+      {
+        "country": "Argentina",
+        "destinationCount": 1,
+        "tier1SourceFound": 0,
+        "tier1SourceMissing": 1,
+        "sourceType": "national AIP (PDF) / operator pages; accessibility not probed",
+        "portalReachableThisEnvironment": null,
+        "batchMachineReadable": false,
+        "note": null
+      }
+    ],
+    "probes": [
+      {
+        "portal": "www.airservicesaustralia.com",
+        "authority": "Airservices Australia",
+        "country": "Australia",
+        "reachable": true,
+        "productType": "AIP PDF bundle; aeronautical data products are subscription/paid"
+      },
+      {
+        "portal": "www.navcanada.ca",
+        "authority": "NAV CANADA",
+        "country": "Canada",
+        "reachable": true,
+        "productType": "CAP/CSA PDFs per aerodrome"
+      },
+      {
+        "portal": "www.enav.it",
+        "authority": "ENAV (Italy)",
+        "country": "Italy",
+        "reachable": true,
+        "productType": "eAIP PDF (AD 2 sections per airport)"
+      },
+      {
+        "portal": "www.sia.aviation-civile.gouv.fr",
+        "authority": "SIA/DSNA (France)",
+        "country": "France",
+        "reachable": true,
+        "productType": "eAIP / VFR PDF bundles"
+      },
+      {
+        "portal": "ais.avinor.no",
+        "authority": "Avinor (Norway)",
+        "country": "Norway",
+        "reachable": true,
+        "productType": "AIP PDF / Open data pages"
+      },
+      {
+        "portal": "nats-uk.ead-it.com",
+        "authority": "NATS (UK AIP)",
+        "country": "United Kingdom",
+        "reachable": true,
+        "productType": "eAIP PDF via UK AIP Online Services"
+      },
+      {
+        "portal": "www.caa.co.uk",
+        "authority": "UK CAA",
+        "country": "United Kingdom",
+        "reachable": true,
+        "productType": "regulatory publications"
+      },
+      {
+        "portal": "aisjapan.mlit.go.jp",
+        "authority": "MLIT/JCAB (Japan)",
+        "country": "Japan",
+        "reachable": false,
+        "productType": "eAIP PDF (unreachable from this environment)"
+      },
+      {
+        "portal": "ead.eurocontrol.int",
+        "authority": "EUROCONTROL EAD",
+        "country": "multi-EU",
+        "reachable": false,
+        "productType": "registration-required EAD/AIXM"
+      },
+      {
+        "portal": "ais.caa.gov.hk",
+        "authority": "CAD Hong Kong",
+        "country": "Hong Kong SAR",
+        "reachable": false,
+        "productType": "eAIP PDF (unreachable)"
+      },
+      {
+        "portal": "www.caa.gov.tw",
+        "authority": "CAA Taiwan",
+        "country": "Taiwan",
+        "reachable": false,
+        "productType": "AIP PDF (unreachable)"
+      },
+      {
+        "portal": "www.luftfartsverket.se",
+        "authority": "LFV (Sweden)",
+        "country": "Sweden",
+        "reachable": false,
+        "productType": "AIP PDF (unreachable)"
+      },
+      {
+        "portal": "eaip.crocontrol.hrs",
+        "authority": "CCAA Croatia",
+        "country": "Croatia",
+        "reachable": false,
+        "productType": "eAIP PDF (unreachable)"
+      },
+      {
+        "portal": "aim.navgurukul.co.in",
+        "authority": "AAI (India)",
+        "country": "India",
+        "reachable": false,
+        "productType": "AIP PDF (unreachable)"
+      },
+      {
+        "portal": "ais.fi",
+        "authority": "Fintraffic (Finland)",
+        "country": "Finland",
+        "reachable": true,
+        "productType": "HTTP 406 on root; AIP PDF behind portal"
+      }
+    ],
+    "realisticallyObtainableTier1Coverage": {
+      "now": "17/145 (FAA only)",
+      "assessment": "no additional bulk machine-readable Tier-1 product was identified for the other 49 countries in this environment: reachable portals (7/16 probed) serve PDF eAIPs; several countries are unreachable or paid (China CAAC, Japan MLIT unreachable; Airservices data products are subscription); per-airport operator pages exist but are not batchable and would still require per-record provenance capture",
+      "estimatedRemainingEffort": "per-country acquisition projects (PDF AD-2 parsing with manual spot checks), weeks of engineering + review; some countries may be effectively unclosable from free public Tier-1 sources"
+    }
+  }
+}

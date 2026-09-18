@@ -1,0 +1,111 @@
+{
+  "assertions": [
+    {
+      "assert": "v87-contract-active-residues=0",
+      "pass": true,
+      "detail": "grep scan: 'authoritative mandatory' remains only in historical sections + meta-references"
+    },
+    {
+      "assert": "elevation-145-approved",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "tier1=17-verified=123-flag=5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "no-tier-upgrades",
+      "pass": true,
+      "detail": "Tier-3 records remain Tier-3 in provenance; OSM used as Tier-4 corroboration only"
+    },
+    {
+      "assert": "climate-cells-changed=59-siem-reap-only",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "july-R5-to-R3",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "december-R4-to-R7",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "best-months-10-to-10-11",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "unexplained-changes=0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "r1r7-v87-counts",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "r1r7-unclassified=0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "branches-117-28-0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "143-unmodified-destinations-byte-identical",
+      "pass": true,
+      "detail": "verified field-by-field in build_v87 (unexplained=0 covers all non-siem-reap destinations)"
+    },
+    {
+      "assert": "elevation-populated-145",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "elev-mismatch-evaluable",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "schema-sunshine-only-null",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "schema-provenance-complete",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "deterministic-rebuild",
+      "pass": true,
+      "detail": "b195ceadee1f5a72 vs b195ceadee1f5a72"
+    },
+    {
+      "assert": "hcmc-zero-impact-guard",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "copernicus-19-19-still-pass",
+      "pass": true,
+      "detail": "rerun below"
+    },
+    {
+      "assert": "source-family-145-single",
+      "pass": true,
+      "detail": "[]"
+    }
+  ],
+  "passed": 21,
+  "failed": 0
+}

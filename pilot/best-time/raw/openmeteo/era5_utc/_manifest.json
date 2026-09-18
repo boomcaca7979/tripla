@@ -1,0 +1,1660 @@
+{
+  "pilotVersion": "pilot-2026.09.11.v1",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.4",
+  "provider": "Open-Meteo",
+  "sourceFamily": "Open-Meteo Historical / Archive (ERA5-family derived)",
+  "officialProduct": "Archive API (daily)",
+  "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+  "parameters": [
+    "temperature_2m_max",
+    "temperature_2m_min",
+    "temperature_2m_mean",
+    "precipitation_sum"
+  ],
+  "timezone": "UTC",
+  "start": "1991-01-01",
+  "end": "2020-12-31",
+  "purpose": "ERA5-family CROSS-CHECK ONLY — not a production source",
+  "licensingStatus": "Open-Meteo data CC BY 4.0; commercial use requires subscription — UNVERIFIED for production",
+  "generatedAt": "2026-09-11T16:31:33.627930+00:00",
+  "records": [
+    {
+      "destinationId": "newyork",
+      "anchorLatitude": 40.6413,
+      "anchorLongitude": -73.7781,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=40.6413&longitude=-73.7781&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:43:09.884076+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 40.667835,
+      "gridLongitude": -73.81021,
+      "gridElevationM": 3.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "bangkok",
+      "anchorLatitude": 13.69,
+      "anchorLongitude": 100.7501,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=13.69&longitude=100.7501&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:43:23.237237+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 13.673111,
+      "gridLongitude": 100.73395,
+      "gridElevationM": 1.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "london",
+      "anchorLatitude": 51.47,
+      "anchorLongitude": -0.4543,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=51.47&longitude=-0.4543&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:43:29.269774+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\"}"
+    },
+    {
+      "destinationId": "sydney",
+      "anchorLatitude": -33.9399,
+      "anchorLongitude": 151.1753,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-33.9399&longitude=151.1753&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:43:45.029241+00:00",
+      "httpStatus": 200,
+      "gridLatitude": -33.919155,
+      "gridLongitude": 151.1596,
+      "gridElevationM": 2.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "dubai",
+      "anchorLatitude": 25.2532,
+      "anchorLongitude": 55.3657,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=25.2532&longitude=55.3657&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:44:08.516651+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 25.272406,
+      "gridLongitude": 55.36216,
+      "gridElevationM": 2.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "rome",
+      "anchorLatitude": 41.8003,
+      "anchorLongitude": 12.2389,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=41.8003&longitude=12.2389&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:44:16.993297+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\",\"error\":true}"
+    },
+    {
+      "destinationId": "barcelona",
+      "anchorLatitude": 41.2974,
+      "anchorLongitude": 2.0833,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=41.2974&longitude=2.0833&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:44:33.351813+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\"}"
+    },
+    {
+      "destinationId": "singapore",
+      "anchorLatitude": 1.3644,
+      "anchorLongitude": 103.9915,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=1.3644&longitude=103.9915&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:44:50.819613+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 1.3708259,
+      "gridLongitude": 103.94466,
+      "gridElevationM": 5.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "istanbul",
+      "anchorLatitude": 41.2753,
+      "anchorLongitude": 28.7519,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=41.2753&longitude=28.7519&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:45:11.567441+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 41.23023,
+      "gridLongitude": 28.75358,
+      "gridElevationM": 57.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "seoul",
+      "anchorLatitude": 37.4602,
+      "anchorLongitude": 126.4407,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=37.4602&longitude=126.4407&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:45:16.988534+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\"}"
+    },
+    {
+      "destinationId": "mexico-city",
+      "anchorLatitude": 19.4363,
+      "anchorLongitude": -99.0721,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=19.4363&longitude=-99.0721&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:45:32.925378+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\"}"
+    },
+    {
+      "destinationId": "las-vegas",
+      "anchorLatitude": 36.084,
+      "anchorLongitude": -115.1538,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=36.084&longitude=-115.1538&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:45:49.320309+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 36.098415,
+      "gridLongitude": -115.097275,
+      "gridElevationM": 643.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "austin",
+      "anchorLatitude": 30.1975,
+      "anchorLongitude": -97.6664,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=30.1975&longitude=-97.6664&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:46:16.777735+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 30.193321,
+      "gridLongitude": -97.684204,
+      "gridElevationM": 150.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "munich",
+      "anchorLatitude": 48.3538,
+      "anchorLongitude": 11.7861,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=48.3538&longitude=11.7861&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:46:33.105475+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\"}"
+    },
+    {
+      "destinationId": "kyoto",
+      "anchorLatitude": 34.4273,
+      "anchorLongitude": 135.2444,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=34.4273&longitude=135.2444&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:46:49.700855+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 34.340946,
+      "gridLongitude": 135.22614,
+      "gridElevationM": 1.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "vienna",
+      "anchorLatitude": 48.1103,
+      "anchorLongitude": 16.5697,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=48.1103&longitude=16.5697&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:47:17.556037+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 48.119507,
+      "gridLongitude": 16.5,
+      "gridElevationM": 182.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "rovaniemi",
+      "anchorLatitude": 66.5648,
+      "anchorLongitude": 25.8319,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=66.5648&longitude=25.8319&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:47:20.942282+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "milan",
+      "anchorLatitude": 45.6306,
+      "anchorLongitude": 8.7281,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=45.6306&longitude=8.7281&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:50:47.081783+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "baku",
+      "anchorLatitude": 40.4675,
+      "anchorLongitude": 50.0467,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=40.4675&longitude=50.0467&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:51:04.669770+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "abu-dhabi",
+      "anchorLatitude": 24.433,
+      "anchorLongitude": 54.6511,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=24.433&longitude=54.6511&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:51:20.498466+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "prague",
+      "anchorLatitude": 50.1008,
+      "anchorLongitude": 14.26,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=50.1008&longitude=14.26&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:51:36.450548+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "cologne",
+      "anchorLatitude": 50.8659,
+      "anchorLongitude": 7.1427,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=50.8659&longitude=7.1427&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:51:57.153193+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "osaka",
+      "anchorLatitude": 34.4347,
+      "anchorLongitude": 135.2441,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=34.4347&longitude=135.2441&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:52:13.966681+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "hong-kong",
+      "anchorLatitude": 22.308,
+      "anchorLongitude": 113.9185,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=22.308&longitude=113.9185&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:52:30.331047+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "amsterdam",
+      "anchorLatitude": 52.3105,
+      "anchorLongitude": 4.7683,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=52.3105&longitude=4.7683&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:52:51.341796+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "san-francisco",
+      "anchorLatitude": 37.6213,
+      "anchorLongitude": -122.379,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=37.6213&longitude=-122.379&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:53:09.086484+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "bali",
+      "anchorLatitude": -8.7482,
+      "anchorLongitude": 115.1675,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-8.7482&longitude=115.1675&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:53:25.302509+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "boston",
+      "anchorLatitude": 42.3656,
+      "anchorLongitude": -71.0096,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=42.3656&longitude=-71.0096&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:53:43.550908+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "beijing",
+      "anchorLatitude": 40.0799,
+      "anchorLongitude": 116.6031,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=40.0799&longitude=116.6031&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:54:00.024311+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "shanghai",
+      "anchorLatitude": 31.1443,
+      "anchorLongitude": 121.8083,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=31.1443&longitude=121.8083&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:54:17.109387+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "guangzhou",
+      "anchorLatitude": 23.3925,
+      "anchorLongitude": 113.2988,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=23.3925&longitude=113.2988&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:54:33.464693+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "chengdu",
+      "anchorLatitude": 30.5785,
+      "anchorLongitude": 103.9471,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=30.5785&longitude=103.9471&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:54:49.382532+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "xian",
+      "anchorLatitude": 34.4471,
+      "anchorLongitude": 108.7519,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=34.4471&longitude=108.7519&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:55:06.370076+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "hangzhou",
+      "anchorLatitude": 30.2348,
+      "anchorLongitude": 120.4293,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=30.2348&longitude=120.4293&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:55:27.699492+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "chongqing",
+      "anchorLatitude": 29.7192,
+      "anchorLongitude": 106.6417,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=29.7192&longitude=106.6417&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:55:44.083032+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "macau",
+      "anchorLatitude": 22.1496,
+      "anchorLongitude": 113.5914,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=22.1496&longitude=113.5914&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:56:05.512884+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "zurich",
+      "anchorLatitude": 47.4647,
+      "anchorLongitude": 8.5492,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=47.4647&longitude=8.5492&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:56:26.963782+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "los-angeles",
+      "anchorLatitude": 33.9425,
+      "anchorLongitude": -118.408,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=33.9425&longitude=-118.408&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:56:42.914271+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "vancouver",
+      "anchorLatitude": 49.1947,
+      "anchorLongitude": -123.1792,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=49.1947&longitude=-123.1792&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:56:59.416236+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "melbourne",
+      "anchorLatitude": -37.669,
+      "anchorLongitude": 144.841,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-37.669&longitude=144.841&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:57:15.116052+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "auckland",
+      "anchorLatitude": -37.0082,
+      "anchorLongitude": 174.785,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-37.0082&longitude=174.785&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:57:30.925541+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "taipei",
+      "anchorLatitude": 25.0777,
+      "anchorLongitude": 121.2328,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=25.0777&longitude=121.2328&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:57:52.234960+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "busan",
+      "anchorLatitude": 35.1795,
+      "anchorLongitude": 128.9382,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=35.1795&longitude=128.9382&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:58:08.995073+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "hanoi",
+      "anchorLatitude": 21.2212,
+      "anchorLongitude": 105.8072,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=21.2212&longitude=105.8072&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:58:32.500341+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "ho-chi-minh-city",
+      "anchorLatitude": 10.8188,
+      "anchorLongitude": 106.8069,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=10.8188&longitude=106.8069&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:58:49.276611+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "kuala-lumpur",
+      "anchorLatitude": 2.7456,
+      "anchorLongitude": 101.7099,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=2.7456&longitude=101.7099&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T15:59:09.932347+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 2.7768013,
+      "gridLongitude": 101.71084,
+      "gridElevationM": 17.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "cebu",
+      "anchorLatitude": 10.3075,
+      "anchorLongitude": 123.979,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=10.3075&longitude=123.979&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:02:22.535798+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 10.369068,
+      "gridLongitude": 123.95779,
+      "gridElevationM": 8.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "lisbon",
+      "anchorLatitude": 38.7742,
+      "anchorLongitude": -9.1342,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=38.7742&longitude=-9.1342&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:02:29.457887+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\"}"
+    },
+    {
+      "destinationId": "budapest",
+      "anchorLatitude": 47.4369,
+      "anchorLongitude": 19.2556,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=47.4369&longitude=19.2556&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:02:45.648895+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 47.486816,
+      "gridLongitude": 19.211823,
+      "gridElevationM": 148.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "florence",
+      "anchorLatitude": 43.81,
+      "anchorLongitude": 11.2051,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=43.81&longitude=11.2051&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:03:07.058836+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 43.83128,
+      "gridLongitude": 11.164902,
+      "gridElevationM": 39.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "venice",
+      "anchorLatitude": 45.5053,
+      "anchorLongitude": 12.3519,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=45.5053&longitude=12.3519&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:03:10.682145+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\",\"error\":true}"
+    },
+    {
+      "destinationId": "athens",
+      "anchorLatitude": 37.9364,
+      "anchorLongitude": 23.9445,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=37.9364&longitude=23.9445&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:03:28.582492+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\",\"error\":true}"
+    },
+    {
+      "destinationId": "edinburgh",
+      "anchorLatitude": 55.95,
+      "anchorLongitude": -3.3725,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=55.95&longitude=-3.3725&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:03:45.551497+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 55.99297,
+      "gridLongitude": -3.3196716,
+      "gridElevationM": 29.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "copenhagen",
+      "anchorLatitude": 55.618,
+      "anchorLongitude": 12.656,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=55.618&longitude=12.656&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:04:11.329551+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 55.641476,
+      "gridLongitude": 12.596349,
+      "gridElevationM": 3.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "seville",
+      "anchorLatitude": 37.418,
+      "anchorLongitude": -5.8931,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=37.418&longitude=-5.8931&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:04:25.399324+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\",\"error\":true}"
+    },
+    {
+      "destinationId": "toronto",
+      "anchorLatitude": 43.6777,
+      "anchorLongitude": -79.6248,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=43.6777&longitude=-79.6248&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:04:47.231565+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 43.690685,
+      "gridLongitude": -79.68326,
+      "gridElevationM": 172.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "manila",
+      "anchorLatitude": 14.5086,
+      "anchorLongitude": 121.0198,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=14.5086&longitude=121.0198&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:05:15.001443+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 14.516696,
+      "gridLongitude": 121.05752,
+      "gridElevationM": 13.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "jakarta",
+      "anchorLatitude": -6.1256,
+      "anchorLongitude": 106.6558,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-6.1256&longitude=106.6558&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:05:26.308983+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\",\"error\":true}"
+    },
+    {
+      "destinationId": "yogyakarta",
+      "anchorLatitude": -7.9014,
+      "anchorLongitude": 110.0576,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-7.9014&longitude=110.0576&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:05:42.832520+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\",\"error\":true}"
+    },
+    {
+      "destinationId": "chiang-mai",
+      "anchorLatitude": 18.7669,
+      "anchorLongitude": 98.9626,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=18.7669&longitude=98.9626&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:05:59.538079+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 18.734621,
+      "gridLongitude": 99.01768,
+      "gridElevationM": 310.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "phuket",
+      "anchorLatitude": 8.1132,
+      "anchorLongitude": 98.3169,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=8.1132&longitude=98.3169&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:06:09.294675+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 8.119508,
+      "gridLongitude": 98.3148,
+      "gridElevationM": 10.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "koh-samui",
+      "anchorLatitude": 9.5476,
+      "anchorLongitude": 100.0613,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=9.5476&longitude=100.0613&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:06:13.426424+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\"}"
+    },
+    {
+      "destinationId": "da-nang",
+      "anchorLatitude": 16.0439,
+      "anchorLongitude": 108.1994,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=16.0439&longitude=108.1994&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:06:36.022813+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\",\"error\":true}"
+    },
+    {
+      "destinationId": "nha-trang",
+      "anchorLatitude": 11.9982,
+      "anchorLongitude": 109.2195,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=11.9982&longitude=109.2195&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:06:51.918965+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 11.98594,
+      "gridLongitude": 109.228004,
+      "gridElevationM": 10.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "phu-quoc",
+      "anchorLatitude": 10.1713,
+      "anchorLongitude": 103.9928,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=10.1713&longitude=103.9928&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:07:03.526964+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 10.158173,
+      "gridLongitude": 103.97368,
+      "gridElevationM": 4.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "siem-reap",
+      "anchorLatitude": 13.4107,
+      "anchorLongitude": 103.8132,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=13.4107&longitude=103.8132&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:07:10.797370+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\",\"error\":true}"
+    },
+    {
+      "destinationId": "phnom-penh",
+      "anchorLatitude": 11.5466,
+      "anchorLongitude": 104.8441,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=11.5466&longitude=104.8441&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:07:33.308505+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\",\"error\":true}"
+    },
+    {
+      "destinationId": "jeju",
+      "anchorLatitude": 33.5113,
+      "anchorLongitude": 126.493,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=33.5113&longitude=126.493&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:07:49.404730+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 33.497364,
+      "gridLongitude": 126.42326,
+      "gridElevationM": 23.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "fukuoka",
+      "anchorLatitude": 33.5859,
+      "anchorLongitude": 130.451,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=33.5859&longitude=130.451&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:08:07.549994+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 33.63796,
+      "gridLongitude": 130.42183,
+      "gridElevationM": 5.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "sapporo",
+      "anchorLatitude": 42.7752,
+      "anchorLongitude": 141.6923,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=42.7752&longitude=141.6923&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:08:12.856382+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\",\"error\":true}"
+    },
+    {
+      "destinationId": "nagoya",
+      "anchorLatitude": 34.8584,
+      "anchorLongitude": 136.8054,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=34.8584&longitude=136.8054&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:08:28.759063+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Minutely API request limit exceeded. Please try again in one minute.\"}"
+    },
+    {
+      "destinationId": "nagasaki",
+      "anchorLatitude": 32.9169,
+      "anchorLongitude": 129.9138,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=32.9169&longitude=129.9138&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:08:45.950123+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 32.864674,
+      "gridLongitude": 129.98776,
+      "gridElevationM": 2.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "hiroshima",
+      "anchorLatitude": 34.4361,
+      "anchorLongitude": 132.9194,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=34.4361&longitude=132.9194&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:11:51.949909+00:00",
+      "httpStatus": 200,
+      "gridLatitude": 34.481544,
+      "gridLongitude": 132.9597,
+      "gridElevationM": 330.0,
+      "utcOffsetSeconds": 0,
+      "timezone": "GMT",
+      "dailyUnits": {
+        "time": "iso8601",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "temperature_2m_mean": "°C",
+        "precipitation_sum": "mm"
+      },
+      "dayCount": 10958,
+      "firstDay": "1991-01-01",
+      "lastDay": "2020-12-31"
+    },
+    {
+      "destinationId": "kanazawa",
+      "anchorLatitude": 36.3939,
+      "anchorLongitude": 136.4072,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=36.3939&longitude=136.4072&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:11:53.725991+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "kobe",
+      "anchorLatitude": 34.6328,
+      "anchorLongitude": 135.2239,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=34.6328&longitude=135.2239&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:12:10.634769+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "berlin",
+      "anchorLatitude": 52.3667,
+      "anchorLongitude": 13.5033,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=52.3667&longitude=13.5033&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:12:27.076856+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "frankfurt",
+      "anchorLatitude": 50.0379,
+      "anchorLongitude": 8.5622,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=50.0379&longitude=8.5622&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:12:44.396349+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "naples",
+      "anchorLatitude": 40.886,
+      "anchorLongitude": 14.2908,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=40.886&longitude=14.2908&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:13:00.632325+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "amalfi-coast",
+      "anchorLatitude": 40.886,
+      "anchorLongitude": 14.2908,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=40.886&longitude=14.2908&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:13:18.979130+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "bologna",
+      "anchorLatitude": 44.5354,
+      "anchorLongitude": 11.2887,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=44.5354&longitude=11.2887&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:13:38.384321+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "turin",
+      "anchorLatitude": 45.2008,
+      "anchorLongitude": 7.6496,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=45.2008&longitude=7.6496&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:13:55.632895+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "valencia",
+      "anchorLatitude": 39.4893,
+      "anchorLongitude": -0.4816,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=39.4893&longitude=-0.4816&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:14:12.322182+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "malaga",
+      "anchorLatitude": 36.6749,
+      "anchorLongitude": -4.4991,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=36.6749&longitude=-4.4991&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:14:29.090180+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "granada",
+      "anchorLatitude": 37.1888,
+      "anchorLongitude": -3.7772,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=37.1888&longitude=-3.7772&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:14:45.820714+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "porto",
+      "anchorLatitude": 41.2481,
+      "anchorLongitude": -8.6814,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=41.2481&longitude=-8.6814&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:15:02.272256+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "brussels",
+      "anchorLatitude": 50.9014,
+      "anchorLongitude": 4.4844,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=50.9014&longitude=4.4844&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:15:18.009388+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "stockholm",
+      "anchorLatitude": 59.6519,
+      "anchorLongitude": 17.9186,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=59.6519&longitude=17.9186&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:15:34.788460+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "oslo",
+      "anchorLatitude": 60.1939,
+      "anchorLongitude": 11.1004,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=60.1939&longitude=11.1004&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:15:55.906432+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "reykjavik",
+      "anchorLatitude": 63.985,
+      "anchorLongitude": -22.6056,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=63.985&longitude=-22.6056&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:16:13.020692+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "dublin",
+      "anchorLatitude": 53.4213,
+      "anchorLongitude": -6.2701,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=53.4213&longitude=-6.2701&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:16:28.998681+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "dubrovnik",
+      "anchorLatitude": 42.5614,
+      "anchorLongitude": 18.2682,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=42.5614&longitude=18.2682&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:16:46.436846+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "santorini",
+      "anchorLatitude": 36.3991,
+      "anchorLongitude": 25.4789,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=36.3991&longitude=25.4789&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:17:04.366977+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "miami",
+      "anchorLatitude": 25.7959,
+      "anchorLongitude": -80.287,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=25.7959&longitude=-80.287&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:17:20.900194+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "orlando",
+      "anchorLatitude": 28.4312,
+      "anchorLongitude": -81.3081,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=28.4312&longitude=-81.3081&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:17:39.799967+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "chicago",
+      "anchorLatitude": 41.9742,
+      "anchorLongitude": -87.9073,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=41.9742&longitude=-87.9073&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:17:57.948980+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "washington-dc",
+      "anchorLatitude": 38.9531,
+      "anchorLongitude": -77.4565,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=38.9531&longitude=-77.4565&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:18:14.784601+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "seattle",
+      "anchorLatitude": 47.4502,
+      "anchorLongitude": -122.3088,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=47.4502&longitude=-122.3088&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:18:30.352918+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "san-diego",
+      "anchorLatitude": 32.7338,
+      "anchorLongitude": -117.1933,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=32.7338&longitude=-117.1933&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:18:46.314030+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "new-orleans",
+      "anchorLatitude": 29.9934,
+      "anchorLongitude": -90.2581,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=29.9934&longitude=-90.2581&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:19:03.814133+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "cancun",
+      "anchorLatitude": 21.0365,
+      "anchorLongitude": -86.8771,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=21.0365&longitude=-86.8771&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:19:20.334802+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "montreal",
+      "anchorLatitude": 45.4706,
+      "anchorLongitude": -73.7408,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=45.4706&longitude=-73.7408&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:19:36.566890+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "quebec-city",
+      "anchorLatitude": 46.7881,
+      "anchorLongitude": -71.3928,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=46.7881&longitude=-71.3928&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:19:53.259208+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "brisbane",
+      "anchorLatitude": -27.3842,
+      "anchorLongitude": 153.1175,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-27.3842&longitude=153.1175&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:20:14.645905+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "gold-coast",
+      "anchorLatitude": -28.1644,
+      "anchorLongitude": 153.5052,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-28.1644&longitude=153.5052&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:20:30.505396+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "perth",
+      "anchorLatitude": -31.9403,
+      "anchorLongitude": 115.9669,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-31.9403&longitude=115.9669&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:20:47.345528+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "queenstown",
+      "anchorLatitude": -45.0211,
+      "anchorLongitude": 168.7392,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-45.0211&longitude=168.7392&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:21:03.315931+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "wellington",
+      "anchorLatitude": -41.3272,
+      "anchorLongitude": 174.8053,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-41.3272&longitude=174.8053&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:21:19.575758+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "ubud",
+      "anchorLatitude": -8.7482,
+      "anchorLongitude": 115.1675,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-8.7482&longitude=115.1675&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:21:35.384370+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "lombok",
+      "anchorLatitude": -8.7569,
+      "anchorLongitude": 116.2784,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-8.7569&longitude=116.2784&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:21:51.537415+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "luang-prabang",
+      "anchorLatitude": 19.8996,
+      "anchorLongitude": 102.1606,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=19.8996&longitude=102.1606&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:22:07.433287+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "kathmandu",
+      "anchorLatitude": 27.6966,
+      "anchorLongitude": 85.3591,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=27.6966&longitude=85.3591&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:22:23.266459+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "colombo",
+      "anchorLatitude": 7.1808,
+      "anchorLongitude": 79.8841,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=7.1808&longitude=79.8841&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:22:38.779609+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "male",
+      "anchorLatitude": 4.1918,
+      "anchorLongitude": 73.5291,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=4.1918&longitude=73.5291&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:22:55.717550+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "mumbai",
+      "anchorLatitude": 19.0896,
+      "anchorLongitude": 72.8656,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=19.0896&longitude=72.8656&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:23:13.616996+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "jaipur",
+      "anchorLatitude": 26.8242,
+      "anchorLongitude": 75.8122,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=26.8242&longitude=75.8122&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:23:29.796417+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "goa",
+      "anchorLatitude": 15.3808,
+      "anchorLongitude": 73.8314,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=15.3808&longitude=73.8314&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:23:46.017233+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "penang",
+      "anchorLatitude": 5.2971,
+      "anchorLongitude": 100.2769,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=5.2971&longitude=100.2769&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:24:02.940130+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "pattaya",
+      "anchorLatitude": 12.6806,
+      "anchorLongitude": 101.0044,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=12.6806&longitude=101.0044&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:24:19.036413+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "yangon",
+      "anchorLatitude": 16.9073,
+      "anchorLongitude": 96.1332,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=16.9073&longitude=96.1332&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:24:35.551758+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "warsaw",
+      "anchorLatitude": 52.1657,
+      "anchorLongitude": 20.9671,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=52.1657&longitude=20.9671&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:24:51.237430+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "krakow",
+      "anchorLatitude": 50.0777,
+      "anchorLongitude": 19.7848,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=50.0777&longitude=19.7848&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:25:07.555919+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "tallinn",
+      "anchorLatitude": 59.4133,
+      "anchorLongitude": 24.8328,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=59.4133&longitude=24.8328&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:25:23.177303+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "zagreb",
+      "anchorLatitude": 45.7429,
+      "anchorLongitude": 16.0688,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=45.7429&longitude=16.0688&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:25:41.511452+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "split",
+      "anchorLatitude": 43.5389,
+      "anchorLongitude": 16.298,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=43.5389&longitude=16.298&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:26:04.093126+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "geneva",
+      "anchorLatitude": 46.2381,
+      "anchorLongitude": 6.1089,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=46.2381&longitude=6.1089&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:26:25.941591+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "lyon",
+      "anchorLatitude": 45.7256,
+      "anchorLongitude": 5.0811,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=45.7256&longitude=5.0811&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:26:43.402436+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "nice",
+      "anchorLatitude": 43.6584,
+      "anchorLongitude": 7.2159,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=43.6584&longitude=7.2159&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:26:59.822268+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "cordoba",
+      "anchorLatitude": 37.8444,
+      "anchorLongitude": -4.8491,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=37.8444&longitude=-4.8491&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:27:17.118350+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "san-sebastian",
+      "anchorLatitude": 43.3564,
+      "anchorLongitude": -1.7906,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=43.3564&longitude=-1.7906&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:27:32.918165+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "philadelphia",
+      "anchorLatitude": 39.8744,
+      "anchorLongitude": -75.2424,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=39.8744&longitude=-75.2424&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:27:48.729741+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "denver",
+      "anchorLatitude": 39.8561,
+      "anchorLongitude": -104.6737,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=39.8561&longitude=-104.6737&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:28:07.921485+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "nashville",
+      "anchorLatitude": 36.1263,
+      "anchorLongitude": -86.6774,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=36.1263&longitude=-86.6774&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:28:25.298445+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "honolulu",
+      "anchorLatitude": 21.3245,
+      "anchorLongitude": -157.9251,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=21.3245&longitude=-157.9251&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:28:49.006307+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "banff",
+      "anchorLatitude": 51.1139,
+      "anchorLongitude": -114.0203,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=51.1139&longitude=-114.0203&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:29:06.857102+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "tulum",
+      "anchorLatitude": 21.0365,
+      "anchorLongitude": -86.8771,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=21.0365&longitude=-86.8771&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:29:22.336670+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "lima",
+      "anchorLatitude": -12.0219,
+      "anchorLongitude": -77.1143,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-12.0219&longitude=-77.1143&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:29:43.894856+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "buenos-aires",
+      "anchorLatitude": -34.8222,
+      "anchorLongitude": -58.5358,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-34.8222&longitude=-58.5358&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:30:05.942098+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "adelaide",
+      "anchorLatitude": -34.945,
+      "anchorLongitude": 138.5286,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-34.945&longitude=138.5286&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:30:21.939769+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    },
+    {
+      "destinationId": "cairns",
+      "anchorLatitude": -16.8858,
+      "anchorLongitude": 145.7553,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-16.8858&longitude=145.7553&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:30:39.375665+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "christchurch",
+      "anchorLatitude": -43.4894,
+      "anchorLongitude": 172.5322,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-43.4894&longitude=172.5322&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:30:55.605074+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\",\"error\":true}"
+    },
+    {
+      "destinationId": "rotorua",
+      "anchorLatitude": -38.1093,
+      "anchorLongitude": 176.3165,
+      "requestUrl": "https://archive-api.open-meteo.com/v1/archive?latitude=-38.1093&longitude=176.3165&start_date=1991-01-01&end_date=2020-12-31&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum&timezone=UTC",
+      "fetchedAt": "2026-09-11T16:31:11.931759+00:00",
+      "httpStatus": null,
+      "error": "HTTPError: HTTP Error 429: Too Many Requests | body={\"error\":true,\"reason\":\"Hourly API request limit exceeded. Please try again in the next hour.\"}"
+    }
+  ],
+  "summary": {
+    "requested": 141,
+    "ok": 26,
+    "failed": 115
+  }
+}

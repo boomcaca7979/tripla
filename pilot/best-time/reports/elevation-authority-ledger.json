@@ -1,0 +1,2507 @@
+{
+  "generatedAt": "2026-09-12",
+  "artifact": "elevation-authority-ledger.json",
+  "authoritativeSourceAcquired": {
+    "source": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+    "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+    "sourceType": "TIER 1 — national aviation authority (United States)",
+    "url": "https://www.faa.gov/air_traffic/flight_info/aeronav/Aero_Data/NASR_Subscription/2026-09-03/",
+    "downloadURL": "https://nfdc.faa.gov/webContent/28DaySub/extra/03_Sep_2026_APT_CSV.zip",
+    "documentTitle": "APT DATA LAYOUT / APT_BASE.csv, effective 2026-09-03",
+    "dateVersion": "EFF_DATE 2026/09/03 (28-day cycle effective 2026-09-03)",
+    "fieldMeaning": "ELEV = airport ARP elevation above mean sea level",
+    "unit": "feet (converted x0.3048 to metres)",
+    "retrievalDate": "2026-09-12",
+    "archiveSha256": "d5e4c999d4c96ab4d66d8ce9a387de8ea59b5226a6144ea1ba58758ff29bbbd9",
+    "archive": "raw/faa_nasr/28DaySubscription_APT_CSV_Effective_2026-09-03.zip"
+  },
+  "coverage": {
+    "authoritative": "17/145 (FAA NFDC Tier-1, United States destinations only)",
+    "authoritativeDestinationIds": [
+      "austin",
+      "boston",
+      "chicago",
+      "denver",
+      "honolulu",
+      "las-vegas",
+      "los-angeles",
+      "miami",
+      "nashville",
+      "new-orleans",
+      "newyork",
+      "orlando",
+      "philadelphia",
+      "san-diego",
+      "san-francisco",
+      "seattle",
+      "washington-dc"
+    ],
+    "notAuthoritative": 128,
+    "crossCheckMaxAbsDeltaVsCandidateM": 0.9,
+    "crossCheckMaxAnchorDistanceKm": 0.896
+  },
+  "notForceFilled": "non-US national AIPs / operator sources were NOT batch-accessible in this environment (DNS restrictions; PDF-based eAIPs); those records keep authoritativeElevationM = null — NOT upgraded from secondary data",
+  "statusDistribution": {
+    "AUTHORITATIVE": 17,
+    "SECONDARY-VERIFIED-ONLY": 126,
+    "PENDING-ANCHOR-DECISION": 2
+  },
+  "ledger": [
+    {
+      "destinationId": "tokyo",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "NRT",
+        "icao": null,
+        "lat": 35.7647,
+        "lon": 140.3864
+      },
+      "candidateElevationM": 43.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "paris",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CDG",
+        "icao": null,
+        "lat": 49.0097,
+        "lon": 2.5479
+      },
+      "candidateElevationM": 119.5,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "newyork",
+      "airport": "JOHN F KENNEDY INTL",
+      "projectAnchor": {
+        "iata": "JFK",
+        "icao": "KJFK",
+        "lat": 40.6413,
+        "lon": -73.7781
+      },
+      "candidateElevationM": 4.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 4.0,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "JFK",
+        "effDate": "2026/09/03",
+        "elevFt": 13.0,
+        "anchorToFaaDistanceKm": 0.161,
+        "deltaVsCandidateM": 0.0
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "bangkok",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "BKK",
+        "icao": null,
+        "lat": 13.69,
+        "lon": 100.7501
+      },
+      "candidateElevationM": 1.5,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "london",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "LHR",
+        "icao": null,
+        "lat": 51.47,
+        "lon": -0.4543
+      },
+      "candidateElevationM": 25.3,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "sydney",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "SYD",
+        "icao": null,
+        "lat": -33.9399,
+        "lon": 151.1753
+      },
+      "candidateElevationM": 6.4,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "dubai",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "DXB",
+        "icao": null,
+        "lat": 25.2532,
+        "lon": 55.3657
+      },
+      "candidateElevationM": 18.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "rome",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "FCO",
+        "icao": null,
+        "lat": 41.8003,
+        "lon": 12.2389
+      },
+      "candidateElevationM": 4.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "barcelona",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "BCN",
+        "icao": null,
+        "lat": 41.2974,
+        "lon": 2.0833
+      },
+      "candidateElevationM": 3.7,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "singapore",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "SIN",
+        "icao": null,
+        "lat": 1.3644,
+        "lon": 103.9915
+      },
+      "candidateElevationM": 6.7,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "istanbul",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "IST",
+        "icao": null,
+        "lat": 41.2753,
+        "lon": 28.7519
+      },
+      "candidateElevationM": 99.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "seoul",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "ICN",
+        "icao": null,
+        "lat": 37.4602,
+        "lon": 126.4407
+      },
+      "candidateElevationM": 7.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "mexico-city",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "MEX",
+        "icao": null,
+        "lat": 19.4363,
+        "lon": -99.0721
+      },
+      "candidateElevationM": 2229.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "las-vegas",
+      "airport": "HARRY REID INTL",
+      "projectAnchor": {
+        "iata": "LAS",
+        "icao": "KLAS",
+        "lat": 36.084,
+        "lon": -115.1538
+      },
+      "candidateElevationM": 664.8,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 665.4,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "LAS",
+        "effDate": "2026/09/03",
+        "elevFt": 2183.1,
+        "anchorToFaaDistanceKm": 0.424,
+        "deltaVsCandidateM": 0.6
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "austin",
+      "airport": "AUSTIN-BERGSTROM INTL",
+      "projectAnchor": {
+        "iata": "AUS",
+        "icao": "KAUS",
+        "lat": 30.1975,
+        "lon": -97.6664
+      },
+      "candidateElevationM": 165.2,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 165.0,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "AUS",
+        "effDate": "2026/09/03",
+        "elevFt": 541.5,
+        "anchorToFaaDistanceKm": 0.47,
+        "deltaVsCandidateM": -0.2
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "munich",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "MUC",
+        "icao": null,
+        "lat": 48.3538,
+        "lon": 11.7861
+      },
+      "candidateElevationM": 453.2,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "kyoto",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "KIX",
+        "icao": null,
+        "lat": 34.4273,
+        "lon": 135.2444
+      },
+      "candidateElevationM": 7.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "vienna",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "VIE",
+        "icao": null,
+        "lat": 48.1103,
+        "lon": 16.5697
+      },
+      "candidateElevationM": 182.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "rovaniemi",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "RVN",
+        "icao": null,
+        "lat": 66.5648,
+        "lon": 25.8319
+      },
+      "candidateElevationM": 195.7,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "antalya",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "AYT",
+        "icao": null,
+        "lat": 36.8987,
+        "lon": 30.8005
+      },
+      "candidateElevationM": 53.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "madrid",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "MAD",
+        "icao": null,
+        "lat": 40.4936,
+        "lon": -3.5668
+      },
+      "candidateElevationM": 609.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "milan",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "MXP",
+        "icao": null,
+        "lat": 45.6306,
+        "lon": 8.7281
+      },
+      "candidateElevationM": 234.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "baku",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "GYD",
+        "icao": null,
+        "lat": 40.4675,
+        "lon": 50.0467
+      },
+      "candidateElevationM": 3.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "abu-dhabi",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "AUH",
+        "icao": null,
+        "lat": 24.433,
+        "lon": 54.6511
+      },
+      "candidateElevationM": 26.8,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "prague",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "PRG",
+        "icao": null,
+        "lat": 50.1008,
+        "lon": 14.26
+      },
+      "candidateElevationM": 380.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "cologne",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CGN",
+        "icao": null,
+        "lat": 50.8659,
+        "lon": 7.1427
+      },
+      "candidateElevationM": 92.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "osaka",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "KIX",
+        "icao": null,
+        "lat": 34.4347,
+        "lon": 135.2441
+      },
+      "candidateElevationM": 7.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "hong-kong",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "HKG",
+        "icao": null,
+        "lat": 22.308,
+        "lon": 113.9185
+      },
+      "candidateElevationM": 8.5,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "amsterdam",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "AMS",
+        "icao": null,
+        "lat": 52.3105,
+        "lon": 4.7683
+      },
+      "candidateElevationM": -3.4,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "san-francisco",
+      "airport": "SAN FRANCISCO INTL",
+      "projectAnchor": {
+        "iata": "SFO",
+        "icao": "KSFO",
+        "lat": 37.6213,
+        "lon": -122.379
+      },
+      "candidateElevationM": 4.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 4.0,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "SFO",
+        "effDate": "2026/09/03",
+        "elevFt": 13.1,
+        "anchorToFaaDistanceKm": 0.42,
+        "deltaVsCandidateM": 0.0
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "bali",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "DPS",
+        "icao": null,
+        "lat": -8.7482,
+        "lon": 115.1675
+      },
+      "candidateElevationM": 4.3,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "boston",
+      "airport": "GENERAL EDWARD LAWRENCE LOGAN INTL",
+      "projectAnchor": {
+        "iata": "BOS",
+        "icao": "KBOS",
+        "lat": 42.3656,
+        "lon": -71.0096
+      },
+      "candidateElevationM": 6.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 5.8,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "BOS",
+        "effDate": "2026/09/03",
+        "elevFt": 19.1,
+        "anchorToFaaDistanceKm": 0.396,
+        "deltaVsCandidateM": -0.3
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "beijing",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "PEK",
+        "icao": null,
+        "lat": 40.0799,
+        "lon": 116.6031
+      },
+      "candidateElevationM": 35.4,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "shanghai",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "PVG",
+        "icao": null,
+        "lat": 31.1443,
+        "lon": 121.8083
+      },
+      "candidateElevationM": 4.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "guangzhou",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CAN",
+        "icao": null,
+        "lat": 23.3925,
+        "lon": 113.2988
+      },
+      "candidateElevationM": 15.2,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "chengdu",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CTU",
+        "icao": null,
+        "lat": 30.5785,
+        "lon": 103.9471
+      },
+      "candidateElevationM": 495.3,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "xian",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "XIY",
+        "icao": null,
+        "lat": 34.4471,
+        "lon": 108.7519
+      },
+      "candidateElevationM": 479.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "hangzhou",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "HGH",
+        "icao": null,
+        "lat": 30.2348,
+        "lon": 120.4293
+      },
+      "candidateElevationM": 7.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "chongqing",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CKG",
+        "icao": null,
+        "lat": 29.7192,
+        "lon": 106.6417
+      },
+      "candidateElevationM": 416.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "macau",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "MFM",
+        "icao": null,
+        "lat": 22.1496,
+        "lon": 113.5914
+      },
+      "candidateElevationM": 6.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "zurich",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "ZRH",
+        "icao": null,
+        "lat": 47.4647,
+        "lon": 8.5492
+      },
+      "candidateElevationM": 431.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "los-angeles",
+      "airport": "LOS ANGELES INTL",
+      "projectAnchor": {
+        "iata": "LAX",
+        "icao": "KLAX",
+        "lat": 33.9425,
+        "lon": -118.408
+      },
+      "candidateElevationM": 38.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 39.0,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "LAX",
+        "effDate": "2026/09/03",
+        "elevFt": 127.8,
+        "anchorToFaaDistanceKm": 0.005,
+        "deltaVsCandidateM": 0.9
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "vancouver",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "YVR",
+        "icao": null,
+        "lat": 49.1947,
+        "lon": -123.1792
+      },
+      "candidateElevationM": 4.3,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "melbourne",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "MEL",
+        "icao": null,
+        "lat": -37.669,
+        "lon": 144.841
+      },
+      "candidateElevationM": 132.3,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "auckland",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "AKL",
+        "icao": null,
+        "lat": -37.0082,
+        "lon": 174.785
+      },
+      "candidateElevationM": 7.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "taipei",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "TPE",
+        "icao": null,
+        "lat": 25.0777,
+        "lon": 121.2328
+      },
+      "candidateElevationM": 32.3,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "busan",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "PUS",
+        "icao": null,
+        "lat": 35.1795,
+        "lon": 128.9382
+      },
+      "candidateElevationM": 1.8,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "hanoi",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "HAN",
+        "icao": null,
+        "lat": 21.2212,
+        "lon": 105.8072
+      },
+      "candidateElevationM": 11.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "ho-chi-minh-city",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "SGN",
+        "icao": null,
+        "lat": 10.8188,
+        "lon": 106.8069
+      },
+      "candidateElevationM": 10.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED - PENDING ANCHOR DECISION (Decision A)"
+    },
+    {
+      "destinationId": "kuala-lumpur",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "KUL",
+        "icao": null,
+        "lat": 2.7456,
+        "lon": 101.7099
+      },
+      "candidateElevationM": 21.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "cebu",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CEB",
+        "icao": null,
+        "lat": 10.3075,
+        "lon": 123.979
+      },
+      "candidateElevationM": 9.4,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "lisbon",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "LIS",
+        "icao": null,
+        "lat": 38.7742,
+        "lon": -9.1342
+      },
+      "candidateElevationM": 114.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "budapest",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "BUD",
+        "icao": null,
+        "lat": 47.4369,
+        "lon": 19.2556
+      },
+      "candidateElevationM": 150.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "florence",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "FLR",
+        "icao": null,
+        "lat": 43.81,
+        "lon": 11.2051
+      },
+      "candidateElevationM": 43.3,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "venice",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "VCE",
+        "icao": null,
+        "lat": 45.5053,
+        "lon": 12.3519
+      },
+      "candidateElevationM": 2.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "athens",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "ATH",
+        "icao": null,
+        "lat": 37.9364,
+        "lon": 23.9445
+      },
+      "candidateElevationM": 93.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "edinburgh",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "EDI",
+        "icao": null,
+        "lat": 55.95,
+        "lon": -3.3725
+      },
+      "candidateElevationM": 41.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "copenhagen",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CPH",
+        "icao": null,
+        "lat": 55.618,
+        "lon": 12.656
+      },
+      "candidateElevationM": 5.2,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "seville",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "SVQ",
+        "icao": null,
+        "lat": 37.418,
+        "lon": -5.8931
+      },
+      "candidateElevationM": 34.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "toronto",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "YYZ",
+        "icao": null,
+        "lat": 43.6777,
+        "lon": -79.6248
+      },
+      "candidateElevationM": 173.4,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "manila",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "MNL",
+        "icao": null,
+        "lat": 14.5086,
+        "lon": 121.0198
+      },
+      "candidateElevationM": 22.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "jakarta",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CGK",
+        "icao": null,
+        "lat": -6.1256,
+        "lon": 106.6558
+      },
+      "candidateElevationM": 10.4,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "yogyakarta",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "YIA",
+        "icao": null,
+        "lat": -7.9014,
+        "lon": 110.0576
+      },
+      "candidateElevationM": 7.3,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "chiang-mai",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CNX",
+        "icao": null,
+        "lat": 18.7669,
+        "lon": 98.9626
+      },
+      "candidateElevationM": 315.8,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "phuket",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "HKT",
+        "icao": null,
+        "lat": 8.1132,
+        "lon": 98.3169
+      },
+      "candidateElevationM": 25.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "koh-samui",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "USM",
+        "icao": null,
+        "lat": 9.5476,
+        "lon": 100.0613
+      },
+      "candidateElevationM": 19.5,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "da-nang",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "DAD",
+        "icao": null,
+        "lat": 16.0439,
+        "lon": 108.1994
+      },
+      "candidateElevationM": 10.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "nha-trang",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CXR",
+        "icao": null,
+        "lat": 11.9982,
+        "lon": 109.2195
+      },
+      "candidateElevationM": 12.2,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "phu-quoc",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "PQC",
+        "icao": null,
+        "lat": 10.1713,
+        "lon": 103.9928
+      },
+      "candidateElevationM": 11.3,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "siem-reap",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "SAI",
+        "icao": null,
+        "lat": 13.4107,
+        "lon": 103.8132
+      },
+      "candidateElevationM": 58.2,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED - PENDING ANCHOR DECISION (Decision B)"
+    },
+    {
+      "destinationId": "phnom-penh",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "PNH",
+        "icao": null,
+        "lat": 11.5466,
+        "lon": 104.8441
+      },
+      "candidateElevationM": 12.2,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "jeju",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CJU",
+        "icao": null,
+        "lat": 33.5113,
+        "lon": 126.493
+      },
+      "candidateElevationM": 36.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "fukuoka",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "FUK",
+        "icao": null,
+        "lat": 33.5859,
+        "lon": 130.451
+      },
+      "candidateElevationM": 9.8,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "sapporo",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CTS",
+        "icao": null,
+        "lat": 42.7752,
+        "lon": 141.6923
+      },
+      "candidateElevationM": 25.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "nagoya",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "NGO",
+        "icao": null,
+        "lat": 34.8584,
+        "lon": 136.8054
+      },
+      "candidateElevationM": 4.6,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "nagasaki",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "NGS",
+        "icao": null,
+        "lat": 32.9169,
+        "lon": 129.9138
+      },
+      "candidateElevationM": 4.6,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "hiroshima",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "HIJ",
+        "icao": null,
+        "lat": 34.4361,
+        "lon": 132.9194
+      },
+      "candidateElevationM": 331.6,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "kanazawa",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "KMQ",
+        "icao": null,
+        "lat": 36.3939,
+        "lon": 136.4072
+      },
+      "candidateElevationM": 11.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "kobe",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "UKB",
+        "icao": null,
+        "lat": 34.6328,
+        "lon": 135.2239
+      },
+      "candidateElevationM": 6.7,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "berlin",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "BER",
+        "icao": null,
+        "lat": 52.3667,
+        "lon": 13.5033
+      },
+      "candidateElevationM": 47.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "frankfurt",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "FRA",
+        "icao": null,
+        "lat": 50.0379,
+        "lon": 8.5622
+      },
+      "candidateElevationM": 110.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "naples",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "NAP",
+        "icao": null,
+        "lat": 40.886,
+        "lon": 14.2908
+      },
+      "candidateElevationM": 89.6,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "amalfi-coast",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "NAP",
+        "icao": null,
+        "lat": 40.886,
+        "lon": 14.2908
+      },
+      "candidateElevationM": 89.6,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "bologna",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "BLQ",
+        "icao": null,
+        "lat": 44.5354,
+        "lon": 11.2887
+      },
+      "candidateElevationM": 37.5,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "turin",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "TRN",
+        "icao": null,
+        "lat": 45.2008,
+        "lon": 7.6496
+      },
+      "candidateElevationM": 301.4,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "valencia",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "VLC",
+        "icao": null,
+        "lat": 39.4893,
+        "lon": -0.4816
+      },
+      "candidateElevationM": 73.2,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "malaga",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "AGP",
+        "icao": null,
+        "lat": 36.6749,
+        "lon": -4.4991
+      },
+      "candidateElevationM": 16.2,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "granada",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "GRX",
+        "icao": null,
+        "lat": 37.1888,
+        "lon": -3.7772
+      },
+      "candidateElevationM": 566.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "porto",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "OPO",
+        "icao": null,
+        "lat": 41.2481,
+        "lon": -8.6814
+      },
+      "candidateElevationM": 69.5,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "brussels",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "BRU",
+        "icao": null,
+        "lat": 50.9014,
+        "lon": 4.4844
+      },
+      "candidateElevationM": 53.3,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "stockholm",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "ARN",
+        "icao": null,
+        "lat": 59.6519,
+        "lon": 17.9186
+      },
+      "candidateElevationM": 41.8,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "oslo",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "OSL",
+        "icao": null,
+        "lat": 60.1939,
+        "lon": 11.1004
+      },
+      "candidateElevationM": 207.6,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "reykjavik",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "KEF",
+        "icao": null,
+        "lat": 63.985,
+        "lon": -22.6056
+      },
+      "candidateElevationM": 52.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "dublin",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "DUB",
+        "icao": null,
+        "lat": 53.4213,
+        "lon": -6.2701
+      },
+      "candidateElevationM": 73.8,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "dubrovnik",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "DBV",
+        "icao": null,
+        "lat": 42.5614,
+        "lon": 18.2682
+      },
+      "candidateElevationM": 160.6,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "santorini",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "JTR",
+        "icao": null,
+        "lat": 36.3991,
+        "lon": 25.4789
+      },
+      "candidateElevationM": 38.7,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "miami",
+      "airport": "MIAMI INTL",
+      "projectAnchor": {
+        "iata": "MIA",
+        "icao": "KMIA",
+        "lat": 25.7959,
+        "lon": -80.287
+      },
+      "candidateElevationM": 2.4,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 2.8,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "MIA",
+        "effDate": "2026/09/03",
+        "elevFt": 9.3,
+        "anchorToFaaDistanceKm": 0.318,
+        "deltaVsCandidateM": 0.4
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "orlando",
+      "airport": "ORLANDO INTL",
+      "projectAnchor": {
+        "iata": "MCO",
+        "icao": "KMCO",
+        "lat": 28.4312,
+        "lon": -81.3081
+      },
+      "candidateElevationM": 29.3,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 29.4,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "MCO",
+        "effDate": "2026/09/03",
+        "elevFt": 96.3,
+        "anchorToFaaDistanceKm": 0.219,
+        "deltaVsCandidateM": 0.1
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "chicago",
+      "airport": "CHICAGO O'HARE INTL",
+      "projectAnchor": {
+        "iata": "ORD",
+        "icao": "KORD",
+        "lat": 41.9742,
+        "lon": -87.9073
+      },
+      "candidateElevationM": 207.3,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 207.3,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "ORD",
+        "effDate": "2026/09/03",
+        "elevFt": 680.0,
+        "anchorToFaaDistanceKm": 0.313,
+        "deltaVsCandidateM": 0.0
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "washington-dc",
+      "airport": "WASHINGTON DULLES INTL",
+      "projectAnchor": {
+        "iata": "IAD",
+        "icao": "KIAD",
+        "lat": 38.9531,
+        "lon": -77.4565
+      },
+      "candidateElevationM": 95.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 95.2,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "IAD",
+        "effDate": "2026/09/03",
+        "elevFt": 312.3,
+        "anchorToFaaDistanceKm": 0.694,
+        "deltaVsCandidateM": 0.1
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "seattle",
+      "airport": "SEATTLE-TACOMA INTL",
+      "projectAnchor": {
+        "iata": "SEA",
+        "icao": "KSEA",
+        "lat": 47.4502,
+        "lon": -122.3088
+      },
+      "candidateElevationM": 132.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 131.8,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "SEA",
+        "effDate": "2026/09/03",
+        "elevFt": 432.3,
+        "anchorToFaaDistanceKm": 0.227,
+        "deltaVsCandidateM": -0.2
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "san-diego",
+      "airport": "SAN DIEGO INTL",
+      "projectAnchor": {
+        "iata": "SAN",
+        "icao": "KSAN",
+        "lat": 32.7338,
+        "lon": -117.1933
+      },
+      "candidateElevationM": 5.2,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 5.1,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "SAN",
+        "effDate": "2026/09/03",
+        "elevFt": 16.8,
+        "anchorToFaaDistanceKm": 0.341,
+        "deltaVsCandidateM": -0.1
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "new-orleans",
+      "airport": "LOUIS ARMSTRONG NEW ORLEANS INTL",
+      "projectAnchor": {
+        "iata": "MSY",
+        "icao": "KMSY",
+        "lat": 29.9934,
+        "lon": -90.2581
+      },
+      "candidateElevationM": 1.2,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 0.9,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "MSY",
+        "effDate": "2026/09/03",
+        "elevFt": 3.0,
+        "anchorToFaaDistanceKm": 0.09,
+        "deltaVsCandidateM": -0.3
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "cancun",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CUN",
+        "icao": null,
+        "lat": 21.0365,
+        "lon": -86.8771
+      },
+      "candidateElevationM": 6.7,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "montreal",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "YUL",
+        "icao": null,
+        "lat": 45.4706,
+        "lon": -73.7408
+      },
+      "candidateElevationM": 36.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "quebec-city",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "YQB",
+        "icao": null,
+        "lat": 46.7881,
+        "lon": -71.3928
+      },
+      "candidateElevationM": 74.4,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "brisbane",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "BNE",
+        "icao": null,
+        "lat": -27.3842,
+        "lon": 153.1175
+      },
+      "candidateElevationM": 4.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "gold-coast",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "OOL",
+        "icao": null,
+        "lat": -28.1644,
+        "lon": 153.5052
+      },
+      "candidateElevationM": 6.4,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "perth",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "PER",
+        "icao": null,
+        "lat": -31.9403,
+        "lon": 115.9669
+      },
+      "candidateElevationM": 20.4,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "queenstown",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "ZQN",
+        "icao": null,
+        "lat": -45.0211,
+        "lon": 168.7392
+      },
+      "candidateElevationM": 356.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "wellington",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "WLG",
+        "icao": null,
+        "lat": -41.3272,
+        "lon": 174.8053
+      },
+      "candidateElevationM": 12.5,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "ubud",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "DPS",
+        "icao": null,
+        "lat": -8.7482,
+        "lon": 115.1675
+      },
+      "candidateElevationM": 4.3,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "lombok",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "LOP",
+        "icao": null,
+        "lat": -8.7569,
+        "lon": 116.2784
+      },
+      "candidateElevationM": 97.2,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "luang-prabang",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "LPQ",
+        "icao": null,
+        "lat": 19.8996,
+        "lon": 102.1606
+      },
+      "candidateElevationM": 291.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "kathmandu",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "KTM",
+        "icao": null,
+        "lat": 27.6966,
+        "lon": 85.3591
+      },
+      "candidateElevationM": 1338.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "colombo",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CMB",
+        "icao": null,
+        "lat": 7.1808,
+        "lon": 79.8841
+      },
+      "candidateElevationM": 9.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "male",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "MLE",
+        "icao": null,
+        "lat": 4.1918,
+        "lon": 73.5291
+      },
+      "candidateElevationM": 1.8,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "mumbai",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "BOM",
+        "icao": null,
+        "lat": 19.0896,
+        "lon": 72.8656
+      },
+      "candidateElevationM": 11.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "jaipur",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "JAI",
+        "icao": null,
+        "lat": 26.8242,
+        "lon": 75.8122
+      },
+      "candidateElevationM": 385.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "goa",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "GOI",
+        "icao": null,
+        "lat": 15.3808,
+        "lon": 73.8314
+      },
+      "candidateElevationM": 45.7,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "penang",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "PEN",
+        "icao": null,
+        "lat": 5.2971,
+        "lon": 100.2769
+      },
+      "candidateElevationM": 3.4,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "pattaya",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "UTP",
+        "icao": null,
+        "lat": 12.6806,
+        "lon": 101.0044
+      },
+      "candidateElevationM": 12.8,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "yangon",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "RGN",
+        "icao": null,
+        "lat": 16.9073,
+        "lon": 96.1332
+      },
+      "candidateElevationM": 33.2,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "warsaw",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "WAW",
+        "icao": null,
+        "lat": 52.1657,
+        "lon": 20.9671
+      },
+      "candidateElevationM": 110.3,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "krakow",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "KRK",
+        "icao": null,
+        "lat": 50.0777,
+        "lon": 19.7848
+      },
+      "candidateElevationM": 241.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "tallinn",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "TLL",
+        "icao": null,
+        "lat": 59.4133,
+        "lon": 24.8328
+      },
+      "candidateElevationM": 39.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "zagreb",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "ZAG",
+        "icao": null,
+        "lat": 45.7429,
+        "lon": 16.0688
+      },
+      "candidateElevationM": 107.6,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "split",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "SPU",
+        "icao": null,
+        "lat": 43.5389,
+        "lon": 16.298
+      },
+      "candidateElevationM": 24.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "geneva",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "GVA",
+        "icao": null,
+        "lat": 46.2381,
+        "lon": 6.1089
+      },
+      "candidateElevationM": 430.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "lyon",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "LYS",
+        "icao": null,
+        "lat": 45.7256,
+        "lon": 5.0811
+      },
+      "candidateElevationM": 250.2,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "nice",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "NCE",
+        "icao": null,
+        "lat": 43.6584,
+        "lon": 7.2159
+      },
+      "candidateElevationM": 3.7,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "cordoba",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "ODB",
+        "icao": null,
+        "lat": 37.8444,
+        "lon": -4.8491
+      },
+      "candidateElevationM": 90.5,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "san-sebastian",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "EAS",
+        "icao": null,
+        "lat": 43.3564,
+        "lon": -1.7906
+      },
+      "candidateElevationM": 4.9,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "philadelphia",
+      "airport": "PHILADELPHIA INTL",
+      "projectAnchor": {
+        "iata": "PHL",
+        "icao": "KPHL",
+        "lat": 39.8744,
+        "lon": -75.2424
+      },
+      "candidateElevationM": 11.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 10.9,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "PHL",
+        "effDate": "2026/09/03",
+        "elevFt": 35.9,
+        "anchorToFaaDistanceKm": 0.297,
+        "deltaVsCandidateM": -0.1
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "denver",
+      "airport": "DENVER INTL",
+      "projectAnchor": {
+        "iata": "DEN",
+        "icao": "KDEN",
+        "lat": 39.8561,
+        "lon": -104.6737
+      },
+      "candidateElevationM": 1655.4,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 1656.2,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "DEN",
+        "effDate": "2026/09/03",
+        "elevFt": 5433.8,
+        "anchorToFaaDistanceKm": 0.621,
+        "deltaVsCandidateM": 0.8
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "nashville",
+      "airport": "NASHVILLE INTL",
+      "projectAnchor": {
+        "iata": "BNA",
+        "icao": "KBNA",
+        "lat": 36.1263,
+        "lon": -86.6774
+      },
+      "candidateElevationM": 182.6,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 182.6,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "BNA",
+        "effDate": "2026/09/03",
+        "elevFt": 599.0,
+        "anchorToFaaDistanceKm": 0.215,
+        "deltaVsCandidateM": 0.0
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "honolulu",
+      "airport": "DANIEL K INOUYE INTL",
+      "projectAnchor": {
+        "iata": "HNL",
+        "icao": "KHNL",
+        "lat": 21.3245,
+        "lon": -157.9251
+      },
+      "candidateElevationM": 4.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": 4.1,
+      "authoritativeSource": {
+        "provider": "FAA Aeronautical Information Services — National Flight Data Center (NFDC)",
+        "product": "28-Day NASR Subscription, APT_CSV (APT_BASE.csv)",
+        "recordARPT_ID": "HNL",
+        "effDate": "2026/09/03",
+        "elevFt": 13.5,
+        "anchorToFaaDistanceKm": 0.896,
+        "deltaVsCandidateM": 0.1
+      },
+      "authorityTier": 1,
+      "status": "AUTHORITATIVE (elevation field; per FAA NFDC NASR)"
+    },
+    {
+      "destinationId": "banff",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "YYC",
+        "icao": null,
+        "lat": 51.1139,
+        "lon": -114.0203
+      },
+      "candidateElevationM": 1084.2,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "tulum",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CUN",
+        "icao": null,
+        "lat": 21.0365,
+        "lon": -86.8771
+      },
+      "candidateElevationM": 6.7,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "lima",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "LIM",
+        "icao": null,
+        "lat": -12.0219,
+        "lon": -77.1143
+      },
+      "candidateElevationM": 34.4,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "buenos-aires",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "EZE",
+        "icao": null,
+        "lat": -34.8222,
+        "lon": -58.5358
+      },
+      "candidateElevationM": 20.4,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "adelaide",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "ADL",
+        "icao": null,
+        "lat": -34.945,
+        "lon": 138.5286
+      },
+      "candidateElevationM": 6.1,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "cairns",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CNS",
+        "icao": null,
+        "lat": -16.8858,
+        "lon": 145.7553
+      },
+      "candidateElevationM": 3.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "christchurch",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "CHC",
+        "icao": null,
+        "lat": -43.4894,
+        "lon": 172.5322
+      },
+      "candidateElevationM": 37.5,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    },
+    {
+      "destinationId": "rotorua",
+      "airport": null,
+      "projectAnchor": {
+        "iata": "ROT",
+        "icao": null,
+        "lat": -38.1093,
+        "lon": 176.3165
+      },
+      "candidateElevationM": 285.0,
+      "candidateSource": "OurAirports airports.csv (TIER 3)",
+      "authoritativeElevationM": null,
+      "authoritativeSource": null,
+      "authorityTier": 0,
+      "status": "BLOCKED"
+    }
+  ]
+}

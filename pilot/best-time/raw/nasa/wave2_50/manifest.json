@@ -1,0 +1,252 @@
+{
+ "marrakech": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 600866
+ },
+ "casablanca": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 605312
+ },
+ "fes": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 602858
+ },
+ "luxor": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 598603
+ },
+ "aswan": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 599297
+ },
+ "tunis": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 605098
+ },
+ "zanzibar": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 611552
+ },
+ "victoria-falls": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 605071
+ },
+ "johannesburg": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 602947
+ },
+ "port-louis": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 611388
+ },
+ "victoria-seychelles": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 611959
+ },
+ "accra": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 611452
+ },
+ "dakar": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 606742
+ },
+ "addis-ababa": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 605269
+ },
+ "sao-paulo": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 611376
+ },
+ "cartagena": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 610599
+ },
+ "medellin": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 613896
+ },
+ "oaxaca": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 606346
+ },
+ "san-juan": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 611834
+ },
+ "panama-city": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 612237
+ },
+ "montevideo": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 606230
+ },
+ "quito": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 600717
+ },
+ "ushuaia": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 595992
+ },
+ "san-antonio": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 605532
+ },
+ "savannah": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 606973
+ },
+ "montego-bay": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 611657
+ },
+ "new-delhi": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 603869
+ },
+ "agra": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 603905
+ },
+ "varanasi": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 605273
+ },
+ "samarkand": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 599945
+ },
+ "muscat": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 603762
+ },
+ "jeddah": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 602476
+ },
+ "tbilisi": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 602771
+ },
+ "bagan": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 606203
+ },
+ "vientiane": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 609109
+ },
+ "kota-kinabalu": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 612772
+ },
+ "almaty": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 602097
+ },
+ "helsinki": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 604874
+ },
+ "bergen": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 600373
+ },
+ "bruges": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 601669
+ },
+ "salzburg": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 603215
+ },
+ "ljubljana": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 603078
+ },
+ "marseille": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 603533
+ },
+ "palermo": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 605232
+ },
+ "valletta": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 607796
+ },
+ "bilbao": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 606203
+ },
+ "hobart": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 603320
+ },
+ "darwin": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 610277
+ },
+ "papeete": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 611966
+ },
+ "dunedin": {
+  "climatology": 200,
+  "daily": 200,
+  "dailyBytes": 599534
+ }
+}

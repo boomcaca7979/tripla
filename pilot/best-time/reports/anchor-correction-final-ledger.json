@@ -1,0 +1,70 @@
+{
+  "generatedAt": "2026-09-13T04:07:56.939561+00:00",
+  "artifact": "anchor-correction-final-ledger.json",
+  "corrections": [
+    {
+      "destinationId": "ho-chi-minh-city",
+      "decision": "A — USER_APPROVED 2026-09-12",
+      "oldAnchor": {
+        "iata": "SGN",
+        "icao": "VVTS",
+        "lat": 10.8188,
+        "lon": 106.8069
+      },
+      "newAnchor": {
+        "iata": "SGN",
+        "icao": "VVTS",
+        "lat": 10.8188,
+        "lon": 106.652
+      },
+      "identity": "SGN/VVTS unchanged (coordinates were city centre)",
+      "elevationM": 10.1,
+      "impact": "METADATA-ONLY (climate 0 diff)",
+      "appliedAt": "v8.7 anchor-corrected dataset"
+    },
+    {
+      "destinationId": "siem-reap",
+      "decision": "B — USER_APPROVED 2026-09-12",
+      "oldAnchor": {
+        "iata": "SAI",
+        "icao": "VDSR",
+        "lat": 13.4107,
+        "lon": 103.8132
+      },
+      "newAnchor": {
+        "iata": "SAI",
+        "icao": "VDSA",
+        "lat": 13.36974,
+        "lon": 104.223831
+      },
+      "identity": "SAI retained; ICAO VDSR->VDSA (old airport closed 2023)",
+      "elevationM": 58.2,
+      "impact": "PRODUCTION-DATA-AFFECTING (59 climate cells; Jul R5->R3; Dec R4->R7; BM [10]->[10,11])",
+      "appliedAt": "v8.7 anchor-corrected dataset"
+    },
+    {
+      "destinationId": "phnom-penh",
+      "decision": "D — USER_APPROVED 2026-09-12",
+      "oldAnchor": {
+        "iata": "PNH",
+        "icao": "VDPP",
+        "name": "Phnom Penh International Airport",
+        "latitude": 11.5466,
+        "longitude": 104.8441
+      },
+      "newAnchor": {
+        "iata": "KTI",
+        "icao": "VDTI",
+        "name": "Techo International Airport",
+        "latitude": 11.36,
+        "longitude": 104.9213,
+        "elevationM": 6.1
+      },
+      "identity": "PNH/VDPP -> KTI/VDTI (old airport closed 2025-09-09)",
+      "elevationM": 6.1,
+      "impact": "METADATA-ONLY (observed climate 0 diff; daylight 8 cells ±0.01 h)",
+      "appliedAt": "v8.7 final dataset"
+    }
+  ],
+  "unresolvedLegacyAirports": 0
+}

@@ -1,0 +1,148 @@
+{
+  "generatedAt": "2026-09-12T08:19:42.449594+00:00",
+  "baseline": {
+    "coreHash": "7edfaa493e113cf141956b24bcdb05268a2322cfdb7c688233bc1f1b53ce7d6a",
+    "recommendationHash": "9a831211d557baa3f3e83638cb6cdedb3aa1c18f66c0f298554fa44d5ca85cc1"
+  },
+  "areas": [
+    {
+      "area": "NASA fallback canonical pipeline",
+      "status": "READY (pilot)",
+      "blocking": false,
+      "evidence": "145/145 Climatology+Daily+Monthly+daily-precip HTTP 200; assertions 23/23; v86_final 0 diffs",
+      "required_action": "none technical; licence still gates production use",
+      "owner": "pilot"
+    },
+    {
+      "area": "ERA5 PRIMARY (Copernicus)",
+      "status": "BLOCKED",
+      "blocking": true,
+      "evidence": "no cdsapi/~/.cdsapirc/env vars; template audited 19/19",
+      "required_action": "CDS account + API key + dataset licence acceptance; then real retrieval + NASA-vs-ERA5 acceptance contract",
+      "owner": "user (credentials) + agent (execution)"
+    },
+    {
+      "area": "ERA5-Land",
+      "status": "NOT REQUIRED AS REPLACEMENT",
+      "blocking": false,
+      "evidence": "field matrix: cannot provide daily precipitation (accumulated vars omitted) -> cannot replace ERA5; usable only as same-family supplementary product",
+      "required_action": "none",
+      "owner": "strategy (decided)"
+    },
+    {
+      "area": "Elevation (source authority)",
+      "status": "BLOCKED per strategy contract",
+      "blocking": true,
+      "evidence": "strategy §19.2 prerequisite: '必须使用可审查的 authoritative elevation source 并记录来源、覆盖率与逐项审批'. Literal reading requires an authoritative source; SECONDARY-VERIFIED 143/145 does not satisfy the wording; AUTHORITATIVE = 0/145",
+      "required_action": "obtain Tier-1/authoritative confirmation for 145 records OR user formally amends the acceptance wording (either closes it; the choice is the user's, not the agent's)",
+      "owner": "user (contract decision) + agent (execution)"
+    },
+    {
+      "area": "Anchor coordinates (2 spatial cases)",
+      "status": "USER DECISION REQUIRED",
+      "blocking": true,
+      "evidence": "full simulations complete: hcmc = metadata-only; siem-reap = climate-changing (July R4->R3, Dec R4->R7, Best Months [10]->[10,11])",
+      "required_action": "user approves both proposed anchors; then destinations.ts update + siem-reap re-bake + re-derivation + baseline hash refresh",
+      "owner": "user"
+    },
+    {
+      "area": "ICAO metadata (7 destinations)",
+      "status": "READY TO APPLY",
+      "blocking": false,
+      "evidence": "airport-identity-corrections.json: 7 items, climate impact none",
+      "required_action": "apply together with any production data migration (SHOULD FIX, not a hard gate)",
+      "owner": "user (timing) + agent (execution)"
+    },
+    {
+      "area": "precipDaysGe1mm",
+      "status": "READY (pilot)",
+      "blocking": false,
+      "evidence": "derived=true, same family, UTC+00:00, year-balanced, 145x12 complete, 0 threshold violations",
+      "required_action": "none",
+      "owner": "closed"
+    },
+    {
+      "area": "sunshineHours",
+      "status": "NOT A BLOCKER",
+      "blocking": false,
+      "evidence": "schema nullable by contract; canonical value null is legal; R1-R7 and Best Months do not consume it; T3 checklist (§23.4 item 9) does not include it",
+      "required_action": "product decision deferred; no pricing research needed for canonical path",
+      "owner": "product (deferred)"
+    },
+    {
+      "area": "daylightHours",
+      "status": "READY (pilot)",
+      "blocking": false,
+      "evidence": "astronomical-derived; deterministic PASS; provenance officialProduct=null",
+      "required_action": "none",
+      "owner": "closed"
+    },
+    {
+      "area": "Licensing (NASA commercial/redistribution)",
+      "status": "BLOCKED",
+      "blocking": true,
+      "evidence": "no formal licence instrument; AWS registry self-statement is not a licence",
+      "required_action": "formal licence text or written NASA confirmation; or drop NASA fallback from production",
+      "owner": "legal"
+    },
+    {
+      "area": "Database rights",
+      "status": "BLOCKED",
+      "blocking": true,
+      "evidence": "reports/database-rights-review.json",
+      "required_action": "lightweight legal review",
+      "owner": "legal"
+    },
+    {
+      "area": "Recommendation engine (R1-R7)",
+      "status": "READY (pilot)",
+      "blocking": false,
+      "evidence": "1740/1740 classified; counts stable across v8.5/v8.6/v86_final; anchor sims re-derive correctly",
+      "required_action": "re-run after any anchor re-bake",
+      "owner": "closed"
+    },
+    {
+      "area": "Best Months",
+      "status": "READY (pilot)",
+      "blocking": false,
+      "evidence": "branches 117/28/0 stable; siem-reap sim shows rule responds correctly to data changes",
+      "required_action": "re-run after any anchor re-bake",
+      "owner": "closed"
+    },
+    {
+      "area": "Provenance",
+      "status": "READY (pilot)",
+      "blocking": false,
+      "evidence": "15 keys x 8 fields x 145 records; derived flags; daylight officialProduct=null",
+      "required_action": "none",
+      "owner": "closed"
+    },
+    {
+      "area": "Runtime architecture",
+      "status": "READY (verified)",
+      "blocking": false,
+      "evidence": "no runtime climate API in Best-time; /api/weather + /api/geocoding are planner-only and not consumed by Best-time",
+      "required_action": "none",
+      "owner": "closed"
+    }
+  ],
+  "blockerBuckets": {
+    "MUST_FIX_BEFORE_T3": [
+      "ERA5 PRIMARY real retrieval (CDS credentials)",
+      "anchor decision for ho-chi-minh-city + siem-reap (USER DECISION REQUIRED)",
+      "elevation source authority per strategy §19.2 literal wording (Tier-1 confirmation OR user contract amendment)",
+      "NASA POWER formal licence (if fallback ships)",
+      "database rights legal review"
+    ],
+    "SHOULD_FIX_BEFORE_PRODUCTION": [
+      "7 ICAO metadata corrections (climate impact none)",
+      "Tier-1 elevation upgrade path (beyond the literal §19.2 requirement)",
+      "sunshineHours product decision (only if the field is ever wanted in UI)"
+    ],
+    "NOT_A_BLOCKER": [
+      "sunshineHours = null (legal by contract)",
+      "Open-Meteo pricing (canonical path does not consume Open-Meteo)",
+      "daylightHours / precipDaysGe1mm provenance (closed)"
+    ]
+  }
+}

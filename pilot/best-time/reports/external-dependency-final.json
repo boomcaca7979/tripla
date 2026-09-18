@@ -1,0 +1,45 @@
+{
+  "generatedAt": "2026-09-12",
+  "items": [
+    {
+      "dependency": "CDS credentials (Copernicus ERA5 PRIMARY retrieval)",
+      "classification": "BLOCKED_EXTERNAL",
+      "detail": "no cdsapi / ~/.cdsapirc / env vars; template ready and audited (19/19)"
+    },
+    {
+      "dependency": "NASA POWER commercial / redistribution licence",
+      "classification": "BLOCKED_EXTERNAL",
+      "detail": "no formal licence instrument found; AWS registry self-statement is NOT a licence; commercialUse=UNVERIFIED, redistribution=UNVERIFIED; attribution CONFIRMED (separate)"
+    },
+    {
+      "dependency": "Copernicus licence (Licence to use Copernicus Products, rev. 12)",
+      "classification": "BLOCKED_EXTERNAL",
+      "detail": "official name + conditions research-confirmed (commercial/reproduction/distribution/modification permitted; attribution required), but final legal sign-off on the official text is outstanding — licence text confirmation kept separate from legal acceptance"
+    },
+    {
+      "dependency": "Database rights (sui generis)",
+      "classification": "BLOCKED_EXTERNAL",
+      "detail": "legal review required; not closable by code"
+    },
+    {
+      "dependency": "Anchor approval (ho-chi-minh-city, siem-reap)",
+      "classification": "BLOCKED_EXTERNAL",
+      "detail": "project/product decision; production-data-affecting (grid probes archived)"
+    },
+    {
+      "dependency": "Authoritative (Tier-1) elevation confirmation",
+      "classification": "BLOCKED_EXTERNAL",
+      "detail": "optional for the 150 m engineering trigger (SECONDARY-VERIFIED 143/145 suffices for flag-level use) but required for any AUTHORITATIVE label"
+    },
+    {
+      "dependency": "Open-Meteo commercial pricing",
+      "classification": "NOT_REQUIRED",
+      "detail": "Open-Meteo is cross-check only; canonical path (NASA fallback) does not consume it; required only if sunshineHours is adopted"
+    },
+    {
+      "dependency": "sunshineHours product decision",
+      "classification": "BLOCKED_EXTERNAL",
+      "detail": "canonical value = null (legal); needs product decision (drop vs subscribe)"
+    }
+  ]
+}

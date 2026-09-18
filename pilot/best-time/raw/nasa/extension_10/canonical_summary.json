@@ -1,0 +1,971 @@
+{
+ "cape-town": {
+  "baseline": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   9,
+   10,
+   11
+  ],
+  "status": "ok-favourable",
+  "months": [
+   {
+    "m": 1,
+    "hi": 27.15,
+    "lo": 16.32,
+    "p": 19.2,
+    "tier": "Favourable"
+   },
+   {
+    "m": 2,
+    "hi": 27.61,
+    "lo": 16.69,
+    "p": 15.2,
+    "tier": "Favourable"
+   },
+   {
+    "m": 3,
+    "hi": 26.01,
+    "lo": 15.62,
+    "p": 25.0,
+    "tier": "Favourable"
+   },
+   {
+    "m": 4,
+    "hi": 22.98,
+    "lo": 13.49,
+    "p": 49.5,
+    "tier": "Favourable"
+   },
+   {
+    "m": 5,
+    "hi": 19.72,
+    "lo": 11.72,
+    "p": 72.2,
+    "tier": "Favourable"
+   },
+   {
+    "m": 6,
+    "hi": 16.44,
+    "lo": 9.58,
+    "p": 124.3,
+    "tier": "Workable"
+   },
+   {
+    "m": 7,
+    "hi": 15.69,
+    "lo": 8.71,
+    "p": 114.7,
+    "tier": "Workable"
+   },
+   {
+    "m": 8,
+    "hi": 15.89,
+    "lo": 8.75,
+    "p": 101.9,
+    "tier": "Workable"
+   },
+   {
+    "m": 9,
+    "hi": 17.65,
+    "lo": 9.8,
+    "p": 58.2,
+    "tier": "Workable"
+   },
+   {
+    "m": 10,
+    "hi": 20.53,
+    "lo": 11.46,
+    "p": 47.5,
+    "tier": "Favourable"
+   },
+   {
+    "m": 11,
+    "hi": 22.76,
+    "lo": 12.95,
+    "p": 41.1,
+    "tier": "Favourable"
+   },
+   {
+    "m": 12,
+    "hi": 25.49,
+    "lo": 15.15,
+    "p": 23.5,
+    "tier": "Favourable"
+   }
+  ]
+ },
+ "cairo": {
+  "baseline": [
+   0,
+   1,
+   2,
+   3,
+   9,
+   10,
+   11
+  ],
+  "status": "ok-favourable",
+  "months": [
+   {
+    "m": 1,
+    "hi": 18.96,
+    "lo": 6.74,
+    "p": 7.8,
+    "tier": "Favourable"
+   },
+   {
+    "m": 2,
+    "hi": 20.75,
+    "lo": 7.37,
+    "p": 6.9,
+    "tier": "Favourable"
+   },
+   {
+    "m": 3,
+    "hi": 24.88,
+    "lo": 9.42,
+    "p": 6.7,
+    "tier": "Favourable"
+   },
+   {
+    "m": 4,
+    "hi": 29.55,
+    "lo": 12.68,
+    "p": 6.2,
+    "tier": "Favourable"
+   },
+   {
+    "m": 5,
+    "hi": 33.97,
+    "lo": 16.57,
+    "p": 0.8,
+    "tier": "Workable"
+   },
+   {
+    "m": 6,
+    "hi": 37.34,
+    "lo": 19.45,
+    "p": 0.2,
+    "tier": "Workable"
+   },
+   {
+    "m": 7,
+    "hi": 38.56,
+    "lo": 21.21,
+    "p": 0.2,
+    "tier": "Workable"
+   },
+   {
+    "m": 8,
+    "hi": 38.3,
+    "lo": 21.66,
+    "p": 0.0,
+    "tier": "Workable"
+   },
+   {
+    "m": 9,
+    "hi": 35.73,
+    "lo": 19.9,
+    "p": 0.4,
+    "tier": "Workable"
+   },
+   {
+    "m": 10,
+    "hi": 31.34,
+    "lo": 17.35,
+    "p": 3.4,
+    "tier": "Favourable"
+   },
+   {
+    "m": 11,
+    "hi": 25.63,
+    "lo": 13.01,
+    "p": 12.7,
+    "tier": "Favourable"
+   },
+   {
+    "m": 12,
+    "hi": 20.52,
+    "lo": 8.75,
+    "p": 6.4,
+    "tier": "Favourable"
+   }
+  ]
+ },
+ "nairobi": {
+  "baseline": [
+   0,
+   1,
+   2,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ],
+  "status": "ok-favourable",
+  "months": [
+   {
+    "m": 1,
+    "hi": 27.78,
+    "lo": 14.17,
+    "p": 44.0,
+    "tier": "Favourable"
+   },
+   {
+    "m": 2,
+    "hi": 29.3,
+    "lo": 14.52,
+    "p": 29.7,
+    "tier": "Favourable"
+   },
+   {
+    "m": 3,
+    "hi": 29.25,
+    "lo": 15.28,
+    "p": 63.0,
+    "tier": "Favourable"
+   },
+   {
+    "m": 4,
+    "hi": 27.46,
+    "lo": 15.4,
+    "p": 108.1,
+    "tier": "Workable"
+   },
+   {
+    "m": 5,
+    "hi": 26.01,
+    "lo": 14.07,
+    "p": 78.8,
+    "tier": "Favourable"
+   },
+   {
+    "m": 6,
+    "hi": 25.83,
+    "lo": 12.92,
+    "p": 24.6,
+    "tier": "Favourable"
+   },
+   {
+    "m": 7,
+    "hi": 26.13,
+    "lo": 12.24,
+    "p": 17.1,
+    "tier": "Favourable"
+   },
+   {
+    "m": 8,
+    "hi": 27.08,
+    "lo": 12.6,
+    "p": 20.7,
+    "tier": "Favourable"
+   },
+   {
+    "m": 9,
+    "hi": 28.63,
+    "lo": 13.31,
+    "p": 18.4,
+    "tier": "Favourable"
+   },
+   {
+    "m": 10,
+    "hi": 28.79,
+    "lo": 14.27,
+    "p": 51.2,
+    "tier": "Favourable"
+   },
+   {
+    "m": 11,
+    "hi": 26.79,
+    "lo": 15.1,
+    "p": 89.0,
+    "tier": "Favourable"
+   },
+   {
+    "m": 12,
+    "hi": 26.46,
+    "lo": 14.69,
+    "p": 63.7,
+    "tier": "Favourable"
+   }
+  ]
+ },
+ "doha": {
+  "baseline": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   10,
+   11
+  ],
+  "status": "ok-favourable",
+  "months": [
+   {
+    "m": 1,
+    "hi": 20.62,
+    "lo": 18.01,
+    "p": 10.2,
+    "tier": "Favourable"
+   },
+   {
+    "m": 2,
+    "hi": 20.8,
+    "lo": 17.84,
+    "p": 7.5,
+    "tier": "Favourable"
+   },
+   {
+    "m": 3,
+    "hi": 22.96,
+    "lo": 19.53,
+    "p": 12.3,
+    "tier": "Favourable"
+   },
+   {
+    "m": 4,
+    "hi": 26.94,
+    "lo": 22.96,
+    "p": 5.1,
+    "tier": "Favourable"
+   },
+   {
+    "m": 5,
+    "hi": 31.48,
+    "lo": 27.0,
+    "p": 0.7,
+    "tier": "Favourable"
+   },
+   {
+    "m": 6,
+    "hi": 34.15,
+    "lo": 29.32,
+    "p": 0.3,
+    "tier": "Workable"
+   },
+   {
+    "m": 7,
+    "hi": 35.61,
+    "lo": 31.32,
+    "p": 0.1,
+    "tier": "Workable"
+   },
+   {
+    "m": 8,
+    "hi": 36.14,
+    "lo": 32.47,
+    "p": 0.2,
+    "tier": "Workable"
+   },
+   {
+    "m": 9,
+    "hi": 35.04,
+    "lo": 31.47,
+    "p": 0.2,
+    "tier": "Workable"
+   },
+   {
+    "m": 10,
+    "hi": 32.26,
+    "lo": 29.22,
+    "p": 2.1,
+    "tier": "Workable"
+   },
+   {
+    "m": 11,
+    "hi": 27.59,
+    "lo": 25.11,
+    "p": 9.6,
+    "tier": "Favourable"
+   },
+   {
+    "m": 12,
+    "hi": 23.17,
+    "lo": 20.67,
+    "p": 14.1,
+    "tier": "Favourable"
+   }
+  ]
+ },
+ "rio-de-janeiro": {
+  "baseline": [
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "status": "ok-favourable",
+  "months": [
+   {
+    "m": 1,
+    "hi": 28.43,
+    "lo": 23.51,
+    "p": 209.2,
+    "tier": "Challenging"
+   },
+   {
+    "m": 2,
+    "hi": 28.77,
+    "lo": 23.62,
+    "p": 149.9,
+    "tier": "Workable"
+   },
+   {
+    "m": 3,
+    "hi": 27.9,
+    "lo": 23.39,
+    "p": 178.7,
+    "tier": "Workable"
+   },
+   {
+    "m": 4,
+    "hi": 26.75,
+    "lo": 22.2,
+    "p": 99.3,
+    "tier": "Workable"
+   },
+   {
+    "m": 5,
+    "hi": 24.94,
+    "lo": 20.19,
+    "p": 80.9,
+    "tier": "Favourable"
+   },
+   {
+    "m": 6,
+    "hi": 24.48,
+    "lo": 18.94,
+    "p": 53.3,
+    "tier": "Favourable"
+   },
+   {
+    "m": 7,
+    "hi": 24.22,
+    "lo": 18.2,
+    "p": 49.8,
+    "tier": "Favourable"
+   },
+   {
+    "m": 8,
+    "hi": 24.86,
+    "lo": 18.27,
+    "p": 48.0,
+    "tier": "Favourable"
+   },
+   {
+    "m": 9,
+    "hi": 25.56,
+    "lo": 19.1,
+    "p": 87.1,
+    "tier": "Favourable"
+   },
+   {
+    "m": 10,
+    "hi": 26.29,
+    "lo": 20.27,
+    "p": 108.7,
+    "tier": "Workable"
+   },
+   {
+    "m": 11,
+    "hi": 26.39,
+    "lo": 21.17,
+    "p": 201.7,
+    "tier": "Challenging"
+   },
+   {
+    "m": 12,
+    "hi": 27.63,
+    "lo": 22.57,
+    "p": 218.6,
+    "tier": "Challenging"
+   }
+  ]
+ },
+ "cusco": {
+  "baseline": [
+   5
+  ],
+  "status": "ok-workable-fallback",
+  "months": [
+   {
+    "m": 1,
+    "hi": 14.21,
+    "lo": 4.15,
+    "p": 132.6,
+    "tier": "Workable"
+   },
+   {
+    "m": 2,
+    "hi": 14.08,
+    "lo": 4.16,
+    "p": 123.5,
+    "tier": "Workable"
+   },
+   {
+    "m": 3,
+    "hi": 14.08,
+    "lo": 3.94,
+    "p": 94.9,
+    "tier": "Workable"
+   },
+   {
+    "m": 4,
+    "hi": 13.95,
+    "lo": 4.08,
+    "p": 38.8,
+    "tier": "Workable"
+   },
+   {
+    "m": 5,
+    "hi": 14.24,
+    "lo": 3.64,
+    "p": 8.0,
+    "tier": "Workable"
+   },
+   {
+    "m": 6,
+    "hi": 14.36,
+    "lo": 2.75,
+    "p": 3.9,
+    "tier": "Workable"
+   },
+   {
+    "m": 7,
+    "hi": 14.64,
+    "lo": 2.07,
+    "p": 7.6,
+    "tier": "Workable"
+   },
+   {
+    "m": 8,
+    "hi": 15.44,
+    "lo": 2.63,
+    "p": 8.7,
+    "tier": "Workable"
+   },
+   {
+    "m": 9,
+    "hi": 15.7,
+    "lo": 3.61,
+    "p": 18.0,
+    "tier": "Workable"
+   },
+   {
+    "m": 10,
+    "hi": 15.68,
+    "lo": 4.05,
+    "p": 58.4,
+    "tier": "Workable"
+   },
+   {
+    "m": 11,
+    "hi": 15.65,
+    "lo": 4.31,
+    "p": 71.9,
+    "tier": "Workable"
+   },
+   {
+    "m": 12,
+    "hi": 14.84,
+    "lo": 4.26,
+    "p": 129.7,
+    "tier": "Workable"
+   }
+  ]
+ },
+ "bogota": {
+  "baseline": [
+   0,
+   1
+  ],
+  "status": "ok-favourable",
+  "months": [
+   {
+    "m": 1,
+    "hi": 24.19,
+    "lo": 14.41,
+    "p": 54.5,
+    "tier": "Favourable"
+   },
+   {
+    "m": 2,
+    "hi": 24.78,
+    "lo": 14.86,
+    "p": 85.8,
+    "tier": "Favourable"
+   },
+   {
+    "m": 3,
+    "hi": 24.37,
+    "lo": 15.32,
+    "p": 139.5,
+    "tier": "Workable"
+   },
+   {
+    "m": 4,
+    "hi": 23.78,
+    "lo": 15.15,
+    "p": 221.7,
+    "tier": "Challenging"
+   },
+   {
+    "m": 5,
+    "hi": 23.41,
+    "lo": 14.63,
+    "p": 219.2,
+    "tier": "Challenging"
+   },
+   {
+    "m": 6,
+    "hi": 23.19,
+    "lo": 13.72,
+    "p": 157.7,
+    "tier": "Workable"
+   },
+   {
+    "m": 7,
+    "hi": 23.33,
+    "lo": 13.28,
+    "p": 132.8,
+    "tier": "Workable"
+   },
+   {
+    "m": 8,
+    "hi": 24.03,
+    "lo": 13.28,
+    "p": 113.8,
+    "tier": "Workable"
+   },
+   {
+    "m": 9,
+    "hi": 24.41,
+    "lo": 13.65,
+    "p": 129.7,
+    "tier": "Workable"
+   },
+   {
+    "m": 10,
+    "hi": 23.54,
+    "lo": 14.33,
+    "p": 190.0,
+    "tier": "Workable"
+   },
+   {
+    "m": 11,
+    "hi": 22.8,
+    "lo": 14.59,
+    "p": 168.2,
+    "tier": "Workable"
+   },
+   {
+    "m": 12,
+    "hi": 23.44,
+    "lo": 14.51,
+    "p": 105.9,
+    "tier": "Workable"
+   }
+  ]
+ },
+ "santiago": {
+  "baseline": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   8,
+   9,
+   10,
+   11
+  ],
+  "status": "ok-favourable",
+  "months": [
+   {
+    "m": 1,
+    "hi": 29.75,
+    "lo": 14.48,
+    "p": 7.5,
+    "tier": "Favourable"
+   },
+   {
+    "m": 2,
+    "hi": 29.02,
+    "lo": 14.29,
+    "p": 7.6,
+    "tier": "Favourable"
+   },
+   {
+    "m": 3,
+    "hi": 27.62,
+    "lo": 13.16,
+    "p": 9.4,
+    "tier": "Favourable"
+   },
+   {
+    "m": 4,
+    "hi": 23.85,
+    "lo": 10.41,
+    "p": 16.9,
+    "tier": "Favourable"
+   },
+   {
+    "m": 5,
+    "hi": 19.76,
+    "lo": 7.74,
+    "p": 48.4,
+    "tier": "Favourable"
+   },
+   {
+    "m": 6,
+    "hi": 15.97,
+    "lo": 4.66,
+    "p": 76.9,
+    "tier": "Workable"
+   },
+   {
+    "m": 7,
+    "hi": 15.47,
+    "lo": 3.77,
+    "p": 47.0,
+    "tier": "Workable"
+   },
+   {
+    "m": 8,
+    "hi": 17.14,
+    "lo": 4.51,
+    "p": 40.3,
+    "tier": "Workable"
+   },
+   {
+    "m": 9,
+    "hi": 19.24,
+    "lo": 5.9,
+    "p": 24.7,
+    "tier": "Favourable"
+   },
+   {
+    "m": 10,
+    "hi": 22.29,
+    "lo": 7.83,
+    "p": 13.7,
+    "tier": "Favourable"
+   },
+   {
+    "m": 11,
+    "hi": 26.06,
+    "lo": 10.43,
+    "p": 8.0,
+    "tier": "Favourable"
+   },
+   {
+    "m": 12,
+    "hi": 28.45,
+    "lo": 12.77,
+    "p": 7.4,
+    "tier": "Favourable"
+   }
+  ]
+ },
+ "havana": {
+  "baseline": [
+   0,
+   1,
+   2,
+   3,
+   10,
+   11
+  ],
+  "status": "ok-favourable",
+  "months": [
+   {
+    "m": 1,
+    "hi": 27.02,
+    "lo": 19.18,
+    "p": 39.7,
+    "tier": "Favourable"
+   },
+   {
+    "m": 2,
+    "hi": 28.4,
+    "lo": 19.46,
+    "p": 28.3,
+    "tier": "Favourable"
+   },
+   {
+    "m": 3,
+    "hi": 29.69,
+    "lo": 20.34,
+    "p": 27.0,
+    "tier": "Favourable"
+   },
+   {
+    "m": 4,
+    "hi": 31.64,
+    "lo": 22.19,
+    "p": 39.0,
+    "tier": "Favourable"
+   },
+   {
+    "m": 5,
+    "hi": 32.43,
+    "lo": 23.84,
+    "p": 65.9,
+    "tier": "Workable"
+   },
+   {
+    "m": 6,
+    "hi": 32.07,
+    "lo": 25.26,
+    "p": 110.9,
+    "tier": "Workable"
+   },
+   {
+    "m": 7,
+    "hi": 32.8,
+    "lo": 25.51,
+    "p": 81.9,
+    "tier": "Workable"
+   },
+   {
+    "m": 8,
+    "hi": 32.68,
+    "lo": 25.75,
+    "p": 107.9,
+    "tier": "Workable"
+   },
+   {
+    "m": 9,
+    "hi": 31.56,
+    "lo": 25.45,
+    "p": 116.8,
+    "tier": "Workable"
+   },
+   {
+    "m": 10,
+    "hi": 30.44,
+    "lo": 24.23,
+    "p": 92.2,
+    "tier": "Workable"
+   },
+   {
+    "m": 11,
+    "hi": 28.76,
+    "lo": 21.87,
+    "p": 42.4,
+    "tier": "Favourable"
+   },
+   {
+    "m": 12,
+    "hi": 27.72,
+    "lo": 20.31,
+    "p": 33.0,
+    "tier": "Favourable"
+   }
+  ]
+ },
+ "nadi": {
+  "baseline": [
+   5,
+   6,
+   7
+  ],
+  "status": "ok-favourable",
+  "months": [
+   {
+    "m": 1,
+    "hi": 29.36,
+    "lo": 25.56,
+    "p": 270.7,
+    "tier": "Challenging"
+   },
+   {
+    "m": 2,
+    "hi": 29.37,
+    "lo": 25.88,
+    "p": 237.6,
+    "tier": "Challenging"
+   },
+   {
+    "m": 3,
+    "hi": 29.07,
+    "lo": 25.84,
+    "p": 286.1,
+    "tier": "Challenging"
+   },
+   {
+    "m": 4,
+    "hi": 28.37,
+    "lo": 25.07,
+    "p": 204.7,
+    "tier": "Challenging"
+   },
+   {
+    "m": 5,
+    "hi": 27.2,
+    "lo": 23.66,
+    "p": 120.4,
+    "tier": "Workable"
+   },
+   {
+    "m": 6,
+    "hi": 26.54,
+    "lo": 22.88,
+    "p": 87.1,
+    "tier": "Favourable"
+   },
+   {
+    "m": 7,
+    "hi": 26.03,
+    "lo": 22.0,
+    "p": 66.2,
+    "tier": "Favourable"
+   },
+   {
+    "m": 8,
+    "hi": 26.16,
+    "lo": 21.77,
+    "p": 78.0,
+    "tier": "Favourable"
+   },
+   {
+    "m": 9,
+    "hi": 26.98,
+    "lo": 22.27,
+    "p": 90.8,
+    "tier": "Workable"
+   },
+   {
+    "m": 10,
+    "hi": 27.79,
+    "lo": 23.08,
+    "p": 123.6,
+    "tier": "Workable"
+   },
+   {
+    "m": 11,
+    "hi": 28.67,
+    "lo": 24.13,
+    "p": 141.7,
+    "tier": "Workable"
+   },
+   {
+    "m": 12,
+    "hi": 29.2,
+    "lo": 25.0,
+    "p": 209.4,
+    "tier": "Challenging"
+   }
+  ]
+ }
+}

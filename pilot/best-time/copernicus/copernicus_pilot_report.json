@@ -1,0 +1,69 @@
+{
+  "artifact": "copernicus-pilot-report",
+  "pilotVersion": "copernicus-pilot-2026.09.13.v1",
+  "generatedAt": "2026-09-13T04:41:28.281502+00:00",
+  "status": "BLOCKED",
+  "note": "BLOCKED is not PASS. Any FAIL invalidates the ERA5 Primary contract until corrected and re-run.",
+  "checks": [
+    {
+      "id": "authentication",
+      "status": "BLOCKED",
+      "evidence": "pilot not executed: raw/_manifest.json absent - pilot has not been executed"
+    },
+    {
+      "id": "dataset-access",
+      "status": "BLOCKED",
+      "evidence": "raw/_manifest.json absent - pilot has not been executed"
+    },
+    {
+      "id": "request-syntax",
+      "status": "BLOCKED",
+      "evidence": "raw/_manifest.json absent - pilot has not been executed"
+    },
+    {
+      "id": "parameter-availability",
+      "status": "BLOCKED",
+      "evidence": "raw/_manifest.json absent - pilot has not been executed"
+    },
+    {
+      "id": "units",
+      "status": "BLOCKED",
+      "evidence": "raw/_manifest.json absent - pilot has not been executed"
+    },
+    {
+      "id": "temporal-semantics",
+      "status": "BLOCKED",
+      "evidence": "raw/_manifest.json absent - pilot has not been executed"
+    },
+    {
+      "id": "coordinates-grid",
+      "status": "BLOCKED",
+      "evidence": "raw/_manifest.json absent - pilot has not been executed"
+    },
+    {
+      "id": "time-axis",
+      "status": "BLOCKED",
+      "evidence": "raw/_manifest.json absent - pilot has not been executed"
+    },
+    {
+      "id": "completeness-1991-2020",
+      "status": "BLOCKED",
+      "evidence": "raw/_manifest.json absent - pilot has not been executed"
+    },
+    {
+      "id": "monthly-aggregation",
+      "status": "BLOCKED",
+      "evidence": "raw/_manifest.json absent - pilot has not been executed"
+    },
+    {
+      "id": "missing-values",
+      "status": "BLOCKED",
+      "evidence": "raw/_manifest.json absent - pilot has not been executed"
+    },
+    {
+      "id": "determinism",
+      "status": "BLOCKED",
+      "evidence": "raw/_manifest.json absent - pilot has not been executed"
+    }
+  ]
+}

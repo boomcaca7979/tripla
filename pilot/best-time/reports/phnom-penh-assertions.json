@@ -1,0 +1,66 @@
+{
+  "assertions": [
+    {
+      "assert": "current-anchor-targets-old-airport",
+      "pass": true,
+      "detail": "to VDPP 0.068 km, to VDTI 22.39 km"
+    },
+    {
+      "assert": "old-airport-closed-2025-09-09",
+      "pass": true,
+      "detail": "multi-source timeline (Air Cambodia/Cathay/VNA)"
+    },
+    {
+      "assert": "kti-identity-multi-source",
+      "pass": true,
+      "detail": "Wikipedia + operator site + OCIC + METAR-TAF"
+    },
+    {
+      "assert": "kti-elevation-semantics-airport-msl",
+      "pass": true,
+      "detail": "20 ft MSL; 4000 m claim discarded as runway-length error"
+    },
+    {
+      "assert": "kti-elevation-corroborated-within-band",
+      "pass": true,
+      "detail": "OSM 7 m delta 0.9 m"
+    },
+    {
+      "assert": "grid-cell-changed-recorded",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "daily-precip-10958-days",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "classification-recomputed-not-copied",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "best-months-branch-rule-applied",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "assert": "verdict-in-allowed-set",
+      "pass": true,
+      "detail": "METADATA-ONLY IMPACT"
+    },
+    {
+      "assert": "no-production-write",
+      "pass": true,
+      "detail": "all outputs under pilot/best-time/"
+    },
+    {
+      "assert": "deterministic-rerun",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "passed": 12,
+  "failed": 0
+}

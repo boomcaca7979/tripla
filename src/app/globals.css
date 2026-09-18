@@ -943,6 +943,38 @@ body {
   color: #ffffff;
 }
 
+/* ════════════════════════════════════════════════════════════════════
+   /trips —— 暗底世界上的**文字可读性**修复
+   （只改文字颜色；版式 / 背景 / 卡片 / 间距 / 字体一律不动）
+
+   问题：页面背景来自 .ut-world（#0c0f16），但 :root 是 light-first 墨色族
+   （--ut-ink #16181d），于是直接落在暗底上的 h1 / h2 / 正文 / 卡片标题变成
+   "暗底暗字"，实测对比度 1.08 —— 等于不可见。
+
+   修法：把该页的**文字墨色**替换为项目既有的 dark-env 墨色族（与首页 Header
+   同一套取值，见 lib/env-tokens.ts 的 ENV_DARK_TOKENS）。刻意**不覆盖**
+   --ut-surface / --ut-border 等表面 token：本页 Featured 卡片是"暗底上的浅底
+   面板"（bg-ut-surface + 纸上墨色）属于既有设计，必须原样保留，故面板内部用
+   .ut-paper-panel 把墨色回调为 :root 原值。
+   ════════════════════════════════════════════════════════════════════ */
+
+[data-ut-page="trips"] {
+  --ut-ink: #f5f2ea;
+  --ut-text: rgba(245, 242, 234, 0.92);
+  --ut-text-2: rgba(245, 242, 234, 0.78);
+  --ut-muted: rgba(245, 242, 234, 0.6);
+  --ut-subtle: rgba(245, 242, 234, 0.44);
+}
+
+/* 浅底面板（Featured 卡片）：回调为修复前的纸上墨色，视觉零变化 */
+[data-ut-page="trips"] .ut-paper-panel {
+  --ut-ink: #16181d;
+  --ut-text: #23272f;
+  --ut-text-2: #4b5261;
+  --ut-muted: #5b6473;
+  --ut-subtle: #646d7e;
+}
+
 /* 月份雨层（密度来自 canonical precipMm，确定性分布） */
 @keyframes ut-world-rain {
   from { transform: translateY(-10vh); }

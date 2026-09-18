@@ -1,0 +1,111 @@
+{
+  "generatedAt": "2026-09-12",
+  "artifact": "t3-production-readiness.json",
+  "criteria": [
+    {
+      "criterion": "Strategy (v8.6)",
+      "status": "PASS",
+      "blocking": false,
+      "evidence": "INTERNAL METHODOLOGY FULLY PASSED; contract extraction 0 contradictions",
+      "nextAction": "Decision C (elevation wording) may trigger v8.7"
+    },
+    {
+      "criterion": "Schema",
+      "status": "PASS",
+      "blocking": false,
+      "evidence": "schema-audit-v86-final: missing/ambiguous/contradictory = 0",
+      "nextAction": "-"
+    },
+    {
+      "criterion": "Canonical semantics",
+      "status": "PASS",
+      "blocking": false,
+      "evidence": "single semantic per field; regression 0 diffs across v8.5/v8.6/v86_final",
+      "nextAction": "-"
+    },
+    {
+      "criterion": "NASA fallback",
+      "status": "PASS (technical)",
+      "blocking": false,
+      "evidence": "145/145 all endpoints; licence still gates production use",
+      "nextAction": "NASA licence clearance"
+    },
+    {
+      "criterion": "ERA5 primary",
+      "status": "BLOCKED",
+      "blocking": true,
+      "evidence": "no CDS credentials; templates 19/19 ready",
+      "nextAction": "user provides CDS API key; agent runs real retrieval + Copernicus contract (T2)"
+    },
+    {
+      "criterion": "ERA5-Land",
+      "status": "NOT REQUIRED AS REPLACEMENT",
+      "blocking": false,
+      "evidence": "cannot supply daily precipitation (accumulated vars omitted)",
+      "nextAction": "-"
+    },
+    {
+      "criterion": "Elevation",
+      "status": "PARTIALLY CLOSED",
+      "blocking": true,
+      "evidence": "AUTHORITATIVE 17/145 (FAA NFDC Tier-1, US); remaining 128 UNVERIFIED-authoritative (SECONDARY-VERIFIED only); contract wording requires authoritative source (Decision C)",
+      "nextAction": "Decision C; then extend Tier-1 acquisition to remaining countries OR amend contract via v8.7"
+    },
+    {
+      "criterion": "Anchor identity",
+      "status": "USER DECISION REQUIRED",
+      "blocking": true,
+      "evidence": "hcmc metadata-only; siem-reap production-data-affecting (full sims)",
+      "nextAction": "Decisions A + B; then re-bake chain"
+    },
+    {
+      "criterion": "Provenance",
+      "status": "PASS",
+      "blocking": false,
+      "evidence": "15 keys x 8 fields x 145; derived flags; officialProduct=null for daylight",
+      "nextAction": "-"
+    },
+    {
+      "criterion": "Recommendation",
+      "status": "PASS",
+      "blocking": false,
+      "evidence": "R1-R7 5/16/157/92/484/460/526; unclassified 0; anchor sims re-derive correctly",
+      "nextAction": "re-run after any re-bake"
+    },
+    {
+      "criterion": "Best Months",
+      "status": "PASS",
+      "blocking": false,
+      "evidence": "117/28/0; sim shows correct response to data change",
+      "nextAction": "re-run after any re-bake"
+    },
+    {
+      "criterion": "Runtime",
+      "status": "PASS",
+      "blocking": false,
+      "evidence": "no runtime climate API in Best-time; planner /api/weather + /api/geocoding not consumed by Best-time",
+      "nextAction": "-"
+    },
+    {
+      "criterion": "Licensing",
+      "status": "BLOCKED",
+      "blocking": true,
+      "evidence": "NASA POWER formal licence instrument absent (Earthdata policy = lead only); Copernicus rev.12 research-confirmed but project sign-off absent",
+      "nextAction": "legal review (NASA letter or user acceptance; Copernicus sign-off)"
+    },
+    {
+      "criterion": "Database rights",
+      "status": "BLOCKED",
+      "blocking": true,
+      "evidence": "reports/database-rights-review.json; sui generis unassessed by agent",
+      "nextAction": "lightweight legal review"
+    },
+    {
+      "criterion": "Sitemap interaction",
+      "status": "PASS (no interaction)",
+      "blocking": false,
+      "evidence": "pilot writes no routes/sitemap; production untouched",
+      "nextAction": "-"
+    }
+  ]
+}

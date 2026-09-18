@@ -1,0 +1,3282 @@
+{
+ "generatedAt": "2026-09-13T03:43:47.941350+00:00",
+ "artifact": "legacy-airport-impact-summary.json",
+ "methodologyVersion": "utrip-methodology-2026.09.v8.7",
+ "sweepVersion": "legacy-sweep-2026.09.12.v1",
+ "totalDestinations": 145,
+ "inventory": {
+  "confirmedLegacyAirport": 3,
+  "metadataOnly": 0,
+  "productionDataAffecting": 0,
+  "ambiguous": 0,
+  "noIssue": 142
+ },
+ "sum": 145,
+ "arithmetic": "3 confirmed + 142 no-issue = 145",
+ "note": "metadata-only / production-data-affecting buckets describe OUTSTANDING impact; hcmc (metadata-only) and siem-reap (production-data-affecting) were already approved and applied in v8.7, so their outstanding impact is 0",
+ "detectionPatterns": {
+  "A (IATA same, airport moved)": "none found beyond approved cases",
+  "B (IATA changed, project on old)": "none found",
+  "C (ICAO changed, coords at old)": "none outstanding (Phase 1B/1C coordinate audit covered all 145)",
+  "D (closed airport, old name retained)": "phnom-penh",
+  "E (fully replaced airport)": "phnom-penh (new); berlin/istanbul correctly pre-migrated",
+  "F (two airports, anchor may be historical)": "chengdu/goa/mexico-city/mumbai/beijing verified operational"
+ },
+ "newSimulationsRequired": 0,
+ "countryBreakdown": [
+  {
+   "country": "USA",
+   "destinations": 15,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 15
+  },
+  {
+   "country": "Japan",
+   "destinations": 10,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 10
+  },
+  {
+   "country": "Italy",
+   "destinations": 8,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 8
+  },
+  {
+   "country": "Spain",
+   "destinations": 8,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 8
+  },
+  {
+   "country": "China",
+   "destinations": 8,
+   "legacyCandidates": 2,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 8
+  },
+  {
+   "country": "Australia",
+   "destinations": 7,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 7
+  },
+  {
+   "country": "Indonesia",
+   "destinations": 5,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 5
+  },
+  {
+   "country": "Thailand",
+   "destinations": 5,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 5
+  },
+  {
+   "country": "Vietnam",
+   "destinations": 5,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 1,
+   "metadataOnly": 1,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 4
+  },
+  {
+   "country": "Canada",
+   "destinations": 5,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 5
+  },
+  {
+   "country": "New Zealand",
+   "destinations": 5,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 5
+  },
+  {
+   "country": "Germany",
+   "destinations": 4,
+   "legacyCandidates": 1,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 4
+  },
+  {
+   "country": "South Korea",
+   "destinations": 3,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 3
+  },
+  {
+   "country": "Croatia",
+   "destinations": 3,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 3
+  },
+  {
+   "country": "Mexico",
+   "destinations": 3,
+   "legacyCandidates": 1,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 3
+  },
+  {
+   "country": "India",
+   "destinations": 3,
+   "legacyCandidates": 2,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 3
+  },
+  {
+   "country": "France",
+   "destinations": 3,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 3
+  },
+  {
+   "country": "Philippines",
+   "destinations": 2,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 2
+  },
+  {
+   "country": "Cambodia",
+   "destinations": 2,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 2,
+   "metadataOnly": 1,
+   "productionImpact": 1,
+   "ambiguous": 0,
+   "noIssue": 0
+  },
+  {
+   "country": "Portugal",
+   "destinations": 2,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 2
+  },
+  {
+   "country": "Greece",
+   "destinations": 2,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 2
+  },
+  {
+   "country": "Malaysia",
+   "destinations": 2,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 2
+  },
+  {
+   "country": "Poland",
+   "destinations": 2,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 2
+  },
+  {
+   "country": "Switzerland",
+   "destinations": 2,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 2
+  },
+  {
+   "country": "United Kingdom",
+   "destinations": 2,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 2
+  },
+  {
+   "country": "UAE",
+   "destinations": 2,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 2
+  },
+  {
+   "country": "Turkey",
+   "destinations": 2,
+   "legacyCandidates": 1,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 2
+  },
+  {
+   "country": "United States",
+   "destinations": 2,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 2
+  },
+  {
+   "country": "Belgium",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Sweden",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Norway",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Iceland",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Ireland",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Laos",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Nepal",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Sri Lanka",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Maldives",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Myanmar",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Estonia",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Peru",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Argentina",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Singapore",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Austria",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Finland",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Azerbaijan",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Czechia",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Hong Kong SAR",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Netherlands",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Taiwan",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Hungary",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  },
+  {
+   "country": "Denmark",
+   "destinations": 1,
+   "legacyCandidates": 0,
+   "confirmedLegacy": 0,
+   "metadataOnly": 0,
+   "productionImpact": 0,
+   "ambiguous": 0,
+   "noIssue": 1
+  }
+ ],
+ "candidates": [
+  {
+   "destinationId": "phnom-penh",
+   "country": "Cambodia",
+   "suspectedIssue": "airport replaced: PNH/VDPP closed 2025-09-09, replaced by Techo KTI/VDTI",
+   "oldAirport": {
+    "iata": "PNH",
+    "icao": "VDPP",
+    "lat": 11.5466,
+    "lon": 104.8441
+   },
+   "newAirport": {
+    "iata": "KTI",
+    "icao": "VDTI",
+    "lat": 11.36,
+    "lon": 104.9213
+   },
+   "replacementDate": "2025-09-09",
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "last commercial flights 2025-09-08 23:59; airport closed 2025-09-09 00:01; all flights transferred",
+     "sources": [
+      "Air Cambodia official notice",
+      "Cathay Pacific agent notice",
+      "Vietnam Airlines",
+      "https://en.wikipedia.org/wiki/Phnom_Penh_International_Airport"
+     ]
+    },
+    {
+     "tier": 1,
+     "fact": "KTI operator site (techoairport.com.kh); OCIC project page",
+     "sources": [
+      "https://www.techoairport.com.kh/",
+      "https://www.ocic.com.kh/projects/techo-international-airport"
+     ]
+    }
+   ],
+   "decision": "LEGACY AIRPORT — impact simulated last round: METADATA-ONLY IMPACT (observed climate byte-identical, R1-R7/BM unchanged, daylightHours 8 cells ±0.01 h)",
+   "status": "CONFIRMED LEGACY AIRPORT — correction proposal exists, USER DECISION REQUIRED",
+   "impact": "METADATA-ONLY IMPACT",
+   "nasaSimulation": "normalized/anchor-correction-simulated-phnom-penh.json (reuse, no recompute)"
+  },
+  {
+   "destinationId": "chengdu",
+   "country": "China",
+   "suspectedIssue": "dual-airport city: Tianfu (TFU) opened 2021-06; is Shuangliu (CTU) still operational?",
+   "oldAirport": null,
+   "newAirport": {
+    "iata": "TFU",
+    "icao": "ZUTF",
+    "note": "new second airport"
+   },
+   "replacementDate": null,
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "CTU fully operational in 2026 (live flight info; ~222k movements 2025; Cathay Pacific relocates ops BACK to CTU from 2026-07-31)",
+     "sources": [
+      "https://www.cdairport.com/en/ (official)",
+      "https://www.cathaypacific.com/cx/id_ID/latest-news/security-and-operational-changes/relocation-of-passenger-flight-operations-to-ctu.html"
+     ]
+    }
+   ],
+   "decision": "NO ISSUE — anchored airport (CTU) remains operational (dual-airport city)",
+   "status": "CURRENT AIRPORT",
+   "impact": "NO IMPACT",
+   "nasaSimulation": null
+  },
+  {
+   "destinationId": "goa",
+   "country": "India",
+   "suspectedIssue": "dual-airport: Mopa (GOX) opened 2022-12; Dabolim (GOI) traffic shifting",
+   "oldAirport": null,
+   "newAirport": {
+    "iata": "GOX",
+    "icao": "VOGA",
+    "note": "Manohar International"
+   },
+   "replacementDate": null,
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "Dabolim still operating civil + navy use; Goa government: no closure plan (movements 55,080 (2022) -> 40,701 (2025), declining but open)",
+     "sources": [
+      "https://timesofindia.indiatimes.com/city/goa/dabolim-airport-will-continue-ops-for-civil-navy-use-says-cm/articleshow/128321885.cms",
+      "https://goemkarponn.com/dabolims-flight-exodus-govt-admits-no-impact-assessment-after-mopa-launch/"
+     ]
+    }
+   ],
+   "decision": "NO ISSUE — anchored airport (GOI) remains operational (watch item: traffic declining)",
+   "status": "CURRENT AIRPORT",
+   "impact": "NO IMPACT",
+   "nasaSimulation": null
+  },
+  {
+   "destinationId": "mexico-city",
+   "country": "Mexico",
+   "suspectedIssue": "dual-airport: Felipe Ángeles (NLU/AIFA) opened 2022-03",
+   "oldAirport": null,
+   "newAirport": {
+    "iata": "NLU",
+    "icao": "MMSM",
+    "note": "Felipe Ángeles"
+   },
+   "replacementDate": null,
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "MEX remains Mexico's busiest airport and the main international gateway; NLU is a growing secondary (7.08M pax 2025, 7th busiest)",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Felipe_%C3%81ngeles_International_Airport",
+      "Mexico Business News"
+     ]
+    }
+   ],
+   "decision": "NO ISSUE — anchored airport (MEX) remains operational and primary",
+   "status": "CURRENT AIRPORT",
+   "impact": "NO IMPACT",
+   "nasaSimulation": null
+  },
+  {
+   "destinationId": "mumbai",
+   "country": "India",
+   "suspectedIssue": "dual-airport: Navi Mumbai (NMI) opened 2025-12-25; from 2026-10 a third of international flights shift",
+   "oldAirport": null,
+   "newAirport": {
+    "iata": "NMI",
+    "icao": "VANM",
+    "note": "Navi Mumbai International"
+   },
+   "replacementDate": null,
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "BOM/CSMIA remains operational and primary; NMI phased in from 2025-12-25",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Navi_Mumbai_International_Airport",
+      "https://edition.cnn.com/2025/10/08/travel/navi-mumbai-international-airport-opens-intl-hnk"
+     ]
+    }
+   ],
+   "decision": "NO ISSUE — anchored airport (BOM) remains operational (watch item: 2026-10 partial shift)",
+   "status": "CURRENT AIRPORT",
+   "impact": "NO IMPACT",
+   "nasaSimulation": null
+  },
+  {
+   "destinationId": "beijing",
+   "country": "China",
+   "suspectedIssue": "dual-airport: Daxing (PKX) opened 2019-09",
+   "oldAirport": null,
+   "newAirport": {
+    "iata": "PKX",
+    "icao": "ZBAD",
+    "note": "Beijing Daxing"
+   },
+   "replacementDate": null,
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "PEK never closed; both airports handled 100.06M pax in 2025; PEK alone ~1.67M trips in one holiday period",
+     "sources": [
+      "https://www.chinadaily.com.cn/a/202509/29/WS68da0986a310f735438b2e95.html",
+      "https://en.wikipedia.org/wiki/Beijing_Capital_International_Airport"
+     ]
+    }
+   ],
+   "decision": "NO ISSUE — anchored airport (PEK) remains operational",
+   "status": "CURRENT AIRPORT",
+   "impact": "NO IMPACT",
+   "nasaSimulation": null
+  },
+  {
+   "destinationId": "berlin",
+   "country": "Germany",
+   "suspectedIssue": "BER (2020-10-31) replaced Tegel (closed 2020-11-08) — is the project anchor on the new airport?",
+   "oldAirport": {
+    "iata": "TXL",
+    "icao": "EDDT",
+    "lat": 52.5547,
+    "lon": 13.2868
+   },
+   "newAirport": {
+    "iata": "BER",
+    "icao": "EDDB",
+    "note": "project anchor already BER"
+   },
+   "replacementDate": "2020-11-08",
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "Tegel closed 2020-11-08 (decommissioned 2021-05-04); project anchor is BER/EDDB with OurAirports coordinate match 0.556 km — project is on the CURRENT airport",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Berlin_Tegel_Airport",
+      "https://corporate.berlin-airport.de/en/company-media/history/berlin-tegel-airport.html"
+     ]
+    }
+   ],
+   "decision": "NO ISSUE — project anchor already the current airport (pre-migrated correctly)",
+   "status": "CURRENT AIRPORT",
+   "impact": "NO IMPACT",
+   "nasaSimulation": null
+  },
+  {
+   "destinationId": "istanbul",
+   "country": "Turkey",
+   "suspectedIssue": "IST/LTFM (2018-10-29) replaced Atatürk (closed to passenger traffic 2019-04-06)",
+   "oldAirport": {
+    "iata": "ISL",
+    "icao": "LTBA",
+    "lat": 40.9769,
+    "lon": 28.8146
+   },
+   "newAirport": {
+    "iata": "IST",
+    "icao": "LTFM",
+    "note": "project anchor already IST"
+   },
+   "replacementDate": "2019-04-06",
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "Atatürk closed to commercial traffic 2019-04-06; project anchor is IST/LTFM with OurAirports coordinate match 1.652 km — project is on the CURRENT airport",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Atat%C3%BCrk_Airport"
+     ]
+    }
+   ],
+   "decision": "NO ISSUE — project anchor already the current airport (pre-migrated correctly)",
+   "status": "CURRENT AIRPORT",
+   "impact": "NO IMPACT",
+   "nasaSimulation": null
+  }
+ ],
+ "previouslyHandled": [
+  {
+   "destinationId": "ho-chi-minh-city",
+   "decision": "A approved 2026-09-12, applied to pilot (metadata-only)"
+  },
+  {
+   "destinationId": "siem-reap",
+   "decision": "B approved 2026-09-12, applied to pilot (production-data-affecting)"
+  }
+ ],
+ "rows": [
+  {
+   "destinationId": "manila",
+   "city": "Manila",
+   "country": "Philippines",
+   "projectAirport": {
+    "iata": "MNL",
+    "icao": "RPLL",
+    "name": "Ninoy Aquino International Airport",
+    "latitude": 14.5086,
+    "longitude": 121.0198
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "jakarta",
+   "city": "Jakarta",
+   "country": "Indonesia",
+   "projectAirport": {
+    "iata": "CGK",
+    "icao": "WIII",
+    "name": "Soekarno-Hatta International Airport",
+    "latitude": -6.1256,
+    "longitude": 106.6558
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "yogyakarta",
+   "city": "Yogyakarta",
+   "country": "Indonesia",
+   "projectAirport": {
+    "iata": "YIA",
+    "icao": "WIHI",
+    "name": "Yogyakarta International Airport",
+    "latitude": -7.9014,
+    "longitude": 110.0576
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "chiang-mai",
+   "city": "Chiang Mai",
+   "country": "Thailand",
+   "projectAirport": {
+    "iata": "CNX",
+    "icao": "VTCC",
+    "name": "Chiang Mai International Airport",
+    "latitude": 18.7669,
+    "longitude": 98.9626
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "phuket",
+   "city": "Phuket",
+   "country": "Thailand",
+   "projectAirport": {
+    "iata": "HKT",
+    "icao": "VTSP",
+    "name": "Phuket International Airport",
+    "latitude": 8.1132,
+    "longitude": 98.3169
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "koh-samui",
+   "city": "Koh Samui",
+   "country": "Thailand",
+   "projectAirport": {
+    "iata": "USM",
+    "icao": "VTSM",
+    "name": "Samui Airport",
+    "latitude": 9.5476,
+    "longitude": 100.0613
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "da-nang",
+   "city": "Da Nang",
+   "country": "Vietnam",
+   "projectAirport": {
+    "iata": "DAD",
+    "icao": "VVDN",
+    "name": "Da Nang International Airport",
+    "latitude": 16.0439,
+    "longitude": 108.1994
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "nha-trang",
+   "city": "Nha Trang",
+   "country": "Vietnam",
+   "projectAirport": {
+    "iata": "CXR",
+    "icao": "VVNT",
+    "name": "Cam Ranh International Airport",
+    "latitude": 11.9982,
+    "longitude": 109.2195
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "phu-quoc",
+   "city": "Phu Quoc",
+   "country": "Vietnam",
+   "projectAirport": {
+    "iata": "PQC",
+    "icao": "VVPQ",
+    "name": "Phu Quoc International Airport",
+    "latitude": 10.1713,
+    "longitude": 103.9928
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "siem-reap",
+   "city": "Siem Reap",
+   "country": "Cambodia",
+   "projectAirport": {
+    "iata": "SAI",
+    "icao": "VDSR",
+    "name": "Siem Reap-Angkor International Airport",
+    "latitude": 13.4107,
+    "longitude": 103.8132
+   },
+   "status": "CONFIRMED LEGACY AIRPORT — correction approved (Decision B), applied to pilot",
+   "impact": "PRODUCTION-DATA-AFFECTING (applied)",
+   "nasaSimulation": "applied in v8.7 dataset",
+   "bucket": "confirmed-legacy-airport"
+  },
+  {
+   "destinationId": "phnom-penh",
+   "city": "Phnom Penh",
+   "country": "Cambodia",
+   "projectAirport": {
+    "iata": "PNH",
+    "icao": "VDPP",
+    "name": "Phnom Penh International Airport",
+    "latitude": 11.5466,
+    "longitude": 104.8441
+   },
+   "suspectedIssue": "airport replaced: PNH/VDPP closed 2025-09-09, replaced by Techo KTI/VDTI",
+   "oldAirport": {
+    "iata": "PNH",
+    "icao": "VDPP",
+    "lat": 11.5466,
+    "lon": 104.8441
+   },
+   "newAirport": {
+    "iata": "KTI",
+    "icao": "VDTI",
+    "lat": 11.36,
+    "lon": 104.9213
+   },
+   "replacementDate": "2025-09-09",
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "last commercial flights 2025-09-08 23:59; airport closed 2025-09-09 00:01; all flights transferred",
+     "sources": [
+      "Air Cambodia official notice",
+      "Cathay Pacific agent notice",
+      "Vietnam Airlines",
+      "https://en.wikipedia.org/wiki/Phnom_Penh_International_Airport"
+     ]
+    },
+    {
+     "tier": 1,
+     "fact": "KTI operator site (techoairport.com.kh); OCIC project page",
+     "sources": [
+      "https://www.techoairport.com.kh/",
+      "https://www.ocic.com.kh/projects/techo-international-airport"
+     ]
+    }
+   ],
+   "decision": "LEGACY AIRPORT — impact simulated last round: METADATA-ONLY IMPACT (observed climate byte-identical, R1-R7/BM unchanged, daylightHours 8 cells ±0.01 h)",
+   "status": "CONFIRMED LEGACY AIRPORT — correction proposal exists, USER DECISION REQUIRED",
+   "impact": "METADATA-ONLY IMPACT",
+   "nasaSimulation": "normalized/anchor-correction-simulated-phnom-penh.json (reuse, no recompute)",
+   "bucket": "confirmed-legacy-airport"
+  },
+  {
+   "destinationId": "jeju",
+   "city": "Jeju",
+   "country": "South Korea",
+   "projectAirport": {
+    "iata": "CJU",
+    "icao": "RKPC",
+    "name": "Jeju International Airport",
+    "latitude": 33.5113,
+    "longitude": 126.493
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "fukuoka",
+   "city": "Fukuoka",
+   "country": "Japan",
+   "projectAirport": {
+    "iata": "FUK",
+    "icao": "RJFF",
+    "name": "Fukuoka Airport",
+    "latitude": 33.5859,
+    "longitude": 130.451
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "sapporo",
+   "city": "Sapporo",
+   "country": "Japan",
+   "projectAirport": {
+    "iata": "CTS",
+    "icao": "RJCC",
+    "name": "New Chitose Airport",
+    "latitude": 42.7752,
+    "longitude": 141.6923
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "nagoya",
+   "city": "Nagoya",
+   "country": "Japan",
+   "projectAirport": {
+    "iata": "NGO",
+    "icao": "RJGG",
+    "name": "Chubu Centrair International Airport",
+    "latitude": 34.8584,
+    "longitude": 136.8054
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "nagasaki",
+   "city": "Nagasaki",
+   "country": "Japan",
+   "projectAirport": {
+    "iata": "NGS",
+    "icao": "RJFU",
+    "name": "Nagasaki Airport",
+    "latitude": 32.9169,
+    "longitude": 129.9138
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "hiroshima",
+   "city": "Hiroshima",
+   "country": "Japan",
+   "projectAirport": {
+    "iata": "HIJ",
+    "icao": "RJOA",
+    "name": "Hiroshima Airport",
+    "latitude": 34.4361,
+    "longitude": 132.9194
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "kanazawa",
+   "city": "Kanazawa",
+   "country": "Japan",
+   "projectAirport": {
+    "iata": "KMQ",
+    "icao": "RJNK",
+    "name": "Komatsu Airport",
+    "latitude": 36.3939,
+    "longitude": 136.4072
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "kobe",
+   "city": "Kobe",
+   "country": "Japan",
+   "projectAirport": {
+    "iata": "UKB",
+    "icao": "RJBE",
+    "name": "Kobe Airport",
+    "latitude": 34.6328,
+    "longitude": 135.2239
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "berlin",
+   "city": "Berlin",
+   "country": "Germany",
+   "projectAirport": {
+    "iata": "BER",
+    "icao": "EDDB",
+    "name": "Berlin Brandenburg Airport",
+    "latitude": 52.3667,
+    "longitude": 13.5033
+   },
+   "suspectedIssue": "BER (2020-10-31) replaced Tegel (closed 2020-11-08) — is the project anchor on the new airport?",
+   "oldAirport": {
+    "iata": "TXL",
+    "icao": "EDDT",
+    "lat": 52.5547,
+    "lon": 13.2868
+   },
+   "newAirport": {
+    "iata": "BER",
+    "icao": "EDDB",
+    "note": "project anchor already BER"
+   },
+   "replacementDate": "2020-11-08",
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "Tegel closed 2020-11-08 (decommissioned 2021-05-04); project anchor is BER/EDDB with OurAirports coordinate match 0.556 km — project is on the CURRENT airport",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Berlin_Tegel_Airport",
+      "https://corporate.berlin-airport.de/en/company-media/history/berlin-tegel-airport.html"
+     ]
+    }
+   ],
+   "decision": "NO ISSUE — project anchor already the current airport (pre-migrated correctly)",
+   "status": "CURRENT AIRPORT",
+   "impact": "NO IMPACT",
+   "nasaSimulation": null,
+   "bucket": "no-issue (candidate verified)"
+  },
+  {
+   "destinationId": "frankfurt",
+   "city": "Frankfurt",
+   "country": "Germany",
+   "projectAirport": {
+    "iata": "FRA",
+    "icao": "EDDF",
+    "name": "Frankfurt Airport",
+    "latitude": 50.0379,
+    "longitude": 8.5622
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "naples",
+   "city": "Naples",
+   "country": "Italy",
+   "projectAirport": {
+    "iata": "NAP",
+    "icao": "LIRN",
+    "name": "Naples International Airport",
+    "latitude": 40.886,
+    "longitude": 14.2908
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "amalfi-coast",
+   "city": "Naples",
+   "country": "Italy",
+   "projectAirport": {
+    "iata": "NAP",
+    "icao": "LIRN",
+    "name": "Naples International Airport",
+    "latitude": 40.886,
+    "longitude": 14.2908
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "bologna",
+   "city": "Bologna",
+   "country": "Italy",
+   "projectAirport": {
+    "iata": "BLQ",
+    "icao": "LIPQ",
+    "name": "Bologna Guglielmo Marconi Airport",
+    "latitude": 44.5354,
+    "longitude": 11.2887
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "turin",
+   "city": "Turin",
+   "country": "Italy",
+   "projectAirport": {
+    "iata": "TRN",
+    "icao": "LIMF",
+    "name": "Turin Airport",
+    "latitude": 45.2008,
+    "longitude": 7.6496
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "valencia",
+   "city": "Valencia",
+   "country": "Spain",
+   "projectAirport": {
+    "iata": "VLC",
+    "icao": "LEVC",
+    "name": "Valencia Airport",
+    "latitude": 39.4893,
+    "longitude": -0.4816
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "malaga",
+   "city": "Málaga",
+   "country": "Spain",
+   "projectAirport": {
+    "iata": "AGP",
+    "icao": "LEMG",
+    "name": "Málaga Airport",
+    "latitude": 36.6749,
+    "longitude": -4.4991
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "granada",
+   "city": "Granada",
+   "country": "Spain",
+   "projectAirport": {
+    "iata": "GRX",
+    "icao": "LEGR",
+    "name": "Federico García Lorca Granada Airport",
+    "latitude": 37.1888,
+    "longitude": -3.7772
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "porto",
+   "city": "Porto",
+   "country": "Portugal",
+   "projectAirport": {
+    "iata": "OPO",
+    "icao": "LPPR",
+    "name": "Francisco Sá Carneiro Airport",
+    "latitude": 41.2481,
+    "longitude": -8.6814
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "brussels",
+   "city": "Brussels",
+   "country": "Belgium",
+   "projectAirport": {
+    "iata": "BRU",
+    "icao": "EBBR",
+    "name": "Brussels Airport",
+    "latitude": 50.9014,
+    "longitude": 4.4844
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "stockholm",
+   "city": "Stockholm",
+   "country": "Sweden",
+   "projectAirport": {
+    "iata": "ARN",
+    "icao": "ESSA",
+    "name": "Stockholm Arlanda Airport",
+    "latitude": 59.6519,
+    "longitude": 17.9186
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "oslo",
+   "city": "Oslo",
+   "country": "Norway",
+   "projectAirport": {
+    "iata": "OSL",
+    "icao": "ENGM",
+    "name": "Oslo Airport, Gardermoen",
+    "latitude": 60.1939,
+    "longitude": 11.1004
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "reykjavik",
+   "city": "Reykjavík",
+   "country": "Iceland",
+   "projectAirport": {
+    "iata": "KEF",
+    "icao": "BIKF",
+    "name": "Keflavík International Airport",
+    "latitude": 63.985,
+    "longitude": -22.6056
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "dublin",
+   "city": "Dublin",
+   "country": "Ireland",
+   "projectAirport": {
+    "iata": "DUB",
+    "icao": "EIDW",
+    "name": "Dublin Airport",
+    "latitude": 53.4213,
+    "longitude": -6.2701
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "dubrovnik",
+   "city": "Dubrovnik",
+   "country": "Croatia",
+   "projectAirport": {
+    "iata": "DBV",
+    "icao": "LDDU",
+    "name": "Dubrovnik Airport",
+    "latitude": 42.5614,
+    "longitude": 18.2682
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "santorini",
+   "city": "Santorini",
+   "country": "Greece",
+   "projectAirport": {
+    "iata": "JTR",
+    "icao": "LGSR",
+    "name": "Santorini Airport",
+    "latitude": 36.3991,
+    "longitude": 25.4789
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "miami",
+   "city": "Miami",
+   "country": "USA",
+   "projectAirport": {
+    "iata": "MIA",
+    "icao": "KMIA",
+    "name": "Miami International Airport",
+    "latitude": 25.7959,
+    "longitude": -80.287
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "orlando",
+   "city": "Orlando",
+   "country": "USA",
+   "projectAirport": {
+    "iata": "MCO",
+    "icao": "KMCO",
+    "name": "Orlando International Airport",
+    "latitude": 28.4312,
+    "longitude": -81.3081
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "chicago",
+   "city": "Chicago",
+   "country": "USA",
+   "projectAirport": {
+    "iata": "ORD",
+    "icao": "KORD",
+    "name": "O'Hare International Airport",
+    "latitude": 41.9742,
+    "longitude": -87.9073
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "washington-dc",
+   "city": "Washington",
+   "country": "USA",
+   "projectAirport": {
+    "iata": "IAD",
+    "icao": "KIAD",
+    "name": "Washington Dulles International Airport",
+    "latitude": 38.9531,
+    "longitude": -77.4565
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "seattle",
+   "city": "Seattle",
+   "country": "USA",
+   "projectAirport": {
+    "iata": "SEA",
+    "icao": "KSEA",
+    "name": "Seattle-Tacoma International Airport",
+    "latitude": 47.4502,
+    "longitude": -122.3088
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "san-diego",
+   "city": "San Diego",
+   "country": "USA",
+   "projectAirport": {
+    "iata": "SAN",
+    "icao": "KSAN",
+    "name": "San Diego International Airport",
+    "latitude": 32.7338,
+    "longitude": -117.1933
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "new-orleans",
+   "city": "New Orleans",
+   "country": "USA",
+   "projectAirport": {
+    "iata": "MSY",
+    "icao": "KMSY",
+    "name": "Louis Armstrong New Orleans International Airport",
+    "latitude": 29.9934,
+    "longitude": -90.2581
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "cancun",
+   "city": "Cancún",
+   "country": "Mexico",
+   "projectAirport": {
+    "iata": "CUN",
+    "icao": "MMUN",
+    "name": "Cancún International Airport",
+    "latitude": 21.0365,
+    "longitude": -86.8771
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "montreal",
+   "city": "Montréal",
+   "country": "Canada",
+   "projectAirport": {
+    "iata": "YUL",
+    "icao": "CYUL",
+    "name": "Montréal-Trudeau International Airport",
+    "latitude": 45.4706,
+    "longitude": -73.7408
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "quebec-city",
+   "city": "Québec City",
+   "country": "Canada",
+   "projectAirport": {
+    "iata": "YQB",
+    "icao": "CYQB",
+    "name": "Québec City Jean Lesage International Airport",
+    "latitude": 46.7881,
+    "longitude": -71.3928
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "brisbane",
+   "city": "Brisbane",
+   "country": "Australia",
+   "projectAirport": {
+    "iata": "BNE",
+    "icao": "YBBN",
+    "name": "Brisbane Airport",
+    "latitude": -27.3842,
+    "longitude": 153.1175
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "gold-coast",
+   "city": "Gold Coast",
+   "country": "Australia",
+   "projectAirport": {
+    "iata": "OOL",
+    "icao": "YBCG",
+    "name": "Gold Coast Airport",
+    "latitude": -28.1644,
+    "longitude": 153.5052
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "perth",
+   "city": "Perth",
+   "country": "Australia",
+   "projectAirport": {
+    "iata": "PER",
+    "icao": "YPPH",
+    "name": "Perth Airport",
+    "latitude": -31.9403,
+    "longitude": 115.9669
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "queenstown",
+   "city": "Queenstown",
+   "country": "New Zealand",
+   "projectAirport": {
+    "iata": "ZQN",
+    "icao": "NZQN",
+    "name": "Queenstown Airport",
+    "latitude": -45.0211,
+    "longitude": 168.7392
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "wellington",
+   "city": "Wellington",
+   "country": "New Zealand",
+   "projectAirport": {
+    "iata": "WLG",
+    "icao": "NZWN",
+    "name": "Wellington International Airport",
+    "latitude": -41.3272,
+    "longitude": 174.8053
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "ubud",
+   "city": "Bali (Denpasar)",
+   "country": "Indonesia",
+   "projectAirport": {
+    "iata": "DPS",
+    "icao": "WADD",
+    "name": "I Gusti Ngurah Rai International Airport",
+    "latitude": -8.7482,
+    "longitude": 115.1675
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "lombok",
+   "city": "Lombok",
+   "country": "Indonesia",
+   "projectAirport": {
+    "iata": "LOP",
+    "icao": "WATB",
+    "name": "Lombok International Airport",
+    "latitude": -8.7569,
+    "longitude": 116.2784
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "luang-prabang",
+   "city": "Luang Prabang",
+   "country": "Laos",
+   "projectAirport": {
+    "iata": "LPQ",
+    "icao": "VLLB",
+    "name": "Luang Prabang International Airport",
+    "latitude": 19.8996,
+    "longitude": 102.1606
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "kathmandu",
+   "city": "Kathmandu",
+   "country": "Nepal",
+   "projectAirport": {
+    "iata": "KTM",
+    "icao": "VNKT",
+    "name": "Tribhuvan International Airport",
+    "latitude": 27.6966,
+    "longitude": 85.3591
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "colombo",
+   "city": "Colombo",
+   "country": "Sri Lanka",
+   "projectAirport": {
+    "iata": "CMB",
+    "icao": "VCBI",
+    "name": "Bandaranaike International Airport",
+    "latitude": 7.1808,
+    "longitude": 79.8841
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "male",
+   "city": "Malé",
+   "country": "Maldives",
+   "projectAirport": {
+    "iata": "MLE",
+    "icao": "VRMM",
+    "name": "Velana International Airport",
+    "latitude": 4.1918,
+    "longitude": 73.5291
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "mumbai",
+   "city": "Mumbai",
+   "country": "India",
+   "projectAirport": {
+    "iata": "BOM",
+    "icao": "VABB",
+    "name": "Chhatrapati Shivaji Maharaj International Airport",
+    "latitude": 19.0896,
+    "longitude": 72.8656
+   },
+   "suspectedIssue": "dual-airport: Navi Mumbai (NMI) opened 2025-12-25; from 2026-10 a third of international flights shift",
+   "oldAirport": null,
+   "newAirport": {
+    "iata": "NMI",
+    "icao": "VANM",
+    "note": "Navi Mumbai International"
+   },
+   "replacementDate": null,
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "BOM/CSMIA remains operational and primary; NMI phased in from 2025-12-25",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Navi_Mumbai_International_Airport",
+      "https://edition.cnn.com/2025/10/08/travel/navi-mumbai-international-airport-opens-intl-hnk"
+     ]
+    }
+   ],
+   "decision": "NO ISSUE — anchored airport (BOM) remains operational (watch item: 2026-10 partial shift)",
+   "status": "CURRENT AIRPORT",
+   "impact": "NO IMPACT",
+   "nasaSimulation": null,
+   "bucket": "no-issue (candidate verified)"
+  },
+  {
+   "destinationId": "jaipur",
+   "city": "Jaipur",
+   "country": "India",
+   "projectAirport": {
+    "iata": "JAI",
+    "icao": "VIJP",
+    "name": "Jaipur International Airport",
+    "latitude": 26.8242,
+    "longitude": 75.8122
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "goa",
+   "city": "Goa",
+   "country": "India",
+   "projectAirport": {
+    "iata": "GOI",
+    "icao": "VOGO",
+    "name": "Dabolim Airport",
+    "latitude": 15.3808,
+    "longitude": 73.8314
+   },
+   "suspectedIssue": "dual-airport: Mopa (GOX) opened 2022-12; Dabolim (GOI) traffic shifting",
+   "oldAirport": null,
+   "newAirport": {
+    "iata": "GOX",
+    "icao": "VOGA",
+    "note": "Manohar International"
+   },
+   "replacementDate": null,
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "Dabolim still operating civil + navy use; Goa government: no closure plan (movements 55,080 (2022) -> 40,701 (2025), declining but open)",
+     "sources": [
+      "https://timesofindia.indiatimes.com/city/goa/dabolim-airport-will-continue-ops-for-civil-navy-use-says-cm/articleshow/128321885.cms",
+      "https://goemkarponn.com/dabolims-flight-exodus-govt-admits-no-impact-assessment-after-mopa-launch/"
+     ]
+    }
+   ],
+   "decision": "NO ISSUE — anchored airport (GOI) remains operational (watch item: traffic declining)",
+   "status": "CURRENT AIRPORT",
+   "impact": "NO IMPACT",
+   "nasaSimulation": null,
+   "bucket": "no-issue (candidate verified)"
+  },
+  {
+   "destinationId": "penang",
+   "city": "Penang",
+   "country": "Malaysia",
+   "projectAirport": {
+    "iata": "PEN",
+    "icao": "WMKP",
+    "name": "Penang International Airport",
+    "latitude": 5.2971,
+    "longitude": 100.2769
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "pattaya",
+   "city": "Pattaya",
+   "country": "Thailand",
+   "projectAirport": {
+    "iata": "UTP",
+    "icao": "VTPH",
+    "name": "U-Tapao Rayong-Pattaya International Airport",
+    "latitude": 12.6806,
+    "longitude": 101.0044
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "yangon",
+   "city": "Yangon",
+   "country": "Myanmar",
+   "projectAirport": {
+    "iata": "RGN",
+    "icao": "VYYY",
+    "name": "Yangon International Airport",
+    "latitude": 16.9073,
+    "longitude": 96.1332
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "warsaw",
+   "city": "Warsaw",
+   "country": "Poland",
+   "projectAirport": {
+    "iata": "WAW",
+    "icao": "EPWA",
+    "name": "Warsaw Chopin Airport",
+    "latitude": 52.1657,
+    "longitude": 20.9671
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "krakow",
+   "city": "Krakow",
+   "country": "Poland",
+   "projectAirport": {
+    "iata": "KRK",
+    "icao": "EPKK",
+    "name": "John Paul II International Airport Kraków-Balice",
+    "latitude": 50.0777,
+    "longitude": 19.7848
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "tallinn",
+   "city": "Tallinn",
+   "country": "Estonia",
+   "projectAirport": {
+    "iata": "TLL",
+    "icao": "EETN",
+    "name": "Lennart Meri Tallinn Airport",
+    "latitude": 59.4133,
+    "longitude": 24.8328
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "zagreb",
+   "city": "Zagreb",
+   "country": "Croatia",
+   "projectAirport": {
+    "iata": "ZAG",
+    "icao": "LDZA",
+    "name": "Franjo Tuđman Airport Zagreb",
+    "latitude": 45.7429,
+    "longitude": 16.0688
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "split",
+   "city": "Split",
+   "country": "Croatia",
+   "projectAirport": {
+    "iata": "SPU",
+    "icao": "LDSP",
+    "name": "Split Airport",
+    "latitude": 43.5389,
+    "longitude": 16.298
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "geneva",
+   "city": "Geneva",
+   "country": "Switzerland",
+   "projectAirport": {
+    "iata": "GVA",
+    "icao": "LSGG",
+    "name": "Geneva Airport",
+    "latitude": 46.2381,
+    "longitude": 6.1089
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "lyon",
+   "city": "Lyon",
+   "country": "France",
+   "projectAirport": {
+    "iata": "LYS",
+    "icao": "LFLL",
+    "name": "Lyon-Saint Exupéry Airport",
+    "latitude": 45.7256,
+    "longitude": 5.0811
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "nice",
+   "city": "Nice",
+   "country": "France",
+   "projectAirport": {
+    "iata": "NCE",
+    "icao": "LFMN",
+    "name": "Nice Côte d'Azur Airport",
+    "latitude": 43.6584,
+    "longitude": 7.2159
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "cordoba",
+   "city": "Córdoba",
+   "country": "Spain",
+   "projectAirport": {
+    "iata": "ODB",
+    "icao": "LEBA",
+    "name": "Córdoba Airport",
+    "latitude": 37.8444,
+    "longitude": -4.8491
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "san-sebastian",
+   "city": "San Sebastián",
+   "country": "Spain",
+   "projectAirport": {
+    "iata": "EAS",
+    "icao": "LESO",
+    "name": "San Sebastián Airport",
+    "latitude": 43.3564,
+    "longitude": -1.7906
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "philadelphia",
+   "city": "Philadelphia",
+   "country": "USA",
+   "projectAirport": {
+    "iata": "PHL",
+    "icao": "KPHL",
+    "name": "Philadelphia International Airport",
+    "latitude": 39.8744,
+    "longitude": -75.2424
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "denver",
+   "city": "Denver",
+   "country": "USA",
+   "projectAirport": {
+    "iata": "DEN",
+    "icao": "KDEN",
+    "name": "Denver International Airport",
+    "latitude": 39.8561,
+    "longitude": -104.6737
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "nashville",
+   "city": "Nashville",
+   "country": "USA",
+   "projectAirport": {
+    "iata": "BNA",
+    "icao": "KBNA",
+    "name": "Nashville International Airport",
+    "latitude": 36.1263,
+    "longitude": -86.6774
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "honolulu",
+   "city": "Honolulu",
+   "country": "USA",
+   "projectAirport": {
+    "iata": "HNL",
+    "icao": "PHNL",
+    "name": "Daniel K. Inouye International Airport",
+    "latitude": 21.3245,
+    "longitude": -157.9251
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "banff",
+   "city": "Calgary",
+   "country": "Canada",
+   "projectAirport": {
+    "iata": "YYC",
+    "icao": "CYYC",
+    "name": "Calgary International Airport",
+    "latitude": 51.1139,
+    "longitude": -114.0203
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "tulum",
+   "city": "Cancún",
+   "country": "Mexico",
+   "projectAirport": {
+    "iata": "CUN",
+    "icao": "MMUN",
+    "name": "Cancún International Airport",
+    "latitude": 21.0365,
+    "longitude": -86.8771
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "lima",
+   "city": "Lima",
+   "country": "Peru",
+   "projectAirport": {
+    "iata": "LIM",
+    "icao": "SPJC",
+    "name": "Jorge Chávez International Airport",
+    "latitude": -12.0219,
+    "longitude": -77.1143
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "buenos-aires",
+   "city": "Buenos Aires",
+   "country": "Argentina",
+   "projectAirport": {
+    "iata": "EZE",
+    "icao": "SAEZ",
+    "name": "Ministro Pistarini International Airport",
+    "latitude": -34.8222,
+    "longitude": -58.5358
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "adelaide",
+   "city": "Adelaide",
+   "country": "Australia",
+   "projectAirport": {
+    "iata": "ADL",
+    "icao": "YPAD",
+    "name": "Adelaide Airport",
+    "latitude": -34.945,
+    "longitude": 138.5286
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "cairns",
+   "city": "Cairns",
+   "country": "Australia",
+   "projectAirport": {
+    "iata": "CNS",
+    "icao": "YBCS",
+    "name": "Cairns Airport",
+    "latitude": -16.8858,
+    "longitude": 145.7553
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "christchurch",
+   "city": "Christchurch",
+   "country": "New Zealand",
+   "projectAirport": {
+    "iata": "CHC",
+    "icao": "NZCH",
+    "name": "Christchurch Airport",
+    "latitude": -43.4894,
+    "longitude": 172.5322
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "rotorua",
+   "city": "Rotorua",
+   "country": "New Zealand",
+   "projectAirport": {
+    "iata": "ROT",
+    "icao": "NZRO",
+    "name": "Rotorua Airport",
+    "latitude": -38.1093,
+    "longitude": 176.3165
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "tokyo",
+   "city": "Tokyo",
+   "country": "Japan",
+   "projectAirport": {
+    "iata": "NRT",
+    "icao": "RJAA",
+    "name": "Narita International Airport",
+    "latitude": 35.7647,
+    "longitude": 140.3864
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "paris",
+   "city": "Paris",
+   "country": "France",
+   "projectAirport": {
+    "iata": "CDG",
+    "icao": "LFPG",
+    "name": "Charles de Gaulle Airport",
+    "latitude": 49.0097,
+    "longitude": 2.5479
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "newyork",
+   "city": "New York",
+   "country": "USA",
+   "projectAirport": {
+    "iata": "JFK",
+    "icao": "KJFK",
+    "name": "John F. Kennedy International Airport",
+    "latitude": 40.6413,
+    "longitude": -73.7781
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "bangkok",
+   "city": "Bangkok",
+   "country": "Thailand",
+   "projectAirport": {
+    "iata": "BKK",
+    "icao": "VTBS",
+    "name": "Suvarnabhumi Airport",
+    "latitude": 13.69,
+    "longitude": 100.7501
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "london",
+   "city": "London",
+   "country": "United Kingdom",
+   "projectAirport": {
+    "iata": "LHR",
+    "icao": "EGLL",
+    "name": "London Heathrow Airport",
+    "latitude": 51.47,
+    "longitude": -0.4543
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "sydney",
+   "city": "Sydney",
+   "country": "Australia",
+   "projectAirport": {
+    "iata": "SYD",
+    "icao": "YSSY",
+    "name": "Sydney Kingsford Smith Airport",
+    "latitude": -33.9399,
+    "longitude": 151.1753
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "dubai",
+   "city": "Dubai",
+   "country": "UAE",
+   "projectAirport": {
+    "iata": "DXB",
+    "icao": "OMDB",
+    "name": "Dubai International Airport",
+    "latitude": 25.2532,
+    "longitude": 55.3657
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "rome",
+   "city": "Rome",
+   "country": "Italy",
+   "projectAirport": {
+    "iata": "FCO",
+    "icao": "LIRF",
+    "name": "Leonardo da Vinci–Fiumicino Airport",
+    "latitude": 41.8003,
+    "longitude": 12.2389
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "barcelona",
+   "city": "Barcelona",
+   "country": "Spain",
+   "projectAirport": {
+    "iata": "BCN",
+    "icao": "LEBL",
+    "name": "Barcelona–El Prat Airport",
+    "latitude": 41.2974,
+    "longitude": 2.0833
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "singapore",
+   "city": "Singapore",
+   "country": "Singapore",
+   "projectAirport": {
+    "iata": "SIN",
+    "icao": "WSSS",
+    "name": "Singapore Changi Airport",
+    "latitude": 1.3644,
+    "longitude": 103.9915
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "istanbul",
+   "city": "Istanbul",
+   "country": "Turkey",
+   "projectAirport": {
+    "iata": "IST",
+    "icao": "LTFM",
+    "name": "Istanbul Airport",
+    "latitude": 41.2753,
+    "longitude": 28.7519
+   },
+   "suspectedIssue": "IST/LTFM (2018-10-29) replaced Atatürk (closed to passenger traffic 2019-04-06)",
+   "oldAirport": {
+    "iata": "ISL",
+    "icao": "LTBA",
+    "lat": 40.9769,
+    "lon": 28.8146
+   },
+   "newAirport": {
+    "iata": "IST",
+    "icao": "LTFM",
+    "note": "project anchor already IST"
+   },
+   "replacementDate": "2019-04-06",
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "Atatürk closed to commercial traffic 2019-04-06; project anchor is IST/LTFM with OurAirports coordinate match 1.652 km — project is on the CURRENT airport",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Atat%C3%BCrk_Airport"
+     ]
+    }
+   ],
+   "decision": "NO ISSUE — project anchor already the current airport (pre-migrated correctly)",
+   "status": "CURRENT AIRPORT",
+   "impact": "NO IMPACT",
+   "nasaSimulation": null,
+   "bucket": "no-issue (candidate verified)"
+  },
+  {
+   "destinationId": "seoul",
+   "city": "Seoul",
+   "country": "South Korea",
+   "projectAirport": {
+    "iata": "ICN",
+    "icao": "RKSI",
+    "name": "Incheon International Airport",
+    "latitude": 37.4602,
+    "longitude": 126.4407
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "mexico-city",
+   "city": "Mexico City",
+   "country": "Mexico",
+   "projectAirport": {
+    "iata": "MEX",
+    "icao": "MMMX",
+    "name": "Mexico City International Airport",
+    "latitude": 19.4363,
+    "longitude": -99.0721
+   },
+   "suspectedIssue": "dual-airport: Felipe Ángeles (NLU/AIFA) opened 2022-03",
+   "oldAirport": null,
+   "newAirport": {
+    "iata": "NLU",
+    "icao": "MMSM",
+    "note": "Felipe Ángeles"
+   },
+   "replacementDate": null,
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "MEX remains Mexico's busiest airport and the main international gateway; NLU is a growing secondary (7.08M pax 2025, 7th busiest)",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Felipe_%C3%81ngeles_International_Airport",
+      "Mexico Business News"
+     ]
+    }
+   ],
+   "decision": "NO ISSUE — anchored airport (MEX) remains operational and primary",
+   "status": "CURRENT AIRPORT",
+   "impact": "NO IMPACT",
+   "nasaSimulation": null,
+   "bucket": "no-issue (candidate verified)"
+  },
+  {
+   "destinationId": "las-vegas",
+   "city": "Las Vegas",
+   "country": "United States",
+   "projectAirport": {
+    "iata": "LAS",
+    "icao": "KLAS",
+    "name": "Harry Reid International Airport",
+    "latitude": 36.084,
+    "longitude": -115.1538
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "austin",
+   "city": "Austin",
+   "country": "United States",
+   "projectAirport": {
+    "iata": "AUS",
+    "icao": "KAUS",
+    "name": "Austin-Bergstrom International Airport",
+    "latitude": 30.1975,
+    "longitude": -97.6664
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "munich",
+   "city": "Munich",
+   "country": "Germany",
+   "projectAirport": {
+    "iata": "MUC",
+    "icao": "EDDM",
+    "name": "Munich Airport",
+    "latitude": 48.3538,
+    "longitude": 11.7861
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "kyoto",
+   "city": "Osaka",
+   "country": "Japan",
+   "projectAirport": {
+    "iata": "KIX",
+    "icao": "RJBB",
+    "name": "Kansai International Airport",
+    "latitude": 34.4273,
+    "longitude": 135.2444
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "vienna",
+   "city": "Vienna",
+   "country": "Austria",
+   "projectAirport": {
+    "iata": "VIE",
+    "icao": "LOWW",
+    "name": "Vienna International Airport",
+    "latitude": 48.1103,
+    "longitude": 16.5697
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "rovaniemi",
+   "city": "Rovaniemi",
+   "country": "Finland",
+   "projectAirport": {
+    "iata": "RVN",
+    "icao": "EFKT",
+    "name": "Rovaniemi Airport",
+    "latitude": 66.5648,
+    "longitude": 25.8319
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "antalya",
+   "city": "Antalya",
+   "country": "Turkey",
+   "projectAirport": {
+    "iata": "AYT",
+    "icao": "LTAI",
+    "name": "Antalya Airport",
+    "latitude": 36.8987,
+    "longitude": 30.8005
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "madrid",
+   "city": "Madrid",
+   "country": "Spain",
+   "projectAirport": {
+    "iata": "MAD",
+    "icao": "LEMD",
+    "name": "Adolfo Suárez Madrid–Barajas Airport",
+    "latitude": 40.4936,
+    "longitude": -3.5668
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "milan",
+   "city": "Milan",
+   "country": "Italy",
+   "projectAirport": {
+    "iata": "MXP",
+    "icao": "LIMC",
+    "name": "Milan Malpensa Airport",
+    "latitude": 45.6306,
+    "longitude": 8.7281
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "baku",
+   "city": "Baku",
+   "country": "Azerbaijan",
+   "projectAirport": {
+    "iata": "GYD",
+    "icao": "UBBB",
+    "name": "Heydar Aliyev International Airport",
+    "latitude": 40.4675,
+    "longitude": 50.0467
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "abu-dhabi",
+   "city": "Abu Dhabi",
+   "country": "UAE",
+   "projectAirport": {
+    "iata": "AUH",
+    "icao": "OMAA",
+    "name": "Zayed International Airport",
+    "latitude": 24.433,
+    "longitude": 54.6511
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "prague",
+   "city": "Prague",
+   "country": "Czechia",
+   "projectAirport": {
+    "iata": "PRG",
+    "icao": "LKPR",
+    "name": "Václav Havel Airport Prague",
+    "latitude": 50.1008,
+    "longitude": 14.26
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "cologne",
+   "city": "Cologne",
+   "country": "Germany",
+   "projectAirport": {
+    "iata": "CGN",
+    "icao": "EDDK",
+    "name": "Cologne Bonn Airport",
+    "latitude": 50.8659,
+    "longitude": 7.1427
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "osaka",
+   "city": "Osaka",
+   "country": "Japan",
+   "projectAirport": {
+    "iata": "KIX",
+    "icao": "RJBB",
+    "name": "Kansai International Airport",
+    "latitude": 34.4347,
+    "longitude": 135.2441
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "hong-kong",
+   "city": "Hong Kong",
+   "country": "Hong Kong SAR",
+   "projectAirport": {
+    "iata": "HKG",
+    "icao": "VHHH",
+    "name": "Hong Kong International Airport",
+    "latitude": 22.308,
+    "longitude": 113.9185
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "amsterdam",
+   "city": "Amsterdam",
+   "country": "Netherlands",
+   "projectAirport": {
+    "iata": "AMS",
+    "icao": "EHAM",
+    "name": "Amsterdam Airport Schiphol",
+    "latitude": 52.3105,
+    "longitude": 4.7683
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "san-francisco",
+   "city": "San Francisco",
+   "country": "USA",
+   "projectAirport": {
+    "iata": "SFO",
+    "icao": "KSFO",
+    "name": "San Francisco International Airport",
+    "latitude": 37.6213,
+    "longitude": -122.379
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "bali",
+   "city": "Bali (Denpasar)",
+   "country": "Indonesia",
+   "projectAirport": {
+    "iata": "DPS",
+    "icao": "WADD",
+    "name": "I Gusti Ngurah Rai International Airport",
+    "latitude": -8.7482,
+    "longitude": 115.1675
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "boston",
+   "city": "Boston",
+   "country": "USA",
+   "projectAirport": {
+    "iata": "BOS",
+    "icao": "KBOS",
+    "name": "General Edward Lawrence Logan International Airport",
+    "latitude": 42.3656,
+    "longitude": -71.0096
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "beijing",
+   "city": "Beijing",
+   "country": "China",
+   "projectAirport": {
+    "iata": "PEK",
+    "icao": "ZBAA",
+    "name": "Beijing Capital International Airport",
+    "latitude": 40.0799,
+    "longitude": 116.6031
+   },
+   "suspectedIssue": "dual-airport: Daxing (PKX) opened 2019-09",
+   "oldAirport": null,
+   "newAirport": {
+    "iata": "PKX",
+    "icao": "ZBAD",
+    "note": "Beijing Daxing"
+   },
+   "replacementDate": null,
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "PEK never closed; both airports handled 100.06M pax in 2025; PEK alone ~1.67M trips in one holiday period",
+     "sources": [
+      "https://www.chinadaily.com.cn/a/202509/29/WS68da0986a310f735438b2e95.html",
+      "https://en.wikipedia.org/wiki/Beijing_Capital_International_Airport"
+     ]
+    }
+   ],
+   "decision": "NO ISSUE — anchored airport (PEK) remains operational",
+   "status": "CURRENT AIRPORT",
+   "impact": "NO IMPACT",
+   "nasaSimulation": null,
+   "bucket": "no-issue (candidate verified)"
+  },
+  {
+   "destinationId": "shanghai",
+   "city": "Shanghai",
+   "country": "China",
+   "projectAirport": {
+    "iata": "PVG",
+    "icao": "ZSPD",
+    "name": "Shanghai Pudong International Airport",
+    "latitude": 31.1443,
+    "longitude": 121.8083
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "guangzhou",
+   "city": "Guangzhou",
+   "country": "China",
+   "projectAirport": {
+    "iata": "CAN",
+    "icao": "ZGGG",
+    "name": "Guangzhou Baiyun International Airport",
+    "latitude": 23.3925,
+    "longitude": 113.2988
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "chengdu",
+   "city": "Chengdu",
+   "country": "China",
+   "projectAirport": {
+    "iata": "CTU",
+    "icao": "ZUUU",
+    "name": "Chengdu Shuangliu International Airport",
+    "latitude": 30.5785,
+    "longitude": 103.9471
+   },
+   "suspectedIssue": "dual-airport city: Tianfu (TFU) opened 2021-06; is Shuangliu (CTU) still operational?",
+   "oldAirport": null,
+   "newAirport": {
+    "iata": "TFU",
+    "icao": "ZUTF",
+    "note": "new second airport"
+   },
+   "replacementDate": null,
+   "evidence": [
+    {
+     "tier": 3,
+     "fact": "CTU fully operational in 2026 (live flight info; ~222k movements 2025; Cathay Pacific relocates ops BACK to CTU from 2026-07-31)",
+     "sources": [
+      "https://www.cdairport.com/en/ (official)",
+      "https://www.cathaypacific.com/cx/id_ID/latest-news/security-and-operational-changes/relocation-of-passenger-flight-operations-to-ctu.html"
+     ]
+    }
+   ],
+   "decision": "NO ISSUE — anchored airport (CTU) remains operational (dual-airport city)",
+   "status": "CURRENT AIRPORT",
+   "impact": "NO IMPACT",
+   "nasaSimulation": null,
+   "bucket": "no-issue (candidate verified)"
+  },
+  {
+   "destinationId": "xian",
+   "city": "Xi'an",
+   "country": "China",
+   "projectAirport": {
+    "iata": "XIY",
+    "icao": "ZLXY",
+    "name": "Xi'an Xianyang International Airport",
+    "latitude": 34.4471,
+    "longitude": 108.7519
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "hangzhou",
+   "city": "Hangzhou",
+   "country": "China",
+   "projectAirport": {
+    "iata": "HGH",
+    "icao": "ZSHC",
+    "name": "Hangzhou Xiaoshan International Airport",
+    "latitude": 30.2348,
+    "longitude": 120.4293
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "chongqing",
+   "city": "Chongqing",
+   "country": "China",
+   "projectAirport": {
+    "iata": "CKG",
+    "icao": "ZUCK",
+    "name": "Chongqing Jiangbei International Airport",
+    "latitude": 29.7192,
+    "longitude": 106.6417
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "macau",
+   "city": "Macau",
+   "country": "China",
+   "projectAirport": {
+    "iata": "MFM",
+    "icao": "VMMC",
+    "name": "Macau International Airport",
+    "latitude": 22.1496,
+    "longitude": 113.5914
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "zurich",
+   "city": "Zurich",
+   "country": "Switzerland",
+   "projectAirport": {
+    "iata": "ZRH",
+    "icao": "LSZH",
+    "name": "Zurich Airport",
+    "latitude": 47.4647,
+    "longitude": 8.5492
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "los-angeles",
+   "city": "Los Angeles",
+   "country": "USA",
+   "projectAirport": {
+    "iata": "LAX",
+    "icao": "KLAX",
+    "name": "Los Angeles International Airport",
+    "latitude": 33.9425,
+    "longitude": -118.408
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "vancouver",
+   "city": "Vancouver",
+   "country": "Canada",
+   "projectAirport": {
+    "iata": "YVR",
+    "icao": "CYVR",
+    "name": "Vancouver International Airport",
+    "latitude": 49.1947,
+    "longitude": -123.1792
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "melbourne",
+   "city": "Melbourne",
+   "country": "Australia",
+   "projectAirport": {
+    "iata": "MEL",
+    "icao": "YMML",
+    "name": "Melbourne Airport",
+    "latitude": -37.669,
+    "longitude": 144.841
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "auckland",
+   "city": "Auckland",
+   "country": "New Zealand",
+   "projectAirport": {
+    "iata": "AKL",
+    "icao": "NZAA",
+    "name": "Auckland Airport",
+    "latitude": -37.0082,
+    "longitude": 174.785
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "taipei",
+   "city": "Taipei",
+   "country": "Taiwan",
+   "projectAirport": {
+    "iata": "TPE",
+    "icao": "RCTP",
+    "name": "Taiwan Taoyuan International Airport",
+    "latitude": 25.0777,
+    "longitude": 121.2328
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "busan",
+   "city": "Busan",
+   "country": "South Korea",
+   "projectAirport": {
+    "iata": "PUS",
+    "icao": "RKPK",
+    "name": "Gimhae International Airport",
+    "latitude": 35.1795,
+    "longitude": 128.9382
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "hanoi",
+   "city": "Hanoi",
+   "country": "Vietnam",
+   "projectAirport": {
+    "iata": "HAN",
+    "icao": "VVNB",
+    "name": "Noi Bai International Airport",
+    "latitude": 21.2212,
+    "longitude": 105.8072
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "ho-chi-minh-city",
+   "city": "Ho Chi Minh City",
+   "country": "Vietnam",
+   "projectAirport": {
+    "iata": "SGN",
+    "icao": "VVTS",
+    "name": "Tan Son Nhat International Airport",
+    "latitude": 10.8188,
+    "longitude": 106.8069
+   },
+   "status": "CONFIRMED LEGACY (anchor coordinate) — correction approved (Decision A), applied to pilot",
+   "impact": "METADATA-ONLY IMPACT (applied)",
+   "nasaSimulation": "applied in v8.7 dataset",
+   "bucket": "confirmed-legacy-airport"
+  },
+  {
+   "destinationId": "kuala-lumpur",
+   "city": "Kuala Lumpur",
+   "country": "Malaysia",
+   "projectAirport": {
+    "iata": "KUL",
+    "icao": "WMKK",
+    "name": "Kuala Lumpur International Airport",
+    "latitude": 2.7456,
+    "longitude": 101.7099
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "cebu",
+   "city": "Cebu",
+   "country": "Philippines",
+   "projectAirport": {
+    "iata": "CEB",
+    "icao": "RPVB",
+    "name": "Mactan-Cebu International Airport",
+    "latitude": 10.3075,
+    "longitude": 123.979
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "lisbon",
+   "city": "Lisbon",
+   "country": "Portugal",
+   "projectAirport": {
+    "iata": "LIS",
+    "icao": "LPPT",
+    "name": "Humberto Delgado Airport",
+    "latitude": 38.7742,
+    "longitude": -9.1342
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "budapest",
+   "city": "Budapest",
+   "country": "Hungary",
+   "projectAirport": {
+    "iata": "BUD",
+    "icao": "LHBP",
+    "name": "Budapest Ferenc Liszt International Airport",
+    "latitude": 47.4369,
+    "longitude": 19.2556
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "florence",
+   "city": "Florence",
+   "country": "Italy",
+   "projectAirport": {
+    "iata": "FLR",
+    "icao": "LIRQ",
+    "name": "Florence Peretola Airport",
+    "latitude": 43.81,
+    "longitude": 11.2051
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "venice",
+   "city": "Venice",
+   "country": "Italy",
+   "projectAirport": {
+    "iata": "VCE",
+    "icao": "LIPZ",
+    "name": "Venice Marco Polo Airport",
+    "latitude": 45.5053,
+    "longitude": 12.3519
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "athens",
+   "city": "Athens",
+   "country": "Greece",
+   "projectAirport": {
+    "iata": "ATH",
+    "icao": "LGAV",
+    "name": "Athens Eleftherios Venizelos Airport",
+    "latitude": 37.9364,
+    "longitude": 23.9445
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "edinburgh",
+   "city": "Edinburgh",
+   "country": "United Kingdom",
+   "projectAirport": {
+    "iata": "EDI",
+    "icao": "EGPH",
+    "name": "Edinburgh Airport",
+    "latitude": 55.95,
+    "longitude": -3.3725
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "copenhagen",
+   "city": "Copenhagen",
+   "country": "Denmark",
+   "projectAirport": {
+    "iata": "CPH",
+    "icao": "EKCH",
+    "name": "Copenhagen Airport",
+    "latitude": 55.618,
+    "longitude": 12.656
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "seville",
+   "city": "Seville",
+   "country": "Spain",
+   "projectAirport": {
+    "iata": "SVQ",
+    "icao": "LEZL",
+    "name": "Seville Airport",
+    "latitude": 37.418,
+    "longitude": -5.8931
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  },
+  {
+   "destinationId": "toronto",
+   "city": "Toronto",
+   "country": "Canada",
+   "projectAirport": {
+    "iata": "YYZ",
+    "icao": "CYYZ",
+    "name": "Toronto Pearson International Airport",
+    "latitude": 43.6777,
+    "longitude": -79.6248
+   },
+   "status": "NO ISSUE",
+   "impact": "NO IMPACT",
+   "note": "no relocation/replacement signal; OurAirports identity+coordinate match verified in Phase 1B/1C elevation audit (135 exact within 2 km + 10 resolved)",
+   "bucket": "no-issue"
+  }
+ ]
+}

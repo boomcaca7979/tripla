@@ -1,0 +1,18 @@
+{
+  "dataset": "nasa_canonical_145_anchor-corrected-v87.json",
+  "methodologyVersion": "utrip-methodology-2026.09.v8.7",
+  "fields": {
+    "tempMeanC": 0,
+    "tempHighC": 0,
+    "tempLowC": 0,
+    "precipMm": 0,
+    "precipDaysGe1mm": 0,
+    "sunshineHours": 1740,
+    "daylightHours": 0
+  },
+  "sunshineOnlyNull": true,
+  "provenanceIncomplete": [],
+  "missingDefinitionCount": 0,
+  "ambiguousDefinitionCount": 0,
+  "contradictoryNullabilityCount": 0
+}

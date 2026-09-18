@@ -1,0 +1,125 @@
+{
+  "spec": "UTRIPLA-INNER-EXPERIENCE-SPEC-v1",
+  "status": "DESIGN_ONLY",
+  "date": "2026-09-13",
+  "codebase": {
+    "framework": "Next.js 16.2.7",
+    "react": "19.2.4",
+    "tailwind": "4",
+    "rendering": "SSG with generateStaticParams + dynamicParams=false on all five detail page types",
+    "designSystem": "ut-* tokens in src/app/globals.css:9-156 (warm paper #faf9f6, terracotta accent #a4513b, Instrument Serif display, Geist Sans body, Geist Mono readouts)"
+  },
+  "datasets": {
+    "destinations": { "count": 145, "file": "src/data/destinations.ts (+extended a/b/d)", "keyFields": ["city","country","region(4-union)","highlights[5]","interests[]","airport.{latitude,longitude,timezone,iata}","weatherScore.{overall,breakdown}","budgetPerDay","image|null"] },
+    "climate": { "file": "src/data/climate/nasa-canonical.ts + nasa-power-canonical-v1.json", "records": 145, "perMonth": ["tempMeanC","tempHighC","tempLowC","precipMm","precipDaysGe1mm","daylightHours","tier(Favourable|Workable|Challenging)"], "rules": ["build-fail on missing record","R1-R7 untouched","sunshineHours always null - must not be visualized"] },
+    "trips": { "count": 280, "file": "src/data/trips.ts (+extended a-g)", "keyFields": ["itinerary day/activities{time,name,emoji}","restaurants","bestSeason","budget/estimatedCost"] },
+    "guides": { "count": 342, "file": "src/data/guides.ts (+25 wave files)", "keyFields": ["sections[]","practicalInfo[]","itinerary","faq","related*Slugs","planner"] },
+    "liveWeather": { "endpoint": "/api/weather (Open-Meteo, existing)", "note": "only live weather source; home hash weather must never be shown as real on inner pages" }
+  },
+  "audit": {
+    "problems": [
+      "detail pages are editorial documents, not exploration products: only FAQ details + month tablist are interactive",
+      "zero maps, zero climate charts, zero visual data trajectories on inner pages",
+      "hub pages still on legacy gray/blue palette with uniform card grids",
+      "region page fully static, 4 macro-regions only, no interactivity",
+      "guide page is a formatted article (wordiest page type)",
+      "homepage 'Already know where?' (PlanLater, src/components/home/PlanLater.tsx) is the LAST section; #hero-search anchor lives there",
+      "destination longDescription ~50-70 words of prose before any interaction; 2 PlaceDecision text modules",
+      "unused real data: airport coordinates, weatherScore.breakdown, per-month NASA tiers"
+    ],
+    "reusable": ["InnerSection","InnerBreadcrumb","Eyebrow","PlacePractical","PlaceDecision","FaqList","EditorialIndex","HotelModule","InnerCTA","PlaceAtmosphere","JourneyAtmosphere","SeasonAtmosphere","LocalStateReadout","PlaceHighlights(adapt)","JourneyRoute","JourneyTimeline","JourneyProgress(adapt)","MonthSelector(adapt->drive ClimateYear)","ClimateTable(keep for SEO)","VerdictTag","WeatherScore","Timeline(guide)","SearchBar+PlanLater(move only)"],
+    "frozen": ["src/components/home/HomeEnvironment","HomeHero","TimeDock","DiscoveryStage","RoutesStage","GuidesStage","SearchBar internals","entire Hero visual design"],
+    "references": [
+      { "product": "Apple Weather", "pattern": "status-first hierarchy + pannable data bands" },
+      { "product": "Polarsteps", "pattern": "vertical journey line, day nodes, photo-dominant" },
+      { "product": "Airbnb explore", "pattern": "map/content co-driven state" },
+      { "product": "Wanderlog", "pattern": "days+durations as one connected object" },
+      { "product": "CN Traveler / Timeshifter", "pattern": "month-first decision UI" },
+      { "product": "Kinfolk / Cereal", "pattern": "editorial calm, hairline rhythm, data as instruments" }
+    ]
+  },
+  "designSystem": {
+    "newTokens": ["--ut-region-* (4 fixed region tints, deterministic server-side)", "--ut-verdict-good", "--ut-verdict-workable", "--ut-verdict-challenging", "--ut-data-line", "--ut-data-fill"],
+    "layoutRhythm": "12-col, py-16/24 sections, alternating full-width visual band -> instrument row -> narrow context column; uniform card grids banned on detail pages",
+    "verdictMapping": "Favourable->GOOD, Workable->WORKABLE, Challenging->CHALLENGING (single shared legend)"
+  },
+  "components": {
+    "new": [
+      { "name": "NowPanel", "type": "client island", "usedBy": ["destination"], "data": "Intl time/season + /api/weather live temp, fallback NASA normals labeled CLIMATE NORMAL" },
+      { "name": "ClimateYear", "type": "client island, hand-rolled SVG", "usedBy": ["destination", "best-time"], "budget": "<=6KB gz", "data": "12-month verdict band + temp range curve + precip bars + rain-day dots" },
+      { "name": "RegionMiniMap", "type": "server SVG + client highlight", "usedBy": ["destination", "region"], "data": "real airport.lat/long equirectangular plot, no map library" },
+      { "name": "VibeSelector", "type": "client island", "usedBy": ["destination"], "data": "real interests[] -> vibe chips; filters highlights/guides/trips" },
+      { "name": "RegionMapExplorer", "type": "client island", "usedBy": ["region"], "data": "month control -> NASA tier per city dot + counts readout" },
+      { "name": "FieldGuideModules", "type": "server + native details", "usedBy": ["guide"], "data": "sections[] bucketed WHEN/MOVE/EAT/STAY/DON'T MISS/GOOD TO KNOW/NOTES" },
+      { "name": "WeatherWindow", "type": "server", "usedBy": ["trip"], "data": "NASA verdict band across trip months" }
+    ],
+    "adapter": "src/lib/inner-state.ts (pure functions: regionTintFor, projectRegionPoints, verdictForMonth, tripMonthWindow, interestToVibe, bucketGuideSection)",
+    "banned": ["map tile libraries", "WebGL", "framer-motion", "recharts on inner pages", "new runtime deps"]
+  },
+  "pages": {
+    "destination": { "verb": "EXPLORE", "sections": ["Hero+state readout (keep PlaceHero)", "NOW (NowPanel)", "EXPLORE THE CITY (CityExplorer: highlight board + RegionMiniMap)", "PICK YOUR VIBE (VibeSelector)", "WHEN TO GO (ClimateYear)", "About {city} demoted prose details", "KEEP EXPLORING (EditorialIndex vibe-filtered, PlacePractical, HotelModule, CTA, FAQ)"] },
+    "guide": { "verb": "PREPARE", "sections": ["EditorialHero + city context readout", "at-a-glance 6-module band", "FieldGuideModules (first paragraph visible, rest in details)", "journey window instrument", "FAQ/CTA/related unchanged"] },
+    "trip": { "verb": "JOURNEY", "sections": ["keep JourneyHero/JourneyRoute/JourneyTimeline/JourneyProgress", "WeatherWindow replaces text best-time decision", "pace strip (derivePace)", "leg durations on day nodes", "prose demoted"] },
+    "region": { "verb": "DISCOVER", "sections": ["ut-* hero with mono readout", "RegionMapExplorer (map + month control + verdict dots + readout)", "season band (Favourable count per month)", "verdict-tagged destination rows sorted by month tier", "trip rows verdict-tagged"] },
+    "bestTime": { "verb": "UNDERSTAND", "sections": ["ClimateHero unchanged", "ClimateYear inserted under hero (shared month state with MonthSelector)", "MonthSelector + ClimateTable kept", "reasoning prose demoted to details", "R1-R7/NASA/BestMonths untouched"] }
+  },
+  "homepageChange": {
+    "file": "src/app/page.tsx",
+    "change": "move <PlanLater /> (line 79) between <HomeHero /> (line 75) and <DiscoveryStage /> (line 76)",
+    "allowedAdjustments": ["PlanLater spacing py-20/24 -> py-14/20", "hero fade-band top-padding clearance"],
+    "forbidden": ["redesigning PlanLater/SearchBar", "any Hero change", "any other home section change"],
+    "anchors": "#ready and #hero-search move near top; hero CTAs and all deep links keep working"
+  },
+  "interactionSystem": {
+    "rules": ["interaction changes information (state/readout/filter/map color), never decorative-only", "44px targets, visible focus, full keyboard, aria-selected/expanded/live", "single-selection per page except comparison views", "hover=preview, click=commit", "reduced-motion + saveData shutoffs reused from globals.css:732-778"]
+  },
+  "textMinimization": {
+    "rules": ["max 2 sentences of prose before first interactive/visual element on detail pages", "longDescription/introduction demoted to SEO-safe details blocks (content in DOM)", "section headings <=4 words, status lines <=12 words", "no 300-500 word intros anywhere", "JSON-LD text sources unchanged"]
+  },
+  "responsive": ["instrument rows collapse 2x2 on mobile", "ClimateYear horizontal scroll+snap with sticky selected readout", "RegionMapExplorer stacks map-above-list with synced selection", "JourneySpine stays vertical", "existing breakpoints sm/lg"],
+  "performance": {
+    "budgets": ["SSG retained on all five types", "+<=15KB gz new client JS per page", "no new dependencies", "LCP element unchanged (hero)", "no CLS from instruments (fixed heights/aspect-ratio)"],
+    "hydration": "deterministic SSG first paint for all islands (MonthSelector/LocalStateReadout precedent) to avoid React #418"
+  },
+  "seo": {
+    "preserved": ["URLs", "generateMetadata", "canonical", "all JSON-LD blocks", "ClimateTable semantic table", "guide full text in DOM", "sitemap/indexability", "internal linking"],
+    "freeFixes": ["/guides hub missing JSON-LD", "/best-time-to-visit hub stale '12 top destinations' copy vs 145", "region breadcrumb position-2 points to /destinations (regions/[region]/page.tsx:125)"]
+  },
+  "dataIntegrity": {
+    "rules": ["NASA canonical only; R1-R7/tiers/bestMonthsBaseline untouched; build-fail assert stays", "live weather only via existing /api/weather with labeled CLIMATE NORMAL fallback", "coordinates only from airport.lat/long", "never visualize sunshineHours (null) or ruleId", "no fake reviews/counts/popularity/live data/fabricated neighborhoods; areas=highlights[], vibes=interests[], statuses=NASA tiers, durations=itinerary time blocks"]
+  },
+  "implementationSequence": [
+    "1. inner-state.ts adapter + verdict/region tokens + tests",
+    "2. ClimateYear component",
+    "3. Destination rebuild",
+    "4. Best Time integration",
+    "5. Trip refinement",
+    "6. Guide rebuild",
+    "7. Region rebuild",
+    "8. Home PlanLater move",
+    "9. Full audit: responsive/perf/a11y/SEO diff/data-integrity + free SEO fixes"
+  ],
+  "acceptanceCriteria": {
+    "home_alreadyKnowWhereDiscoverability": "PASS iff #ready within first ~1.5 viewports at 1440x900 and 390x844; zero other home visual diff",
+    "destination": ["visual exploration", "low-text (<=2 sentences before interaction)", "interaction (vibe/highlight/month all state-changing)"],
+    "guide": ["visual information modules", "low-text"],
+    "trip": ["journey visualization (spine + WeatherWindow)"],
+    "region": ["discovery interaction (month re-colors map+list)"],
+    "bestTime": ["climate visualization (12 months x 3 metrics, keyboard-navigable)"],
+    "seo": "metadata/JSON-LD byte-diff = 0",
+    "performance": "SSG + JS budget + no new deps",
+    "responsive": "390/768/1280/1440",
+    "accessibility": "keyboard-complete, ARIA, verdict contrast >=4.5:1, reduced-motion",
+    "dataIntegrity": "no fake data; NASA assert passing",
+    "noProductionApiRegression": "/api/weather, /api/geocoding, planner deep links verified"
+  },
+  "risks": [
+    "image sparsity across 145 destinations -> atmosphere-field fallback carries weight",
+    "guide heading variance -> conservative bucketing to NOTES",
+    "abstract SVG map must not masquerade as basemap -> mono lat/long readout on selection",
+    "hydration discipline for new islands (deterministic initial states)",
+    "home freeze -> screenshot diff of Hero before/after PlanLater move"
+  ],
+  "deliverablesThisRound": ["UTRIPLA-INNER-EXPERIENCE-SPEC-v1.md", "UTRIPLA-INNER-EXPERIENCE-SPEC-v1.json"],
+  "nextStep": "await user confirmation before STEP 3 (template creation) and any code development"
+}

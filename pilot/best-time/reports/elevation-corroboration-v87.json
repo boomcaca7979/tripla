@@ -1,0 +1,3500 @@
+{
+ "generatedAt": "2026-09-12T12:12:27.400505+00:00",
+ "artifact": "elevation-corroboration-v87.json",
+ "campaignVersion": "elevation-corroboration-v87",
+ "methodologyVersion": "utrip-methodology-2026.09.v8.7",
+ "corroborationSource": {
+  "provider": "OpenStreetMap via Overpass API",
+  "tier": 4,
+  "role": "corroboration ONLY (never approval basis alone)",
+  "archivedRaw": "raw/osm/aerodromes_2026-09-12.json"
+ },
+ "recordsProcessed": 145,
+ "statusCounts": {
+  "CORROBORATED": 118,
+  "PENDING": 21,
+  "FLAGGED": 4,
+  "REJECTED": 1,
+  "NEEDS_REVIEW": 1
+ },
+ "rows": [
+  {
+   "destinationId": "abu-dhabi",
+   "airport": "Zayed International Airport",
+   "iata": "AUH",
+   "icao": "OMAA",
+   "anchor": {
+    "lat": 24.433,
+    "lon": 54.6511
+   },
+   "candidateElevationM": 26.8,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/685739503",
+    "osmName": "مطار زايد الدولي",
+    "eleTag": "25.29",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -1.5,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.92 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "adelaide",
+   "airport": "Adelaide International Airport",
+   "iata": "ADL",
+   "icao": "YPAD",
+   "anchor": {
+    "lat": -34.945,
+    "lon": 138.5286
+   },
+   "candidateElevationM": 6.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/146489105",
+    "osmName": "Adelaide Airport",
+    "eleTag": "6",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.34 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "amalfi-coast",
+   "airport": "Naples International Airport",
+   "iata": "NAP",
+   "icao": "LIRN",
+   "anchor": {
+    "lat": 40.886,
+    "lon": 14.2908
+   },
+   "candidateElevationM": 89.6,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/22652287",
+    "osmName": "Aeroporto di Napoli Capodichino",
+    "eleTag": "89.61",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.27 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "amsterdam",
+   "airport": "Amsterdam Airport Schiphol",
+   "iata": "AMS",
+   "icao": "EHAM",
+   "anchor": {
+    "lat": 52.3105,
+    "lon": 4.7683
+   },
+   "candidateElevationM": -3.4,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/12470437",
+    "osmName": "Luchthaven Schiphol",
+    "eleTag": "-3",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.95 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "antalya",
+   "airport": "Antalya International Airport",
+   "iata": "AYT",
+   "icao": "LTAI",
+   "anchor": {
+    "lat": 36.8987,
+    "lon": 30.8005
+   },
+   "candidateElevationM": 53.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/2862287",
+    "osmName": "Antalya Havalimanı (AYT)",
+    "eleTag": "54",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.40 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "athens",
+   "airport": "Athens Eleftherios Venizelos International Airport",
+   "iata": "ATH",
+   "icao": "LGAV",
+   "anchor": {
+    "lat": 37.9364,
+    "lon": 23.9445
+   },
+   "candidateElevationM": 93.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/13105563",
+    "osmName": "Διεθνής Αερολιμένας Αθηνών «Ελευθέριος Βενιζέλος»",
+    "eleTag": "94",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.49 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "auckland",
+   "airport": "Auckland International Airport",
+   "iata": "AKL",
+   "icao": "NZAA",
+   "anchor": {
+    "lat": -37.0082,
+    "lon": 174.785
+   },
+   "candidateElevationM": 7.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/14260471",
+    "osmName": "Auckland Airport",
+    "eleTag": "7",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.31 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "austin",
+   "airport": "Austin Bergstrom International Airport",
+   "iata": "AUS",
+   "icao": "KAUS",
+   "anchor": {
+    "lat": 30.1975,
+    "lon": -97.6664
+   },
+   "candidateElevationM": 165.2,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/209060967",
+    "osmName": "Austin-Bergstrom International Airport",
+    "eleTag": "158",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -7.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.51 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 10m; within acceptance threshold)"
+  },
+  {
+   "destinationId": "baku",
+   "airport": "Heydar Aliyev International Airport",
+   "iata": "GYD",
+   "icao": "UBBB",
+   "anchor": {
+    "lat": 40.4675,
+    "lon": 50.0467
+   },
+   "candidateElevationM": 3.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/163717459",
+    "osmName": "Heydər Əliyev Beynəlxalq Aeroportu (GYD)",
+    "eleTag": "3",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.58 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "bali",
+   "airport": "Denpasar I Gusti Ngurah Rai International Airport",
+   "iata": "DPS",
+   "icao": "WADD",
+   "anchor": {
+    "lat": -8.7482,
+    "lon": 115.1675
+   },
+   "candidateElevationM": 4.3,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.18 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "banff",
+   "airport": "Calgary International Airport",
+   "iata": "YYC",
+   "icao": "CYYC",
+   "anchor": {
+    "lat": 51.1139,
+    "lon": -114.0203
+   },
+   "candidateElevationM": 1084.2,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/234496840",
+    "osmName": "Calgary International Airport",
+    "eleTag": "1099",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 14.8,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.14 km anchor-to-OSM-centroid",
+   "finalStatus": "FLAGGED (5-20m band per v8.7 rules; secondary review)"
+  },
+  {
+   "destinationId": "bangkok",
+   "airport": "Suvarnabhumi Airport",
+   "iata": "BKK",
+   "icao": "VTBS",
+   "anchor": {
+    "lat": 13.69,
+    "lon": 100.7501
+   },
+   "candidateElevationM": 1.5,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/6641648",
+    "osmName": "ท่าอากาศยานสุวรรณภูมิ",
+    "eleTag": "2",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.5,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.96 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "barcelona",
+   "airport": "Josep Tarradellas Barcelona-El Prat Airport",
+   "iata": "BCN",
+   "icao": "LEBL",
+   "anchor": {
+    "lat": 41.2974,
+    "lon": 2.0833
+   },
+   "candidateElevationM": 3.7,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/314726876",
+    "osmName": "Aeroport Josep Tarradellas Barcelona-el Prat",
+    "eleTag": "3.8",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.08 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "beijing",
+   "airport": "Beijing Capital International Airport",
+   "iata": "PEK",
+   "icao": "ZBAA",
+   "anchor": {
+    "lat": 40.0799,
+    "lon": 116.6031
+   },
+   "candidateElevationM": 35.4,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/292809708",
+    "osmName": "北京首都国际机场",
+    "eleTag": "35",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.79 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "berlin",
+   "airport": "Berlin Brandenburg Airport",
+   "iata": "BER",
+   "icao": "EDDB",
+   "anchor": {
+    "lat": 52.3667,
+    "lon": 13.5033
+   },
+   "candidateElevationM": 47.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/859790021",
+    "osmName": "Flughafen Berlin Brandenburg",
+    "eleTag": "47",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.9,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.45 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "bologna",
+   "airport": "Bologna Guglielmo Marconi Airport",
+   "iata": "BLQ",
+   "icao": "LIPE",
+   "anchor": {
+    "lat": 44.5354,
+    "lon": 11.2887
+   },
+   "candidateElevationM": 37.5,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/11212141",
+    "osmName": "Aeroporto di Bologna \"Guglielmo Marconi\"",
+    "eleTag": "37",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.5,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.12 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "boston",
+   "airport": "Boston Logan International Airport",
+   "iata": "BOS",
+   "icao": "KBOS",
+   "anchor": {
+    "lat": 42.3656,
+    "lon": -71.0096
+   },
+   "candidateElevationM": 6.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/291828579",
+    "osmName": "Logan International Airport",
+    "eleTag": "6",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.27 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "brisbane",
+   "airport": "Brisbane International Airport",
+   "iata": "BNE",
+   "icao": "YBBN",
+   "anchor": {
+    "lat": -27.3842,
+    "lon": 153.1175
+   },
+   "candidateElevationM": 4.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/17378993",
+    "osmName": "Brisbane Airport",
+    "eleTag": "4",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.42 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "brussels",
+   "airport": "Brussels Airport",
+   "iata": "BRU",
+   "icao": "EBBR",
+   "anchor": {
+    "lat": 50.9014,
+    "lon": 4.4844
+   },
+   "candidateElevationM": 53.3,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/370594935",
+    "osmName": "Brussels Airport",
+    "eleTag": "56",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 2.7,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.11 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "budapest",
+   "airport": "Budapest Liszt Ferenc International Airport",
+   "iata": "BUD",
+   "icao": "LHBP",
+   "anchor": {
+    "lat": 47.4369,
+    "lon": 19.2556
+   },
+   "candidateElevationM": 150.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/2798244",
+    "osmName": "Budapest Liszt Ferenc Nemzetközi Repülőtér",
+    "eleTag": "151",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.22 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "buenos-aires",
+   "airport": "Ezeiza International Airport - Ministro Pistarini",
+   "iata": "EZE",
+   "icao": "SAEZ",
+   "anchor": {
+    "lat": -34.8222,
+    "lon": -58.5358
+   },
+   "candidateElevationM": 20.4,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/8940835",
+    "osmName": "Aeropuerto Internacional Ministro Pistarini",
+    "eleTag": "20",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.67 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "busan",
+   "airport": "Gimhae International Airport",
+   "iata": "PUS",
+   "icao": "RKPK",
+   "anchor": {
+    "lat": 35.1795,
+    "lon": 128.9382
+   },
+   "candidateElevationM": 1.8,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/4450294",
+    "osmName": "김해국제공항",
+    "eleTag": "2",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.08 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "cairns",
+   "airport": "Cairns International Airport",
+   "iata": "CNS",
+   "icao": "YBCS",
+   "anchor": {
+    "lat": -16.8858,
+    "lon": 145.7553
+   },
+   "candidateElevationM": 3.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/461758871",
+    "osmName": "Cairns Airport",
+    "eleTag": "3",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.04 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "cancun",
+   "airport": "Cancún International Airport",
+   "iata": "CUN",
+   "icao": "MMUN",
+   "anchor": {
+    "lat": 21.0365,
+    "lon": -86.8771
+   },
+   "candidateElevationM": 6.7,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.49 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "cebu",
+   "airport": "Mactan Cebu International Airport",
+   "iata": "CEB",
+   "icao": "RPVM",
+   "anchor": {
+    "lat": 10.3075,
+    "lon": 123.979
+   },
+   "candidateElevationM": 9.4,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/4040104",
+    "osmName": "Mactan–Cebu International Airport",
+    "eleTag": "11",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 1.6,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.30 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "chengdu",
+   "airport": "Chengdu Shuangliu International Airport",
+   "iata": "CTU",
+   "icao": "ZUUU",
+   "anchor": {
+    "lat": 30.5785,
+    "lon": 103.9471
+   },
+   "candidateElevationM": 495.3,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/9484398",
+    "osmName": "成都双流国际机场",
+    "eleTag": "495",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.3,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "2.65 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "chiang-mai",
+   "airport": "Chiang Mai International Airport",
+   "iata": "CNX",
+   "icao": "VTCC",
+   "anchor": {
+    "lat": 18.7669,
+    "lon": 98.9626
+   },
+   "candidateElevationM": 315.8,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.23 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "chicago",
+   "airport": "Chicago O'Hare International Airport",
+   "iata": "ORD",
+   "icao": "KORD",
+   "anchor": {
+    "lat": 41.9742,
+    "lon": -87.9073
+   },
+   "candidateElevationM": 207.3,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/13423944",
+    "osmName": "O'Hare International Airport",
+    "eleTag": "204",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -3.3,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.46 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "chongqing",
+   "airport": "Chongqing Jiangbei International Airport",
+   "iata": "CKG",
+   "icao": "ZUCK",
+   "anchor": {
+    "lat": 29.7192,
+    "lon": 106.6417
+   },
+   "candidateElevationM": 416.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.63 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "christchurch",
+   "airport": "Christchurch International Airport",
+   "iata": "CHC",
+   "icao": "NZCH",
+   "anchor": {
+    "lat": -43.4894,
+    "lon": 172.5322
+   },
+   "candidateElevationM": 37.5,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/306945956",
+    "osmName": "Christchurch Airport",
+    "eleTag": "37",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.5,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.59 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "cologne",
+   "airport": "Cologne Bonn Airport",
+   "iata": "CGN",
+   "icao": "EDDK",
+   "anchor": {
+    "lat": 50.8659,
+    "lon": 7.1427
+   },
+   "candidateElevationM": 92.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/2269304",
+    "osmName": "Flughafen Köln/Bonn",
+    "eleTag": "77",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -15.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.22 km anchor-to-OSM-centroid",
+   "finalStatus": "FLAGGED (5-20m band per v8.7 rules; secondary review)"
+  },
+  {
+   "destinationId": "colombo",
+   "airport": "Bandaranaike International Colombo Airport",
+   "iata": "CMB",
+   "icao": "VCBI",
+   "anchor": {
+    "lat": 7.1808,
+    "lon": 79.8841
+   },
+   "candidateElevationM": 9.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/183539977",
+    "osmName": "Bandaranaike International Airport",
+    "eleTag": "8",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -1.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.16 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "copenhagen",
+   "airport": "Copenhagen Kastrup Airport",
+   "iata": "CPH",
+   "icao": "EKCH",
+   "anchor": {
+    "lat": 55.618,
+    "lon": 12.656
+   },
+   "candidateElevationM": 5.2,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/12786040",
+    "osmName": "Københavns Lufthavn",
+    "eleTag": "5",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.49 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "cordoba",
+   "airport": "Córdoba Airport",
+   "iata": "ODB",
+   "icao": "LEBA",
+   "anchor": {
+    "lat": 37.8444,
+    "lon": -4.8491
+   },
+   "candidateElevationM": 90.5,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/180735799",
+    "osmName": "Aeropuerto de Córdoba",
+    "eleTag": "94",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 3.5,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.13 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "da-nang",
+   "airport": "Da Nang International Airport",
+   "iata": "DAD",
+   "icao": "VVDN",
+   "anchor": {
+    "lat": 16.0439,
+    "lon": 108.1994
+   },
+   "candidateElevationM": 10.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.15 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "denver",
+   "airport": "Denver International Airport",
+   "iata": "DEN",
+   "icao": "KDEN",
+   "anchor": {
+    "lat": 39.8561,
+    "lon": -104.6737
+   },
+   "candidateElevationM": 1655.4,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/851424893",
+    "osmName": "Denver International Airport",
+    "eleTag": "1655",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.53 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "dubai",
+   "airport": "Dubai International Airport",
+   "iata": "DXB",
+   "icao": "OMDB",
+   "anchor": {
+    "lat": 25.2532,
+    "lon": 55.3657
+   },
+   "candidateElevationM": 18.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/1429712446",
+    "osmName": "مطار دبي الدولي",
+    "eleTag": "19",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.49 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "dublin",
+   "airport": "Dublin Airport",
+   "iata": "DUB",
+   "icao": "EIDW",
+   "anchor": {
+    "lat": 53.4213,
+    "lon": -6.2701
+   },
+   "candidateElevationM": 73.8,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/10150161",
+    "osmName": "Dublin Airport",
+    "eleTag": "74",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.80 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "dubrovnik",
+   "airport": "Dubrovnik Ruđer Bošković Airport",
+   "iata": "DBV",
+   "icao": "LDDU",
+   "anchor": {
+    "lat": 42.5614,
+    "lon": 18.2682
+   },
+   "candidateElevationM": 160.6,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/209996074",
+    "osmName": "Zračna luka Ruđer Bošković",
+    "eleTag": "125.88",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -34.7,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.21 km anchor-to-OSM-centroid",
+   "finalStatus": "REJECTED (delta > 20m; escalation)"
+  },
+  {
+   "destinationId": "edinburgh",
+   "airport": "Edinburgh Airport",
+   "iata": "EDI",
+   "icao": "EGPH",
+   "anchor": {
+    "lat": 55.95,
+    "lon": -3.3725
+   },
+   "candidateElevationM": 41.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.69 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "florence",
+   "airport": "Florence Airport, Peretola",
+   "iata": "FLR",
+   "icao": "LIRQ",
+   "anchor": {
+    "lat": 43.81,
+    "lon": 11.2051
+   },
+   "candidateElevationM": 43.3,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/1788587",
+    "osmName": "Aeroporto Firenze Amerigo Vespucci",
+    "eleTag": "42",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -1.3,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.23 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "frankfurt",
+   "airport": "Frankfurt Main Airport",
+   "iata": "FRA",
+   "icao": "EDDF",
+   "anchor": {
+    "lat": 50.0379,
+    "lon": 8.5622
+   },
+   "candidateElevationM": 110.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/5813621",
+    "osmName": "Flughafen Frankfurt am Main",
+    "eleTag": "100",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -10.9,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.95 km anchor-to-OSM-centroid",
+   "finalStatus": "FLAGGED (5-20m band per v8.7 rules; secondary review)"
+  },
+  {
+   "destinationId": "fukuoka",
+   "airport": "Fukuoka Airport",
+   "iata": "FUK",
+   "icao": "RJFF",
+   "anchor": {
+    "lat": 33.5859,
+    "lon": 130.451
+   },
+   "candidateElevationM": 9.8,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.18 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "geneva",
+   "airport": "Geneva International Airport",
+   "iata": "GVA",
+   "icao": "LSGG",
+   "anchor": {
+    "lat": 46.2381,
+    "lon": 6.1089
+   },
+   "candidateElevationM": 430.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/21154378",
+    "osmName": "Aéroport international de Genève",
+    "eleTag": "430",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.05 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "goa",
+   "airport": "Goa Dabolim International Airport",
+   "iata": "GOI",
+   "icao": "VOGO",
+   "anchor": {
+    "lat": 15.3808,
+    "lon": 73.8314
+   },
+   "candidateElevationM": 45.7,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.14 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "gold-coast",
+   "airport": "Gold Coast Airport",
+   "iata": "OOL",
+   "icao": "YBCG",
+   "anchor": {
+    "lat": -28.1644,
+    "lon": 153.5052
+   },
+   "candidateElevationM": 6.4,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/8171222",
+    "osmName": "Gold Coast Airport",
+    "eleTag": "6",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.45 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "granada",
+   "airport": "F.G.L. Airport Granada-Jaén Airport",
+   "iata": "GRX",
+   "icao": "LEGR",
+   "anchor": {
+    "lat": 37.1888,
+    "lon": -3.7772
+   },
+   "candidateElevationM": 566.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/14624570",
+    "osmName": "Aeropuerto de Granada - Federico García Lorca",
+    "eleTag": "567",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.39 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "guangzhou",
+   "airport": "Guangzhou Baiyun International Airport",
+   "iata": "CAN",
+   "icao": "ZGGG",
+   "anchor": {
+    "lat": 23.3925,
+    "lon": 113.2988
+   },
+   "candidateElevationM": 15.2,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/19772898",
+    "osmName": "广州白云国际机场",
+    "eleTag": "15",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.76 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "hangzhou",
+   "airport": "Hangzhou Xiaoshan International Airport",
+   "iata": "HGH",
+   "icao": "ZSHC",
+   "anchor": {
+    "lat": 30.2348,
+    "lon": 120.4293
+   },
+   "candidateElevationM": 7.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/328062510",
+    "osmName": "杭州萧山国际机场",
+    "eleTag": "7",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.21 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "hanoi",
+   "airport": "Noi Bai International Airport",
+   "iata": "HAN",
+   "icao": "VVNB",
+   "anchor": {
+    "lat": 21.2212,
+    "lon": 105.8072
+   },
+   "candidateElevationM": 11.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/20136775",
+    "osmName": "Sân bay Quốc tế Nội Bài",
+    "eleTag": "12",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.55 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "hiroshima",
+   "airport": "Hiroshima Airport",
+   "iata": "HIJ",
+   "icao": "RJOA",
+   "anchor": {
+    "lat": 34.4361,
+    "lon": 132.9194
+   },
+   "candidateElevationM": 331.6,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/57010613",
+    "osmName": "広島空港",
+    "eleTag": "332",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.24 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "ho-chi-minh-city",
+   "airport": "Tan Son Nhat International Airport",
+   "iata": "SGN",
+   "icao": "VVTS",
+   "anchor": {
+    "lat": 10.8188,
+    "lon": 106.8069
+   },
+   "candidateElevationM": 10.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/54242195",
+    "osmName": "Sân bay quốc tế Tân Sơn Nhất",
+    "eleTag": "10",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "16.51 km anchor-to-OSM-centroid",
+   "finalStatus": "NEEDS_REVIEW (identity/coordinate conflict)"
+  },
+  {
+   "destinationId": "hong-kong",
+   "airport": "Hong Kong International Airport",
+   "iata": "HKG",
+   "icao": "VHHH",
+   "anchor": {
+    "lat": 22.308,
+    "lon": 113.9185
+   },
+   "candidateElevationM": 8.5,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/16105017",
+    "osmName": "香港國際機場 Hong Kong International Airport",
+    "eleTag": "9",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.5,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.89 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "honolulu",
+   "airport": "Daniel K. Inouye International Airport",
+   "iata": "HNL",
+   "icao": "PHNL",
+   "anchor": {
+    "lat": 21.3245,
+    "lon": -157.9251
+   },
+   "candidateElevationM": 4.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/2815931",
+    "osmName": "Daniel K. Inouye International Airport",
+    "eleTag": "4",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.39 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "istanbul",
+   "airport": "İstanbul Airport",
+   "iata": "IST",
+   "icao": "LTFM",
+   "anchor": {
+    "lat": 41.2753,
+    "lon": 28.7519
+   },
+   "candidateElevationM": 99.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/812730062",
+    "osmName": "İstanbul Havalimanı",
+    "eleTag": "92",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -7.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.02 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 10m; within acceptance threshold)"
+  },
+  {
+   "destinationId": "jaipur",
+   "airport": "Jaipur International Airport",
+   "iata": "JAI",
+   "icao": "VIJP",
+   "anchor": {
+    "lat": 26.8242,
+    "lon": 75.8122
+   },
+   "candidateElevationM": 385.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.81 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "jakarta",
+   "airport": "Soekarno-Hatta International Airport",
+   "iata": "CGK",
+   "icao": "WIII",
+   "anchor": {
+    "lat": -6.1256,
+    "lon": 106.6558
+   },
+   "candidateElevationM": 10.4,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/19104217",
+    "osmName": "Bandar Udara Internasional Soekarno-Hatta",
+    "eleTag": "10",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.28 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "jeju",
+   "airport": "Jeju International Airport",
+   "iata": "CJU",
+   "icao": "RKPC",
+   "anchor": {
+    "lat": 33.5113,
+    "lon": 126.493
+   },
+   "candidateElevationM": 36.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/550343242",
+    "osmName": "제주국제공항",
+    "eleTag": "36",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.83 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "kanazawa",
+   "airport": "Komatsu Airport / JASDF Komatsu Air Base",
+   "iata": "KMQ",
+   "icao": "RJNK",
+   "anchor": {
+    "lat": 36.3939,
+    "lon": 136.4072
+   },
+   "candidateElevationM": 11.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/13514757",
+    "osmName": "小松飛行場",
+    "eleTag": "6",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -5.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.19 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "kathmandu",
+   "airport": "Tribhuvan International Airport",
+   "iata": "KTM",
+   "icao": "VNKT",
+   "anchor": {
+    "lat": 27.6966,
+    "lon": 85.3591
+   },
+   "candidateElevationM": 1338.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/118505122",
+    "osmName": "त्रिभुवन अन्तर्राष्ट्रिय विमानस्थल",
+    "eleTag": "1339.5",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 1.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.32 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "kobe",
+   "airport": "Kobe Airport",
+   "iata": "UKB",
+   "icao": "RJBE",
+   "anchor": {
+    "lat": 34.6328,
+    "lon": 135.2239
+   },
+   "candidateElevationM": 6.7,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/772669000",
+    "osmName": "神戸空港",
+    "eleTag": "5",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -1.7,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.16 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "koh-samui",
+   "airport": "Samui International Airport",
+   "iata": "USM",
+   "icao": "VTSM",
+   "anchor": {
+    "lat": 9.5476,
+    "lon": 100.0613
+   },
+   "candidateElevationM": 19.5,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/476938595",
+    "osmName": "ท่าอากาศยานนานาชาติสมุย",
+    "eleTag": "20",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.5,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.20 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "krakow",
+   "airport": "Kraków John Paul II International Airport",
+   "iata": "KRK",
+   "icao": "EPKK",
+   "anchor": {
+    "lat": 50.0777,
+    "lon": 19.7848
+   },
+   "candidateElevationM": 241.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.10 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (unparseable ele tag)"
+  },
+  {
+   "destinationId": "kuala-lumpur",
+   "airport": "Kuala Lumpur International Airport",
+   "iata": "KUL",
+   "icao": "WMKK",
+   "anchor": {
+    "lat": 2.7456,
+    "lon": 101.7099
+   },
+   "candidateElevationM": 21.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/11579113",
+    "osmName": "Lapangan Terbang Antarabangsa Kuala Lumpur",
+    "eleTag": "21",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.08 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "kyoto",
+   "airport": "Kansai International Airport",
+   "iata": "KIX",
+   "icao": "RJBB",
+   "anchor": {
+    "lat": 34.4273,
+    "lon": 135.2444
+   },
+   "candidateElevationM": 7.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/9436735",
+    "osmName": "関西国際空港",
+    "eleTag": "5",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -2.9,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.30 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "las-vegas",
+   "airport": "Harry Reid International Airport",
+   "iata": "LAS",
+   "icao": "KLAS",
+   "anchor": {
+    "lat": 36.084,
+    "lon": -115.1538
+   },
+   "candidateElevationM": 664.8,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/218427190",
+    "osmName": "Harry Reid International Airport",
+    "eleTag": "665",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.75 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "lima",
+   "airport": "Jorge Chávez International Airport",
+   "iata": "LIM",
+   "icao": "SPIM",
+   "anchor": {
+    "lat": -12.0219,
+    "lon": -77.1143
+   },
+   "candidateElevationM": 34.4,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": null,
+   "coordinateCheck": null,
+   "finalStatus": "PENDING (no corroboration found)"
+  },
+  {
+   "destinationId": "lisbon",
+   "airport": "Lisbon Humberto Delgado Airport",
+   "iata": "LIS",
+   "icao": "LPPT",
+   "anchor": {
+    "lat": 38.7742,
+    "lon": -9.1342
+   },
+   "candidateElevationM": 114.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/336112741",
+    "osmName": "Aeroporto Humberto Delgado",
+    "eleTag": "114",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.77 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "lombok",
+   "airport": "Lombok International Airport",
+   "iata": "LOP",
+   "icao": "WADL",
+   "anchor": {
+    "lat": -8.7569,
+    "lon": 116.2784
+   },
+   "candidateElevationM": 97.2,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/404339178",
+    "osmName": "Bandar Udara Internasional Zainuddin Abdul Madjid",
+    "eleTag": "97",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.26 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "london",
+   "airport": "London Heathrow Airport",
+   "iata": "LHR",
+   "icao": "EGLL",
+   "anchor": {
+    "lat": 51.47,
+    "lon": -0.4543
+   },
+   "candidateElevationM": 25.3,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/14001268",
+    "osmName": "London Heathrow Airport",
+    "eleTag": "25",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.3,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.25 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "los-angeles",
+   "airport": "Los Angeles International Airport",
+   "iata": "LAX",
+   "icao": "KLAX",
+   "anchor": {
+    "lat": 33.9425,
+    "lon": -118.408
+   },
+   "candidateElevationM": 38.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/649268639",
+    "osmName": "Los Angeles International Airport",
+    "eleTag": "38",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.09 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "luang-prabang",
+   "airport": "Luang Phabang International Airport",
+   "iata": "LPQ",
+   "icao": "VLLB",
+   "anchor": {
+    "lat": 19.8996,
+    "lon": 102.1606
+   },
+   "candidateElevationM": 291.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/701088765",
+    "osmName": "ສະຫນາມບິນສາກົນແຂວງຫລວງພະບາງ",
+    "eleTag": "291",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.96 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "lyon",
+   "airport": "Lyon Saint-Exupéry Airport",
+   "iata": "LYS",
+   "icao": "LFLL",
+   "anchor": {
+    "lat": 45.7256,
+    "lon": 5.0811
+   },
+   "candidateElevationM": 250.2,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/104573411",
+    "osmName": "Aéroport Lyon Saint-Exupéry",
+    "eleTag": "250",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.50 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "macau",
+   "airport": "Macau International Airport",
+   "iata": "MFM",
+   "icao": "VMMC",
+   "anchor": {
+    "lat": 22.1496,
+    "lon": 113.5914
+   },
+   "candidateElevationM": 6.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/2589459",
+    "osmName": "澳門國際機場 Aeroporto Internacional de Macau",
+    "eleTag": "6",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.76 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "madrid",
+   "airport": "Adolfo Suárez Madrid–Barajas Airport",
+   "iata": "MAD",
+   "icao": "LEMD",
+   "anchor": {
+    "lat": 40.4936,
+    "lon": -3.5668
+   },
+   "candidateElevationM": 609.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/167025457",
+    "osmName": "Aeropuerto Adolfo Suárez Madrid-Barajas",
+    "eleTag": "610",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 1.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.44 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "malaga",
+   "airport": "Málaga-Costa del Sol Airport",
+   "iata": "AGP",
+   "icao": "LEMG",
+   "anchor": {
+    "lat": 36.6749,
+    "lon": -4.4991
+   },
+   "candidateElevationM": 16.2,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/435099913",
+    "osmName": "Aeropuerto de Málaga - Costa del Sol",
+    "eleTag": "16",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.49 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "male",
+   "airport": "Velana International Airport",
+   "iata": "MLE",
+   "icao": "VRMM",
+   "anchor": {
+    "lat": 4.1918,
+    "lon": 73.5291
+   },
+   "candidateElevationM": 1.8,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/747440857",
+    "osmName": "ވެލާނާ ބައިނަލްއަޤުވާމީ ވައިގެ ބަނދަރު",
+    "eleTag": "2",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.51 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "manila",
+   "airport": "Ninoy Aquino International Airport",
+   "iata": "MNL",
+   "icao": "RPLL",
+   "anchor": {
+    "lat": 14.5086,
+    "lon": 121.0198
+   },
+   "candidateElevationM": 22.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/12733706",
+    "osmName": "Ninoy Aquino International Airport",
+    "eleTag": "23",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.68 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "melbourne",
+   "airport": "Melbourne Airport",
+   "iata": "MEL",
+   "icao": "YMML",
+   "anchor": {
+    "lat": -37.669,
+    "lon": 144.841
+   },
+   "candidateElevationM": 132.3,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/305804278",
+    "osmName": "Melbourne Airport",
+    "eleTag": "132",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.3,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.68 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "mexico-city",
+   "airport": "Mexico City Benito Juárez International Airport",
+   "iata": "MEX",
+   "icao": "MMMX",
+   "anchor": {
+    "lat": 19.4363,
+    "lon": -99.0721
+   },
+   "candidateElevationM": 2229.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/1429419990",
+    "osmName": "Aeropuerto Internacional de la Ciudad de México",
+    "eleTag": "2238",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 8.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.34 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 10m; within acceptance threshold)"
+  },
+  {
+   "destinationId": "miami",
+   "airport": "Miami International Airport",
+   "iata": "MIA",
+   "icao": "KMIA",
+   "anchor": {
+    "lat": 25.7959,
+    "lon": -80.287
+   },
+   "candidateElevationM": 2.4,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/113657169",
+    "osmName": "Miami International Airport",
+    "eleTag": "3",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.6,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.49 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "milan",
+   "airport": "Milan Malpensa International Airport",
+   "iata": "MXP",
+   "icao": "LIMC",
+   "anchor": {
+    "lat": 45.6306,
+    "lon": 8.7281
+   },
+   "candidateElevationM": 234.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/20397999",
+    "osmName": "Aeroporto internazionale Milano Malpensa - Silvio Berlusconi",
+    "eleTag": "234",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.22 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "montreal",
+   "airport": "Montreal / Pierre Elliott Trudeau International Airport",
+   "iata": "YUL",
+   "icao": "CYUL",
+   "anchor": {
+    "lat": 45.4706,
+    "lon": -73.7408
+   },
+   "candidateElevationM": 36.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/945479715",
+    "osmName": "Aéroport international Montréal-Trudeau",
+    "eleTag": "36",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.49 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "mumbai",
+   "airport": "Chhatrapati Shivaji Maharaj International Airport",
+   "iata": "BOM",
+   "icao": "VABB",
+   "anchor": {
+    "lat": 19.0896,
+    "lon": 72.8656
+   },
+   "candidateElevationM": 11.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/22826676",
+    "osmName": "Chhatrapati Shivaji Maharaj International Airport",
+    "eleTag": "11",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.9,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.29 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "munich",
+   "airport": "Munich Airport",
+   "iata": "MUC",
+   "icao": "EDDM",
+   "anchor": {
+    "lat": 48.3538,
+    "lon": 11.7861
+   },
+   "candidateElevationM": 453.2,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/20786018",
+    "osmName": "Flughafen München",
+    "eleTag": "453",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.01 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "nagasaki",
+   "airport": "Nagasaki Airport",
+   "iata": "NGS",
+   "icao": "RJFU",
+   "anchor": {
+    "lat": 32.9169,
+    "lon": 129.9138
+   },
+   "candidateElevationM": 4.6,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/57015147",
+    "osmName": "長崎空港",
+    "eleTag": "5",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.04 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "nagoya",
+   "airport": "Chubu Centrair International Airport",
+   "iata": "NGO",
+   "icao": "RJGG",
+   "anchor": {
+    "lat": 34.8584,
+    "lon": 136.8054
+   },
+   "candidateElevationM": 4.6,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/54717812",
+    "osmName": "中部国際空港セントレア",
+    "eleTag": "5",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.54 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "naples",
+   "airport": "Naples International Airport",
+   "iata": "NAP",
+   "icao": "LIRN",
+   "anchor": {
+    "lat": 40.886,
+    "lon": 14.2908
+   },
+   "candidateElevationM": 89.6,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/22652287",
+    "osmName": "Aeroporto di Napoli Capodichino",
+    "eleTag": "89.61",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.27 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "nashville",
+   "airport": "Nashville International Airport",
+   "iata": "BNA",
+   "icao": "KBNA",
+   "anchor": {
+    "lat": 36.1263,
+    "lon": -86.6774
+   },
+   "candidateElevationM": 182.6,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/11657815",
+    "osmName": "Nashville International Airport",
+    "eleTag": "179",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -3.6,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.75 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "new-orleans",
+   "airport": "Louis Armstrong New Orleans International Airport",
+   "iata": "MSY",
+   "icao": "KMSY",
+   "anchor": {
+    "lat": 29.9934,
+    "lon": -90.2581
+   },
+   "candidateElevationM": 1.2,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/134013319",
+    "osmName": "Louis Armstrong New Orleans International Airport",
+    "eleTag": "-1",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -2.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.62 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "newyork",
+   "airport": "John F. Kennedy International Airport",
+   "iata": "JFK",
+   "icao": "KJFK",
+   "anchor": {
+    "lat": 40.6413,
+    "lon": -73.7781
+   },
+   "candidateElevationM": 4.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/158042008",
+    "osmName": "John F. Kennedy International Airport",
+    "eleTag": "3",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -1.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.67 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "nha-trang",
+   "airport": "Cam Ranh International Airport / Cam Ranh Air Base",
+   "iata": "CXR",
+   "icao": "VVCR",
+   "anchor": {
+    "lat": 11.9982,
+    "lon": 109.2195
+   },
+   "candidateElevationM": 12.2,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/217534447",
+    "osmName": "Sân bay quốc tế Cam Ranh",
+    "eleTag": "12",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.10 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "nice",
+   "airport": "Nice-Côte d'Azur Airport",
+   "iata": "NCE",
+   "icao": "LFMN",
+   "anchor": {
+    "lat": 43.6584,
+    "lon": 7.2159
+   },
+   "candidateElevationM": 3.7,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/365180154",
+    "osmName": "Aéroport de Nice-Côte d'Azur",
+    "eleTag": "3.65",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.17 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "orlando",
+   "airport": "Orlando International Airport",
+   "iata": "MCO",
+   "icao": "KMCO",
+   "anchor": {
+    "lat": 28.4312,
+    "lon": -81.3081
+   },
+   "candidateElevationM": 29.3,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/589215792",
+    "osmName": "Orlando International Airport",
+    "eleTag": "29",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.3,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "2.03 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "osaka",
+   "airport": "Kansai International Airport",
+   "iata": "KIX",
+   "icao": "RJBB",
+   "anchor": {
+    "lat": 34.4347,
+    "lon": 135.2441
+   },
+   "candidateElevationM": 7.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/9436735",
+    "osmName": "関西国際空港",
+    "eleTag": "5",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -2.9,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.01 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "oslo",
+   "airport": "Oslo-Gardermoen International Airport",
+   "iata": "OSL",
+   "icao": "ENGM",
+   "anchor": {
+    "lat": 60.1939,
+    "lon": 11.1004
+   },
+   "candidateElevationM": 207.6,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/425295012",
+    "osmName": "Oslo lufthavn, Gardermoen",
+    "eleTag": "208",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.44 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "paris",
+   "airport": "Charles de Gaulle International Airport",
+   "iata": "CDG",
+   "icao": "LFPG",
+   "anchor": {
+    "lat": 49.0097,
+    "lon": 2.5479
+   },
+   "candidateElevationM": 119.5,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/294032205",
+    "osmName": "Aéroport de Paris-Charles-de-Gaulle",
+    "eleTag": "119",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.5,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.11 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "pattaya",
+   "airport": "U-Tapao–Rayong–Pattaya International Airport",
+   "iata": "UTP",
+   "icao": "VTBU",
+   "anchor": {
+    "lat": 12.6806,
+    "lon": 101.0044
+   },
+   "candidateElevationM": 12.8,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/19902821",
+    "osmName": "ท่าอากาศยานนานาชาติอู่ตะเภา",
+    "eleTag": "13",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.80 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "penang",
+   "airport": "Penang International Airport",
+   "iata": "PEN",
+   "icao": "WMKP",
+   "anchor": {
+    "lat": 5.2971,
+    "lon": 100.2769
+   },
+   "candidateElevationM": 3.4,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/11581513",
+    "osmName": "Lapangan Terbang Antarabangsa Pulau Pinang",
+    "eleTag": "3",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.19 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "perth",
+   "airport": "Perth International Airport",
+   "iata": "PER",
+   "icao": "YPPH",
+   "anchor": {
+    "lat": -31.9403,
+    "lon": 115.9669
+   },
+   "candidateElevationM": 20.4,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/179200892",
+    "osmName": "Perth Airport",
+    "eleTag": "20",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.31 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "philadelphia",
+   "airport": "Philadelphia International Airport",
+   "iata": "PHL",
+   "icao": "KPHL",
+   "anchor": {
+    "lat": 39.8744,
+    "lon": -75.2424
+   },
+   "candidateElevationM": 11.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/113482644",
+    "osmName": "Philadelphia International Airport",
+    "eleTag": "11",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.18 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "phnom-penh",
+   "airport": "Phnom Penh International Airport",
+   "iata": "PNH",
+   "icao": "VDPP",
+   "anchor": {
+    "lat": 11.5466,
+    "lon": 104.8441
+   },
+   "candidateElevationM": 12.2,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": null,
+   "coordinateCheck": null,
+   "finalStatus": "PENDING (no corroboration found)"
+  },
+  {
+   "destinationId": "phu-quoc",
+   "airport": "Phú Quốc International Airport",
+   "iata": "PQC",
+   "icao": "VVPQ",
+   "anchor": {
+    "lat": 10.1713,
+    "lon": 103.9928
+   },
+   "candidateElevationM": 11.3,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.10 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "phuket",
+   "airport": "Phuket International Airport",
+   "iata": "HKT",
+   "icao": "VTSP",
+   "anchor": {
+    "lat": 8.1132,
+    "lon": 98.3169
+   },
+   "candidateElevationM": 25.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/20416548",
+    "osmName": "ท่าอากาศยานนานาชาติภูเก็ต",
+    "eleTag": "25",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.37 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "porto",
+   "airport": "Francisco de Sá Carneiro Airport",
+   "iata": "OPO",
+   "icao": "LPPR",
+   "anchor": {
+    "lat": 41.2481,
+    "lon": -8.6814
+   },
+   "candidateElevationM": 69.5,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/13802869",
+    "osmName": "Aeroporto Francisco Sá Carneiro",
+    "eleTag": "69",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.5,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.28 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "prague",
+   "airport": "Václav Havel Airport Prague",
+   "iata": "PRG",
+   "icao": "LKPR",
+   "anchor": {
+    "lat": 50.1008,
+    "lon": 14.26
+   },
+   "candidateElevationM": 380.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/949871",
+    "osmName": "Letiště Václava Havla Praha",
+    "eleTag": "376",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -4.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.34 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "quebec-city",
+   "airport": "Quebec Jean Lesage International Airport",
+   "iata": "YQB",
+   "icao": "CYQB",
+   "anchor": {
+    "lat": 46.7881,
+    "lon": -71.3928
+   },
+   "candidateElevationM": 74.4,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/464846018",
+    "osmName": "Aéroport international Jean-Lesage de Québec",
+    "eleTag": "74",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.58 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "queenstown",
+   "airport": "Queenstown Airport",
+   "iata": "ZQN",
+   "icao": "NZQN",
+   "anchor": {
+    "lat": -45.0211,
+    "lon": 168.7392
+   },
+   "candidateElevationM": 356.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/175977600",
+    "osmName": "Queenstown Airport",
+    "eleTag": "357",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.61 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "reykjavik",
+   "airport": "Keflavik International Airport",
+   "iata": "KEF",
+   "icao": "BIKF",
+   "anchor": {
+    "lat": 63.985,
+    "lon": -22.6056
+   },
+   "candidateElevationM": 52.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/6584878",
+    "osmName": "Keflavíkurflugvöllur",
+    "eleTag": "52",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.00 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "rome",
+   "airport": "Rome–Fiumicino Leonardo da Vinci International Airport",
+   "iata": "FCO",
+   "icao": "LIRF",
+   "anchor": {
+    "lat": 41.8003,
+    "lon": 12.2389
+   },
+   "candidateElevationM": 4.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/16054538",
+    "osmName": "Aeroporto di Roma-Fiumicino",
+    "eleTag": "5",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 1.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.91 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "rotorua",
+   "airport": "Rotorua Regional Airport",
+   "iata": "ROT",
+   "icao": "NZRO",
+   "anchor": {
+    "lat": -38.1093,
+    "lon": 176.3165
+   },
+   "candidateElevationM": 285.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/176133781",
+    "osmName": "Rotorua Regional Airport",
+    "eleTag": "285",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.11 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "rovaniemi",
+   "airport": "Rovaniemi Airport",
+   "iata": "RVN",
+   "icao": "EFRO",
+   "anchor": {
+    "lat": 66.5648,
+    "lon": 25.8319
+   },
+   "candidateElevationM": 195.7,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/1101678254",
+    "osmName": "Rovaniemen lentoasema",
+    "eleTag": "196",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.3,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.11 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "san-diego",
+   "airport": "San Diego International Airport",
+   "iata": "SAN",
+   "icao": "KSAN",
+   "anchor": {
+    "lat": 32.7338,
+    "lon": -117.1933
+   },
+   "candidateElevationM": 5.2,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/209694794",
+    "osmName": "San Diego International Airport",
+    "eleTag": "5",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.18 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "san-francisco",
+   "airport": "San Francisco International Airport",
+   "iata": "SFO",
+   "icao": "KSFO",
+   "anchor": {
+    "lat": 37.6213,
+    "lon": -122.379
+   },
+   "candidateElevationM": 4.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/545819287",
+    "osmName": "San Francisco International Airport",
+    "eleTag": "4",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.05 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "san-sebastian",
+   "airport": "San Sebastián Airport",
+   "iata": "EAS",
+   "icao": "LESO",
+   "anchor": {
+    "lat": 43.3564,
+    "lon": -1.7906
+   },
+   "candidateElevationM": 4.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/202976101",
+    "osmName": "Donostiako aireportua",
+    "eleTag": "5",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.03 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "santorini",
+   "airport": "Santorini International Airport",
+   "iata": "JTR",
+   "icao": "LGSR",
+   "anchor": {
+    "lat": 36.3991,
+    "lon": 25.4789
+   },
+   "candidateElevationM": 38.7,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/966322236",
+    "osmName": "Κρατικός Αερολιμένας Σαντορίνης",
+    "eleTag": "39",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.3,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.12 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "sapporo",
+   "airport": "New Chitose Airport",
+   "iata": "CTS",
+   "icao": "RJCC",
+   "anchor": {
+    "lat": 42.7752,
+    "lon": 141.6923
+   },
+   "candidateElevationM": 25.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.22 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "seattle",
+   "airport": "Seattle–Tacoma International Airport",
+   "iata": "SEA",
+   "icao": "KSEA",
+   "anchor": {
+    "lat": 47.4502,
+    "lon": -122.3088
+   },
+   "candidateElevationM": 132.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/50898115",
+    "osmName": "Seattle-Tacoma International Airport",
+    "eleTag": "129",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -3.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.31 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "seoul",
+   "airport": "Incheon International Airport",
+   "iata": "ICN",
+   "icao": "RKSI",
+   "anchor": {
+    "lat": 37.4602,
+    "lon": 126.4407
+   },
+   "candidateElevationM": 7.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/316419197",
+    "osmName": "인천국제공항",
+    "eleTag": "7",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.41 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "seville",
+   "airport": "Seville Airport",
+   "iata": "SVQ",
+   "icao": "LEZL",
+   "anchor": {
+    "lat": 37.418,
+    "lon": -5.8931
+   },
+   "candidateElevationM": 34.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/352690279",
+    "osmName": "Aeropuerto internacional de Sevilla - San Pablo",
+    "eleTag": "34",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.17 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "shanghai",
+   "airport": "Shanghai Pudong International Airport",
+   "iata": "PVG",
+   "icao": "ZSPD",
+   "anchor": {
+    "lat": 31.1443,
+    "lon": 121.8083
+   },
+   "candidateElevationM": 4.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/19842271",
+    "osmName": "上海浦东国际机场",
+    "eleTag": "4",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.64 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "siem-reap",
+   "airport": "Siem Reap-Angkor International Airport",
+   "iata": "SAI",
+   "icao": "VDSA",
+   "anchor": {
+    "lat": 13.4107,
+    "lon": 103.8132
+   },
+   "candidateElevationM": 58.2,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "44.49 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "singapore",
+   "airport": "Singapore Changi Airport",
+   "iata": "SIN",
+   "icao": "WSSS",
+   "anchor": {
+    "lat": 1.3644,
+    "lon": 103.9915
+   },
+   "candidateElevationM": 6.7,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/174037464",
+    "osmName": "Singapore Changi Airport (SIN)",
+    "eleTag": "7",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.3,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.51 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "split",
+   "airport": "Split Saint Jerome Airport",
+   "iata": "SPU",
+   "icao": "LDSP",
+   "anchor": {
+    "lat": 43.5389,
+    "lon": 16.298
+   },
+   "candidateElevationM": 24.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.16 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "stockholm",
+   "airport": "Stockholm-Arlanda Airport",
+   "iata": "ARN",
+   "icao": "ESSA",
+   "anchor": {
+    "lat": 59.6519,
+    "lon": 17.9186
+   },
+   "candidateElevationM": 41.8,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/81298309",
+    "osmName": "Stockholm-Arlanda flygplats",
+    "eleTag": "42",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.60 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "sydney",
+   "airport": "Sydney Kingsford Smith International Airport",
+   "iata": "SYD",
+   "icao": "YSSY",
+   "anchor": {
+    "lat": -33.9399,
+    "lon": 151.1753
+   },
+   "candidateElevationM": 6.4,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/211818374",
+    "osmName": "Sydney (Kingsford Smith) Airport",
+    "eleTag": "6",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.16 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "taipei",
+   "airport": "Taiwan Taoyuan International Airport",
+   "iata": "TPE",
+   "icao": "RCTP",
+   "anchor": {
+    "lat": 25.0777,
+    "lon": 121.2328
+   },
+   "candidateElevationM": 32.3,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/19784610",
+    "osmName": "臺灣桃園國際機場",
+    "eleTag": "33",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.7,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.22 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "tallinn",
+   "airport": "Lennart Meri Tallinn Airport",
+   "iata": "TLL",
+   "icao": "EETN",
+   "anchor": {
+    "lat": 59.4133,
+    "lon": 24.8328
+   },
+   "candidateElevationM": 39.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/85746992",
+    "osmName": "Tallinna lennujaam",
+    "eleTag": "39",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.9,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.48 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "tokyo",
+   "airport": "Narita International Airport",
+   "iata": "NRT",
+   "icao": "RJAA",
+   "anchor": {
+    "lat": 35.7647,
+    "lon": 140.3864
+   },
+   "candidateElevationM": 43.0,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/3182579",
+    "osmName": "成田国際空港",
+    "eleTag": "43",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.27 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "toronto",
+   "airport": "Toronto Pearson International Airport",
+   "iata": "YYZ",
+   "icao": "CYYZ",
+   "anchor": {
+    "lat": 43.6777,
+    "lon": -79.6248
+   },
+   "candidateElevationM": 173.4,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/148396221",
+    "osmName": "Toronto Pearson International Airport",
+    "eleTag": "173",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.30 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "tulum",
+   "airport": "Cancún International Airport",
+   "iata": "CUN",
+   "icao": "MMUN",
+   "anchor": {
+    "lat": 21.0365,
+    "lon": -86.8771
+   },
+   "candidateElevationM": 6.7,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.49 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "turin",
+   "airport": "Turin Airport",
+   "iata": "TRN",
+   "icao": "LIMF",
+   "anchor": {
+    "lat": 45.2008,
+    "lon": 7.6496
+   },
+   "candidateElevationM": 301.4,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/322915733",
+    "osmName": "Aeroporto di Torino",
+    "eleTag": "284",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -17.4,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.12 km anchor-to-OSM-centroid",
+   "finalStatus": "FLAGGED (5-20m band per v8.7 rules; secondary review)"
+  },
+  {
+   "destinationId": "ubud",
+   "airport": "Denpasar I Gusti Ngurah Rai International Airport",
+   "iata": "DPS",
+   "icao": "WADD",
+   "anchor": {
+    "lat": -8.7482,
+    "lon": 115.1675
+   },
+   "candidateElevationM": 4.3,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.18 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "valencia",
+   "airport": "Valencia Airport",
+   "iata": "VLC",
+   "icao": "LEVC",
+   "anchor": {
+    "lat": 39.4893,
+    "lon": -0.4816
+   },
+   "candidateElevationM": 73.2,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/20242344",
+    "osmName": "Aeropuerto Internacional de Valencia",
+    "eleTag": "73",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.15 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "vancouver",
+   "airport": "Vancouver International Airport",
+   "iata": "YVR",
+   "icao": "CYVR",
+   "anchor": {
+    "lat": 49.1947,
+    "lon": -123.1792
+   },
+   "candidateElevationM": 4.3,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/11680231",
+    "osmName": "Vancouver International Airport",
+    "eleTag": "4",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.3,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.24 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "venice",
+   "airport": "Venice Marco Polo Airport",
+   "iata": "VCE",
+   "icao": "LIPZ",
+   "anchor": {
+    "lat": 45.5053,
+    "lon": 12.3519
+   },
+   "candidateElevationM": 2.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/460409906",
+    "osmName": "Aeroporto Marco Polo di Venezia",
+    "eleTag": "2",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.23 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "vienna",
+   "airport": "Vienna International Airport",
+   "iata": "VIE",
+   "icao": "LOWW",
+   "anchor": {
+    "lat": 48.1103,
+    "lon": 16.5697
+   },
+   "candidateElevationM": 182.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/75732093",
+    "osmName": "Vienna Airport",
+    "eleTag": "183",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.01 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "warsaw",
+   "airport": "Warsaw Chopin Airport",
+   "iata": "WAW",
+   "icao": "EPWA",
+   "anchor": {
+    "lat": 52.1657,
+    "lon": 20.9671
+   },
+   "candidateElevationM": 110.3,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/237594029",
+    "osmName": "Lotnisko Chopina",
+    "eleTag": "109.1",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -1.2,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.37 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "washington-dc",
+   "airport": "Washington Dulles International Airport",
+   "iata": "IAD",
+   "icao": "KIAD",
+   "anchor": {
+    "lat": 38.9531,
+    "lon": -77.4565
+   },
+   "candidateElevationM": 95.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "1.53 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "wellington",
+   "airport": "Wellington International Airport",
+   "iata": "WLG",
+   "icao": "NZWN",
+   "anchor": {
+    "lat": -41.3272,
+    "lon": 174.8053
+   },
+   "candidateElevationM": 12.5,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/15875553",
+    "osmName": "Wellington Airport",
+    "eleTag": "13",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.5,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.25 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "xian",
+   "airport": "Xi'an Xianyang International Airport",
+   "iata": "XIY",
+   "icao": "ZLXY",
+   "anchor": {
+    "lat": 34.4471,
+    "lon": 108.7519
+   },
+   "candidateElevationM": 479.1,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/1377770481",
+    "osmName": "西安咸阳国际机场",
+    "eleTag": "479",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.92 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "yangon",
+   "airport": "Yangon International Airport",
+   "iata": "RGN",
+   "icao": "VYYY",
+   "anchor": {
+    "lat": 16.9073,
+    "lon": 96.1332
+   },
+   "candidateElevationM": 33.2,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.62 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "yogyakarta",
+   "airport": "Yogyakarta International Airport",
+   "iata": "YIA",
+   "icao": "WAHI",
+   "anchor": {
+    "lat": -7.9014,
+    "lon": 110.0576
+   },
+   "candidateElevationM": 7.3,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": null,
+   "corroboratingSourceTier": null,
+   "elevationDifferenceM": null,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.10 km anchor-to-OSM-centroid",
+   "finalStatus": "PENDING (OSM aerodrome found, no ele tag)"
+  },
+  {
+   "destinationId": "zagreb",
+   "airport": "Zagreb Franjo Tuđman International Airport",
+   "iata": "ZAG",
+   "icao": "LDZA",
+   "anchor": {
+    "lat": 45.7429,
+    "lon": 16.0688
+   },
+   "candidateElevationM": 107.6,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/way/142163337",
+    "osmName": "Zračna luka Franjo Tuđman",
+    "eleTag": "107.59",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": -0.0,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.38 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  },
+  {
+   "destinationId": "zurich",
+   "airport": "Zürich Airport",
+   "iata": "ZRH",
+   "icao": "LSZH",
+   "anchor": {
+    "lat": 47.4647,
+    "lon": 8.5492
+   },
+   "candidateElevationM": 431.9,
+   "candidateSource": "OurAirports airports.csv (Tier 3)",
+   "corroboratingSource": {
+    "provider": "OpenStreetMap (Overpass API)",
+    "url": "https://www.openstreetmap.org/relation/13368029",
+    "osmName": "Flughafen Zürich",
+    "eleTag": "432",
+    "eleUnit": "m (OSM ele tag)",
+    "retrievedAt": "2026-09-12"
+   },
+   "corroboratingSourceTier": 4,
+   "elevationDifferenceM": 0.1,
+   "identityCheck": "MATCH",
+   "coordinateCheck": "0.26 km anchor-to-OSM-centroid",
+   "finalStatus": "CORROBORATED (delta <= 5m; record difference)"
+  }
+ ]
+}

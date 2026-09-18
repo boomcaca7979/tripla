@@ -1,0 +1,57 @@
+{
+  "generatedAt": "2026-09-12T09:29:38.305072+00:00",
+  "artifact": "elevation-contract-option-comparison.json",
+  "noScoringApplied": true,
+  "rows": [
+    {
+      "criterion": "acceptance strictness",
+      "option1": "§19.2 literal: authoritative source required for all 145",
+      "option2": "defined hierarchy + verification matrix; Tier-3 needs corroboration; Tier-4 never sufficient"
+    },
+    {
+      "criterion": "coverage today",
+      "option1": "17/145 (FAA Tier-1)",
+      "option2": "25/145 approved (17 Tier-1 + 8 verified)"
+    },
+    {
+      "criterion": "coverage after feasible work",
+      "option1": "unknown ceiling: 128 airports / 49 countries; several countries paid or unreachable (China, Japan-probe, ...); PDF parsing projects",
+      "option2": "143/145 achievable via corroboration campaign (118 lookups; method proven); 2 gated by anchor decisions"
+    },
+    {
+      "criterion": "engineering work remaining",
+      "option1": "per-country Tier-1 acquisition projects (PDF eAIP parsing, provenance capture, spot checks); weeks+; possibly unclosable for some countries",
+      "option2": "one corroboration lookup per remaining airport (same method as the 10 already done) + formal v8.7 rewrite + re-audit"
+    },
+    {
+      "criterion": "data quality",
+      "option1": "highest possible provenance authority",
+      "option2": "high: identity+tolerance+MSL+unit+version+corroboration mandatory; explicit conflict thresholds; provenance authority below Tier-1"
+    },
+    {
+      "criterion": "T3 impact",
+      "option1": "elevation gate stays BLOCKED until 145/145 Tier-1",
+      "option2": "elevation gate can close at 143/145 after campaign (anchor decisions still separate); requires v8.7 + full re-audit before it counts"
+    },
+    {
+      "criterion": "future maintainability",
+      "option1": "every new airport needs a Tier-1 source before onboarding",
+      "option2": "framework-based onboarding; corroboration requirement scales linearly and cheaply"
+    },
+    {
+      "criterion": "source audit burden",
+      "option1": "low volume, high per-record effort",
+      "option2": "higher volume, low per-record effort; automated delta checks possible"
+    },
+    {
+      "criterion": "risk",
+      "option1": "schedule/availability risk: some countries may never yield free Tier-1 elevation (hard blocker risk)",
+      "option2": "provenance-quality risk mitigated by thresholds + corroboration; requires disciplined v8.7 audit to avoid criteria erosion"
+    },
+    {
+      "criterion": "re-review burden",
+      "option1": "re-review only on new sources",
+      "option2": "one-off framework audit + periodic delta re-checks on source updates"
+    }
+  ]
+}

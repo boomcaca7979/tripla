@@ -1,0 +1,87 @@
+{
+  "total": 16,
+  "passed": 16,
+  "failed": 0,
+  "results": [
+    {
+      "assertion": "assert destinationCount === 145",
+      "result": "PASS",
+      "detail": "got 145"
+    },
+    {
+      "assertion": "assert monthCountPerDestination === 12",
+      "result": "PASS",
+      "detail": "violations=[]"
+    },
+    {
+      "assertion": "assert noInvalidCoordinates",
+      "result": "PASS",
+      "detail": "violations=[]"
+    },
+    {
+      "assertion": "assert noTempOutOfRange",
+      "result": "PASS",
+      "detail": "0 violations"
+    },
+    {
+      "assertion": "assert noPrecipOutOfRange",
+      "result": "PASS",
+      "detail": "0 violations"
+    },
+    {
+      "assertion": "assert noTempHighBelowTempLow",
+      "result": "PASS",
+      "detail": "violations=[]"
+    },
+    {
+      "assertion": "assert noUnknownCanonicalField",
+      "result": "PASS",
+      "detail": "violations=[]"
+    },
+    {
+      "assertion": "assert noCrossFamilyFieldMixing",
+      "result": "PASS",
+      "detail": "records missing single sourceFamily=[]"
+    },
+    {
+      "assertion": "assert noInvalidOfficialProduct",
+      "result": "PASS",
+      "detail": "violations=[]"
+    },
+    {
+      "assertion": "assert no climatology-level T2M_MAX/T2M_MIN/PRECTOTCORR substitution",
+      "result": "PASS",
+      "detail": "violations=[]"
+    },
+    {
+      "assertion": "assert R1toR7Unclassified === 0",
+      "result": "PASS",
+      "detail": "unclassified=0 []"
+    },
+    {
+      "assertion": "assert R1toR7FinalClassificationDuplicates === 0",
+      "result": "PASS",
+      "detail": "violations=0"
+    },
+    {
+      "assertion": "assert bestMonthsOutputDefinedForAllDestinations",
+      "result": "PASS",
+      "detail": "violations=[]"
+    },
+    {
+      "assertion": "assert noLatitudeTemplateFallback",
+      "result": "PASS",
+      "detail": "violations=0"
+    },
+    {
+      "assertion": "assert noRuntimeClimateAPI",
+      "result": "PASS",
+      "detail": "0 records missing methodologyVersion (build-time provenance)"
+    },
+    {
+      "assertion": "assert precipDaysGe1mm unresolved contract (null value + null product)",
+      "result": "PASS",
+      "detail": "violations=[]"
+    }
+  ]
+}
