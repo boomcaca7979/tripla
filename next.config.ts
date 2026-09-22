@@ -69,6 +69,22 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // ── 主域统一：apex → www（301） ─────────────────────────────────────
+      // 正式 canonical host 只有一个：https://www.utripla.xyz；
+      // apex（utripla.xyz）不再作为最终 200 主站。放在数组最前，apex 上任何
+      // 路径先归一到 www，再由后续规则继续处理（例：apex /regions → www/regions
+      // → www/destinations）。其它 host（Vercel 部署域名等）不受影响。
+      //
+      // 自循环安全性：Next 把该条件编译为 `new RegExp("^" + value + "$")`
+      // （见 shared/lib/router/utils/prepare-destination.js 的 matchHas），
+      // 故 "utripla.xyz" 不会命中 "www.utripla.xyz"。
+      // 已在 production build 下用伪造 Host 头实测：apex→301、www→200、其它→200。
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "utripla.xyz" }],
+        destination: "https://www.utripla.xyz/:path*",
+        statusCode: 301,
+      },
       // 移除用户系统与 SaaS 残留后，将旧入口 301 到首页，避免已收录 URL 404。
       // /login 与 /signup 已恢复为真实认证页（WorkBuddy Cloud auth），不再重定向。
       { source: "/forgot-password", destination: "/", statusCode: 301 },
