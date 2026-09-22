@@ -13,7 +13,9 @@ import { FEATURED_DESTINATIONS } from "@/data/featured-destinations";
 
 // ── Metadata（保留既有 SEO 结构；文案随 destination 数量动态） ───────────────
 const DESTINATIONS_COUNT = DESTINATIONS.length;
-const DEST_TITLE = `UTRIPLA World Atlas · Explore ${DESTINATIONS_COUNT} destinations on a night globe`;
+// 标题不带品牌名：root layout 的 title.template = "%s | tripla" 会追加站点名，
+// 否则会渲染成 "tripla World Atlas · ... | tripla"（同一标题出现两次品牌）。
+const DEST_TITLE = `World Atlas · Explore ${DESTINATIONS_COUNT} destinations on a night globe`;
 const DEST_DESCRIPTION =
   `A glowing night earth with ${DESTINATIONS_COUNT} destinations. Drag to spin the globe, hover a city for its best months and typical budget, then open its full travel guide. Every month is ranked from NASA POWER climate data.`;
 

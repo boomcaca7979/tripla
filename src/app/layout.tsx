@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     template: "%s | tripla",
   },
   description:
-    "Wander a living atlas of destinations, stolen routes and field notes. No account, no search box in your face — open it and see what pulls you in.",
+    "Wander a living atlas of destinations, stolen routes and field notes. No sign-up wall, no search box in your face — open it and see what pulls you in.",
   keywords: [
     "travel discovery",
     "travel guides",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "tripla — Interactive Travel Discovery",
     description:
-      "Wander a living atlas of destinations, stolen routes and field notes — no account, no search box in your face.",
+      "Wander a living atlas of destinations, stolen routes and field notes — no sign-up wall, no search box in your face.",
     url: SITE_URL,
     siteName: "tripla",
     type: "website",
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "tripla — Interactive Travel Discovery",
     description:
-      "Wander a living atlas of destinations, stolen routes and field notes — no account, no search box in your face.",
+      "Wander a living atlas of destinations, stolen routes and field notes — no sign-up wall, no search box in your face.",
     images: ["/og-image.png"],
   },
   robots: {

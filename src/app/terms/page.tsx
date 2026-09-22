@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Terms of Service · tripla",
+  // 标题不带后缀：root layout 的 template 会追加 "| tripla"，
+  // 否则渲染成 "Terms of Service · tripla | tripla"。
+  title: "Terms of Service",
   description: "Terms of Service for tripla.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {
@@ -31,9 +34,9 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900">3. No Account Required</h2>
+            <h2 className="text-lg font-semibold text-gray-900">3. Accounts</h2>
             <p className="mt-2">
-              The Service is publicly accessible and does not require registration, login, or an account of any kind. All content is available anonymously, and any preferences or locally saved itineraries are stored only in your own browser.
+              Browsing the Service does not require registration or login. You may optionally create an account with an email address and password to reach your personal workspace, and you are responsible for keeping those credentials secure. Preferences and locally saved itineraries remain stored only in your own browser.
             </p>
           </section>
 

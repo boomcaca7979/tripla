@@ -24,11 +24,16 @@ const en: TranslationDict = {
   nav: {
     home: "Home",
     destinations: "Destinations",
-    guides: "Guides",
-    trips: "Trips",
-    routes: "Trips",
-    regions: "Regions",
-    bestTime: "Best Time to Visit",
+    // /guides 是目的地目录（该页 title 亦为 "Destinations"）；/destinations 是夜球地图。
+    // 两个标签各自与目标页自身语义一致 —— 消除"Guides 指向目的地目录"的命名冲突。
+    atlas: "Atlas",
+    // /trips 是用户的个人旅行工作台（Trips/Saved/Inbox/Expenses/Profile/Settings），
+    // 导航语义为"个人中心"；URL 保持 /trips 不变（不做 route 迁移）。
+    account: "Account",
+    // 认证入口（未登录时的 Header / 抽屉；已登录时的账号菜单）
+    signIn: "Sign in",
+    createAccount: "Create account",
+    signOut: "Sign out",
     comingSoon: "Coming soon",
   },
 
@@ -139,11 +144,11 @@ const zh: TranslationDict = {
   nav: {
     home: "首页",
     destinations: "目的地",
-    guides: "攻略",
-    trips: "行程",
-    routes: "行程",
-    regions: "地区",
-    bestTime: "最佳旅行时间",
+    atlas: "世界地图",
+    account: "账户",
+    signIn: "登录",
+    createAccount: "注册",
+    signOut: "退出登录",
     comingSoon: "即将推出",
   },
 

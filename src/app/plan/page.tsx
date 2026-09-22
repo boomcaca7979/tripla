@@ -1,5 +1,15 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import PlanPageClient from "./PlanPageClient";
+
+export const metadata: Metadata = {
+  title: "Plan a trip",
+  description:
+    "Sketch a day-by-day itinerary — flights, weather and budget side by side, saved in your browser.",
+  alternates: { canonical: "/plan" },
+  // 工具页：首屏为客户端表单骨架，对抓取者是薄内容 → 收录无益。
+  robots: { index: false, follow: true },
+};
 
 // ── Loading fallback ─────────────────────────────────────────────────
 

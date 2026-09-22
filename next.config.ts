@@ -69,12 +69,26 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // 移除用户系统与 SaaS 残留后，将旧入口 301 到首页，避免已收录 URL 404
-      { source: "/login", destination: "/", statusCode: 301 },
-      { source: "/signup", destination: "/", statusCode: 301 },
+      // 移除用户系统与 SaaS 残留后，将旧入口 301 到首页，避免已收录 URL 404。
+      // /login 与 /signup 已恢复为真实认证页（WorkBuddy Cloud auth），不再重定向。
       { source: "/forgot-password", destination: "/", statusCode: 301 },
       { source: "/reset-password", destination: "/", statusCode: 301 },
       { source: "/pricing", destination: "/", statusCode: 301 },
+      // ── 已下线栏目：Regions 与 Best Time to Visit ──────────────────────
+      // 这两个栏目已从前端导航（Header/Footer）、sitemap 与站内链接中完整移除。
+      // 它们此前是公开收录页面，因此这里保留 301 兜底 —— 不产生 404，也不留下
+      // 只能靠孤儿页吃收录的 thin content。
+      //   · /regions*            → /destinations（区域维度由 Destination 发现层承担）
+      //   · /best-time-to-visit* → 对应城市的 /destinations/<slug>（气候/月份数据
+      //     仍保留在 Destination 页面内部，只是不再有独立栏目包装）
+      { source: "/regions", destination: "/destinations", statusCode: 301 },
+      { source: "/regions/:region", destination: "/destinations", statusCode: 301 },
+      { source: "/best-time-to-visit", destination: "/destinations", statusCode: 301 },
+      {
+        source: "/best-time-to-visit/:slug",
+        destination: "/destinations/:slug",
+        statusCode: 301,
+      },
       // 城市唯一页规则：/guides?city=<城市> 308 → /destinations/<slug>。
       // config 级 redirect 保证爬虫/直链拿到真 308（页面级流式跳转仅作兜底）。
       ...DESTINATIONS.map((d) => ({

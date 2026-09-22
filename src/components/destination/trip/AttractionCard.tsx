@@ -1,6 +1,7 @@
 "use client";
 
 import AddToTripButton from "./AddToTripButton";
+import WorkspaceActions from "./WorkspaceActions";
 import WinkHotelCards from "./WinkHotelCards";
 import AttractionTickets from "./AttractionTickets";
 import type { AttractionRecord } from "@/data/attractions";
@@ -29,6 +30,7 @@ export default function AttractionCard({
   name,
   index,
   slug,
+  city,
   gradient,
   bestMonths,
   suggestedDays,
@@ -156,6 +158,7 @@ export default function AttractionCard({
 
         <div className="mt-5">
           <AddToTripButton type="attraction" name={attraction?.name ?? name} />
+          <WorkspaceActions kind="place" title={attraction?.name ?? name} city={city} source={`Destination · ${city}`} compact />
         </div>
       </div>
     </article>

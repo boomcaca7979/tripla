@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy · tripla",
+  // 标题不带后缀：root layout 的 template 会追加 "| tripla"，
+  // 否则渲染成 "Privacy Policy · tripla | tripla"。
+  title: "Privacy Policy",
   description: "Privacy Policy for tripla.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {
@@ -26,7 +29,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-lg font-semibold text-gray-900">2. How We Use Your Information</h2>
             <p className="mt-2">
-              We use your information to provide and improve the Service, personalize your travel recommendations, and ensure the security of our platform. The Service does not require an account: all content is anonymously accessible, and preferences you choose (such as temperature unit or currency) are stored only on your own device.
+              We use your information to provide and improve the Service, personalize your travel recommendations, and ensure the security of our platform. Browsing the Service does not require an account, and all content is anonymously accessible. If you choose to create one, your email address is stored with our authentication provider so you can sign in again. Preferences you choose (such as temperature unit or currency) are stored only on your own device.
             </p>
           </section>
 

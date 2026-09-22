@@ -16,25 +16,24 @@ const GROUPS: { titleKey: string; links: FooterLink[] }[] = [
   {
     titleKey: "footer.discover",
     links: [
-      { labelKey: "nav.destinations", href: "/destinations" },
-      { labelKey: "nav.regions", href: "/regions" },
+      { labelKey: "nav.destinations", href: "/guides" },
+      { labelKey: "nav.atlas", href: "/destinations" },
       { labelKey: "footer.travelStyles", href: "/travel-styles" },
     ],
   },
   {
     titleKey: "footer.travel",
     links: [
-      { labelKey: "nav.routes", href: "/trips" },
-      { labelKey: "nav.guides", href: "/guides" },
-      { labelKey: "nav.bestTime", href: "/best-time-to-visit" },
+      { labelKey: "nav.account", href: "/trips" },
       { labelKey: "footer.budget", href: "/travel-budget" },
     ],
   },
   {
     titleKey: "footer.tools",
     links: [
+      // /share 需要 ?data= 载荷，无载荷时是 "Invalid Share Link" 空态；
+      // 它由 Trip 内的分享按钮进入，不作为站点级入口，故此处不再链接。
       { labelKey: "footer.plan", href: "/plan" },
-      { labelKey: "footer.share", href: "/share" },
     ],
   },
   {

@@ -173,7 +173,9 @@ export default function CesiumGlobePrototype({ geojson, token }: PrototypeProps)
           subdomains: ["0", "1", "2", "3", "4", "5", "6", "7"],
           minimumLevel: 1,
           maximumLevel: 18,
-          credit: new Cesium.Credit("天地图 · 国家地理信息公共服务平台"),
+          credit: new Cesium.Credit(
+            "Tianditu 天地图 · National Platform for Common Geospatial Information Services",
+          ),
         });
         const darkLabels = new Cesium.UrlTemplateImageryProvider({
           url: TD_WMTS("cva_d", tk),

@@ -508,14 +508,8 @@ export default async function TripDetailPage({
             >
               {capitalize(trip.travelStyle)} journeys
             </Link>
-            {matchedDestination && (
-              <Link
-                href={`/regions/${matchedDestination.region.toLowerCase()}`}
-                className="text-body-sm font-medium text-ut-accent-strong underline decoration-ut-accent-line underline-offset-4 transition-colors duration-[var(--ut-dur-fast)] hover:text-ut-ink focus-visible:outline-2 focus-visible:outline-ut-accent"
-              >
-                {matchedDestination.region} journeys
-              </Link>
-            )}
+            {/* 原「{Region} journeys」链接指向已下线的 /regions/<region>，
+                且站点没有 region 过滤路由，故移除该链接（不再指向失效目标）。 */}
           </div>
 
           {/* Highlights — 仅在存在独立内容时渲染（见 hasExplicitHighlights） */}
@@ -563,13 +557,13 @@ export default async function TripDetailPage({
               }
               href={
                 matchedDestination
-                  ? `/best-time-to-visit/${matchedDestination.slug}`
-                  : "/best-time-to-visit"
+                  ? `/destinations/${matchedDestination.slug}`
+                  : "/destinations"
               }
               linkLabel={
                 matchedDestination
-                  ? `See the full best-time guide for ${trip.city}`
-                  : "Browse best-time guides"
+                  ? `See the full climate guide for ${trip.city}`
+                  : "Browse destinations"
               }
             />
           </InnerSection>

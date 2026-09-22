@@ -42,3 +42,6 @@ next-env.d.ts
 
 # agent workspace memory (private, not part of the product)
 /.workbuddy/
+
+# local app-registration artifact (WorkBuddy publish metadata, machine-local)
+.wbapp_*.genie

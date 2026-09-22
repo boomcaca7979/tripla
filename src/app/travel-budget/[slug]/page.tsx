@@ -242,7 +242,9 @@ export default async function TravelBudgetPage({
             Here&apos;s an estimated daily budget and total trip cost for different durations.
           </p>
 
-          {/* Related guides (Phase 5 Step 4) */}
+          {/* Related links. The standalone "Best Time to Visit" column no longer
+              exists; the climate/month data lives inside the destination page,
+              which the first pill already links to. */}
           <div className="mt-6 flex flex-wrap gap-3 text-sm">
             <Link
               href={`/destinations/${dest.slug}`}
@@ -251,10 +253,10 @@ export default async function TravelBudgetPage({
               📍 {dest.city} travel guide
             </Link>
             <Link
-              href={`/best-time-to-visit/${dest.slug}`}
+              href="/travel-budget"
               className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-4 py-2 font-medium text-amber-700 transition hover:bg-amber-100"
             >
-              🗓️ Best time to visit {dest.city}
+              💰 Budget by destination
             </Link>
           </div>
         </header>

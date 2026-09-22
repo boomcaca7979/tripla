@@ -16,6 +16,7 @@ import Timeline from "@/components/inner/Timeline";
 import FaqList from "@/components/inner/FaqList";
 import PracticalInfo from "@/components/inner/PracticalInfo";
 import GuideHero from "@/components/guides/GuideHero";
+import WorkspaceActions from "@/components/destination/trip/WorkspaceActions";
 import GuideQuickFacts from "@/components/guides/GuideQuickFacts";
 import GuideContents from "@/components/guides/GuideContents";
 import {
@@ -286,6 +287,17 @@ export default async function GuideDetailPage({
 
         {/* Quick facts：destination / duration / timing / style / budget（仅有真实数据时） */}
         <GuideQuickFacts facts={quickFacts} />
+
+        {/* 工作区接入（最小 UI，蓝图 #10）：Save guide / Add to Trip */}
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <WorkspaceActions
+            kind="guide"
+            title={guide.title}
+            city={guide.city}
+            source={`Guide · ${guide.city}`}
+            sourceUrl={`/guides/${guide.slug}`}
+          />
+        </div>
 
         {/* Guide overview：真实引言（不改写） */}
         <section className="mb-10 max-w-[68ch]">

@@ -40,8 +40,8 @@ const CAPABILITIES: Capability[] = [
     step: "03",
     title: "Understand",
     body: "Before you commit: best months, weather windows and typical daily budgets — destination by destination, from real climate data.",
-    href: "/best-time-to-visit",
-    cta: "Check best time to visit",
+    href: "/destinations",
+    cta: "See months & climate",
   },
   {
     step: "04",

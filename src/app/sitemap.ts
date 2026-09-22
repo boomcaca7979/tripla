@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { TRIPS } from "@/data/trips";
-import { DESTINATIONS, type Region } from "@/data/destinations";
+import { DESTINATIONS } from "@/data/destinations";
 import { TRAVEL_STYLES } from "@/data/travel-styles";
 import { GUIDES } from "@/data/guides";
 import { AI_PAGES } from "@/data/ai-pages";
@@ -8,14 +8,15 @@ import { AI_PAGES } from "@/data/ai-pages";
 const SITE_URL = "https://www.utripla.xyz";
 
 export function generateSitemapEntries(): MetadataRoute.Sitemap {
-  // Phase 7.4/9 Step 7: 6 个 Hub 页面 priority 0.8
+  // Hub 页面 priority 0.8
+  // 已移除 Regions 与 Best Time to Visit 两个栏目入口（不再作为公开导航/收录目标），
+  // 其旧 URL 由 next.config.ts 的 301 兜底，避免已收录地址 404。
+  // /trips 也已移出：它现在是登录后的个人工作台（匿名抓取者只看到空壳），
+  // 已改为 noindex；其下的预制 Trip 详情页 /trips/<slug> 仍是内容页，继续收录。
   const hubRoutes = [
-    { path: "/trips", priority: 0.8, changeFrequency: "weekly" as const },
     { path: "/destinations", priority: 0.8, changeFrequency: "weekly" as const },
-    { path: "/best-time-to-visit", priority: 0.8, changeFrequency: "weekly" as const },
     { path: "/travel-budget", priority: 0.8, changeFrequency: "weekly" as const },
     { path: "/travel-styles", priority: 0.8, changeFrequency: "weekly" as const },
-    { path: "/regions", priority: 0.8, changeFrequency: "weekly" as const },
   ];
 
   // 其他静态页面
@@ -43,18 +44,6 @@ export function generateSitemapEntries(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  // Phase 8.6: Region landing 页 priority 0.7
-  // 仅生成真实存在 destination 的 region
-  const ALL_REGIONS: Region[] = ["Asia", "Europe", "Americas", "Oceania", "Africa"];
-  const usedRegions = new Set(DESTINATIONS.map((d) => d.region));
-  const regionEntries: MetadataRoute.Sitemap = ALL_REGIONS.filter((r) =>
-    usedRegions.has(r),
-  ).map((r) => ({
-    url: `${SITE_URL}/regions/${r.toLowerCase()}`,
-    changeFrequency: "weekly",
-    priority: 0.7,
-  }));
-
   // 详情页 priority 0.6-0.7
   const tripEntries: MetadataRoute.Sitemap = TRIPS.map((t) => ({
     url: `${SITE_URL}/trips/${t.slug}`,
@@ -66,12 +55,6 @@ export function generateSitemapEntries(): MetadataRoute.Sitemap {
     url: `${SITE_URL}/destinations/${d.slug}`,
     changeFrequency: "monthly",
     priority: 0.7,
-  }));
-
-  const bestTimeEntries: MetadataRoute.Sitemap = DESTINATIONS.map((d) => ({
-    url: `${SITE_URL}/best-time-to-visit/${d.slug}`,
-    changeFrequency: "monthly",
-    priority: 0.6,
   }));
 
   const travelBudgetEntries: MetadataRoute.Sitemap = DESTINATIONS.map((d) => ({
@@ -100,10 +83,8 @@ export function generateSitemapEntries(): MetadataRoute.Sitemap {
     ...staticEntries,
     ...hubEntries,
     ...travelStyleEntries,
-    ...regionEntries,
     ...tripEntries,
     ...destinationEntries,
-    ...bestTimeEntries,
     ...travelBudgetEntries,
     ...guideEntries,
     ...aiPageEntries,

@@ -157,7 +157,9 @@ export default async function TravelStylePage({
         {/* Hero */}
         <header className="mb-10">
           <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-            {meta.label} Travel Trips &amp; Itineraries
+            {/* 显式的 {" "}：JSX 会裁掉表达式后跨行文本块的前导空格，
+                否则 h1 会渲染成 "FoodieTravel Trips & Itineraries"。 */}
+            {meta.label}{" "}Travel Trips &amp; Itineraries
           </h1>
           <p className="mt-3 max-w-2xl text-base text-gray-500 sm:text-lg">
             {matchedTrips.length} ready-to-use {meta.label.toLowerCase()} trip

@@ -8,12 +8,17 @@ import { useHydration } from "@/hooks/useHydration";
 import { useTranslation } from "@/lib/i18n";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import TriplaLogo from "@/components/ui/TriplaLogo";
+import AccountLink, { AccountDrawerLinks } from "@/components/layout/AccountLink";
 import {
   ENV_DARK_TOKENS, HEADER_FULL_STATE_CLASS, HEADER_SCROLLED_STATE_CLASS,
 } from "@/lib/env-tokens";
 
 // ── Navigation ───────────────────────────────────────────────────────
-// 仅链接现有路由；Explore / Experiences 槽位等对应路由在 Phase 5 落地后再加入。
+// 只链接真实存在的路由。
+//
+// `Account`（href 仍是 /trips）是用户的个人旅行工作台入口：Trips / Saved /
+// Inbox / Expenses / Profile / Settings 都在这一层之下。导航语义是"个人中心"，
+// 但 URL 保持 /trips —— 不为改称谓迁移 route，也不重做 SEO。
 
 interface NavItem {
   labelKey: string;
@@ -21,11 +26,9 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { labelKey: "nav.destinations", href: "/destinations" },
-  { labelKey: "nav.guides", href: "/guides" },
-  { labelKey: "nav.routes", href: "/trips" },
-  { labelKey: "nav.regions", href: "/regions" },
-  { labelKey: "nav.bestTime", href: "/best-time-to-visit" },
+  { labelKey: "nav.destinations", href: "/guides" },
+  { labelKey: "nav.atlas", href: "/destinations" },
+  { labelKey: "nav.account", href: "/trips" },
 ];
 
 // ── Component ────────────────────────────────────────────────────────
@@ -215,6 +218,11 @@ export default function Header() {
             </>
           )}
 
+          {/* 认证入口：未登录 = Sign in + Create account；已登录 = 账号芯片
+              （Account → /trips / Sign out）。放在移动端菜单按钮之前，
+              不改变 Header 既有布局与视觉结构。 */}
+          <AccountLink />
+
           {/* Mobile drawer toggle */}
           <button
             ref={toggleButtonRef}
@@ -288,6 +296,9 @@ export default function Header() {
                 </Link>
               );
             })}
+
+            {/* 认证入口（与桌面端同一 auth 来源，两种状态共用一份渲染逻辑） */}
+            <AccountDrawerLinks onNavigate={() => setDrawerOpen(false)} />
 
             {/* 偏好设置（保持既有公开功能） */}
             {hydrated && (

@@ -172,17 +172,6 @@ function buildDestinationMetaDescription(d) {
   return prefix + suffix;
 }
 
-function buildBestTimeMetaDescription(d) {
-  const suffix = ` Plan your trip to ${d.city}, ${d.country}.`;
-  const weatherPrefix = `Weather: ${d.weatherLabel}. `;
-  const maxSeason = 160 - suffix.length - weatherPrefix.length;
-  let season = d.bestSeason;
-  if (season.length > maxSeason) {
-    season = season.slice(0, Math.max(0, maxSeason - 1)).trimEnd() + "…";
-  }
-  return season + " " + weatherPrefix + suffix.trim();
-}
-
 function buildTravelBudgetMetaDescription(d) {
   const total = d.budgetPerDay * d.recommendedDays;
   const prefix = `Daily cost in ${d.city}: ${d.budgetPerDay} ${d.budgetCurrency}. Total for ${d.recommendedDays} days: ${total} ${d.budgetCurrency}. `;
@@ -233,7 +222,7 @@ function countInternalLinks(html, page, minRequired) {
     return 0;
   }
   // 匹配 href="/trips/...", href="/destinations/...", etc.
-  const linkRegex = /href="\/(trips|destinations|best-time-to-visit|travel-budget|travel-styles|regions)\/[^"#]+"/g;
+  const linkRegex = /href="\/(trips|destinations|travel-budget|travel-styles)\/[^"#]+"/g;
   const matches = html.match(linkRegex) ?? [];
   const uniqueLinks = new Set(matches);
   console.log(`[links] ${page.padEnd(40)} | ${uniqueLinks.size} unique internal links ${uniqueLinks.size >= minRequired ? "✓" : "❌"}`);
@@ -273,13 +262,8 @@ for (const d of dests) {
   recordDesc(`/destinations/${d.city.toLowerCase()}`, description);
 }
 
-console.log("\n--- /best-time-to-visit/[slug] ---");
-for (const d of dests) {
-  const title = `Best Time To Visit ${d.city} · ${d.bestMonths} Travel Guide`;
-  const description = buildBestTimeMetaDescription(d);
-  recordTitle(`/best-time-to-visit/${d.city.toLowerCase()}`, title);
-  recordDesc(`/best-time-to-visit/${d.city.toLowerCase()}`, description);
-}
+// 注：/best-time-to-visit/[slug] 与 /regions 栏目已下线（导航/sitemap/内链均已移除，
+// 旧 URL 由 next.config.ts 301 兜底），因此不再对它们做 metadata 断言。
 
 console.log("\n--- /travel-budget/[slug] ---");
 for (const d of dests) {
@@ -311,7 +295,6 @@ console.log(`\n=== 3. Schema 检查 (Phase 9 Step 8) ===`);
 const schemaPages = [
   { rel: "trips/tokyo-3d-foodie.html", page: "/trips/tokyo-3d-foodie" },
   { rel: "destinations/tokyo.html", page: "/destinations/tokyo" },
-  { rel: "best-time-to-visit/tokyo.html", page: "/best-time-to-visit/tokyo" },
   { rel: "travel-budget/tokyo.html", page: "/travel-budget/tokyo" },
 ];
 for (const { rel, page } of schemaPages) {
@@ -349,10 +332,8 @@ countInternalLinks(sampleDestHtml, "/destinations/tokyo", 4);
 
 const landingPages = [
   { rel: "travel-styles/foodie.html", page: "/travel-styles/foodie", min: 3 },
-  { rel: "regions/asia.html", page: "/regions/asia", min: 3 },
   { rel: "trips.html", page: "/trips", min: 3 },
   { rel: "destinations.html", page: "/destinations", min: 3 },
-  { rel: "best-time-to-visit.html", page: "/best-time-to-visit", min: 3 },
   { rel: "travel-budget.html", page: "/travel-budget", min: 3 },
 ];
 for (const { rel, page, min } of landingPages) {
@@ -376,10 +357,8 @@ if (fs.existsSync(sitemapPath)) {
   const requiredHubs = [
     "https://www.utripla.xyz/trips",
     "https://www.utripla.xyz/destinations",
-    "https://www.utripla.xyz/best-time-to-visit",
     "https://www.utripla.xyz/travel-budget",
     "https://www.utripla.xyz/travel-styles",
-    "https://www.utripla.xyz/regions",
   ];
   for (const hub of requiredHubs) {
     if (!uniqueUrls.has(hub)) {
@@ -387,7 +366,7 @@ if (fs.existsSync(sitemapPath)) {
       issues.push(`sitemap: missing ${hub}`);
     }
   }
-  console.log(`[sitemap] all 6 hubs present ✓`);
+  console.log(`[sitemap] all ${requiredHubs.length} hubs present ✓`);
 } else {
   console.log(`[sitemap] sitemap.xml.body not found ❌ (run npm run build first)`);
   issues.push("sitemap: build output not found");
@@ -396,7 +375,7 @@ if (fs.existsSync(sitemapPath)) {
 // ── 汇总 ─────────────────────────────────────────────────────────────
 
 console.log(`\n=== 汇总 ===`);
-console.log(`总页面数 (metadata): ${trips.length + dests.length * 3}`);
+console.log(`总页面数 (metadata): ${trips.length + dests.length * 2}`);
 console.log(`总 title+desc 计数: ${totalCount}`);
 console.log(`范围内: ${inRangeCount}/${totalCount} (${Math.round(inRangeCount / totalCount * 100)}%)`);
 console.log(`问题数: ${issues.length}`);

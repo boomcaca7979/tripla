@@ -60,7 +60,16 @@ export default function HotelSearchLink({
   const [resolvedHref, setResolvedHref] = useState(href);
 
   useEffect(() => {
-    setResolvedHref(refreshStayWindow(href, nights));
+    // 不在 effect 体内同步 setState（react-hooks/set-state-in-effect：会触发级联
+    // 渲染）。推迟到微任务执行，仍是"挂载后立刻用本地时钟覆写"，且发生在首帧
+    // 绘制之前 —— 行为与原来一致，链接恒为"今天起"。
+    let alive = true;
+    queueMicrotask(() => {
+      if (alive) setResolvedHref(refreshStayWindow(href, nights));
+    });
+    return () => {
+      alive = false;
+    };
   }, [href, nights]);
 
   return (

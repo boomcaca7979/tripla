@@ -12,7 +12,7 @@ import { DESTINATIONS } from "@/data/destinations";
 const SITE_URL = "https://www.utripla.xyz";
 
 const HOME_TITLE = "tripla — Interactive Travel Discovery";
-const HOME_DESCRIPTION = `Wander a living atlas of ${DESTINATIONS.length} destinations, stolen routes and field notes. No account, no search box in your face — open it and see what pulls you in.`;
+const HOME_DESCRIPTION = `Wander a living atlas of ${DESTINATIONS.length} destinations, stolen routes and field notes. No sign-up wall, no search box in your face — open it and see what pulls you in.`;
 
 export const metadata: Metadata = {
   title: HOME_TITLE,

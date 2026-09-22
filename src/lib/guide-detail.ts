@@ -266,6 +266,10 @@ export interface DestinationLink {
 /**
  * Guide → Destination 生态的真实内链。全部为 SSG 已生成的目的地路由，
  * 不存在死链接。
+ *
+ * 注：原「Best time to visit（Timing）」条目指向已下线的独立栏目
+ * `/best-time-to-visit/<slug>`，故移除 —— 气候/最佳月份数据仍完整保留在
+ * Destination 页面内部，而上面第一条链接已经指向该页，不再重复。
  */
 export function destinationLinks(destination: Destination | null): DestinationLink[] {
   if (!destination) return [];
@@ -274,11 +278,6 @@ export function destinationLinks(destination: Destination | null): DestinationLi
       href: `/destinations/${destination.slug}`,
       label: `Explore ${destination.city}`,
       meta: "Destination",
-    },
-    {
-      href: `/best-time-to-visit/${destination.slug}`,
-      label: `Best time to visit ${destination.city}`,
-      meta: "Timing",
     },
     {
       href: `/travel-budget/${destination.slug}`,

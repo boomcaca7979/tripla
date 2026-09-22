@@ -2,6 +2,7 @@
 
 import { useMyTrip } from "./MyTripContext";
 import type { TripItemPrice } from "@/lib/trip-list";
+import { upsertSavedItem } from "@/lib/travel-workspace";
 
 /**
  * AddToTripButton — 景点 / 酒店 / 美食 / 可预订体验统一加入清单按钮。
@@ -27,6 +28,24 @@ export default function AddToTripButton({
   const { has, toggle, city, hydrated } = useMyTrip();
   const added = hydrated && has(type, name);
 
+  // 全局工作区同步（蓝图 #9）：加入页面清单 = 收藏该对象到 /trips 的 Saved。
+  // kind 映射：attraction→place / hotel→hotel / food→restaurant / experience→activity。
+  const syncToWorkspace = () => {
+    const kindMap = {
+      attraction: "place",
+      hotel: "hotel",
+      food: "restaurant",
+      experience: "activity",
+      flight: "activity",
+    } as const;
+    upsertSavedItem({
+      kind: kindMap[type],
+      title: name,
+      meta: city,
+      source: `Destination · ${city}`,
+    });
+  };
+
   const base =
     variant === "primary"
       ? "inline-flex min-h-[44px] items-center gap-2 rounded-ut-sm border px-5 py-2.5 text-body font-medium transition-colors duration-[var(--ut-dur-fast)] focus-visible:outline-2 focus-visible:outline-ut-accent"
@@ -36,7 +55,10 @@ export default function AddToTripButton({
     <button
       type="button"
       aria-pressed={added}
-      onClick={() => toggle({ type, name, city, affiliateUrl, price })}
+      onClick={() => {
+        toggle({ type, name, city, affiliateUrl, price });
+        if (!added) syncToWorkspace();
+      }}
       className={`${base} ${
         added
           ? "border-ut-accent bg-ut-accent text-white"

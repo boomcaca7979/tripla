@@ -582,7 +582,7 @@ export const EXTENDED_TRIPS_F: RawTripInput[] = [
     ],
     restaurants: [
       { name: "Stari Fijaker", cuisine: "Zagreb classics · $$", emoji: "🍲" },
-      { name: "Subway点位 vs OK', 'Vinodol", cuisine: "Croatian tavern · $$", emoji: "🍷" },
+      { name: "Vinodol", cuisine: "Croatian tavern · $$", emoji: "🍷" },
       { name: "Mali Medo", cuisine: "Craft beer hall · $$", emoji: "🍺" },
     ],
     city: "Zagreb", country: "Croatia", airport: ZAG, travelStyle: "cultural",

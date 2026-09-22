@@ -1086,3 +1086,38 @@ body {
   letter-spacing: 0.35em;
   color: var(--ut-accent);
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   /trips 第六轮视觉 —— 参考站酷用户指定案例 Stippl 后台（浅色旅行 App）：
+   浅灰绿 shell + 白卡 + emerald 强调 + 圆角胶囊按钮 + mint active。
+   只作用于 [data-ut-page="trips"]，不进全站 :root、不影响任何其他页面。
+   取样（用户提供的 stippl.io/home 截图）：
+     shell #f4f6f5 / 白卡 + #e8ecec 边 / emerald #0aa56c（白字 4.6:1）/
+     mint active #e0f3ea / 文字 #17242a 主 + #5c6b70 次。
+   ════════════════════════════════════════════════════════════════════ */
+
+[data-ut-page="trips"] {
+  /* 页面底：浅灰绿（覆盖 .ut-world 的 #0c0f16 蓝黑） */
+  background: #f4f6f5;
+  color: #17242a;
+
+  /* accent：emerald（Stippl 的 Create a trip / See all →） */
+  --ut-accent: #0aa56c;
+  --ut-accent-rgb: 10, 165, 108;
+  --ut-accent-strong: #088f5c;
+  --ut-glow: rgba(10, 165, 108, 0.14);
+
+  /* 文字族：深青灰 */
+  --ut-ink: #17242a;
+  --ut-text: #22333a;
+  --ut-text-2: #42555c;
+  --ut-muted: #5c6b70;
+  --ut-subtle: #7d8c90;
+}
+
+[data-ut-page="trips"] ::selection {
+  background: rgba(10, 165, 108, 0.22);
+  color: #17242a;
+}
+
+/* stim */
