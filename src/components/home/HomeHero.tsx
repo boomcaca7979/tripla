@@ -116,7 +116,7 @@ export default function HomeHero() {
 
       {/* ── Z2 内容：居中的文案组 + 整宽乐器带 ───────────────────── */}
       <div className="relative z-10 mx-auto flex w-full max-w-[var(--ut-container-max)] flex-1 flex-col items-center justify-center px-4 pb-10 pt-24 text-center md:px-6 md:pt-20">
-        <Eyebrow dot className="ut-hero-eyebrow">
+        <Eyebrow dot className="ut-hero-eyebrow ut-t-micro">
           Interactive travel discovery
         </Eyebrow>
 
@@ -128,15 +128,15 @@ export default function HomeHero() {
 
         {/* L2：这一片区域是做什么的（一句，解释"怎么用"，不抢 H1） */}
         <p
-          className="mx-auto mt-6 max-w-[46ch] text-balance text-body-lg leading-snug"
+          className="ut-t-support-lg mx-auto mt-6 max-w-[46ch] text-balance"
           style={{ color: "var(--ut-hero-soft)" }}
         >
-          Set a month, a mood and a budget — the atlas answers with places that
-          fit, right now.
+          Explore destinations, understand places, compare them — then continue
+          into travel.
         </p>
 
-        {/* L3：只由当前选择派生的状态行 */}
-        <div className="mt-4">
+        {/* L3：只由当前真实操作派生的状态行（无真实状态时该行整体不渲染） */}
+        <div className="mt-4 empty:mt-0">
           <HomeStatusLine />
         </div>
       </div>
@@ -175,13 +175,13 @@ export default function HomeHero() {
               <div className="flex flex-wrap items-center gap-3 md:pb-0.5">
                 <Link
                   href="#discover"
-                  className="inline-flex min-h-[44px] items-center rounded-ut-sm bg-ut-accent px-5 py-2.5 text-body-sm font-medium text-ut-on-accent transition-[background-color,transform] duration-[var(--ut-dur-fast)] ease-ut-out hover:-translate-y-px hover:bg-ut-accent-strong focus-visible:outline-2 focus-visible:outline-ut-accent"
+                  className="inline-flex min-h-[44px] items-center ut-t-control rounded-ut-sm bg-ut-accent px-5 py-2.5 text-ut-on-accent transition-[background-color,transform] duration-[var(--ut-dur-fast)] ease-ut-out hover:-translate-y-px hover:bg-ut-accent-strong focus-visible:outline-2 focus-visible:outline-ut-accent"
                 >
                   Start exploring
                 </Link>
                 <Link
                   href="#ready"
-                  className="inline-flex min-h-[44px] items-center rounded-ut-sm border border-ut-border-strong px-5 py-2.5 text-body-sm font-medium text-ut-text transition-[border-color,color,transform] duration-[var(--ut-dur-fast)] ease-ut-out hover:-translate-y-px hover:border-ut-accent-line hover:text-ut-accent focus-visible:outline-2 focus-visible:outline-ut-accent"
+                  className="inline-flex min-h-[44px] items-center ut-t-control rounded-ut-sm border border-ut-border-strong px-5 py-2.5 text-ut-text transition-[border-color,color,transform] duration-[var(--ut-dur-fast)] ease-ut-out hover:-translate-y-px hover:border-ut-accent-line hover:text-ut-accent focus-visible:outline-2 focus-visible:outline-ut-accent"
                 >
                   I already know where
                 </Link>

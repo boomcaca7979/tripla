@@ -26,10 +26,13 @@ const geistMono = localFont({
   ],
 });
 
-// Display 衬线（编辑感标题）：单字重 400，构建时自托管，浏览器不请求 Google
+// Display 衬线（编辑感标题）：单字重 400，构建时自托管，浏览器不请求 Google。
+// Hero H1 的 <em class="italic"> 需要真实 italic face —— 本项目 next/font 的 API
+// （node_modules/next/dist/compiled/@next/font/dist/google/index.d.ts）支持
+// style 为数组，这里同时声明 normal + italic，浏览器不再做 synthetic oblique。
 const instrumentSerif = Instrument_Serif({
   weight: "400",
-  style: "normal",
+  style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-instrument-serif",

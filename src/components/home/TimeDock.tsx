@@ -69,23 +69,23 @@ export default function TimeDock() {
         <span className="ut-inst-label">
           {cityLabel ? `Local time · ${cityLabel}` : "Local time"}
         </span>
-        <span className="flex items-center gap-1.5 font-mono text-micro">
+        <span className="flex items-center gap-1.5">
           {manual ? (
               <>
                 <button
                   type="button"
                   onClick={() => setHourOverride(null)}
-                  className="rounded-ut-sm text-ut-text-2 underline-offset-2 transition-colors duration-[var(--ut-dur-fast)] hover:text-ut-text hover:underline focus-visible:outline-2 focus-visible:outline-ut-accent"
+                  className="ut-t-control rounded-ut-sm text-ut-text-2 underline-offset-2 transition-colors duration-[var(--ut-dur-fast)] hover:text-ut-text hover:underline focus-visible:outline-2 focus-visible:outline-ut-accent"
                 >
                   Reset to live
                 </button>
                 <span aria-hidden="true" className="text-ut-subtle">·</span>
-                <span className="uppercase tracking-wider text-ut-text-2">Preview</span>
+                <span className="ut-t-micro text-ut-text-2">Preview</span>
               </>
             ) : (
               <>
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 ut-chip-pulse" aria-hidden="true" />
-                <span className="uppercase tracking-wider text-emerald-200">Live</span>
+                <span className="ut-t-micro text-emerald-200">Live</span>
               </>
             )}
         </span>
@@ -125,7 +125,7 @@ export default function TimeDock() {
         </div>
       </div>
 
-      <p suppressHydrationWarning aria-live="polite" className="mt-1.5 font-mono text-micro text-ut-text-2">
+      <p suppressHydrationWarning aria-live="polite" className="ut-t-data mt-1.5 text-ut-text-2">
         {manual ? "Preview · " : ""}{timeLabel(hour)}
         {cityLabel ? ` · ${cityLabel}` : " · local"}
       </p>

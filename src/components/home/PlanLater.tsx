@@ -28,8 +28,8 @@ export default function PlanLater({ cityIndex }: { cityIndex: CityIndexEntry[] }
       <div className="mx-auto max-w-[var(--ut-container-max)] px-4 py-14 md:px-6 md:py-20">
         <div className="mx-auto max-w-3xl text-center">
           <Eyebrow dot>When you&apos;re ready</Eyebrow>
-          <h2 className="mt-3 font-display text-h1 text-ut-ink">Already know where?</h2>
-          <p className="mx-auto mt-3 max-w-[58ch] text-body text-ut-text-2">
+          <h2 className="ut-t-section mt-3 text-ut-ink">Already know where?</h2>
+          <p className="ut-t-support mx-auto mt-3 max-w-[58ch] text-ut-text-2">
             Then skip the browsing. Type city names — no airport codes needed — add your
             dates, travellers, travel style, budget and interests, and we&apos;ll sketch
             the route, check the weather window and hand you a plan you can bend.

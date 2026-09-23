@@ -1121,3 +1121,136 @@ body {
 }
 
 /* stim */
+
+/* ════════════════════════════════════════════════════════════════════
+   HOME TYPOGRAPHY SYSTEM — `ut-t-*`（首页唯一字号 / 字重 / 行高 / 字距来源）
+
+   为什么单独成一层：全局的 `--ut-text-*` token 被 Destination / Guides / Trips
+   等页面共同消费，不能为了首页改值。因此首页用这一组**语义角色类**表达层级，
+   组件只挑角色，不再自己写 font-size / font-weight / tracking。
+
+   ── 依据（2026-09-23 首页字体勘测）
+     字体家族是三套，且都是项目既有：display = Instrument Serif（**仅 400**）、
+     sans = Geist（300–700）、mono = Geist Mono（400/500/700）。
+     因此**全部角色一律 weight 400** —— display 只有 400，靠加粗做层级只会得到
+     伪粗体；层级改由 family / size / line-height / letter-spacing / opacity / position
+     承担。全局（含其他页面）的 `--ut-text-*` token 与字号保持原样。
+
+   ── 角色表（size 为移动端 → 桌面端）
+     .ut-t-section      Section Display    display 400  clamp 30→40px  lh 1.08  ls -0.01em
+     .ut-t-panel        Panel / 图上城市名   display 400  clamp 20→24px  lh 1.12  ls 0
+     .ut-t-row          列表行城市名         display 400  clamp 17→20px  lh 1.25  ls 0
+     .ut-t-figure       仪表主数字（温度）   display 400  clamp 28→36px  lh 1     ls -0.01em  tabular
+     .ut-t-support      正文级说明（段内）   sans    400  clamp 15→17px  lh 1.55
+     .ut-t-support-lg   Hero 说明（最高一级）sans    400  clamp 16→20px  lh 1.5
+     .ut-t-data         数据值（全部读数）   mono    400  12px           lh 1.35  ls 0.01em  tabular
+     .ut-t-control      控件 / CTA / 链接    mono    400  12px           lh 1.2   ls 0.08em
+     .ut-t-micro        微标签（唯一 caps 层）mono    400  10px           lh 1.4   ls 0.16em  uppercase
+     .ut-t-micro-photo  微标签（照片之上）   同上 + 照片可读色（用于覆盖 Eyebrow 自带色）
+
+   ── 纪律
+     · caps 只属于 .ut-t-micro 一层（eyebrow / 数据标签 / 注脚 / 徽标）；控件与数据值
+       一律句首大写，避免"到处大写"。
+     · Hero H1 是唯一比 .ut-t-section 更高的一级（`.ut-hero-h1`，clamp 至 100px），
+       不在此表内、也不改值。
+     · 小字号（micro / data / control）用固定值，不随断点机械缩放；只有 display 与
+       supporting 用 clamp 做流体比例。
+     · 这些类**不带颜色**，颜色继续由场景决定（照片上用 text-white/xx，深色面板上
+       用 text-ut-* 家族）—— 层级与颜色解耦。
+   ════════════════════════════════════════════════════════════════════ */
+
+.ut-t-section {
+  font-family: var(--ut-font-display);
+  font-weight: 400;
+  font-size: clamp(1.875rem, 1.5vw + 1.15rem, 2.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.ut-t-panel {
+  font-family: var(--ut-font-display);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 0.55vw + 1.05rem, 1.5rem);
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+.ut-t-row {
+  font-family: var(--ut-font-display);
+  font-weight: 400;
+  font-size: clamp(1.0625rem, 0.35vw + 0.96rem, 1.25rem);
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.ut-t-figure {
+  font-family: var(--ut-font-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 0.8vw + 1.55rem, 2.25rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.ut-t-support {
+  font-family: var(--ut-font-sans);
+  font-weight: 400;
+  font-size: clamp(0.9375rem, 0.2vw + 0.89rem, 1.0625rem);
+  line-height: 1.55;
+}
+
+.ut-t-support-lg {
+  font-family: var(--ut-font-sans);
+  font-weight: 400;
+  font-size: clamp(1rem, 0.4vw + 0.9rem, 1.25rem);
+  line-height: 1.5;
+}
+
+.ut-t-data {
+  font-family: var(--ut-font-mono);
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.ut-t-control {
+  font-family: var(--ut-font-mono);
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+}
+
+.ut-t-micro {
+  font-family: var(--ut-font-mono);
+  font-weight: 400;
+  font-size: 0.625rem;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* 照片之上：Eyebrow 组件自带 text-ut-subtle，这里用非分层类给出确定的浅色 */
+.ut-t-micro-photo {
+  font-family: var(--ut-font-mono);
+  font-weight: 400;
+  font-size: 0.625rem;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(248, 246, 240, 0.78);
+}
+
+/* 器材带标签与天气读数并入微标签层（只统一字号/字距，其余行为不变） */
+.ut-inst-label,
+.ut-wx-btn {
+  font-family: var(--ut-font-mono);
+  font-weight: 400;
+  font-size: 0.625rem;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}

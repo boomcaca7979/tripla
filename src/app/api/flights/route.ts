@@ -18,91 +18,17 @@ interface AviationstackRawFlight {
   aircraft?: { iata?: string };
 }
 
-// ── Mock flight data ──────────────────────────────────────────────────
-
-function buildMockFlights(depIata: string, arrIata: string, date: string): FlightLeg[] {
-  const airports: Record<string, { iata: string; icao: string; name: string; city: string; country: string; timezone: string; latitude: number; longitude: number }> = {
-    NRT: { iata: "NRT", icao: "RJAA", name: "Narita International Airport", city: "Tokyo", country: "Japan", timezone: "Asia/Tokyo", latitude: 35.7647, longitude: 140.3864 },
-    TPE: { iata: "TPE", icao: "RCTP", name: "Taiwan Taoyuan International Airport", city: "Taipei", country: "Taiwan", timezone: "Asia/Taipei", latitude: 25.0777, longitude: 121.2328 },
-    ICN: { iata: "ICN", icao: "RKSI", name: "Incheon International Airport", city: "Seoul", country: "South Korea", timezone: "Asia/Seoul", latitude: 37.4602, longitude: 126.4407 },
-    BKK: { iata: "BKK", icao: "VTBS", name: "Suvarnabhumi Airport", city: "Bangkok", country: "Thailand", timezone: "Asia/Bangkok", latitude: 13.6900, longitude: 100.7501 },
-    SIN: { iata: "SIN", icao: "WSSS", name: "Changi Airport", city: "Singapore", country: "Singapore", timezone: "Asia/Singapore", latitude: 1.3644, longitude: 103.9915 },
-    HKG: { iata: "HKG", icao: "VHHH", name: "Hong Kong International Airport", city: "Hong Kong", country: "China", timezone: "Asia/Hong_Kong", latitude: 22.3080, longitude: 113.9185 },
-    CAN: { iata: "CAN", icao: "ZGGG", name: "Guangzhou Baiyun International Airport", city: "Guangzhou", country: "China", timezone: "Asia/Shanghai", latitude: 23.3925, longitude: 113.2988 },
-    PVG: { iata: "PVG", icao: "ZSPD", name: "Shanghai Pudong International Airport", city: "Shanghai", country: "China", timezone: "Asia/Shanghai", latitude: 31.1443, longitude: 121.8083 },
-    KIX: { iata: "KIX", icao: "RJBB", name: "Kansai International Airport", city: "Osaka", country: "Japan", timezone: "Asia/Tokyo", latitude: 34.4346, longitude: 135.2440 },
-    JFK: { iata: "JFK", icao: "KJFK", name: "John F. Kennedy International Airport", city: "New York", country: "USA", timezone: "America/New_York", latitude: 40.6413, longitude: -73.7781 },
-    LHR: { iata: "LHR", icao: "EGLL", name: "Heathrow Airport", city: "London", country: "UK", timezone: "Europe/London", latitude: 51.4700, longitude: -0.4543 },
-  };
-
-  const dep = airports[depIata] ?? { iata: depIata, icao: "XXXX", name: `${depIata} Airport`, city: depIata, country: "Unknown", timezone: "UTC", latitude: 0, longitude: 0 };
-  const arr = airports[arrIata] ?? { iata: arrIata, icao: "YYYY", name: `${arrIata} Airport`, city: arrIata, country: "Unknown", timezone: "UTC", latitude: 0, longitude: 0 };
-
-  return [
-    {
-      flightNumber: `${depIata}${arrIata}1`,
-      airline: { name: "Partner Airways", iata: "PA", icao: "PRT" },
-      departure: {
-        airport: dep,
-        scheduledTime: `${date}T08:00:00Z`,
-        actualTime: null,
-        terminal: "T1",
-        gate: null,
-      },
-      arrival: {
-        airport: arr,
-        scheduledTime: `${date}T12:00:00Z`,
-        actualTime: null,
-        terminal: null,
-        gate: null,
-      },
-      status: "scheduled" as FlightStatus,
-      duration: 240,
-      aircraft: "Boeing 777",
-    },
-    {
-      flightNumber: `${depIata}${arrIata}2`,
-      airline: { name: "Sky Connect", iata: "SC", icao: "SKC" },
-      departure: {
-        airport: dep,
-        scheduledTime: `${date}T14:30:00Z`,
-        actualTime: null,
-        terminal: "T2",
-        gate: "B12",
-      },
-      arrival: {
-        airport: arr,
-        scheduledTime: `${date}T18:45:00Z`,
-        actualTime: null,
-        terminal: "T1",
-        gate: null,
-      },
-      status: "scheduled" as FlightStatus,
-      duration: 255,
-      aircraft: "Airbus A350",
-    },
-    {
-      flightNumber: `${depIata}${arrIata}3`,
-      airline: { name: "Pacific Air", iata: "PA", icao: "PCA" },
-      departure: {
-        airport: dep,
-        scheduledTime: `${date}T20:00:00Z`,
-        actualTime: null,
-        terminal: null,
-        gate: null,
-      },
-      arrival: {
-        airport: arr,
-        scheduledTime: `${date}T23:30:00Z`,
-        actualTime: null,
-        terminal: null,
-        gate: null,
-      },
-      status: "scheduled" as FlightStatus,
-      duration: 210,
-      aircraft: null,
-    },
-  ];
+/**
+ * 统一的"不可用"响应：永远不返回编造的航班。
+ *
+ * 约定（与 hooks/useFlightSearch.ts 的 !res.ok 分支对齐）：
+ *   body = { message: string, code: string }，HTTP 状态区分原因——
+ *     503 NOT_CONFIGURED     provider 未配置
+ *     502 PROVIDER_ERROR     provider 失败 / 超时 / malformed
+ * 成功（含真实空结果）才返回 FlightLeg[]。
+ */
+function unavailable(message: string, code: string, status: number): Response {
+  return Response.json({ message, code }, { status });
 }
 
 export async function GET(request: Request): Promise<Response> {
@@ -112,55 +38,68 @@ export async function GET(request: Request): Promise<Response> {
   const date = searchParams.get("date");
 
   if (!depIata || !arrIata || !date)
-    return Response.json({ error: "Missing params" }, { status: 400 });
+    return Response.json(
+      { message: "Missing params", code: "MISSING_PARAMS" },
+      { status: 400 },
+    );
 
   const key = process.env.AVIATIONSTACK_API_KEY?.trim();
 
-  // ── No API key: return mock data ──────────────────────────────────
+  // ── 情况 B：provider 未配置 → 明确不可用（绝不返回 mock） ────────────
   if (!key) {
-    console.log("[flights] No AVIATIONSTACK_API_KEY, returning mock data");
-    return Response.json(buildMockFlights(depIata, arrIata, date), {
-      headers: { "Cache-Control": "s-maxage=3600", "X-Mock-Data": "true" },
-    });
+    console.error("[flights] AVIATIONSTACK_API_KEY is not configured");
+    return unavailable("Flight search is not configured", "NOT_CONFIGURED", 503);
   }
 
-  // ── Try real API ──────────────────────────────────────────────────
+  // ── 情况 A/C/D/E：真实调用 ─────────────────────────────────────────
   try {
     // ⚠️ 注意：Aviationstack 免费版必须用 HTTP（不是 HTTPS）
     const url = `http://api.aviationstack.com/v1/flights?access_key=${key}&dep_iata=${depIata}&arr_iata=${arrIata}&flight_date=${date}&limit=20`;
 
     const res = await fetch(url, { signal: AbortSignal.timeout(10_000) });
 
+    // 情况 C：provider 返回非 2xx
     if (!res.ok) {
-      const errBody = await res.text().catch(() => "");
-      console.error(`[flights] Upstream ${res.status}: ${errBody.slice(0, 300)}`);
-      console.log("[flights] Falling back to mock data");
-      return Response.json(buildMockFlights(depIata, arrIata, date), {
-        headers: { "Cache-Control": "s-maxage=3600", "X-Mock-Data": "true" },
-      });
+      console.error(`[flights] Upstream ${res.status}`);
+      return unavailable(
+        "Flight search is temporarily unavailable",
+        "PROVIDER_ERROR",
+        502,
+      );
     }
 
-    const json = await res.json();
+    const json: unknown = await res.json();
 
-    // Aviationstack sometimes returns { error: { ... } } instead of data
-    if (json.error || !json.data) {
-      console.error("[flights] API error:", JSON.stringify(json.error ?? json).slice(0, 300));
-      console.log("[flights] Falling back to mock data");
-      return Response.json(buildMockFlights(depIata, arrIata, date), {
-        headers: { "Cache-Control": "s-maxage=3600", "X-Mock-Data": "true" },
-      });
+    // 情况 E：provider 返回错误对象 / malformed
+    if (
+      typeof json !== "object" ||
+      json === null ||
+      "error" in json ||
+      !("data" in json) ||
+      !Array.isArray(json.data)
+    ) {
+      const reason =
+        typeof json === "object" && json !== null && "error" in json
+          ? JSON.stringify((json as { error: unknown }).error).slice(0, 300)
+          : "malformed response";
+      console.error(`[flights] API error: ${reason}`);
+      return unavailable(
+        "Flight search is temporarily unavailable",
+        "PROVIDER_ERROR",
+        502,
+      );
     }
 
-    const raw: AviationstackRawFlight[] = json.data ?? [];
+    const raw = json.data as AviationstackRawFlight[];
 
+    // 情况 D：真实空结果 → 如实返回空数组（UI 显示真实的 No flights found）
     if (raw.length === 0) {
-      console.log("[flights] No results from upstream, returning mock data");
-      return Response.json(buildMockFlights(depIata, arrIata, date), {
-        headers: { "Cache-Control": "s-maxage=3600", "X-Mock-Data": "true" },
+      return Response.json([], {
+        headers: { "Cache-Control": "s-maxage=600" },
       });
     }
 
-    // 映射为 FlightLeg 格式
+    // 情况 A：真实结果
     const flights: FlightLeg[] = raw.map((f) => ({
       flightNumber: f.flight?.iata ?? "",
       airline: {
@@ -216,10 +155,12 @@ export async function GET(request: Request): Promise<Response> {
       },
     });
   } catch (err) {
+    // 情况 C：超时 / 网络失败（只记录原因，不暴露 provider 细节）
     console.error("[flights] Fetch error:", err instanceof Error ? err.message : err);
-    console.log("[flights] Falling back to mock data");
-    return Response.json(buildMockFlights(depIata, arrIata, date), {
-      headers: { "Cache-Control": "s-maxage=3600", "X-Mock-Data": "true" },
-    });
+    return unavailable(
+      "Flight search is temporarily unavailable",
+      "PROVIDER_ERROR",
+      502,
+    );
   }
 }

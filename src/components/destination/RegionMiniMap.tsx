@@ -88,7 +88,7 @@ export default function RegionMiniMap({
               <span
                 aria-hidden="true"
                 className={[
-                  "pointer-events-none absolute whitespace-nowrap font-mono text-[0.5625rem] uppercase tracking-[0.1em] transition-colors duration-[var(--ut-dur-fast)] motion-reduce:transition-none",
+                  "pointer-events-none absolute whitespace-nowrap ut-t-micro transition-colors duration-[var(--ut-dur-fast)] motion-reduce:transition-none",
                   // 靠近底边的点标签放上方；靠近右缘的标签右对齐，避免截断
                   p.y > 0.82 ? "bottom-full mb-0.5" : "top-full mt-0.5",
                   p.x > 0.85 ? "right-0" : p.x < 0.15 ? "left-0" : "left-1/2 -translate-x-1/2",
@@ -104,16 +104,16 @@ export default function RegionMiniMap({
 
       {/* 坐标读数（aria-live：选择变化同步播报） */}
       <div aria-live="polite" className="mt-3 flex flex-wrap items-baseline justify-between gap-2 border-t border-ut-border pt-3">
-        <p className="font-mono text-label uppercase tracking-[0.16em] text-ut-text">
+        <p className="ut-t-micro text-ut-text">
           {selected ? selected.city : "—"}
           {selected?.isSelf ? " · this city" : ""}
         </p>
-        <p className="font-mono text-label tabular-nums tracking-[0.12em] text-ut-muted">
+        <p className="ut-t-data text-ut-muted">
           {selected ? formatLatLon(selected.latitude, selected.longitude) : PENDING}
         </p>
       </div>
       {activeVibe !== null && (
-        <p className="mt-2 font-mono text-micro uppercase tracking-[0.14em] text-ut-verdict-good">
+        <p className="ut-t-micro mt-2 text-ut-verdict-good">
           ● {activeVibe} match
         </p>
       )}
