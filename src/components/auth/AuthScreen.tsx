@@ -37,12 +37,13 @@
  * in the artwork's own anti-aliasing, so no per-point resampling.
  *
  * Auth goes through Supabase Auth (real requests): password sign-in, password
- * registration, and e-mail-OTP password recovery. The project runs with e-mail
+ * registration, and link-based password recovery. The project runs with e-mail
  * confirmation OFF (`mailer_autoconfirm`), so registration returns a live
- * session straight away — signup mails nothing, shows no code step, and never
- * waits on an inbox. Recovery still mails a numeric token (length = the
- * project's `mailer_otp_length`), hence the "Email code" field, and recovery
- * links still land on /auth/confirm.
+ * session straight away — signup mails nothing and shows no code step.
+ *
+ * Recovery is link-only: /auth/confirm exchanges the mailed link for a recovery
+ * session and hands the user to the set-new-password form (`/login?reset=1`).
+ * No screen here ever asks for a code typed out of an e-mail.
  *
  * The layout, dimensions, colours and artwork below are FROZEN — reviewed and
  * signed off pixel-by-pixel. This migration changes the auth *provider* only.
@@ -72,10 +73,16 @@ const WAVE_PATH =
   "C304.0,266.8 320.0,267.5 336,271C352.0,274.5 368.0,279.3 384,287C400.0,294.7 419.8,308.0 432,317" +
   "C444.2,326.0 452.8,337.0 457,341";
 
-type View = "login" | "register" | "forgot";
+type View = "login" | "register" | "forgot" | "reset";
 
 /** Shared network failure copy (kept in one place so it stays consistent). */
 const NETWORK_ERROR = "Network error. Check your connection and try again.";
+
+/**
+ * Shown when a recovery link cannot be exchanged: expired, already used, or
+ * opened on a device that never requested it (the PKCE verifier is per-browser).
+ */
+const RESET_LINK_ERROR = "That reset link is invalid or has expired. Please request a new one.";
 
 // ── Brand panel ──────────────────────────────────────────────────────
 
@@ -227,7 +234,7 @@ function humanError(
   if (code === "invalid_credentials" || /invalid login credentials/i.test(msg))
     return "Incorrect email or password.";
   if (code === "email_not_confirmed" || /email not confirmed/i.test(msg))
-    return "Please confirm your email address first — check your inbox for the code.";
+    return "Please confirm your email address first — check your inbox.";
   if (
     code === "user_already_exists" ||
     code === "email_exists" ||
@@ -243,7 +250,7 @@ function humanError(
     code === "otp_disabled" ||
     /token has expired|invalid.*token|expired or is invalid/i.test(msg)
   )
-    return "The verification code is incorrect or has expired.";
+    return RESET_LINK_ERROR;
   if (
     code === "over_email_send_rate_limit" ||
     code === "over_request_rate_limit" ||
@@ -267,16 +274,9 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
-  const [code, setCode] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [info, setInfo] = useState("");
-  const [forgotStep, setForgotStep] = useState<1 | 2>(1);
-  // Password recovery only: the address with an outstanding e-mailed token.
-  // Supabase's verifyOtp is keyed on (email, token, type), so we only need to
-  // remember the address — no opaque server-side challenge handle any more.
-  // Registration mails nothing, so it keeps no pending state at all.
-  const pendingRef = useRef<{ recoveryEmail?: string }>({});
   const switchedRef = useRef(false);
 
   const reset = useCallback((next: View) => {
@@ -285,23 +285,54 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
     setInfo("");
     setPassword("");
     setConfirm("");
-    setCode("");
-    setForgotStep(1);
-    pendingRef.current = {};
   }, []);
 
-  // A signed-in user landing on sign in / create account goes to the real account area.
-  // Guarded: with no Supabase config there is no session to resolve, and an unguarded
-  // client creation here would throw synchronously inside the effect and hand the whole
-  // route to the error boundary instead of simply showing the form.
+  /**
+   * Landing behaviour for the two link-driven states the server routes create:
+   *
+   *  · `?reset=1` — a verified recovery link. `/auth/confirm` has already
+   *    established the recovery session, so show the new-password form instead
+   *    of bouncing the user into the workspace (which is what plain "signed in"
+   *    would do) — a recovery session is only useful once the password changed.
+   *  · `?verification=failed` — the link was invalid/expired or its exchange
+   *    failed. Say so, rather than presenting a silent sign-in form.
+   *
+   * The query is read from `window.location` rather than `useSearchParams()`
+   * on purpose: these are statically prerendered pages, and that hook would
+   * force them to render dynamically at build time.
+   */
   useEffect(() => {
     if (switchedRef.current) return;
     switchedRef.current = true;
     if (!SUPABASE_CONFIGURED) return;
+
+    // Read from the live URL rather than useSearchParams(): these pages are
+    // statically prerendered, and that hook would force them to render
+    // dynamically at build time.
+    const params = new URLSearchParams(window.location.search);
+    const wantsReset = params.get("reset") === "1";
+    const linkFailed = params.get("verification") === "failed";
+
+    // Guarded: with no Supabase config there is no session to resolve, and an
+    // unguarded client creation here would throw synchronously inside the effect
+    // and hand the whole route to the error boundary instead of showing the form.
+    //
+    // Every state change sits inside the promise continuation on purpose: this
+    // repo lints `react-hooks/set-state-in-effect` as an error, so the effect
+    // body itself must not call setState.
     try {
       createClient()
         .auth.getSession()
         .then(({ data }) => {
+          if (wantsReset) {
+            if (data.session) {
+              setView("reset");
+              return;
+            }
+            setError(RESET_LINK_ERROR);
+            return;
+          }
+          if (linkFailed) setError(RESET_LINK_ERROR);
           if (data.session) router.replace("/trips");
         })
         .catch(() => {});
@@ -314,6 +345,19 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
     router.replace("/trips");
     router.refresh();
   }, [router]);
+
+  /**
+   * Leaving the reset form: discard the recovery session (it exists only to
+   * carry the password change) and drop back to the sign-in view.
+   */
+  const cancelReset = useCallback(async () => {
+    try {
+      await createClient().auth.signOut();
+    } catch {
+      // Best-effort: fall through to the sign-in view either way.
+    }
+    reset("login");
+  }, [reset]);
 
   // ── Flow submissions ────────────────────────────────────────────────
 
@@ -387,6 +431,12 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
     }
   };
 
+  /**
+   * Ask Supabase to mail a recovery link. The mail itself carries the session
+   * (`/auth/confirm` exchanges it and forwards to the new-password form), so
+   * this screen only needs to confirm that the request went out — it never
+   * collects a code.
+   */
   const submitForgotSend = async () => {
     if (!EMAIL_RE.test(email)) return setError("Enter a valid email address.");
     setBusy(true);
@@ -396,9 +446,11 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
         redirectTo: `${window.location.origin}/auth/confirm`,
       });
       if (e) return setError(humanError(e));
-      pendingRef.current = { recoveryEmail: email.trim() };
-      setForgotStep(2);
-      setInfo("We’ve sent a password reset code to your email.");
+      setPassword("");
+      setConfirm("");
+      setInfo(
+        `We’ve sent a password reset link to ${email.trim()}. Open it on this device to choose a new password.`,
+      );
     } catch {
       setError(NETWORK_ERROR);
     } finally {
@@ -407,25 +459,17 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
   };
 
   /**
-   * Forgot step 2 — verify the recovery token, which returns a session, then
-   * set the new password on that authenticated session.
+   * Set the new password on the recovery session that `/auth/confirm` already
+   * established. Reached via `/login?reset=1`; there is no token to verify
+   * here — possession of the session IS the proof the link was opened.
    */
-  const submitForgotReset = async () => {
-    if (!code.trim()) return setError("Enter the email verification code.");
+  const submitResetPassword = async () => {
     if (password.length < 6) return setError("The new password must be at least 6 characters.");
-    const pending = pendingRef.current;
-    if (!pending.recoveryEmail) return setError("Request a verification code first.");
+    if (password !== confirm) return setError("Passwords do not match.");
     setBusy(true);
     setError("");
     try {
-      const client = createClient();
-      const verified = await client.auth.verifyOtp({
-        email: pending.recoveryEmail,
-        token: code.trim(),
-        type: "recovery",
-      });
-      if (verified.error) return setError(humanError(verified.error));
-      const { error: e } = await client.auth.updateUser({ password });
+      const { error: e } = await createClient().auth.updateUser({ password });
       if (e) return setError(humanError(e));
       goToTrips();
     } catch {
@@ -442,31 +486,37 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
       submitLogin();
     } else if (view === "register") {
       submitRegister();
-    } else if (forgotStep === 1) {
-      submitForgotSend();
+    } else if (view === "reset") {
+      submitResetPassword();
     } else {
-      submitForgotReset();
+      submitForgotSend();
     }
   };
 
   // ── Copy ────────────────────────────────────────────────────────────
 
-  const title = view === "login" ? "Sign in" : view === "register" ? "Create account" : "Reset password";
+  const title =
+    view === "login"
+      ? "Sign in"
+      : view === "register"
+        ? "Create account"
+        : view === "reset"
+          ? "Set new password"
+          : "Reset password";
 
   const busyLabel = busy
     ? "Please wait…"
     : view === "register"
       ? "Create account"
       : view === "forgot"
-        ? forgotStep === 1
-          ? "Send code"
-          : "Reset password"
-        : "Sign in";
+        ? "Send reset link"
+        : view === "reset"
+          ? "Save new password"
+          : "Sign in";
 
   const showPassword = view === "login" || view === "register";
-  const showConfirm = view === "register";
-  const showCode = view === "forgot" && forgotStep === 2;
-  const showNewPassword = view === "forgot" && forgotStep === 2;
+  const showConfirm = view === "register" || view === "reset";
+  const showNewPassword = view === "reset";
 
   return (
     <div
@@ -486,14 +536,18 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
             </h1>
 
             <div className="mt-[52px]">
-              <Field
-                label="Email"
-                type="email"
-                autoComplete="email"
-                aria-label="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+              {/* No address field on the reset view: the recovery session is
+                  already bound to the address that received the link. */}
+              {view !== "reset" && (
+                <Field
+                  label="Email"
+                  type="email"
+                  autoComplete="email"
+                  aria-label="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              )}
 
               {showPassword && (
                 <div className="mt-[23px]">
@@ -517,20 +571,6 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
                     aria-label="Confirm password"
                     value={confirm}
                     onChange={(e) => setConfirm(e.target.value)}
-                  />
-                </div>
-              )}
-
-              {showCode && (
-                <div className="mt-[23px]">
-                  <Field
-                    label="Email code"
-                    type="text"
-                    inputMode="numeric"
-                    autoComplete="one-time-code"
-                    aria-label="Email verification code"
-                    value={code}
-                    onChange={(e) => setCode(e.target.value)}
                   />
                 </div>
               )}
@@ -598,6 +638,14 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
                     <Link href="/login" className="transition-opacity hover:opacity-70">
                       Back to sign in
                     </Link>
+                  ) : view === "reset" ? (
+                    <button
+                      type="button"
+                      className="cursor-pointer transition-opacity hover:opacity-70"
+                      onClick={cancelReset}
+                    >
+                      Back to sign in
+                    </button>
                   ) : (
                     <button
                       type="button"
@@ -605,15 +653,6 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
                       onClick={() => reset("login")}
                     >
                       Back to sign in
-                    </button>
-                  )}
-                  {view === "forgot" && forgotStep === 2 && (
-                    <button
-                      type="button"
-                      className="cursor-pointer transition-opacity hover:opacity-70"
-                      onClick={() => setForgotStep(1)}
-                    >
-                      Back
                     </button>
                   )}
                 </>
