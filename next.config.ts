@@ -86,7 +86,7 @@ const nextConfig: NextConfig = {
         statusCode: 301,
       },
       // 移除用户系统与 SaaS 残留后，将旧入口 301 到首页，避免已收录 URL 404。
-      // /login 与 /signup 已恢复为真实认证页（WorkBuddy Cloud auth），不再重定向。
+      // /login 与 /signup 已恢复为真实认证页（Supabase Auth），不再重定向。
       { source: "/forgot-password", destination: "/", statusCode: 301 },
       { source: "/reset-password", destination: "/", statusCode: 301 },
       { source: "/pricing", destination: "/", statusCode: 301 },

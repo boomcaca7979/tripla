@@ -324,7 +324,7 @@ export default function TripsWorkspace() {
           </ul>
         </nav>
 
-        {/* 账号 chip：读真实会话（WorkBuddy Cloud），点击进入 Account 视图 */}
+        {/* 账号 chip：读真实会话（Supabase Auth），点击进入 Account 视图 */}
         <AccountChip active={activeNav === "account"} onClick={() => setView({ name: "account" })} />
       </aside>
 
