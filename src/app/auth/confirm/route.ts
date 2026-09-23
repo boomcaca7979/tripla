@@ -1,18 +1,20 @@
 /**
  * /auth/confirm — landing point for links Supabase mails out.
  *
- * Two link shapes must be handled, because different Supabase flows produce
- * different parameters:
+ * Registration does NOT use this route: the project runs with e-mail
+ * confirmation off, so signup returns a session directly. What still lands here
+ * is password recovery (and any future mailed flow), which can arrive in two
+ * shapes:
  *
- *  · `?token_hash=…&type=signup|recovery|email` — the server-generated OTP link
- *    (used by the "Confirm signup" template). Verified with `verifyOtp`.
+ *  · `?token_hash=…&type=recovery|email|signup` — the server-generated OTP link.
+ *    Verified with `verifyOtp`.
  *  · `?code=…` — the PKCE authorization code returned when a flow was started
  *    with a `redirectTo` (our password-reset call uses this). Exchanged with
  *    `exchangeCodeForSession`.
  *
  * Both establish cookie-backed sessions via the server client, so a user who
  * clicks the e-mail link ends up signed in exactly like one who typed the
- * 6-digit code — there is still only ONE real auth system.
+ * mailed code — there is still only ONE real auth system.
  *
  * Nothing is trusted from the URL beyond these parameters; failures fall back
  * to /login rather than rendering an error state here.

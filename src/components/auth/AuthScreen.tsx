@@ -36,13 +36,13 @@
  * preserveAspectRatio="none" for a 0.7%/1.1% squeeze — smaller than the measurement noise
  * in the artwork's own anti-aliasing, so no per-point resampling.
  *
- * Auth goes through Supabase Auth (real requests): password sign-in / e-mail OTP
- * registration / e-mail OTP password recovery. Registration is two steps
- * because the account is only usable after the address is confirmed by the
- * numeric token Supabase mails out (length = the project's `mailer_otp_length`,
- * currently 8 — the input is deliberately not length-capped), hence the
- * "Email code" screen. The mailed link is a separate path: it lands on
- * /auth/confirm, which exchanges it for the same cookie session.
+ * Auth goes through Supabase Auth (real requests): password sign-in, password
+ * registration, and e-mail-OTP password recovery. The project runs with e-mail
+ * confirmation OFF (`mailer_autoconfirm`), so registration returns a live
+ * session straight away — signup mails nothing, shows no code step, and never
+ * waits on an inbox. Recovery still mails a numeric token (length = the
+ * project's `mailer_otp_length`), hence the "Email code" field, and recovery
+ * links still land on /auth/confirm.
  *
  * The layout, dimensions, colours and artwork below are FROZEN — reviewed and
  * signed off pixel-by-pixel. This migration changes the auth *provider* only.
@@ -271,12 +271,12 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [info, setInfo] = useState("");
-  const [registerStep, setRegisterStep] = useState<1 | 2>(1);
   const [forgotStep, setForgotStep] = useState<1 | 2>(1);
-  // Which flow has an outstanding e-mailed token, and for which address.
+  // Password recovery only: the address with an outstanding e-mailed token.
   // Supabase's verifyOtp is keyed on (email, token, type), so we only need to
   // remember the address — no opaque server-side challenge handle any more.
-  const pendingRef = useRef<{ signupEmail?: string; recoveryEmail?: string }>({});
+  // Registration mails nothing, so it keeps no pending state at all.
+  const pendingRef = useRef<{ recoveryEmail?: string }>({});
   const switchedRef = useRef(false);
 
   const reset = useCallback((next: View) => {
@@ -286,7 +286,6 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
     setPassword("");
     setConfirm("");
     setCode("");
-    setRegisterStep(1);
     setForgotStep(1);
     pendingRef.current = {};
   }, []);
@@ -341,17 +340,20 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
   };
 
   /**
-   * Register step 1 — create the account with Supabase Auth.
+   * Create the account with Supabase Auth.
    *
-   * With email confirmation enabled Supabase mails a 6-digit token, so the
-   * account exists but has no session yet; we advance to the code step.
+   * The project runs with e-mail confirmation OFF (`mailer_autoconfirm`), so a
+   * successful signUp returns BOTH a user and a live session: no mailed token,
+   * no code step, nothing to wait for. The client-side PKCE e-mail flow is
+   * deliberately not used here — with auto-confirm there is no confirmation
+   * round-trip to redirect back from.
    *
-   * Enumeration safety: for an address that already exists Supabase returns
-   * success with an EMPTY `identities` array rather than an error (so the
-   * response cannot be used to probe for accounts). We detect that and send the
-   * user to sign-in with neutral copy, matching the previous behaviour.
+   * Neutral copy on the no-session case: for an address that already exists
+   * Supabase can answer "success" with an EMPTY `identities` array instead of an
+   * error (so the response cannot be used to probe for accounts). That is not a
+   * signed-in user, and must never be treated as one.
    */
-  const submitRegisterSend = async () => {
+  const submitRegister = async () => {
     if (!EMAIL_RE.test(email)) return setError("Enter a valid email address.");
     if (password.length < 6) return setError("Password must be at least 6 characters.");
     if (password !== confirm) return setError("Passwords do not match.");
@@ -361,44 +363,22 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
       const { data, error: e } = await createClient().auth.signUp({
         email: email.trim(),
         password,
-        // Env-aware confirmation target. Production mails
-        // https://www.utripla.xyz/auth/confirm; local dev mails
-        // http://localhost:3000/auth/confirm. Without this, Supabase falls back
-        // to the project's Site URL — which is how the links shipped with
-        // `redirect_to=http://localhost:3000`. Same expression as
-        // `resetPasswordForEmail` below, so both flows stay consistent.
-        options: { emailRedirectTo: `${window.location.origin}/auth/confirm` },
       });
-      if (e) return setError(humanError(e));
-      if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+      if (e) {
+        console.warn("[auth] signUp", e.code ?? e.message);
+        return setError(humanError(e));
+      }
+      if (!data.session) {
+        const alreadyRegistered =
+          !!data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0;
         reset("login");
-        setInfo("That email is already registered. Please sign in.");
+        setInfo(
+          alreadyRegistered
+            ? "That email is already registered. Please sign in."
+            : "Account created, but Supabase returned no session. Please sign in.",
+        );
         return;
       }
-      pendingRef.current = { signupEmail: email.trim() };
-      setRegisterStep(2);
-      setInfo("We’ve sent a verification code to your email.");
-    } catch {
-      setError(NETWORK_ERROR);
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  /** Register step 2 — exchange the e-mailed token for a real session. */
-  const submitRegisterVerify = async () => {
-    const pending = pendingRef.current;
-    if (!pending.signupEmail) return setError("Request a verification code first.");
-    if (!code.trim()) return setError("Enter the email verification code.");
-    setBusy(true);
-    setError("");
-    try {
-      const { error: e } = await createClient().auth.verifyOtp({
-        email: pending.signupEmail,
-        token: code.trim(),
-        type: "signup",
-      });
-      if (e) return setError(humanError(e));
       goToTrips();
     } catch {
       setError(NETWORK_ERROR);
@@ -461,8 +441,7 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
     if (view === "login") {
       submitLogin();
     } else if (view === "register") {
-      if (registerStep === 1) submitRegisterSend();
-      else submitRegisterVerify();
+      submitRegister();
     } else if (forgotStep === 1) {
       submitForgotSend();
     } else {
@@ -484,10 +463,9 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
           : "Reset password"
         : "Sign in";
 
-  const showPassword = view === "login" || (view === "register" && registerStep === 1);
-  const showConfirm = view === "register" && registerStep === 1;
-  const showCode =
-    (view === "register" && registerStep === 2) || (view === "forgot" && forgotStep === 2);
+  const showPassword = view === "login" || view === "register";
+  const showConfirm = view === "register";
+  const showCode = view === "forgot" && forgotStep === 2;
   const showNewPassword = view === "forgot" && forgotStep === 2;
 
   return (
@@ -583,7 +561,7 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
               </PillButton>
             </div>
 
-            {view === "register" && registerStep === 1 && (
+            {view === "register" && (
               <p className="mt-[14px] text-[11px] leading-relaxed" style={{ color: LABEL }}>
                 By creating an account you agree to our{" "}
                 <Link href="/terms" target="_blank" className="hover:underline" style={{ color: BRAND }}>
@@ -627,15 +605,6 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
                       onClick={() => reset("login")}
                     >
                       Back to sign in
-                    </button>
-                  )}
-                  {view === "register" && registerStep === 2 && (
-                    <button
-                      type="button"
-                      className="cursor-pointer transition-opacity hover:opacity-70"
-                      onClick={() => setRegisterStep(1)}
-                    >
-                      Back
                     </button>
                   )}
                   {view === "forgot" && forgotStep === 2 && (
