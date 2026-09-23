@@ -3,8 +3,9 @@
 /**
  * Auth entry for the site Header.
  *
- * Two variants, one auth source (WorkBuddy Cloud — the same `getCloud()`
- * instance used by /login and /register; there is no second auth system):
+ * Two variants, one auth source (Supabase Auth — the same session read by
+ * /login, /register and the /trips workspace through `useSession()`; there is
+ * no second auth system and localStorage is never treated as identity):
  *
  *   · `AccountLink`        desktop right-actions — compact "Sign in" +
  *                          "Create account" when signed out; an account chip

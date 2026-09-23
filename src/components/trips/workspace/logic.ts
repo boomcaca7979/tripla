@@ -21,10 +21,12 @@ import type {
   ActivityItem,
   ChecklistPhase,
   InboxItem,
+  InboxKind,
   Place,
   PlaceKind,
   PlaceStatus,
   RouteStop,
+  SavedItem,
   Trip,
   WorkspaceAction,
   WorkspaceState,
@@ -40,6 +42,32 @@ let idCounter = 0;
 export function localId(prefix: string): string {
   idCounter += 1;
   return `${prefix}-${Date.now().toString(36)}-${idCounter}`;
+}
+
+/**
+ * 「收藏 → Trip 内实体」的**稳定身份**。
+ *
+ * 为什么需要它：Saved → Add to Trip 是**可重复触发**的动作（用户第二次点、
+ * 两个标签页各点一次、Modal 误双击）。如果每次都 `localId("p")`，同一条收藏
+ * 会在同一个 Trip 里长出多个同名 Place —— 而 Places 是 Trip 的一等实体，
+ * 重复行会被用户当成真实数据（计数、路线、预算全部偏）。
+ *
+ * 判据必须与标题无关：标题可被用户编辑（改名后再 Add 会重新插入），也不保证
+ * 在跨语言/同城同名的场景下唯一。这里把关系直接编码进 id：
+ *
+ *     place.id = `svp:<savedId>@<tripId>`
+ *     hotel.id = `svh:<savedId>@<tripId>`
+ *
+ * 同一个 saved item + 同一个 Trip ⇒ 永远派生同一个 id ⇒ 第二次 Add 的语义是
+ * 「已存在」而不是「再插一条」。id 是 places.id / stays.id 的真实列值
+ * （写入云端时再加用户前缀，读出时剥离），因此**换浏览器、重载、重新登录后
+ * 幂等性依然成立**，且不需要新增数据库列。
+ *
+ * 分隔符 `:` `@` 不会与 `localId()` 的产物（只含 `[a-z0-9-]`）或 demo id
+ * 冲突，因此派生 id 与随机 id 的取值空间不相交。
+ */
+export function fromSavedLinkId(entity: "place" | "hotel", tripId: string, savedId: string): string {
+  return `${entity === "hotel" ? "svh" : "svp"}:${savedId}@${tripId}`;
 }
 
 // ── 确定性格式化 ──────────────────────────────────────────────────────
@@ -393,6 +421,142 @@ function cleanTransactionsForTraveler(state: WorkspaceState, travelerId: string)
   };
 }
 
+/**
+ * Saved 幂等 upsert —— **唯一实现**（ADD_SAVED 与 SAVE_AND_ADD_TO_TRIP 共用）。
+ *
+ * 去重键必须与数据库唯一索引 saved_items_user_title_kind_key
+ * （user_id, lower(title), kind）以及 saved_items.kind 的 CHECK 约束一致：
+ * 同 title（大小写不敏感）+ 同 kind 即同一条收藏，只刷新来源信息，不新增行。
+ * 不一致的话本地会留下两条而云端只允许一条 → 第二条写入被 23505 拒绝。
+ */
+function upsertSaved(state: WorkspaceState, item: Omit<SavedItem, "id">): WorkspaceState {
+  const existing = state.saved.find(
+    (s) => s.kind === item.kind && s.title.toLowerCase() === item.title.toLowerCase(),
+  );
+  if (existing) {
+    return {
+      ...state,
+      saved: state.saved.map((s) =>
+        s.id === existing.id
+          ? {
+              ...s,
+              meta: item.meta ?? s.meta,
+              source: item.source ?? s.source,
+              sourceUrl: item.sourceUrl ?? s.sourceUrl,
+            }
+          : s,
+      ),
+    };
+  }
+  return { ...state, saved: [{ ...item, id: localId("sv") }, ...state.saved] };
+}
+
+/** 按 (kind, lower(title)) 找收藏 —— upsert 之后的稳定引用方式。 */
+function findSaved(state: WorkspaceState, kind: InboxKind, title: string): SavedItem | undefined {
+  const lower = title.toLowerCase();
+  return state.saved.find((s) => s.kind === kind && s.title.toLowerCase() === lower);
+}
+
+/** Saved ↔ Trip 关联：幂等追加（同一条收藏可属于多个 Trip，重复调用不产生重复项）。 */
+function linkSavedToTrip(state: WorkspaceState, savedId: string, tripId: string): WorkspaceState {
+  return {
+    ...state,
+    saved: state.saved.map((s) => {
+      if (s.id !== savedId) return s;
+      const ids = s.tripIds ?? [];
+      return ids.includes(tripId) ? s : { ...s, tripIds: [...ids, tripId] };
+    }),
+  };
+}
+
+/** 该收藏是否已关联该 Trip（用于把「重复 Add」折叠成**真·空操作**）。 */
+function isSavedLinkedToTrip(state: WorkspaceState, savedId: string, tripId: string): boolean {
+  return (state.saved.find((s) => s.id === savedId)?.tripIds ?? []).includes(tripId);
+}
+
+/** SavedItem.kind → Trip 内 Place.kind（收藏库只有 4 个 kind，Place 有 5 个）。 */
+export function placeKindOfSaved(kind: InboxKind): PlaceKind {
+  if (kind === "activity" || kind === "guide") return "activity";
+  return "sight";
+}
+
+/**
+ * Trip 内是否已有同名条目（places + hotels，大小写不敏感）。
+ *
+ * 定位：**展示口径 + 同名兜底**，不是身份判据。Modal 的「✓ In trip」用它；
+ * 写入路径的一级判据是 fromSavedLinkId 派生的稳定 id（见 addSavedIntoTrip）。
+ */
+export function tripNameTaken(trip: Trip, title: string): boolean {
+  const lower = title.toLowerCase();
+  const nameOf = (v: string) => v.toLowerCase();
+  return (
+    trip.places.some((p) => nameOf(p.name) === lower) ||
+    trip.hotels.some((h) => nameOf(h.name) === lower)
+  );
+}
+
+/**
+ * 把一条收藏挂到 Trip 上 —— **唯一实现**。
+ *
+ * `SAVED_ADD_TO_TRIP`（/trips 内页 Saved 列表）与 `SAVE_AND_ADD_TO_TRIP`
+ * （Destinations / Guides 外部页）都走这里，因此两个入口的幂等语义不可能漂移；
+ * 而两者最终都由同一个 reducer 承担，guest 与 remote 通道天然共享同一份语义
+ * （通道只决定「写哪里」，不决定「写什么」）。
+ *
+ * 幂等判据（任一命中即视为已存在，返回 added=false）：
+ *  1. **稳定身份**：`fromSavedLinkId(saved.id, trip.id)` 已在 Trip 内存在。
+ *     这是与标题无关的权威判据 —— 用户把 Place 改名后再 Add 也不会重复，
+ *     因为 id 不随标题变化。
+ *  2. **同名兜底**：Trip 内已有同名条目（例如用户手工录入的同一地点）。
+ *     只用来避免制造视觉重复，与 Modal 的「✓ In trip」判定同口径。
+ *
+ * 注意：命中判据 2 时**不**把既有条目的 id 改写成派生 id —— 已有条目可能
+ * 已被 routeDays[].stops[].placeId 引用，改写 id 会连带打断引用关系。
+ */
+function addSavedIntoTrip(
+  state: WorkspaceState,
+  trip: Trip,
+  saved: SavedItem,
+  placeKind: PlaceKind,
+): { state: WorkspaceState; added: boolean } {
+  if (saved.kind === "hotel") {
+    const id = fromSavedLinkId("hotel", trip.id, saved.id);
+    if (trip.hotels.some((h) => h.id === id) || tripNameTaken(trip, saved.title)) {
+      return { state, added: false };
+    }
+    return {
+      state: updateTrip(state, trip.id, (t) => ({
+        ...t,
+        hotels: [...t.hotels, { id, name: saved.title, pricePerNight: 0, area: saved.meta }],
+      })),
+      added: true,
+    };
+  }
+
+  const id = fromSavedLinkId("place", trip.id, saved.id);
+  if (trip.places.some((p) => p.id === id) || tripNameTaken(trip, saved.title)) {
+    return { state, added: false };
+  }
+  return {
+    state: updateTrip(state, trip.id, (t) => ({
+      ...t,
+      places: [
+        ...t.places,
+        {
+          id,
+          name: saved.title,
+          kind: placeKind,
+          status: "want" as const,
+          area: saved.meta,
+          note: saved.source,
+          fromSaved: true,
+        },
+      ],
+    })),
+    added: true,
+  };
+}
+
 export function workspaceReducer(state: WorkspaceState, action: WorkspaceAction): WorkspaceState {
   switch (action.type) {
     case "RESET":
@@ -435,6 +599,14 @@ export function workspaceReducer(state: WorkspaceState, action: WorkspaceAction)
         trips: state.trips.filter((t) => t.id !== action.tripId),
         transactions: state.transactions.map((t) =>
           t.tripId === action.tripId ? { ...t, tripId: undefined, updatedAt: new Date().toISOString() } : t,
+        ),
+        // Saved↔Trip 关联随 Trip 消失 —— 对齐 saved_item_trips.trip_id 的 on delete cascade。
+        // 留着悬空 trip_id 有两个真实后果：云端写入撞 FK 23503（整批失败），
+        // 以及 Saved 列表显示一个已经不存在的 Trip。
+        saved: state.saved.map((s) =>
+          s.tripIds?.includes(action.tripId)
+            ? { ...s, tripIds: s.tripIds.filter((id) => id !== action.tripId) }
+            : s,
         ),
       };
 
@@ -839,7 +1011,41 @@ export function workspaceReducer(state: WorkspaceState, action: WorkspaceAction)
       return { ...state, inbox: state.inbox.filter((i) => i.id !== action.itemId) };
 
     case "ADD_SAVED":
-      return { ...state, saved: [{ ...action.item, id: localId("sv") }, ...state.saved] };
+      // 去重语义统一收敛到 upsertSaved（见其定义处注释），与数据库唯一索引
+      // saved_items_user_title_kind_key（user_id, lower(title), kind）一致。
+      return upsertSaved(state, action.item);
+
+    case "SAVE_AND_ADD_TO_TRIP": {
+      // 外部页（Destinations / Guides）的原子写入：Saved upsert → 关联 → Trip 内新增。
+      const trip = state.trips.find((t) => t.id === action.tripId);
+      // 无该 Trip：整体不写入（调用方据返回值判定 no-trip，不会出现半截状态）。
+      if (!trip) return state;
+
+      let next = upsertSaved(state, {
+        kind: action.kind,
+        title: action.title,
+        meta: action.meta,
+        savedAt: action.savedAt,
+        source: action.source,
+        sourceUrl: action.sourceUrl,
+      });
+      const savedItem = findSaved(next, action.kind, action.title);
+      // 兜底：upsertSaved 必然写入（新增或命中既有），这里的 return 只为类型收敛。
+      if (!savedItem) return next;
+      next = linkSavedToTrip(next, savedItem.id, action.tripId);
+
+      // 幂等：判定用**刚写入的 savedItem.id 派生出的稳定 id**，与标题字符串无关。
+      // 重复触发（双击 / 多标签页 / 先 Add 后重新打开页面再 Add）只补 Saved 关联，
+      // 不再插入第二条 Place；这也覆盖「外部页与 /trips 内页交叉 Add」的场景。
+      const { state: added, added: didAdd } = addSavedIntoTrip(
+        next,
+        trip,
+        savedItem,
+        action.placeKind ?? "sight",
+      );
+      if (!didAdd) return added;
+      return withActivity(added, `Added ${action.title} to ${trip.destination} from ${action.source}`);
+    }
 
     case "REMOVE_SAVED":
       return { ...state, saved: state.saved.filter((s) => s.id !== action.itemId) };
@@ -847,33 +1053,31 @@ export function workspaceReducer(state: WorkspaceState, action: WorkspaceAction)
     case "SAVED_ADD_TO_TRIP": {
       const item = state.saved.find((s) => s.id === action.itemId);
       if (!item) return state;
-      // 加入 Trip（复制为 Trip 内对象）；Saved 语义 = "以后可能用"，保留不删
-      const next = updateTrip(state, action.tripId, (t) =>
-        item.kind === "hotel"
-          ? { ...t, hotels: [...t.hotels, { id: localId("h"), name: item.title, pricePerNight: 0, area: item.meta }] }
-          : {
-              ...t,
-              places: [
-                ...t.places,
-                {
-                  id: localId("p"),
-                  name: item.title,
-                  kind: "sight" as const,
-                  status: "want" as const,
-                  area: item.meta,
-                  note: item.source,
-                  fromSaved: true,
-                },
-              ],
-            },
+      const trip = state.trips.find((t) => t.id === action.tripId);
+      // 目标 Trip 不存在：不写入（此前会走 updateTrip 的静默 no-op，却仍然写流水与
+      // Saved 关联，留下「已加入」的假象）。
+      if (!trip) return state;
+
+      // 加入 Trip（复制为 Trip 内对象）；Saved 语义 = "以后可能用"，保留不删。
+      // 幂等：id 由 (savedId, tripId) 派生 → 同一条收藏加入同一个 Trip 只会有一个
+      // Place，与标题无关（改名后再 Add 也不会重复）。
+      const { state: added, added: didAdd } = addSavedIntoTrip(
+        state,
+        trip,
+        item,
+        placeKindOfSaved(item.kind),
       );
-      // 双向关系：SavedItem 记录已加入的 Trip（同 item 可属于多个 Trip）
-      return {
-        ...withActivity(next, `Added ${item.title} from Saved to ${state.trips.find((t) => t.id === action.tripId)?.destination ?? "trip"}`),
-        saved: state.saved.map((s) =>
-          s.id === item.id ? { ...s, tripIds: [...(s.tripIds ?? []), action.tripId] } : s,
-        ),
-      };
+
+      // 重复 Add 且关联已存在 → 返回**同一个 state 引用**：对 remote 通道而言
+      // flatten 后的行完全一致，diff 为空、零请求，是真正的空操作。
+      if (!didAdd && isSavedLinkedToTrip(added, item.id, action.tripId)) return state;
+
+      // 双向关系：SavedItem 记录已加入的 Trip（同 item 可属于多个 Trip）。
+      // 经 linkSavedToTrip 保证幂等：重复触发不会产生重复的 saved_item_trips 行
+      //（该表主键 (saved_item_id, trip_id)，重复行在云端会被 23505 拒绝）。
+      const linked = linkSavedToTrip(added, item.id, action.tripId);
+      if (!didAdd) return linked; // 已存在（同名兜底命中）：只补关联，不写流水
+      return withActivity(linked, `Added ${item.title} from Saved to ${trip.destination}`);
     }
 
     case "ADD_INBOX_ITEM":

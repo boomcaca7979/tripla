@@ -36,15 +36,19 @@
  * preserveAspectRatio="none" for a 0.7%/1.1% squeeze — smaller than the measurement noise
  * in the artwork's own anti-aliasing, so no per-point resampling.
  *
- * Auth goes through WorkBuddy Cloud (real requests): password sign-in / email-OTP
- * registration (with password) / password reset. Registration requires the OTP
- * (the SDK needs a verificationToken), hence the two steps.
+ * Auth goes through Supabase Auth (real requests): password sign-in / e-mail OTP
+ * registration / e-mail OTP password recovery. Registration is two steps
+ * because the account is only usable after the address is confirmed by the
+ * 6-digit token Supabase mails out, hence the "Email code" screen.
+ *
+ * The layout, dimensions, colours and artwork below are FROZEN — reviewed and
+ * signed off pixel-by-pixel. This migration changes the auth *provider* only.
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { CLOUD_CONFIGURED, getCloud } from "@/lib/cloud";
+import { SUPABASE_CONFIGURED, createClient } from "@/lib/supabase/client";
 
 // ── Artwork sampling constants (measured in the 1280px artboard) ──────
 
@@ -200,21 +204,53 @@ function Msg({ kind, text }: { kind: "error" | "info"; text: string }) {
   );
 }
 
-// ── Error copy (driven by stable kinds, never by guessing internals) ──
+// ── Error copy (mapped from Supabase's stable `code`, never guessed) ──
 
-function humanError(err: { kind?: string; code?: string; message?: string } | null | undefined): string {
-  const kind = err?.kind ?? "";
+/**
+ * Supabase surfaces failures as an `AuthError` carrying `message` / `code` /
+ * `status`. We key off `code` first (stable) and fall back to the message text,
+ * so copy does not silently break when Supabase rewords a message.
+ */
+function humanError(
+  err: { code?: string; message?: string; status?: number } | null | undefined,
+): string {
   const code = err?.code ?? "";
   const msg = err?.message ?? "";
-  if (kind === "invalid_grant" || kind === "unauthenticated") return "Incorrect email or password.";
-  if (code === "invalid_username_or_password" || /incorrect|credential|wrong[_ ]?password/i.test(msg))
+  const status = err?.status ?? 0;
+
+  // status 0 / fetch failure = transport problem, not an auth verdict.
+  if (status === 0 || /failed to fetch|network|fetch failed/i.test(msg)) return NETWORK_ERROR;
+
+  if (code === "invalid_credentials" || /invalid login credentials/i.test(msg))
     return "Incorrect email or password.";
-  if (kind === "network") return NETWORK_ERROR;
-  if (kind === "backend-unavailable") return "The service is temporarily unavailable. Please try again shortly.";
-  if (/password/i.test(msg)) return "That password does not meet the requirements (at least 6 characters).";
-  if (/email/i.test(msg) && /invalid|format/i.test(msg)) return "That email address does not look valid.";
-  if (/code|token|verification/i.test(msg)) return "The verification code is incorrect or has expired.";
-  if (/rate|frequent|limit/i.test(msg)) return "Too many attempts. Please try again in a moment.";
+  if (code === "email_not_confirmed" || /email not confirmed/i.test(msg))
+    return "Please confirm your email address first — check your inbox for the code.";
+  if (
+    code === "user_already_exists" ||
+    code === "email_exists" ||
+    /already registered|already exists/i.test(msg)
+  )
+    return "That email is already registered. Please sign in.";
+  if (code === "weak_password" || /password should be at least|password.*characters/i.test(msg))
+    return "That password does not meet the requirements (at least 6 characters).";
+  if (code === "same_password" || /different from the old|should be different/i.test(msg))
+    return "The new password must be different from the current one.";
+  if (
+    code === "otp_expired" ||
+    code === "otp_disabled" ||
+    /token has expired|invalid.*token|expired or is invalid/i.test(msg)
+  )
+    return "The verification code is incorrect or has expired.";
+  if (
+    code === "over_email_send_rate_limit" ||
+    code === "over_request_rate_limit" ||
+    /rate limit|too many/i.test(msg)
+  )
+    return "Too many attempts. Please try again in a moment.";
+  if (code === "email_address_invalid" || /invalid.*email|email.*invalid/i.test(msg))
+    return "That email address does not look valid.";
+  if (status >= 500) return "The service is temporarily unavailable. Please try again shortly.";
+
   return msg || "Something went wrong. Please try again.";
 }
 
@@ -234,11 +270,10 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
   const [info, setInfo] = useState("");
   const [registerStep, setRegisterStep] = useState<1 | 2>(1);
   const [forgotStep, setForgotStep] = useState<1 | 2>(1);
-  const pendingRef = useRef<{
-    verificationId?: string;
-    isExistingUser?: boolean;
-    resetChallenge?: { updateUser: (u: { nonce: string; password: string }) => Promise<unknown> };
-  }>({});
+  // Which flow has an outstanding e-mailed token, and for which address.
+  // Supabase's verifyOtp is keyed on (email, token, type), so we only need to
+  // remember the address — no opaque server-side challenge handle any more.
+  const pendingRef = useRef<{ signupEmail?: string; recoveryEmail?: string }>({});
   const switchedRef = useRef(false);
 
   const reset = useCallback((next: View) => {
@@ -254,18 +289,18 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
   }, []);
 
   // A signed-in user landing on sign in / create account goes to the real account area.
-  // Guarded: without cloud config there is no session to resolve, and an unguarded
-  // `getCloud()` here would throw synchronously inside the effect and hand the whole
+  // Guarded: with no Supabase config there is no session to resolve, and an unguarded
+  // client creation here would throw synchronously inside the effect and hand the whole
   // route to the error boundary instead of simply showing the form.
   useEffect(() => {
     if (switchedRef.current) return;
     switchedRef.current = true;
-    if (!CLOUD_CONFIGURED) return;
+    if (!SUPABASE_CONFIGURED) return;
     try {
-      getCloud()
+      createClient()
         .auth.getSession()
         .then(({ data }) => {
-          if (data) router.replace("/trips");
+          if (data.session) router.replace("/trips");
         })
         .catch(() => {});
     } catch {
@@ -286,12 +321,12 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
     setBusy(true);
     setError("");
     try {
-      const { error: e } = await getCloud().auth.signInWithPassword({
+      const { error: e } = await createClient().auth.signInWithPassword({
         email: email.trim(),
         password,
       });
       if (e) {
-        console.warn("[auth] signInWithPassword error", JSON.stringify(e));
+        console.warn("[auth] signInWithPassword", e.code ?? e.message);
         return setError(humanError(e));
       }
       goToTrips();
@@ -302,6 +337,17 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
     }
   };
 
+  /**
+   * Register step 1 — create the account with Supabase Auth.
+   *
+   * With email confirmation enabled Supabase mails a 6-digit token, so the
+   * account exists but has no session yet; we advance to the code step.
+   *
+   * Enumeration safety: for an address that already exists Supabase returns
+   * success with an EMPTY `identities` array rather than an error (so the
+   * response cannot be used to probe for accounts). We detect that and send the
+   * user to sign-in with neutral copy, matching the previous behaviour.
+   */
   const submitRegisterSend = async () => {
     if (!EMAIL_RE.test(email)) return setError("Enter a valid email address.");
     if (password.length < 6) return setError("Password must be at least 6 characters.");
@@ -309,15 +355,17 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
     setBusy(true);
     setError("");
     try {
-      const sent = await getCloud().auth.sendOtp({ email: email.trim() });
-      if (sent.error) return setError(humanError(sent.error));
-      if (sent.data.isExistingUser) {
-        // Neutral copy that does not leak account existence — just point at sign in
+      const { data, error: e } = await createClient().auth.signUp({
+        email: email.trim(),
+        password,
+      });
+      if (e) return setError(humanError(e));
+      if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
         reset("login");
         setInfo("That email is already registered. Please sign in.");
         return;
       }
-      pendingRef.current = { verificationId: sent.data.verificationId, isExistingUser: false };
+      pendingRef.current = { signupEmail: email.trim() };
       setRegisterStep(2);
       setInfo("We’ve sent a verification code to your email.");
     } catch {
@@ -327,21 +375,20 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
     }
   };
 
+  /** Register step 2 — exchange the e-mailed token for a real session. */
   const submitRegisterVerify = async () => {
     const pending = pendingRef.current;
-    if (!pending.verificationId) return setError("Request a verification code first.");
+    if (!pending.signupEmail) return setError("Request a verification code first.");
     if (!code.trim()) return setError("Enter the email verification code.");
     setBusy(true);
     setError("");
     try {
-      const completed = await getCloud().auth.verifyOtp({
-        verificationId: pending.verificationId,
+      const { error: e } = await createClient().auth.verifyOtp({
+        email: pending.signupEmail,
         token: code.trim(),
-        email: email.trim(),
-        isExistingUser: pending.isExistingUser ?? false,
-        password: pending.isExistingUser ? undefined : password,
+        type: "signup",
       });
-      if (completed.error) return setError(humanError(completed.error));
+      if (e) return setError(humanError(e));
       goToTrips();
     } catch {
       setError(NETWORK_ERROR);
@@ -355,9 +402,11 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
     setBusy(true);
     setError("");
     try {
-      const started = await getCloud().auth.resetPasswordForEmail(email.trim());
-      if (started.error) return setError(humanError(started.error));
-      pendingRef.current = { resetChallenge: started.data };
+      const { error: e } = await createClient().auth.resetPasswordForEmail(email.trim(), {
+        redirectTo: `${window.location.origin}/auth/confirm`,
+      });
+      if (e) return setError(humanError(e));
+      pendingRef.current = { recoveryEmail: email.trim() };
       setForgotStep(2);
       setInfo("We’ve sent a password reset code to your email.");
     } catch {
@@ -367,17 +416,27 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
     }
   };
 
+  /**
+   * Forgot step 2 — verify the recovery token, which returns a session, then
+   * set the new password on that authenticated session.
+   */
   const submitForgotReset = async () => {
     if (!code.trim()) return setError("Enter the email verification code.");
     if (password.length < 6) return setError("The new password must be at least 6 characters.");
-    const challenge = pendingRef.current.resetChallenge;
-    if (!challenge) return setError("Request a verification code first.");
+    const pending = pendingRef.current;
+    if (!pending.recoveryEmail) return setError("Request a verification code first.");
     setBusy(true);
     setError("");
     try {
-      const completed = await challenge.updateUser({ nonce: code.trim(), password });
-      if ((completed as { error?: unknown }).error)
-        return setError(humanError((completed as { error: { kind?: string; message?: string } }).error));
+      const client = createClient();
+      const verified = await client.auth.verifyOtp({
+        email: pending.recoveryEmail,
+        token: code.trim(),
+        type: "recovery",
+      });
+      if (verified.error) return setError(humanError(verified.error));
+      const { error: e } = await client.auth.updateUser({ password });
+      if (e) return setError(humanError(e));
       goToTrips();
     } catch {
       setError(NETWORK_ERROR);

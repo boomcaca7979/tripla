@@ -261,6 +261,30 @@ export type WorkspaceAction =
     }
   | { type: "ADD_EXPENSE"; tripId: string; expense: Omit<Expense, "id"> }
   | { type: "ADD_SAVED"; item: Omit<SavedItem, "id"> }
+  /**
+   * 外部页（Destinations / Guides）的「Save + Add to Trip」原子写入意图。
+   *
+   * 与 SAVED_ADD_TO_TRIP 的区别：这条收藏**可能尚不存在**——本动作先按
+   * (kind, lower(title)) 幂等 upsert 到 Saved，再挂到 Trip 上，避免调用方
+   * "先 ADD_SAVED，再回头按标题猜 id" 的脆弱两步流程。
+   *
+   * kind 使用 SavedItem 的合法词表（place / hotel / activity / guide），与
+   * saved_items.kind 的 CHECK 约束一致；外部页的 "restaurant" 由调用方在边界
+   * 归一为 kind="place" + placeKind="food"。
+   */
+  | {
+      type: "SAVE_AND_ADD_TO_TRIP";
+      tripId: string;
+      kind: InboxKind;
+      title: string;
+      meta?: string;
+      /** 写入时刻（由调用方提供，保持 reducer 纯函数可测） */
+      savedAt: string;
+      source: string;
+      sourceUrl?: string;
+      /** Trip 内 Place 的分类；缺省 sight */
+      placeKind?: PlaceKind;
+    }
   | { type: "REMOVE_SAVED"; itemId: string }
   | { type: "SAVED_ADD_TO_TRIP"; itemId: string; tripId: string }
   | { type: "ADD_INBOX_ITEM"; item: Omit<InboxItem, "id"> }

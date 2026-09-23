@@ -4,23 +4,43 @@
  * WorkspaceActions — Destinations / Guides 页面的最小工作区接入（蓝图 #9/#10/#11）。
  *
  * 两个动作：
- *  - Save        → 全局 Saved（travel-workspace.upsertSavedItem，幂等去重）
- *  - Add to Trip → Modal 选择用户 Trip（或新建）→ 直接写入该 Trip
+ *  - Save        → 全局 Saved（幂等去重：同 title 大小写不敏感 + 同 kind）
+ *  - Add to Trip → Modal 选择用户 Trip（或新建）→ 写入该 Trip
  *
- * 不跳页、不改变页面布局，只以一枚次级按钮 + 弹层存在。
- * 数据写 localStorage（utripla.trips.workspace.v5），/trips 下次挂载自动恢复。
+ * 本组件只声明**意图**；落到 localStorage 还是 Supabase 由
+ * `@/lib/travel-workspace` 按当前身份解析（见该模块的边界说明）。
+ * 因此这里既没有 localStorage、也没有 Supabase 的调用。
+ *
+ * 失败不置成功态：Save 失败时按钮停在可重试的形态，Add to Trip 失败时在
+ * 弹层里给出原因，而不是显示 "✓ Added" 骗用户。
  */
 
 import { useState } from "react";
-import { DESTINATIONS } from "@/data/destinations";
 import {
   addPageItemToTrip,
+  createPageTrip,
   readTripOptions,
-  tripHasItem,
-  upsertSavedItem,
+  resolvePageMode,
+  savePageItem,
+  type PageFailure,
+  type TripOption,
 } from "@/lib/travel-workspace";
 
 export type WorkspaceKind = "place" | "hotel" | "activity" | "guide" | "restaurant";
+
+/** 失败原因 → 人话。RLS 拒绝（42501）与网络失败要能分辨。 */
+function describeFailure(failure: PageFailure): string {
+  if (failure.reason === "not-ready") {
+    return "Couldn't confirm your account — try again in a moment.";
+  }
+  if (failure.reason === "no-trip") {
+    return "That trip no longer exists.";
+  }
+  if (failure.code === "42501") {
+    return "Your account isn't allowed to change this trip.";
+  }
+  return "Couldn't reach your account — nothing was saved. Retry.";
+}
 
 export default function WorkspaceActions({
   kind,
@@ -40,65 +60,131 @@ export default function WorkspaceActions({
   compact?: boolean;
 }) {
   const [open, setOpen] = useState(false);
-  const [trips, setTrips] = useState<Array<{ id: string; destination: string; currency: string }>>([]);
+  const [trips, setTrips] = useState<TripOption[]>([]);
+  const [loadingTrips, setLoadingTrips] = useState(false);
   const [savedDone, setSavedDone] = useState(false);
   const [addedTrip, setAddedTrip] = useState<string | null>(null);
   const [creating, setCreating] = useState(false);
   const [newDestination, setNewDestination] = useState(city ?? "");
   const [newStart, setNewStart] = useState("");
   const [newEnd, setNewEnd] = useState("");
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const [modalError, setModalError] = useState<string | null>(null);
+  const [pending, setPending] = useState(false);
 
-  const openModal = () => {
-    const opts = readTripOptions();
-    setTrips(opts);
-    setNewDestination(city ?? "");
-    setCreating(opts.length === 0);
-    setOpen(true);
-  };
+  const input = { kind, title, meta: city, source, sourceUrl };
 
-  const save = () => {
-    upsertSavedItem({ kind, title, meta: city, source, sourceUrl });
-    setSavedDone(true);
-  };
-
-  const addTo = (tripId: string) => {
-    const res = addPageItemToTrip(tripId, { kind, title, meta: city, source, sourceUrl });
+  const save = async () => {
+    const mode = await resolvePageMode();
+    if (!mode) {
+      setSaveError(describeFailure({ ok: false, reason: "not-ready" }));
+      return;
+    }
+    setPending(true);
+    setSaveError(null);
+    const res = await savePageItem(mode, input);
+    setPending(false);
     if (res.ok) {
-      setAddedTrip(tripId);
-      setTimeout(() => setOpen(false), 900);
+      setSavedDone(true);
+      return;
+    }
+    setSavedDone(false);
+    setSaveError(describeFailure(res));
+  };
+
+  const openModal = async () => {
+    setOpen(true);
+    setAddedTrip(null);
+    setModalError(null);
+    setNewDestination(city ?? "");
+    setCreating(false);
+    const mode = await resolvePageMode();
+    if (!mode) {
+      setTrips([]);
+      setCreating(true);
+      setModalError(describeFailure({ ok: false, reason: "not-ready" }));
+      return;
+    }
+    setLoadingTrips(true);
+    try {
+      const opts = await readTripOptions(mode, title);
+      setTrips(opts);
+      // 没有 Trip 时直接进创建表单
+      setCreating(opts.length === 0);
+    } catch {
+      setTrips([]);
+      setCreating(true);
+      setModalError("Couldn't load your trips. Retry, or create a new one.");
+    } finally {
+      setLoadingTrips(false);
     }
   };
 
-  const createAndAdd = () => {
+  const addTo = async (tripId: string) => {
+    const mode = await resolvePageMode();
+    if (!mode) {
+      setModalError(describeFailure({ ok: false, reason: "not-ready" }));
+      return;
+    }
+    setPending(true);
+    setModalError(null);
+    const res = await addPageItemToTrip(mode, tripId, input);
+    setPending(false);
+    if (!res.ok) {
+      setModalError(describeFailure(res));
+      return;
+    }
+    setAddedTrip(tripId);
+    setTimeout(() => setOpen(false), 900);
+  };
+
+  const createAndAdd = async () => {
     if (!newDestination.trim() || !newStart || !newEnd) return;
-    // 直接经 lib 创建 Trip（写 localStorage），再添加当前对象
-    const id = createTripViaLib(newDestination.trim(), newStart, newEnd);
-    if (id) addTo(id);
+    const mode = await resolvePageMode();
+    if (!mode) {
+      setModalError(describeFailure({ ok: false, reason: "not-ready" }));
+      return;
+    }
+    setPending(true);
+    setModalError(null);
+    const created = await createPageTrip(mode, newDestination.trim(), newStart, newEnd);
+    setPending(false);
+    if (!created.ok) {
+      setModalError(describeFailure(created));
+      return;
+    }
+    await addTo(created.id);
   };
 
   const sizeCls = compact
     ? "min-h-[30px] px-2.5 py-1 text-[0.75rem]"
     : "min-h-[36px] px-3.5 py-1.5 text-[0.8125rem]";
 
+  const saveFailed = Boolean(saveError) && !savedDone;
+
   return (
     <>
       <span className="inline-flex items-center gap-1.5 align-middle">
         <button
           type="button"
-          onClick={save}
+          onClick={() => void save()}
+          disabled={pending}
           aria-pressed={savedDone}
-          className={`inline-flex cursor-pointer items-center gap-1.5 rounded-full border transition-colors ${sizeCls} ${
+          title={saveError ?? undefined}
+          className={`inline-flex cursor-pointer items-center gap-1.5 rounded-full border transition-colors disabled:opacity-60 ${sizeCls} ${
             savedDone
               ? "border-ut-accent bg-ut-accent text-white"
-              : "border-ut-border-strong text-ut-text hover:bg-ut-surface-hover"
+              : saveFailed
+                ? "border-[#d92d20] text-[#b42318]"
+                : "border-ut-border-strong text-ut-text hover:bg-ut-surface-hover"
           }`}
         >
-          <span aria-hidden="true">{savedDone ? "✓" : "🔖"}</span>
-          {savedDone ? "Saved" : "Save"}
+          <span aria-hidden="true">{savedDone ? "✓" : saveFailed ? "↻" : "🔖"}</span>
+          {savedDone ? "Saved" : saveFailed ? "Retry save" : "Save"}
         </button>
         <button
           type="button"
-          onClick={openModal}
+          onClick={() => void openModal()}
           className={`inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-ut-border-strong transition-colors hover:bg-ut-surface-hover ${sizeCls} text-ut-text`}
         >
           <span aria-hidden="true">+</span>
@@ -134,23 +220,36 @@ export default function WorkspaceActions({
               {city ? ` · ${city}` : ""}
             </p>
 
+            {modalError && (
+              <p
+                role="alert"
+                className="mb-3 rounded-xl bg-[#fef3f2] px-4 py-3 text-[0.8125rem] font-semibold text-[#b42318]"
+              >
+                {modalError}
+              </p>
+            )}
+
             {addedTrip ? (
               <p className="rounded-xl bg-[#e0f3ea] px-4 py-3 text-[0.875rem] font-semibold text-[#0b6b47]">
                 ✓ Added to {trips.find((t) => t.id === addedTrip)?.destination ?? "trip"}
               </p>
             ) : (
               <>
+                {loadingTrips && (
+                  <p className="mb-3 text-[0.8125rem] text-[#5c6b70]">Loading your trips…</p>
+                )}
+
                 {trips.length > 0 && !creating && (
                   <ul className="mb-3 space-y-1.5">
                     {trips.map((t) => {
-                      const inTrip = tripHasItem(t.id, title);
+                      const inTrip = t.hasItem;
                       return (
                         <li key={t.id}>
                           <button
                             type="button"
-                            disabled={inTrip}
-                            onClick={() => addTo(t.id)}
-                            className={`flex w-full cursor-pointer items-center justify-between rounded-xl border px-4 py-3 text-left text-[0.875rem] transition-colors ${
+                            disabled={inTrip || pending}
+                            onClick={() => void addTo(t.id)}
+                            className={`flex w-full cursor-pointer items-center justify-between rounded-xl border px-4 py-3 text-left text-[0.875rem] transition-colors disabled:opacity-60 ${
                               inTrip
                                 ? "cursor-not-allowed border-[#e8ecec] bg-[#f6f8f7] text-[#9aa5a8]"
                                 : "border-[#e3e8e7] text-[#17242a] hover:border-ut-accent hover:bg-[#f6fbf9]"
@@ -207,8 +306,8 @@ export default function WorkspaceActions({
                     <div className="mt-3 flex gap-2">
                       <button
                         type="button"
-                        onClick={createAndAdd}
-                        disabled={!newDestination.trim() || !newStart || !newEnd}
+                        onClick={() => void createAndAdd()}
+                        disabled={!newDestination.trim() || !newStart || !newEnd || pending}
                         className="min-h-[36px] cursor-pointer rounded-full bg-ut-accent px-4 text-[0.8125rem] font-semibold text-white transition-colors hover:bg-ut-accent-strong disabled:opacity-40"
                       >
                         Create &amp; add
@@ -226,7 +325,7 @@ export default function WorkspaceActions({
                   </div>
                 )}
 
-                {trips.length === 0 && !creating && (
+                {trips.length === 0 && !creating && !loadingTrips && (
                   <p className="text-[0.8125rem] text-[#5c6b70]">You don&apos;t have any trips yet.</p>
                 )}
               </>
@@ -236,59 +335,4 @@ export default function WorkspaceActions({
       )}
     </>
   );
-}
-
-/** lib 层创建 Trip（与 /trips CREATE_TRIP 的默认值一致：You 单旅客、空容器）。 */
-function createTripViaLib(destination: string, startDate: string, endDate: string): string | null {
-  if (typeof window === "undefined") return null;
-  // 按名称匹配真实 Destination（蓝图 #5/#8）：destinationId/slug/country/image 快照
-  const dest = DESTINATIONS.find(
-    (d) => d.city.toLowerCase() === destination.trim().toLowerCase(),
-  );
-  try {
-    const raw = window.localStorage.getItem("utripla.trips.workspace.v5");
-    const state = raw ? (JSON.parse(raw) as Record<string, unknown>) : null;
-    if (!state || !Array.isArray(state.trips)) return null;
-    const id = `trip-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
-    const status = deriveStatus(startDate, endDate);
-    (state.trips as unknown[]).unshift({
-      id,
-      destination,
-      destinationId: dest?.slug,
-      destinationSlug: dest?.slug,
-      destinationImage: dest?.image ?? null,
-      country: dest?.country ?? "",
-      currency: "¥",
-      status,
-      startDate,
-      endDate,
-      travelers: [{ id: `t-${Date.now().toString(36)}`, name: "You" }],
-      places: [],
-      hotels: [],
-      routeDays: [],
-      expenses: [],
-      checklist: [],
-      budgetPlanned: 0,
-    });
-    (state.activity as unknown[]).unshift({
-      id: `a-${Date.now().toString(36)}`,
-      at: new Date().toLocaleString("en-US", { month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false }),
-      text: `Created trip ${destination}`,
-    });
-    window.localStorage.setItem("utripla.trips.workspace.v5", JSON.stringify(state));
-    return id;
-  } catch {
-    return null;
-  }
-}
-
-function deriveStatus(startDate: string, endDate: string): "current" | "upcoming" | "past" {
-  const today = new Date();
-  const t0 = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-  const start = new Date(`${startDate}T00:00:00Z`);
-  const end = new Date(`${endDate}T00:00:00Z`);
-  if (end < start) return "upcoming";
-  if (start > t0) return "upcoming";
-  if (end < t0) return "past";
-  return "current";
 }

@@ -13,12 +13,16 @@
  *  - Demo 数据与真实数据隔离：仅当用户显式点击 "Load demo data" 才加载；
  *  - 新 Trip 刚创建时为空 Trip（Places "No places yet" 等）。
  *
- * 状态：useReducer（mock / local state）+ localStorage 持久化（v4）。
+ * 状态：useReducer 是唯一的状态变更入口（`workspaceReducer`），持久化交给
+ * `@/lib/workspace` 的两条通道——
+ *  - 未登录：localStorage（这台设备）；
+ *  - 已登录：Supabase（唯一 source of truth，按 auth.uid() 由 RLS 隔离）。
+ * 两条通道之间没有任何自动搬运：匿名期间的草稿不会因为登录而被上传。
  */
 
 import Link from "next/link";
 import DestinationField, { type DestinationChoice } from "./DestinationField";
-import { useEffect, useReducer, useState } from "react";
+import { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import Image from "next/image";
 import type { InboxItem, InboxKind, SavedItem, Trip, WorkspaceAction, WorkspaceState } from "./types";
 import {
@@ -34,13 +38,17 @@ import { seedWorkspace } from "./seed";
 import TripWorkspace from "./TripWorkspace";
 import { CaptureLine } from "./inline";
 import ExpensesWorkspace from "./expenses/ExpensesWorkspace";
-import { tripActualTotals } from "./expenses/engine";
+import { tripActualTotals, migrateWorkspaceState } from "./expenses/engine";
 import { reviewQueue } from "./expenses/engine";
 import { BTN_GHOST, BTN_PRIMARY, EmptyState, INPUT, META_LINE, Modal, Panel, MONO_META, T_CARD, T_META, T_PAGE, T_SECTION, TOOLBAR_ACTION } from "./ui";
 import { DESTINATIONS } from "@/data/destinations";
 import { useSession } from "@/lib/use-session";
-
-const STORAGE_KEY = "utripla.trips.workspace.v5";
+import {
+  commitWorkspace,
+  loadWorkspace,
+  modeKey,
+  type WorkspaceMode,
+} from "@/lib/workspace";
 
 type View =
   | { name: "trips" }
@@ -63,39 +71,150 @@ function destinationImage(destination: string): string | null {
   return dest?.image ?? null;
 }
 
+/** 同步错误的可读描述（保留表名/操作，便于定位是哪一层拒绝的写入）。 */
+function describeSyncError(error: unknown): string {
+  if (error instanceof Error && error.message) return error.message;
+  return "Unexpected error while saving.";
+}
+
 export default function TripsWorkspace() {
   const [state, dispatch] = useReducer(workspaceReducer, undefined, seedWorkspace);
   const [view, setView] = useState<View>({ name: "trips" });
   const [newTripOpen, setNewTripOpen] = useState(false);
+  const { userId, ready: sessionReady } = useSession();
 
-  // 挂载后一次性恢复本地持久化（v4：第六轮默认空工作区）
+  /**
+   * 数据基线 = **上一次成功落盘的状态**，并且与它所属的身份绑在一起。
+   *
+   * 身份必须和状态同存：只存状态的话，切换账号的瞬间会用 A 的数据算出增量、
+   * 打到 B 的账号上（userId 决定命名空间与 RLS 作用域，写错就是真实泄漏）。
+   * 因此每次写入用的 mode 都取自基线自身，而不是当前渲染的 session。
+   *
+   * 失败时基线**不推进** —— 下一次提交会从同一个基线重新算出同一份增量并重试。
+   * 这是「不出现假成功」的落地点：界面可以乐观，基线不会说谎。
+   */
+  const baselineRef = useRef<{
+    identity: string;
+    mode: WorkspaceMode;
+    state: WorkspaceState;
+  } | null>(null);
+  const latestStateRef = useRef(state);
+  const loadSeqRef = useRef(0);
+  const commitChainRef = useRef<Promise<void>>(Promise.resolve());
+  const drainingRef = useRef(false);
+  const dirtyRef = useRef(false);
+
+  /**
+   * 加载结果的**事实记录**（identity + 是否失败），不是命令式的 phase 变量。
+   *
+   * phase 是派生的：`已加载的身份 !== 当前身份` 就是 loading，因此身份一变
+   * 立刻回到 loading，不需要在 effect 里同步 setState 去"改状态" ——
+   * 那样会触发级联渲染，也会让"正在加载"和"加载完了"两个事实分家。
+   */
+  const [loadResult, setLoadResult] = useState<{ identity: string; error: string | null } | null>(
+    null,
+  );
+  const [writeError, setWriteError] = useState<string | null>(null);
+  const [reloadNonce, setReloadNonce] = useState(0);
+
+  // 当前身份（由会话推导，不落 state）：null = 会话还没解析完
+  const activeIdentity = !sessionReady
+    ? null
+    : modeKey(userId ? { kind: "remote", userId } : { kind: "guest" });
+
+  const syncPhase: "loading" | "ready" | "error" =
+    activeIdentity === null || loadResult?.identity !== activeIdentity
+      ? "loading"
+      : loadResult.error
+        ? "error"
+        : "ready";
+
+  const syncError = syncPhase === "error" ? (loadResult?.error ?? null) : writeError;
+
+  // ── 读：由身份（不是挂载）决定数据来源 ─────────────────────────────
   useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const parsed = JSON.parse(raw) as WorkspaceState;
-      if (
-        parsed &&
-        Array.isArray(parsed.trips) &&
-        Array.isArray(parsed.saved) &&
-        Array.isArray(parsed.inbox) &&
-        Array.isArray(parsed.activity)
-      ) {
-        dispatch({ type: "RESTORE_STATE", state: parsed });
+    if (!sessionReady) return;
+    const mode: WorkspaceMode = userId ? { kind: "remote", userId } : { kind: "guest" };
+    const identity = modeKey(mode);
+    const seq = ++loadSeqRef.current;
+
+    // 身份切换的第一件事：让旧基线立即失效。此后任何在途提交都读不到基线，
+    // 也就不会把上一个账号的数据写到新账号下。（ref 写入不引起渲染。）
+    baselineRef.current = null;
+    dirtyRef.current = false;
+
+    void (async () => {
+      try {
+        const loadedState = await loadWorkspace(mode);
+        if (seq !== loadSeqRef.current) return; // 更新的加载已开始 → 丢弃这次结果
+        baselineRef.current = {
+          identity,
+          mode,
+          // 与 reducer 的 RESTORE_STATE 用同一个迁移函数：两边结果深度相等，
+          // 因此「加载完成」本身不会产生任何写入（空增量 = 零请求）。
+          state: migrateWorkspaceState(loadedState),
+        };
+        dispatch({ type: "RESTORE_STATE", state: loadedState });
+        setView({ name: "trips" });
+        setWriteError(null);
+        setLoadResult({ identity, error: null });
+      } catch (error) {
+        if (seq !== loadSeqRef.current) return;
+        setLoadResult({ identity, error: describeSyncError(error) });
       }
-    } catch {
-      // ignore（隐私模式 / 损坏数据）
-    }
+    })();
+  }, [sessionReady, userId, reloadNonce]);
+
+  /**
+   * 串行排空待写增量：同一时刻只有一个写入序列在跑，避免两次快速改动互相穿插
+   * （逐行 upsert 的顺序会决定外键是否已存在）。
+   *
+   * 循环在每次迭代重新读取「最新基线 + 最新状态」，因此循环期间到达的新改动
+   * 会被顺带写完，不需要额外排队；`dirtyRef` 负责消灭「刚好在退出前到达」的
+   * 那次改动造成的丢写窗口。
+   */
+  const drain = useCallback(() => {
+    if (drainingRef.current) return;
+    drainingRef.current = true;
+    commitChainRef.current = commitChainRef.current.then(async () => {
+      try {
+        while (dirtyRef.current) {
+          dirtyRef.current = false;
+          const base = baselineRef.current;
+          const current = latestStateRef.current;
+          if (!base || base.state === current) continue;
+          // 写入用的 mode 取自基线自身（而非当前渲染的 session）：
+          // 身份与数据永远不可能错配。
+          await commitWorkspace(base.mode, base.state, current);
+          baselineRef.current = { identity: base.identity, mode: base.mode, state: current };
+          setWriteError(null);
+        }
+      } catch (error) {
+        dirtyRef.current = false;
+        setWriteError(describeSyncError(error));
+      } finally {
+        drainingRef.current = false;
+      }
+    });
   }, []);
 
-  // 状态变化后持久化
+  // 状态变化 → 标记待写并（若空闲）开始排空
   useEffect(() => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    } catch {
-      // ignore
+    latestStateRef.current = state;
+    if (syncPhase !== "ready") return;
+    dirtyRef.current = true;
+    drain();
+  }, [state, syncPhase, drain]);
+
+  const retrySync = useCallback(() => {
+    if (syncPhase === "error") {
+      setReloadNonce((n) => n + 1);
+      return;
     }
-  }, [state]);
+    dirtyRef.current = true;
+    setWriteError(null);
+    drain();
+  }, [drain, syncPhase]);
 
   const activeNav =
     view.name === "trip" ? "trips" : view.name === "account" ? "account" : view.name;
@@ -104,6 +223,33 @@ export default function TripsWorkspace() {
   const reviewCount = reviewQueue(state.transactions).length;
 
   const rightPane = (() => {
+    // 加载中：不渲染空态又立刻替换（会让人误以为数据丢了）
+    if (syncPhase === "loading") {
+      return (
+        <Panel className="mt-6">
+          <p className="px-6 py-14 text-center text-[0.875rem] text-ut-muted">
+            {sessionReady && userId ? "Loading your trips…" : "Loading your workspace…"}
+          </p>
+        </Panel>
+      );
+    }
+    // 加载失败：没有可信基线，任何写入都可能覆盖真实数据 → 阻断并只提供重试
+    if (syncPhase === "error") {
+      return (
+        <Panel className="mt-6">
+          <EmptyState
+            icon="⚠️"
+            title="Couldn't load your workspace"
+            description={syncError ?? "The workspace could not be loaded."}
+            action={
+              <button type="button" className={BTN_PRIMARY} onClick={retrySync}>
+                Try again
+              </button>
+            }
+          />
+        </Panel>
+      );
+    }
     if (view.name === "trip") {
       const trip = state.trips.find((t) => t.id === view.tripId);
       if (trip) {
@@ -207,6 +353,27 @@ export default function TripsWorkspace() {
             </button>
           ))}
         </nav>
+        {/* 写入失败：本地改动仍在内存里（乐观），但**必须**告诉用户它还没落盘。
+            刻意不做自动回滚 —— 回滚会丢掉用户刚输入的内容；这里保持界面与
+            「基线未推进」一致，下一次改动或点 Retry 会重试同一份增量。 */}
+        {syncPhase === "ready" && syncError && (
+          <div
+            role="alert"
+            className="mb-5 flex flex-wrap items-start gap-x-4 gap-y-2 rounded-ut-md border border-[#e8c9c6] bg-[#fdf5f4] px-4 py-3"
+          >
+            <p className="min-w-0 flex-1 text-[0.8125rem] leading-relaxed text-[#8a2f28]">
+              <span className="font-semibold">Not saved to your account yet.</span>{" "}
+              {syncError}
+            </p>
+            <button
+              type="button"
+              onClick={retrySync}
+              className="shrink-0 cursor-pointer text-[0.8125rem] font-semibold text-[#8a2f28] underline underline-offset-2 transition-opacity hover:opacity-70"
+            >
+              Retry
+            </button>
+          </div>
+        )}
         {rightPane}
       </main>
     </div>
@@ -344,17 +511,15 @@ function TripsListView({
               type="button"
               className="cursor-pointer font-semibold text-ut-accent hover:text-ut-accent-strong"
               onClick={() => {
+                // 清空 = dispatch RESET，由数据层按通道落盘：匿名写空状态回
+                // localStorage，登录用户则由增量 diff 删掉云端对应行。
+                // 不在这里直接 removeItem —— 那样会与随后的写入互相打脸。
                 if (
                   window.confirm(
-                    "Clear the workspace? All trips and saves in this browser will be removed.",
+                    "Clear the workspace? All trips, saves, expenses and checklist items will be deleted.",
                   )
                 ) {
                   dispatch({ type: "RESET" });
-                  try {
-                    window.localStorage.removeItem("utripla.trips.workspace.v5");
-                  } catch {
-                    // ignore
-                  }
                 }
               }}
             >
