@@ -39,7 +39,10 @@
  * Auth goes through Supabase Auth (real requests): password sign-in / e-mail OTP
  * registration / e-mail OTP password recovery. Registration is two steps
  * because the account is only usable after the address is confirmed by the
- * 6-digit token Supabase mails out, hence the "Email code" screen.
+ * numeric token Supabase mails out (length = the project's `mailer_otp_length`,
+ * currently 8 — the input is deliberately not length-capped), hence the
+ * "Email code" screen. The mailed link is a separate path: it lands on
+ * /auth/confirm, which exchanges it for the same cookie session.
  *
  * The layout, dimensions, colours and artwork below are FROZEN — reviewed and
  * signed off pixel-by-pixel. This migration changes the auth *provider* only.
@@ -358,6 +361,13 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
       const { data, error: e } = await createClient().auth.signUp({
         email: email.trim(),
         password,
+        // Env-aware confirmation target. Production mails
+        // https://www.utripla.xyz/auth/confirm; local dev mails
+        // http://localhost:3000/auth/confirm. Without this, Supabase falls back
+        // to the project's Site URL — which is how the links shipped with
+        // `redirect_to=http://localhost:3000`. Same expression as
+        // `resetPasswordForEmail` below, so both flows stay consistent.
+        options: { emailRedirectTo: `${window.location.origin}/auth/confirm` },
       });
       if (e) return setError(humanError(e));
       if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
