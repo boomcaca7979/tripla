@@ -94,7 +94,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Promenade_sur_la_Corniche_Ain_Diab_%C3%A0_Casablanca_-_photo_Bertrand_SOUBEYRAND.jpg/1920px-Promenade_sur_la_Corniche_Ain_Diab_%C3%A0_Casablanca_-_photo_Bertrand_SOUBEYRAND.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Promenade_sur_la_Corniche_Ain_Diab_%C3%A0_Casablanca_-_photo_Bertrand_SOUBEYRAND.jpg/1920px-Promenade_sur_la_Corniche_Ain_Diab_%C3%A0_Casablanca_-_photo_Bertrand_SOUBEYRAND.jpg",
       alt: "Corniche Ain Diab, Casablanca",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -212,7 +212,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Aswan_High_Dam-1.jpg/3840px-Aswan_High_Dam-1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Aswan_High_Dam-1.jpg/3840px-Aswan_High_Dam-1.jpg",
       alt: "Aswan High Dam, Aswan",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -293,7 +293,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Old_Fort_of_Zanzibar_%28Boma_la_Kale_la_Zanzibar%29.jpg/1920px-Old_Fort_of_Zanzibar_%28Boma_la_Kale_la_Zanzibar%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Old_Fort_of_Zanzibar_%28Boma_la_Kale_la_Zanzibar%29.jpg/1920px-Old_Fort_of_Zanzibar_%28Boma_la_Kale_la_Zanzibar%29.jpg",
       alt: "Old Fort, Zanzibar City",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -330,7 +330,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Cataratas_Victoria%2C_Zambia-Zimbabue%2C_2018-07-27%2C_DD_30-34_PAN.jpg/3840px-Cataratas_Victoria%2C_Zambia-Zimbabue%2C_2018-07-27%2C_DD_30-34_PAN.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Cataratas_Victoria%2C_Zambia-Zimbabue%2C_2018-07-27%2C_DD_30-34_PAN.jpg/3840px-Cataratas_Victoria%2C_Zambia-Zimbabue%2C_2018-07-27%2C_DD_30-34_PAN.jpg",
       alt: "Victoria Falls (Mosi-oa-Tunya), Victoria Falls",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -358,7 +358,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Mosi-oa-Tunya%2C_Livingstone_%2820260519-P1075665%29.jpg/1920px-Mosi-oa-Tunya%2C_Livingstone_%2820260519-P1075665%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Mosi-oa-Tunya%2C_Livingstone_%2820260519-P1075665%29.jpg/1920px-Mosi-oa-Tunya%2C_Livingstone_%2820260519-P1075665%29.jpg",
       alt: "Livingstone Island, Victoria Falls",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -374,21 +374,21 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Entrance_to_the_museum_of_apartheid._Johannesburg._South_Africa.jpg/1920px-Entrance_to_the_museum_of_apartheid._Johannesburg._South_Africa.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Entrance_to_the_museum_of_apartheid._Johannesburg._South_Africa.jpg/1920px-Entrance_to_the_museum_of_apartheid._Johannesburg._South_Africa.jpg",
       alt: "Apartheid Museum, Johannesburg",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Eternal_Flame_on_Constitution_Hill_in_Johannesburg.JPG/1920px-Eternal_Flame_on_Constitution_Hill_in_Johannesburg.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Eternal_Flame_on_Constitution_Hill_in_Johannesburg.JPG/1920px-Eternal_Flame_on_Constitution_Hill_in_Johannesburg.JPG",
       alt: "Constitution Hill, Johannesburg",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Vilakazi_street_performers.jpg/1920px-Vilakazi_street_performers.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Vilakazi_street_performers.jpg/1920px-Vilakazi_street_performers.jpg",
       alt: "Vilakazi Street, Johannesburg",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -402,7 +402,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Origins_Centre_and_M1_highway.jpg/1920px-Origins_Centre_and_M1_highway.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Origins_Centre_and_M1_highway.jpg/1920px-Origins_Centre_and_M1_highway.jpg",
       alt: "Origins Centre, Johannesburg",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -418,14 +418,14 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Aapravasi_ghat_museum%2C_Port_Louis%2C_Mauritius.jpg/1920px-Aapravasi_ghat_museum%2C_Port_Louis%2C_Mauritius.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Aapravasi_ghat_museum%2C_Port_Louis%2C_Mauritius.jpg/1920px-Aapravasi_ghat_museum%2C_Port_Louis%2C_Mauritius.jpg",
       alt: "Aapravasi Ghat, Port Louis",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Umbrellas_at_Caudan_Waterfront_Mall.JPG/1920px-Umbrellas_at_Caudan_Waterfront_Mall.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Umbrellas_at_Caudan_Waterfront_Mall.JPG/1920px-Umbrellas_at_Caudan_Waterfront_Mall.JPG",
       alt: "Le Caudan Waterfront, Port Louis",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -462,7 +462,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Big_Ben_Clock_Tower_-_Victoria_-_Mahe_-_Seychelles_-_01.jpg/1920px-Big_Ben_Clock_Tower_-_Victoria_-_Mahe_-_Seychelles_-_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Big_Ben_Clock_Tower_-_Victoria_-_Mahe_-_Seychelles_-_01.jpg/1920px-Big_Ben_Clock_Tower_-_Victoria_-_Mahe_-_Seychelles_-_01.jpg",
       alt: "Victoria Clock Tower, Victoria",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -483,14 +483,14 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Beau_Vallon%2C_Mah%C3%A9%2C_Seychelles%2C_2025-09-07%2C_DD_02.jpg/1920px-Beau_Vallon%2C_Mah%C3%A9%2C_Seychelles%2C_2025-09-07%2C_DD_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Beau_Vallon%2C_Mah%C3%A9%2C_Seychelles%2C_2025-09-07%2C_DD_02.jpg/1920px-Beau_Vallon%2C_Mah%C3%A9%2C_Seychelles%2C_2025-09-07%2C_DD_02.jpg",
       alt: "Beau Vallon Beach, Victoria",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/c/c5/Ile_de_Mahe_-_Morne_Seychellois_%281%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "https://upload.wikimedia.org/wikipedia/commons/c/c5/Ile_de_Mahe_-_Morne_Seychellois_%281%29.JPG",
       alt: "Morne Seychellois National Park, Victoria",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -520,7 +520,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Makola_Market_Entrance%2C_Accra%2C_Ghana.JPG/1920px-Makola_Market_Entrance%2C_Accra%2C_Ghana.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Makola_Market_Entrance%2C_Accra%2C_Ghana.JPG/1920px-Makola_Market_Entrance%2C_Accra%2C_Ghana.JPG",
       alt: "Makola Market, Accra",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -534,7 +534,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Museum_Ground_floor_from_1st_floor.jpg/1920px-Museum_Ground_floor_from_1st_floor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Museum_Ground_floor_from_1st_floor.jpg/1920px-Museum_Ground_floor_from_1st_floor.jpg",
       alt: "National Museum of Ghana, Accra",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -594,7 +594,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Central_Exhibition_Hall_-_National_Museum_of_Ethiopia_-_Addis_Ababa_-_Ethiopia_%288744259542%29.jpg/1920px-Central_Exhibition_Hall_-_National_Museum_of_Ethiopia_-_Addis_Ababa_-_Ethiopia_%288744259542%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Central_Exhibition_Hall_-_National_Museum_of_Ethiopia_-_Addis_Ababa_-_Ethiopia_%288744259542%29.jpg/1920px-Central_Exhibition_Hall_-_National_Museum_of_Ethiopia_-_Addis_Ababa_-_Ethiopia_%288744259542%29.jpg",
       alt: "National Museum of Ethiopia, Addis Ababa",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -615,7 +615,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Church_on_the_Mount_Entoto.jpg/1920px-Church_on_the_Mount_Entoto.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Church_on_the_Mount_Entoto.jpg/1920px-Church_on_the_Mount_Entoto.jpg",
       alt: "Mount Entoto, Addis Ababa",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -689,7 +689,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Castillo_San_Felipe_de_Barajas%2C_Cartagena_25.jpg/1920px-Castillo_San_Felipe_de_Barajas%2C_Cartagena_25.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Castillo_San_Felipe_de_Barajas%2C_Cartagena_25.jpg/1920px-Castillo_San_Felipe_de_Barajas%2C_Cartagena_25.jpg",
       alt: "Castillo San Felipe de Barajas, Cartagena",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -726,14 +726,14 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Medell%C3%ADn%2C_Museo_de_Antioquia%2C_2023-07_CN-01.jpg/1920px-Medell%C3%ADn%2C_Museo_de_Antioquia%2C_2023-07_CN-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Medell%C3%ADn%2C_Museo_de_Antioquia%2C_2023-07_CN-01.jpg/1920px-Medell%C3%ADn%2C_Museo_de_Antioquia%2C_2023-07_CN-01.jpg",
       alt: "Museo de Antioquia, Medellín",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Medell%C3%ADn%2C_Plaza_Botero%2C_2023-07_CN-01.jpg/3840px-Medell%C3%ADn%2C_Plaza_Botero%2C_2023-07_CN-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Medell%C3%ADn%2C_Plaza_Botero%2C_2023-07_CN-01.jpg/3840px-Medell%C3%ADn%2C_Plaza_Botero%2C_2023-07_CN-01.jpg",
       alt: "Plaza Botero, Medellín",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -747,7 +747,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Metrocable_del_Parque_Arv%C3%AD_-_Medell%C3%ADn.jpg/3840px-Metrocable_del_Parque_Arv%C3%AD_-_Medell%C3%ADn.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Metrocable_del_Parque_Arv%C3%AD_-_Medell%C3%ADn.jpg/3840px-Metrocable_del_Parque_Arv%C3%AD_-_Medell%C3%ADn.jpg",
       alt: "Arví Park, Medellín",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -784,7 +784,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Zocalo%2C_oaxaca%2C_oaxaca_-_panoramio.jpg/1920px-Zocalo%2C_oaxaca%2C_oaxaca_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Zocalo%2C_oaxaca%2C_oaxaca_-_panoramio.jpg/1920px-Zocalo%2C_oaxaca%2C_oaxaca_-_panoramio.jpg",
       alt: "Plaza de la Constitución (Zócalo), Oaxaca",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -821,7 +821,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Castillo_San_Felipe_del_Morro_aerial%2C_May_2024_-_01.jpg/1920px-Castillo_San_Felipe_del_Morro_aerial%2C_May_2024_-_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Castillo_San_Felipe_del_Morro_aerial%2C_May_2024_-_01.jpg/1920px-Castillo_San_Felipe_del_Morro_aerial%2C_May_2024_-_01.jpg",
       alt: "Castillo San Felipe del Morro, San Juan",
       source: "pexels",
       verifiedAt: "2026-09-18",
@@ -879,7 +879,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Calzada_de_amador.jpg/1920px-Calzada_de_amador.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Calzada_de_amador.jpg/1920px-Calzada_de_amador.jpg",
       alt: "Amador Causeway, Panama City",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -916,7 +916,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Montevideo_Rambla-20110506-RM-120836.jpg/1920px-Montevideo_Rambla-20110506-RM-120836.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Montevideo_Rambla-20110506-RM-120836.jpg/1920px-Montevideo_Rambla-20110506-RM-120836.jpg",
       alt: "Rambla of Montevideo, Montevideo",
       source: "pexels",
       verifiedAt: "2026-09-18",
@@ -953,7 +953,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Iglesia_de_La_Compa%C3%B1%C3%ADa%2C_Quito%2C_Ecuador%2C_2015-07-22%2C_DD_116-118_HDR.JPG/1920px-Iglesia_de_La_Compa%C3%B1%C3%ADa%2C_Quito%2C_Ecuador%2C_2015-07-22%2C_DD_116-118_HDR.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Iglesia_de_La_Compa%C3%B1%C3%ADa%2C_Quito%2C_Ecuador%2C_2015-07-22%2C_DD_116-118_HDR.JPG/1920px-Iglesia_de_La_Compa%C3%B1%C3%ADa%2C_Quito%2C_Ecuador%2C_2015-07-22%2C_DD_116-118_HDR.JPG",
       alt: "La Compañía de Jesús, Quito",
       source: "pexels",
       verifiedAt: "2026-09-18",
@@ -1004,14 +1004,14 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Martial_Mountains_1.JPG/1920px-Martial_Mountains_1.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Martial_Mountains_1.JPG/1920px-Martial_Mountains_1.JPG",
       alt: "Martial Glacier, Ushuaia",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Museo_Maritimo_y_Ex_Presidio_de_Ushuaia_14.jpg/1920px-Museo_Maritimo_y_Ex_Presidio_de_Ushuaia_14.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Museo_Maritimo_y_Ex_Presidio_de_Ushuaia_14.jpg/1920px-Museo_Maritimo_y_Ex_Presidio_de_Ushuaia_14.jpg",
       alt: "Museo Marítimo y del Presidio de Ushuaia, Ushuaia",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1085,7 +1085,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/267_Forsyth_Park%2C_Savannah%2C_Georgia.jpg/1920px-267_Forsyth_Park%2C_Savannah%2C_Georgia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/267_Forsyth_Park%2C_Savannah%2C_Georgia.jpg/1920px-267_Forsyth_Park%2C_Savannah%2C_Georgia.jpg",
       alt: "Savannah Historic District, Savannah",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1115,7 +1115,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
   "montego-bay": [
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Montego_bay-1001.jpg/1920px-Montego_bay-1001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Montego_bay-1001.jpg/1920px-Montego_bay-1001.jpg",
       alt: "Spectacular fireworks over montego bay at night",
       source: "pexels",
       verifiedAt: "2026-09-18",
@@ -1210,7 +1210,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Mehtab_Bagh-Agra-Uttar_Pradesh-N-AP-A18.jpg/1920px-Mehtab_Bagh-Agra-Uttar_Pradesh-N-AP-A18.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Mehtab_Bagh-Agra-Uttar_Pradesh-N-AP-A18.jpg/1920px-Mehtab_Bagh-Agra-Uttar_Pradesh-N-AP-A18.jpg",
       alt: "Mehtab Bagh, Agra",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1240,7 +1240,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Shri_Kashi_Vishwanath_Temple_2.jpg/1920px-Shri_Kashi_Vishwanath_Temple_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Shri_Kashi_Vishwanath_Temple_2.jpg/1920px-Shri_Kashi_Vishwanath_Temple_2.jpg",
       alt: "Kashi Vishwanath Temple, Varanasi",
       source: "pexels",
       verifiedAt: "2026-09-18",
@@ -1254,7 +1254,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Assi_Ghat_boats_Varanasi.jpg/1920px-Assi_Ghat_boats_Varanasi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Assi_Ghat_boats_Varanasi.jpg/1920px-Assi_Ghat_boats_Varanasi.jpg",
       alt: "Assi Ghat, Varanasi",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1356,7 +1356,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Qurum_Beach_in_Muscat_2019-11-30.jpg/1920px-Qurum_Beach_in_Muscat_2019-11-30.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Qurum_Beach_in_Muscat_2019-11-30.jpg/1920px-Qurum_Beach_in_Muscat_2019-11-30.jpg",
       alt: "Qurum Beach, Muscat",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1365,7 +1365,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
   "jeddah": [
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Jeddah_skyline_February_2020.jpg/1920px-Jeddah_skyline_February_2020.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Jeddah_skyline_February_2020.jpg/1920px-Jeddah_skyline_February_2020.jpg",
       alt: "Historic minaret in jeddah s old town",
       source: "pexels",
       verifiedAt: "2026-09-18",
@@ -1379,7 +1379,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/King_Fahd%27s_Fountain_Jeddah_Fountain_%285129797428%29.jpg/1920px-King_Fahd%27s_Fountain_Jeddah_Fountain_%285129797428%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/King_Fahd%27s_Fountain_Jeddah_Fountain_%285129797428%29.jpg/1920px-King_Fahd%27s_Fountain_Jeddah_Fountain_%285129797428%29.jpg",
       alt: "King Fahd's Fountain, Jeddah",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1467,7 +1467,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Shwezigon_Pagoda%2C_Bagan.jpg/1920px-Shwezigon_Pagoda%2C_Bagan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Shwezigon_Pagoda%2C_Bagan.jpg/1920px-Shwezigon_Pagoda%2C_Bagan.jpg",
       alt: "Shwezigon Pagoda, Bagan",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1504,7 +1504,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/20171118_Pha_That_Luang_in_Vientiane_3169_DxO.jpg/1920px-20171118_Pha_That_Luang_in_Vientiane_3169_DxO.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/20171118_Pha_That_Luang_in_Vientiane_3169_DxO.jpg/1920px-20171118_Pha_That_Luang_in_Vientiane_3169_DxO.jpg",
       alt: "Pha That Luang, Vientiane",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1525,7 +1525,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Haw_Phra_Kaew.jpg/1920px-Haw_Phra_Kaew.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Haw_Phra_Kaew.jpg/1920px-Haw_Phra_Kaew.jpg",
       alt: "Haw Phra Kaew, Vientiane",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1555,7 +1555,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/View_of_Mount_Kinabalu_taken_from_Manukan_Island_%28Pulau_Manukan%29_.jpg/1920px-View_of_Mount_Kinabalu_taken_from_Manukan_Island_%28Pulau_Manukan%29_.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/View_of_Mount_Kinabalu_taken_from_Manukan_Island_%28Pulau_Manukan%29_.jpg/1920px-View_of_Mount_Kinabalu_taken_from_Manukan_Island_%28Pulau_Manukan%29_.jpg",
       alt: "Tunku Abdul Rahman National Park, Kota Kinabalu",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1576,7 +1576,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Photowalk_at_Sabah_State_Museum%2C_Kota_Kinabalu_209.jpg/1920px-Photowalk_at_Sabah_State_Museum%2C_Kota_Kinabalu_209.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Photowalk_at_Sabah_State_Museum%2C_Kota_Kinabalu_209.jpg/1920px-Photowalk_at_Sabah_State_Museum%2C_Kota_Kinabalu_209.jpg",
       alt: "Sabah Museum, Kota Kinabalu",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1599,7 +1599,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Almaty%2C_Kok-tobe_exposition_3.jpg/1920px-Almaty%2C_Kok-tobe_exposition_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Almaty%2C_Kok-tobe_exposition_3.jpg/1920px-Almaty%2C_Kok-tobe_exposition_3.jpg",
       alt: "Kok-Tobe, Almaty",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1620,7 +1620,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Green_Market%2C_Almaty_02.jpg/1920px-Green_Market%2C_Almaty_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Green_Market%2C_Almaty_02.jpg/1920px-Green_Market%2C_Almaty_02.jpg",
       alt: "Green Bazaar, Almaty",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1687,7 +1687,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Vista_de_Bergen_desde_la_monta%C3%B1a_Fl%C3%B8yen%2C_Noruega%2C_2019-09-08%2C_DD_48.jpg/1920px-Vista_de_Bergen_desde_la_monta%C3%B1a_Fl%C3%B8yen%2C_Noruega%2C_2019-09-08%2C_DD_48.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Vista_de_Bergen_desde_la_monta%C3%B1a_Fl%C3%B8yen%2C_Noruega%2C_2019-09-08%2C_DD_48.jpg/1920px-Vista_de_Bergen_desde_la_monta%C3%B1a_Fl%C3%B8yen%2C_Noruega%2C_2019-09-08%2C_DD_48.jpg",
       alt: "Mount Fløyen, Bergen",
       source: "pexels",
       verifiedAt: "2026-09-18",
@@ -1701,14 +1701,14 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Bergen_Fish_Market_-_2013.08_-_panoramio.jpg/1920px-Bergen_Fish_Market_-_2013.08_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Bergen_Fish_Market_-_2013.08_-_panoramio.jpg/1920px-Bergen_Fish_Market_-_2013.08_-_panoramio.jpg",
       alt: "Bergen Fish Market, Bergen",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Ulriken_Bergen.jpg/1920px-Ulriken_Bergen.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Ulriken_Bergen.jpg/1920px-Ulriken_Bergen.jpg",
       alt: "Ulriken, Bergen",
       source: "pexels",
       verifiedAt: "2026-09-18",
@@ -1745,14 +1745,14 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Lake_of_Love_in_Bruges.JPG/1920px-Lake_of_Love_in_Bruges.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Lake_of_Love_in_Bruges.JPG/1920px-Lake_of_Love_in_Bruges.JPG",
       alt: "Minnewater (Lake of Love), Bruges",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Brugge_-_Dijver_12_-Voormalig_poortgebouw_van_de_proosdij_van_Onze-Lieve-Vrouw%2C_heden_ingang_van_het_Groeningemuseum_-_82339.jpg/1920px-Brugge_-_Dijver_12_-Voormalig_poortgebouw_van_de_proosdij_van_Onze-Lieve-Vrouw%2C_heden_ingang_van_het_Groeningemuseum_-_82339.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Brugge_-_Dijver_12_-Voormalig_poortgebouw_van_de_proosdij_van_Onze-Lieve-Vrouw%2C_heden_ingang_van_het_Groeningemuseum_-_82339.jpg/1920px-Brugge_-_Dijver_12_-Voormalig_poortgebouw_van_de_proosdij_van_Onze-Lieve-Vrouw%2C_heden_ingang_van_het_Groeningemuseum_-_82339.jpg",
       alt: "Groeningemuseum, Bruges",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1833,7 +1833,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Ljubljana_Park_Tivoli_%2854209040156%29.jpg/1920px-Ljubljana_Park_Tivoli_%2854209040156%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Ljubljana_Park_Tivoli_%2854209040156%29.jpg/1920px-Ljubljana_Park_Tivoli_%2854209040156%29.jpg",
       alt: "Tivoli Park, Ljubljana",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1914,7 +1914,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Ballar%C3%B2%2C_gente_en_el_mercado%2C_Palermo%2C_Sicilia%2C_Italia%2C_2015.JPG/1920px-Ballar%C3%B2%2C_gente_en_el_mercado%2C_Palermo%2C_Sicilia%2C_Italia%2C_2015.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Ballar%C3%B2%2C_gente_en_el_mercado%2C_Palermo%2C_Sicilia%2C_Italia%2C_2015.JPG/1920px-Ballar%C3%B2%2C_gente_en_el_mercado%2C_Palermo%2C_Sicilia%2C_Italia%2C_2015.JPG",
       alt: "Ballarò Market, Palermo",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1972,7 +1972,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Malta_-_Valletta_-_Republic_Street_-_View_along_National_Museum_of_Archaeology.jpg/1920px-Malta_-_Valletta_-_Republic_Street_-_View_along_National_Museum_of_Archaeology.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Malta_-_Valletta_-_Republic_Street_-_View_along_National_Museum_of_Archaeology.jpg/1920px-Malta_-_Valletta_-_Republic_Street_-_View_along_National_Museum_of_Archaeology.jpg",
       alt: "National Museum of Archaeology, Valletta",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -1995,7 +1995,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Bilbao_-_Casco_Viejo_10.jpg/1920px-Bilbao_-_Casco_Viejo_10.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Bilbao_-_Casco_Viejo_10.jpg/1920px-Bilbao_-_Casco_Viejo_10.jpg",
       alt: "Casco Viejo, Bilbao",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -2009,14 +2009,14 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Bilbao_-_Mercado_de_la_Ribera_%2828935207930%29.jpg/1920px-Bilbao_-_Mercado_de_la_Ribera_%2828935207930%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Bilbao_-_Mercado_de_la_Ribera_%2828935207930%29.jpg/1920px-Bilbao_-_Mercado_de_la_Ribera_%2828935207930%29.jpg",
       alt: "Mercado de la Ribera, Bilbao",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Funicular_Artxanda%2C_Bilbao%2C_July_2010_%2801%29.JPG/1920px-Funicular_Artxanda%2C_Bilbao%2C_July_2010_%2801%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Funicular_Artxanda%2C_Bilbao%2C_July_2010_%2801%29.JPG/1920px-Funicular_Artxanda%2C_Bilbao%2C_July_2010_%2801%29.JPG",
       alt: "Mount Artxanda, Bilbao",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -2032,7 +2032,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Reflection_on_black_oil_-_Museum_of_Old_and_New_Art_%28MONA%29_-_Hobart.jpg/1920px-Reflection_on_black_oil_-_Museum_of_Old_and_New_Art_%28MONA%29_-_Hobart.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Reflection_on_black_oil_-_Museum_of_Old_and_New_Art_%28MONA%29_-_Hobart.jpg/1920px-Reflection_on_black_oil_-_Museum_of_Old_and_New_Art_%28MONA%29_-_Hobart.jpg",
       alt: "Museum of Old and New Art (MONA), Hobart",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -2083,7 +2083,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/c/cb/Museum_and_Art_Gallery_of_the_Northern_Territory.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "https://upload.wikimedia.org/wikipedia/commons/c/cb/Museum_and_Art_Gallery_of_the_Northern_Territory.JPG",
       alt: "Museum and Art Gallery of the Northern Territory, Darwin",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -2104,7 +2104,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/In_Kakadu_Natl_Park_E_of_Darwin_N.T_-_a_roadside_forest_fire_reddens_the_imminent_sunset_%2813113319793%29.jpg/1920px-In_Kakadu_Natl_Park_E_of_Darwin_N.T_-_a_roadside_forest_fire_reddens_the_imminent_sunset_%2813113319793%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/In_Kakadu_Natl_Park_E_of_Darwin_N.T_-_a_roadside_forest_fire_reddens_the_imminent_sunset_%2813113319793%29.jpg/1920px-In_Kakadu_Natl_Park_E_of_Darwin_N.T_-_a_roadside_forest_fire_reddens_the_imminent_sunset_%2813113319793%29.jpg",
       alt: "Kakadu National Park, Darwin",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -2113,28 +2113,28 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
   "papeete": [
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/PF-papeete-hafen-2.jpg/1920px-PF-papeete-hafen-2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/PF-papeete-hafen-2.jpg/1920px-PF-papeete-hafen-2.jpg",
       alt: "Panorama de Papeete",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Tahitian_local_market_01.jpg/1920px-Tahitian_local_market_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Tahitian_local_market_01.jpg/1920px-Tahitian_local_market_01.jpg",
       alt: "Papeete Market, Papeete",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Tahiti%2C_French_Polynesia_-_Notre_Dame_Cathedral%2C_Papeete_%2848028242478%29.jpg/1920px-Tahiti%2C_French_Polynesia_-_Notre_Dame_Cathedral%2C_Papeete_%2848028242478%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Tahiti%2C_French_Polynesia_-_Notre_Dame_Cathedral%2C_Papeete_%2848028242478%29.jpg/1920px-Tahiti%2C_French_Polynesia_-_Notre_Dame_Cathedral%2C_Papeete_%2848028242478%29.jpg",
       alt: "Notre-Dame Cathedral of Papeete, Papeete",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Tahiti%2C_French_Polynesia_-_Point_Venus_Lighthouse_%2848032601316%29.jpg/1920px-Tahiti%2C_French_Polynesia_-_Point_Venus_Lighthouse_%2848032601316%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Tahiti%2C_French_Polynesia_-_Point_Venus_Lighthouse_%2848032601316%29.jpg/1920px-Tahiti%2C_French_Polynesia_-_Point_Venus_Lighthouse_%2848032601316%29.jpg",
       alt: "Point Venus, Papeete",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",
@@ -2171,7 +2171,7 @@ export const DESTINATION_GALLERY_WAVE2: Record<string, GalleryEntry[]> = {
     },
     {
       src:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Baldwin_Street.JPG/1920px-Baldwin_Street.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Baldwin_Street.JPG/1920px-Baldwin_Street.JPG",
       alt: "Baldwin Street, Dunedin",
       source: "wikimedia-commons",
       verifiedAt: "2026-09-18",

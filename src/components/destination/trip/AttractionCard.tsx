@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import AddToTripButton from "./AddToTripButton";
 import WorkspaceActions from "./WorkspaceActions";
 import WinkHotelCards from "./WinkHotelCards";
@@ -59,16 +60,20 @@ export default function AttractionCard({
   const pointLat = attraction?.lat ?? lat;
   const pointLon = attraction?.lon ?? lon;
 
+  // 景点照片加载失败 → 退回城市 gradient 视觉（与无结构化数据同一语言）。
+  const [imgFailed, setImgFailed] = useState(false);
+
   return (
     <article className="overflow-hidden rounded-ut-sm bg-ut-bg shadow-ut-1">
       {/* 视觉：结构化景点 = 真实照片；回退 = 城市真实 gradient */}
-      {attraction ? (
+      {attraction && !imgFailed ? (
         <div className="relative">
           {/* eslint-disable-next-line @next/next/no-img-element -- 数据集静态 URL 走 img 与画廊一致性成本更低 */}
           <img
             src={attraction.image}
             alt={attraction.imageAlt}
             loading="lazy"
+            onError={() => setImgFailed(true)}
             className="aspect-[16/8] w-full object-cover sm:aspect-[16/7]"
           />
           <span className="absolute right-5 top-2 select-none font-display text-[64px] font-bold leading-none text-white/50 drop-shadow">
@@ -87,7 +92,7 @@ export default function AttractionCard({
             {String(index + 1).padStart(2, "0")}
           </span>
           <p className="line-clamp-2 px-5 pb-4 font-display text-[24px] font-bold leading-snug text-white drop-shadow">
-            {name}
+            {attraction ? attraction.name : name}
           </p>
         </div>
       )}

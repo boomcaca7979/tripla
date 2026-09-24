@@ -1133,7 +1133,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
       "January – April, December is the canonical best window — average daytime highs of 29 °C and 239 mm of rain across those months. The wettest month is October (212 mm) and the driest is February (38 mm).",
     currency: "JMD J$",
     gradient: "from-cyan-500 to-emerald-600",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Montego_bay-1001.jpg/1920px-Montego_bay-1001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Montego_bay-1001.jpg/1920px-Montego_bay-1001.jpg",
     weatherScore: {
       overall: 77,
       label: "Good",
@@ -1397,7 +1397,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
       "January – February, December is the canonical best window — average daytime highs of 30 °C and 11 mm of rain across those months. The wettest month is November (12 mm) and the driest is July (0 mm).",
     currency: "SAR ﷼",
     gradient: "from-teal-500 to-cyan-700",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Jeddah_skyline_February_2020.jpg/1920px-Jeddah_skyline_February_2020.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Jeddah_skyline_February_2020.jpg/1920px-Jeddah_skyline_February_2020.jpg",
     weatherScore: {
       overall: 78,
       label: "Good",
@@ -2145,7 +2145,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
       "May – September is the canonical best window — average daytime highs of 26 °C and 303 mm of rain across those months. The wettest month is December (233 mm) and the driest is September (42 mm).",
     currency: "XPF ₣",
     gradient: "from-cyan-500 to-teal-700",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/PF-papeete-hafen-2.jpg/1920px-PF-papeete-hafen-2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/PF-papeete-hafen-2.jpg/1920px-PF-papeete-hafen-2.jpg",
     weatherScore: {
       overall: 77,
       label: "Good",

@@ -106,7 +106,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The roofless ruined palace of Sultan Ahmad al-Mansur, built in the 1570s from the ransom of the Portuguese after the Battle of the Three Kings.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Marrakech_-_El_Badi_Palace.jpg/1920px-Marrakech_-_El_Badi_Palace.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Marrakech_-_El_Badi_Palace.jpg/1920px-Marrakech_-_El_Badi_Palace.jpg",
       imageAlt: "El Badi Palace, Marrakech",
       lat: 31.6183,
       lon: -7.9858,
@@ -187,7 +187,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "Casablanca's Atlantic seafront promenade, lined with beaches, pools and cafes west of the city centre.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Promenade_sur_la_Corniche_Ain_Diab_%C3%A0_Casablanca_-_photo_Bertrand_SOUBEYRAND.jpg/1920px-Promenade_sur_la_Corniche_Ain_Diab_%C3%A0_Casablanca_-_photo_Bertrand_SOUBEYRAND.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Promenade_sur_la_Corniche_Ain_Diab_%C3%A0_Casablanca_-_photo_Bertrand_SOUBEYRAND.jpg/1920px-Promenade_sur_la_Corniche_Ain_Diab_%C3%A0_Casablanca_-_photo_Bertrand_SOUBEYRAND.jpg",
       imageAlt: "Corniche Ain Diab, Casablanca",
       lat: 33.5895,
       lon: -7.6741,
@@ -203,7 +203,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The 1917 Art Deco market hall in the city centre, still trading in flowers, spices and crafts.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/%CE%9A%CE%B5%CE%BD%CF%84%CF%81%CE%B9%CE%BA%CE%AE_%CE%91%CE%B3%CE%BF%CF%81%CE%AC_%CE%9A%CE%B1%CE%B6%CE%B1%CE%BC%CF%80%CE%BB%CE%AC%CE%BD%CE%BA%CE%B1_1821.jpg/1920px-%CE%9A%CE%B5%CE%BD%CF%84%CF%81%CE%B9%CE%BA%CE%AE_%CE%91%CE%B3%CE%BF%CF%81%CE%AC_%CE%9A%CE%B1%CE%B6%CE%B1%CE%BC%CF%80%CE%BB%CE%AC%CE%BD%CE%BA%CE%B1_1821.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/%CE%9A%CE%B5%CE%BD%CF%84%CF%81%CE%B9%CE%BA%CE%AE_%CE%91%CE%B3%CE%BF%CF%81%CE%AC_%CE%9A%CE%B1%CE%B6%CE%B1%CE%BC%CF%80%CE%BB%CE%AC%CE%BD%CE%BA%CE%B1_1821.jpg/1920px-%CE%9A%CE%B5%CE%BD%CF%84%CF%81%CE%B9%CE%BA%CE%AE_%CE%91%CE%B3%CE%BF%CF%81%CE%AC_%CE%9A%CE%B1%CE%B6%CE%B1%CE%BC%CF%80%CE%BB%CE%AC%CE%BD%CE%BA%CE%B1_1821.jpg",
       imageAlt: "Marché Central, Casablanca",
       lat: 33.594706,
       lon: -7.612006,
@@ -446,7 +446,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The 3,600-metre embankment dam completed in 1970 that created Lake Nasser.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Aswan_High_Dam-1.jpg/3840px-Aswan_High_Dam-1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Aswan_High_Dam-1.jpg/3840px-Aswan_High_Dam-1.jpg",
       imageAlt: "Aswan High Dam, Aswan",
       lat: 23.97056,
       lon: 32.87778,
@@ -624,7 +624,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The Omani fort built in 1699 on the site of a Portuguese chapel, now an arts and craft centre.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Old_Fort_of_Zanzibar_%28Boma_la_Kale_la_Zanzibar%29.jpg/1920px-Old_Fort_of_Zanzibar_%28Boma_la_Kale_la_Zanzibar%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Old_Fort_of_Zanzibar_%28Boma_la_Kale_la_Zanzibar%29.jpg/1920px-Old_Fort_of_Zanzibar_%28Boma_la_Kale_la_Zanzibar%29.jpg",
       imageAlt: "Old Fort, Zanzibar City",
       lat: -6.16139,
       lon: 39.18917,
@@ -706,7 +706,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The 1,708-metre-wide waterfall on the Zambezi, a UNESCO World Heritage Site shared with Zambia.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Cataratas_Victoria%2C_Zambia-Zimbabue%2C_2018-07-27%2C_DD_30-34_PAN.jpg/3840px-Cataratas_Victoria%2C_Zambia-Zimbabue%2C_2018-07-27%2C_DD_30-34_PAN.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Cataratas_Victoria%2C_Zambia-Zimbabue%2C_2018-07-27%2C_DD_30-34_PAN.jpg/3840px-Cataratas_Victoria%2C_Zambia-Zimbabue%2C_2018-07-27%2C_DD_30-34_PAN.jpg",
       imageAlt: "Victoria Falls (Mosi-oa-Tunya), Victoria Falls",
       lat: -17.92444,
       lon: 25.85667,
@@ -770,7 +770,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The island on the lip of Victoria Falls from which David Livingstone first saw the falls in 1855; reached by boat for the Devil's Pool swim.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Mosi-oa-Tunya%2C_Livingstone_%2820260519-P1075665%29.jpg/1920px-Mosi-oa-Tunya%2C_Livingstone_%2820260519-P1075665%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Mosi-oa-Tunya%2C_Livingstone_%2820260519-P1075665%29.jpg/1920px-Mosi-oa-Tunya%2C_Livingstone_%2820260519-P1075665%29.jpg",
       imageAlt: "Livingstone Island, Victoria Falls",
       lat: -17.92444,
       lon: 25.85667,
@@ -786,7 +786,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The riverine national park along the Zambezi just upstream of the falls, with elephant, buffalo and fishing camps.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Sunset_over_Zambezi_River%2C_Zimbabwe.jpg/1920px-Sunset_over_Zambezi_River%2C_Zimbabwe.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Sunset_over_Zambezi_River%2C_Zimbabwe.jpg/1920px-Sunset_over_Zambezi_River%2C_Zimbabwe.jpg",
       imageAlt: "Zambezi National Park, Victoria Falls",
       lat: -17.926476,
       lon: 25.634422,
@@ -803,7 +803,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The museum charting the rise and fall of apartheid, opened in 2001 beside Gold Reef City.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Entrance_to_the_museum_of_apartheid._Johannesburg._South_Africa.jpg/1920px-Entrance_to_the_museum_of_apartheid._Johannesburg._South_Africa.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Entrance_to_the_museum_of_apartheid._Johannesburg._South_Africa.jpg/1920px-Entrance_to_the_museum_of_apartheid._Johannesburg._South_Africa.jpg",
       imageAlt: "Apartheid Museum, Johannesburg",
       lat: -26.2376,
       lon: 28.009,
@@ -819,7 +819,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The former Old Fort prison complex, now home to South Africa's Constitutional Court.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Eternal_Flame_on_Constitution_Hill_in_Johannesburg.JPG/1920px-Eternal_Flame_on_Constitution_Hill_in_Johannesburg.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Eternal_Flame_on_Constitution_Hill_in_Johannesburg.JPG/1920px-Eternal_Flame_on_Constitution_Hill_in_Johannesburg.JPG",
       imageAlt: "Constitution Hill, Johannesburg",
       lat: -26.18861,
       lon: 28.04278,
@@ -835,7 +835,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The Soweto street where both Nelson Mandela and Desmond Tutu lived, now a heritage precinct.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Vilakazi_street_performers.jpg/1920px-Vilakazi_street_performers.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Vilakazi_street_performers.jpg/1920px-Vilakazi_street_performers.jpg",
       imageAlt: "Vilakazi Street, Johannesburg",
       lat: -26.20444,
       lon: 28.04556,
@@ -867,7 +867,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The rock-art and human-origins museum at the University of the Witwatersrand.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Origins_Centre_and_M1_highway.jpg/1920px-Origins_Centre_and_M1_highway.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Origins_Centre_and_M1_highway.jpg/1920px-Origins_Centre_and_M1_highway.jpg",
       imageAlt: "Origins Centre, Johannesburg",
       lat: -26.20444,
       lon: 28.04556,
@@ -901,7 +901,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The 1849 immigration depot for indentured labourers, inscribed as a UNESCO World Heritage Site in 2006.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Aapravasi_ghat_museum%2C_Port_Louis%2C_Mauritius.jpg/1920px-Aapravasi_ghat_museum%2C_Port_Louis%2C_Mauritius.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Aapravasi_ghat_museum%2C_Port_Louis%2C_Mauritius.jpg/1920px-Aapravasi_ghat_museum%2C_Port_Louis%2C_Mauritius.jpg",
       imageAlt: "Aapravasi Ghat, Port Louis",
       lat: -20.15861,
       lon: 57.50306,
@@ -917,7 +917,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The harbour-side commercial and leisure quarter of Port Louis, opened in 1996.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Umbrellas_at_Caudan_Waterfront_Mall.JPG/1920px-Umbrellas_at_Caudan_Waterfront_Mall.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Umbrellas_at_Caudan_Waterfront_Mall.JPG/1920px-Umbrellas_at_Caudan_Waterfront_Mall.JPG",
       imageAlt: "Le Caudan Waterfront, Port Louis",
       lat: -20.1615,
       lon: 57.49845,
@@ -999,7 +999,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The 1903 clock tower in the centre of Victoria, modelled on London's Vauxhall Clock Tower.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Big_Ben_Clock_Tower_-_Victoria_-_Mahe_-_Seychelles_-_01.jpg/1920px-Big_Ben_Clock_Tower_-_Victoria_-_Mahe_-_Seychelles_-_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Big_Ben_Clock_Tower_-_Victoria_-_Mahe_-_Seychelles_-_01.jpg/1920px-Big_Ben_Clock_Tower_-_Victoria_-_Mahe_-_Seychelles_-_01.jpg",
       imageAlt: "Victoria Clock Tower, Victoria",
       lat: -43.52474,
       lon: 172.63075,
@@ -1047,7 +1047,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The longest beach on Mahé, a sheltered crescent of white sand 4 km from Victoria.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Beau_Vallon%2C_Mah%C3%A9%2C_Seychelles%2C_2025-09-07%2C_DD_02.jpg/1920px-Beau_Vallon%2C_Mah%C3%A9%2C_Seychelles%2C_2025-09-07%2C_DD_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Beau_Vallon%2C_Mah%C3%A9%2C_Seychelles%2C_2025-09-07%2C_DD_02.jpg/1920px-Beau_Vallon%2C_Mah%C3%A9%2C_Seychelles%2C_2025-09-07%2C_DD_02.jpg",
       imageAlt: "Beau Vallon Beach, Victoria",
       lat: -4.58333,
       lon: 55.66667,
@@ -1079,7 +1079,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "A marine park of six islands within the harbour of Victoria, with coral reefs, mangroves and giant tortoises on Moyenne.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/2006-06-22_12-38-56_Seychelles_-_De_Quincey_Village.jpg/1920px-2006-06-22_12-38-56_Seychelles_-_De_Quincey_Village.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/2006-06-22_12-38-56_Seychelles_-_De_Quincey_Village.jpg/1920px-2006-06-22_12-38-56_Seychelles_-_De_Quincey_Village.jpg",
       imageAlt: "Sainte Anne Marine National Park, Victoria",
       lat: -4.61667,
       lon: 55.5,
@@ -1129,7 +1129,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "Accra's largest open-air market, largely run by women traders and covering several city blocks.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Makola_Market_Entrance%2C_Accra%2C_Ghana.JPG/1920px-Makola_Market_Entrance%2C_Accra%2C_Ghana.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Makola_Market_Entrance%2C_Accra%2C_Ghana.JPG/1920px-Makola_Market_Entrance%2C_Accra%2C_Ghana.JPG",
       imageAlt: "Makola Market, Accra",
       lat: 5.54779,
       lon: -0.20686,
@@ -1160,7 +1160,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The national collection of Ghanaian archaeology, ethnography and art, opened in 1957.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Museum_Ground_floor_from_1st_floor.jpg/1920px-Museum_Ground_floor_from_1st_floor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Museum_Ground_floor_from_1st_floor.jpg/1920px-Museum_Ground_floor_from_1st_floor.jpg",
       imageAlt: "National Museum of Ghana, Accra",
       lat: 5.56042,
       lon: -0.20642,
@@ -1176,7 +1176,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "Accra's busiest beach, a stretch of Atlantic sand east of the centre known for its drumming, horses and weekend crowds.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Labadi_Beach_-_Accra_-_panoramio.jpg/1920px-Labadi_Beach_-_Accra_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Labadi_Beach_-_Accra_-_panoramio.jpg/1920px-Labadi_Beach_-_Accra_-_panoramio.jpg",
       imageAlt: "Labadi Beach, Accra",
       lat: 5.56222,
       lon: 0.13944,
@@ -1291,7 +1291,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The museum holding the 3.2-million-year-old hominin fossil known as Lucy (Dinkinesh).",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Central_Exhibition_Hall_-_National_Museum_of_Ethiopia_-_Addis_Ababa_-_Ethiopia_%288744259542%29.jpg/1920px-Central_Exhibition_Hall_-_National_Museum_of_Ethiopia_-_Addis_Ababa_-_Ethiopia_%288744259542%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Central_Exhibition_Hall_-_National_Museum_of_Ethiopia_-_Addis_Ababa_-_Ethiopia_%288744259542%29.jpg/1920px-Central_Exhibition_Hall_-_National_Museum_of_Ethiopia_-_Addis_Ababa_-_Ethiopia_%288744259542%29.jpg",
       imageAlt: "National Museum of Ethiopia, Addis Ababa",
       lat: 9.03833,
       lon: 38.76194,
@@ -1339,7 +1339,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The 3,200-metre ridge above the city, with Entoto Maryam church and eucalyptus forest.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Church_on_the_Mount_Entoto.jpg/1920px-Church_on_the_Mount_Entoto.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Church_on_the_Mount_Entoto.jpg/1920px-Church_on_the_Mount_Entoto.jpg",
       imageAlt: "Mount Entoto, Addis Ababa",
       lat: 9.11556,
       lon: 38.77222,
@@ -1469,7 +1469,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "São Paulo's 2.8 km financial spine, closed to cars on Sundays and lined with museums, cultural centres and banks.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/MASP_Brazil.jpg/1920px-MASP_Brazil.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/MASP_Brazil.jpg/1920px-MASP_Brazil.jpg",
       imageAlt: "Avenida Paulista, São Paulo",
       lat: -23.56139,
       lon: -46.65639,
@@ -1503,7 +1503,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The largest Spanish fort in the Americas, begun in 1536 on the hill of San Lázaro.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Castillo_San_Felipe_de_Barajas%2C_Cartagena_25.jpg/1920px-Castillo_San_Felipe_de_Barajas%2C_Cartagena_25.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Castillo_San_Felipe_de_Barajas%2C_Cartagena_25.jpg/1920px-Castillo_San_Felipe_de_Barajas%2C_Cartagena_25.jpg",
       imageAlt: "Castillo San Felipe de Barajas, Cartagena",
       lat: 10.4225,
       lon: -75.5392,
@@ -1585,7 +1585,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The regional museum in Parque Berrío, holding the largest collection of Fernando Botero's work.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Medell%C3%ADn%2C_Museo_de_Antioquia%2C_2023-07_CN-01.jpg/1920px-Medell%C3%ADn%2C_Museo_de_Antioquia%2C_2023-07_CN-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Medell%C3%ADn%2C_Museo_de_Antioquia%2C_2023-07_CN-01.jpg/1920px-Medell%C3%ADn%2C_Museo_de_Antioquia%2C_2023-07_CN-01.jpg",
       imageAlt: "Museo de Antioquia, Medellín",
       lat: 6.23083,
       lon: -75.59056,
@@ -1715,7 +1715,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The main square of Oaxaca, ringed by arcades and the city's busiest cafes and markets.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Zocalo%2C_oaxaca%2C_oaxaca_-_panoramio.jpg/1920px-Zocalo%2C_oaxaca%2C_oaxaca_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Zocalo%2C_oaxaca%2C_oaxaca_-_panoramio.jpg/1920px-Zocalo%2C_oaxaca%2C_oaxaca_-_panoramio.jpg",
       imageAlt: "Plaza de la Constitución (Zócalo), Oaxaca",
       lat: 19.43278,
       lon: -99.13306,
@@ -1763,7 +1763,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "A botanical garden inside the former Santo Domingo convent, growing the cactus, agave and maize varieties of Oaxaca.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Jard%C3%ADn_Etnobot%C3%A1nico_de_Oaxaca_01.JPG/1920px-Jard%C3%ADn_Etnobot%C3%A1nico_de_Oaxaca_01.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Jard%C3%ADn_Etnobot%C3%A1nico_de_Oaxaca_01.JPG/1920px-Jard%C3%ADn_Etnobot%C3%A1nico_de_Oaxaca_01.JPG",
       imageAlt: "Jardín Etnobotánico de Oaxaca, Oaxaca",
       lat: 17.06056,
       lon: -96.72528,
@@ -1797,7 +1797,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The 16th-century citadel at the mouth of San Juan Bay, part of a UNESCO World Heritage Site.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Castillo_San_Felipe_del_Morro_aerial%2C_May_2024_-_01.jpg/1920px-Castillo_San_Felipe_del_Morro_aerial%2C_May_2024_-_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Castillo_San_Felipe_del_Morro_aerial%2C_May_2024_-_01.jpg/1920px-Castillo_San_Felipe_del_Morro_aerial%2C_May_2024_-_01.jpg",
       imageAlt: "Castillo San Felipe del Morro, San Juan",
       lat: 18.47083,
       lon: -66.12417,
@@ -1860,7 +1860,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "A tree-lined promenade below the old city walls running to the San Juan Gate, famed for its 19th-century Raíces fountain.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Old_San_Juan_-_View_of_city_from_Paseo_de_la_Princesa.jpg/1920px-Old_San_Juan_-_View_of_city_from_Paseo_de_la_Princesa.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Old_San_Juan_-_View_of_city_from_Paseo_de_la_Princesa.jpg/1920px-Old_San_Juan_-_View_of_city_from_Paseo_de_la_Princesa.jpg",
       imageAlt: "Paseo de la Princesa, San Juan",
       lat: 18.46333,
       lon: -66.11833,
@@ -1926,7 +1926,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The causeway linking four islands across the Pacific entrance of the canal.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Calzada_de_amador.jpg/1920px-Calzada_de_amador.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Calzada_de_amador.jpg/1920px-Calzada_de_amador.jpg",
       imageAlt: "Amador Causeway, Panama City",
       lat: 8.913,
       lon: -79.525,
@@ -2008,7 +2008,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The 22 km waterfront promenade along the Río de la Plata, the city's defining public space.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Montevideo_Rambla-20110506-RM-120836.jpg/1920px-Montevideo_Rambla-20110506-RM-120836.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Montevideo_Rambla-20110506-RM-120836.jpg/1920px-Montevideo_Rambla-20110506-RM-120836.jpg",
       imageAlt: "Rambla of Montevideo, Montevideo",
       lat: -34.88333,
       lon: -56.06667,
@@ -2090,7 +2090,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The 17th-century Jesuit church whose interior is covered in gold leaf.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Iglesia_de_La_Compa%C3%B1%C3%ADa%2C_Quito%2C_Ecuador%2C_2015-07-22%2C_DD_116-118_HDR.JPG/1920px-Iglesia_de_La_Compa%C3%B1%C3%ADa%2C_Quito%2C_Ecuador%2C_2015-07-22%2C_DD_116-118_HDR.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Iglesia_de_La_Compa%C3%B1%C3%ADa%2C_Quito%2C_Ecuador%2C_2015-07-22%2C_DD_116-118_HDR.JPG/1920px-Iglesia_de_La_Compa%C3%B1%C3%ADa%2C_Quito%2C_Ecuador%2C_2015-07-22%2C_DD_116-118_HDR.JPG",
       imageAlt: "La Compañía de Jesús, Quito",
       lat: -0.22083,
       lon: -78.51389,
@@ -2220,7 +2220,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The maritime and prison museum in the former national prison, whose cell blocks run off a central hall.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Museo_Maritimo_y_Ex_Presidio_de_Ushuaia_14.jpg/1920px-Museo_Maritimo_y_Ex_Presidio_de_Ushuaia_14.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Museo_Maritimo_y_Ex_Presidio_de_Ushuaia_14.jpg/1920px-Museo_Maritimo_y_Ex_Presidio_de_Ushuaia_14.jpg",
       imageAlt: "Museo Marítimo y del Presidio de Ushuaia, Ushuaia",
       lat: -54.80722,
       lon: -68.30806,
@@ -2350,7 +2350,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "A 38-acre garden with a glass conservatory, native Texas hill country flora and a restored 19th-century farmstead.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Fountain_at_San_Antonio_Botanical_Garden_IMG_5324.JPG/1920px-Fountain_at_San_Antonio_Botanical_Garden_IMG_5324.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Fountain_at_San_Antonio_Botanical_Garden_IMG_5324.JPG/1920px-Fountain_at_San_Antonio_Botanical_Garden_IMG_5324.JPG",
       imageAlt: "San Antonio Botanical Garden, San Antonio",
       lat: 29.4589,
       lon: -98.4571,
@@ -2384,7 +2384,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The 18th-century city plan of 24 squares and its antebellum houses, a National Historic Landmark District.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/267_Forsyth_Park%2C_Savannah%2C_Georgia.jpg/1920px-267_Forsyth_Park%2C_Savannah%2C_Georgia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/267_Forsyth_Park%2C_Savannah%2C_Georgia.jpg/1920px-267_Forsyth_Park%2C_Savannah%2C_Georgia.jpg",
       imageAlt: "Savannah Historic District, Savannah",
       lat: 39.25847,
       lon: -76.55542,
@@ -2514,7 +2514,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "A restored 1770s plantation great house east of the city, known for its Georgian staircase and the Annie Palmer legend.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rose_Hall_Jamaica_Photo_Don_Ramey_Logan.jpg/1920px-Rose_Hall_Jamaica_Photo_Don_Ramey_Logan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rose_Hall_Jamaica_Photo_Don_Ramey_Logan.jpg/1920px-Rose_Hall_Jamaica_Photo_Don_Ramey_Logan.jpg",
       imageAlt: "Rose Hall Great House, Montego Bay",
       lat: 18.5167104,
       lon: -77.8192574,
@@ -2545,7 +2545,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The civic square at the heart of downtown, named for the national hero hanged there after the 1831 Christmas Rebellion.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Montego_Bay_-_Sam_Sharpe_Memorial.JPG/1920px-Montego_Bay_-_Sam_Sharpe_Memorial.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Montego_Bay_-_Sam_Sharpe_Memorial.JPG/1920px-Montego_Bay_-_Sam_Sharpe_Memorial.JPG",
       imageAlt: "Sam Sharpe Square, Montego Bay",
       lat: 18.4737528,
       lon: -77.9228047,
@@ -2692,7 +2692,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The riverside Mughal garden opposite the Taj Mahal, laid out on a square plan along the Yamuna.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Mehtab_Bagh-Agra-Uttar_Pradesh-N-AP-A18.jpg/1920px-Mehtab_Bagh-Agra-Uttar_Pradesh-N-AP-A18.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Mehtab_Bagh-Agra-Uttar_Pradesh-N-AP-A18.jpg/1920px-Mehtab_Bagh-Agra-Uttar_Pradesh-N-AP-A18.jpg",
       imageAlt: "Mehtab Bagh, Agra",
       lat: 27.17972,
       lon: 78.04194,
@@ -2740,7 +2740,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "A red sandstone congregational mosque built in 1648 by Shah Jahan's daughter Jahanara, facing Agra Fort across the railway.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Agra_Jama_Masjid_%289960497626%29.jpg/1920px-Agra_Jama_Masjid_%289960497626%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Agra_Jama_Masjid_%289960497626%29.jpg/1920px-Agra_Jama_Masjid_%289960497626%29.jpg",
       imageAlt: "Jama Masjid, Agra, Agra",
       lat: 27.18028,
       lon: 78.02167,
@@ -2758,7 +2758,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "One of the twelve Jyotirlinga shrines of Shiva, at the centre of the old city beside the Ganges.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Shri_Kashi_Vishwanath_Temple_2.jpg/1920px-Shri_Kashi_Vishwanath_Temple_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Shri_Kashi_Vishwanath_Temple_2.jpg/1920px-Shri_Kashi_Vishwanath_Temple_2.jpg",
       imageAlt: "Kashi Vishwanath Temple, Varanasi",
       lat: 25.31077,
       lon: 83.01061,
@@ -2790,7 +2790,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The southernmost of the principal ghats, at the confluence of the Assi and the Ganges.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Assi_Ghat_boats_Varanasi.jpg/1920px-Assi_Ghat_boats_Varanasi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Assi_Ghat_boats_Varanasi.jpg/1920px-Assi_Ghat_boats_Varanasi.jpg",
       imageAlt: "Assi Ghat, Varanasi",
       lat: 25.28865,
       lon: 83.00676,
@@ -2838,7 +2838,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The principal cremation ghat of Varanasi, burning continuously beside the sacred Manikarnika Kund.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Manikarnika_Cremation_Ghat%2C_Varanasi_from_boat.jpg/1920px-Manikarnika_Cremation_Ghat%2C_Varanasi_from_boat.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Manikarnika_Cremation_Ghat%2C_Varanasi_from_boat.jpg/1920px-Manikarnika_Cremation_Ghat%2C_Varanasi_from_boat.jpg",
       imageAlt: "Manikarnika Ghat, Varanasi",
       lat: 25.31087,
       lon: 83.01409,
@@ -3016,7 +3016,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The palm-lined public beach along the Qurum corniche in the embassy district of Muscat.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Qurum_Beach_in_Muscat_2019-11-30.jpg/1920px-Qurum_Beach_in_Muscat_2019-11-30.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Qurum_Beach_in_Muscat_2019-11-30.jpg/1920px-Qurum_Beach_in_Muscat_2019-11-30.jpg",
       imageAlt: "Qurum Beach, Muscat",
       lat: 23.61667,
       lon: 58.49472,
@@ -3065,7 +3065,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The 312-metre seawater fountain off the Jeddah corniche, the tallest of its kind in the world.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/King_Fahd%27s_Fountain_Jeddah_Fountain_%285129797428%29.jpg/1920px-King_Fahd%27s_Fountain_Jeddah_Fountain_%285129797428%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/King_Fahd%27s_Fountain_Jeddah_Fountain_%285129797428%29.jpg/1920px-King_Fahd%27s_Fountain_Jeddah_Fountain_%285129797428%29.jpg",
       imageAlt: "King Fahd's Fountain, Jeddah",
       lat: 21.51556,
       lon: 39.145,
@@ -3129,7 +3129,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "A 19th-century coral-stone merchant mansion of 106 rooms in Al Balad, restored as a cultural house.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Al-Naseef_House_%286573572949%29.jpg/1920px-Al-Naseef_House_%286573572949%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Al-Naseef_House_%286573572949%29.jpg/1920px-Al-Naseef_House_%286573572949%29.jpg",
       imageAlt: "Nassif House, Jeddah",
       lat: 21.48388889,
       lon: 39.18777778,
@@ -3259,7 +3259,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The gilded stupa of 1102 at Nyaung U, the model for later Burmese stupas.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Shwezigon_Pagoda%2C_Bagan.jpg/1920px-Shwezigon_Pagoda%2C_Bagan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Shwezigon_Pagoda%2C_Bagan.jpg/1920px-Shwezigon_Pagoda%2C_Bagan.jpg",
       imageAlt: "Shwezigon Pagoda, Bagan",
       lat: 21.19528,
       lon: 94.89389,
@@ -3339,7 +3339,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The gilded national stupa of Laos, built in its present form in 1566 on the site of an earlier monument.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/20171118_Pha_That_Luang_in_Vientiane_3169_DxO.jpg/1920px-20171118_Pha_That_Luang_in_Vientiane_3169_DxO.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/20171118_Pha_That_Luang_in_Vientiane_3169_DxO.jpg/1920px-20171118_Pha_That_Luang_in_Vientiane_3169_DxO.jpg",
       imageAlt: "Pha That Luang, Vientiane",
       lat: 17.97617,
       lon: 102.63425,
@@ -3387,7 +3387,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The former royal temple of the Emerald Buddha, built in 1565 and now the national museum of religious art.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Haw_Phra_Kaew.jpg/1920px-Haw_Phra_Kaew.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Haw_Phra_Kaew.jpg/1920px-Haw_Phra_Kaew.jpg",
       imageAlt: "Haw Phra Kaew, Vientiane",
       lat: 17.96139,
       lon: 102.61167,
@@ -3453,7 +3453,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "Five islands and surrounding coral reef in the bay off Kota Kinabalu, gazetted in 1974.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/View_of_Mount_Kinabalu_taken_from_Manukan_Island_%28Pulau_Manukan%29_.jpg/1920px-View_of_Mount_Kinabalu_taken_from_Manukan_Island_%28Pulau_Manukan%29_.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/View_of_Mount_Kinabalu_taken_from_Manukan_Island_%28Pulau_Manukan%29_.jpg/1920px-View_of_Mount_Kinabalu_taken_from_Manukan_Island_%28Pulau_Manukan%29_.jpg",
       imageAlt: "Tunku Abdul Rahman National Park, Kota Kinabalu",
       lat: 5.96667,
       lon: 116,
@@ -3501,7 +3501,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The state museum of Sabah, with longhouse architecture, tribal artefacts and a heritage village in its grounds.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Photowalk_at_Sabah_State_Museum%2C_Kota_Kinabalu_209.jpg/1920px-Photowalk_at_Sabah_State_Museum%2C_Kota_Kinabalu_209.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Photowalk_at_Sabah_State_Museum%2C_Kota_Kinabalu_209.jpg/1920px-Photowalk_at_Sabah_State_Museum%2C_Kota_Kinabalu_209.jpg",
       imageAlt: "Sabah Museum, Kota Kinabalu",
       lat: 5.96056,
       lon: 116.07167,
@@ -3517,7 +3517,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The city's sunset beach beside the airport, lined with food stalls and casuarina trees.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Tanjung_Aru_beach_sunset_view.jpg/3840px-Tanjung_Aru_beach_sunset_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Tanjung_Aru_beach_sunset_view.jpg/3840px-Tanjung_Aru_beach_sunset_view.jpg",
       imageAlt: "Tanjung Aru Beach, Kota Kinabalu",
       lat: 5.9356507,
       lon: 116.0466981,
@@ -3598,7 +3598,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "Almaty's main market, in a Soviet-era hall with produce, dried fruit, meat and dairy counters.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Green_Market%2C_Almaty_02.jpg/1920px-Green_Market%2C_Almaty_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Green_Market%2C_Almaty_02.jpg/1920px-Green_Market%2C_Almaty_02.jpg",
       imageAlt: "Green Bazaar, Almaty",
       lat: 43.23333,
       lon: 76.95,
@@ -3614,7 +3614,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "Kazakhstan's principal museum, covering the Saka gold finds, nomadic culture and the modern republic.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Almaty_Central_State_Museum_of_Kazakhstan%2C_July_2025.jpg/1920px-Almaty_Central_State_Museum_of_Kazakhstan%2C_July_2025.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Almaty_Central_State_Museum_of_Kazakhstan%2C_July_2025.jpg/1920px-Almaty_Central_State_Museum_of_Kazakhstan%2C_July_2025.jpg",
       imageAlt: "Central State Museum of Kazakhstan, Almaty",
       lat: 43.23583,
       lon: 76.95083,
@@ -3712,7 +3712,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The national gallery of Finnish art on Rautatientori, holding the largest collection of paintings and sculpture in the country.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Art_museum_Ateneum_in_Kluuvi%2C_Helsinki%2C_Finland%2C_2014.jpg/1920px-Art_museum_Ateneum_in_Kluuvi%2C_Helsinki%2C_Finland%2C_2014.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Art_museum_Ateneum_in_Kluuvi%2C_Helsinki%2C_Finland%2C_2014.jpg/1920px-Art_museum_Ateneum_in_Kluuvi%2C_Helsinki%2C_Finland%2C_2014.jpg",
       imageAlt: "Ateneum Art Museum, Helsinki",
       lat: 60.17,
       lon: 24.94417,
@@ -3746,7 +3746,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The 400-metre summit above the city, reached by the Fløibanen funicular since 1918.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Vista_de_Bergen_desde_la_monta%C3%B1a_Fl%C3%B8yen%2C_Noruega%2C_2019-09-08%2C_DD_48.jpg/1920px-Vista_de_Bergen_desde_la_monta%C3%B1a_Fl%C3%B8yen%2C_Noruega%2C_2019-09-08%2C_DD_48.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Vista_de_Bergen_desde_la_monta%C3%B1a_Fl%C3%B8yen%2C_Noruega%2C_2019-09-08%2C_DD_48.jpg/1920px-Vista_de_Bergen_desde_la_monta%C3%B1a_Fl%C3%B8yen%2C_Noruega%2C_2019-09-08%2C_DD_48.jpg",
       imageAlt: "Mount Fløyen, Bergen",
       lat: 60.38944,
       lon: 5.33,
@@ -3778,7 +3778,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The outdoor fish market on the inner harbour, trading since the 13th century.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Bergen_Fish_Market_-_2013.08_-_panoramio.jpg/1920px-Bergen_Fish_Market_-_2013.08_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Bergen_Fish_Market_-_2013.08_-_panoramio.jpg/1920px-Bergen_Fish_Market_-_2013.08_-_panoramio.jpg",
       imageAlt: "Bergen Fish Market, Bergen",
       lat: 40.79416,
       lon: -74.02495,
@@ -3794,7 +3794,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "At 643 metres the highest of the seven mountains around Bergen, reached by cable car.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Ulriken_Bergen.jpg/1920px-Ulriken_Bergen.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Ulriken_Bergen.jpg/1920px-Ulriken_Bergen.jpg",
       imageAlt: "Ulriken, Bergen",
       lat: 60.37747,
       lon: 5.38713,
@@ -3810,7 +3810,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The lakeside villa where Edvard Grieg composed for 22 years, with his composing hut and grave in the cliff.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/2/2a/Troldhaugen_Bergen_Norway_Edvard_Grieg_tunliweb_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "https://upload.wikimedia.org/wikipedia/commons/2/2a/Troldhaugen_Bergen_Norway_Edvard_Grieg_tunliweb_01.jpg",
       imageAlt: "Troldhaugen, Bergen",
       lat: 60.3196,
       lon: 5.32948,
@@ -3876,7 +3876,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The canal lake at the southern edge of the old city, beside the 13th-century Beguinage.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Lake_of_Love_in_Bruges.JPG/1920px-Lake_of_Love_in_Bruges.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Lake_of_Love_in_Bruges.JPG/1920px-Lake_of_Love_in_Bruges.JPG",
       imageAlt: "Minnewater (Lake of Love), Bruges",
       lat: 51.19994,
       lon: 3.22477,
@@ -3892,7 +3892,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The city's fine art museum, holding Early Netherlandish works by Jan van Eyck and Hans Memling.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Brugge_-_Dijver_12_-Voormalig_poortgebouw_van_de_proosdij_van_Onze-Lieve-Vrouw%2C_heden_ingang_van_het_Groeningemuseum_-_82339.jpg/1920px-Brugge_-_Dijver_12_-Voormalig_poortgebouw_van_de_proosdij_van_Onze-Lieve-Vrouw%2C_heden_ingang_van_het_Groeningemuseum_-_82339.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Brugge_-_Dijver_12_-Voormalig_poortgebouw_van_de_proosdij_van_Onze-Lieve-Vrouw%2C_heden_ingang_van_het_Groeningemuseum_-_82339.jpg/1920px-Brugge_-_Dijver_12_-Voormalig_poortgebouw_van_de_proosdij_van_Onze-Lieve-Vrouw%2C_heden_ingang_van_het_Groeningemuseum_-_82339.jpg",
       imageAlt: "Groeningemuseum, Bruges",
       lat: 51.20528,
       lon: 3.22667,
@@ -4006,7 +4006,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The house on Getreidegasse where Mozart was born in 1756, now a museum of family portraits, instruments and letters.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Salzburg_-_Hagenauerplatz_-_Mozart%27s_Geburtshaus_%28cropped%29.jpg/1920px-Salzburg_-_Hagenauerplatz_-_Mozart%27s_Geburtshaus_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Salzburg_-_Hagenauerplatz_-_Mozart%27s_Geburtshaus_%28cropped%29.jpg/1920px-Salzburg_-_Hagenauerplatz_-_Mozart%27s_Geburtshaus_%28cropped%29.jpg",
       imageAlt: "Mozart's Birthplace, Salzburg",
       lat: 47.8,
       lon: 13.04333,
@@ -4072,7 +4072,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The largest park in Ljubljana, designed in 1813, running west from the city centre.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Ljubljana_Park_Tivoli_%2854209040156%29.jpg/1920px-Ljubljana_Park_Tivoli_%2854209040156%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Ljubljana_Park_Tivoli_%2854209040156%29.jpg/1920px-Ljubljana_Park_Tivoli_%2854209040156%29.jpg",
       imageAlt: "Tivoli Park, Ljubljana",
       lat: 46.05389,
       lon: 14.49667,
@@ -4202,7 +4202,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The island fortress off Marseille that inspired Alexandre Dumas' The Count of Monte Cristo, used as a prison from 1540.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Ch%C3%A2teau_d%27If_%40_Baie_de_Marseille_01.jpg/1920px-Ch%C3%A2teau_d%27If_%40_Baie_de_Marseille_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Ch%C3%A2teau_d%27If_%40_Baie_de_Marseille_01.jpg/1920px-Ch%C3%A2teau_d%27If_%40_Baie_de_Marseille_01.jpg",
       imageAlt: "Château d'If, Marseille",
       lat: 43.27986,
       lon: 5.32514,
@@ -4252,7 +4252,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The oldest and largest of Palermo's street markets, held each morning in the Albergheria quarter.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Ballar%C3%B2%2C_gente_en_el_mercado%2C_Palermo%2C_Sicilia%2C_Italia%2C_2015.JPG/1920px-Ballar%C3%B2%2C_gente_en_el_mercado%2C_Palermo%2C_Sicilia%2C_Italia%2C_2015.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Ballar%C3%B2%2C_gente_en_el_mercado%2C_Palermo%2C_Sicilia%2C_Italia%2C_2015.JPG/1920px-Ballar%C3%B2%2C_gente_en_el_mercado%2C_Palermo%2C_Sicilia%2C_Italia%2C_2015.JPG",
       imageAlt: "Ballarò Market, Palermo",
       lat: 38.11111,
       lon: 13.35167,
@@ -4300,7 +4300,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "Burial crypts beneath the Capuchin monastery holding some 8,000 mummified bodies arranged in corridors and dressed in period clothes.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Catacombe_dei_Cappuccini_Corridoio_Professionisti.jpg/1920px-Catacombe_dei_Cappuccini_Corridoio_Professionisti.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Catacombe_dei_Cappuccini_Corridoio_Professionisti.jpg/1920px-Catacombe_dei_Cappuccini_Corridoio_Professionisti.jpg",
       imageAlt: "Catacombs of the Capuchins, Palermo",
       lat: 38.112,
       lon: 13.341,
@@ -4382,7 +4382,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The museum in the Auberge de Provence, holding the artefacts of Malta's Neolithic temple culture.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Malta_-_Valletta_-_Republic_Street_-_View_along_National_Museum_of_Archaeology.jpg/1920px-Malta_-_Valletta_-_Republic_Street_-_View_along_National_Museum_of_Archaeology.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Malta_-_Valletta_-_Republic_Street_-_View_along_National_Museum_of_Archaeology.jpg/1920px-Malta_-_Valletta_-_Republic_Street_-_View_along_National_Museum_of_Archaeology.jpg",
       imageAlt: "National Museum of Archaeology, Valletta",
       lat: 35.86958,
       lon: 14.50681,
@@ -4398,7 +4398,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "Built in 1731 by Grand Master António Manoel de Vilhena, one of the oldest working theatres in Europe.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Malta_-_Valletta_-_Manoel_Theatre_%28monument_01140%29_20220521.jpg/1920px-Malta_-_Valletta_-_Manoel_Theatre_%28monument_01140%29_20220521.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Malta_-_Valletta_-_Manoel_Theatre_%28monument_01140%29_20220521.jpg/1920px-Malta_-_Valletta_-_Manoel_Theatre_%28monument_01140%29_20220521.jpg",
       imageAlt: "Manoel Theatre, Valletta",
       lat: 35.89833,
       lon: 14.5125,
@@ -4432,7 +4432,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The seven original streets of Bilbao on the right bank, with the Santiago Cathedral and the Plaza Nueva.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Bilbao_-_Casco_Viejo_10.jpg/1920px-Bilbao_-_Casco_Viejo_10.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Bilbao_-_Casco_Viejo_10.jpg/1920px-Bilbao_-_Casco_Viejo_10.jpg",
       imageAlt: "Casco Viejo, Bilbao",
       lat: 43.25722,
       lon: -2.92389,
@@ -4464,7 +4464,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The covered market of 1929 on the river, the largest in Europe by floor area.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Bilbao_-_Mercado_de_la_Ribera_%2828935207930%29.jpg/1920px-Bilbao_-_Mercado_de_la_Ribera_%2828935207930%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Bilbao_-_Mercado_de_la_Ribera_%2828935207930%29.jpg/1920px-Bilbao_-_Mercado_de_la_Ribera_%2828935207930%29.jpg",
       imageAlt: "Mercado de la Ribera, Bilbao",
       lat: 43.2555,
       lon: -2.9242,
@@ -4480,7 +4480,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The 251-metre hill above the city, reached by a funicular opened in 1915.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Funicular_Artxanda%2C_Bilbao%2C_July_2010_%2801%29.JPG/1920px-Funicular_Artxanda%2C_Bilbao%2C_July_2010_%2801%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Funicular_Artxanda%2C_Bilbao%2C_July_2010_%2801%29.JPG/1920px-Funicular_Artxanda%2C_Bilbao%2C_July_2010_%2801%29.JPG",
       imageAlt: "Mount Artxanda, Bilbao",
       lat: 43.27444,
       lon: -2.91778,
@@ -4496,7 +4496,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "A fine arts museum spanning 12th-century Romanesque panel painting to postwar Basque sculpture, next to the Guggenheim.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Bilbao_-_Museo_de_Bellas_Artes_15.jpg/1920px-Bilbao_-_Museo_de_Bellas_Artes_15.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Bilbao_-_Museo_de_Bellas_Artes_15.jpg/1920px-Bilbao_-_Museo_de_Bellas_Artes_15.jpg",
       imageAlt: "Museo de Bellas Artes de Bilbao, Bilbao",
       lat: 43.266,
       lon: -2.9378,
@@ -4514,7 +4514,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "David Walsh's museum of art and antiquities, built into a sandstone headland on the Derwent north of Hobart.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Reflection_on_black_oil_-_Museum_of_Old_and_New_Art_%28MONA%29_-_Hobart.jpg/1920px-Reflection_on_black_oil_-_Museum_of_Old_and_New_Art_%28MONA%29_-_Hobart.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Reflection_on_black_oil_-_Museum_of_Old_and_New_Art_%28MONA%29_-_Hobart.jpg/1920px-Reflection_on_black_oil_-_Museum_of_Old_and_New_Art_%28MONA%29_-_Hobart.jpg",
       imageAlt: "Museum of Old and New Art (MONA), Hobart",
       lat: -42.81278,
       lon: 147.26111,
@@ -4676,7 +4676,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "Australia's largest national park, 20,000 square kilometres of escarpment, wetlands and rock art east of Darwin.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/In_Kakadu_Natl_Park_E_of_Darwin_N.T_-_a_roadside_forest_fire_reddens_the_imminent_sunset_%2813113319793%29.jpg/1920px-In_Kakadu_Natl_Park_E_of_Darwin_N.T_-_a_roadside_forest_fire_reddens_the_imminent_sunset_%2813113319793%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/In_Kakadu_Natl_Park_E_of_Darwin_N.T_-_a_roadside_forest_fire_reddens_the_imminent_sunset_%2813113319793%29.jpg/1920px-In_Kakadu_Natl_Park_E_of_Darwin_N.T_-_a_roadside_forest_fire_reddens_the_imminent_sunset_%2813113319793%29.jpg",
       imageAlt: "Kakadu National Park, Darwin",
       lat: -13.1,
       lon: 132.6,
@@ -4710,7 +4710,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The two-storey waterfront market of Papeete, selling fish, produce, vanilla, pearls and pareu cloth.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Tahitian_local_market_01.jpg/1920px-Tahitian_local_market_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Tahitian_local_market_01.jpg/1920px-Tahitian_local_market_01.jpg",
       imageAlt: "Papeete Market, Papeete",
       lat: -17.5388,
       lon: -149.5674,
@@ -4726,7 +4726,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The Catholic cathedral of 1875 in the centre of Papeete, seat of the Archdiocese of Papeete.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Tahiti%2C_French_Polynesia_-_Notre_Dame_Cathedral%2C_Papeete_%2848028242478%29.jpg/1920px-Tahiti%2C_French_Polynesia_-_Notre_Dame_Cathedral%2C_Papeete_%2848028242478%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Tahiti%2C_French_Polynesia_-_Notre_Dame_Cathedral%2C_Papeete_%2848028242478%29.jpg/1920px-Tahiti%2C_French_Polynesia_-_Notre_Dame_Cathedral%2C_Papeete_%2848028242478%29.jpg",
       imageAlt: "Notre-Dame Cathedral of Papeete, Papeete",
       lat: -17.535,
       lon: -149.5696,
@@ -4742,7 +4742,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The northernmost point of Tahiti, where Captain Cook observed the 1769 transit of Venus.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Tahiti%2C_French_Polynesia_-_Point_Venus_Lighthouse_%2848032601316%29.jpg/1920px-Tahiti%2C_French_Polynesia_-_Point_Venus_Lighthouse_%2848032601316%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Tahiti%2C_French_Polynesia_-_Point_Venus_Lighthouse_%2848032601316%29.jpg/1920px-Tahiti%2C_French_Polynesia_-_Point_Venus_Lighthouse_%2848032601316%29.jpg",
       imageAlt: "Point Venus, Papeete",
       lat: -17.49556,
       lon: -149.49444,
@@ -4774,7 +4774,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "The waterfront garden opposite the ferry terminal, shaded by banyan trees and marked by the WWI war memorial.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Park_%28Papeete_-_Tahiti%29.jpg/1920px-Park_%28Papeete_-_Tahiti%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Park_%28Papeete_-_Tahiti%29.jpg/1920px-Park_%28Papeete_-_Tahiti%29.jpg",
       imageAlt: "Bougainville Park, Papeete",
       lat: -17.5411803,
       lon: -149.570233,
@@ -4789,7 +4789,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "Te Fare — Tahiti's museum of Polynesian culture, nature and voyaging canoes, on the lagoon shore at Punaauia.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Tahiti%2C_French_Polynesia_-_The_Mus%C3%A9e_de_Tahiti_%2848061643522%29.jpg/1920px-Tahiti%2C_French_Polynesia_-_The_Mus%C3%A9e_de_Tahiti_%2848061643522%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Tahiti%2C_French_Polynesia_-_The_Mus%C3%A9e_de_Tahiti_%2848061643522%29.jpg/1920px-Tahiti%2C_French_Polynesia_-_The_Mus%C3%A9e_de_Tahiti_%2848061643522%29.jpg",
       imageAlt: "Museum of Tahiti and the Islands, Papeete",
       lat: -17.6323,
       lon: -149.6139,
@@ -4839,7 +4839,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "A residential street in North East Valley with a 35 per cent gradient, listed as the steepest in the world.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Baldwin_Street.JPG/1920px-Baldwin_Street.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Baldwin_Street.JPG/1920px-Baldwin_Street.JPG",
       imageAlt: "Baldwin Street, Dunedin",
       lat: -45.84944,
       lon: 170.53472,
@@ -4887,7 +4887,7 @@ export const ATTRACTIONS_WAVE2: Record<string, AttractionRecord[]> = {
       description:
         "New Zealand's oldest botanic garden, established in 1863 on the slopes of Signal Hill above the city.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Greenhouse_in_Dunedin_Botanic_Garden_02.jpg/1920px-Greenhouse_in_Dunedin_Botanic_Garden_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Greenhouse_in_Dunedin_Botanic_Garden_02.jpg/1920px-Greenhouse_in_Dunedin_Botanic_Garden_02.jpg",
       imageAlt: "Dunedin Botanic Garden, Dunedin",
       lat: -45.8575,
       lon: 170.5225,

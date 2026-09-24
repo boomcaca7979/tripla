@@ -163,6 +163,8 @@ export default function PlaceWorld({
   const timeLabel = formatHour(hour);
   const tempLine = normal ? `${normal.tempHighC.toFixed(0)}° / ${normal.tempLowC.toFixed(0)}°C` : "—";
   const hasImage = Boolean(dest.image);
+  // 真实街景加载失败 → 退回数据肖像（与无图目的地同一视觉语言，不留 broken image）。
+  const [heroFailed, setHeroFailed] = useState(false);
 
   return (
     <header
@@ -207,7 +209,7 @@ export default function PlaceWorld({
           className="absolute inset-0 transition-[filter] duration-700 ease-ut-out motion-reduce:transition-none"
           style={{ filter: light.photoFilter, maskImage: "linear-gradient(to bottom, transparent 0%, black 34%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 34%)" }}
         >
-          {hasImage ? (
+          {hasImage && !heroFailed ? (
             <Image
               src={dest.image as string}
               alt=""
@@ -215,6 +217,7 @@ export default function PlaceWorld({
               preload
               sizes="100vw"
               className="object-cover"
+              onError={() => setHeroFailed(true)}
             />
           ) : (
             // 数据肖像：温度轨迹 / 降水 / 日照构成的无图目的地视觉主体

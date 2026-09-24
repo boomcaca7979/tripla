@@ -28,6 +28,16 @@ export default function PlaceGallery({
   images: string[];
 }) {
   const [selected, setSelected] = useState(0);
+  // 加载失败的图片（按 src 记录）：失败即以中性渐变占位，保留布局与缩略图选择态。
+  const [failedSrcs, setFailedSrcs] = useState<ReadonlySet<string>>(new Set());
+  const markFailed = (src: string) => {
+    setFailedSrcs((prev) => {
+      if (prev.has(src)) return prev;
+      const next = new Set(prev);
+      next.add(src);
+      return next;
+    });
+  };
   const hasThumbs = images.length > 1;
   const main = images[Math.min(selected, images.length - 1)] ?? null;
 
@@ -39,14 +49,22 @@ export default function PlaceGallery({
       <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_minmax(0,290px)] md:gap-3">
         {/* 主图（aspect 决定整个画廊总高度；右列 stretch 到同高） */}
         <figure className="relative aspect-[4/3] overflow-hidden bg-ut-surface sm:aspect-[16/10]">
-          <Image
-            src={main}
-            alt={`${city}, ${country}`}
-            fill
-            priority
-            sizes="(max-width: 768px) 100vw, 900px"
-            className="object-cover"
-          />
+          {failedSrcs.has(main) ? (
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-br from-ut-muted/25 to-ut-muted/45"
+            />
+          ) : (
+            <Image
+              src={main}
+              alt={`${city}, ${country}`}
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 900px"
+              className="object-cover"
+              onError={() => markFailed(main)}
+            />
+          )}
           <figcaption className="absolute bottom-3 left-3 bg-black/40 px-2.5 py-1 font-mono text-micro uppercase tracking-[0.2em] text-white">
             {city} · {country}
           </figcaption>
@@ -68,13 +86,21 @@ export default function PlaceGallery({
                     : "border-2 border-transparent opacity-75 hover:opacity-100"
                 }`}
               >
-                <Image
-                  src={src}
-                  alt=""
-                  fill
-                  sizes="(max-width: 768px) 30vw, 140px"
-                  className="object-cover"
-                />
+                {failedSrcs.has(src) ? (
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-br from-ut-muted/25 to-ut-muted/45"
+                  />
+                ) : (
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    sizes="(max-width: 768px) 30vw, 140px"
+                    className="object-cover"
+                    onError={() => markFailed(src)}
+                  />
+                )}
               </button>
             ))}
           </div>
