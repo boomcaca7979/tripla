@@ -2,6 +2,7 @@
 
 import { useState, type CSSProperties } from "react";
 import { useMyTrip } from "./MyTripContext";
+import { trackEvent } from "@/lib/analytics";
 import type { TripItemPrice } from "@/lib/trip-list";
 import { resolvePageMode, savePageItem } from "@/lib/travel-workspace";
 
@@ -84,6 +85,11 @@ export default function AddToTripButton({
       aria-pressed={added}
       title={syncFailed ? "Saved to My Trip, but not to your account — reopen the page to retry." : undefined}
       onClick={() => {
+        trackEvent(
+          added
+            ? { name: "trip_remove_place", destination: city }
+            : { name: "trip_add_place", destination: city, source: "destination_page" },
+        );
         toggle({ type, name, city, affiliateUrl, price });
         if (!added) void syncToWorkspace();
       }}

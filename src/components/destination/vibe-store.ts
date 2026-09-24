@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { trackEvent } from "@/lib/analytics";
 import type { Vibe } from "@/lib/inner-state";
 
 /**
@@ -33,10 +34,15 @@ export const useAtlasStore = create<AtlasState>((set, get) => ({
     if (compare.includes(slug)) return "exists";
     if (compare.length >= COMPARE_MAX) return "full";
     set({ compare: [...compare, slug] });
+    trackEvent({ name: "destination_compare_add", destination: slug, compare_count: compare.length + 1 });
     return "added";
   },
   removeFromCompare: (slug) =>
-    set((state) => ({ compare: state.compare.filter((s) => s !== slug) })),
+    set((state) => {
+      const next = state.compare.filter((s) => s !== slug);
+      trackEvent({ name: "destination_compare_remove", destination: slug, compare_count: next.length });
+      return { compare: next };
+    }),
   clearCompare: () => set({ compare: [] }),
 }));
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import AffiliateLink from "@/components/analytics/AffiliateLink";
 import AddToTripButton from "./AddToTripButton";
 
 /**
@@ -117,14 +118,18 @@ export default function AttractionTickets({
                 </p>
               </div>
               <div className="flex shrink-0 flex-wrap items-center gap-2">
-                <a
+                <AffiliateLink
                   href={t.url}
+                  category="experience"
+                  provider="viator"
+                  destination={slug}
+                  identifier={t.title}
                   target="_blank"
                   rel="sponsored noopener noreferrer"
                   className="inline-flex min-h-[30px] items-center gap-1 rounded-[4px] bg-ut-accent px-2.5 py-1 text-micro font-bold uppercase tracking-[0.08em] text-white transition-colors hover:bg-ut-accent-strong"
                 >
                   Book <span aria-hidden="true">→</span>
-                </a>
+                </AffiliateLink>
                 <AddToTripButton
                   type="experience"
                   name={t.title}

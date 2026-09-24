@@ -28,6 +28,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { SUPABASE_CONFIGURED, createClient } from "@/lib/supabase/client";
+import { currentPagePath, trackEvent } from "@/lib/analytics";
 
 /** Minimal shape we rely on; the Supabase session itself is much larger. */
 function identityOf(session: unknown): { userId: string | null; email: string | null } {
@@ -81,6 +82,7 @@ export function useSession() {
   const signOut = useCallback(async () => {
     setBusy(true);
     try {
+      trackEvent({ name: "signout", source_page: currentPagePath() });
       await createClient().auth.signOut();
     } catch {
       // signOut clears local session state unconditionally; a transport

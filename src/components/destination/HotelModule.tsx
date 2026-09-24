@@ -56,7 +56,7 @@ export default function HotelModule({ city }: { city: string }) {
         Compare live rates for {city} accommodation. Opens the provider in a new
         tab with a date window prefilled.
       </p>
-      <HotelSearchLink href={href} nights={HOTEL_NIGHTS} className={LINK_CLASS}>
+      <HotelSearchLink href={href} nights={HOTEL_NIGHTS} destination={city} className={LINK_CLASS}>
         Search hotels in {city}
         <span aria-hidden="true">→</span>
       </HotelSearchLink>

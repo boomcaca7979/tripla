@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import AffiliateLink from "@/components/analytics/AffiliateLink";
 
 /**
  * HotelSearchLink — HotelModule 的链接叶子（client）。
@@ -47,6 +48,8 @@ interface HotelSearchLinkProps {
   href: string;
   /** 住宿晚数（与页面 "Suggested city stay" 语义一致）。 */
   nights: number;
+  /** 目的地城市（affiliate_click 事件属性）。 */
+  destination?: string;
   className?: string;
   children: ReactNode;
 }
@@ -54,6 +57,7 @@ interface HotelSearchLinkProps {
 export default function HotelSearchLink({
   href,
   nights,
+  destination,
   className,
   children,
 }: HotelSearchLinkProps) {
@@ -73,13 +77,16 @@ export default function HotelSearchLink({
   }, [href, nights]);
 
   return (
-    <a
+    <AffiliateLink
       href={resolvedHref}
+      category="hotel"
+      provider="hotellook"
+      destination={destination ?? ""}
       target="_blank"
       rel="sponsored noopener noreferrer"
       className={className}
     >
       {children}
-    </a>
+    </AffiliateLink>
   );
 }

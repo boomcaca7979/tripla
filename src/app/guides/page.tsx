@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound, permanentRedirect } from "next/navigation";
 import { DESTINATIONS, type Destination } from "@/data/destinations";
 import GuideSearch from "@/components/guides/GuideSearch";
+import GuidesDirectoryTracker from "@/components/analytics/GuidesDirectoryTracker";
 import MddSection, {
   type MddPanelData,
   type MddCardData,
@@ -397,6 +398,7 @@ export default async function GuidesHubPage({
 
               {/* All destinations：Region → Country → City 全部展开，无 Tab */}
               <DestinationDirectory groups={directoryGroups(hub)} />
+              <GuidesDirectoryTracker />
             </div>
         </>
       </div>

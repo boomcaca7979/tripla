@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import AddToTripButton from "./AddToTripButton";
+import AffiliateLink from "@/components/analytics/AffiliateLink";
 
 /**
  * WinkHotelCards — Attraction「Nearby Hotels」唯一酒店内容（Wink 唯一数据源）。
@@ -260,14 +261,18 @@ export default function WinkHotelCards({
                 </div>
                 <div className="mt-3 flex flex-wrap items-center gap-2">
                   {hotel.bookingUrl && (
-                    <a
+                    <AffiliateLink
                       href={hotel.bookingUrl}
+                      category="hotel"
+                      provider="wink"
+                      destination={slug}
+                      identifier={hotel.name}
                       target="_blank"
                       rel="sponsored noopener noreferrer"
                       className="inline-flex min-h-[34px] items-center gap-1 rounded-[4px] bg-ut-accent px-3 py-1 text-micro font-bold uppercase tracking-[0.08em] text-white transition-colors hover:bg-ut-accent-strong"
                     >
                       Book <span aria-hidden="true">→</span>
-                    </a>
+                    </AffiliateLink>
                   )}
                   <AddToTripButton
                     type="hotel"

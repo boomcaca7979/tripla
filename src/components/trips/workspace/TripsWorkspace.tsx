@@ -1,5 +1,7 @@
 "use client";
 
+import { trackEvent } from "@/lib/analytics";
+
 /**
  * TripsWorkspace — UTRIPLA 用户登录后的个人旅行后台（App Shell）。
  *
@@ -416,6 +418,7 @@ function TripsListView({
           <NewTripForm
             dispatch={dispatch}
             onCreated={(tripId) => {
+              trackEvent({ name: "trip_create", authenticated: true, source: "trips_workspace" });
               setNewTripOpen(false);
               onOpenTrip(tripId);
             }}

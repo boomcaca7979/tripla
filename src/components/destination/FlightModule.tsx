@@ -1,4 +1,5 @@
 import { buildFlightSearchUrl } from "@/lib/affiliate";
+import AffiliateLink from "@/components/analytics/AffiliateLink";
 
 /**
  * FlightModule — Destination 商业层的 **Flights 插槽**（integration boundary）。
@@ -53,15 +54,19 @@ export default function FlightModule({
         Compare live fares to {city} ({destinationIata}). Opens the provider in a
         new tab with a departure window prefilled.
       </p>
-      <a
+      <AffiliateLink
         href={href}
+        category="flight"
+        provider="aviasales"
+        destination={city}
+        identifier={destinationIata}
         target="_blank"
         rel="sponsored noopener noreferrer"
         className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-ut-sm border border-ut-border-strong px-5 py-3 text-body font-medium text-ut-text transition-colors duration-[var(--ut-dur-fast)] hover:bg-ut-surface-hover focus-visible:outline-2 focus-visible:outline-ut-accent"
       >
         Search flights to {city}
         <span aria-hidden="true">→</span>
-      </a>
+      </AffiliateLink>
     </section>
   );
 }

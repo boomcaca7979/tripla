@@ -53,6 +53,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SUPABASE_CONFIGURED, createClient } from "@/lib/supabase/client";
+import { currentPagePath, trackEvent } from "@/lib/analytics";
 
 // ── Artwork sampling constants (measured in the 1280px artboard) ──────
 
@@ -364,6 +365,7 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
   const submitLogin = async () => {
     if (!EMAIL_RE.test(email)) return setError("Enter a valid email address.");
     if (!password) return setError("Enter your password.");
+    trackEvent({ name: "signin_start", method: "password", source_page: currentPagePath() });
     setBusy(true);
     setError("");
     try {
@@ -375,6 +377,7 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
         console.warn("[auth] signInWithPassword", e.code ?? e.message);
         return setError(humanError(e));
       }
+      trackEvent({ name: "signin_success", method: "password", source_page: currentPagePath() });
       goToTrips();
     } catch {
       setError(NETWORK_ERROR);
@@ -401,6 +404,7 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
     if (!EMAIL_RE.test(email)) return setError("Enter a valid email address.");
     if (password.length < 6) return setError("Password must be at least 6 characters.");
     if (password !== confirm) return setError("Passwords do not match.");
+    trackEvent({ name: "signup_start", method: "password", source_page: currentPagePath() });
     setBusy(true);
     setError("");
     try {
@@ -423,6 +427,7 @@ export default function AuthScreen({ initialMode }: { initialMode: "login" | "re
         );
         return;
       }
+      trackEvent({ name: "signup_success", method: "password", source_page: currentPagePath() });
       goToTrips();
     } catch {
       setError(NETWORK_ERROR);

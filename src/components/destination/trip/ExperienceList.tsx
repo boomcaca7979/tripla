@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import AddToTripButton from "./AddToTripButton";
+import AffiliateLink from "@/components/analytics/AffiliateLink";
 import { makeTripItemId } from "@/lib/trip-list";
 
 /**
@@ -103,14 +104,18 @@ export default function ExperienceList({ slug, city }: { slug: string; city: str
       ) : !state.available ? (
         <div className="mt-6 text-center">
           <p className="text-label text-ut-text-2">Live experiences unavailable right now.</p>
-          <a
+          <AffiliateLink
             href={state.searchUrl}
+            category="experience"
+            provider="viator"
+            destination={slug}
+            identifier="search"
             target="_blank"
             rel="sponsored noopener noreferrer"
             className="mt-3 inline-flex min-h-[44px] items-center gap-2 rounded-ut-sm border border-ut-border-strong px-5 py-2.5 text-body font-medium text-ut-text transition-colors duration-[var(--ut-dur-fast)] hover:bg-ut-surface-hover"
           >
             Search things to do in {city} <span aria-hidden="true">→</span>
-          </a>
+          </AffiliateLink>
         </div>
       ) : (
         <ul className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -160,14 +165,18 @@ export default function ExperienceList({ slug, city }: { slug: string; city: str
                     </div>
                   </div>
                   <div className="mt-4 flex flex-wrap items-center gap-3">
-                    <a
+                    <AffiliateLink
                       href={p.url}
+                      category="experience"
+                      provider="viator"
+                      destination={slug}
+                      identifier={p.code}
                       target="_blank"
                       rel="sponsored noopener noreferrer"
                       className="inline-flex min-h-[34px] items-center gap-1.5 rounded-[4px] bg-ut-accent px-3 py-1.5 text-label font-medium text-white transition-colors hover:bg-ut-accent-strong"
                     >
                       Book on Viator <span aria-hidden="true">→</span>
-                    </a>
+                    </AffiliateLink>
                     <AddToTripButton
                       type="experience"
                       name={p.title}

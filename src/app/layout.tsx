@@ -4,6 +4,7 @@ import { Instrument_Serif } from "next/font/google";
 import Script from "next/script";
 import { LanguageProvider } from "@/lib/i18n";
 import PageWrapper from "@/components/layout/PageWrapper";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -112,6 +113,7 @@ export default function RootLayout({
           strategy="beforeInteractive"
         />
         <LanguageProvider>
+          <Analytics />
           <PageWrapper>{children}</PageWrapper>
         </LanguageProvider>
       </body>

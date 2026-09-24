@@ -9,6 +9,7 @@ import DestinationSearchBox from "./DestinationSearchBox";
 import GlobePreview from "./GlobePreview";
 import type { DestinationSearchDoc } from "@/lib/atlas/destination-search";
 import { COMPARE_MAX, useAtlasStore } from "@/components/destination/vibe-store";
+import { trackEvent } from "@/lib/analytics";
 import { VIBE_ORDER, type NodeTier, type Vibe } from "@/lib/inner-state";
 import type { EarthHover, EarthNode, EarthSceneHandle } from "./globe/earth";
 
@@ -199,6 +200,7 @@ export default function WorldAtlas({ nodes }: { nodes: AtlasNode[] }) {
   // ── 交互回调 ─────────────────────────────────────────────────────────
   const openDestination = useCallback(
     (slug: string) => {
+      trackEvent({ name: "atlas_destination_select", destination: slug, source: "atlas" });
       router.push(`/destinations/${slug}`);
     },
     [router],
@@ -378,6 +380,7 @@ export default function WorldAtlas({ nodes }: { nodes: AtlasNode[] }) {
             <div className="mt-2.5 flex items-center gap-1.5">
               <Link
                 href={`/destinations/${cardNode.slug}`}
+                onClick={() => trackEvent({ name: "atlas_destination_select", destination: cardNode.slug, source: "atlas" })}
                 className="inline-flex min-h-[32px] flex-1 items-center justify-center rounded-ut-sm bg-white/90 px-2 text-body-sm font-medium text-[#080d18]"
               >
                 Explore
@@ -510,6 +513,7 @@ export default function WorldAtlas({ nodes }: { nodes: AtlasNode[] }) {
             <li key={n.slug} className={view === "list" ? "flex flex-wrap items-baseline gap-x-4 gap-y-1 py-3" : ""}>
               <Link
                 href={`/destinations/${n.slug}`}
+                onClick={() => trackEvent({ name: "atlas_destination_select", destination: n.slug, source: "atlas" })}
                 className={view === "list" ? "font-display text-h3 text-white transition-colors hover:text-ut-accent" : ""}
               >
                 {n.city}, {n.country}

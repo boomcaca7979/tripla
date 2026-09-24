@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { buildFlightSearchUrl } from "@/lib/affiliate";
 import AddToTripButton from "./AddToTripButton";
+import AffiliateLink from "@/components/analytics/AffiliateLink";
 
 /**
  * FlightSearch — 城市级 Flights 查询（每页仅一个实例，放在酒店推荐上方）。
@@ -356,14 +357,18 @@ export default function FlightSearch({
                   <p className="text-label font-bold text-ut-ink">
                     {f.price.currency} {f.price.amount.toLocaleString()}
                   </p>
-                  <a
+                  <AffiliateLink
                     href={f.bookUrl}
+                    category="flight"
+                    provider="aviasales"
+                    destination={destinationIata}
+                    identifier={f.flightNumber}
                     target="_blank"
                     rel="sponsored noopener noreferrer"
                     className="inline-flex min-h-[30px] items-center gap-1 rounded-[4px] bg-ut-accent px-2.5 py-1 text-micro font-bold uppercase tracking-[0.08em] text-white transition-colors hover:bg-ut-accent-strong"
                   >
                     Book <span aria-hidden="true">→</span>
-                  </a>
+                  </AffiliateLink>
                   <AddToTripButton
                     type="flight"
                     name={`Flight ${originIata} → ${destinationIata} · ${f.departureAt ?? departDate}${f.airline ? ` · ${f.airline}` : ""}`}
@@ -390,14 +395,17 @@ export default function FlightSearch({
                     ? "Flight fare data is temporarily unavailable (provider rate limit). Try again shortly."
                     : "Flight price data is unavailable right now."}
           </p>
-          <a
+          <AffiliateLink
             href={href ?? "#"}
+            category="flight"
+            provider="aviasales"
+            destination={destinationIata}
             target="_blank"
             rel="sponsored noopener noreferrer"
             className="mt-3 inline-flex min-h-[38px] items-center gap-2 rounded-[4px] border border-ut-border-strong px-4 py-2 text-label font-medium text-ut-text transition-colors hover:bg-ut-surface-hover"
           >
             Search flights on Aviasales <span aria-hidden="true">→</span>
-          </a>
+          </AffiliateLink>
         </div>
       )}
       {result.phase === "error" && (

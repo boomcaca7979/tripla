@@ -10,6 +10,7 @@ import { getGuidesForCity } from "@/data/guides";
 import { getAttractions } from "@/data/attractions";
 import { getDestinationGallery } from "@/data/destination-gallery";
 import PlaceWorld from "@/components/destination/PlaceWorld";
+import DestinationViewTracker from "@/components/analytics/DestinationViewTracker";
 import { getClimateRecord } from "@/data/climate/nasa-canonical";
 import { buildMonthRows, canonicalWindowLabel } from "@/components/besttime/besttime-state";
 import { monthNormals } from "@/lib/inner-state";
@@ -286,6 +287,7 @@ export default async function DestinationDetailPage({
         )}
 
         {/* ═══ SCENE 01 — THE PLACE（Hero 城市身份，保留） ═══ */}
+        <DestinationViewTracker destination={dest.slug} country={dest.country} />
         <PlaceWorld
           dest={dest}
           normals={normals}
