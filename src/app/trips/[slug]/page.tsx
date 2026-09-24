@@ -90,7 +90,9 @@ const CONTAINER = "mx-auto w-full max-w-7xl px-4 md:px-6";
 
 // 仅允许 generateStaticParams 返回的 slug 被渲染；
 // 其他 slug 在路由层直接 404，避免 notFound() 被静默吞掉返回 200。
-export const dynamicParams = false;
+// dynamicParams 默认 true：未知 slug 仍由本页按需渲染并 notFound（
+// /trips/new 静态路由需能从 [slug] 的封闭集外匹配，故不再关闭）。
+// export const dynamicParams = false;
 
 /**
  * 酒店入住窗口（HotelModule）在构建期求值，若页面永不重生成，静态 HTML 会把

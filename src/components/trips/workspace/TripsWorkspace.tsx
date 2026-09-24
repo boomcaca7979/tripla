@@ -23,7 +23,7 @@ import { trackEvent } from "@/lib/analytics";
  */
 
 import Link from "next/link";
-import DestinationField, { type DestinationChoice } from "./DestinationField";
+import DestinationField, { toChoice, type DestinationChoice } from "./DestinationField";
 import { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import Image from "next/image";
 import type { InboxItem, InboxKind, SavedItem, Trip, WorkspaceAction, WorkspaceState } from "./types";
@@ -79,10 +79,18 @@ function describeSyncError(error: unknown): string {
   return "Unexpected error while saving.";
 }
 
-export default function TripsWorkspace() {
+export default function TripsWorkspace({
+  /** 来自 /trips/new 的预填（destination slug + 日期）；存在时自动打开 New Trip 表单。 */
+  prefill = null,
+}: {
+  prefill?: { destinationId: string; startDate?: string; endDate?: string } | null;
+} = {}) {
   const [state, dispatch] = useReducer(workspaceReducer, undefined, seedWorkspace);
   const [view, setView] = useState<View>({ name: "trips" });
-  const [newTripOpen, setNewTripOpen] = useState(false);
+  // /trips/new 深链：带有效 destination 预填时自动打开创建表单
+  const [newTripOpen, setNewTripOpen] = useState(
+    Boolean(prefill && prefill.destinationId),
+  );
   const { userId, ready: sessionReady } = useSession();
 
   /**
@@ -287,6 +295,7 @@ export default function TripsWorkspace() {
         newTripOpen={newTripOpen}
         setNewTripOpen={setNewTripOpen}
         onOpenTrip={(id) => setView({ name: "trip", tripId: id })}
+        prefill={prefill}
       />
     );
   })();
@@ -390,12 +399,14 @@ function TripsListView({
   newTripOpen,
   setNewTripOpen,
   onOpenTrip,
+  prefill,
 }: {
   state: WorkspaceState;
   dispatch: (action: WorkspaceAction) => void;
   newTripOpen: boolean;
   setNewTripOpen: (v: boolean) => void;
   onOpenTrip: (tripId: string) => void;
+  prefill?: { destinationId: string; startDate?: string; endDate?: string } | null;
 }) {
   const current = state.trips.filter((t) => t.status === "current");
   const upcoming = state.trips.filter((t) => t.status === "upcoming");
@@ -417,8 +428,11 @@ function TripsListView({
         <Modal title="Create a trip" onClose={() => setNewTripOpen(false)}>
           <NewTripForm
             dispatch={dispatch}
+            initialDestinationId={prefill?.destinationId ?? null}
+            initialStartDate={prefill?.startDate ?? ""}
+            initialEndDate={prefill?.endDate ?? ""}
             onCreated={(tripId) => {
-              trackEvent({ name: "trip_create", authenticated: true, source: "trips_workspace" });
+              trackEvent({ name: "trip_create", authenticated: true, source: "trips_new" });
               setNewTripOpen(false);
               onOpenTrip(tripId);
             }}
@@ -1096,16 +1110,26 @@ function NewTripForm({
   dispatch,
   onCreated,
   onCancel,
+  initialDestinationId = null,
+  initialStartDate = "",
+  initialEndDate = "",
 }: {
   dispatch: (action: WorkspaceAction) => void;
   onCreated: (tripId: string) => void;
   onCancel: () => void;
+  /** /trips/new 深链预填：destination slug（无效 slug → 正常空选择态，不伪造）。 */
+  initialDestinationId?: string | null;
+  initialStartDate?: string;
+  initialEndDate?: string;
 }) {
-  const [dest, setDest] = useState<DestinationChoice | null>(null);
+  // 预填：slug → DestinationChoice（toChoice 内部校验必须命中真实 DESTINATIONS）
+  const [dest, setDest] = useState<DestinationChoice | null>(() =>
+    initialDestinationId ? toChoice(initialDestinationId) : null,
+  );
   const [tripName, setTripName] = useState("");
   const [currency, setCurrency] = useState("CNY");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState(initialStartDate);
+  const [endDate, setEndDate] = useState(initialEndDate);
 
   const submit = () => {
     // 蓝图 #7：只允许从真实 Destination 创建（destinationId 必填）

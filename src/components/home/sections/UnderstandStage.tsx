@@ -159,7 +159,7 @@ export default function UnderstandStage({ hero }: { hero: Postcard | null }) {
           </div>
 
           {/* ── 数据列（桌面在左） ─────────────────────────────────── */}
-          <div className="lg:order-1 lg:col-span-7">
+          <div className="lg:order-1 lg:col-span-7 lg:self-center">
             <div className="grid gap-8 sm:grid-cols-2">
               <div>
                 <Eyebrow className="ut-t-micro">Destination information</Eyebrow>

@@ -30,6 +30,64 @@ export interface MapPoint {
   vibes: Vibe[];
 }
 
+// ── 标签避让（确定性贪心；SSR 与客户端输出一致，无 hydration 风险） ──────
+// 小地图上邻近城市密集（伊比利亚/摩洛哥集群），默认"点下方居中"标签会两两重叠。
+// 解析器按 (y, x) 排序逐个放置：默认点下方，冲突时尝试上方，再冲突逐级下移。
+// 估算在 340px 容器宽的像素空间进行（百分比定位随容器等比缩放，碰撞关系不变）。
+
+const LABEL_CHAR_W = 6.2; // ut-t-micro（10px）平均字符宽估算
+const LABEL_H = 14;       // 标签行高
+const HIT_HALF = 22;      // 44px 命中区半径
+
+interface LabelPlacement {
+  above: boolean;
+  dy: number;
+}
+
+function resolveLabelPlacements(
+  points: Pick<MapPoint, "slug" | "city" | "x" | "y">[],
+): Map<string, LabelPlacement> {
+  const W = 340;
+  const H = W * 0.75;
+  const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
+  const out = new Map<string, LabelPlacement>();
+  const sorted = [...points].sort((a, b) => a.y - b.y || a.x - b.x);
+
+  for (const p of sorted) {
+    const w = Math.max(44, p.city.length * LABEL_CHAR_W + 8);
+    const cx = p.x * W;
+    const cy = p.y * H;
+    const candidates: LabelPlacement[] = [
+      { above: false, dy: 2 },
+      { above: true, dy: 2 },
+      { above: false, dy: 18 },
+      { above: true, dy: 18 },
+      { above: false, dy: 34 },
+      { above: true, dy: 34 },
+      { above: false, dy: 50 },
+      { above: true, dy: 50 },
+    ];
+    let chosen: LabelPlacement = { above: p.y > 0.82, dy: 2 };
+    for (const c of candidates) {
+      const top = c.above ? cy - HIT_HALF - LABEL_H - c.dy : cy + HIT_HALF + c.dy;
+      const box = { x1: cx - w / 2, y1: top, x2: cx + w / 2, y2: top + LABEL_H };
+      const hit = placed.some(
+        (b) => box.x1 < b.x2 && b.x1 < box.x2 && box.y1 < b.y2 && b.y1 < box.y2,
+      );
+      if (!hit) {
+        chosen = c;
+        break;
+      }
+    }
+    const top = chosen.above
+      ? cy - HIT_HALF - LABEL_H - chosen.dy
+      : cy + HIT_HALF + chosen.dy;
+    placed.push({ x1: cx - w / 2, y1: top, x2: cx + w / 2, y2: top + LABEL_H });
+    out.set(p.slug, chosen);
+  }
+  return out;
+}
+
 export default function RegionMiniMap({
   points,
   selectedSlug,
@@ -44,6 +102,7 @@ export default function RegionMiniMap({
   label: string;
 }) {
   const selected = points.find((p) => p.slug === selectedSlug) ?? points.find((p) => p.isSelf) ?? points[0];
+  const placements = resolveLabelPlacements(points);
 
   return (
     <div>
@@ -67,6 +126,8 @@ export default function RegionMiniMap({
         {points.map((p) => {
           const isSelected = p.slug === selected?.slug;
           const vibeHit = activeVibe !== null && p.vibes.includes(activeVibe);
+          // 标签位置由确定性避让解析器决定（above + 垂直偏移），消除密集邻近点的文字重叠
+          const placement = placements.get(p.slug) ?? { above: p.y > 0.82, dy: 2 };
           return (
             <button
               key={p.slug}
@@ -89,11 +150,11 @@ export default function RegionMiniMap({
                 aria-hidden="true"
                 className={[
                   "pointer-events-none absolute whitespace-nowrap ut-t-micro transition-colors duration-[var(--ut-dur-fast)] motion-reduce:transition-none",
-                  // 靠近底边的点标签放上方；靠近右缘的标签右对齐，避免截断
-                  p.y > 0.82 ? "bottom-full mb-0.5" : "top-full mt-0.5",
+                  placement.above ? "bottom-full" : "top-full",
                   p.x > 0.85 ? "right-0" : p.x < 0.15 ? "left-0" : "left-1/2 -translate-x-1/2",
                   isSelected ? "text-ut-ink" : "text-ut-muted group-hover:text-ut-text",
                 ].join(" ")}
+                style={placement.above ? { marginBottom: placement.dy } : { marginTop: placement.dy }}
               >
                 {p.city}
               </span>

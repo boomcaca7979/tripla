@@ -200,19 +200,18 @@ export default function SearchBar({ onSearch, cityIndex = [], copy }: SearchBarP
       return;
     }
 
-    // ── Navigate to plan page ────────────────────────────────────────
-    const params = new URLSearchParams({
-      origin: JSON.stringify(origin),
-      destination: JSON.stringify(destination),
-      departureDate,
-      returnDate,
-      travelStyle,
-      budgetLevel,
-      interests: interests.join(","),
-      groupSize: String(groupSize),
-    });
+    // ── Navigate to the trips workspace new-trip handoff ─────────────
+    // destination 以稳定 slug 传递（按 city+country 匹配 DESTINATIONS 数据集；
+    // 非 UTRIPLA 目的地城市无 slug → /trips/new 回到正常空选择态，不伪造）。
+    const slug = DESTINATIONS.find(
+      (d) => d.city === destination.city && d.country === destination.country,
+    )?.slug;
+    const params = new URLSearchParams();
+    if (slug) params.set("destination", slug);
+    params.set("startDate", departureDate);
+    params.set("endDate", returnDate);
 
-    router.push(`/plan?${params.toString()}`);
+    router.push(`/trips/new?${params.toString()}`);
   }, [
     origin,
     destination,
