@@ -35,7 +35,7 @@ import { SEASON_LABEL } from "@/components/destination/place-state";
  */
 
 export default function ExploreStage({ hero }: { hero: Postcard | null }) {
-  const { places, currentMonth, selectDestination } = useHomeState();
+  const { places, placeIndex, currentMonth, selectDestination } = useHomeState();
   const [activeSlug, setActiveSlug] = useState<string>(EXPLORE_SLUG);
 
   const active = useMemo(
@@ -97,7 +97,7 @@ export default function ExploreStage({ hero }: { hero: Postcard | null }) {
                   href="/destinations"
                   className="inline-flex shrink-0 items-center gap-2 rounded-ut-pill border border-white/25 bg-black/35 px-4 py-2 ut-t-control text-white/85 backdrop-blur-sm transition-colors duration-[var(--ut-dur-fast)] hover:border-white/60 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/70"
                 >
-                  World atlas · {places.length}
+                  World atlas · {placeIndex.length}
                 </Link>
               </div>
 

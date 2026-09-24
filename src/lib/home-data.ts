@@ -19,10 +19,12 @@ import { DESTINATIONS, getDestinationBySlug } from "@/data/destinations";
 import { getClimateRecord } from "@/data/climate/nasa-canonical";
 import { canonicalWindowLabel } from "@/components/besttime/besttime-state";
 import {
-  FEATURED_DESTINATION_SLUGS,
-  FEATURED_DESTINATIONS,
-} from "@/data/featured-destinations";
-import type { HomeMonth, HomePlace } from "./home-discovery";
+  COMPARE_SLUGS,
+  EXPLORE_SELECTOR_SLUGS,
+  EXPLORE_SLUG,
+  UNDERSTAND_SLUG,
+} from "@/lib/home-sections";
+import type { HomeIndexEntry, HomeMonth, HomePlace } from "./home-discovery";
 
 // ── 参考汇率（units per 1 USD） ────────────────────────────────────────
 // 来源：open.er-api.com（exchangerate-api 免费端点），取数时间 2026-09-14 UTC。
@@ -57,12 +59,6 @@ export function usdPerDay(amount: number, currency: string): number {
 // ── 编辑排序（唯一真相源：src/data/featured-destinations.ts） ────────────
 // 同一份名单也被 /destinations 地球用于"重要目的地"（major）判定。
 
-function phraseOf(description: string): string {
-  const s = description.replace(/\s+/g, " ").trim();
-  const firstSentence = s.split(/(?<=[.!?])\s/)[0] ?? s;
-  return firstSentence.length <= 96 ? firstSentence : `${firstSentence.slice(0, 93).trimEnd()}…`;
-}
-
 // ── 装配 ──────────────────────────────────────────────────────────────
 
 function monthsOf(slug: string): HomeMonth[] {
@@ -77,7 +73,6 @@ function monthsOf(slug: string): HomeMonth[] {
     tempLowC: m.tempLowC,
     precipMm: m.precipMm,
     precipDays: m.precipDaysGe1mm,
-    daylightHours: m.daylightHours,
   }));
 }
 
@@ -90,39 +85,57 @@ function toHomePlace(slug: string): HomePlace | null {
     city: d.city,
     country: d.country,
     region: d.region,
-    phrase: phraseOf(d.description),
-    gradient: d.gradient,
-    image: d.image,
-    bestMonths,
     bestMonthsLabel: canonicalWindowLabel(bestMonths),
     budgetPerDay: d.budgetPerDay,
     budgetCurrency: d.budgetCurrency,
     budgetUsdPerDay: usdPerDay(d.budgetPerDay, d.budgetCurrency),
     recommendedDays: d.recommendedDays,
     iata: d.airport.iata,
-    airportName: d.airport.name,
     timezone: d.timezone,
     latitude: d.airport.latitude,
     longitude: d.airport.longitude,
-    travelStyle: d.travelStyle,
     interests: d.interests as unknown as string[],
     months: monthsOf(slug),
-    highlights: d.highlights ?? [],
   };
 }
 
 /**
- * 首页数据集：精选城市排前，其余按数据顺序（与既有 SSR 默认视图一致）。
+ * 首页**交互面**数据集：只含首页各段实际可切换/展示的目的地
+ * （Explore 候选 6 城 = Understand / Compare 的超集，真相源 src/lib/home-sections.ts）。
+ *
+ * 2026-09-24 payload 边界收缩：原实现把全部 205 城 × 12 月 climate 一并下发，
+ * 但其唯一全量消费方（DiscoveryStage 的 month/mood/budget 筛选）已随首页重构删除；
+ * 现在的月值只被候选/比较/理解段读取。全量城市的轻量身份由 buildHomeIndex() 提供。
  * 任何 destination 缺少 canonical 记录时，getClimateRecord 直接抛错 → build FAIL。
  */
 export function buildHomePlaces(): HomePlace[] {
-  const ordered = [
-    ...FEATURED_DESTINATION_SLUGS.map((s) => getDestinationBySlug(s)).filter((d): d is NonNullable<typeof d> => Boolean(d)),
-    ...DESTINATIONS.filter((d) => !FEATURED_DESTINATIONS.has(d.slug)),
+  const slugs = [
+    ...new Set([
+      ...EXPLORE_SELECTOR_SLUGS,
+      EXPLORE_SLUG,
+      UNDERSTAND_SLUG,
+      ...COMPARE_SLUGS,
+    ]),
   ];
-  return ordered
-    .map((d) => toHomePlace(d.slug))
+  return slugs
+    .map((slug) => toHomePlace(slug))
     .filter((p): p is HomePlace => Boolean(p));
+}
+
+/**
+ * 首页**索引**数据集：全量目的地的轻量身份（无月值 / 无图片 / 无预算）。
+ * 消费方：UnderstandStage 的邻近目的地计算（大圆距离 + 小地图 vibes）与
+ * "World atlas · N" 计数；搜索用的城市/机场详情见 buildCityIndex()。
+ */
+export function buildHomeIndex(): HomeIndexEntry[] {
+  return DESTINATIONS.map((d) => ({
+    slug: d.slug,
+    city: d.city,
+    country: d.country,
+    latitude: d.airport.latitude,
+    longitude: d.airport.longitude,
+    interests: d.interests as unknown as string[],
+  }));
 }
 
 // ── 城市索引（供 From / To 城市名搜索；不要求用户知道机场代码） ─────────

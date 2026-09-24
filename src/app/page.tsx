@@ -6,7 +6,7 @@ import ExploreStage from "@/components/home/sections/ExploreStage";
 import UnderstandStage from "@/components/home/sections/UnderstandStage";
 import CompareStage from "@/components/home/sections/CompareStage";
 import TravelStage from "@/components/home/sections/TravelStage";
-import { buildCityIndex, buildHomePlaces } from "@/lib/home-data";
+import { buildCityIndex, buildHomeIndex, buildHomePlaces } from "@/lib/home-data";
 import { buildHomeSectionImages } from "@/lib/home-postcards";
 import { DESTINATIONS } from "@/data/destinations";
 
@@ -54,22 +54,27 @@ function buildWebSiteJsonLd(count: number) {
  * 四段共同遵守：图片 = 真实目的地照片（该项目图集已目检）；读数 = 真实数据
  * （canonical 气候 / 真实坐标 / 实时天气 / 真实服务），不虚构任何功能。
  *
- * 数据集（全量目的地 + canonical 月值 + 城市索引）在此一次装配，作为 props 下发；
+ * 数据集按消费方拆成三份，在此一次装配后作为 props 下发（2026-09-24 payload 收缩）：
+ *   · places      —— 首页交互面 6 城（Explore/Understand/Compare 可切换展示的），
+ *                    含 canonical 月值；全量 205 城月值不再下发（其消费方已删除）。
+ *   · placeIndex  —— 全量目的地的轻量身份（邻近计算 / 计数），无月值。
+ *   · cityIndex   —— SearchBar 的城市/机场索引（PlanLater）。
  * 四段的图片同样在此由 server 端装配（图集数据不进 client bundle）。
  * 客户端不再导入气候/目的地数据集。数量一律动态（当前 205），不要把数字写死。
  */
 export default function Home() {
   const places = buildHomePlaces();
+  const placeIndex = buildHomeIndex();
   const cityIndex = buildCityIndex();
   const images = buildHomeSectionImages();
   // 首屏确定性月份：SSG 构建时与客户端首次 render 一致；客户端 hydration 后再校正。
   const initialMonth = new Date().getMonth();
 
   return (
-    <HomeEnvironment places={places} initialMonth={initialMonth}>
+    <HomeEnvironment places={places} placeIndex={placeIndex} initialMonth={initialMonth}>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildWebSiteJsonLd(places.length)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildWebSiteJsonLd(placeIndex.length)) }}
       />
       <HomeHero />
       <PlanLater cityIndex={cityIndex} />

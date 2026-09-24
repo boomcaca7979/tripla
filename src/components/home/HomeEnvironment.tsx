@@ -9,7 +9,7 @@ import {
   type DestinationContext, type MoodId, type MoonPhaseId, type Season,
   type VisualState, type WeatherId,
 } from "@/lib/visual-state";
-import type { BudgetTier, HomePlace } from "@/lib/home-discovery";
+import type { BudgetTier, HomeIndexEntry, HomePlace } from "@/lib/home-discovery";
 import {
   EMPTY_USER_LOCATION, resolveUserLocation,
   type ResolvedUserLocation,
@@ -49,8 +49,10 @@ export interface HomeFocus {
 }
 
 interface HomeState {
-  /** 首页数据集（server 装配，含 canonical 月值 + 坐标）。 */
+  /** 首页交互面数据集（server 装配，含 canonical 月值 + 坐标；仅交互面 6 城）。 */
   places: HomePlace[];
+  /** 全量目的地轻量索引（邻近计算 / 计数；无月值）。 */
+  placeIndex: HomeIndexEntry[];
   /** 构建/首屏所属月份（未筛选月份时的上下文，非筛选条件）。 */
   currentMonth: number;
 
@@ -114,10 +116,12 @@ const INITIAL_MOON: MoonPhaseId = "full";
 export default function HomeEnvironment({
   children,
   places,
+  placeIndex,
   initialMonth,
 }: {
   children: ReactNode;
   places: HomePlace[];
+  placeIndex: HomeIndexEntry[];
   /** server 首屏月份（与客户端首次 render 一致，hydration 后再校正为真实当前月）。 */
   initialMonth: number;
 }) {
@@ -373,6 +377,7 @@ export default function HomeEnvironment({
 
   const state: HomeState = {
     places,
+    placeIndex,
     currentMonth,
     destination,
     selectDestination: setDestination,

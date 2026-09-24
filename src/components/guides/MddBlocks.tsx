@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -68,13 +67,16 @@ function MddCard({ card }: { card: MddCardData }) {
     <Link href={card.href} className="block">
       <div className="relative aspect-[206/170] w-full overflow-hidden bg-[#f2f2f2]">
         {card.image ? (
-          <Image
+          // 卡片缩略图（206×170 槽位）用单 src 的 lazy img：本页 5 个 MddSection 的全部面板
+          // （含 hidden）都会 SSR，next/image 的响应式 srcSet 会给 1,300+ 张卡各生成 ~1.8KB
+          // 元数据，是 /guides 解码 HTML 的最大单项（~2.4MB）。懒加载行为不变。
+          // eslint-disable-next-line @next/next/no-img-element -- 单 src lazy img，理由见上
+          <img
             src={card.image}
             alt={card.city}
-            fill
-            sizes="(max-width: 640px) 33vw, (max-width: 1024px) 25vw, 16vw"
             loading="lazy"
-            className="object-cover"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover"
           />
         ) : (
           <div

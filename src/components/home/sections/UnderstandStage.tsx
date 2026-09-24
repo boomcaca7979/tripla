@@ -19,6 +19,7 @@ import {
   monthOf,
   seasonSignalFor,
   weatherPhraseFor,
+  type HomeIndexEntry,
 } from "@/lib/home-discovery";
 import {
   haversineKm,
@@ -48,7 +49,7 @@ import { weatherGlyph, weatherLabel } from "@/lib/weather-state";
  */
 
 export default function UnderstandStage({ hero }: { hero: Postcard | null }) {
-  const { places, currentMonth, focus, condition } = useHomeState();
+  const { places, placeIndex, currentMonth, focus, condition } = useHomeState();
   const [mapSlug, setMapSlug] = useState<string>(UNDERSTAND_SLUG);
 
   const active = useMemo(
@@ -79,9 +80,9 @@ export default function UnderstandStage({ hero }: { hero: Postcard | null }) {
       country: active.country,
       airport: { latitude: active.latitude, longitude: active.longitude },
     };
-    const within = places
+    const within = placeIndex
       .filter(
-        (p) =>
+        (p: HomeIndexEntry) =>
           p.slug !== active.slug &&
           haversineKm(active.latitude, active.longitude, p.latitude, p.longitude) <=
             NEIGHBOUR_RADIUS_KM,
@@ -97,7 +98,7 @@ export default function UnderstandStage({ hero }: { hero: Postcard | null }) {
     const projected = projectRegionPoints(inputs);
     if (projected.points.length === 0) return null;
 
-    const bySlug = new Map(places.map((p) => [p.slug, p]));
+    const bySlug = new Map(placeIndex.map((p) => [p.slug, p]));
     const points: MapPoint[] = projected.points.map((pp) => ({
       slug: pp.slug,
       city: pp.city,
@@ -110,7 +111,7 @@ export default function UnderstandStage({ hero }: { hero: Postcard | null }) {
       vibes: vibesForInterests(bySlug.get(pp.slug)?.interests ?? []),
     }));
     return { points };
-  }, [active, places]);
+  }, [active, placeIndex]);
 
   return (
     <section id="understand" className="scroll-mt-20">

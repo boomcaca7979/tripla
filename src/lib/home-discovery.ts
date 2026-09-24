@@ -31,7 +31,6 @@ export interface HomeMonth {
   tempLowC: number;
   precipMm: number;
   precipDays: number;
-  daylightHours: number;
 }
 
 export interface HomePlace {
@@ -39,12 +38,6 @@ export interface HomePlace {
   city: string;
   country: string;
   region: string;
-  /** 一行短描述（真实 description 首句）。 */
-  phrase: string;
-  gradient: string;
-  image: string | null;
-  /** canonical Best Months 窗口（月 index 集合）。 */
-  bestMonths: number[];
   /** 窗口的可读标签，如 "March – May, October – November"。 */
   bestMonthsLabel: string;
   /** 当地货币计的每日预算（数据原值，不做换算）。 */
@@ -55,16 +48,28 @@ export interface HomePlace {
   recommendedDays: number;
   /** 主机场 IATA（只作为信息展示，不作为输入要求）。 */
   iata: string;
-  airportName: string;
   /** IANA 时区（选择该城市后首屏时间随之锚定）。 */
   timezone: string;
   /** 坐标（用于该城市的实时天气读数 / 用户坐标邻近判定）。 */
   latitude: number;
   longitude: number;
-  travelStyle: string;
   interests: string[];
   months: HomeMonth[];
-  highlights: string[];
+}
+
+/**
+ * 首页索引条目：**全量 205 城**的轻量身份（无月值）。
+ * 消费方：UnderstandStage 的邻近计算（大圆距离 + 小地图 vibes）。
+ * 城市/机场详情（icao / airportName / timezone）由 cityIndex（SearchBar）单独提供，
+ * 两份索引不再互相重复携带对方的字段。
+ */
+export interface HomeIndexEntry {
+  slug: string;
+  city: string;
+  country: string;
+  latitude: number;
+  longitude: number;
+  interests: string[];
 }
 
 // ── Budget 档位（USD/天；阈值固定，全数据域覆盖） ──────────────────────
@@ -325,11 +330,6 @@ export function buildStatusLine(input: StatusLineInput): string {
 
 // ── 展示格式化（真实字段，不做换算推断） ───────────────────────────────
 
-export function bestMonthsShort(place: HomePlace): string {
-  if (place.bestMonths.length === 0) return "Year-round";
-  return place.bestMonths.map((m) => MONTH_SHORT[m]).join(" · ");
-}
-
 /** 日预算读数：当地货币原值 + 折算 USD（仅供参考汇率）。 */
 export function budgetLabel(place: HomePlace): string {
   const local = `${Math.round(place.budgetPerDay)} ${place.budgetCurrency}/day`;
@@ -351,20 +351,6 @@ function median(values: number[]): number | null {
   const sorted = [...values].sort((a, b) => a - b);
   const mid = Math.floor(sorted.length / 2);
   return sorted.length % 2 === 1 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
-}
-
-/** 集合中最常出现的 best-month（计数降序，同票按月序）。 */
-export function aggregateBestMonths(places: HomePlace[], limit = 3): string | null {
-  const counts = new Map<number, number>();
-  for (const p of places) {
-    for (const m of p.bestMonths) counts.set(m, (counts.get(m) ?? 0) + 1);
-  }
-  if (counts.size === 0) return null;
-  return [...counts.entries()]
-    .sort((a, b) => (b[1] === a[1] ? a[0] - b[0] : b[1] - a[1]))
-    .slice(0, limit)
-    .map(([m, c]) => `${MONTH_SHORT[m]} (${c})`)
-    .join(" · ");
 }
 
 /** 集合日预算中位数（USD，已按参考汇率折算）。 */
