@@ -51,6 +51,19 @@ function formatDistance(m: number): string {
   return `${(m / 1000).toFixed(1)} km away`;
 }
 
+/**
+ * 本地时区的 YYYY-MM-DD —— 用户视角的"今天"，不是 UTC 意义上的今天。
+ * 口径与 HotelSearchLink.refreshStayWindow 一致（该处只覆写链接 URL 参数）。
+ */
+function localISODate(offsetDays: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() + offsetDays);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
 export default function WinkHotelCards({
   slug,
   name,
@@ -73,6 +86,11 @@ export default function WinkHotelCards({
   });
   const [refreshing, setRefreshing] = useState(false);
   const [noMore, setNoMore] = useState(false);
+  // 入住窗口：本路由是构建期预渲染页，服务端传下来的日期会被静态 HTML 永久冻结
+  // （部署次日起一直在问"构建那两天的房"→ 上游只回空/报错 → 酒店区整片空白）。
+  // 故 props 仅作首帧惰性初值，真正发请求前一律按**客户端时钟**重算。
+  const [stay, setStay] = useState<{ checkIn: string; checkOut: string }>({ checkIn, checkOut });
+  const stayRef = useRef<{ checkIn: string; checkOut: string }>({ checkIn, checkOut });
   const rootRef = useRef<HTMLDivElement | null>(null);
   const startedRef = useRef(false);
 
@@ -82,13 +100,14 @@ export default function WinkHotelCards({
     (offset: number, isRefresh: boolean) => {
       if (!hasCoords) return;
       if (isRefresh) setRefreshing(true);
+      // 请求窗口恒取 stayRef（客户端时钟结果）；Refresh 也一样，绝不复用构建期日期。
       const qs = new URLSearchParams({
         slug,
         name,
         lat: String(lat),
         lon: String(lon),
-        checkIn,
-        checkOut,
+        checkIn: stayRef.current.checkIn,
+        checkOut: stayRef.current.checkOut,
         offset: String(offset),
       });
       fetch(`/api/hotels?${qs.toString()}`)
@@ -128,7 +147,8 @@ export default function WinkHotelCards({
           else setState({ phase: "error" });
         });
     },
-    [slug, name, lat, lon, checkIn, checkOut, hasCoords],
+    // 依赖不含 checkIn/checkOut：请求窗口来自 stayRef（客户端时钟），与 props 解耦。
+    [slug, name, lat, lon, hasCoords],
   );
 
   useEffect(() => {
@@ -139,6 +159,14 @@ export default function WinkHotelCards({
       if (startedRef.current) return;
       startedRef.current = true;
       setState({ phase: "loading" });
+      // 关键一步：用**客户端时钟**重算窗口（今天 → 今天 + nights 晚），覆盖构建期
+      // props。放在首次请求之前，故请求永远带的是用户打开页面那一刻的日期。
+      const clientStay = {
+        checkIn: localISODate(0),
+        checkOut: localISODate(Math.max(1, nights)),
+      };
+      stayRef.current = clientStay;
+      setStay(clientStay);
       // 无坐标 = 无 geo 能力：不打 API，直接诚实空态。
       if (!hasCoords) {
         setState({ phase: "ready", data: { available: false, hotels: [], total: 0, offset: 0 } });
@@ -163,7 +191,7 @@ export default function WinkHotelCards({
     );
     observer.observe(root);
     return () => observer.disconnect();
-  }, [fetchBatch, hasCoords]);
+  }, [fetchBatch, hasCoords, nights]);
 
   const data = state.data;
   const hotels = data?.hotels ?? [];
@@ -289,7 +317,7 @@ export default function WinkHotelCards({
       ) : state.phase === "ready" && (!data || !data.available) ? (
         <p className="mt-3 text-micro leading-relaxed text-ut-muted">
           {hasCoords
-            ? `No live Wink inventory near ${name} for ${checkIn} → ${checkOut} right now.`
+            ? `No live Wink inventory near ${name} for ${stay.checkIn} → ${stay.checkOut} right now.`
             : "Live nearby hotels aren't available for this attraction yet."}
         </p>
       ) : state.phase === "error" ? (
