@@ -14,7 +14,9 @@ import { buildWinkBookingUrl } from "@/lib/affiliate";
  *   · /api/public/** 匿名可调；401/403 时回退 OAuth2 client credentials Bearer 重试一次。
  *   · 价格 = lowestPrice.price.userSpecifiedCurrencyTotal，绑定请求日期
  *     （price.startDate/endDate），是入住区间 stay total；pricingType 实际为 null。
- *   · 部分酒店对所选日期真实无价（三级 available 任一 false）→ 过滤，不补足。
+ *   · 酒店发现 vs 可售：hotel 本体存在（hotelIdentifier + name）即保留卡片；
+ *     上游宣告不可售（item/hotel/lowestPrice 任一 available=false）→ 该卡不计算
+ *     价格、不生成 Book 入口，由 UI 现有 "Price unavailable" 分支如实呈现。
  *   · 图片 = Cloudinary identifier → res.cloudinary.com/traveliko/image/upload/<id>.jpg。
  *
  * 缓存（server 内存）：key = wink|geo|slug|lat|lon|radius|checkIn|checkOut|adults|currency，
@@ -50,9 +52,11 @@ export interface HotelOffer {
   reviewCount?: number;
   /** Wink search/geo 返回的距搜索点真实距离（米）。 */
   distanceInMeters?: number;
-  /** 所选入住区间真实 stay total（userSpecifiedCurrency）；无真实价格则缺省。 */
+  /** 所选入住区间真实 stay total（userSpecifiedCurrency）；仅可售酒店填充，
+   *  不可售/无真实价格 → undefined（UI 呈现 "Price unavailable"）。 */
   price?: { amount: number; currency: string };
-  /** 直接进入该酒店 Booking Engine 页（含 Utripla client-id 归因）；无 urlName 则缺省。 */
+  /** 直接进入该酒店 Booking Engine 页（含 Utripla client-id 归因）；仅可售酒店生成，
+   *  不可售酒店不给 Book 入口（避免误导成当前可订）。 */
   bookingUrl?: string;
 }
 
@@ -267,19 +271,20 @@ export async function searchHotelsNearPoint(params: {
     for (const item of content) {
       const h = item.hotel;
       if (!h?.hotelIdentifier || !h.name) continue;
-      // 真实可售：三级 available 任一明确 false 即视为不可售。
+      // 可售性只决定价格与 Book CTA：hotel 本体存在即保留为"酒店发现卡片"，
+      // 上游宣告不可售（item/hotel/lowestPrice 任一 false）→ 无真实价、无预订入口，
+      // 由 UI 现有 "Price unavailable" 分支如实呈现（绝不伪造当前可订状态）。
       const bookable =
         item.available !== false &&
         h.available !== false &&
         item.lowestPrice?.available !== false;
-      if (!bookable) continue;
 
       const img = (h.images ?? []).find(
         (i) => i.type === "IMAGE" && i.source === "CLOUDINARY" && i.identifier,
       );
       const total = item.lowestPrice?.price?.userSpecifiedCurrencyTotal;
       const price =
-        total && typeof total.amount === "number" && total.amount > 0 && total.currency
+        bookable && total && typeof total.amount === "number" && total.amount > 0 && total.currency
           ? { amount: total.amount, currency: total.currency }
           : undefined;
 
@@ -299,14 +304,15 @@ export async function searchHotelsNearPoint(params: {
         distanceInMeters:
           typeof item.distanceInMeters === "number" ? item.distanceInMeters : undefined,
         price,
-        bookingUrl: h.urlName
-          ? buildWinkBookingUrl({
-              hotelUrlName: h.urlName,
-              checkIn,
-              checkOut,
-              adults: WINK_ADULTS,
-            })
-          : undefined,
+        bookingUrl:
+          bookable && h.urlName
+            ? buildWinkBookingUrl({
+                hotelUrlName: h.urlName,
+                checkIn,
+                checkOut,
+                adults: WINK_ADULTS,
+              })
+            : undefined,
       });
     }
 
