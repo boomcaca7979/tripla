@@ -31,15 +31,17 @@ const GROUPS: { titleKey: string; links: FooterLink[] }[] = [
   {
     titleKey: "footer.tools",
     links: [
-      // /share 需要 ?data= 载荷，无载荷时是 "Invalid Share Link" 空态；
-      // 它由 Trip 内的分享按钮进入，不作为站点级入口，故此处不再链接。
-      { labelKey: "footer.plan", href: "/plan" },
+      // 统一规划入口（P5）：/trips/new 是正式承接（workspace planner）。
+      // /plan 不再作为站点级入口（无参数时由 /plan 客户端重定向到 /trips/new）。
+      { labelKey: "footer.plan", href: "/trips/new" },
     ],
   },
   {
     titleKey: "footer.about",
     links: [
       { labelKey: "nav.home", href: "/" },
+      { labelKey: "footer.about", href: "/about" },
+      { labelKey: "footer.contact", href: "/contact" },
       { labelKey: "footer.privacy", href: "/privacy" },
       { labelKey: "footer.terms", href: "/terms" },
     ],

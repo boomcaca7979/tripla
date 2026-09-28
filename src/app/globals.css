@@ -770,7 +770,7 @@ body {
    IntersectionObserver 添加。
 
    注意：这里刻意**不使用** <html>.js-ready 这类内联脚本标记。内联
-   script 会占用 <head> 的一个 DOM 位置，而第三方脚本（AdSense）在
+   script 会占用 <head> 的一个 DOM 位置，而第三方广告脚本在
    hydration 前会向 <head> 注入自己的 script，导致 React 对 head 子节点
    做 hydration 比对时错位（"tree hydrated but attributes didn't match"）。
    改用纯 CSS media feature 后，head 里不再有我们自己的节点，根因消除。

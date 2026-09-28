@@ -579,6 +579,7 @@ export function workspaceReducer(state: WorkspaceState, action: WorkspaceAction)
         status: deriveStatus(action.startDate, action.endDate),
         startDate: action.startDate,
         endDate: action.endDate,
+        preferences: action.preferences,
         budgetPlanned: 0,
         flightBooked: false,
         // 第六轮：新 Trip 只含用户自己（You），同行人由用户手动添加
@@ -633,6 +634,7 @@ export function workspaceReducer(state: WorkspaceState, action: WorkspaceAction)
           name: action.name,
           currency: action.currency ? codeForSymbol(action.currency) : t.currency,
           country: dest?.country ?? t.country,
+          preferences: action.preferences ?? t.preferences,
           startDate,
           endDate,
           status: deriveStatus(startDate, endDate),

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Instrument_Serif } from "next/font/google";
-import Script from "next/script";
 import { LanguageProvider } from "@/lib/i18n";
 import PageWrapper from "@/components/layout/PageWrapper";
 import { Analytics } from "@vercel/analytics/next";
@@ -106,12 +105,6 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4267926791604017"
-          crossOrigin="anonymous"
-          strategy="beforeInteractive"
-        />
         <LanguageProvider>
           <Analytics />
           <PageWrapper>{children}</PageWrapper>

@@ -280,6 +280,7 @@ function tripToRow(scope: string, trip: Trip, id: string): TripRow {
     end_date: trip.endDate || null,
     currency: trip.currency,
     flight: trip.flight ?? null,
+    preferences: trip.preferences ?? null,
     budget_planned: trip.budgetPlanned ?? 0,
     flight_booked: Boolean(trip.flightBooked),
   };
@@ -406,6 +407,7 @@ export function assembleWorkspace(scope: string, rows: FlatWorkspace): Workspace
       endDate: dateOnly(row.end_date) ?? "",
       currency: row.currency,
       flight: row.flight ?? undefined,
+      preferences: row.preferences ?? undefined,
       budgetPlanned: num(row.budget_planned, 0),
       flightBooked: Boolean(row.flight_booked),
       travelers,

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useMyTrip } from "./MyTripContext";
+import { useTravelStore } from "@/store/travel";
 import type { TravelPlanInput, TravelInterest, Itinerary } from "@/types/itinerary";
 
 /**
@@ -34,12 +35,29 @@ export interface MyTripPanelProps {
 type PlanState =
   | { phase: "idle" }
   | { phase: "generating" }
-  | { phase: "done"; plan: Itinerary; fallback: boolean }
+  | { phase: "done"; plan: Itinerary }
   | { phase: "error"; message: string };
+
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+const VALID_STYLES = ["relaxed", "active", "cultural", "foodie", "adventure"] as const;
+const VALID_BUDGETS = ["budget", "mid-range", "luxury"] as const;
 
 export default function MyTripPanel({ airport, travelStyle, interests }: MyTripPanelProps) {
   const { city, items, days, setDays, remove, clear, hydrated, dailyBudget } = useMyTrip();
   const [plan, setPlan] = useState<PlanState>({ phase: "idle" });
+  // 显式日期（P4 日期完整性）：绝不用"今天" fabricated 默认值。用户在面板里
+  // 选择起止日期；若首页搜索恰好存的是本城市的参数，则自动采用真实搜索日期。
+  const [dateStart, setDateStart] = useState("");
+  const [dateEnd, setDateEnd] = useState("");
+  const storedParams = useTravelStore((s) => s.searchParams);
+  const stored =
+    hydrated && storedParams.destination?.city?.toLowerCase() === city.toLowerCase()
+      ? storedParams
+      : null;
+  const effStart = stored?.departureDate ?? dateStart;
+  const effEnd = stored?.returnDate ?? dateEnd;
+  const datesValid =
+    ISO_DATE.test(effStart) && ISO_DATE.test(effEnd) && effEnd >= effStart;
 
   const counts = useMemo(
     () => ({
@@ -62,20 +80,31 @@ export default function MyTripPanel({ airport, travelStyle, interests }: MyTripP
   const totalCurrency = priced[0]?.price?.currency ?? "CNY";
 
   async function generatePlan() {
-    if (items.length === 0) return;
+    if (items.length === 0 || !datesValid) return;
     setPlan({ phase: "generating" });
     try {
-      const today = new Date();
-      const dep = today.toISOString().slice(0, 10);
-      const ret = new Date(today.getTime() + days * 86400000).toISOString().slice(0, 10);
+      // 日期严格来自真实上下文：首页搜索存的参数（同一城市）或面板里显式选择的日期。
+      // 绝不从"今天"推算 —— 那会产生与用户实际行程不一致的日期（P4 修复）。
       const input: TravelPlanInput = {
         destination: airport,
-        departureDate: dep,
-        returnDate: ret,
-        travelStyle,
-        budgetLevel: dailyBudget.amount <= 80 ? "budget" : dailyBudget.amount <= 200 ? "mid-range" : "luxury",
-        interests,
-        groupSize: 1,
+        departureDate: effStart,
+        returnDate: effEnd,
+        travelStyle: stored && VALID_STYLES.includes(stored.travelStyle as never)
+          ? (stored.travelStyle as (typeof VALID_STYLES)[number])
+          : travelStyle,
+        budgetLevel: stored && VALID_BUDGETS.includes(stored.budgetLevel as never)
+          ? (stored.budgetLevel as (typeof VALID_BUDGETS)[number])
+          : dailyBudget.amount <= 80
+            ? "budget"
+            : dailyBudget.amount <= 200
+              ? "mid-range"
+              : "luxury",
+        interests: stored && (stored.interests?.length ?? 0) > 0 ? stored.interests! : interests,
+        groupSize:
+          stored && typeof stored.groupSize === "number" && stored.groupSize >= 1
+            ? stored.groupSize
+            : 1,
+        ...(stored?.origin ? { origin: stored.origin } : {}),
         tripItems: items.map((i) => ({
           name: i.name,
           kind:
@@ -95,19 +124,23 @@ export default function MyTripPanel({ airport, travelStyle, interests }: MyTripP
         body: JSON.stringify({ input, weather: [], exchangeRate: null }),
       });
       if (!res.ok) {
-        setPlan({ phase: "error", message: `Planner API returned ${res.status}` });
+        const body = (await res.json().catch(() => null)) as
+          | { error?: { message?: string } }
+          | null;
+        setPlan({
+          phase: "error",
+          message:
+            body?.error?.message ??
+            `Planner API returned ${res.status}`,
+        });
         return;
       }
-      const json = (await res.json()) as Itinerary & { generatedBy?: string };
+      const json = (await res.json()) as Itinerary;
       if (!json?.days?.length) {
         setPlan({ phase: "error", message: "Planner returned an empty itinerary" });
         return;
       }
-      setPlan({
-        phase: "done",
-        plan: json,
-        fallback: json.generatedBy === "fallback-template",
-      });
+      setPlan({ phase: "done", plan: json });
     } catch (err) {
       setPlan({ phase: "error", message: err instanceof Error ? err.message : "Failed to generate plan" });
     }
@@ -259,10 +292,38 @@ export default function MyTripPanel({ airport, travelStyle, interests }: MyTripP
 
       {/* AI plan */}
       <div className="px-5 py-4">
+        {/* 日期输入（P4 日期完整性）：无真实上下文日期时由用户显式选择，绝不从"今天"推算 */}
+        {!stored && (
+          <div className="mb-4 grid grid-cols-2 gap-2">
+            <label className="block">
+              <span className="mb-1 block font-mono text-[0.625rem] uppercase tracking-[0.14em] text-ut-text-2">
+                Start
+              </span>
+              <input
+                type="date"
+                value={dateStart}
+                onChange={(e) => setDateStart(e.target.value)}
+                className="w-full rounded-[4px] border border-ut-border bg-ut-surface px-2.5 py-2 text-label text-ut-text"
+              />
+            </label>
+            <label className="block">
+              <span className="mb-1 block font-mono text-[0.625rem] uppercase tracking-[0.14em] text-ut-text-2">
+                End
+              </span>
+              <input
+                type="date"
+                value={dateEnd}
+                min={dateStart || undefined}
+                onChange={(e) => setDateEnd(e.target.value)}
+                className="w-full rounded-[4px] border border-ut-border bg-ut-surface px-2.5 py-2 text-label text-ut-text"
+              />
+            </label>
+          </div>
+        )}
         <button
           type="button"
           onClick={generatePlan}
-          disabled={items.length === 0 || plan.phase === "generating"}
+          disabled={items.length === 0 || !datesValid || plan.phase === "generating"}
           className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-[4px] bg-ut-accent px-5 py-3 text-body font-medium text-white transition-opacity hover:bg-ut-accent-strong disabled:cursor-not-allowed disabled:opacity-50"
         >
           {plan.phase === "generating" ? "Planning your trip…" : "AI Plan My Trip"}
@@ -270,6 +331,11 @@ export default function MyTripPanel({ airport, travelStyle, interests }: MyTripP
         {items.length === 0 && (
           <p className="mt-2 text-micro text-ut-muted">
             Add at least one place to generate a plan.
+          </p>
+        )}
+        {items.length > 0 && !datesValid && (
+          <p className="mt-2 text-micro text-ut-muted">
+            Choose your start and end dates to generate a plan.
           </p>
         )}
 
@@ -290,12 +356,6 @@ export default function MyTripPanel({ airport, travelStyle, interests }: MyTripP
                 {plan.plan.days.length} {plan.plan.days.length === 1 ? "day" : "days"}
               </p>
             </div>
-            {plan.fallback && (
-              <p role="alert" className="rounded-[4px] bg-ut-surface p-3 text-micro leading-relaxed text-ut-text-2">
-                The AI planner key is not configured on this deployment — what you see below is
-                the site&apos;s generic fallback template, not a real AI plan.
-              </p>
-            )}
             {plan.plan.summary && (
               <p className="text-label leading-relaxed text-ut-text-2">{plan.plan.summary}</p>
             )}

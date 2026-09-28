@@ -48,16 +48,16 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900">5. Cookies</h2>
+            <h2 className="text-lg font-semibold text-gray-900">5. Cookies &amp; Advertising</h2>
             <p className="mt-2">
-              We use cookies and similar tracking technologies to enhance your experience. You can control cookie preferences through your browser settings.
+              We use cookies and similar tracking technologies to enhance your experience. Some pages on this site also carry advertising served by a third-party advertising partner (currently Adsterra); such partners may use cookies or similar technologies to measure and serve ads, and advertising on this site is clearly distinguishable from editorial content. You can control cookie preferences through your browser settings.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900">6. Your Rights</h2>
             <p className="mt-2">
-              You have the right to access, correct, or delete your personal information. You may also opt out of marketing communications at any time. To exercise these rights, contact us at support@tripla.app.
+              You have the right to access, correct, or delete your personal information. You may also opt out of marketing communications at any time. See the <Link href="/contact" className="underline font-medium">Contact page</Link> for how these requests are handled.
             </p>
           </section>
 

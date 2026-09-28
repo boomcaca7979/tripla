@@ -203,13 +203,24 @@ export default function SearchBar({ onSearch, cityIndex = [], copy }: SearchBarP
     // ── Navigate to the trips workspace new-trip handoff ─────────────
     // destination 以稳定 slug 传递（按 city+country 匹配 DESTINATIONS 数据集；
     // 非 UTRIPLA 目的地城市无 slug → /trips/new 回到正常空选择态，不伪造）。
+    // 全部表单字段随 URL 透传（P2 漏斗）：origin/style/budget/interests/travelers
+    // 一并由目标页读入 Trip.preferences，不允许静默丢失。
     const slug = DESTINATIONS.find(
       (d) => d.city === destination.city && d.country === destination.country,
     )?.slug;
     const params = new URLSearchParams();
     if (slug) params.set("destination", slug);
+    else {
+      params.set("destinationCity", destination.city);
+      if (destination.country) params.set("destinationCountry", destination.country);
+    }
+    params.set("originCity", origin.city);
     params.set("startDate", departureDate);
     params.set("endDate", returnDate);
+    params.set("travelStyle", travelStyle);
+    params.set("budgetLevel", budgetLevel);
+    params.set("travelers", String(groupSize));
+    if (interests.length > 0) params.set("interests", interests.join(","));
 
     router.push(`/trips/new?${params.toString()}`);
   }, [

@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { useTravelStore } from "@/store/travel";
 import { useHydration } from "@/hooks/useHydration";
 import { useTranslation } from "@/lib/i18n";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 import TriplaLogo from "@/components/ui/TriplaLogo";
 import AccountLink, { AccountDrawerLinks } from "@/components/layout/AccountLink";
 import {
@@ -55,9 +54,6 @@ export default function Header() {
    * 于是浅色 Header 直接压在近黑页面上形成一道明显接缝。这里让它复用首页
    * 已经确认的同一套 Header 外观（HEADER_FULL_STATE_CLASS + ENV_DARK_TOKENS），
    * 不新增样式、不改变 Header 设计。
-   *
-   * 注意与 isHome 的区别：isHome 还控制 LanguageSwitcher 是否渲染（首页恒英文），
-   * 而 /trips 需要保留语言切换器 —— 因此两者分开判断。
    */
   const isDarkWorld = isHome || pathname === "/trips";
 
@@ -188,10 +184,6 @@ export default function Header() {
               <path d="M21 21l-4.35-4.35" />
             </svg>
           </Link>
-
-          {/* 语言切换器只在非首页渲染：首页 UI 恒为英文（面向国际用户），
-              若在首页展示"中文"选项会与英文界面混排。其余路由行为不变。 */}
-          {!isHome && <LanguageSwitcher />}
 
           {hydrated && (
             <>

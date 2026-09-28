@@ -276,11 +276,17 @@ function extractCuisine(p: GeoapifyPlaceProperties): string | undefined {
   const suffix = fromCategory?.split(".")[2];
   const cuisine = p.catering?.cuisine ?? suffix;
   if (!cuisine) return undefined;
-  // OSM cuisine 可能是 "asian;curry;oriental" 分号列表 → 分词、首字母大写、忠实展示。
+  // OSM cuisine 可能是 "asian;curry" 分号列表或机器枚举（"fine_dining"）→ 分词、
+  // 下划线还原为空格、首字母大写，忠实展示（不改写语义，只做可读化）。
   return cuisine
     .split(";")
     .filter(Boolean)
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .map((w) =>
+      w
+        .replace(/_/g, " ")
+        .trim()
+        .replace(/^\w/, (c) => c.toUpperCase()),
+    )
     .join(" · ");
 }
 
@@ -307,7 +313,9 @@ function toRestaurant(p: GeoapifyPlaceProperties): Restaurant | null {
     ...optionalRating(p),
     priceLevel: optionalPriceLevel(p),
     // Geoapify Places 不返回照片 → imageUrl 恒缺省，UI 不显示图片。
-    mapUrl: `https://apis.map.qq.com/uri/v1/marker?marker=lat:${p.lat},lng:${p.lon};title:${encodeURIComponent(englishName ?? p.name)}`,
+    // 地图链接：OSM 全球可访问的坐标锚点（无需 key、不引入新第三方依赖）。
+    // 此前是 apis.map.qq.com（腾讯地图 URI）—— 对国际用户不可用，已移除。
+    mapUrl: `https://www.openstreetmap.org/?mlat=${p.lat}&mlon=${p.lon}#map=17/${p.lat}/${p.lon}`,
     source: p.datasource?.attribution ?? "© OpenStreetMap contributors",
   };
 }

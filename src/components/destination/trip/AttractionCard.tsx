@@ -161,9 +161,18 @@ export default function AttractionCard({
           />
         </div>
 
-        <div className="mt-5">
+        <div className="mt-5 flex flex-wrap items-center gap-2">
+          {/* CTA 统一（两层语义）：Save = 收藏到 Saved；Add to My Trip = 加入 My Trip。
+              此前同卡并存 3 个按钮（Add to My Trip / Save / Add to Trip），已收敛为这两个。 */}
+          <WorkspaceActions
+            kind="place"
+            title={attraction?.name ?? name}
+            city={city}
+            source={`Destination · ${city}`}
+            compact
+            saveOnly
+          />
           <AddToTripButton type="attraction" name={attraction?.name ?? name} />
-          <WorkspaceActions kind="place" title={attraction?.name ?? name} city={city} source={`Destination · ${city}`} compact />
         </div>
       </div>
     </article>

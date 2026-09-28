@@ -164,7 +164,23 @@ export default function HomeEnvironment({
     };
   }, []);
 
-  // 聚焦地点：目的地优先，其次用户所在地（严格分离两个状态）
+  // 聚焦地点：目的地优先，其次用户所在地（严格分离两个状态）。
+  // 两者都不可用时 → 首页 featured 城市兜底（确定性、非随机；标签明确标注
+  // "featured"）：hero 的 Local time / Weather 读数保持有信息量，不再长期
+  // 显示大面积 "Unavailable" 空白（P8）。天气仍取该城市真实实时数据。
+  const featuredFallback = useMemo<HomeFocus | null>(() => {
+    const p = places[0];
+    if (!p) return null;
+    return {
+      id: `featured:${p.slug}`,
+      kind: "destination",
+      label: `${p.city} (featured)`,
+      timeZone: p.timezone,
+      latitude: p.latitude,
+      longitude: p.longitude,
+    };
+  }, [places]);
+
   const focus = useMemo<HomeFocus | null>(() => {
     if (destination) {
       return {
@@ -186,8 +202,8 @@ export default function HomeEnvironment({
         longitude: userLocation.longitude,
       };
     }
-    return null;
-  }, [destination, userLocation]);
+    return featuredFallback;
+  }, [destination, userLocation, featuredFallback]);
 
   const focusTimeZone = focus?.timeZone ?? null;
   const focusLat = focus?.latitude ?? null;

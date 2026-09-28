@@ -3,15 +3,15 @@
 /**
  * WorkspaceActions — Destinations / Guides 页面的最小工作区接入（蓝图 #9/#10/#11）。
  *
- * 两个动作：
- *  - Save        → 全局 Saved（幂等去重：同 title 大小写不敏感 + 同 kind）
- *  - Add to Trip → Modal 选择用户 Trip（或新建）→ 写入该 Trip
+ * 两个动作（命名与其他页面统一，同一动作不允许第二种名字）：
+ *  - Save            → 全局 Saved（幂等去重：同 title 大小写不敏感 + 同 kind）
+ *  - Add to My Trip  → Modal 选择用户 Trip（或新建）→ 写入该 Trip
  *
  * 本组件只声明**意图**；落到 localStorage 还是 Supabase 由
  * `@/lib/travel-workspace` 按当前身份解析（见该模块的边界说明）。
  * 因此这里既没有 localStorage、也没有 Supabase 的调用。
  *
- * 失败不置成功态：Save 失败时按钮停在可重试的形态，Add to Trip 失败时在
+ * 失败不置成功态：Save 失败时按钮停在可重试的形态，Add to My Trip 失败时在
  * 弹层里给出原因，而不是显示 "✓ Added" 骗用户。
  */
 
@@ -49,6 +49,7 @@ export default function WorkspaceActions({
   source,
   sourceUrl,
   compact = false,
+  saveOnly = false,
 }: {
   kind: WorkspaceKind;
   title: string;
@@ -58,6 +59,11 @@ export default function WorkspaceActions({
   source: string;
   sourceUrl?: string;
   compact?: boolean;
+  /**
+   * 只渲染两层语义中的 Save（页面已有自己的 "Add to My Trip" 时使用，
+   * 避免同名同义的第二个按钮同时出现）。
+   */
+  saveOnly?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [trips, setTrips] = useState<TripOption[]>([]);
@@ -182,14 +188,16 @@ export default function WorkspaceActions({
           <span aria-hidden="true">{savedDone ? "✓" : saveFailed ? "↻" : "🔖"}</span>
           {savedDone ? "Saved" : saveFailed ? "Retry save" : "Save"}
         </button>
-        <button
-          type="button"
-          onClick={() => void openModal()}
-          className={`inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-ut-border-strong transition-colors hover:bg-ut-surface-hover ${sizeCls} text-ut-text`}
-        >
-          <span aria-hidden="true">+</span>
-          Add to Trip
-        </button>
+        {!saveOnly && (
+          <button
+            type="button"
+            onClick={() => void openModal()}
+            className={`inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-ut-border-strong transition-colors hover:bg-ut-surface-hover ${sizeCls} text-ut-text`}
+          >
+            <span aria-hidden="true">+</span>
+            Add to My Trip
+          </button>
+        )}
       </span>
 
       {open && (
@@ -197,7 +205,7 @@ export default function WorkspaceActions({
           className="fixed inset-0 z-[80] flex items-center justify-center bg-black/40 p-4"
           role="dialog"
           aria-modal="true"
-          aria-label="Add to trip"
+          aria-label="Add to My Trip"
           onClick={() => setOpen(false)}
         >
           <div
@@ -205,7 +213,7 @@ export default function WorkspaceActions({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-4 flex items-center justify-between">
-              <p className="text-[1.0625rem] font-bold tracking-[-0.01em] text-[#17242a]">Add to trip</p>
+              <p className="text-[1.0625rem] font-bold tracking-[-0.01em] text-[#17242a]">Add to My Trip</p>
               <button
                 type="button"
                 onClick={() => setOpen(false)}

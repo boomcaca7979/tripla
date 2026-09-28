@@ -19,7 +19,9 @@ import { trackEvent } from "@/lib/analytics";
  * `@/lib/workspace` 的两条通道——
  *  - 未登录：localStorage（这台设备）；
  *  - 已登录：Supabase（唯一 source of truth，按 auth.uid() 由 RLS 隔离）。
- * 两条通道之间没有任何自动搬运：匿名期间的草稿不会因为登录而被上传。
+ * 两条通道之间的搬运只有一个入口：登录后首次加载云端时做一次性 guest → cloud
+ * 迁移（src/lib/workspace/migration.ts，同 ID 去重、失败显式报错）；登出时
+ * 浏览器里的匿名副本原样保留。
  */
 
 import Link from "next/link";
@@ -47,10 +49,16 @@ import { DESTINATIONS } from "@/data/destinations";
 import { useSession } from "@/lib/use-session";
 import {
   commitWorkspace,
+  diffWorkspace,
+  flattenWorkspace,
+  hasChanges,
+  idScope,
   loadWorkspace,
   modeKey,
   type WorkspaceMode,
 } from "@/lib/workspace";
+import { applyRemoteChanges } from "@/lib/workspace/remote";
+import { mergeGuestWorkspace } from "@/lib/workspace/migration";
 
 type View =
   | { name: "trips" }
@@ -80,16 +88,28 @@ function describeSyncError(error: unknown): string {
 }
 
 export default function TripsWorkspace({
-  /** 来自 /trips/new 的预填（destination slug + 日期）；存在时自动打开 New Trip 表单。 */
+  /** 来自 /trips/new 的预填（destination + 日期 + 首页表单偏好）；存在时自动打开 New Trip 表单。 */
   prefill = null,
 }: {
-  prefill?: { destinationId: string; startDate?: string; endDate?: string } | null;
+  prefill?: {
+    destinationId?: string;
+    destinationLabel?: string;
+    startDate?: string;
+    endDate?: string;
+    preferences?: {
+      originCity?: string;
+      travelStyle?: string;
+      budgetLevel?: string;
+      interests?: string[];
+      travelers?: number;
+    };
+  } | null;
 } = {}) {
   const [state, dispatch] = useReducer(workspaceReducer, undefined, seedWorkspace);
   const [view, setView] = useState<View>({ name: "trips" });
-  // /trips/new 深链：带有效 destination 预填时自动打开创建表单
+  // /trips/new 深链：带有效 destination 或任一偏好预填时自动打开创建表单
   const [newTripOpen, setNewTripOpen] = useState(
-    Boolean(prefill && prefill.destinationId),
+    Boolean(prefill && (prefill.destinationId || prefill.destinationLabel || prefill.preferences)),
   );
   const { userId, ready: sessionReady } = useSession();
 
@@ -157,6 +177,33 @@ export default function TripsWorkspace({
       try {
         const loadedState = await loadWorkspace(mode);
         if (seq !== loadSeqRef.current) return; // 更新的加载已开始 → 丢弃这次结果
+
+        // 登录态（remote）下尝试一次性 guest → cloud 迁移（P3 漏斗修复）：
+        // 浏览器里的匿名草稿（trip/places/stays/route/expenses）在登录后并入云端，
+        // 同 ID 去重；上传失败显式报错阻断（匿名数据原地保留，可重试），不假装成功。
+        if (mode.kind === "remote") {
+          const migratedBaseline = migrateWorkspaceState(loadedState);
+          const migration = mergeGuestWorkspace(migratedBaseline);
+          if (migration) {
+            const scope = idScope(mode.userId);
+            const changes = diffWorkspace(
+              flattenWorkspace(scope, migratedBaseline),
+              flattenWorkspace(scope, migration.merged),
+            );
+            if (hasChanges(changes)) {
+              await applyRemoteChanges(mode.userId, changes);
+              if (seq !== loadSeqRef.current) return;
+            }
+            if (seq !== loadSeqRef.current) return;
+            baselineRef.current = { identity, mode, state: migration.merged };
+            dispatch({ type: "RESTORE_STATE", state: migration.merged });
+            setView({ name: "trips" });
+            setWriteError(null);
+            setLoadResult({ identity, error: null });
+            return;
+          }
+        }
+
         baselineRef.current = {
           identity,
           mode,
@@ -406,7 +453,19 @@ function TripsListView({
   newTripOpen: boolean;
   setNewTripOpen: (v: boolean) => void;
   onOpenTrip: (tripId: string) => void;
-  prefill?: { destinationId: string; startDate?: string; endDate?: string } | null;
+  prefill?: {
+    destinationId?: string;
+    destinationLabel?: string;
+    startDate?: string;
+    endDate?: string;
+    preferences?: {
+      originCity?: string;
+      travelStyle?: string;
+      budgetLevel?: string;
+      interests?: string[];
+      travelers?: number;
+    };
+  } | null;
 }) {
   const current = state.trips.filter((t) => t.status === "current");
   const upcoming = state.trips.filter((t) => t.status === "upcoming");
@@ -429,8 +488,10 @@ function TripsListView({
           <NewTripForm
             dispatch={dispatch}
             initialDestinationId={prefill?.destinationId ?? null}
+            initialDestinationLabel={prefill?.destinationLabel}
             initialStartDate={prefill?.startDate ?? ""}
             initialEndDate={prefill?.endDate ?? ""}
+            initialPreferences={prefill?.preferences}
             onCreated={(tripId) => {
               trackEvent({ name: "trip_create", authenticated: true, source: "trips_new" });
               setNewTripOpen(false);
@@ -1040,10 +1101,12 @@ function AccountChip({ active, onClick }: { active: boolean; onClick: () => void
   );
 }
 
-// ── View：Account（真实会话；账号资料同步尚未开放，如实说明） ────────
+// ── View：Account（真实会话；存储位置如实描述，不虚构资料编辑） ────────
 
 function AccountView() {
   const { email, ready, busy, signOut } = useSession();
+  // 存储位置如实描述：登录 = 云端（Supabase，RLS 隔离）；未登录 = 本浏览器。
+  const cloudAccount = ready && Boolean(email);
 
   return (
     <div>
@@ -1074,7 +1137,9 @@ function AccountView() {
             </div>
 
             <p className={`mt-5 ${T_META}`}>
-              Your trips, saved places, expenses and inbox are stored in this browser on this device.
+              {cloudAccount
+                ? "Your trips, saved places, expenses and inbox are synced to your account and available on any device you sign in from."
+                : "Your trips, saved places, expenses and inbox are stored in this browser on this device."}
             </p>
 
             <div className="mt-5">
@@ -1111,16 +1176,28 @@ function NewTripForm({
   onCreated,
   onCancel,
   initialDestinationId = null,
+  initialDestinationLabel,
   initialStartDate = "",
   initialEndDate = "",
+  initialPreferences,
 }: {
   dispatch: (action: WorkspaceAction) => void;
   onCreated: (tripId: string) => void;
   onCancel: () => void;
   /** /trips/new 深链预填：destination slug（无效 slug → 正常空选择态，不伪造）。 */
   initialDestinationId?: string | null;
+  /** 无法映射到 UTRIPLA Destination 的自由城市名（显示用，不伪造 destinationId）。 */
+  initialDestinationLabel?: string;
   initialStartDate?: string;
   initialEndDate?: string;
+  /** 首页表单带来的规划偏好（origin/style/budget/interests/travelers），随 CREATE_TRIP 落库。 */
+  initialPreferences?: {
+    originCity?: string;
+    travelStyle?: string;
+    budgetLevel?: string;
+    interests?: string[];
+    travelers?: number;
+  };
 }) {
   // 预填：slug → DestinationChoice（toChoice 内部校验必须命中真实 DESTINATIONS）
   const [dest, setDest] = useState<DestinationChoice | null>(() =>
@@ -1130,6 +1207,8 @@ function NewTripForm({
   const [currency, setCurrency] = useState("CNY");
   const [startDate, setStartDate] = useState(initialStartDate);
   const [endDate, setEndDate] = useState(initialEndDate);
+
+  const prefTravelers = initialPreferences?.travelers;
 
   const submit = () => {
     // 蓝图 #7：只允许从真实 Destination 创建（destinationId 必填）
@@ -1142,20 +1221,61 @@ function NewTripForm({
       destinationId: dest.id,
       startDate,
       endDate,
-      travelers: 1,
+      travelers: prefTravelers ?? 1,
       name: tripName.trim() || undefined,
       currency,
+      preferences: initialPreferences,
     });
     onCreated(tripId);
   };
+
+  // 非数据集城市的只读展示（如有）；数据集城市仍走 DestinationField 正常编辑
+  const hasFreeLabel = Boolean(initialDestinationLabel && !dest);
 
   return (
     <div>
       <div className="grid gap-4">
         <div className="block">
           <span className={`mb-1.5 block ${T_META}`}>Destination</span>
+          {hasFreeLabel && (
+            <p className="mb-1.5 rounded-ut-sm border border-[#e3e8e7] bg-[#f6f8f7] px-3 py-2.5 text-[0.875rem] text-ut-text">
+              {initialDestinationLabel}
+            </p>
+          )}
           <DestinationField value={dest} onChange={setDest} />
         </div>
+        {initialPreferences && (
+          <div className="flex flex-wrap gap-2">
+            {initialPreferences.originCity && (
+              <span className="rounded-full border border-[#e8ecec] bg-[#f6f8f7] px-3 py-1.5 text-[0.6875rem] font-medium text-ut-text-2">
+                From {initialPreferences.originCity}
+              </span>
+            )}
+            {initialPreferences.travelStyle && (
+              <span className="rounded-full border border-[#e8ecec] bg-[#f6f8f7] px-3 py-1.5 text-[0.6875rem] font-medium capitalize text-ut-text-2">
+                {initialPreferences.travelStyle} style
+              </span>
+            )}
+            {initialPreferences.budgetLevel && (
+              <span className="rounded-full border border-[#e8ecec] bg-[#f6f8f7] px-3 py-1.5 text-[0.6875rem] font-medium capitalize text-ut-text-2">
+                {initialPreferences.budgetLevel} budget
+              </span>
+            )}
+            {typeof initialPreferences.travelers === "number" && initialPreferences.travelers > 1 && (
+              <span className="rounded-full border border-[#e8ecec] bg-[#f6f8f7] px-3 py-1.5 text-[0.6875rem] font-medium text-ut-text-2">
+                {initialPreferences.travelers} travelers
+              </span>
+            )}
+            {(initialPreferences.interests ?? []).map((i) => (
+              <span
+                key={i}
+                className="rounded-full border border-[#e8ecec] bg-[#f6f8f7] px-3 py-1.5 text-[0.6875rem] font-medium capitalize text-ut-text-2"
+              >
+                {i}
+              </span>
+            ))}
+          </div>
+        )}
         <label className="block">
           <span className={`mb-1.5 block ${MONO_META}`}>Trip name (optional)</span>
           <input

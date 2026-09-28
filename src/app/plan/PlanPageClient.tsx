@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useCallback } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { useItinerary } from "@/hooks/useItinerary";
 import { useFlightSearch } from "@/hooks/useFlightSearch";
@@ -65,6 +66,23 @@ function countryNameToCode(name: string): string {
 
 export default function PlanPageClient() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+
+  // 无参数时立即替换到正式规划入口（/trips/new）—— 不停留在死胡同页（P5）。
+  useEffect(() => {
+    const departureDate = searchParams.get("departureDate");
+    const returnDate = searchParams.get("returnDate");
+    const destinationRaw = searchParams.get("destination");
+    let hasDestination = false;
+    try {
+      hasDestination = Boolean(destinationRaw && JSON.parse(destinationRaw));
+    } catch {
+      hasDestination = false;
+    }
+    if (!hasDestination || !departureDate || !returnDate) {
+      router.replace("/trips/new");
+    }
+  }, [searchParams, router]);
 
   // ── Parse URL params ─────────────────────────────────────────────
   const originRaw = searchParams.get("origin") ?? "null";
@@ -185,25 +203,21 @@ export default function PlanPageClient() {
     );
   }, [destination, departureDate, returnDate, weather.fetchForDestination]);
 
-  // ── Empty state ───────────────────────────────────────────────────
-  // 无参数进入时给出可恢复的用户流程：页面主标题 + 明确的返回首页入口。
-  // （此前只有两行说明文字，main 内既无 h1 也无任何链接/按钮 —— 用户被"告知"
-  //  回首页却没有任何可供性。带参数的 /plan 完全不受影响。）
+  // ── Empty state → 统一规划入口（P5） ────────────────────────────────
+  // 无参数进入 /plan 不再是死胡同：直接进入正式 trip planner（/trips/new）。
+  // 带参数的 /plan 完全不受影响（保留原有 in-page 工具作为深链承接）。
   if (!travelPlanInput) {
     return (
       <div className="flex flex-col items-center gap-3 py-20 text-center">
-        <h1 className="text-2xl font-semibold text-gray-700">Plan a trip</h1>
-        <p className="mt-1 text-lg font-medium text-gray-500">
-          No search parameters found.
-        </p>
-        <p className="text-sm text-gray-400">
-          Go back to the homepage and search for a trip.
+        <h1 className="text-2xl font-semibold text-gray-700">Opening your trip planner…</h1>
+        <p className="mt-1 text-sm text-gray-400">
+          Taking you to the trip planner. If nothing happens, continue manually.
         </p>
         <Link
-          href="/"
+          href="/trips/new"
           className="mt-4 inline-flex min-h-[44px] items-center gap-2 rounded-md border border-gray-300 px-5 text-sm font-medium text-gray-700 transition-colors hover:border-gray-400 hover:text-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400"
         >
-          Back to homepage
+          Open the trip planner
           <span aria-hidden="true">→</span>
         </Link>
       </div>

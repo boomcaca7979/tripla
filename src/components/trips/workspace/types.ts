@@ -132,6 +132,19 @@ export interface ChecklistItem {
 
 export type TripStatus = "current" | "upcoming" | "past";
 
+/**
+ * 首页 SearchBar 收集的规划偏好（漏斗透传）。
+ * 与 flight 同模式的小 JSONB 对象：整体随 Trip 行存储，不值得单独建表。
+ * origin 存城市显示名（搜索出处），interests 存合法 TravelInterest 值。
+ */
+export interface TripPreferences {
+  originCity?: string;
+  travelStyle?: string;
+  budgetLevel?: string;
+  interests?: string[];
+  travelers?: number;
+}
+
 export interface Trip {
   id: string;
   destination: string;
@@ -152,6 +165,8 @@ export interface Trip {
   currency: string;
   /** 用户录入的航班（无 API，手动登记；Itinerary Day 1 显示） */
   flight?: FlightInfo;
+  /** 首页表单带来的规划偏好（origin/style/budget/interests；JSONB 随行存储） */
+  preferences?: TripPreferences;
   /** Planned：计划预算 */
   budgetPlanned: number;
   flightBooked: boolean;
@@ -228,11 +243,11 @@ export interface ActivityItem {
 // ── Reducer 动作 ──────────────────────────────────────────────────────
 
 export type WorkspaceAction =
-  | { type: "CREATE_TRIP"; id?: string; destination: string; startDate: string; endDate: string; travelers: number; name?: string; currency?: string; destinationId?: string }
+  | { type: "CREATE_TRIP"; id?: string; destination: string; startDate: string; endDate: string; travelers: number; name?: string; currency?: string; destinationId?: string; preferences?: TripPreferences }
   | { type: "DELETE_TRIP"; tripId: string }
   | { type: "LOAD_DEMO" }
   | { type: "SET_FLIGHT"; tripId: string; flight?: FlightInfo }
-  | { type: "EDIT_TRIP"; tripId: string; destination?: string; startDate?: string; endDate?: string; name?: string; currency?: string; destinationId?: string }
+  | { type: "EDIT_TRIP"; tripId: string; destination?: string; startDate?: string; endDate?: string; name?: string; currency?: string; destinationId?: string; preferences?: TripPreferences }
   | { type: "RESTORE_STATE"; state: WorkspaceState }
   | { type: "ADD_PLACE"; tripId: string; name: string; kind: PlaceKind; area?: string; note?: string }
   | { type: "EDIT_PLACE"; tripId: string; placeId: string; name: string; kind: PlaceKind; area?: string; note?: string; status: PlaceStatus }

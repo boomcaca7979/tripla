@@ -19,6 +19,8 @@ import GuideHero from "@/components/guides/GuideHero";
 import WorkspaceActions from "@/components/destination/trip/WorkspaceActions";
 import GuideQuickFacts from "@/components/guides/GuideQuickFacts";
 import GuideContents from "@/components/guides/GuideContents";
+import AdsterraNativeBanner from "@/components/ads/AdsterraNativeBanner";
+import ContentCommerce from "@/components/content/ContentCommerce";
 import {
   resolveGuideDestination,
   guideKind,
@@ -348,6 +350,12 @@ export default async function GuideDetailPage({
             </div>
           </InnerSection>
         ))}
+
+        {/* 广告位（Native Banner，独立模块，不进 Hero/首段） */}
+        <AdsterraNativeBanner />
+
+        {/* 商业入口（真实联盟链路，与正文相关的目的地；Sponsored 标注明确） */}
+        {destination && <ContentCommerce destination={destination} />}
 
         {/* What to know（实用规划信息，真实数据） */}
         <InnerSection title="What to know before you go" eyebrow="Before you go">

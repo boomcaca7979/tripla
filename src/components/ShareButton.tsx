@@ -18,7 +18,7 @@ export default function ShareButton({ itinerary, flights }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const handleShare = useCallback(async () => {
-    const link = createShareableLink(itinerary, flights);
+    const link = await createShareableLink(itinerary, flights);
 
     try {
       await navigator.clipboard.writeText(link);

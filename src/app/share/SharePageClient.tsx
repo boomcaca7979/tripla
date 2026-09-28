@@ -2,7 +2,8 @@
 
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { decodeShareData } from "@/lib/share";
+import { useEffect, useState } from "react";
+import { decodeShareData, type SharedData } from "@/lib/share";
 import ItineraryTimeline from "@/components/itinerary/ItineraryTimeline";
 import type { GenerationStep } from "@/components/itinerary/ItineraryTimeline";
 import ErrorBoundary from "@/components/ui/ErrorBoundary";
@@ -13,6 +14,23 @@ import FlightList from "@/components/flight/FlightList";
 export default function SharePageClient() {
   const searchParams = useSearchParams();
   const dataParam = searchParams.get("data");
+  // decodeShareData 现为 async（压缩载荷需 DecompressionStream）：
+  // 在 effect 中解码一次，绝不阻塞首帧。
+  const [shared, setShared] = useState<SharedData | null | "decoding">(dataParam ? "decoding" : null);
+
+  useEffect(() => {
+    if (!dataParam) return;
+    let alive = true;
+    // 异步首个 tick：解码是 Promise（压缩载荷需 DecompressionStream），
+    // 不在 effect 内同步 setState（防级联渲染）。
+    decodeShareData(decodeURIComponent(dataParam))
+      .then((result) => {
+        if (alive) setShared(result);
+      });
+    return () => {
+      alive = false;
+    };
+  }, [dataParam]);
 
   if (!dataParam) {
     return (
@@ -34,7 +52,14 @@ export default function SharePageClient() {
     );
   }
 
-  const shared = decodeShareData(decodeURIComponent(dataParam));
+  if (shared === "decoding") {
+    return (
+      <div className="flex flex-col items-center gap-4 py-20 text-center">
+        <div className="text-5xl">⏳</div>
+        <h1 className="text-2xl font-bold text-gray-900">Loading shared itinerary…</h1>
+      </div>
+    );
+  }
 
   if (!shared || !shared.itinerary) {
     return (

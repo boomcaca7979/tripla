@@ -7,6 +7,8 @@ import {
   type Destination,
 } from "@/data/destinations";
 import { TRIPS } from "@/data/trips";
+import AdsterraNativeBanner from "@/components/ads/AdsterraNativeBanner";
+import ContentCommerce from "@/components/content/ContentCommerce";
 
 // ── Static params ─────────────────────────────────────────────────────
 
@@ -363,6 +365,12 @@ export default async function TravelBudgetPage({
             <li>Carry {dest.currency} in cash for small vendors that don&apos;t accept cards.</li>
           </ul>
         </section>
+
+        {/* 商业入口（真实联盟链路；Sponsored 标注明确，不进首段） */}
+        <ContentCommerce destination={dest} />
+
+        {/* 广告位（Native Banner，独立模块，不进 Hero/首段） */}
+        <AdsterraNativeBanner />
 
         {/* Related trips */}
         {relatedTrips.length > 0 && (

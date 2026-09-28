@@ -1,18 +1,10 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-  type ReactNode,
-} from "react";
-import { usePathname } from "next/navigation";
+import { createContext, useContext, useCallback, type ReactNode } from "react";
 
 // ── Types ────────────────────────────────────────────────────────────
 
-export type Locale = "en" | "zh";
+export type Locale = "en";
 
 type TranslationValue = string | { [key: string]: TranslationValue };
 type TranslationDict = { [key: string]: TranslationValue };
@@ -51,6 +43,7 @@ const en: TranslationDict = {
     budget: "Travel Budget",
     plan: "Plan a Trip",
     share: "Share",
+    contact: "Contact",
     privacy: "Privacy Policy",
     terms: "Terms of Service",
     affiliates:
@@ -140,111 +133,6 @@ const en: TranslationDict = {
   },
 };
 
-const zh: TranslationDict = {
-  nav: {
-    home: "首页",
-    destinations: "目的地",
-    atlas: "世界地图",
-    account: "账户",
-    signIn: "登录",
-    createAccount: "注册",
-    signOut: "退出登录",
-    comingSoon: "即将推出",
-  },
-
-  footer: {
-    rights: "保留所有权利。",
-    home: "首页",
-    poweredBy: "技术支持",
-    tagline: "发现下一个想消失的地方。",
-    discover: "发现",
-    travel: "旅行",
-    tools: "工具",
-    about: "关于",
-    travelStyles: "旅行风格",
-    budget: "旅行预算",
-    plan: "规划旅程",
-    share: "分享",
-    privacy: "隐私政策",
-    terms: "服务条款",
-    affiliates:
-      "本站部分链接为联盟推广链接——通过它们预订，我们可能获得佣金，费用不会因此增加。",
-  },
-
-  hero: {
-    title1: "聪明规划。",
-    title2: "更好旅行。",
-    tagline: "别想太多，交给 tripla。",
-    description:
-      "AI 驱动的旅行规划，整合实时航班数据、智能天气评分和个性化行程——一站式搞定。",
-  },
-
-  search: {
-    from: "出发地",
-    to: "目的地",
-    fromPlaceholder: "城市或机场…",
-    toPlaceholder: "城市或机场…",
-    travelers: "出行人数",
-    travelStyle: "旅行风格",
-    budget: "预算",
-    interests: "兴趣",
-    planMyTrip: "规划我的旅行",
-    errorOriginDest: "请选择出发地和目的地机场。",
-    errorDates: "请选择出发和返回日期。",
-    relaxed: "休闲",
-    active: "活力",
-    cultural: "文化",
-    foodie: "美食",
-    adventure: "探险",
-    budgetLevel: "经济",
-    midRange: "中档",
-    luxury: "豪华",
-    museums: "博物馆与画廊",
-    nature: "自然与户外",
-    food: "美食与饮品",
-    shopping: "购物",
-    nightlife: "夜生活",
-    history: "历史与地标",
-    sports: "运动",
-    beaches: "海滩与海岸",
-  },
-
-  aiShowcase: {
-    title: "AI 驱动的旅行规划",
-    subtitle: "三大核心能力，让行程规划毫不费力",
-    smartItinerary: "AI 智能行程",
-    smartItineraryDesc:
-      "AI 根据你的偏好和实时天气生成每日行程安排。",
-    realTimeData: "实时数据",
-    realTimeDataDesc: "实时航班价格、天气预报和汇率，尽在指尖。",
-    flexiblePlanning: "灵活规划",
-    flexiblePlanningDesc:
-      "改变主意了？调整日期、预算或风格，即刻重新规划。",
-    startPlanning: "立即开始规划",
-  },
-
-  itineraryPreview: {
-    title: "热门目的地",
-    subtitle: "预览真实行程——看看 tripla 能为你创建什么",
-    days: "天",
-    est: "预估",
-    day: "第",
-    planWithTemplate: "使用此模板规划",
-    templateHint: "自动填入目的地和偏好——只需选择日期",
-    templateApplied: "模板已应用！选择日期后点击规划我的旅行",
-    morning: "上午",
-    afternoon: "下午",
-    evening: "晚上",
-  },
-
-  lang: {
-    en: "English",
-    zh: "中文",
-  },
-};
-
-const DICTS: Record<Locale, TranslationDict> = { en, zh };
-
 // ── Helper: nested key access ────────────────────────────────────────
 
 function get(dict: TranslationDict, path: string): string {
@@ -262,6 +150,12 @@ function get(dict: TranslationDict, path: string): string {
 
 // ── Context ──────────────────────────────────────────────────────────
 
+/**
+ * uTripla 是 English international travel site。历史上曾有不完整的 en/zh
+ * 双语开关（只覆盖导航/footer，正文仍是英文）—— 已连同 zh 词条与切换入口
+ * 一起移除（假双语不留）。本模块保留 `t()` 的既有调用面（多处组件在用），
+ * 解析恒为英文词典；`setLocale` 保留为兼容空操作，不再有任何 UI 入口。
+ */
 interface I18nContextValue {
   locale: Locale;
   setLocale: (l: Locale) => void;
@@ -270,54 +164,13 @@ interface I18nContextValue {
 
 const I18nContext = createContext<I18nContextValue | null>(null);
 
-const STORAGE_KEY = "tripla-lang";
-
-/**
- * 首页（"/"）强制英文：首页面向国际用户，UI 语言不跟随已保存的 locale，
- * 因此不会在首页出现中文界面文案。其余路由行为完全不变（仍按 locale 渲染）。
- * 只影响 t() 的解析语言，不改写用户保存的偏好。
- */
-const ENGLISH_ONLY_ROUTES = new Set(["/"]);
-
 // ── Provider ─────────────────────────────────────────────────────────
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
-  const [locale, setLocaleState] = useState<Locale>("en");
-
-  // Read from localStorage on mount
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored === "zh" || stored === "en") {
-        // eslint-disable-next-line react-hooks/set-state-in-effect -- 从 localStorage 恢复语言（SSR 安全模式，官方推荐）
-        setLocaleState(stored);
-      }
-    } catch {
-      // SSR or storage unavailable
-    }
-  }, []);
-
-  const setLocale = useCallback((l: Locale) => {
-    try {
-      localStorage.setItem(STORAGE_KEY, l);
-    } catch {
-      // storage unavailable
-    }
-    setLocaleState(l);
-  }, []);
-
-  // 解析语言：首页恒为英文，其余路由 = 用户 locale。
-  const resolvedLocale: Locale =
-    ENGLISH_ONLY_ROUTES.has(pathname ?? "/") ? "en" : locale;
-
-  const t = useCallback(
-    (key: string) => get(DICTS[resolvedLocale], key),
-    [resolvedLocale],
-  );
+  const t = useCallback((key: string) => get(en, key), []);
 
   return (
-    <I18nContext.Provider value={{ locale, setLocale, t }}>
+    <I18nContext.Provider value={{ locale: "en", setLocale: () => {}, t }}>
       {children}
     </I18nContext.Provider>
   );

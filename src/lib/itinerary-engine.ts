@@ -143,8 +143,13 @@ export async function generateItinerary(
       let detail = `Itinerary API returned ${res.status}`;
       try {
         const errJson = await res.json();
-        if (errJson?.message) detail += `: ${errJson.message}`;
-        else if (errJson?.error) detail += `: ${typeof errJson.error === "string" ? errJson.error : JSON.stringify(errJson.error)}`;
+        const nested =
+          errJson?.error && typeof errJson.error === "object"
+            ? (errJson.error as { message?: string }).message
+            : undefined;
+        if (nested) detail = nested;
+        else if (errJson?.message) detail = `${detail}: ${errJson.message}`;
+        else if (typeof errJson?.error === "string") detail = `${detail}: ${errJson.error}`;
       } catch {
         // ignore parse error for error response
       }

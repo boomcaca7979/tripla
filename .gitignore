@@ -45,3 +45,6 @@ next-env.d.ts
 
 # local app-registration artifact (WorkBuddy publish metadata, machine-local)
 .wbapp_*.genie
+
+# supabase cli transient state
+/supabase/.temp/

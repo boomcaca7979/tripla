@@ -78,6 +78,7 @@ export interface TripRow {
   end_date: string | null;
   currency: string;
   flight: Trip["flight"] | null;
+  preferences: Trip["preferences"] | null;
   budget_planned: number;
   flight_booked: boolean;
   /**
