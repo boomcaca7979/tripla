@@ -3,7 +3,9 @@ import type { Itinerary } from "../../../types/itinerary";
 import { generateId } from "../../../lib/utils";
 
 const GROQ_BASE_URL = "https://api.groq.com/openai/v1";
-const GROQ_MODEL = "llama-3.3-70b-versatile";
+// llama-3.3-70b-versatile 于 2026-08 起对 Developer 层下线（Groq 404 model_not_found），
+// 换成 Groq 当前文档主推的同级别模型。
+const GROQ_MODEL = "openai/gpt-oss-120b";
 
 /**
  * /api/itinerary — AI 行程生成。
