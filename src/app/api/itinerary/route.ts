@@ -2,6 +2,10 @@ import { buildSystemPrompt, buildUserMessage } from "../../../lib/itinerary-engi
 import type { Itinerary } from "../../../types/itinerary";
 import { generateId } from "../../../lib/utils";
 
+// gpt-oss-120b 生成完整 itinerary JSON 常规 7-8s，输出波动会逼近/超过
+// Vercel 默认 10s 函数上限（连接被杀 → 浏览器 "Failed to fetch"）。
+export const maxDuration = 60;
+
 const GROQ_BASE_URL = "https://api.groq.com/openai/v1";
 // llama-3.3-70b-versatile 于 2026-08 起对 Developer 层下线（Groq 404 model_not_found），
 // 换成 Groq 当前文档主推的同级别模型。
