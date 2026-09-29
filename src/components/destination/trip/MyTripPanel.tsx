@@ -43,19 +43,47 @@ const VALID_STYLES = ["relaxed", "active", "cultural", "foodie", "adventure"] as
 const VALID_BUDGETS = ["budget", "mid-range", "luxury"] as const;
 
 export default function MyTripPanel({ airport, travelStyle, interests }: MyTripPanelProps) {
-  const { city, items, days, setDays, remove, clear, hydrated, dailyBudget } = useMyTrip();
+  const { slug, city, items, days, setDays, remove, clear, hydrated, dailyBudget } = useMyTrip();
   const [plan, setPlan] = useState<PlanState>({ phase: "idle" });
   // 显式日期（P4 日期完整性）：绝不用"今天" fabricated 默认值。用户在面板里
   // 选择起止日期；若首页搜索恰好存的是本城市的参数，则自动采用真实搜索日期。
   const [dateStart, setDateStart] = useState("");
   const [dateEnd, setDateEnd] = useState("");
   const storedParams = useTravelStore((s) => s.searchParams);
+
+  // Trip.preferences（工作区同城市 Trip，handoff→CREATE_TRIP 写入、随工作区持久化
+  // 与 guest→cloud 迁移保留）是用户真实选择的第一权威来源；travel-store 的搜索
+  // 参数为次选；都缺失时才落到 destination 数据默认值。
+  const tripMatch = useMemo(() => {
+    if (typeof window === "undefined") return null;
+    try {
+      const v = JSON.parse(window.localStorage.getItem("utripla.trips.workspace.v5") ?? "null");
+      const trips: Array<{
+        destinationId?: string;
+        destination?: string;
+        startDate?: string;
+        endDate?: string;
+        preferences?: { travelStyle?: string; budgetLevel?: string; interests?: string[]; groupSize?: number; originCity?: string };
+      }> = v?.trips ?? [];
+      return (
+        trips.find(
+          (t) =>
+            (t.destinationId && t.destinationId === slug) ||
+            (t.destination && t.destination.toLowerCase() === city.toLowerCase()),
+        ) ?? null
+      );
+    } catch {
+      return null;
+    }
+    // 仅在清单 hydrate 后读一次：此时工作区数据已在页面加载时写入/回填。
+  }, [city, slug, hydrated]);
+
   const stored =
     hydrated && storedParams.destination?.city?.toLowerCase() === city.toLowerCase()
       ? storedParams
       : null;
-  const effStart = stored?.departureDate ?? dateStart;
-  const effEnd = stored?.returnDate ?? dateEnd;
+  const effStart = tripMatch?.startDate ?? stored?.departureDate ?? dateStart;
+  const effEnd = tripMatch?.endDate ?? stored?.returnDate ?? dateEnd;
   const datesValid =
     ISO_DATE.test(effStart) && ISO_DATE.test(effEnd) && effEnd >= effStart;
 
@@ -89,21 +117,35 @@ export default function MyTripPanel({ airport, travelStyle, interests }: MyTripP
         destination: airport,
         departureDate: effStart,
         returnDate: effEnd,
-        travelStyle: stored && VALID_STYLES.includes(stored.travelStyle as never)
-          ? (stored.travelStyle as (typeof VALID_STYLES)[number])
-          : travelStyle,
-        budgetLevel: stored && VALID_BUDGETS.includes(stored.budgetLevel as never)
-          ? (stored.budgetLevel as (typeof VALID_BUDGETS)[number])
-          : dailyBudget.amount <= 80
-            ? "budget"
-            : dailyBudget.amount <= 200
-              ? "mid-range"
-              : "luxury",
-        interests: stored && (stored.interests?.length ?? 0) > 0 ? stored.interests! : interests,
+        // 优先级：Trip.preferences（用户创建 trip 时的真实选择）>
+        // travel-store 搜索参数 > destination 数据默认值。
+        travelStyle: tripMatch?.preferences?.travelStyle && VALID_STYLES.includes(tripMatch.preferences.travelStyle as never)
+          ? (tripMatch.preferences.travelStyle as (typeof VALID_STYLES)[number])
+          : stored && VALID_STYLES.includes(stored.travelStyle as never)
+            ? (stored.travelStyle as (typeof VALID_STYLES)[number])
+            : travelStyle,
+        budgetLevel: tripMatch?.preferences?.budgetLevel && VALID_BUDGETS.includes(tripMatch.preferences.budgetLevel as never)
+          ? (tripMatch.preferences.budgetLevel as (typeof VALID_BUDGETS)[number])
+          : stored && VALID_BUDGETS.includes(stored.budgetLevel as never)
+            ? (stored.budgetLevel as (typeof VALID_BUDGETS)[number])
+            : dailyBudget.amount <= 80
+              ? "budget"
+              : dailyBudget.amount <= 200
+                ? "mid-range"
+                : "luxury",
+        interests: tripMatch?.preferences?.interests && tripMatch.preferences.interests.length > 0
+          ? (tripMatch.preferences.interests as TravelInterest[])
+          : stored && (stored.interests?.length ?? 0) > 0
+            ? stored.interests!
+            : interests,
         groupSize:
-          stored && typeof stored.groupSize === "number" && stored.groupSize >= 1
-            ? stored.groupSize
-            : 1,
+          tripMatch?.preferences?.groupSize && tripMatch.preferences.groupSize >= 1
+            ? tripMatch.preferences.groupSize
+            : stored && typeof stored.groupSize === "number" && stored.groupSize >= 1
+              ? stored.groupSize
+              : 1,
+        // origin 需要完整 Airport 对象（iata/icao/…）；preferences 里只有城市名，
+        // 不能伪造机场数据（NRT 事故教训）——仅沿用搜索参数里的真实机场。
         ...(stored?.origin ? { origin: stored.origin } : {}),
         tripItems: items.map((i) => ({
           name: i.name,
