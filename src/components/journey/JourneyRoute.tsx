@@ -20,7 +20,7 @@ import { legHours, type JourneyLeg } from "./journey-state";
  * 语义：
  *   本 strip 是"路线总览 / 索引对象"，其 leg 标签与下方 Journey Timeline 的
  *   H3 是同一批 place（会重复）。为避免同名标题重复出现，strip 标签一律使用
- *   纯文本（<span>），**不使用标题标签** —— 与 Guide 的"索引行标题保持链接文本"
+ *   纯文本（<span>），**不使用标题标签** —— 与"索引行标题保持链接文本"
  *   约定一致；真正的具名对象标题只在下方的 Timeline / Highlights 中出现。
  *
  * 响应式（§34）：

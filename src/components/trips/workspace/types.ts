@@ -277,7 +277,7 @@ export type WorkspaceAction =
   | { type: "ADD_EXPENSE"; tripId: string; expense: Omit<Expense, "id"> }
   | { type: "ADD_SAVED"; item: Omit<SavedItem, "id"> }
   /**
-   * 外部页（Destinations / Guides）的「Save + Add to Trip」原子写入意图。
+   * 外部页（Destinations）的「Save + Add to Trip」原子写入意图。
    *
    * 与 SAVED_ADD_TO_TRIP 的区别：这条收藏**可能尚不存在**——本动作先按
    * (kind, lower(title)) 幂等 upsert 到 Saved，再挂到 Trip 上，避免调用方

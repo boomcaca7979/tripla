@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTripBySlug, getTripSlugs, TRIPS, type Trip } from "@/data/trips";
 import { DESTINATIONS } from "@/data/destinations";
-import { getGuidesForCity } from "@/data/guides";
 import InnerBreadcrumb from "@/components/inner/InnerBreadcrumb";
 import InnerSection from "@/components/inner/InnerSection";
 import EditorialIndex from "@/components/inner/EditorialIndex";
@@ -35,10 +34,10 @@ import {
 /**
  * Trip Detail — JOURNEY EXPERIENCE（第三阶段）。
  *
- * 与 Guide / Destination 的关系（Product Role 三分）：
- *   Guide       = Editorial Experience（**阅读**：文章、章节、阅读进度）
+ * 与 Destination 的关系（Product Role）：
  *   Destination = Place Experience（**抵达**：我到了这个地方、当地状态、地点对象）
  *   Trip        = Journey Experience（**移动**：一段有起点、有段数、有节奏的旅程）
+ *   （原 Guide = Editorial Experience 角色随 Guides 栏目整体下线一并移除。）
  *
  * 因此本页的骨架是"旅程"的信息关系，而不是文章的章节关系：
  *   Journey Arrival（首屏，含唯一首屏 CTA「Plan this trip」）→ Quick facts（决策条）→
@@ -361,9 +360,6 @@ export default async function TripDetailPage({
     ...otherDests,
   ].slice(0, 3);
 
-  // Trip → Guide 内链（同 city 的 guide，最多 3）。
-  const cityGuides = getGuidesForCity(trip.city).slice(0, 3);
-
   // ── Journey practicalities：仅由真实字段构成（无任何模板建议）──────
   // Stage 3 §6.2 修订：Duration / Travel style / Region 已上移到首屏决策条
   // （TripQuickFacts），此处不再重复，只保留"出发前必须知道"的仪器读数。
@@ -627,20 +623,8 @@ export default async function TripDetailPage({
             label="Use this route in the planner"
           />
 
-          {/* Related — 全部为编辑式索引行（非卡片墙） */}
-          {cityGuides.length > 0 && (
-            <InnerSection title={`${trip.city} travel guides`} eyebrow="More guides">
-              <EditorialIndex
-                items={cityGuides.map((g) => ({
-                  href: `/guides/${g.slug}`,
-                  title: g.seoTitle,
-                  meta: g.readTime,
-                  description: g.excerpt,
-                }))}
-              />
-            </InnerSection>
-          )}
-
+          {/* Related — 全部为编辑式索引行（非卡片墙）
+              注：原「More guides」模块（同城 Guide 内链）随 Guides 栏目整体下线移除。 */}
           {relatedTrips.length > 0 && (
             <InnerSection title="Related journeys" eyebrow="Trips">
               <EditorialIndex

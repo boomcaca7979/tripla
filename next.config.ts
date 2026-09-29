@@ -1,11 +1,6 @@
 import type { NextConfig } from "next";
 import { DESTINATIONS } from "./src/data/destinations";
 
-/** 转义城市名中的正则特殊字符（如 "Bali (Denpasar)"）。 */
-function escapeRegex(s: string) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
 /** 城市名 → 连字符 slug（"New York" → "new-york"）。
  *  先做 Unicode NFD 分解去掉变音符号，否则 "Bogotá" 会退化成 "bogot"
  *  （á 被当作分隔符丢弃），推导出用户永远不会输入的错误别名。 */
@@ -105,14 +100,8 @@ const nextConfig: NextConfig = {
         destination: "/destinations/:slug",
         statusCode: 301,
       },
-      // 城市唯一页规则：/guides?city=<城市> 308 → /destinations/<slug>。
-      // config 级 redirect 保证爬虫/直链拿到真 308（页面级流式跳转仅作兜底）。
-      ...DESTINATIONS.map((d) => ({
-        source: "/guides",
-        has: [{ type: "query" as const, key: "city", value: escapeRegex(d.city) }],
-        destination: `/destinations/${d.slug}`,
-        statusCode: 308 as const,
-      })),
+      // 城市唯一页规则：/guides?city=<城市> 的 308 重定向随 Guides 栏目整体下线一并移除
+      // （/guides 及其查询变体现在一律 404，不再有 Guides 相关重定向规则）。
       // Destination slug 容错：连字符写法 301 → canonical slug（如
       // /destinations/new-york → /destinations/newyork）。canonical、sitemap、
       // 页面输出与 Destination Detail 设计均不变；alias 与真 slug 冲突时不生成。

@@ -50,7 +50,6 @@ export const metadata: Metadata = {
     "Wander a living atlas of destinations, stolen routes and field notes. No sign-up wall, no search box in your face — open it and see what pulls you in.",
   keywords: [
     "travel discovery",
-    "travel guides",
     "destinations",
     "trip routes",
     "flights",

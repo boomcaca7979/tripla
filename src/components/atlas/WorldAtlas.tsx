@@ -302,10 +302,11 @@ export default function WorldAtlas({ nodes }: { nodes: AtlasNode[] }) {
       )}
 
       {/* ── 顶部：页面文档结构用 sr-only h1（视觉不做 Hero 标题）+ 右上切换与搜索 ──
-          Stage 4：左上是**页面级轻量导航**（Collections → /guides, /trips），
-          让地球 Hub 有通往 Guides / Trips 的内容入口。它是同一行 chrome 里的两个
-          文字链接（不是面板、不是卡片、不加控件），md 以下隐藏（移动端改用
-          列表视图顶部的内容级入口），因此不改变"地球是唯一主角"的视觉层级。 */}
+          Stage 4：左上是**页面级轻量导航**（Collections → /trips），让地球 Hub 有
+          通往其余内容集合的入口。它是同一行 chrome 里的文字链接（不是面板、不是
+          卡片、不加控件），md 以下隐藏（移动端改用列表视图顶部的内容级入口），
+          因此不改变"地球是唯一主角"的视觉层级。
+          注：原 /guides 入口随 Guides 栏目下线移除。 */}
       <div className="pointer-events-none absolute inset-x-0 top-6 z-20 flex items-start justify-between gap-3 px-4 md:px-8">
         <h1 className="sr-only">Destinations — global destination discovery map</h1>
         <nav
@@ -316,15 +317,6 @@ export default function WorldAtlas({ nodes }: { nodes: AtlasNode[] }) {
             Collections
           </span>
           <span className="flex flex-wrap items-center gap-x-3">
-            <Link
-              href="/guides"
-              className="font-mono text-micro uppercase tracking-[0.14em] text-white/60 underline decoration-white/20 underline-offset-4 transition-colors duration-[var(--ut-dur-fast)] hover:text-white focus-visible:outline-2 focus-visible:outline-ut-accent"
-            >
-              Travel guides
-            </Link>
-            <span aria-hidden="true" className="font-mono text-micro text-white/20">
-              ·
-            </span>
             <Link
               href="/trips"
               className="font-mono text-micro uppercase tracking-[0.14em] text-white/60 underline decoration-white/20 underline-offset-4 transition-colors duration-[var(--ut-dur-fast)] hover:text-white focus-visible:outline-2 focus-visible:outline-ut-accent"
@@ -488,18 +480,10 @@ export default function WorldAtlas({ nodes }: { nodes: AtlasNode[] }) {
           <h2 className="font-display text-h2 text-white">All {nodes.length} destinations</h2>
         )}
         {/* Stage 4：列表视图里的内容级入口（移动端在 md 以下没有顶部 Collections，
-            这里补上；地图视图下本 section 为 sr-only，链接仍在 DOM 中可被爬取）。 */}
+            这里补上；地图视图下本 section 为 sr-only，链接仍在 DOM 中可被爬取）。
+            注：原 /guides 入口随 Guides 栏目下线移除。 */}
         {view === "list" && (
           <p className="mt-3 font-mono text-micro uppercase tracking-[0.14em] text-white/45">
-            <Link
-              href="/guides"
-              className="underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
-            >
-              Travel guides
-            </Link>
-            <span aria-hidden="true" className="mx-2 text-white/20">
-              ·
-            </span>
             <Link
               href="/trips"
               className="underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"

@@ -3,7 +3,7 @@
 /**
  * travel-workspace — /trips 工作区的**跨页面写入口适配层**。
  *
- * Destinations / Guides 等外部页面的 Save / Add to Trip 动作经由此模块落库。
+ * Destinations 等外部页面的 Save / Add to Trip 动作经由此模块落库。
  * 本模块存在的唯一理由是「把意图与持久化通道解耦」：
  *
  *   调用方只声明 **意图**（Save / Add to Trip / Create Trip / Inbox）与当前 **mode**
@@ -35,7 +35,7 @@ import type { WorkspaceMode } from "./workspace";
 // ── 按需加载 ───────────────────────────────────────────────────────────
 //
 // reducer（含 expenses 引擎）与 workspace 数据层合计约 85KB 源码。它们对
-// Destinations / Guides 的**首屏**没有价值——用户不点 Save 就不需要。因此只在
+// Destinations 等外部页的**首屏**没有价值——用户不点 Save 就不需要。因此只在
 // 第一次真正发生写/读动作时拉取，避免把所有外部页面的初始 JS 撑大。
 // （Supabase 客户端本身已由全局 Header 的 useSession 加载，这里不含额外成本。）
 

@@ -48,8 +48,6 @@ export default function PlaceWorld({
   facts,
   interests,
   planHref,
-  guidesCount,
-  guidesHref,
 }: {
   dest: Destination;
   normals: MonthNormal[];
@@ -63,10 +61,6 @@ export default function PlaceWorld({
   interests: string[];
   /** 主 CTA：规划器入口（带该目的地预填） */
   planHref: string;
-  /** 同城 guide 数（真实 hub 数据）；0 = 无 guide */
-  guidesCount: number;
-  /** 有 guide → 首篇同城 guide 文章；无 guide → null（不造假入口） */
-  guidesHref: string | null;
 }) {
   const hemisphere = hemisphereForLatitude(dest.airport.latitude);
   const [season] = useState<Season>(() => seasonForLatitudeMonth(new Date().getMonth(), hemisphere) ?? "autumn");
@@ -289,23 +283,18 @@ export default function PlaceWorld({
               Plan this trip
               <span aria-hidden="true">→</span>
             </Link>
-            {guidesHref ? (
-              <Link
-                href={guidesHref}
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-[4px] border border-white/25 px-5 font-mono text-label uppercase tracking-[0.14em] text-white/85 transition-colors duration-[var(--ut-dur-fast)] hover:border-white/60 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ut-accent"
-              >
-                Explore {guidesCount} {guidesCount === 1 ? "guide" : "guides"}
-                <span aria-hidden="true">→</span>
-              </Link>
-            ) : (
-              <a
-                href="#explore"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-[4px] border border-white/25 px-5 font-mono text-label uppercase tracking-[0.14em] text-white/85 transition-colors duration-[var(--ut-dur-fast)] hover:border-white/60 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ut-accent"
-              >
-                Explore this destination
-                <span aria-hidden="true">→</span>
-              </a>
-            )}
+            {/*
+              Hero 第二按钮：页内"进入本页探索层"（#explore 锚点）。
+              原「Explore N guides」出口随 Guides 栏目整体下线移除 —— 不保留空容器、
+              不死链；这里保留的正是该按钮在“无 Guide”情形下的既有降级形态。
+            */}
+            <a
+              href="#explore"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-[4px] border border-white/25 px-5 font-mono text-label uppercase tracking-[0.14em] text-white/85 transition-colors duration-[var(--ut-dur-fast)] hover:border-white/60 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ut-accent"
+            >
+              Explore this destination
+              <span aria-hidden="true">→</span>
+            </a>
           </div>
         </div>
       </div>

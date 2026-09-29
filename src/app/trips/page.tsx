@@ -5,7 +5,7 @@ import TripsWorkspace from "@/components/trips/workspace/TripsWorkspace";
  * /trips — Personal Travel Workspace（个人旅行工作台）。
  *
  * 产品定位（相对站点其余部分）：
- *   Destinations = 发现目的地 · Guides = 了解目的地 · Trips = 组织自己的旅行
+ *   Destinations = 发现目的地 · Trips = 组织自己的旅行
  *   Discover → Save → Compare → Organize → Plan → Travel → Track
  *
  * 与旧 /trips Hub（预制 280-trip 内容列表）的区别：本页是用户自己的工作台，
@@ -13,7 +13,7 @@ import TripsWorkspace from "@/components/trips/workspace/TripsWorkspace";
  * 预制 Trip 的 Detail 页（/trips/[slug]）不受影响，仍走既有 Journey Experience。
  *
  * 视觉：沿用 /trips 既有"暗底世界"（.ut-world + data-ut-page="trips" 的
- * ENV_DARK_TOKENS 墨色修复，见 globals.css），版式语言借 /guides 内页
+ * ENV_DARK_TOKENS 墨色修复，见 globals.css），版式语言沿用站内 inner 版式系统
  * （display 衬线标题 + 等宽 eyebrow + editorial 阅读宽度）。
  */
 

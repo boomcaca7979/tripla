@@ -11,7 +11,7 @@ import type { Destination } from "@/data/destinations";
  *       Instrument Serif H1 → destination context → **best-month signal** →
  *       compact climate / season readout。没有大图 hero、没有营销 CTA、
  *       没有"探索 / 开始规划"之类与决策无关的转化入口。
- *   §5  这不是 Destination 的 Place Hero，也不是 Guide 的 Editorial Hero：
+ *   §5  这不是 Destination 的 Place Hero，也不是 Editorial 文章页的 Hero：
  *       它不卖目的地，只回答"什么时候去"。因此刻意**没有图片**——
  *       一张漂亮的照片会让页面读起来像 marketing，而不是 decision support。
  *   §10 Environment Depth = 2：季节氛围只体现为一条季节色 hairline

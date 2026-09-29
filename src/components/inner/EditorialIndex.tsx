@@ -11,7 +11,7 @@ interface IndexItem {
 
 /**
  * EditorialIndex — 编辑式索引行（FINAL CONTRACT: "related = editorial index rows"）。
- * 用于相关指南 / 目的地 / 行程的内链，对应 Home GuidesStage 的 hairline 行模式。
+ * 用于相关目的地 / 行程的内链，对应 Home 各内容段落的 hairline 行模式。
  * 非卡片墙，避免 Card Contract 的"≤3 连续卡片"约束被触发。
  */
 export default function EditorialIndex({ items }: { items: IndexItem[] }) {

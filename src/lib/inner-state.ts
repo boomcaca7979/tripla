@@ -301,52 +301,6 @@ export function interestToVibe(key: string): Vibe | null {
   return null;
 }
 
-// ── Guide 模块分桶（FieldGuideModules 数据基座；真实 headings → 固定模块） ──
-
-export type GuideModule =
-  | "WHEN"
-  | "MOVE"
-  | "EAT"
-  | "STAY"
-  | "DONT_MISS"
-  | "GOOD_TO_KNOW"
-  | "NOTES";
-
-export const GUIDE_MODULE_ORDER: GuideModule[] = [
-  "WHEN",
-  "MOVE",
-  "EAT",
-  "STAY",
-  "DONT_MISS",
-  "GOOD_TO_KNOW",
-  "NOTES",
-];
-
-/**
- * 标题关键词 → 模块（大小写不敏感的子串匹配；表驱动，**首个命中**的桶优先于
- * 关键词出现顺序 —— 桶顺序即优先级，固定不可变）。未命中 → NOTES（保守降级，
- * 绝不硬塞进语义不符的模块）。
- */
-const MODULE_KEYWORDS: ReadonlyArray<readonly [GuideModule, readonly string[]]> = [
-  ["WHEN", ["when", "best time", "season", "weather", "climate", "month", "month to visit"]],
-  ["MOVE", ["move", "getting there", "getting around", "getting around", "transport", "flight", "train", "bus", "metro", "subway", "ferry", "airport", "arrival", "how to get"]],
-  ["EAT", ["eat", "food", "drink", "restaurant", "cuisine", "dining", "street food", "cafe", "coffee"]],
-  ["STAY", ["stay", "hotel", "accommodat", "sleep", "neighbourhood", "neighborhood", "where to stay"]],
-  ["DONT_MISS", ["don't miss", "dont miss", "highlights", "attraction", "must", "itinerary", "things to", "see and do", "sights"]],
-  ["GOOD_TO_KNOW", ["good to know", "tips", "practical", "budget", "money", "cost", "safety", "etiquette", "visa", "sim", "language", "phrase", "packing", "what to pack"]],
-];
-
-export function bucketGuideSection(heading: string): GuideModule {
-  const normalized = heading.trim().toLowerCase();
-  if (!normalized) return "NOTES";
-  for (const [mod, keywords] of MODULE_KEYWORDS) {
-    for (const kw of keywords) {
-      if (normalized.includes(kw)) return mod;
-    }
-  }
-  return "NOTES";
-}
-
 // ── Destination Explore（STEP 3：邻近投影 / vibe 过滤 / 月份法线 / 状态读数） ──
 
 /**
@@ -401,7 +355,7 @@ export function vibesForInterests(interests: string[]): Vibe[] {
 }
 
 /**
- * 条目（guide tags / trip interests / destination interests）是否命中 vibe。
+ * 条目（trip interests / destination interests）是否命中 vibe。
  * vibe = null → 全部命中（"ALL" 状态）。未知 tag 不命中，不硬造映射。
  */
 export function itemMatchesVibe(tags: string[], vibe: Vibe | null): boolean {

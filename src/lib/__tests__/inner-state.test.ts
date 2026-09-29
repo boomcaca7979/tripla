@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getClimateRecord } from "@/data/climate/nasa-canonical";
 import {
-  bucketGuideSection,
   displayVerdictForDerived,
   displayVerdictForTier,
   interestToVibe,
@@ -277,36 +276,6 @@ describe("interestToVibe", () => {
   it("空/空白输入 → null", () => {
     expect(interestToVibe("")).toBeNull();
     expect(interestToVibe("   ")).toBeNull();
-  });
-});
-
-// ── bucketGuideSection ───────────────────────────────────────────────────
-
-describe("bucketGuideSection", () => {
-  it("六类标题命中对应模块", () => {
-    expect(bucketGuideSection("When to go")).toBe("WHEN");
-    expect(bucketGuideSection("Getting around")).toBe("MOVE");
-    expect(bucketGuideSection("What to eat and drink")).toBe("EAT");
-    expect(bucketGuideSection("Where to stay")).toBe("STAY");
-    expect(bucketGuideSection("Don't miss")).toBe("DONT_MISS");
-    expect(bucketGuideSection("Good to know")).toBe("GOOD_TO_KNOW");
-  });
-
-  it("匹配大小写不敏感", () => {
-    expect(bucketGuideSection("BEST TIME TO VISIT")).toBe("WHEN");
-  });
-
-  it("未知标题 → NOTES（保守降级）", () => {
-    expect(bucketGuideSection("Quantum entanglement in transit")).toBe("NOTES");
-  });
-
-  it("空标题 → NOTES", () => {
-    expect(bucketGuideSection("")).toBe("NOTES");
-    expect(bucketGuideSection("   ")).toBe("NOTES");
-  });
-
-  it("分桶确定性：相同标题恒返回相同模块", () => {
-    expect(bucketGuideSection("Practical tips")).toBe(bucketGuideSection("Practical tips"));
   });
 });
 

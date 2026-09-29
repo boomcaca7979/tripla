@@ -2,8 +2,6 @@ import type { MetadataRoute } from "next";
 import { TRIPS } from "@/data/trips";
 import { DESTINATIONS } from "@/data/destinations";
 import { TRAVEL_STYLES } from "@/data/travel-styles";
-import { GUIDES } from "@/data/guides";
-import { AI_PAGES } from "@/data/ai-pages";
 
 const SITE_URL = "https://www.utripla.xyz";
 
@@ -20,9 +18,9 @@ export function generateSitemapEntries(): MetadataRoute.Sitemap {
   ];
 
   // 其他静态页面
+  // 注：/guides 栏目已整体下线（路由、数据、导航入口全部移除），不再进 sitemap。
   const staticRoutes = [
     { path: "/", priority: 1.0, changeFrequency: "weekly" as const },
-    { path: "/guides", priority: 0.7, changeFrequency: "monthly" as const },
   ];
 
   const hubEntries: MetadataRoute.Sitemap = hubRoutes.map((r) => ({
@@ -63,22 +61,6 @@ export function generateSitemapEntries(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  // Guide 详情页（SEO 内容页）priority 0.7，随 updatedAt 声明 lastModified。
-  const guideEntries: MetadataRoute.Sitemap = GUIDES.map((g) => ({
-    url: `${SITE_URL}/guides/${g.slug}`,
-    changeFrequency: "monthly",
-    priority: 0.7,
-    lastModified: new Date(g.updatedAt),
-  }));
-
-  // Phase 2: AI Travel SEO 落地页 priority 0.8，随 updatedAt 声明 lastModified。
-  const aiPageEntries: MetadataRoute.Sitemap = AI_PAGES.map((p) => ({
-    url: `${SITE_URL}/${p.slug}`,
-    changeFrequency: "monthly",
-    priority: 0.8,
-    lastModified: new Date(p.updatedAt),
-  }));
-
   return [
     ...staticEntries,
     ...hubEntries,
@@ -86,8 +68,6 @@ export function generateSitemapEntries(): MetadataRoute.Sitemap {
     ...tripEntries,
     ...destinationEntries,
     ...travelBudgetEntries,
-    ...guideEntries,
-    ...aiPageEntries,
   ];
 }
 

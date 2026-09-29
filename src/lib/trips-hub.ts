@@ -1,7 +1,7 @@
 /**
  * trips-hub — /trips Discovery Hub 的**派生数据层**。
  *
- * 原则（与 guides-hub 一致）：
+ * 原则：
  *   · 一切维度从 `TRIPS` + `DESTINATIONS` 现有真实数据**派生**，不复制内容、
  *     不假造分类 / featured / 统计；
  *   · `FEATURED_TRIP_SLUGS` 是唯一的显式人工选择（独立常量，不改 280 条数据），
@@ -20,7 +20,7 @@
 import { DESTINATIONS } from "@/data/destinations";
 import { TRIPS, type Trip } from "@/data/trips";
 import type { TravelInterest, TravelStyle } from "@/types/itinerary";
-import { DAYS_BUCKETS, daysBucketOf, destinationImageForCity, regionForCity, type DaysBucket } from "@/lib/guides-hub";
+import { DAYS_BUCKETS, daysBucketOf, destinationImageForCity, regionForCity, type DaysBucket } from "@/lib/discovery-geo";
 
 export { DAYS_BUCKETS, daysBucketOf };
 

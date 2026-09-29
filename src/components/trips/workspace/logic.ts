@@ -499,7 +499,7 @@ export function tripNameTaken(trip: Trip, title: string): boolean {
  * 把一条收藏挂到 Trip 上 —— **唯一实现**。
  *
  * `SAVED_ADD_TO_TRIP`（/trips 内页 Saved 列表）与 `SAVE_AND_ADD_TO_TRIP`
- * （Destinations / Guides 外部页）都走这里，因此两个入口的幂等语义不可能漂移；
+ * （Destinations 等外部页）都走这里，因此入口的幂等语义不可能漂移；
  * 而两者最终都由同一个 reducer 承担，guest 与 remote 通道天然共享同一份语义
  * （通道只决定「写哪里」，不决定「写什么」）。
  *
@@ -1018,7 +1018,7 @@ export function workspaceReducer(state: WorkspaceState, action: WorkspaceAction)
       return upsertSaved(state, action.item);
 
     case "SAVE_AND_ADD_TO_TRIP": {
-      // 外部页（Destinations / Guides）的原子写入：Saved upsert → 关联 → Trip 内新增。
+      // 外部页（Destinations）的原子写入：Saved upsert → 关联 → Trip 内新增。
       const trip = state.trips.find((t) => t.id === action.tripId);
       // 无该 Trip：整体不写入（调用方据返回值判定 no-trip，不会出现半截状态）。
       if (!trip) return state;

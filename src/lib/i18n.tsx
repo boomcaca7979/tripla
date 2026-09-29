@@ -16,8 +16,8 @@ const en: TranslationDict = {
   nav: {
     home: "Home",
     destinations: "Destinations",
-    // /guides 是目的地目录（该页 title 亦为 "Destinations"）；/destinations 是夜球地图。
-    // 两个标签各自与目标页自身语义一致 —— 消除"Guides 指向目的地目录"的命名冲突。
+    // /destinations 是夜球地图（Atlas）。原 /guides 目的地目录栏目已整体下线，
+    // 其导航项随之移除；本词典保留 destinations 文案供其它入口复用。
     atlas: "Atlas",
     // /trips 是用户的个人旅行工作台（Trips/Saved/Inbox/Expenses/Profile/Settings），
     // 导航语义为"个人中心"；URL 保持 /trips 不变（不做 route 迁移）。

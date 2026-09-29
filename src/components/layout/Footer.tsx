@@ -16,7 +16,6 @@ const GROUPS: { titleKey: string; links: FooterLink[] }[] = [
   {
     titleKey: "footer.discover",
     links: [
-      { labelKey: "nav.destinations", href: "/guides" },
       { labelKey: "nav.atlas", href: "/destinations" },
       { labelKey: "footer.travelStyles", href: "/travel-styles" },
     ],

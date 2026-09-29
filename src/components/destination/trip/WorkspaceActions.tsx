@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * WorkspaceActions — Destinations / Guides 页面的最小工作区接入（蓝图 #9/#10/#11）。
+ * WorkspaceActions — Destinations 页面的最小工作区接入（蓝图 #9/#10/#11）。
  *
  * 两个动作（命名与其他页面统一，同一动作不允许第二种名字）：
  *  - Save            → 全局 Saved（幂等去重：同 title 大小写不敏感 + 同 kind）
