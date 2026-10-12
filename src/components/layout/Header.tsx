@@ -25,6 +25,7 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
+  { labelKey: "nav.destinations", href: "/guides" },
   { labelKey: "nav.atlas", href: "/destinations" },
   { labelKey: "nav.account", href: "/trips" },
 ];

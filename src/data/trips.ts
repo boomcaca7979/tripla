@@ -149,7 +149,7 @@ const RAW_TRIPS: RawTrip[] = [
           { time: "10:00", name: "Shinjuku Gyoen gardens", emoji: "🌸" },
           { time: "13:00", name: "Depachika (underground food hall) lunch", emoji: "🍱" },
           { time: "16:00", name: "Ginza boutique window-shopping", emoji: "💎" },
-          { time: "20:00", name: "Robot Restaurant show & farewell dinner", emoji: "🤖" },
+          { time: "20:00", name: "Kabukicho farewell dinner & Golden Gai nightcap", emoji: "🏮" },
         ],
       },
     ],

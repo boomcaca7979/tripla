@@ -7,6 +7,7 @@ import {
   type Destination,
 } from "@/data/destinations";
 import { TRIPS } from "@/data/trips";
+import { getBudgetDetail } from "@/data/budget-detail";
 import AdsterraNativeBanner from "@/components/ads/AdsterraNativeBanner";
 import ContentCommerce from "@/components/content/ContentCommerce";
 
@@ -134,16 +135,30 @@ function buildBreadcrumbJsonLd(dest: Destination) {
 
 /**
  * Phase 8.3/9 Step 5: FAQPage schema for travel-budget。
- * 答案仅来自 dest.budgetPerDay / budgetCurrency / recommendedDays 真实字段。
+ * 答案仅来自真实字段；城市有 budget-detail 条目时，用三档区间替代
+ * 通用比例表述（该比例是估算模板，不是分项数据，不得包装为城市实况）。
  */
-function buildFaqJsonLd(dest: Destination) {
+function buildFaqJsonLd(dest: Destination, detail?: ReturnType<typeof getBudgetDetail>) {
   const faqs: { question: string; answer: string }[] = [];
   const total = dest.budgetPerDay * dest.recommendedDays;
 
-  faqs.push({
-    question: `How much does it cost to visit ${dest.city} per day?`,
-    answer: `Estimated daily cost in ${dest.city} is ${dest.budgetPerDay.toLocaleString()} ${dest.budgetCurrency}, covering accommodation, food, local transport, and activities. The breakdown is approximately 40% accommodation, 25% food, 15% transport, and 20% activities. International flights are not included.`,
-  });
+  if (detail) {
+    const tierLine = detail.tiers
+      .map((t) => {
+        const usd = t.dailyTotalJPY.map((j) => Math.round(j / detail.fxRate));
+        return `${t.label} ¥${t.dailyTotalJPY[0].toLocaleString()}–${t.dailyTotalJPY[1].toLocaleString()} (≈ $${usd[0]}–${usd[1]})`;
+      })
+      .join("; ");
+    faqs.push({
+      question: `How much does it cost to visit ${dest.city} per day?`,
+      answer: `Per person per day including accommodation, food, local transport and activities (international flights excluded), realistic ${dest.city} ranges are: ${tierLine} yen. Figures were checked in ${detail.checkedAsOf}; see the tier breakdown on this page for the line items.`,
+    });
+  } else {
+    faqs.push({
+      question: `How much does it cost to visit ${dest.city} per day?`,
+      answer: `Estimated daily cost in ${dest.city} is ${dest.budgetPerDay.toLocaleString()} ${dest.budgetCurrency}, covering accommodation, food, local transport, and activities. The breakdown is approximately 40% accommodation, 25% food, 15% transport, and 20% activities. International flights are not included.`,
+    });
+  }
 
   faqs.push({
     question: `What is the total budget for ${dest.recommendedDays} days in ${dest.city}?`,
@@ -190,6 +205,10 @@ export default async function TravelBudgetPage({
   const dest = getDestinationBySlug(slug);
   if (!dest) notFound();
 
+  // 城市有 evidence-backed 分档数据时，分项区与贴士区改用真实档位；
+  // 其他城市保持原渲染路径（比例卡片 + 通用贴士），行为不变。
+  const detail = getBudgetDetail(slug);
+
   const planHref = `/?to=${encodeURIComponent(dest.city)}#hero-search`;
 
   const dailyBudget = dest.budgetPerDay;
@@ -221,7 +240,7 @@ export default async function TravelBudgetPage({
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqJsonLd(dest)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqJsonLd(dest, detail)) }}
       />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -278,44 +297,98 @@ export default async function TravelBudgetPage({
           </p>
         </section>
 
-        {/* Budget breakdown */}
-        <section className="mb-10">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">Daily budget breakdown</h2>
-          <p className="mb-4 text-sm text-gray-500">
-            The split below uses common traveler ratios (40% / 25% / 15% / 20%) applied to the daily estimate.
-            Actual spend varies by travel style and season.
-          </p>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <BudgetCard
-              label="Accommodation"
-              amount={accommodation}
-              currency={currency}
-              icon="🏨"
-              note="Hostels to mid-range hotels"
-            />
-            <BudgetCard
-              label="Food"
-              amount={food}
-              currency={currency}
-              icon="🍜"
-              note="Local eateries and casual dining"
-            />
-            <BudgetCard
-              label="Transportation"
-              amount={transportation}
-              currency={currency}
-              icon="🚇"
-              note="Public transit and local taxis"
-            />
-            <BudgetCard
-              label="Activities"
-              amount={activities}
-              currency={currency}
-              icon="🎟️"
-              note="Attractions, museums, tours"
-            />
-          </div>
-        </section>
+        {/* Budget breakdown — 城市有分档数据时渲染三档真实区间，否则保持比例卡片 */}
+        {detail ? (
+          <section className="mb-10">
+            <h2 className="mb-4 text-2xl font-bold text-gray-900">
+              Daily budget by travel style
+            </h2>
+            <p className="mb-1 text-sm text-gray-500">{detail.scope}</p>
+            <p className="mb-4 text-sm text-gray-500">{detail.fxNote}</p>
+            <div className="space-y-6">
+              {detail.tiers.map((tier) => {
+                const usdMin = Math.round(tier.dailyTotalJPY[0] / detail.fxRate);
+                const usdMax = Math.round(tier.dailyTotalJPY[1] / detail.fxRate);
+                return (
+                  <div key={tier.key} className="rounded-2xl border border-gray-100 p-5">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <h3 className="text-lg font-bold text-gray-900">
+                        {tier.label}
+                        <span className="ml-2 text-xs font-medium uppercase tracking-wide text-gray-400">
+                          {tier.profile}
+                        </span>
+                      </h3>
+                      <div className="text-right">
+                        <div className="text-xl font-extrabold text-gray-900">
+                          ¥{tier.dailyTotalJPY[0].toLocaleString()}–
+                          {tier.dailyTotalJPY[1].toLocaleString()}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          ≈ ${usdMin.toLocaleString()}–{usdMax.toLocaleString()} per day
+                        </div>
+                      </div>
+                    </div>
+                    <dl className="mt-4 grid gap-3 sm:grid-cols-2">
+                      {tier.categories.map((c) => (
+                        <div key={c.label} className="rounded-xl bg-gray-50 p-3">
+                          <dt className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                            {c.label}
+                          </dt>
+                          <dd className="mt-1 text-sm font-bold text-gray-900">
+                            ¥{c.jpy[0].toLocaleString()}–{c.jpy[1].toLocaleString()}
+                          </dd>
+                          <dd className="mt-1 text-xs text-gray-500">{c.note}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </div>
+                );
+              })}
+            </div>
+            <p className="mt-4 text-xs text-gray-400">
+              {detail.referenceNote} Ranges checked {detail.checkedAsOf}; sources listed at the bottom
+              of this page.
+            </p>
+          </section>
+        ) : (
+          <section className="mb-10">
+            <h2 className="mb-4 text-2xl font-bold text-gray-900">Daily budget breakdown</h2>
+            <p className="mb-4 text-sm text-gray-500">
+              The split below uses common traveler ratios (40% / 25% / 15% / 20%) applied to the daily estimate.
+              Actual spend varies by travel style and season.
+            </p>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <BudgetCard
+                label="Accommodation"
+                amount={accommodation}
+                currency={currency}
+                icon="🏨"
+                note="Hostels to mid-range hotels"
+              />
+              <BudgetCard
+                label="Food"
+                amount={food}
+                currency={currency}
+                icon="🍜"
+                note="Local eateries and casual dining"
+              />
+              <BudgetCard
+                label="Transportation"
+                amount={transportation}
+                currency={currency}
+                icon="🚇"
+                note="Public transit and local taxis"
+              />
+              <BudgetCard
+                label="Activities"
+                amount={activities}
+                currency={currency}
+                icon="🎟️"
+                note="Attractions, museums, tours"
+              />
+            </div>
+          </section>
+        )}
 
         {/* Trip duration calculator */}
         <section className="mb-10">
@@ -352,18 +425,48 @@ export default async function TravelBudgetPage({
           <p className="mt-3 text-xs text-gray-400">
             Calculated from destination.budgetPerDay. Recommended stay in {dest.city}: {dest.recommendedDays} days.
           </p>
+          {detail && (
+            <p className="mt-2 text-xs text-gray-500">
+              This multiplication table uses the site&apos;s single reference figure. For a realistic range,
+              apply the tier totals above instead — e.g. a 3-day Comfort-tier trip in {dest.city} runs about
+              ¥46,500–84,000 (≈ $295–530) per person including 3 nights&apos; accommodation.
+            </p>
+          )}
         </section>
 
-        {/* Cost-saving tips */}
+        {/* Cost-saving tips — 城市有专属贴士时替换通用模板 */}
         <section className="mb-10 rounded-2xl border border-gray-100 p-6">
           <h2 className="mb-3 text-2xl font-bold text-gray-900">Money-saving tips</h2>
           <ul className="list-disc space-y-2 pl-6 text-gray-700">
-            <li>Travel in shoulder season for lower accommodation rates.</li>
-            <li>Use public transit passes instead of single tickets.</li>
-            <li>Eat where locals eat — street food and hawker centres are often the best value.</li>
-            <li>Book attractions online in advance for combo discounts.</li>
-            <li>Carry {dest.currency} in cash for small vendors that don&apos;t accept cards.</li>
+            {(detail?.tips ?? [
+              "Travel in shoulder season for lower accommodation rates.",
+              "Use public transit passes instead of single tickets.",
+              "Eat where locals eat — street food and hawker centres are often the best value.",
+              "Book attractions online in advance for combo discounts.",
+              `Carry ${dest.currency} in cash for small vendors that don't accept cards.`,
+            ]).map((tip) => (
+              <li key={tip}>{tip}</li>
+            ))}
           </ul>
+          {detail && (
+            <div className="mt-5 border-t border-gray-100 pt-4">
+              <h3 className="text-sm font-semibold text-gray-900">Sources</h3>
+              <ul className="mt-2 space-y-1 text-xs text-gray-500">
+                {detail.sources.map((s) => (
+                  <li key={s.url}>
+                    <a
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline decoration-gray-300 underline-offset-2 hover:text-gray-700"
+                    >
+                      {s.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </section>
 
         {/* 商业入口（真实联盟链路；Sponsored 标注明确，不进首段） */}

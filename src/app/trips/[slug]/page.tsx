@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTripBySlug, getTripSlugs, TRIPS, type Trip } from "@/data/trips";
+import { getTripGuideDetail, type PriceStatus } from "@/data/trip-guides";
 import { DESTINATIONS } from "@/data/destinations";
+import { getGuidesForCity } from "@/data/guides";
 import InnerBreadcrumb from "@/components/inner/InnerBreadcrumb";
 import InnerSection from "@/components/inner/InnerSection";
 import EditorialIndex from "@/components/inner/EditorialIndex";
@@ -311,6 +313,10 @@ export default async function TripDetailPage({
   const trip = getTripBySlug(slug);
   if (!trip) notFound();
 
+  // 城市级 field notes：仅当该 trip 在 trip-guides.ts 有条目时渲染；
+  // 其余 trip 页面渲染路径不变。
+  const guide = getTripGuideDetail(trip.slug);
+
   // ── Journey 派生读数（全部来自真实字段）────────────────────────────
   const legs = deriveLegs(trip);
   const stops = deriveStopCount(trip);
@@ -359,6 +365,9 @@ export default async function TripDetailPage({
     ...sameRegionDests,
     ...otherDests,
   ].slice(0, 3);
+
+  // Trip → Guide 内链（同 city 的 guide，最多 3）。
+  const cityGuides = getGuidesForCity(trip.city).slice(0, 3);
 
   // ── Journey practicalities：仅由真实字段构成（无任何模板建议）──────
   // Stage 3 §6.2 修订：Duration / Travel style / Region 已上移到首屏决策条
@@ -523,6 +532,129 @@ export default async function TripDetailPage({
             <JourneyTimeline trip={trip} legs={legs} />
           </InnerSection>
 
+          {/*
+            Trip guide detail — opt-in field notes（仅该 slug 在 trip-guides.ts 有条目时渲染）。
+            内容层级：逐日衔接 / 已核实价格 / 预订注意 / 雨天备选 / 当日地面小计，
+            之后是"地面成本 vs 住宿分档 vs 全包参考值"三行总账（与 trip.budget 不重复计算），
+            最后如实标注对原行程的事实性修正与导入规划器说明（信息性，不新增 CTA）。
+          */}
+          {guide && (
+            <InnerSection title="Day notes, prices & bookings" eyebrow="Field notes">
+              <p className="mb-6 text-body-sm text-ut-muted">{guide.fxNote}</p>
+              <div className="space-y-8">
+                {guide.days.map((d) => (
+                  <div key={d.day} className="rounded-ut-card border border-ut-border p-5">
+                    <h3 className="text-body-lg font-semibold text-ut-ink">
+                      Day {d.day} — {trip.itinerary.find((i) => i.day === d.day)?.theme ?? ""}
+                    </h3>
+                    <div className="mt-4 grid gap-6 lg:grid-cols-2">
+                      <div>
+                        <h4 className="text-micro font-semibold uppercase tracking-[0.16em] text-ut-muted">
+                          Getting between stops
+                        </h4>
+                        <ul className="mt-2 space-y-1.5 text-body-sm text-ut-text">
+                          {d.transit.map((t) => (
+                            <li key={t} className="flex gap-2">
+                              <span aria-hidden>→</span>
+                              <span>{t}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <h4 className="mt-4 text-micro font-semibold uppercase tracking-[0.16em] text-ut-muted">
+                          Booking & etiquette
+                        </h4>
+                        <ul className="mt-2 space-y-1.5 text-body-sm text-ut-text">
+                          {d.booking.map((b) => (
+                            <li key={b} className="flex gap-2">
+                              <span aria-hidden>•</span>
+                              <span>{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-micro font-semibold uppercase tracking-[0.16em] text-ut-muted">
+                          Prices on this day
+                        </h4>
+                        <ul className="mt-2 space-y-2 text-body-sm">
+                          {d.costs.map((c) => (
+                            <li key={c.item} className="flex items-baseline justify-between gap-3">
+                              <span className="text-ut-text">
+                                {c.item}
+                                <span
+                                  className={`ml-2 rounded-ut-pill px-1.5 py-0.5 align-middle text-[10px] font-medium uppercase tracking-wide ${
+                                    c.status === "verified" as PriceStatus
+                                      ? "bg-emerald-50 text-emerald-700"
+                                      : "bg-amber-50 text-amber-700"
+                                  }`}
+                                >
+                                  {c.status}
+                                </span>
+                                {c.note && (
+                                  <span className="block text-xs text-ut-muted">{c.note}</span>
+                                )}
+                              </span>
+                              <span className="whitespace-nowrap font-medium text-ut-ink">{c.price}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <h4 className="mt-4 text-micro font-semibold uppercase tracking-[0.16em] text-ut-muted">
+                          If it rains
+                        </h4>
+                        <p className="mt-2 text-body-sm text-ut-text">{d.weatherBackup}</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 border-t border-ut-border pt-3 text-body-sm font-medium text-ut-ink">
+                      Day {d.day} ground total: {d.groundTotal}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 rounded-ut-card border border-ut-border p-5">
+                <h3 className="text-body-lg font-semibold text-ut-ink">Budget summary</h3>
+                <dl className="mt-3 space-y-3">
+                  {guide.totals.map((t) => (
+                    <div key={t.label}>
+                      <div className="flex flex-wrap items-baseline justify-between gap-2">
+                        <dt className="text-body-sm font-medium text-ut-ink">{t.label}</dt>
+                        <dd className="text-body-sm font-semibold text-ut-ink">{t.value}</dd>
+                      </div>
+                      {t.note && <dd className="mt-0.5 text-xs text-ut-muted">{t.note}</dd>}
+                    </div>
+                  ))}
+                </dl>
+              </div>
+
+              {guide.itineraryFix && (
+                <p className="mt-6 text-body-sm text-ut-muted">
+                  <span className="font-semibold text-ut-ink">Itinerary correction: </span>
+                  “{guide.itineraryFix.original}” was updated to “{guide.itineraryFix.updated}” — {guide.itineraryFix.reason}
+                </p>
+              )}
+              <p className="mt-3 text-body-sm text-ut-muted">{guide.plannerImport}</p>
+              <div className="mt-4 border-t border-ut-border pt-3">
+                <h3 className="text-micro font-semibold uppercase tracking-[0.16em] text-ut-muted">
+                  Sources — checked {guide.checkedAsOf}
+                </h3>
+                <ul className="mt-2 space-y-1 text-xs text-ut-muted">
+                  {guide.sources.map((s) => (
+                    <li key={s.url}>
+                      <a
+                        href={s.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline decoration-ut-border underline-offset-2 hover:text-ut-ink"
+                      >
+                        {s.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </InnerSection>
+          )}
+
           {/* Where to eat — 编辑式行，不是三列卡片 */}
           {trip.restaurants.length > 0 && (
             <InnerSection title={`Where to eat in ${trip.city}`} eyebrow="Food">
@@ -623,8 +755,20 @@ export default async function TripDetailPage({
             label="Use this route in the planner"
           />
 
-          {/* Related — 全部为编辑式索引行（非卡片墙）
-              注：原「More guides」模块（同城 Guide 内链）随 Guides 栏目整体下线移除。 */}
+          {/* Related — 全部为编辑式索引行（非卡片墙） */}
+          {cityGuides.length > 0 && (
+            <InnerSection title={`${trip.city} travel guides`} eyebrow="More guides">
+              <EditorialIndex
+                items={cityGuides.map((g) => ({
+                  href: `/guides/${g.slug}`,
+                  title: g.seoTitle,
+                  meta: g.readTime,
+                  description: g.excerpt,
+                }))}
+              />
+            </InnerSection>
+          )}
+
           {relatedTrips.length > 0 && (
             <InnerSection title="Related journeys" eyebrow="Trips">
               <EditorialIndex
