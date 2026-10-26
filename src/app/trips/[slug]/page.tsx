@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { getTripBySlug, getTripSlugs, TRIPS, type Trip } from "@/data/trips";
 import { getTripGuideDetail, type PriceStatus } from "@/data/trip-guides";
 import { DESTINATIONS } from "@/data/destinations";
-import { getGuidesForCity } from "@/data/guides";
 import InnerBreadcrumb from "@/components/inner/InnerBreadcrumb";
 import InnerSection from "@/components/inner/InnerSection";
 import EditorialIndex from "@/components/inner/EditorialIndex";
@@ -365,9 +364,6 @@ export default async function TripDetailPage({
     ...sameRegionDests,
     ...otherDests,
   ].slice(0, 3);
-
-  // Trip → Guide 内链（同 city 的 guide，最多 3）。
-  const cityGuides = getGuidesForCity(trip.city).slice(0, 3);
 
   // ── Journey practicalities：仅由真实字段构成（无任何模板建议）──────
   // Stage 3 §6.2 修订：Duration / Travel style / Region 已上移到首屏决策条
@@ -755,20 +751,8 @@ export default async function TripDetailPage({
             label="Use this route in the planner"
           />
 
-          {/* Related — 全部为编辑式索引行（非卡片墙） */}
-          {cityGuides.length > 0 && (
-            <InnerSection title={`${trip.city} travel guides`} eyebrow="More guides">
-              <EditorialIndex
-                items={cityGuides.map((g) => ({
-                  href: `/guides/${g.slug}`,
-                  title: g.seoTitle,
-                  meta: g.readTime,
-                  description: g.excerpt,
-                }))}
-              />
-            </InnerSection>
-          )}
-
+          {/* Related — 全部为编辑式索引行（非卡片墙）
+              注：原「More guides」模块（同城 Guide 内链）随 Guides 栏目整体下线移除。 */}
           {relatedTrips.length > 0 && (
             <InnerSection title="Related journeys" eyebrow="Trips">
               <EditorialIndex

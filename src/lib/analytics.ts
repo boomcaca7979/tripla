@@ -24,7 +24,6 @@ export type AnalyticsEvent =
   | { name: "atlas_destination_select"; destination: string; source: string }
   | { name: "destination_compare_add"; destination: string; compare_count: number }
   | { name: "destination_compare_remove"; destination: string; compare_count: number }
-  | { name: "guide_destination_click"; destination: string; region: string }
   | { name: "trip_create"; authenticated: boolean; source: string }
   | { name: "trip_add_place"; destination: string; source: string }
   | { name: "trip_remove_place"; destination: string }

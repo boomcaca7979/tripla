@@ -62,8 +62,9 @@ export default function AboutPage() {
             <p>
               Destination facts, monthly climate figures and budget estimates are compiled from
               public datasets — including the NASA POWER climate archive for monthly normals,
-              and OpenStreetMap contributor data for place listings. Guides are editorial
-              compilations of publicly available destination knowledge, refreshed periodically.
+              and OpenStreetMap contributor data for place listings. Destination content is
+              an editorial compilation of publicly available destination knowledge, refreshed
+              periodically.
               Numbers shown for flights, hotels and experiences come from the named providers
               at request time; where live data is unavailable, the site shows an honest empty
               state instead of inventing numbers.

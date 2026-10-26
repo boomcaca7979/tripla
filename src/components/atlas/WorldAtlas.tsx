@@ -318,15 +318,6 @@ export default function WorldAtlas({ nodes }: { nodes: AtlasNode[] }) {
           </span>
           <span className="flex flex-wrap items-center gap-x-3">
             <Link
-              href="/guides"
-              className="font-mono text-micro uppercase tracking-[0.14em] text-white/60 underline decoration-white/20 underline-offset-4 transition-colors duration-[var(--ut-dur-fast)] hover:text-white focus-visible:outline-2 focus-visible:outline-ut-accent"
-            >
-              Travel guides
-            </Link>
-            <span aria-hidden="true" className="font-mono text-micro text-white/20">
-              ·
-            </span>
-            <Link
               href="/trips"
               className="font-mono text-micro uppercase tracking-[0.14em] text-white/60 underline decoration-white/20 underline-offset-4 transition-colors duration-[var(--ut-dur-fast)] hover:text-white focus-visible:outline-2 focus-visible:outline-ut-accent"
             >
@@ -493,15 +484,6 @@ export default function WorldAtlas({ nodes }: { nodes: AtlasNode[] }) {
             注：原 /guides 入口随 Guides 栏目下线移除。 */}
         {view === "list" && (
           <p className="mt-3 font-mono text-micro uppercase tracking-[0.14em] text-white/45">
-            <Link
-              href="/guides"
-              className="underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
-            >
-              Travel guides
-            </Link>
-            <span aria-hidden="true" className="mx-2 text-white/20">
-              ·
-            </span>
             <Link
               href="/trips"
               className="underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"

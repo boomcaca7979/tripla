@@ -1,10 +1,6 @@
 import type { NextConfig } from "next";
 import { DESTINATIONS } from "./src/data/destinations";
-
-/** 转义城市名中的正则特殊字符（如 "Bali (Denpasar)"）。 */
-function escapeRegex(s: string) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
+import { LEGACY_GUIDE_REDIRECTS } from "./src/data/guide-redirects";
 /** 城市名 → 连字符 slug（"New York" → "new-york"）。
  *  先做 Unicode NFD 分解去掉变音符号，否则 "Bogotá" 会退化成 "bogot"
  *  （á 被当作分隔符丢弃），推导出用户永远不会输入的错误别名。 */
@@ -104,13 +100,15 @@ const nextConfig: NextConfig = {
         destination: "/destinations/:slug",
         statusCode: 301,
       },
-      // 城市唯一页规则：/guides?city=<城市> 308 → /destinations/<slug>。
-      // config 级 redirect 保证爬虫/直链拿到真 308（页面级流式跳转仅作兜底）。
-      ...DESTINATIONS.map((d) => ({
-        source: "/guides",
-        has: [{ type: "query" as const, key: "city", value: escapeRegex(d.city) }],
-        destination: `/destinations/${d.slug}`,
-        statusCode: 308 as const,
+      // ── 旧 Guides 栏目 URL（栏目已整体下线）逐项处理 ───────────────────
+      // 只重定向「内容已被对应 Destinations 页面完全取代」的旧 Guide：即其
+      // `city` 字段命中真实 DESTINATIONS 城市的条目（映射表由数据派生生成，
+      // 见 src/data/guide-redirects.ts 头注）。其余旧 Guide（Global/区域专题、
+      // 城市不在目的地数据中的）一律 404 —— 绝不批量重定向到无关页面。
+      ...Object.entries(LEGACY_GUIDE_REDIRECTS).map(([guideSlug, destSlug]) => ({
+        source: `/guides/${guideSlug}`,
+        destination: `/destinations/${destSlug}`,
+        statusCode: 301 as const,
       })),
       // Destination slug 容错：连字符写法 301 → canonical slug（如
       // /destinations/new-york → /destinations/newyork）。canonical、sitemap、

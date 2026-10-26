@@ -6,7 +6,6 @@ import {
   type Destination,
 } from "@/data/destinations";
 import { TRIPS } from "@/data/trips";
-import { getGuidesForCity } from "@/data/guides";
 import { getAttractions } from "@/data/attractions";
 import { getDestinationGallery } from "@/data/destination-gallery";
 import PlaceWorld from "@/components/destination/PlaceWorld";
@@ -210,11 +209,6 @@ export default async function DestinationDetailPage({
   const popularTrips = TRIPS.filter(
     (t) => t.city.toLowerCase() === dest.city.toLowerCase(),
   ).slice(0, 5);
-  const cityGuideCount = getGuidesForCity(dest.city).length;
-  // Hero "Explore N guides" 出口：直接进首篇同城 Guide（真实 Guide URL）。
-  // 不再指向 /guides?city=X —— 城市唯一页规则下该深链会 308 回本页形成循环。
-  const firstCityGuide = getGuidesForCity(dest.city)[0] ?? null;
-  const guidesHref = firstCityGuide ? `/guides/${firstCityGuide.slug}` : null;
 
   // ── Gallery（结构化优先）：城市画廊数据收录的城市用结构化真实地标图
   //    （逐张目检）；未收录城市回退既有拼装（dest.image + 同城 trip 真实封面）。
@@ -298,8 +292,6 @@ export default async function DestinationDetailPage({
           }}
           interests={dest.interests.map((i) => i.charAt(0).toUpperCase() + i.slice(1))}
           planHref="#explore"
-          guidesCount={cityGuideCount}
-          guidesHref={guidesHref}
         />
 
         {/* ═══ THE PLACE — Gallery + City identity（Round 15 视觉重构） ═══ */}
