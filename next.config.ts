@@ -45,6 +45,43 @@ function buildDestinationSlugAliases() {
   return out;
 }
 
+/** 转义城市名中的正则特殊字符（如 "Bali (Denpasar)"）。 */
+function escapeRegex(s: string) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/**
+ * 城市查询参数 → 唯一目的地页，真实 3xx（渲染前生效）。
+ *
+ * 背景：`/destinations?city=X`、`/guides?city=X` 是历史深链，旧实现把判断放在
+ * 页面组件里；但根 layout 的 loading.tsx 会先流式吐出 shell，`permanentRedirect()`
+ * 只能退化成 200 + `<meta refresh>`，`notFound()` 退化成 200 软 404。
+ * 移到 config 层后：① 在流式开始前返回真正的 301；② 页面不再读 searchParams，
+ * `/destinations` 恢复静态生成。
+ *
+ * 未知城市不在此处匹配 → 回落成目录页（200，canonical 指向 `/destinations`）。
+ * 不生成 `city=.*` 兜底规则：Next 会把原查询串拼进 Location，兜底会形成自环。
+ *
+ * 大小写：`has.value` 会被编译成 `new RegExp("^" + value + "$")`（见
+ * prepare-destination.js 的 matchHas），故按 原样/小写/大写 三个变体做择一匹配，
+ * 让 `?city=Paris`、`?city=paris`、`?city=PARIS` 都直达同一页。
+ */
+function buildCityQueryRedirects(source: "/destinations" | "/guides") {
+  return DESTINATIONS.map((d) => {
+    const variants = [
+      ...new Set([d.city, d.city.toLowerCase(), d.city.toUpperCase(), d.slug]),
+    ]
+      .map(escapeRegex)
+      .join("|");
+    return {
+      source,
+      has: [{ type: "query" as const, key: "city", value: `(?:${variants})` }],
+      destination: `/destinations/${d.slug}`,
+      statusCode: 301 as const,
+    };
+  });
+}
+
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
@@ -100,7 +137,16 @@ const nextConfig: NextConfig = {
         destination: "/destinations/:slug",
         statusCode: 301,
       },
+      // ── 城市深链：/destinations?city=X 与 /guides?city=X ────────────────
+      // 必须排在下方裸 /guides 规则之前：带 city 的请求若先命中裸规则，会先落到
+      // /destinations?city=X，再多一跳才到详情页。
+      ...buildCityQueryRedirects("/destinations"),
+      ...buildCityQueryRedirects("/guides"),
       // ── 旧 Guides 栏目 URL（栏目已整体下线）逐项处理 ───────────────────
+      // 栏目首页 /guides 的路由已删除，但该 URL 在当前生产 sitemap 中仍被收录、
+      // 且是 330 条子页的原入口。补一条 301 到真正承接其内容的目的地目录，
+      // 避免它从 200 直接变成 404（子页规则见下方 LEGACY_GUIDE_REDIRECTS）。
+      { source: "/guides", destination: "/destinations", statusCode: 301 },
       // 只重定向「内容已被对应 Destinations 页面完全取代」的旧 Guide：即其
       // `city` 字段命中真实 DESTINATIONS 城市的条目（映射表由数据派生生成，
       // 见 src/data/guide-redirects.ts 头注）。其余旧 Guide（Global/区域专题、

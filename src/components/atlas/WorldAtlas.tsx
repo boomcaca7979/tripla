@@ -308,7 +308,7 @@ export default function WorldAtlas({ nodes }: { nodes: AtlasNode[] }) {
           因此不改变"地球是唯一主角"的视觉层级。
           注：原 /guides 入口随 Guides 栏目下线移除。 */}
       <div className="pointer-events-none absolute inset-x-0 top-6 z-20 flex items-start justify-between gap-3 px-4 md:px-8">
-        <h1 className="sr-only">Destinations — global destination discovery map</h1>
+        <h1 className="sr-only">Atlas — global destination discovery map</h1>
         <nav
           aria-label="Related collections"
           className="pointer-events-auto hidden flex-col gap-1.5 md:flex"

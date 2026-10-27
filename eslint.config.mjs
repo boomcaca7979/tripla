@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // 第三方静态产物（Cesium 运行时，minified worker 与 chunk），
+    // 非本站源码、不参与构建，仅随 public/ 原样分发。
+    "public/cesium/**",
   ]),
 ]);
 

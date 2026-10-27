@@ -15,9 +15,9 @@ const en: TranslationDict = {
   // Header
   nav: {
     home: "Home",
+    // Destinations（列表目录，/destinations）与 Atlas（夜球地球，/atlas）
+    // 是两个并列栏目。原 /guides 目的地目录栏目已整体下线，其导航项已移除。
     destinations: "Destinations",
-    // /destinations 是夜球地图（Atlas）。原 /guides 目的地目录栏目已整体下线，
-    // 其导航项随之移除；本词典保留 destinations 文案供其它入口复用。
     atlas: "Atlas",
     // /trips 是用户的个人旅行工作台（Trips/Saved/Inbox/Expenses/Profile/Settings），
     // 导航语义为"个人中心"；URL 保持 /trips 不变（不做 route 迁移）。

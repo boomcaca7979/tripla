@@ -16,7 +16,9 @@ const GROUPS: { titleKey: string; links: FooterLink[] }[] = [
   {
     titleKey: "footer.discover",
     links: [
-      { labelKey: "nav.atlas", href: "/destinations" },
+      // Destinations（列表目录）与 Atlas（夜球地球）两个并列入口。
+      { labelKey: "nav.destinations", href: "/destinations" },
+      { labelKey: "nav.atlas", href: "/atlas" },
       { labelKey: "footer.travelStyles", href: "/travel-styles" },
     ],
   },

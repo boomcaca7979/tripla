@@ -13,6 +13,9 @@ export function generateSitemapEntries(): MetadataRoute.Sitemap {
   // 已改为 noindex；其下的预制 Trip 详情页 /trips/<slug> 仍是内容页，继续收录。
   const hubRoutes = [
     { path: "/destinations", priority: 0.8, changeFrequency: "weekly" as const },
+    // /atlas 是独立的夜球地球页（原 /destinations 的 Atlas 视图迁出），
+    // 与 /destinations 列表页并存、互不覆盖。
+    { path: "/atlas", priority: 0.7, changeFrequency: "weekly" as const },
     { path: "/travel-budget", priority: 0.8, changeFrequency: "weekly" as const },
     { path: "/travel-styles", priority: 0.8, changeFrequency: "weekly" as const },
   ];

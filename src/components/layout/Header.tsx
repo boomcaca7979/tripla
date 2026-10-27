@@ -25,7 +25,11 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { labelKey: "nav.atlas", href: "/destinations" },
+  // Destinations（列表目录）与 Atlas（夜球地球）是两个并列栏目、两个独立 URL。
+  // Destinations 标签用 nav.destinations（"Destinations"）指向 /destinations；
+  // Atlas 用 nav.atlas（"Atlas"）指向 /atlas。原 /guides 入口已随 Guides 下线移除。
+  { labelKey: "nav.destinations", href: "/destinations" },
+  { labelKey: "nav.atlas", href: "/atlas" },
   { labelKey: "nav.account", href: "/trips" },
 ];
 
