@@ -280,6 +280,10 @@ function buildJourneyPlannerHref(trip: Trip): string {
   params.set("to", trip.city);
   params.set("travelStyle", trip.travelStyle);
   if (trip.interests.length > 0) params.set("interests", trip.interests.join(","));
+  // 「Plan this trip」承诺的是规划**这一段**旅程：携带 slug 让规划链路一路
+  // 透传到 /trips/new，创建个人行程时由既有 reducer 导入本行程的天数/活动
+  // （见 TripsNewHandoff / IMPORT_SOURCE_DAYS）。仅传内容数据，不改 CTA 语义。
+  params.set("trip", trip.slug);
   return `/?${params.toString()}#hero-search`;
 }
 

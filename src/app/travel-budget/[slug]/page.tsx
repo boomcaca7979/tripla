@@ -8,6 +8,7 @@ import {
 } from "@/data/destinations";
 import { TRIPS } from "@/data/trips";
 import { getBudgetDetail } from "@/data/budget-detail";
+import { budgetBreakdown } from "@/lib/budget-breakdown";
 import AdsterraNativeBanner from "@/components/ads/AdsterraNativeBanner";
 import ContentCommerce from "@/components/content/ContentCommerce";
 
@@ -179,20 +180,9 @@ function buildFaqJsonLd(dest: Destination, detail?: ReturnType<typeof getBudgetD
   };
 }
 
-// ── Budget breakdown helpers ──────────────────────────────────────────
-// 基于 destination.budgetPerDay 拆分为 4 类。比例为旅行预算通用估算
-//（住宿 40% / 餐饮 25% / 交通 15% / 活动 20%），明确标注为 estimated。
-
-const BREAKDOWN_RATIOS = {
-  accommodation: 0.4,
-  food: 0.25,
-  transportation: 0.15,
-  activities: 0.2,
-} as const;
-
-function breakdownAmount(daily: number, ratio: number): number {
-  return Math.round(daily * ratio);
-}
+// ── Budget breakdown ──────────────────────────────────────────────────
+// 分项计算已抽取到 src/lib/budget-breakdown.ts（比例口径与舍入规则见该
+// 模块文档），供全量 205 城数据契约测试与页面共用同一实现。
 
 // ── Page ──────────────────────────────────────────────────────────────
 
@@ -214,10 +204,7 @@ export default async function TravelBudgetPage({
   const dailyBudget = dest.budgetPerDay;
   const currency = dest.budgetCurrency;
 
-  const accommodation = breakdownAmount(dailyBudget, BREAKDOWN_RATIOS.accommodation);
-  const food = breakdownAmount(dailyBudget, BREAKDOWN_RATIOS.food);
-  const transportation = breakdownAmount(dailyBudget, BREAKDOWN_RATIOS.transportation);
-  const activities = breakdownAmount(dailyBudget, BREAKDOWN_RATIOS.activities);
+  const { accommodation, food, transportation, activities } = budgetBreakdown(dailyBudget);
 
   // 多个行程时长参考：3 / 5 / 7 / 14 天
   const durations = [3, 5, 7, 14];

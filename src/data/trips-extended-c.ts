@@ -318,7 +318,7 @@ export const EXTENDED_TRIPS_C: RawTripInput[] = [
     author: AI,
     days: 4,
     estimatedCost: 600,
-    currency: "USD",
+    currency: "EUR",
     tags: ["Family", "Culture", "Parks"],
     excerpt:
       "Four kid-paced days: one museum morning, one park afternoon, a boat ride, and crêpes as structural engineering.",

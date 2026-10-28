@@ -282,10 +282,14 @@ function EditTripForm({
         <label className="block">
           <span className={`mb-1.5 block ${MONO_META}`}>Currency</span>
           <select className={INPUT} value={currency} onChange={(e) => setCurrency(e.target.value)}>
-            <option value="¥">¥</option>
-            <option value="$">$</option>
-            <option value="€">€</option>
-            <option value="£">£</option>
+            {/* value 用 ISO 代码（数据契约：trip.currency 一律存 ISO），可见文字不变。
+                修复：此前 value=符号 → ISO 货币的行程（如 AI 保存的 JPY）在表单里
+                无匹配项显示空白，且选择 "¥"（用户意为日元）会被 codeForSymbol 存成
+                CNY。现在 ISO 行程能正确回显，符号与 SYMBOL_TO_CODE 的映射语义一致。 */}
+            <option value="CNY">¥</option>
+            <option value="USD">$</option>
+            <option value="EUR">€</option>
+            <option value="GBP">£</option>
           </select>
         </label>
         <div className="block">

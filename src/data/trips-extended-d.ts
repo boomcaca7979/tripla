@@ -621,7 +621,7 @@ export const EXTENDED_TRIPS_D: RawTripInput[] = [
     author: AI,
     days: 3,
     estimatedCost: 450,
-    currency: "EUR",
+    currency: "USD",
     tags: ["Foodie", "Culture", "Beer"],
     excerpt:
       "Three days of Bavaria's capital: the Englischer Garten's surf wave, six beer gardens, the Viktualienmarkt, and one Neuschwanstein day trip.",
@@ -732,7 +732,7 @@ export const EXTENDED_TRIPS_D: RawTripInput[] = [
     author: AI,
     days: 2,
     estimatedCost: 260,
-    currency: "EUR",
+    currency: "USD",
     tags: ["Shopping", "Foodie", "Culture"],
     excerpt:
       "Two days of Italy's design capital: the Duomo's rooftops, the Last Supper (booked), Navigli aperitivo and the Quadrilatero's windows.",

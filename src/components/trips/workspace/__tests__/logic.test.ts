@@ -8,6 +8,7 @@
 import { describe, expect, it } from "vitest";
 
 import { fromSavedLinkId, placeKindOfSaved, tripNameTaken, workspaceReducer } from "@/components/trips/workspace/logic";
+import { money as formatMoney } from "@/components/trips/workspace/expenses/engine";
 import type { SavedItem, Trip, WorkspaceState } from "@/components/trips/workspace/types";
 
 function emptyState(): WorkspaceState {
@@ -435,5 +436,59 @@ describe("workspaceReducer — 外部页(SAVE_AND_ADD_TO_TRIP) 与内页(SAVED_A
     });
     const twice = workspaceReducer(renamed, external);
     expect(twice.trips[0].places).toHaveLength(1);
+  });
+});
+
+// ── IMPORT_SOURCE_DAYS（公开行程「Plan this trip」内容导入） ────────────
+
+describe("workspaceReducer — IMPORT_SOURCE_DAYS", () => {
+  const days = [
+    { theme: "Tsukiji & Shibuya", stops: [{ name: "Sushi breakfast at Tsukiji", time: "08:00" }, { name: "Meiji Shrine stroll", time: "11:00" }] },
+    { theme: "Asakusa & Skytree", stops: [{ name: "Senso-ji", time: "09:00" }] },
+  ];
+
+  it("导入为 routeDays/stops：主题进标题、时间原样、全部 activity 类别", () => {
+    const state: WorkspaceState = { ...emptyState(), trips: [tripWith()] };
+    const next = workspaceReducer(state, { type: "IMPORT_SOURCE_DAYS", tripId: "trip-1", days });
+    expect(next.trips[0].routeDays).toHaveLength(2);
+    expect(next.trips[0].routeDays[0].title).toBe("Day 1 · Tsukiji & Shibuya");
+    expect(next.trips[0].routeDays[1].title).toBe("Day 2 · Asakusa & Skytree");
+    expect(next.trips[0].routeDays[0].stops.map((s) => [s.time, s.name])).toEqual([
+      ["08:00", "Sushi breakfast at Tsukiji"],
+      ["11:00", "Meiji Shrine stroll"],
+    ]);
+    expect(next.trips[0].routeDays[0].stops.every((s) => s.kind === "activity")).toBe(true);
+    // 单条流水：导入是一次动作，不逐 stop 刷屏
+    expect(next.activity).toHaveLength(1);
+    expect(next.activity[0].text).toContain("2-day plan (3 stops)");
+  });
+
+  it("不造数据：源 days 为空 / trip 不存在 → 状态原样返回", () => {
+    const state: WorkspaceState = { ...emptyState(), trips: [tripWith()] };
+    expect(workspaceReducer(state, { type: "IMPORT_SOURCE_DAYS", tripId: "trip-1", days: [] })).toBe(state);
+    expect(workspaceReducer(state, { type: "IMPORT_SOURCE_DAYS", tripId: "trip-x", days })).toBe(state);
+  });
+
+  it("与既有 routeDays 叠加时序号续排（不完全覆盖）", () => {
+    const existing = tripWith();
+    existing.routeDays = [{ id: "d-0", title: "Day 1 · Tokyo", stops: [], distanceKm: 0, transitMin: 0 }];
+    const state: WorkspaceState = { ...emptyState(), trips: [existing] };
+    const next = workspaceReducer(state, { type: "IMPORT_SOURCE_DAYS", tripId: "trip-1", days });
+    expect(next.trips[0].routeDays).toHaveLength(3);
+    expect(next.trips[0].routeDays[1].title).toBe("Day 2 · Tsukiji & Shibuya");
+    expect(next.trips[0].routeDays[2].title).toBe("Day 3 · Asakusa & Skytree");
+  });
+});
+
+describe("工作台货币格式化（ISO 契约）", () => {
+  // 回归：trip.currency 自 ISO 契约后存 "JPY" 这类代码，若用 logic.money 的
+  // 字符串拼接会渲染成 "JPY1200"。统一走 expenses/engine.money（symbolFor）。
+  it("ISO 代码渲染为符号，并按币种精度显示（JPY 无小数 / USD 两位）", () => {
+    expect(formatMoney(1200, "JPY")).toBe("¥1,200");
+    expect(formatMoney(32.5, "USD")).toBe("$32.50");
+  });
+
+  it("旧数据里的符号仍能渲染（迁移前后都不出现裸数字）", () => {
+    expect(formatMoney(45, "$")).toBe("$45");
   });
 });

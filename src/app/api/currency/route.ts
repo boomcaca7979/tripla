@@ -1,47 +1,16 @@
-// ── Mock exchange rates for demo / no-API-key mode ────────────────────
-
-const MOCK_RATES: Record<string, number> = {
-  "USD-TWD": 30.0,
-  "USD-JPY": 150.0,
-  "USD-EUR": 0.92,
-  "USD-GBP": 0.79,
-  "USD-KRW": 1350.0,
-  "USD-CNY": 7.25,
-  "USD-HKD": 7.82,
-  "USD-SGD": 1.35,
-  "USD-THB": 36.0,
-  "USD-AUD": 1.55,
-  "USD-AED": 3.67,
-  "USD-MYR": 4.72,
-  "USD-PHP": 58.0,
-  "USD-VND": 25000.0,
-  "USD-IDR": 16000.0,
-  "USD-INR": 83.0,
-  "USD-BRL": 5.0,
-  "USD-MXN": 17.0,
-  "USD-TRY": 32.0,
-  "USD-NZD": 1.68,
-  "USD-CAD": 1.37,
-  "USD-CHF": 0.88,
-  "USD-SEK": 10.8,
-  "USD-NOK": 10.6,
-  "USD-DKK": 6.88,
-  "USD-IEK": 1.0, // IEK not real; fallback
-};
-
-function getMockRate(from: string, to: string): number | null {
-  if (from === to) return 1;
-  const direct = MOCK_RATES[`${from}-${to}`];
-  if (direct !== undefined) return direct;
-  // Try reverse
-  const reverse = MOCK_RATES[`${to}-${from}`];
-  if (reverse !== undefined) return 1 / reverse;
-  // Try via USD
-  const fromUsd = MOCK_RATES[`USD-${from}`];
-  const toUsd = MOCK_RATES[`USD-${to}`];
-  if (fromUsd !== undefined && toUsd !== undefined) return toUsd / fromUsd;
-  return null;
-}
+/**
+ * /api/currency — 参考汇率（供 /plan 的汇率组件与 AI 行程提示词使用）。
+ *
+ * 数据诚信（2026-10-28，依据实测证据）：
+ *   此前 `EXCHANGE_RATE_API_KEY` 缺失时会返回写死的 MOCK_RATES，并把
+ *   `lastUpdated` 伪造成"刚刚"。该响应在**生产环境实际生效**
+ *   （`x-mock-data: true`，USD→JPY 恒为 150），导致两个用户可见后果：
+ *     1) /plan 的汇率组件把模拟值渲染成 "Updated <当前时间>"；
+ *     2) useItinerary 把它写进 AI 提示词的 `Currency:` 行，行程费用按
+ *        错误汇率生成后展示给用户。
+ *   现已彻底移除模拟值：未配置 key 时按"服务不可用"返回 503，由调用方
+ *   既有错误/空态承接。不返回编造汇率，也不以任何固定汇率冒充实时数据。
+ */
 
 export async function GET(request: Request): Promise<Response> {
   const sp = new URL(request.url).searchParams;
@@ -49,18 +18,19 @@ export async function GET(request: Request): Promise<Response> {
   const to = (sp.get("to") ?? "USD").toUpperCase();
   const key = process.env.EXCHANGE_RATE_API_KEY;
 
-  // ── No API key: return mock data ──────────────────────────────────
+  // ── No API key: 明确的"不可用"，绝不返回模拟汇率 ────────────────
+  // 诊断信息留在 message 里供日志/服务端消费；UI 侧由 getExchangeRate 映射到
+  // 既有空态，不把技术细节当成用户文案，也不降级成任何固定汇率。
   if (!key) {
-    const mockRate = getMockRate(from, to);
-    if (mockRate === null) {
-      return Response.json(
-        { data: null, error: { code: "MOCK_RATE_UNAVAILABLE", message: `No mock rate for ${from}→${to}` } },
-        { status: 404 },
-      );
-    }
     return Response.json(
-      { data: { base: from, target: to, rate: mockRate, lastUpdated: new Date().toISOString(), mock: true }, error: null },
-      { headers: { "Cache-Control": "s-maxage=21600", "X-Mock-Data": "true" } },
+      {
+        data: null,
+        error: {
+          code: "CURRENCY_NOT_CONFIGURED",
+          message: "EXCHANGE_RATE_API_KEY is not configured; live rates are unavailable.",
+        },
+      },
+      { status: 503, headers: { "Cache-Control": "no-store" } },
     );
   }
 

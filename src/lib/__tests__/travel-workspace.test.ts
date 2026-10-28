@@ -88,9 +88,11 @@ import {
   readTripOptions,
   resolvePageMode,
   savePageItem,
+  savePageItinerary,
   type PageSavedInput,
 } from "@/lib/travel-workspace";
 import { GUEST_WORKSPACE_KEY } from "@/lib/workspace/guest";
+import type { Itinerary } from "@/types/itinerary";
 
 const USER_A = "aaaaaaaa-1111-4111-8111-aaaaaaaaaaaa";
 const USER_B = "bbbbbbbb-2222-4222-8222-bbbbbbbbbbbb";
@@ -710,6 +712,219 @@ describe("travel-workspace — 新建 Trip", () => {
       throw new Error(`expected a write failure, got ${JSON.stringify(res)}`);
     }
     expect(res.code).toBe("42501");
+    expect(storedGuest()).toBeNull();
+  });
+});
+
+// ── Save Itinerary（AI 行程 → 工作区 Trip） ───────────────────────────
+
+function itineraryFixture(): Itinerary {
+  return {
+    id: "itin-fixture-1",
+    createdAt: "2026-10-27T00:00:00.000Z",
+    input: {
+      destination: {
+        iata: "NRT",
+        icao: "RJAA",
+        name: "Narita International Airport",
+        city: "Tokyo",
+        country: "Japan",
+        timezone: "Asia/Tokyo",
+        latitude: 35.772,
+        longitude: 140.3929,
+      },
+      departureDate: "2026-11-02",
+      returnDate: "2026-11-03",
+      travelStyle: "foodie",
+      budgetLevel: "mid-range",
+      interests: ["food", "history"],
+      groupSize: 2,
+    },
+    days: [
+      {
+        date: "2026-11-02",
+        dayNumber: 1,
+        weather: null,
+        activities: [
+          {
+            id: "a1",
+            name: "Senso-ji",
+            description: "Tokyo's oldest temple",
+            duration: 90,
+            estimatedCost: 0,
+            category: "history",
+            timeOfDay: "morning",
+            tip: "Go before 9am",
+          },
+          {
+            id: "a2",
+            name: "Shibuya Crossing",
+            description: "The famous scramble",
+            duration: 30,
+            estimatedCost: 0,
+            category: "history",
+            timeOfDay: "evening",
+          },
+        ],
+        meals: {
+          breakfast: "Konbini breakfast",
+          lunch: "Ramen at Ichiran",
+          dinner: "Izakaya in Shinjuku",
+        },
+        estimatedDailyCost: 12000,
+      },
+      {
+        date: "2026-11-03",
+        dayNumber: 2,
+        weather: null,
+        activities: [],
+        meals: {},
+        estimatedDailyCost: 8000,
+      },
+    ],
+    totalEstimatedCost: 20000,
+    currency: "JPY",
+    summary: "Two foodie days in Tokyo.",
+    packingList: ["Passport", "", "Comfortable walking shoes"],
+    importantNotes: ["Cash is preferred at small ramen counters", "IC card works on all metro lines"],
+  };
+}
+
+describe("travel-workspace — savePageItinerary", () => {
+  it("guest：写入 localStorage，days/stops 内容与顺序正确，零 Supabase 调用", async () => {
+    const res = await savePageItinerary({ kind: "guest" }, itineraryFixture());
+    expect(res.ok).toBe(true);
+
+    const stored = storedGuest();
+    expect(stored).not.toBeNull();
+    const trips = stored?.trips as Array<Record<string, unknown>>;
+    expect(trips).toHaveLength(1);
+    const trip = trips[0];
+    expect(trip.destination).toBe("Tokyo");
+    expect(trip.currency).toBe("JPY");
+    expect(trip.startDate).toBe("2026-11-02");
+    expect(trip.endDate).toBe("2026-11-03");
+    // 偏好原样进入既有 Trip.preferences 字段；行程级文本随 JSONB 保留（不静默丢弃）
+    expect(trip.preferences).toMatchObject({
+      travelStyle: "foodie",
+      budgetLevel: "mid-range",
+      summary: "Two foodie days in Tokyo.",
+      importantNotes: ["Cash is preferred at small ramen counters", "IC card works on all metro lines"],
+    });
+    // packingList → 既有 Checklist（before 阶段），空行被过滤
+    const checklist = trip.checklist as Array<Record<string, unknown>>;
+    expect(checklist.map((c) => c.label)).toEqual(["Passport", "Comfortable walking shoes"]);
+    expect(checklist.every((c) => c.phase === "before" && c.done === false)).toBe(true);
+
+    const routeDays = trip.routeDays as Array<Record<string, unknown>>;
+    expect(routeDays).toHaveLength(2);
+    const stops1 = routeDays[0].stops as Array<Record<string, unknown>>;
+    // 按时间排序：breakfast 08:00 → Senso-ji 09:00 → lunch 12:30 → Shibuya 18:00 → dinner 19:00
+    expect(stops1.map((s) => s.time)).toEqual(["08:00", "09:00", "12:30", "18:00", "19:00"]);
+    expect(stops1[1].name).toBe("Senso-ji");
+    expect(stops1[1].kind).toBe("activity");
+    expect(String(stops1[1].note)).toContain("Tokyo's oldest temple");
+    expect(String(stops1[1].note)).toContain("Tip: Go before 9am");
+    expect(stops1[0].kind).toBe("meal");
+    // 第 2 天无内容 → 仍创建空 Day（结构保留）
+    expect((routeDays[1].stops as unknown[])).toHaveLength(0);
+
+    // guest 通道：完全不构造 Supabase 客户端
+    expect(h.calls).toHaveLength(0);
+    expect(String(res.ok === true ? res.id : "")).toBe(String(trip.id));
+  });
+
+  it("remote：写 trips / itinerary_days / itinerary_stops，父→子顺序，id 带用户前缀，浏览器零字节", async () => {
+    h.session = { userId: USER_A, email: null, resolved: true };
+    const res = await savePageItinerary({ kind: "remote", userId: USER_A }, itineraryFixture());
+    expect(res.ok).toBe(true);
+
+    const callOrder = writes().map((c) => c.table);
+    expect(callOrder.indexOf("trips")).toBeLessThan(callOrder.indexOf("itinerary_days"));
+    expect(callOrder.indexOf("itinerary_days")).toBeLessThan(callOrder.indexOf("itinerary_stops"));
+
+    const tripRows = payloadOf("trips");
+    expect(tripRows).toHaveLength(1);
+    expect(tripRows[0].user_id).toBe(USER_A);
+    expect(String(tripRows[0].id)).toMatch(new RegExp(`^${USER_A}:trip-`));
+    expect(tripRows[0].destination).toBe("Tokyo");
+    expect(tripRows[0].currency).toBe("JPY");
+
+    const dayRows = payloadOf("itinerary_days");
+    expect(dayRows).toHaveLength(2);
+    for (const row of dayRows) {
+      expect(row.user_id).toBe(USER_A);
+      expect(String(row.id)).toMatch(new RegExp(`^${USER_A}:`));
+      expect(String(row.trip_id)).toBe(String(tripRows[0].id));
+    }
+
+    const stopRows = payloadOf("itinerary_stops");
+    expect(stopRows).toHaveLength(5);
+    for (const row of stopRows) {
+      expect(row.user_id).toBe(USER_A);
+      expect(String(row.id)).toMatch(new RegExp(`^${USER_A}:`));
+    }
+
+    // packingList → checklist_items（父→子契约内），preferences JSONB 含行程级文本
+    const checklistRows = payloadOf("checklist_items");
+    expect(checklistRows).toHaveLength(2);
+    expect(checklistRows[0].user_id).toBe(USER_A);
+    expect(checklistRows[0].label).toBe("Passport");
+    expect(callOrder.indexOf("checklist_items")).toBeGreaterThan(callOrder.indexOf("trips"));
+    expect(tripRows[0].preferences).toMatchObject({ summary: "Two foodie days in Tokyo." });
+
+    // 登录用户：浏览器里一个字节都不写
+    expect(storedGuest()).toBeNull();
+  });
+
+  it("remote：写入失败显式返回 42501，不回落 guest、不假装成功", async () => {
+    h.session = { userId: USER_A, email: null, resolved: true };
+    h.failOn = "upsert:trips";
+    const res = await savePageItinerary({ kind: "remote", userId: USER_A }, itineraryFixture());
+    expect(res.ok).toBe(false);
+    if (res.ok || res.reason !== "write-failed") {
+      throw new Error(`expected a write failure, got ${JSON.stringify(res)}`);
+    }
+    expect(res.code).toBe("42501");
+    expect(storedGuest()).toBeNull();
+  });
+
+  it("载荷缺必需字段（无日期）→ 明确失败、可重试，且一个 Trip 都不写", async () => {
+    // 分享链接的载荷只经过 JSON.parse，没有 schema 校验；缺 input/日期时
+    // 必须走失败返回（调用方保持可重试），而不是抛异常或写出半条 Trip。
+    const broken = {
+      ...itineraryFixture(),
+      input: { destination: { city: "Tokyo" } },
+    } as unknown as ReturnType<typeof itineraryFixture>;
+
+    const res = await savePageItinerary({ kind: "guest" }, broken);
+    expect(res.ok).toBe(false);
+    if (res.ok || res.reason !== "write-failed") {
+      throw new Error(`expected write-failed, got ${JSON.stringify(res)}`);
+    }
+    expect(storedGuest()).toBeNull();
+  });
+
+  // 与 /share 的展示门禁共用同一条规则（lib/itinerary-input.ts）：
+  // 下面三种载荷在页面上已被拦下，这里再确认**保存侧**同样一个 Trip 都不写。
+  it.each([
+    ["缺出发日期", { departureDate: "" }],
+    ["缺返程日期", { returnDate: "" }],
+    ["日期不是真实日历日", { departureDate: "2026-02-31" }],
+    ["日期不是 ISO 形状", { returnDate: "2026-11-1" }],
+  ])("载荷 %s → write-failed，且不产生部分 Trip / RouteDay / Stop / Checklist", async (_label, patch) => {
+    const base = itineraryFixture();
+    const broken = {
+      ...base,
+      input: { ...base.input, ...patch },
+    } as unknown as ReturnType<typeof itineraryFixture>;
+
+    const res = await savePageItinerary({ kind: "guest" }, broken);
+    expect(res.ok).toBe(false);
+    if (res.ok || res.reason !== "write-failed") {
+      throw new Error(`expected write-failed, got ${JSON.stringify(res)}`);
+    }
+    // 一个字节都不落盘 —— 也就没有半条 Trip / RouteDay / Stop / Checklist。
     expect(storedGuest()).toBeNull();
   });
 });

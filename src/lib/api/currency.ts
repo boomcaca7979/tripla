@@ -119,6 +119,10 @@ export async function getExchangeRate(
     const res = await fetch(`/api/currency?${query}`);
 
     if (!res.ok) {
+      // 503 = 汇率服务未配置（见 /api/currency）。message 置空是有意的：
+      // CurrencyWidget 会回落到它既有的兜底文案（"Unable to load exchange
+      // rate."），因此不新增任何可见文案，也不把 HTTP 状态码展示给用户。
+      if (res.status === 503) return errorResponse("", "CURRENCY_NOT_CONFIGURED");
       return errorResponse(`Currency API returned ${res.status}`, "API_ERROR");
     }
 
@@ -130,6 +134,12 @@ export async function getExchangeRate(
 
     if (body.data === null) {
       return errorResponse("No exchange rate data returned", "NO_DATA");
+    }
+
+    // 防御：任何带 mock 标记的响应都不得进入缓存、换算或展示。
+    // 即便将来有人重新引入模拟数据源，这条守卫仍然把模拟值挡在业务之外。
+    if (body.data.mock === true) {
+      return errorResponse("", "CURRENCY_MOCK_DATA");
     }
 
     cache.set(cacheKey, body.data, CACHE_TTL.CURRENCY);

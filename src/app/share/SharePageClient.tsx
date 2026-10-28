@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { decodeShareData, type SharedData } from "@/lib/share";
+import { isDisplayableItinerary, tripInputIssue } from "@/lib/itinerary-input";
 import ItineraryTimeline from "@/components/itinerary/ItineraryTimeline";
 import type { GenerationStep } from "@/components/itinerary/ItineraryTimeline";
 import ErrorBoundary from "@/components/ui/ErrorBoundary";
@@ -25,7 +26,19 @@ export default function SharePageClient() {
     // 不在 effect 内同步 setState（防级联渲染）。
     decodeShareData(decodeURIComponent(dataParam))
       .then((result) => {
-        if (alive) setShared(result);
+        if (!alive) return;
+        // 载荷只经 JSON.parse，没有 schema 校验。缺 input / 日期或日期字符串非法的
+        // 数据，一旦往下走就会在 formatDateRange 里渲染出 "Invalid Date — Invalid Date"，
+        // 让一份无效计划看起来只是"日期怪怪的"。这里与 savePageItinerary 用**同一条**
+        // 必要字段规则拦下，落到下方既有的 "Could Not Load Itinerary" 错误态：
+        // 不新增按钮/区块/文案，也不补默认日期把它伪装成有效计划。
+        if (!isDisplayableItinerary(result?.itinerary)) {
+          const issue = tripInputIssue(result?.itinerary);
+          console.warn("[share] Rejected payload:", issue?.code, issue?.message);
+          setShared(null);
+          return;
+        }
+        setShared(result);
       });
     return () => {
       alive = false;

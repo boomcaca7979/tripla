@@ -217,3 +217,70 @@ describe("generateItinerary", () => {
     expect(result.error!.message).toContain("Failed to fetch");
   });
 });
+
+// ── 成功响应解析（【模拟测试】mock fetch，非真实 AI 请求） ──────────────
+//
+// 背景：本地环境无 GROQ_API_KEY，无法发起真实 AI 生成。本测试只验证
+// /api/itinerary 返回 200 + 合法 Itinerary JSON 时的**解析与字段映射**，
+// 不声称真实 AI 生成已通过。真实 AI 成功路径需在配置密钥的环境验收。
+
+describe("generateItinerary — 成功解析（模拟）", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("【模拟测试】200 + 合法 Itinerary → data 返回且字段完整映射", async () => {
+    const payload = {
+      id: "itin-mock-1",
+      createdAt: "2026-10-27T00:00:00.000Z",
+      input: sampleInput(),
+      days: [
+        {
+          date: "2026-11-02",
+          dayNumber: 1,
+          weather: null,
+          activities: [
+            {
+              id: "a1",
+              name: "Senso-ji",
+              description: "Tokyo's oldest temple",
+              duration: 90,
+              estimatedCost: 0,
+              category: "history",
+              timeOfDay: "morning",
+            },
+          ],
+          meals: { lunch: "Ramen at Ichiran" },
+          estimatedDailyCost: 12000,
+        },
+      ],
+      totalEstimatedCost: 12000,
+      currency: "JPY",
+      summary: "One day in Tokyo.",
+      packingList: ["Passport"],
+      importantNotes: ["Carry cash"],
+    };
+
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(JSON.stringify(payload), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+
+    const result = await generateItinerary(sampleInput(), sampleWeather(), null);
+
+    expect(result.error).toBeNull();
+    expect(result.data).not.toBeNull();
+    expect(result.data!.id).toBe("itin-mock-1");
+    // 用户输入原样进入 itinerary.input（保存链路依赖它落到 Trip.preferences）
+    expect(result.data!.input.destination.city).toBe("Tokyo");
+    expect(result.data!.input.departureDate).toBe(sampleInput().departureDate);
+    expect(result.data!.input.travelStyle).toBe(sampleInput().travelStyle);
+    expect(result.data!.currency).toBe("JPY");
+    expect(result.data!.days).toHaveLength(1);
+    expect(result.data!.days[0].activities[0].name).toBe("Senso-ji");
+    expect(result.data!.packingList).toEqual(["Passport"]);
+    expect(result.data!.importantNotes).toEqual(["Carry cash"]);
+  });
+});

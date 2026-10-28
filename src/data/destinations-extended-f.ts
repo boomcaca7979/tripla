@@ -55,7 +55,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "food", "shopping"],
     recommendedDays: 4,
     budgetPerDay: 65,
-    budgetCurrency: "MAD",
+    budgetCurrency: "USD",
     highlights: [
       "Jemaa el-Fnaa at dusk",
       "Koutoubia Mosque minaret",
@@ -99,7 +99,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "food", "shopping"],
     recommendedDays: 3,
     budgetPerDay: 70,
-    budgetCurrency: "MAD",
+    budgetCurrency: "USD",
     highlights: [
       "Hassan II Mosque over the Atlantic",
       "Habous Quarter arcades",
@@ -143,7 +143,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "shopping", "food"],
     recommendedDays: 3,
     budgetPerDay: 60,
-    budgetCurrency: "MAD",
+    budgetCurrency: "USD",
     highlights: [
       "Al-Qarawiyyin, the world's oldest university",
       "Chouara tannery terraces",
@@ -187,7 +187,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "museums"],
     recommendedDays: 4,
     budgetPerDay: 55,
-    budgetCurrency: "EGP",
+    budgetCurrency: "USD",
     highlights: [
       "Karnak's hypostyle hall",
       "Valley of the Kings tombs",
@@ -231,7 +231,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "nature"],
     recommendedDays: 3,
     budgetPerDay: 50,
-    budgetCurrency: "EGP",
+    budgetCurrency: "USD",
     highlights: [
       "Abu Simbel at the sun festival",
       "Philae Temple by boat",
@@ -275,7 +275,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "museums", "food"],
     recommendedDays: 3,
     budgetPerDay: 55,
-    budgetCurrency: "TND",
+    budgetCurrency: "USD",
     highlights: [
       "Medina of Tunis souks",
       "Bardo mosaics",
@@ -319,7 +319,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["beaches", "history", "food"],
     recommendedDays: 5,
     budgetPerDay: 75,
-    budgetCurrency: "TZS",
+    budgetCurrency: "USD",
     highlights: [
       "Stone Town's carved doors",
       "Old Fort and its amphitheatre",
@@ -407,7 +407,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["museums", "history", "nightlife"],
     recommendedDays: 3,
     budgetPerDay: 80,
-    budgetCurrency: "ZAR",
+    budgetCurrency: "USD",
     highlights: [
       "Apartheid Museum",
       "Constitution Hill",
@@ -451,7 +451,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["beaches", "history", "food"],
     recommendedDays: 4,
     budgetPerDay: 90,
-    budgetCurrency: "MUR",
+    budgetCurrency: "USD",
     highlights: [
       "Aapravasi Ghat",
       "Le Caudan Waterfront",
@@ -495,7 +495,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["beaches", "nature"],
     recommendedDays: 5,
     budgetPerDay: 165,
-    budgetCurrency: "SCR",
+    budgetCurrency: "USD",
     highlights: [
       "Victoria Clock Tower",
       "Sir Selwyn Selwyn-Clarke Market",
@@ -539,7 +539,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "food", "nightlife"],
     recommendedDays: 3,
     budgetPerDay: 65,
-    budgetCurrency: "GHS",
+    budgetCurrency: "USD",
     highlights: [
       "Independence Square (Black Star Gate)",
       "Kwame Nkrumah Memorial Park",
@@ -583,7 +583,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "museums", "food"],
     recommendedDays: 3,
     budgetPerDay: 70,
-    budgetCurrency: "XOF",
+    budgetCurrency: "USD",
     highlights: [
       "African Renaissance Monument",
       "Gorée Island House of Slaves",
@@ -627,7 +627,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "museums", "food"],
     recommendedDays: 3,
     budgetPerDay: 50,
-    budgetCurrency: "ETB",
+    budgetCurrency: "USD",
     highlights: [
       "National Museum — Lucy's skeleton",
       "Holy Trinity Cathedral",
@@ -671,7 +671,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["food", "museums", "nightlife", "shopping"],
     recommendedDays: 4,
     budgetPerDay: 85,
-    budgetCurrency: "BRL",
+    budgetCurrency: "USD",
     highlights: [
       "MASP on Avenida Paulista",
       "Ibirapuera Park",
@@ -715,7 +715,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "beaches", "food"],
     recommendedDays: 4,
     budgetPerDay: 80,
-    budgetCurrency: "COP",
+    budgetCurrency: "USD",
     highlights: [
       "Ciudad Amurallada at golden hour",
       "Castillo San Felipe de Barajas",
@@ -759,7 +759,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["museums", "nightlife", "nature"],
     recommendedDays: 4,
     budgetPerDay: 65,
-    budgetCurrency: "COP",
+    budgetCurrency: "USD",
     highlights: [
       "Museo de Antioquia Botero collection",
       "Plaza Botero",
@@ -803,7 +803,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["food", "history", "museums"],
     recommendedDays: 4,
     budgetPerDay: 75,
-    budgetCurrency: "MXN",
+    budgetCurrency: "USD",
     highlights: [
       "Monte Albán Zapotec ruins",
       "Santo Domingo de Guzmán",
@@ -935,7 +935,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["food", "history", "beaches"],
     recommendedDays: 3,
     budgetPerDay: 85,
-    budgetCurrency: "UYU",
+    budgetCurrency: "USD",
     highlights: [
       "Mercado del Puerto parrilla",
       "Plaza Independencia",
@@ -1023,7 +1023,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["nature", "adventure"],
     recommendedDays: 4,
     budgetPerDay: 90,
-    budgetCurrency: "ARS",
+    budgetCurrency: "USD",
     highlights: [
       "Tierra del Fuego National Park",
       "Beagle Channel boat trip",
@@ -1155,7 +1155,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["beaches", "history", "food"],
     recommendedDays: 5,
     budgetPerDay: 130,
-    budgetCurrency: "JMD",
+    budgetCurrency: "USD",
     highlights: [
       "Doctor's Cave Beach",
       "Rose Hall Great House",
@@ -1199,7 +1199,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "museums", "food", "shopping"],
     recommendedDays: 4,
     budgetPerDay: 55,
-    budgetCurrency: "INR",
+    budgetCurrency: "USD",
     highlights: [
       "India Gate",
       "Red Fort",
@@ -1243,7 +1243,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "museums"],
     recommendedDays: 2,
     budgetPerDay: 50,
-    budgetCurrency: "INR",
+    budgetCurrency: "USD",
     highlights: [
       "Taj Mahal at sunrise",
       "Agra Fort",
@@ -1287,7 +1287,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "food"],
     recommendedDays: 3,
     budgetPerDay: 45,
-    budgetCurrency: "INR",
+    budgetCurrency: "USD",
     highlights: [
       "Kashi Vishwanath Temple",
       "Ganga Aarti at Dashashwamedh",
@@ -1331,7 +1331,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "museums", "food"],
     recommendedDays: 3,
     budgetPerDay: 50,
-    budgetCurrency: "UZS",
+    budgetCurrency: "USD",
     highlights: [
       "Registan square",
       "Gur-e-Amir mausoleum",
@@ -1507,7 +1507,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "museums"],
     recommendedDays: 3,
     budgetPerDay: 55,
-    budgetCurrency: "MMK",
+    budgetCurrency: "USD",
     highlights: [
       "Ananda Temple",
       "Sunrise over the temple plain",
@@ -1551,7 +1551,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["history", "food"],
     recommendedDays: 3,
     budgetPerDay: 50,
-    budgetCurrency: "LAK",
+    budgetCurrency: "USD",
     highlights: [
       "Pha That Luang",
       "Patuxai monument",
@@ -1595,7 +1595,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["nature", "beaches", "food", "adventure"],
     recommendedDays: 4,
     budgetPerDay: 75,
-    budgetCurrency: "MYR",
+    budgetCurrency: "USD",
     highlights: [
       "Mount Kinabalu",
       "Tunku Abdul Rahman islands",
@@ -1639,7 +1639,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["nature", "history", "food"],
     recommendedDays: 4,
     budgetPerDay: 65,
-    budgetCurrency: "KZT",
+    budgetCurrency: "USD",
     highlights: [
       "Big Almaty Lake",
       "Kok-Tobe cable car",
@@ -1727,7 +1727,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["nature", "history", "food"],
     recommendedDays: 3,
     budgetPerDay: 140,
-    budgetCurrency: "NOK",
+    budgetCurrency: "USD",
     highlights: [
       "Bryggen wharf",
       "Fløyen funicular",
@@ -2167,7 +2167,7 @@ export const EXTENDED_DESTINATIONS_F: RawDestination[] = [
     interests: ["beaches", "nature", "food"],
     recommendedDays: 4,
     budgetPerDay: 175,
-    budgetCurrency: "XPF",
+    budgetCurrency: "USD",
     highlights: [
       "Papeete Market",
       "Notre-Dame Cathedral of Papeete",

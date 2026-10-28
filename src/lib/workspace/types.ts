@@ -11,7 +11,9 @@
  *   guest   → localStorage，唯一 source of truth 是浏览器
  *   remote  → Supabase，唯一 source of truth 是数据库（RLS 以 auth.uid() 为边界）
  *
- * 两者之间**没有任何自动搬运**：匿名期间积累的数据不会因为登录而被上传。
+ * 两者之间**没有自动同步**：登录后由 `migration.ts` 的 `mergeGuestWorkspace`
+ * 做**一次性单向** guest→cloud 合并（同 id 去重、失败显式报错、匿名数据原地保留）；
+ * 除此之外匿名期间积累的数据不会持续上传。
  */
 
 import type {

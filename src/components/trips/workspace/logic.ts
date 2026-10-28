@@ -893,6 +893,36 @@ export function workspaceReducer(state: WorkspaceState, action: WorkspaceAction)
         ],
       }));
 
+    case "IMPORT_SOURCE_DAYS": {
+      // 公开行程内容导入：只搬源数据实际具备的字段（主题/活动名/时间），
+      // 不造价格/日期/时长。与 ADD_ROUTE_DAY 同构（title 沿用 Day N · X）。
+      const trip = state.trips.find((t) => t.id === action.tripId);
+      if (!trip || action.days.length === 0) return state;
+      const next = updateTrip(state, action.tripId, (t) => ({
+        ...t,
+        routeDays: [
+          ...t.routeDays,
+          ...action.days.map((day, i) => ({
+            id: localId("d"),
+            title: day.theme ? `Day ${t.routeDays.length + i + 1} · ${day.theme}` : `Day ${t.routeDays.length + i + 1} · ${t.destination}`,
+            stops: day.stops.map((s) => ({
+              id: localId("s"),
+              name: s.name,
+              time: s.time,
+              kind: "activity" as const,
+            })),
+            distanceKm: 0,
+            transitMin: 0,
+          })),
+        ],
+      }));
+      const importedStops = action.days.reduce((n, d) => n + d.stops.length, 0);
+      return withActivity(
+        next,
+        `Imported ${action.days.length}-day plan (${importedStops} stops) into ${trip.destination}`,
+      );
+    }
+
     case "ADD_EXPENSE": {
       const trip = state.trips.find((t) => t.id === action.tripId);
       const next = updateTrip(state, action.tripId, (t) => ({

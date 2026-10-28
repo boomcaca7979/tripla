@@ -1709,7 +1709,7 @@ export const EXTENDED_TRIPS_E: RawTripInput[] = [
     author: AI,
     days: 3,
     estimatedCost: 420,
-    currency: "EUR",
+    currency: "USD",
     tags: ["Culture", "History", "Music"],
     excerpt:
       "Three days of the imperial city: Schönbrunn's palace, the Ring's grand buildings, café-hour sachertorte and one concert night.",
@@ -1820,7 +1820,7 @@ export const EXTENDED_TRIPS_E: RawTripInput[] = [
     author: AI,
     days: 4,
     estimatedCost: 400,
-    currency: "EUR",
+    currency: "USD",
     tags: ["Culture", "History", "Nature"],
     excerpt:
       "Four days beyond the postcard: Prague's essentials, a Český Krumlov day, and Kutná Hora's bone chapel or Bohemian Switzerland's rocks.",

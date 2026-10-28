@@ -13,8 +13,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Hotel, Trip, WorkspaceAction } from "./types";
-import { money } from "./logic";
-import { parseQuickCapture } from "./expenses/engine";
+// money 取自 expenses/engine（ISO 感知：JPY→¥、零小数位），与 Expenses/People/Overview
+// 同一实现。原先取 logic.money 只拼接字符串，ISO 货币会渲染成 "JPY120"。
+import { money, parseQuickCapture } from "./expenses/engine";
 import {
   CaptureLine,
   HoverActions,

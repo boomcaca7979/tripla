@@ -3,9 +3,33 @@ import type { WeatherScore } from "@/types/weather";
 import type { TravelStyle, TravelInterest } from "@/types/itinerary";
 
 /**
- * 数据层允许的 travelStyle 值：除 planner 的 5 值 TravelStyle 枚举外，
- * 部分扩展目的地数据使用 nature / history / culture / beaches 等描述值。
- * 消费端（planner 输入）必须经页面 guard 收敛为 TravelStyle，不得直传。
+ * 预算字段口径（2026-10-27 全量核查确立，修改前必读）：
+ *
+ *   budgetPerDay / budgetCurrency = **编辑估算值**（editorial estimate），
+ *   覆盖全部 205 城，数据文件**无逐城外部来源**；/travel-budget 页面以
+ *   "estimated" 措辞向用户披露，分项按 40/25/15/20 比例拆分（计算与舍入
+ *   规则见 src/lib/budget-breakdown.ts，全量契约测试见
+ *   src/lib/__tests__/budget-data.test.ts）。
+ *
+ *   例外：Tokyo 另有 evidence-backed 三档数据（src/data/budget-detail.ts，
+ *   JPY 区间，2026-10 核对，含来源链接）。
+ *
+ *   修复记录（两批，共 30 城）：budgetCurrency 曾被错标为本币代码，而数值
+ *   是按 USD 口径抄写的（Luxor 55 "EGP" ≈ 1 USD/天、Marrakech 65 "MAD"）；
+ *   2026-10-27 修 15 城、2026-10-28 修 15 城，均改为 USD，budgetPerDay 数值
+ *   一律未动。同期 12 个 trip 的 currency 与城市口径不符，一并修正。
+ *   ⚠️ 两批修复的依据都是**内部数值量级（折算后 < 20 USD/日）+ 同国城市
+ *   对照**，未经任何独立价格来源确认 —— 任何场合不得表述为"外部核实"。
+ *   该结论由 budget-data.test.ts 的修复锁定表 + 全量量级检测守护。
+ *
+ *   已知存量口径混用（同国城市 EUR/USD 并存，数值各自合理，统一需汇率
+ *   换算授权）：Italy / Spain / Germany / Austria / Finland / Norway——
+ *   由 budget-data.test.ts 白名单登记，新增混用会使测试失败。注意该断言只是
+ *   **状态锁**：同国币种各异未必错，同国全同也可能全错（Morocco 三城曾同时
+ *   错标为 MAD 而测试通过），取值正确性由量级检测兜底。
+ *
+ *   后续提升精度需引入有商业使用授权的逐城旅行费用数据源（见 2026-10-28
+ *   第四轮报告的来源评估），未获得授权前不得伪造来源或误差区间。
  */
 export type DestinationTravelStyle = TravelStyle | "nature" | "history" | "culture" | "beaches";
 

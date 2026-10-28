@@ -3,9 +3,9 @@ import Link from "next/link";
 import { DESTINATIONS } from "@/data/destinations";
 
 // ── Metadata（Phase 7.2）──────────────────────────────────────────────
+// 计数动态派生（曾硬编码 "12 destinations"，实际 205 —— 确认过的数据错误）。
 const TB_TITLE = "Travel Budget Guide · Daily Costs for Top Destinations";
-const TB_DESCRIPTION =
-  "Plan your trip budget with daily cost estimates for 12 destinations — Tokyo, Paris, Bangkok, Dubai, and more. See accommodation, food, transport, and activity breakdowns per city.";
+const TB_DESCRIPTION = `Plan your trip budget with daily cost estimates for ${DESTINATIONS.length} destinations — Tokyo, Paris, Bangkok, Dubai, and more. See accommodation, food, transport, and activity breakdowns per city.`;
 
 export const metadata: Metadata = {
   title: TB_TITLE,
@@ -40,7 +40,7 @@ function buildItemListJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "UTripla Travel Budget Guides",
+    name: "UTripla Travel Budget",
     numberOfItems: DESTINATIONS.length,
     itemListElement: DESTINATIONS.map((d, i) => ({
       "@type": "ListItem",

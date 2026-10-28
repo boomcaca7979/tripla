@@ -180,9 +180,9 @@ const RAW_TRIPS: RawTrip[] = [
     gradient: "from-indigo-500 to-pink-600",
     author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
     days: 2,
-    // Fix: 与 destinations.ts 的 budgetPerDay(USD 150/日) 对齐。
+    // Fix: 与 destinations.ts 的 budgetPerDay(EUR 150/日) 对齐。
     estimatedCost: 300,
-    currency: "USD",
+    currency: "EUR",
     tags: ["Culture", "Foodie", "Couples"],
     excerpt:
       "Two art-filled days along the Seine — Louvre mornings, café afternoons, a sunset cruise, and one unforgettable dinner.",
@@ -370,9 +370,9 @@ const RAW_TRIPS: RawTrip[] = [
     gradient: "from-slate-700 to-blue-900",
     author: { kind: "ai", name: "tripla AI", avatarColor: "from-blue-500 to-indigo-600", initials: "AI" },
     days: 2,
-    // Fix: 与 destinations.ts 的 budgetPerDay(USD 180/日) 对齐。
+    // Fix: 与 destinations.ts 的 budgetPerDay(GBP 180/日) 对齐。
     estimatedCost: 360,
-    currency: "USD",
+    currency: "GBP",
     tags: ["History", "Museums", "Slow Travel"],
     excerpt:
       "Seven centuries of London on foot — Tower, Borough Market, the South Bank, and a free museum afternoon.",
@@ -428,9 +428,9 @@ const RAW_TRIPS: RawTrip[] = [
     gradient: "from-sky-500 to-cyan-700",
     author: { kind: "user", name: "Olivia P.", avatarColor: "from-sky-500 to-cyan-500", initials: "OP" },
     days: 3,
-    // Fix: 与 destinations.ts 的 budgetPerDay(USD 160/日) 对齐。
+    // Fix: 与 destinations.ts 的 budgetPerDay(AUD 160/日) 对齐。
     estimatedCost: 480,
-    currency: "USD",
+    currency: "AUD",
     tags: ["Adventure", "Nature", "Beaches"],
     excerpt:
       "Coastal walks, hidden harbour coves and a sunrise kayak — three days of outdoor Sydney beyond the Opera House.",

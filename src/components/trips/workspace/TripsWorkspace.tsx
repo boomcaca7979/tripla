@@ -33,7 +33,6 @@ import {
   formatSavedDate,
   formatTripDates,
   localId,
-  money,
   nightsBetween,
   tripStage,
   workspaceReducer,
@@ -42,7 +41,9 @@ import { seedWorkspace } from "./seed";
 import TripWorkspace from "./TripWorkspace";
 import { CaptureLine } from "./inline";
 import ExpensesWorkspace from "./expenses/ExpensesWorkspace";
-import { tripActualTotals, migrateWorkspaceState } from "./expenses/engine";
+// money 取自 expenses/engine（ISO 感知）——trip.currency 存 ISO 代码后，
+// logic.money 的字符串拼接会把 "JPY" 直接拼在金额前（"JPY1200"）。
+import { money, tripActualTotals, migrateWorkspaceState } from "./expenses/engine";
 import { reviewQueue } from "./expenses/engine";
 import { BTN_GHOST, BTN_PRIMARY, EmptyState, INPUT, META_LINE, Modal, Panel, MONO_META, T_CARD, T_META, T_PAGE, T_SECTION, TOOLBAR_ACTION } from "./ui";
 import { DESTINATIONS } from "@/data/destinations";
@@ -88,7 +89,7 @@ function describeSyncError(error: unknown): string {
 }
 
 export default function TripsWorkspace({
-  /** 来自 /trips/new 的预填（destination + 日期 + 首页表单偏好）；存在时自动打开 New Trip 表单。 */
+  /** 来自 /trips/new 的预填（destination + 日期 + 首页表单偏好 + 公开行程内容）；存在时自动打开 New Trip 表单。 */
   prefill = null,
 }: {
   prefill?: {
@@ -103,13 +104,18 @@ export default function TripsWorkspace({
       interests?: string[];
       travelers?: number;
     };
+    /** 公开行程「Plan this trip」深链带入的源行程内容（主题/活动，已洁净化）。 */
+    sourceDays?: Array<{ theme: string; stops: Array<{ name: string; time: string }> }>;
   } | null;
 } = {}) {
   const [state, dispatch] = useReducer(workspaceReducer, undefined, seedWorkspace);
   const [view, setView] = useState<View>({ name: "trips" });
-  // /trips/new 深链：带有效 destination 或任一偏好预填时自动打开创建表单
+  // /trips/new 深链：带有效 destination 或任一偏好预填或源行程内容时自动打开创建表单
   const [newTripOpen, setNewTripOpen] = useState(
-    Boolean(prefill && (prefill.destinationId || prefill.destinationLabel || prefill.preferences)),
+    Boolean(
+      prefill &&
+        (prefill.destinationId || prefill.destinationLabel || prefill.preferences || prefill.sourceDays),
+    ),
   );
   const { userId, ready: sessionReady } = useSession();
 
@@ -465,6 +471,8 @@ function TripsListView({
       interests?: string[];
       travelers?: number;
     };
+    /** 公开行程「Plan this trip」深链带入的源行程内容（主题/活动，已洁净化）。 */
+    sourceDays?: Array<{ theme: string; stops: Array<{ name: string; time: string }> }>;
   } | null;
 }) {
   const current = state.trips.filter((t) => t.status === "current");
@@ -492,6 +500,7 @@ function TripsListView({
             initialStartDate={prefill?.startDate ?? ""}
             initialEndDate={prefill?.endDate ?? ""}
             initialPreferences={prefill?.preferences}
+            initialSourceDays={prefill?.sourceDays}
             onCreated={(tripId) => {
               trackEvent({ name: "trip_create", authenticated: true, source: "trips_new" });
               setNewTripOpen(false);
@@ -1180,6 +1189,7 @@ function NewTripForm({
   initialStartDate = "",
   initialEndDate = "",
   initialPreferences,
+  initialSourceDays,
 }: {
   dispatch: (action: WorkspaceAction) => void;
   onCreated: (tripId: string) => void;
@@ -1198,6 +1208,8 @@ function NewTripForm({
     interests?: string[];
     travelers?: number;
   };
+  /** 公开行程「Plan this trip」深链带入的源行程内容；创建时经 IMPORT_SOURCE_DAYS 导入。 */
+  initialSourceDays?: Array<{ theme: string; stops: Array<{ name: string; time: string }> }>;
 }) {
   // 预填：slug → DestinationChoice（toChoice 内部校验必须命中真实 DESTINATIONS）
   const [dest, setDest] = useState<DestinationChoice | null>(() =>
@@ -1207,12 +1219,17 @@ function NewTripForm({
   const [currency, setCurrency] = useState("CNY");
   const [startDate, setStartDate] = useState(initialStartDate);
   const [endDate, setEndDate] = useState(initialEndDate);
+  // 防重复提交：连续点击 Save 在 React 重渲染前会触发两次 submit → 两次
+  // CREATE_TRIP（同 id 会在列表里出现两行）。用 ref 在本次挂载内只提交一次。
+  const submittedRef = useRef(false);
 
   const prefTravelers = initialPreferences?.travelers;
 
   const submit = () => {
     // 蓝图 #7：只允许从真实 Destination 创建（destinationId 必填）
     if (!dest || !startDate || !endDate) return;
+    if (submittedRef.current) return;
+    submittedRef.current = true;
     const tripId = localId("trip");
     dispatch({
       type: "CREATE_TRIP",
@@ -1226,6 +1243,11 @@ function NewTripForm({
       currency,
       preferences: initialPreferences,
     });
+    // 公开行程内容导入：源行程实际具备的天数/主题/活动，经既有 reducer
+    // 变成 routeDays/stops（可继续编辑）。源数据没有的价格/日期不造。
+    if (initialSourceDays && initialSourceDays.length > 0) {
+      dispatch({ type: "IMPORT_SOURCE_DAYS", tripId, days: initialSourceDays });
+    }
     onCreated(tripId);
   };
 

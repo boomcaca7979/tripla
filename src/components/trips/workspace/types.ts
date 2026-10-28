@@ -143,6 +143,15 @@ export interface TripPreferences {
   budgetLevel?: string;
   interests?: string[];
   travelers?: number;
+  /**
+   * AI Itinerary（/plan、/share 的 Save Itinerary）随 Trip 一并保存的行程级
+   * 文本内容。工作区没有 trip 级 description 字段（schema 冻结，不新增列），
+   * preferences 本就是随行 JSONB —— 这里以可选扩展 key 承载，mapper 整体
+   * JSON 往返无损，Edit 表单不写 preferences（reducer `?? t.preferences`
+   * 保留原值），对既有 key 与老数据零影响。现有 UI 不渲染这两个 key。
+   */
+  summary?: string;
+  importantNotes?: string[];
 }
 
 export interface Trip {
@@ -260,6 +269,13 @@ export type WorkspaceAction =
   /** inline 编辑酒店字段（Workspace-driven 重构）：局部 patch，保留其余字段 */
   | { type: "PATCH_HOTEL"; tripId: string; hotelId: string; patch: Partial<Pick<Hotel, "name" | "area" | "pricePerNight" | "nights" | "rating" | "breakfast" | "freeCancellation" | "notes">> }
   | { type: "ADD_STOP"; tripId: string; dayId: string; name: string; time: string; note?: string; placeId?: string; kind?: "activity" | "meal" | "custom" }
+  /**
+   * 公开行程「Plan this trip」→ /trips/new 创建时的一次性内容导入：
+   * 源行程的天数/主题/活动 → routeDays/stops（activity 类别，时间原样）。
+   * 只搬源数据实际具备的字段，不造价格/日期/时长；单次 dispatch 保证
+   * 活动流水只有一条导入记录（不逐 stop 刷屏）。
+   */
+  | { type: "IMPORT_SOURCE_DAYS"; tripId: string; days: Array<{ theme: string; stops: Array<{ name: string; time: string }> }> }
   | { type: "REMOVE_ROUTE_DAY"; tripId: string; dayId: string }
   | { type: "ADD_PLACE_TO_ITINERARY"; tripId: string; placeId: string; time?: string }
   | { type: "REMOVE_STOP"; tripId: string; dayId: string; stopId: string }

@@ -125,10 +125,16 @@ export function useItinerary() {
       );
       const rateData = await rateRes.json().catch(() => null);
 
+      // 只有"真实且未标记 mock"的汇率才允许进入 AI 提示词。服务不可用、
+      // 返回错误体或带 mock 标记时一律传 null —— buildUserMessage 会省略
+      // Currency 行，AI 不会按编造汇率换算行程费用。
+      const liveRate =
+        rateData?.data && rateData.data.mock !== true ? rateData.data : null;
+
       const result = await generateItinerary(
         input,
         weatherData,
-        rateData?.data ?? null,
+        liveRate,
       );
 
       if (result.error !== null) {

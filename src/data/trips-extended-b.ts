@@ -1534,7 +1534,7 @@ export const EXTENDED_TRIPS_B: RawTripInput[] = [
     author: AI,
     days: 3,
     estimatedCost: 480,
-    currency: "EUR",
+    currency: "USD",
     tags: ["Museums", "Culture", "Bikes"],
     excerpt:
       "Museum mornings, Jordaan afternoons, one bike day through the Waterland — Amsterdam at the pace the canal ring was built for.",

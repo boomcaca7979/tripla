@@ -29,7 +29,9 @@
  */
 
 import type { InboxKind, PlaceKind } from "@/components/trips/workspace/types";
+import type { Itinerary, ItineraryDay } from "@/types/itinerary";
 import { getSessionIdentity } from "./use-session";
+import { tripInputIssue } from "./itinerary-input";
 import type { WorkspaceMode } from "./workspace";
 
 // ── 按需加载 ───────────────────────────────────────────────────────────
@@ -310,6 +312,166 @@ export async function createPageTrip(
     return writeFailed(error);
   }
   return { ok: true, id };
+}
+
+// ── AI Itinerary → 工作区 Trip（/plan、/share 的 Save Itinerary） ────────
+
+/**
+ * AI 行程（/api/itinerary 产物）里的时间表达 → RouteStop.time（"09:00" 24h 制）。
+ * AI 只给出时段（morning/afternoon/evening/night），不给出钟点；
+ * 这里映射为该时段的代表钟点，用户可在工作台 Route 页继续调整。
+ */
+const ACTIVITY_TIME: Record<ItineraryDay["activities"][number]["timeOfDay"], string> = {
+  morning: "09:00",
+  afternoon: "13:00",
+  evening: "18:00",
+  night: "21:00",
+};
+
+const MEAL_TIME: Record<keyof ItineraryDay["meals"], string> = {
+  breakfast: "08:00",
+  lunch: "12:30",
+  dinner: "19:00",
+};
+
+/** 由一天的数据推导 RouteStop 序列（按时间排序，行程读起来是按时间推进的）。 */
+function plannedStopsOf(day: ItineraryDay): Array<{
+  name: string;
+  time: string;
+  kind: "activity" | "meal";
+  note?: string;
+}> {
+  const stops: Array<{ name: string; time: string; kind: "activity" | "meal"; note?: string }> = [];
+  for (const meal of ["breakfast", "lunch", "dinner"] as const) {
+    const suggestion = day.meals?.[meal];
+    if (suggestion) {
+      stops.push({ name: suggestion, time: MEAL_TIME[meal], kind: "meal" });
+    }
+  }
+  for (const activity of Array.isArray(day.activities) ? day.activities : []) {
+    const note = [activity.description, activity.tip ? `Tip: ${activity.tip}` : null]
+      .filter(Boolean)
+      .join(" · ");
+    stops.push({
+      name: activity.name,
+      time: ACTIVITY_TIME[activity.timeOfDay] ?? "12:00",
+      kind: "activity",
+      note: note || undefined,
+    });
+  }
+  return stops.sort((a, b) => a.time.localeCompare(b.time));
+}
+
+/**
+ * Save Itinerary —— 把一份 AI 生成的 Itinerary 保存为工作区里的一个真实 Trip。
+ *
+ * 业务语义全部经既有 reducer（CREATE_TRIP → ADD_ROUTE_DAY → ADD_STOP），
+ * 持久化完全走既有的 load/commit 双通道：guest → localStorage，登录 → Supabase。
+ * 行程的 days/activities/meals 映射为 Trip 的 routeDays/stops（时间、备注保留），
+ * 偏好（style/budget/interests/travelers）映射进 Trip.preferences。
+ *
+ * 说明：
+ *  - 每次 Save 都创建一个新 Trip（AI 重新生成会得到新 id）。同一浏览器内的
+ *    重复保存由调用方的 savedItineraries 标记挡住；换设备对同一分享链接再保存
+ *    会得到一个新 Trip —— 这是「保存一份计划」的自然语义，不做合并猜测。
+ *  - 内容映射：days/activities/meals → routeDays/stops；packingList → 既有
+ *    Checklist（before 阶段，可见可勾选）；summary / importantNotes → 既有
+ *    preferences JSONB 扩展 key（当前无 UI 渲染，数据不丢）。AI 的预计费用
+ *    不进 expenses/transactions 账本（预算 ≠ 真实消费）。
+ *
+ * 失败显式返回（PageFailure），调用方不得在失败时显示成功状态。
+ */
+export async function savePageItinerary(
+  mode: PageMode,
+  itinerary: Itinerary,
+): Promise<PageCreateTripResult> {
+  const { loadWorkspace, commitWorkspace, workspaceReducer, localId } = await runtime();
+  let prev;
+  try {
+    prev = await loadWorkspace(mode);
+  } catch (error) {
+    return writeFailed(error);
+  }
+
+  // 分享链接与页面展示共用同一条「必要字段」规则（见 lib/itinerary-input.ts）：
+  // 缺 input / 目的地 / 日期，或日期不是 YYYY-MM-DD 日历日时，无法建立一条合法的
+  // Trip（会写下无目的地、无日期的行，或让 routeDays 落在无效日期上）。
+  // 因此**明确失败**，让调用方保持可重试状态，而不是抛异常导致"点了 Save 什么都不发生"。
+  const issue = tripInputIssue(itinerary);
+  if (issue) {
+    return writeFailed(new Error(issue.message));
+  }
+  const input = itinerary.input;
+  // 同源问题：数组字段可能不存在。缺失按空数组处理（不补造内容）。
+  const days = Array.isArray(itinerary.days) ? itinerary.days : [];
+  const packingList = Array.isArray(itinerary.packingList) ? itinerary.packingList : [];
+  const importantNotes = Array.isArray(itinerary.importantNotes) ? itinerary.importantNotes : [];
+
+  const city = input.destination.city?.trim() || input.destination.name;
+  // 与 createPageTrip 同口径：按城市名匹配真实 Destination，快照 slug/country/image
+  const { DESTINATIONS } = await import("@/data/destinations");
+  const dest = DESTINATIONS.find((d) => d.city.toLowerCase() === city.toLowerCase());
+
+  const travelers = Number.isFinite(input.groupSize) && input.groupSize > 0 ? input.groupSize : 1;
+  const tripId = localId("trip");
+  let next = workspaceReducer(prev, {
+    type: "CREATE_TRIP",
+    id: tripId,
+    destination: city,
+    destinationId: dest?.slug,
+    startDate: input.departureDate,
+    endDate: input.returnDate,
+    travelers,
+    // 币种沿用行程自带的 ISO 代码；缺失时退回目的地数据集的计价币种，
+    // 再退回 USD —— 绝不写入空字符串（会让 money() 渲染出裸数字）。
+    currency: (itinerary.currency ?? "").trim() || dest?.budgetCurrency || "USD",
+    preferences: {
+      travelStyle: input.travelStyle,
+      budgetLevel: input.budgetLevel,
+      interests: Array.isArray(input.interests) ? [...input.interests] : [],
+      travelers,
+      // 行程级文本内容随既有 preferences JSONB 保存（不静默丢弃）：
+      // summary / importantNotes 当前无 UI 渲染，packingList 走下方 Checklist。
+      summary: itinerary.summary?.trim() || undefined,
+      importantNotes: importantNotes.length
+        ? importantNotes.map((n) => n.trim()).filter(Boolean)
+        : undefined,
+    },
+  });
+
+  for (const day of days) {
+    const stops = plannedStopsOf(day);
+    if (stops.length === 0) {
+      next = workspaceReducer(next, { type: "ADD_ROUTE_DAY", tripId });
+      continue;
+    }
+    next = workspaceReducer(next, { type: "ADD_ROUTE_DAY", tripId, firstStop: stops[0] });
+    // ADD_ROUTE_DAY 把新 Day 追加在末尾并自生成 id —— 从真实状态读回，
+    // 与 addPageItemToTrip 的「由 reducer 之后的状态推导」同一纪律。
+    const routeDays = next.trips.find((t) => t.id === tripId)?.routeDays ?? [];
+    const dayId = routeDays[routeDays.length - 1]?.id;
+    if (!dayId) break;
+    for (const stop of stops.slice(1)) {
+      next = workspaceReducer(next, { type: "ADD_STOP", tripId, dayId, ...stop });
+    }
+  }
+
+  // packingList → 既有 Checklist（"Before trip" 阶段）：AI 建议的行李清单
+  // 进入用户既有的清单结构，可见、可勾选、可编辑。空行过滤；语义是
+  // 「AI 建议的待办」，不是真实消费，绝不进 expenses/transactions 账本。
+  for (const raw of packingList) {
+    const label = raw.trim();
+    if (label) {
+      next = workspaceReducer(next, { type: "ADD_CHECKLIST", tripId, label, phase: "before" });
+    }
+  }
+
+  try {
+    await commitWorkspace(mode, prev, next);
+  } catch (error) {
+    return writeFailed(error);
+  }
+  return { ok: true, id: tripId };
 }
 
 /**

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import TripsWorkspace from "@/components/trips/workspace/TripsWorkspace";
 import type { TravelInterest } from "@/types/itinerary";
@@ -12,6 +13,10 @@ import type { TravelInterest } from "@/types/itinerary";
  *   · startDate/endDate = ISO 日期；end < start 或格式非法 → 不预填该日期
  *   · 其余首页表单字段（originCity/travelStyle/budgetLevel/interests/travelers）
  *     全部读入 prefill.preferences，随 CREATE_TRIP 落 Trip.preferences —— 不静默丢失。
+ *   · trip = 公开行程 slug（「Plan this trip」深链透传）：命中真实种子行程时，
+ *     把它的天数/主题/活动映射为 prefill.sourceDays，创建行程时经既有
+ *     IMPORT_SOURCE_DAYS reducer 导入 routeDays/stops —— 源数据没有的
+ *     日期/价格/时长一律不造。slug 无效 → 静默忽略（正常空行程创建）。
  * 创建走现有 workspace reducer / 持久化流程（不新增第二套存储）。
  */
 
@@ -28,6 +33,12 @@ const VALID_INTERESTS: readonly TravelInterest[] = [
   "beaches",
 ];
 
+/** 源行程经洁净化后的可导入内容（仅名称/时间/主题 —— 源数据就是这么多）。 */
+export interface SourceDayContent {
+  theme: string;
+  stops: Array<{ name: string; time: string }>;
+}
+
 export interface HandoffPrefill {
   destinationId?: string;
   destinationLabel?: string;
@@ -40,6 +51,7 @@ export interface HandoffPrefill {
     interests?: string[];
     travelers?: number;
   };
+  sourceDays?: SourceDayContent[];
 }
 
 export default function TripsNewHandoff() {
@@ -58,6 +70,7 @@ export default function TripsNewHandoff() {
     .split(",")
     .map((i) => i.trim())
     .filter((i): i is TravelInterest => VALID_INTERESTS.includes(i as TravelInterest));
+  const tripSlug = params.get("trip") ?? undefined;
 
   const startDate = rawStart && ISO_DATE.test(rawStart) ? rawStart : undefined;
   const endDate = rawEnd && ISO_DATE.test(rawEnd) ? rawEnd : undefined;
@@ -78,8 +91,35 @@ export default function TripsNewHandoff() {
   };
   const hasPreferences = Object.values(preferences).some((v) => v !== undefined);
 
+  // 源行程内容按需加载：280 个种子行程数据体量大，只在深链真正携带 slug
+  // 时才拉取对应数据（动态 import 走独立 chunk）。异步 setState 在 promise
+  // 回调内，不在 effect 体内同步执行。
+  const [sourceDays, setSourceDays] = useState<SourceDayContent[] | undefined>(undefined);
+  useEffect(() => {
+    if (!tripSlug) return;
+    let alive = true;
+    import("@/data/trips")
+      .then(({ getTripBySlug }) => {
+        if (!alive) return;
+        const trip = getTripBySlug(tripSlug);
+        if (!trip || trip.itinerary.length === 0) return;
+        setSourceDays(
+          trip.itinerary.map((day) => ({
+            theme: day.theme,
+            stops: day.activities.map((a) => ({ name: a.name, time: a.time })),
+          })),
+        );
+      })
+      .catch(() => {
+        // 加载失败 → 正常空行程创建，不阻塞主流程
+      });
+    return () => {
+      alive = false;
+    };
+  }, [tripSlug]);
+
   const prefill: HandoffPrefill | null =
-    destinationId || destinationCity || hasPreferences
+    destinationId || destinationCity || hasPreferences || sourceDays
       ? {
           destinationId,
           destinationLabel: destinationCity
@@ -90,6 +130,7 @@ export default function TripsNewHandoff() {
           startDate: validRange.startDate,
           endDate: validRange.endDate,
           preferences: hasPreferences ? preferences : undefined,
+          sourceDays,
         }
       : null;
 

@@ -1174,7 +1174,7 @@ export const EXTENDED_TRIPS_A: RawTripInput[] = [
     author: AI,
     days: 3,
     estimatedCost: 450,
-    currency: "USD",
+    currency: "EUR",
     tags: ["Culture", "Museums", "Classic"],
     excerpt:
       "The first-timer's Paris: islands and the Louvre, Montmartre and the Marais, and the grand axis to the Eiffel Tower — grouped by neighborhood to beat the crowds.",
@@ -1236,7 +1236,7 @@ export const EXTENDED_TRIPS_A: RawTripInput[] = [
     author: AI,
     days: 5,
     estimatedCost: 750,
-    currency: "USD",
+    currency: "EUR",
     tags: ["Museums", "Foodie", "Culture"],
     excerpt:
       "Five days for the museum-and-table version of Paris: Louvre and d'Orsay done properly, Versailles unhurried, and the pastry circuit as serious sightseeing.",
@@ -1318,7 +1318,7 @@ export const EXTENDED_TRIPS_A: RawTripInput[] = [
     author: AI,
     days: 3,
     estimatedCost: 450,
-    currency: "USD",
+    currency: "EUR",
     tags: ["Foodie", "Markets", "Patisserie"],
     excerpt:
       "Three days built around the table: bakery breakfasts, formule lunches, market picnics, a booked bistro a night, and the pastry circuit between.",

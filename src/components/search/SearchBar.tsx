@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import AirportAutocomplete, { type CityIndexEntry } from "./AirportAutocomplete";
 import DateRangePicker from "./DateRangePicker";
@@ -99,6 +99,9 @@ export default function SearchBar({ onSearch, cityIndex = [], copy }: SearchBarP
   // error 存"错误码"而非文本：文案在渲染处按当前语言/首页覆盖解析，
   // 使 handleSubmit 不依赖任何外部文案变量。
   const [error, setError] = useState<"originDest" | "dates" | null>(null);
+  // 公开行程「Plan this trip」深链的源行程 slug（首次挂载时从 URL 读取一次，
+  // 提交时透传给 /trips/new —— 不进入任何可见 UI）。
+  const sourceTripRef = useRef<string | null>(null);
 
   // ── Sync from store (template auto-fill) ────────────────────────────
   useEffect(() => {
@@ -123,6 +126,10 @@ export default function SearchBar({ onSearch, cityIndex = [], copy }: SearchBarP
     const interestsParam = params.get("interests");
     const dep = params.get("departureDate");
     const ret = params.get("returnDate");
+    // 公开行程「Plan this trip」深链携带的源行程 slug（见 /trips/[slug]
+    // buildJourneyPlannerHref）：提交时原样透传给 /trips/new，让新建的个人
+    // 行程由既有 reducer 导入源行程的天数/活动。仅透传 slug，不改变表单语义。
+    sourceTripRef.current = params.get("trip");
     if (!to && !style && !interestsParam && !dep && !ret) return;
 
     if (to) {
@@ -200,29 +207,52 @@ export default function SearchBar({ onSearch, cityIndex = [], copy }: SearchBarP
       return;
     }
 
-    // ── Navigate to the trips workspace new-trip handoff ─────────────
-    // destination 以稳定 slug 传递（按 city+country 匹配 DESTINATIONS 数据集；
-    // 非 UTRIPLA 目的地城市无 slug → /trips/new 回到正常空选择态，不伪造）。
-    // 全部表单字段随 URL 透传（P2 漏斗）：origin/style/budget/interests/travelers
-    // 一并由目标页读入 Trip.preferences，不允许静默丢失。
-    const slug = DESTINATIONS.find(
-      (d) => d.city === destination.city && d.country === destination.country,
-    )?.slug;
-    const params = new URLSearchParams();
-    if (slug) params.set("destination", slug);
-    else {
-      params.set("destinationCity", destination.city);
-      if (destination.country) params.set("destinationCountry", destination.country);
+    // ── 路由分派（按入口语义，纯提交逻辑，无可见差异） ────────────────
+    //
+    // ① 公开行程「Plan this trip」深链（携带 trip=slug）：沿用 /trips/new
+    //    导入链路 —— CTA 承诺的是沿用参照行程，创建时由 IMPORT_SOURCE_DAYS
+    //    把源行程的天数/主题/活动带入工作台。
+    if (sourceTripRef.current) {
+      // destination 以稳定 slug 传递（按 city+country 匹配 DESTINATIONS 数据集；
+      // 非 UTRIPLA 目的地城市无 slug → /trips/new 回到正常空选择态，不伪造）。
+      // 全部表单字段随 URL 透传（P2 漏斗）：origin/style/budget/interests/travelers
+      // 一并由目标页读入 Trip.preferences，不允许静默丢失。
+      const slug = DESTINATIONS.find(
+        (d) => d.city === destination.city && d.country === destination.country,
+      )?.slug;
+      const params = new URLSearchParams();
+      if (slug) params.set("destination", slug);
+      else {
+        params.set("destinationCity", destination.city);
+        if (destination.country) params.set("destinationCountry", destination.country);
+      }
+      params.set("originCity", origin.city);
+      params.set("startDate", departureDate);
+      params.set("endDate", returnDate);
+      params.set("travelStyle", travelStyle);
+      params.set("budgetLevel", budgetLevel);
+      params.set("travelers", String(groupSize));
+      if (interests.length > 0) params.set("interests", interests.join(","));
+      params.set("trip", sourceTripRef.current);
+      router.push(`/trips/new?${params.toString()}`);
+      return;
     }
-    params.set("originCity", origin.city);
-    params.set("startDate", departureDate);
-    params.set("endDate", returnDate);
-    params.set("travelStyle", travelStyle);
-    params.set("budgetLevel", budgetLevel);
-    params.set("travelers", String(groupSize));
-    if (interests.length > 0) params.set("interests", interests.join(","));
 
-    router.push(`/trips/new?${params.toString()}`);
+    // ② 普通首页搜索 → 现有 AI 规划页（/plan）：该页按既有契约接收参数后
+    //    自动调用 /api/itinerary 生成真实行程并展示（航班/天气/汇率），失败时
+    //    沿用既有错误展示（stepper 红色错误步骤），绝不自动建空行程假成功。
+    //    生成结果页内即有既有 Save Itinerary → 工作台闭环。
+    //    /plan 参数契约：origin/destination = JSON Airport（PlanPageClient 解析）。
+    const planParams = new URLSearchParams();
+    planParams.set("origin", JSON.stringify(origin));
+    planParams.set("destination", JSON.stringify(destination));
+    planParams.set("departureDate", departureDate);
+    planParams.set("returnDate", returnDate);
+    planParams.set("travelStyle", travelStyle);
+    planParams.set("budgetLevel", budgetLevel);
+    if (interests.length > 0) planParams.set("interests", interests.join(","));
+    planParams.set("groupSize", String(groupSize));
+    router.push(`/plan?${planParams.toString()}`);
   }, [
     origin,
     destination,
