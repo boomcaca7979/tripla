@@ -92,6 +92,7 @@ import {
   type PageSavedInput,
 } from "@/lib/travel-workspace";
 import { GUEST_WORKSPACE_KEY } from "@/lib/workspace/guest";
+import { normalizeItinerary } from "@/lib/itinerary-normalizer";
 import type { Itinerary } from "@/types/itinerary";
 
 const USER_A = "aaaaaaaa-1111-4111-8111-aaaaaaaaaaaa";
@@ -926,5 +927,104 @@ describe("travel-workspace — savePageItinerary", () => {
     }
     // 一个字节都不落盘 —— 也就没有半条 Trip / RouteDay / Stop / Checklist。
     expect(storedGuest()).toBeNull();
+  });
+
+  it("AI 线上结构经规范化后可直接进入保存链路（Trip / RouteDays / Stops / Checklist）", async () => {
+    // 这条钉的是"规范化输出 → 既有保存流程"的接缝：模型自创结构经 normalizer 之后，
+    // 应当和手写的契约对象一样能被 savePageItinerary 接受，不需要任何适配层。
+    const normalized = normalizeItinerary(
+      {
+        input: { destination: "Tokyo, Japan (NRT)" },
+        days: [
+          {
+            date: "2026-11-15",
+            activities: [
+              {
+                name: "Senso-ji Temple",
+                type: "cultural",
+                startTime: "09:00",
+                endTime: "10:30",
+                location: "Asakusa",
+                estimatedCost: 0,
+                description: "Tokyo's oldest temple.",
+              },
+              {
+                name: "Ramen dinner in Ueno",
+                type: "food",
+                startTime: "19:00",
+                endTime: "20:00",
+                location: "Ueno",
+                estimatedCost: 1500,
+                description: "Counter-seat ramen.",
+              },
+            ],
+            meals: { breakfast: "Onigiri" },
+          },
+          {
+            date: "2026-11-16",
+            activities: [
+              {
+                name: "Tokyo National Museum",
+                type: "museum",
+                startTime: "10:00",
+                endTime: "12:00",
+                estimatedCost: 1000,
+                description: "Japanese art in Ueno Park.",
+              },
+            ],
+          },
+        ],
+        totalEstimatedCost: 2500,
+        currency: "JPY",
+        summary: "Two compact Tokyo days.",
+        packingList: ["Passport", "  "],
+        importantNotes: ["No tipping."],
+      },
+      {
+        destination: {
+          iata: "NRT",
+          icao: "RJAA",
+          name: "Narita International Airport",
+          city: "Tokyo",
+          country: "Japan",
+          timezone: "Asia/Tokyo",
+          latitude: 35.7647,
+          longitude: 140.3864,
+        },
+        departureDate: "2026-11-15",
+        returnDate: "2026-11-16",
+        travelStyle: "cultural",
+        budgetLevel: "mid-range",
+        interests: ["food", "history"],
+        groupSize: 2,
+      },
+      { id: "itin-normalized-1", createdAt: "2026-10-28T06:00:00.000Z", fallbackCurrency: "JPY" },
+    );
+
+    expect(normalized.ok).toBe(true);
+    if (!normalized.ok) throw new Error(normalized.message);
+
+    const res = await savePageItinerary({ kind: "guest" }, normalized.itinerary);
+    expect(res.ok).toBe(true);
+
+    const trips = storedGuest()?.trips as Array<Record<string, unknown>>;
+    expect(trips).toHaveLength(1);
+    const trip = trips[0];
+    expect(trip.destination).toBe("Tokyo");
+    expect(trip.currency).toBe("JPY");
+    expect(trip.startDate).toBe("2026-11-15");
+    expect(trip.endDate).toBe("2026-11-16");
+    expect(trip.preferences).toMatchObject({ summary: "Two compact Tokyo days.", importantNotes: ["No tipping."] });
+
+    const routeDays = trip.routeDays as Array<Record<string, unknown>>;
+    expect(routeDays).toHaveLength(2);
+    const day1Stops = routeDays[0].stops as Array<Record<string, unknown>>;
+    // 早餐 08:00；活动时间由 timeOfDay 映射为既有代表钟点（morning 09:00 / evening 18:00），
+    // 这是 savePageItinerary 既有语义，不是本轮改动。
+    expect(day1Stops.map((s) => s.time)).toEqual(["08:00", "09:00", "18:00"]);
+    expect(day1Stops.map((s) => s.name)).toContain("Senso-ji Temple");
+    expect(String(day1Stops[1].note)).toContain("Tokyo's oldest temple");
+    // packingList → Checklist；空白项被过滤
+    expect((trip.checklist as Array<Record<string, unknown>>).map((c) => c.label)).toEqual(["Passport"]);
   });
 });

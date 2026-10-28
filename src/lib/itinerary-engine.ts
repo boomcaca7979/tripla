@@ -32,7 +32,14 @@ export function buildSystemPrompt(): string {
     "CRITICAL: Respond ONLY with a single valid JSON object. No markdown code fences, no explanation text, no comments.",
     "The JSON must exactly match this TypeScript interface:",
     "{ id: string, createdAt: string, input: TravelPlanInput, days: ItineraryDay[], totalEstimatedCost: number, currency: string, summary: string, packingList: string[], importantNotes: string[] }",
+    // 2026-10-28：此前只给了顶层接口名，模型看不到 Activity/ItineraryDay 的字段，
+    // 于是自创 type/startTime/endTime/location，导致前端 schema 校验必然失败。
+    // 这里把子结构写死，服务端仍会再规范化一遍（不把可靠性寄托在模型一次做对）。
+    "ItineraryDay = { date: 'YYYY-MM-DD', dayNumber: number, weather: null, activities: Activity[] (1-6 per day), meals: { breakfast?: string, lunch?: string, dinner?: string }, estimatedDailyCost: number, notes?: string }",
+    "Activity = { id: string, name: string, description: string, duration: number (minutes), estimatedCost: number, category: 'museums' | 'nature' | 'food' | 'shopping' | 'nightlife' | 'history' | 'sports' | 'beaches', timeOfDay: 'morning' | 'afternoon' | 'evening' | 'night', address?: string, tip?: string }",
     "Rules:",
+    "- Use these field names verbatim. Do NOT use alternative keys such as type, startTime, endTime or location.",
+    "- dayNumber must be sequential starting at 1; every date must be a real calendar day inside the trip range.",
     "- Each day must have 3-5 activities",
     "- Match activities to the specified travelStyle and interests",
     "- Schedule indoor activities (museums, restaurants, spas) on days with weatherCode >= 61 (rain/snow/storm)",
