@@ -187,6 +187,43 @@ describe("/api/itinerary — 失败路径绝不返回 200", () => {
     });
     expect(res.status).toBe(400);
   });
+
+  it("请求体不是合法 JSON → 400（不裸 500）", async () => {
+    const res = await POST(
+      new Request("http://localhost/api/itinerary", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: "{not-json",
+      }),
+    );
+    expect(res.status).toBe(400);
+    const body = (await res.json()) as { error?: { code?: string } };
+    expect(body.error?.code).toBe("INVALID_INPUT");
+  });
+
+  it("weather 是 /api/weather 的并行数组对象 → 不再 500，按无天气处理（2026-10-28 生产故障回归）", async () => {
+    stubModelText(JSON.stringify(productionShapedPlan()));
+    // 修复前：客户端把 `{ time: [...], temperature_2m_max: [...] }` 直接当
+    // WeatherDay[] 传上来，buildUserMessage 对它调 .map() 抛 TypeError → 裸 500。
+    const res = await postItinerary({
+      input: planInput(),
+      weather: {
+        time: ["2026-11-15", "2026-11-16"],
+        temperature_2m_max: [16.2, 17.1],
+        temperature_2m_min: [11.4, 12.0],
+        precipitation_sum: [0, 0.2],
+        wind_speed_10m_max: [9.7, 18.8],
+        weather_code: [45, 3],
+        uv_index_max: [3.1, 2.8],
+        sunrise: ["2026-11-15T06:00:00", "2026-11-16T06:00:00"],
+        sunset: ["2026-11-15T16:30:00", "2026-11-16T16:30:00"],
+      },
+      exchangeRate: null,
+    });
+    expect(res.status).toBe(200);
+    const body: unknown = await res.json();
+    expect(ItinerarySchema.safeParse(body).success).toBe(true);
+  });
 });
 
 describe("/api/itinerary — 正常路径输出契约", () => {

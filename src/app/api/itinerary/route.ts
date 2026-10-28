@@ -21,7 +21,14 @@ const GROQ_MODEL = "openai/gpt-oss-120b";
  *  · 不打印任何 secret（含 key 前缀）。
  */
 export async function POST(request: Request): Promise<Response> {
-  const body = await request.json();
+  // 坏 JSON 体若不接住会变成裸 500（Next 未处理异常），而不是我们的错误信封。
+  const body = await request.json().catch(() => null);
+  if (body === null || typeof body !== "object") {
+    return Response.json(
+      { error: { code: "INVALID_INPUT", message: "Request body must be a valid JSON object." } },
+      { status: 400 },
+    );
+  }
   const { input, weather, exchangeRate } = body;
 
   if (!input) {
@@ -45,7 +52,12 @@ export async function POST(request: Request): Promise<Response> {
     );
   }
 
-  const userMessage = buildUserMessage(input, weather ?? [], exchangeRate ?? null);
+  // weather 必须是 WeatherDay[]：/api/weather 的 `daily` 是并行数组对象，
+  // 客户端曾直接把它传上来，buildUserMessage 的 .map() 抛 TypeError → 裸 500。
+  // 非数组一律按"无天气"处理（提示词省略天气行，不编造）。
+  const weatherList = Array.isArray(weather) ? weather : [];
+
+  const userMessage = buildUserMessage(input, weatherList, exchangeRate ?? null);
 
   console.log("[itinerary] Request payload (redacted):", {
     model: GROQ_MODEL,

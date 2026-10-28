@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef } from "react";
 import { generateItinerary } from "@/lib/itinerary-engine";
+import { toWeatherDays } from "@/lib/api/weather";
 import type { Itinerary, TravelPlanInput } from "@/types/itinerary";
 import type { WeatherDay } from "@/types/weather";
 import type { AppError } from "@/types/common";
@@ -109,7 +110,11 @@ export function useItinerary() {
           const weatherRes = await fetch(
             `/api/weather?latitude=${latitude}&longitude=${longitude}&startDate=${input.departureDate}&endDate=${input.returnDate}&timezone=${timezone}`,
           );
-          weatherData = (await weatherRes.json()).daily ?? [];
+          // /api/weather 返回 Open-Meteo 原始结构：`daily` 是**并行数组对象**
+          // （{ time: [...], temperature_2m_max: [...] }），不是 WeatherDay[]。
+          // 此前直接把它当数组传给 /api/itinerary，服务端 buildUserMessage 对它
+          // 调 .map() 抛 TypeError → 裸 500（2026-10-28 生产实测）。
+          weatherData = toWeatherDays((await weatherRes.json()).daily);
         }
       } catch {
         // Proceed without weather

@@ -34,6 +34,58 @@ const DAILY_PARAMS = [
 ].join(",");
 
 /**
+ * Open-Meteo `daily` 原始结构：并行数组对象（`{ time: [...], temperature_2m_max: [...] }`），
+ * **不是** WeatherDay[]。
+ */
+interface OpenMeteoDaily {
+  time?: unknown;
+  temperature_2m_max?: unknown;
+  temperature_2m_min?: unknown;
+  precipitation_sum?: unknown;
+  wind_speed_10m_max?: unknown;
+  weather_code?: unknown;
+  uv_index_max?: unknown;
+  sunrise?: unknown;
+  sunset?: unknown;
+}
+
+/**
+ * 把 Open-Meteo 的 `daily` 并行数组对象压缩成 `WeatherDay[]`。
+ *
+ * `/api/weather` 返回的就是这个原始结构；任何消费方若把它直接当数组用
+ * （`.map` / `for..of`），运行时都会炸。输入不是对象或缺数组字段时返回 `[]`
+ * （调用方自行降级为"无天气"，不编造数据）。
+ */
+export function toWeatherDays(daily: unknown): WeatherDay[] {
+  if (daily === null || typeof daily !== "object") return [];
+  const d = daily as OpenMeteoDaily;
+  const time = Array.isArray(d.time) ? d.time : [];
+  const pick = (v: unknown) => (Array.isArray(v) ? v : []);
+  const temperatureMax = pick(d.temperature_2m_max);
+  const temperatureMin = pick(d.temperature_2m_min);
+  const precipitationSum = pick(d.precipitation_sum);
+  const windSpeedMax = pick(d.wind_speed_10m_max);
+  const weatherCode = pick(d.weather_code);
+  const uvIndexMax = pick(d.uv_index_max);
+  const sunrise = pick(d.sunrise);
+  const sunset = pick(d.sunset);
+
+  return time
+    .filter((t): t is string => typeof t === "string")
+    .map((date, i) => ({
+      date,
+      temperatureMax: temperatureMax[i],
+      temperatureMin: temperatureMin[i],
+      precipitationSum: precipitationSum[i],
+      windSpeedMax: windSpeedMax[i],
+      weatherCode: weatherCode[i] as WMOWeatherCode,
+      uvIndexMax: uvIndexMax[i],
+      sunriseISO: sunrise[i],
+      sunsetISO: sunset[i],
+    }));
+}
+
+/**
  * Generate mock weather forecast data when the real API call fails.
  */
 function generateMockWeatherForecast(
@@ -127,19 +179,7 @@ export async function fetchWeatherForecast(
       };
     } = await res.json();
 
-    const { time, temperature_2m_max, temperature_2m_min, precipitation_sum, wind_speed_10m_max, weather_code, uv_index_max, sunrise, sunset } = body.daily;
-
-    const daily: WeatherDay[] = time.map((date, i) => ({
-      date,
-      temperatureMax: temperature_2m_max[i],
-      temperatureMin: temperature_2m_min[i],
-      precipitationSum: precipitation_sum[i],
-      windSpeedMax: wind_speed_10m_max[i],
-      weatherCode: weather_code[i] as WMOWeatherCode,
-      uvIndexMax: uv_index_max[i],
-      sunriseISO: sunrise[i],
-      sunsetISO: sunset[i],
-    }));
+    const daily: WeatherDay[] = toWeatherDays(body.daily);
 
     const result: WeatherForecastResponse = {
       location: "",
